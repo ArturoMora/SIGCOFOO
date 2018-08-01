@@ -1,0 +1,36 @@
+<div class="modal-header">
+    <button type="button" class="close" ng-click="cancel()" data-dissmiss="modal">
+        <i class="glyphicon glyphicon-remove"></i>
+    </button>
+    <div class="col-xs-1"></div>
+    <div>
+        <h3>
+            Agregar aptitudes
+        </h3>
+    </div>
+
+
+</div>
+<div class="modal-body">
+    <div class="row">
+        <div class="col-sm-12">
+            <tags-input ng-model="aptitudesempleado" display-property="nombre" 
+                        placeholder="Agregar aptitud" replace-spaces-with-dashes="false">
+                <auto-complete source="filtro($query)" min-length="0" load-on-focus="false" load-on-empty="false" max-results-to-show="5"></auto-complete>
+            </tags-input>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12" >
+            <label style="vertical-align: top;">NO</label>&nbsp;&nbsp;<switch  name="enviarcorreo" ng-model="enviarcorreo"></switch>&nbsp;&nbsp;<label style="vertical-align: top;">SI</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label style="vertical-align: top;"> &nbsp; Enviar correo a mi red de contactos.</label>
+        </div>
+            
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-md-6">
+            <button type="submit" ng-disabled="aptitudesempleado.length <= 0" class="btn btn-success"  ng-click="guardaraptitudes()">
+<i class="glyphicon glyphicon-saved"></i> Guardar
+                                    </button>
+        </div>
+    </div>
+</div>

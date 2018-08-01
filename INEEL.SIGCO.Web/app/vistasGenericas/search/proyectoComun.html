@@ -1,0 +1,24 @@
+﻿
+<div class="vista">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Buscar proyectos</h2>
+
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content sin-desborde">
+                    {{showCase.term}}
+                    <table datatable="" dt-options="showCase.dtOptions" dt-columns="showCase.dtColumns"
+                           dt-instance="showCase.dtInstance"
+                           class="table table-hover table-striped table-condensed dt-responsive"
+                           cellspacing="0" width="100%"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $('div.dataTables_filter input').focus();
+</script>

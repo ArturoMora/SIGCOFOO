@@ -1,0 +1,63 @@
+﻿<!-- page content -->
+<div class="vista">
+
+    <div class="page-title">
+        <div class="title_left">
+
+            <ol class="breadcrumb miga">
+                <li><i class="sg sg-cursos-cap"></i> <a ui-sref="Cursos">Cursos impartidos/Mis cursos</a></li>
+            </ol>
+
+        </div>
+    </div>
+
+    <div class="x_panel">
+        <div class="x_content">
+            <div class="row">
+                <div class="col-md-12 col-lg-12 col-xs-12 sin-desborde">
+                    <div ng-show="registros.length === 0" class="alert advertencia">
+                        No hay registros de cursos impartidos.
+                    </div>
+                    <div ng-show="registros.length > 0">
+                        <table id="MTcursosPersonalGet" class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" datatable="ng" width="100%"
+                               dt-options="dtOptions" dt-column-defs="dtColumnDefs">
+                            <thead>
+                                <tr>
+                                    <th data-priority="1">T&iacute;tulo</th>
+                                    <th>Tipo curso</th>
+                                    <th>Estado registro</th>
+                                    <th>Fecha validaci&oacute;n</th>
+                                    <th data-priority="1" class="thAjuste text-center">Opciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="registro in registros">
+                                    <td style="max-width:300px" class="sin-desborde"><a ng-click="setGlobalID(registro.cursoInternoId);" ui-sref="CursoDetails" title="Detalle">{{registro.titulo}}</a></td>
+                                    <td>{{registro.tipoCurso.descripcion}}</td>
+                                    <td>{{registro.estadoFlujo ===  null ? 'Aceptado' : registro.estadoFlujo.descripcion}}</td>
+                                    <td>{{registro.fechaValidacion === null ? 'Dato no disponible' : registro.fechaValidacion | date:"dd/MM/yyyy"}}</td>
+                                    <td class="text-center">
+                                        <div ng-if="registro.estadoFlujoId==1 || editarGestion==1 || registro.estadoFlujoId==3">
+                                            <a ng-click="setOrigen('MT');setGlobalID(registro.cursoInternoId);" ui-sref="CursoEdit" title="Editar" class="btn btn-warning">
+                                                <i class="glyphicon glyphicon-pencil"></i>
+                                            </a>
+                                            <a title="Eliminar" ng-if="registro.fechaValidacion === null && registro.estadoFlujoId!=3" 
+                                               ng-click="open(registro)" class="btn btn-danger">
+                                                <i class="glyphicon glyphicon-trash"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <button type="button" ng-click="setOrigen('MT')" ui-sref="CursoAdd" class="btn btn-success">
+                        <span class="glyphicon glyphicon-plus"></span> Agregar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+</div>

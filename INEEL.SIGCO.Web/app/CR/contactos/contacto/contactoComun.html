@@ -1,0 +1,70 @@
+﻿
+    <div class="profile_img">
+        <div id="crop-avatar">
+            <img class="img-thumbnail" ng-src="data:image/png;base64,{{contacto.adjunto64}}" width="180" height="180" title={{contacto.nombreCompleto}}>
+        </div>
+    </div>
+    <br />
+    <ul class="list-unstyled user_data">
+        <li ng-if="contacto.empresa!=null">
+            <i class="fa fa fa-building"></i> {{contacto.empresa.nombreEmpresa}}
+        </li>
+        <li ng-if="contacto.puesto!=null">
+            <i class="fa fa-briefcase user-profile-icon"></i> {{contacto.puesto}}
+        </li>
+        <li class="m-top-xs" ng-if="contacto.correo!=null">
+            <i class="fa fa fa-envelope"></i> {{contacto.correo}}
+        </li>
+        <li class="m-top-xs" ng-if="contacto.telefono!=null || contacto.extension!=null">
+            <i class="fa fa fa-phone"></i> {{contacto.telefono}}  {{(contacto.extension===null || contacto.extension==='')?'ext. ' + contacto.extension :''}}
+        </li>
+        <li class="m-top-xs" ng-if="contacto.celular!=null">
+            <i class="fa fa fa-mobile-phone"></i> {{contacto.celular}}
+        </li>
+    </ul>
+
+    <div ng-hide="contacto.redFacebook === null && contacto.redTwitter === null && contacto.redLinkedin === null">
+        <div class="x_title">
+            <h2>Red social </h2>
+            <div class="clearfix"></div>
+        </div>
+        <ul class="list-unstyled user_data">
+            <li ng-show="contacto.redFacebook !== null" class="m-top-xs">
+                <i class="fa fa fa-facebook"></i> {{contacto.redFacebook}}
+            </li>
+            <li ng-show="contacto.redTwitter !== null" class="m-top-xs">
+                <i class="fa fa fa-twitter"></i> {{contacto.redTwitter}}
+            </li>
+            <li ng-show="contacto.redLinkedin !== null" class="m-top-xs">
+                <i class="fa fa fa-linkedin"></i> {{contacto.redLinkedin}}
+            </li>
+        </ul>
+    </div>
+
+    <div class="x_title" ng-if="contacto.calle!=null || contacto.colonia!=null || contacto.localidad!=null">
+        <h2>Domicilio </h2>
+        <div class="clearfix"></div>
+    </div>
+    <div ng-if="contacto.paises.paisId===null || contacto.paises.paisId===0">
+        {{contacto.direccion}}
+    </div>
+    <div>
+        <label class="tit col-xs-12" ng-if="contacto.calle!=null">Calle</label>
+        <span class="cont col-xs-12" ng-if="contacto.calle!=null">{{contacto.calle}}</span>
+        <label class="tit col-xs-12" ng-if="contacto.colonia!=null">Colonia</label>
+        <span class="cont col-xs-12" ng-if="contacto.colonia!=null">{{contacto.colonia}}</span>
+        <label class="tit col-xs-12" ng-if="contacto.localidad!=null">Localidad</label>
+        <span class="cont col-xs-12" ng-if="contacto.localidad!=null">{{contacto.localidad}}</span>
+        <label class="tit col-xs-12" ng-show="contacto.paises.paisId ===16">Municipio</label>
+        <span class="cont col-xs-12" ng-show="contacto.paises.paisId ===16">{{contacto.municipios.nombreMunicipio}}</span>
+        <label class="tit col-xs-12" ng-show="contacto.paises.paisId ===16">Estado</label>
+        <span class="cont col-xs-12" ng-show="contacto.paises.paisId ===16">{{contacto.estados.nombreEstado}}</span>
+        <label class="tit col-xs-12" ng-show="contacto.paises.paisId !==16 && contacto.munipio.length > 0">Municipio</label>
+        <span class="cont col-xs-12" ng-show="contacto.paises.paisId !==16 && contacto.munipio.length > 0">{{contacto.munipio}}</span>
+        <label class="tit col-xs-12" ng-show="contacto.paises.paisId !==16 && contacto.edo.length > 0">Estado</label>
+        <span class="cont col-xs-12" ng-show="contacto.paises.paisId !==16 && contacto.edo.length > 0">{{contacto.edo}}</span>
+        <label class="tit col-xs-12" ng-if="contacto.paises!=null">Pa&iacute;s</label>
+        <span class="cont col-xs-12" >{{contacto.paises.nombrePais}}</span>
+        <label class="tit col-xs-12" ng-if="contacto.cp">CP</label>
+        <span class="cont col-xs-12">{{contacto.cp}}</span>
+    </div>

@@ -1,0 +1,55 @@
+<div class="vista">
+	<div class="page-title">
+		<div class="title_left">
+			<ol class="breadcrumb miga">
+				<li><i class="sg sg-clientes"></i> <a ui-sref="clientesProyectos"> Clientes / Proyectos totales</a></li>
+			</ol>
+
+		</div>
+	</div>
+	<div class="clearfix"></div>
+	<div class="row">
+		<div class="col-md-12 col-sm-12 col-xs-12">
+			<div class="x_panel">
+				<div class="x_title">
+					<h2>Resultados</h2>
+					<div class="clearfix"></div>
+				</div>
+				<div class="x_content sin-desborde">
+					<div class="row">
+						<div class="col-xs-12">
+							<table id="CRproyectosGetTotal" datatable="ng" width="100%" class="table table-hover table-striped table-condensed dt-responsive"  ng-show="proyectos">
+								<thead>
+                                    <tr>
+                                        <th data-priority="1">Cliente</th>
+                                        <th>N&uacute;meros</th>
+                                        <th>Titulo</th>
+                                        <th>Monto <br> contratado</th>
+                                        <th>Fecha de inicio</th>
+                                        <th>Fecha de fin </th>
+                                        <th>Gerencia</th>
+                                    </tr>
+								</thead>
+								<tbody>
+									<tr ng-repeat="proyecto in proyectos">
+										<td>{{proyecto.cliente !== null ? proyecto.cliente : 'No disponible'}}</td>
+										<td>{{proyecto.proyectoID}}</td>
+										<td>{{proyecto.nombre}}</td>
+										<td style="text-align:right">{{proyecto.monto!== null? proyecto.monto : 0 | currency}}</td>
+										<td>{{proyecto.fInicio | date:'dd/MM/yyyy'}}</td>
+										<td>{{proyecto.fFinal | date:'dd/MM/yyyy'}}</td>
+										<td>{{proyecto.gerencia}}</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+    <button type="button" ng-click="globalRegresar();" class="btn btn-primary">
+        <span class="fa fa-arrow-left"></span> Regresar
+    </button>
+</div>

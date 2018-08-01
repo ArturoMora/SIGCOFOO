@@ -1,0 +1,92 @@
+﻿<div class="modal-content">
+    <div class="modal-header">
+        Editar propuesta asociada
+        <button type="button" class="close" ng-click="cancel()" data-dissmiss="modal">x</button>
+    </div>
+    <form role="form" novalidate name="propuestaAsignadaEditEditForm">
+        <div class="modal-body">
+            <div class="panel">
+                <!-- /.panel-heading -->
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label>No. Propuesta: </label>
+                                <span class="text">{{propuestaAsignadaEdit.propuestaId}}</span>
+                            </div>
+                            <div class="form-group">
+                                <label>Nombre: </label>
+                                <span class="text">{{propuestaAsignadaEdit.titulo}}</span>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label>Clave: </label>
+                                <span class="text">{{propuestaAsignadaEdit.claveEmpPropuesta}}</span>
+                            </div>
+                            <div class="form-group">
+                                <label for="usr">Monto: </label>
+                                {{propuestaAsignadaEdit.costo}}
+                            </div>
+                            <div class="form-group">
+                                <label for="usr">Fecha: </label>
+                                {{propuestaAsignadaEdit.fecha | date:'yyyy-MM-dd'}}
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12">
+                            <label>Asociar datos de Empresa</label>
+                            <hr />
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label>Empresa: </label>
+                                <span class="text">{{propuestaAsignadaEdit.empresa.nombreEmpresa}}</span>
+                            </div>
+                            <div class="form-group">
+                                <label for="usr">Unidad Organizacional: <a style="color:red;font-weight:bold">*</a></label>
+                                <div class="row">
+                                    <div class="col-xs-10">
+                                        <input required type="text" class="form-control" id="usr" name="unidad" ng-model="propuestaAsignadaEdit.unidadOrganizacionalEmpresas.nombreUnidad" disabled="disabled" />
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <a class="btn btn-default" ng-click="openEstructuraOrg(propuestaAsignadaEdit.empresa.empresaId)" title="Buscar EO">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="usr">Contacto:<a style="color:red;font-weight:bold">*</a></label>
+                                <div class="row">
+                                    <div class="col-xs-10">
+                                        <input required type="text" class="form-control" id="usr" name="contacto" ng-model="propuestaAsignadaEdit.contacto.nombreCompleto" disabled ng-required="true">
+                                        <input type="hidden" ng-model="contactoId" class="form-control" value="contactoId" />
+                                        <span class="error" ng-show="propuestaEmpresaAddForm.contacto.$invalid && propuestaEmpresaAddForm.contacto.$dirty || fondoProgramaForm.$submitted && fondoProgramaForm.contacto.$invalid">
+                                            Debes de agregar un contacto.
+                                        </span>
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <a ng-click="openContacto()" class="btn btn-default" title="Buscar contacto" ng-disabled="desabilitarBuscarContacto">
+                                            <i class="glyphicon glyphicon-search"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-success" ng-click="ok()">Actualizar</button>
+            <button type="button" class="btn btn-primary" ng-click="cancel()">Cancelar</button>
+        </div>
+    </form>
+</div>
+
+
+
+
+
+

@@ -1,0 +1,172 @@
+﻿<div class="vista">
+    <div class="page-title">
+        <div class="title_left">
+            <ol class="breadcrumb miga">
+                <li>
+                    <i class="glyphicon glyphicon-file"></i>
+                    <a ui-sref="productoFI">Solicitudes FI</a>
+                </li>
+            </ol>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Criterios de b&uacute;squeda</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li>
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content sin-desborde">
+                    <form name="Search" id="Search" class="form-horizontal">
+                        <div class="col-xs-12">
+                            <div class="col-xs-12 col-md-6">
+                                <div class="form-group ">
+                                    <label class="col-md-12 col-sm-12 col-xs-12">
+                                        Producto o servicio
+                                    </label>
+                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                        <input type="text" id="s1" ng-model="prod.nombreTecnico" class="frmSearch form-control" placeholder="Nombre" />
+                                    </div>
+                                </div>
+                                <!--Form-G-->
+                                <div class="form-group ">
+                                    <label class="col-md-12 col-sm-12 col-xs-12">
+                                        Autor
+                                    </label>
+                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                        <input type="text" id="s1" ng-model="prod.autor" class="frmSearch form-control" placeholder="Nombre del autor" />
+                                    </div>
+                                </div>
+                                <!--Form-G-->
+                                <div class="form-group ">
+                                    <label class="col-md-12 col-sm-12 col-xs-12">
+                                        Evaluador
+                                    </label>
+                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                        <input type="text" id="s1" ng-model="prod.evaluador" class="frmSearch form-control" placeholder="Nombre del evaluador" />
+                                    </div>
+                                </div>
+                                <!--Form-G-->
+                            </div>
+                            <div class="col-xs-12 col-md-6">
+                                <div class="form-group ">
+                                    <label class="col-xs-12">
+                                        Proyecto
+                                    </label>
+                                    <div class="col-xs-10">
+                                        <input type="text" class="form-control" placeholder="Buscar por proyecto" id="usr" name="proyecto" ng-model="prod.proyectoNombre"
+                                            disabled>
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <a class="btn btn-success" ng-click="openProyecto()" title="Buscar por proyecto">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                        </a>
+                                    </div>
+                                </div>
+                                <!--Form-G-->
+                                <div class="form-group ">
+                                    <label class="col-md-12 col-sm-12 col-xs-12">
+                                        Gerencia
+                                    </label>
+                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                        <div uo-modal2 ng-model="prod.unidadOselect" ng-change="{{prod.unidadOrganizacionalId = prod.unidadOselect.claveUnidad}}"
+                                            requerido="false" fecha=""></div>
+                                    </div>
+                                </div>
+                                <!--Form-G-->
+                                <div class="form-group " ng-show="rolId == 1028">
+                                    <label class="col-md-12 col-sm-12 col-xs-12">
+                                        Estado comit&eacute;
+                                    </label>
+                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                        <select ng-model="prod.estadoFlujoComite" class="form-control">
+                                            <option value="">---Seleccione un estado---</option>
+                                            <option value="16">Solicitud (FI)</option>
+                                            <option value="17">Revisado por Evaluador (FI)</option>
+                                            <option value="18">FIN establecido</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <!--Form-G-->
+                            </div>
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="col-xs-12 col-md-6">
+                                <div class="form-group ">
+                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                        <a class="btn btn-success" ng-click="buscar()" title="buscar">
+                                            <span class="glyphicon glyphicon-search"></span> Buscar
+                                        </a>
+                                        <button type="button" ng-click="reset()" class="btn btn-primary">
+                                            Limpiar
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12">
+            <div class="x_panel" ng-show="busqueda">
+                <div class="x_content sin-desborde">
+                    <form name="ValidForm" id="form" class="form-horizontal">
+                        <div class="col-xs-12">
+                            <!--<div ng-show="registros.length === 0 || registros==null" class="alert advertencia">
+                                No hay registros de productos innovadores.
+                            </div>-->
+                            <div>
+                                <table id="GIproductoFI" dt-options="dtOptions" dt-column-defs="dtColumnDefs" class="table table-hover table-striped table-condensed dt-responsive"
+                                    cellspacing="0" width="100%" datatable="ng">
+                                    <thead>
+                                        <tr>
+                                            <th>Fecha<br />registro</th>
+                                            <th>Nombre t&eacute;cnico<br />producto o servicio</th>
+                                            <th>Autor</th>
+                                            <th ng-show="false"></th>
+                                            <th data-priority="1">N&uacute;m proyecto</th>
+                                            <th>Gerencia</th>
+                                            <th data-priority="2">Estado<br />Comite</th>
+                                            <th data-priority="3">Evaluador</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="registro in registros" id="{{registro.productoId}}">
+                                            <td>{{registro.fechaRegistro === null ? 'Dato no disponible' : registro.fechaRegistro
+                                                | date:"dd/MM/yyyy"}}</td>
+                                            <td>
+                                                <div ng-show="rolId==1028">
+                                                    <a ng-click="setVariable('busquedaSolicitudesFI', prod);setGlobalID(registro.productoId)" ui-sref="solicitudFIDetalles" title="Detalle"
+                                                        class="linkTabla">{{registro.nombreTecnico}}</a>
+                                                </div>
+                                                <div ng-show="rolId!=1028">
+                                                    <a ng-click="setVariable('busquedaSolicitudesFI', prod);setGlobalID(registro.productoId)" ui-sref="productoInnovadorDetailsEvaluador"
+                                                        title="Detalle" class="linkTabla">{{registro.nombreTecnico}}</a>
+                                                </div>
+                                            </td>
+                                            <td ng-click="openProfile(registro.clavePersona)" title="Detalle de empleado" class="linkTabla ">{{registro.clavePersona}}</td>
+                                            <td ng-show="false"></td>
+                                            <td href="" load-proyectos idproyecto="{{registro.proyectoId}}" title="Detalle de proyecto">{{registro.proyectoId}}</td>- {{registro.proyectoNombre}}
+                                            <td>{{registro.unidadOrganizacional}}</td>
+                                            <td>{{registro.comiteFlujo}}</td>
+                                            <td>{{registro.evaluadores.join(', ')}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

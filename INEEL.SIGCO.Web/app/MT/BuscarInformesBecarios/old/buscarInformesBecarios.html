@@ -1,0 +1,241 @@
+<div class="vista">
+    <div id="page-wrapper">
+        <div class="page-title">
+            <div class="title_full">
+
+                <ol class="breadcrumb miga">
+                    <li><i class="sg sg-informes-bec"></i> <a ui-sref="BuscarInformesBecarios">Informes de becarios/Buscar informes de becarios internos o dirigidos</a></li>
+                </ol>
+
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Criterios de b&uacute;squeda</h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li>
+                                <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <form name="form" id="form" class="form-label-left">
+
+                            <div class="col-xs-12 col-md-12">
+                                <div class="col-xs-12 col-md-12">
+                                    <div class="form-group">
+
+                                        <label for="usr">Selecciona un informe de becario<span class="required"></span></label>
+                                        <select ng-model="Palabra.selectedInforme" ng-options="informe.informeId as informe.descripcion for informe in Informes"  ng-init="Palabra.selectedInforme"  class="form-control"></select>
+                                    </div>
+                                    <hr />
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12 col-md-6" ng-show="nueva===true&&Palabra.selectedInforme!=null">
+                                <div class="form-group" ng-show="Palabra.selectedInforme==1">
+                                    <label class="col-xs-12">
+                                        Becario
+                                    </label>
+                                   
+                                        
+                                            <div class="col-xs-10">
+                                                <input type="text" ng-model="Palabra.becario.nombreCompleto" id="searchTextBecario" disabled name="searchTextBecario" class="form-control" placeholder="Buscar por becario">
+                                            </div>
+                                            <div class="col-xs-2">
+                                                <button class="btn btn-success" ng-click="openBecario();" title="Buscar por becario">
+                                                    <span class="glyphicon glyphicon-search"></span>
+                                                </button>
+                                            </div>
+                                         
+                                    <div class="clearfix"></div>
+
+                                </div>
+
+                                <div class="form-group" ng-show="Palabra.selectedInforme==1">
+                                    <label class="col-xs-12">
+                                        Instituci&oacute;n
+                                    </label>
+
+                                            <div class="col-xs-10">
+                                                <input type="text" class="form-control" id="usr" name="institucionselect" ng-model="Palabra.selectedinstitucion.descripcion" disabled placeholder="Buscar Instituci&oacute;n...">
+                                            </div>
+                                            <div class="col-xs-2">
+                                                <a class="btn btn-success" ng-click="openInstituciones()" title="Buscar persona">
+                                                    <span class="glyphicon glyphicon-search"></span>
+                                                </a>
+                                            </div>
+                                      
+                                    <div class="clearfix"></div>
+
+                                </div>
+
+                               
+                                <div class="form-group" ng-show="Palabra.selectedInforme==2">
+                                    <label class="col-xs-10">
+                                        Tipo de beca
+                                    </label>
+                                    <div class="col-xs-10">
+                                        <select ng-model="Palabra.TipoBeca2" ng-options="beca.tipoBecaId as beca.descripcion for beca in becas " class="form-control">
+                                            <option value="">---Seleccione un tipo de beca---</option>
+                                        </select>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                               
+                                <div class="form-group" ng-show="Palabra.selectedInforme==1">
+                                    <label class="col-xs-10">
+                                        Tipo de beca
+                                    </label>
+                                    <div class="col-xs-10">
+                                        <select ng-model="Palabra.TipoBeca1" ng-options="bi.becaInternaId as bi.descripcion for bi in becasinternas " class="form-control">
+                                            <option value="">---Seleccione un tipo de beca---</option>
+                                        </select>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                               
+                                <div class="form-group " ng-show="Palabra.selectedInforme==2">
+
+                                    <label class="col-xs-10">
+                                        T&iacute;tulo de la estancia
+                                    </label>
+                                    <div class="col-xs-10">
+
+                                        <input type="text" ng-model="Palabra.Titulo" id="searchTextTitulo"
+                                               name="searchTextTitulo" class="form-control" placeholder="Buscar por nombre de la estancia"
+                                               ng-minlength="3" />
+                                        <span class="error" ng-show="formulario.searchTextTitulo.$dirty && !formulario.searchTextTitulo.$valid">
+                                            Longitud m&iacute;nima de 3
+                                        </span>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+
+                                <div ng-show="Palabra.selectedInforme==2">
+                                      <div class="form-group ">
+                                        <label class="col-xs-12">
+                                             Asesor 
+                                        </label>
+                                      
+                                          <div class="col-xs-10">
+                                              <input type="text" ng-model="Palabra.asesor.nombreCompleto" id="searchTextAsesor" disabled
+                                                     name="searchTextAsesor" class="form-control" placeholder="Buscar por asesor">
+                                          </div>
+                                          <div class="col-xs-2">
+                                              <button class="btn btn-success" ng-click="openAsesor();" title="Buscar por asesor" ng-disabled="BuscarAsesor">
+                                                  <span class="glyphicon glyphicon-search"></span>
+                                              </button>
+                                          </div>
+                                        
+                                    </div>
+                                    <div class="clearfix"></div>
+
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-6 col-md-6" ng-show="nueva===true&&Palabra.selectedInforme!=0">
+                                <div class="form-group ">
+                                    <label class="col-xs-12">
+                                        Fecha de inicio
+                                    </label>
+                                   
+
+                                    <div class="col-xs-10">
+                                        <input placeholder="dd/mm/yyyy" ng-minlength="8" name="fechaInicio" maxlength="10" ng-init="open=false" type="text" show-button-bar="false" popup-placement="bottom"
+                                               datepicker-options="datePicker.FechaOptions" class="form-control fechaOnly" uib-datepicker-popup="dd/MM/yyyy" ng-model="Palabra.FechaInicio" value="{{ date | date: 'dd/MM/yyyy' }}"
+                                               is-open="open" close-text="Close" ng-change="desabilitar=false;validarFechasInicio()">
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <button type="button" class="btn btn-success" ng-click="open=true;"><i class="glyphicon glyphicon-calendar"></i></button>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                   
+                                </div>
+
+                                <div class="form-group ">
+                                    <label class="col-xs-12">
+                                        Fecha de t&eacute;rmino
+                                    </label>
+                                  
+                                    <div class="col-xs-10">
+                                        <input placeholder="dd/mm/yyyy" name="fechaTermino" ng-minlength="8" maxlength="10" ng-init="open2=false" type="text" show-button-bar="false" popup-placement="bottom"
+                                               datepicker-options="datePicker.FechaOptions" class="form-control fechaOnly" uib-datepicker-popup="dd/MM/yyyy" ng-model="Palabra.FechaTermino" value="{{ date | date: 'dd/MM/yyyy' }}"
+                                               is-open="open2" close-text="Close" ng-change="desabilitar=false;validarFechas()">
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <button type="button" class="btn btn-success" ng-click="open2=true;"><i class="glyphicon glyphicon-calendar"></i></button>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+
+
+                                <div class="form-group " ng-show="Palabra.selectedInforme==2">
+                                    <label class="col-xs-12">
+                                        Proyecto
+                                    </label>
+
+                                   
+
+                                    <div class="col-xs-10">
+                                        <input type="text" class="form-control" placeholder="Buscar por proyecto" id="usr" name="proyecto" ng-model="Palabra.proyecto.nombre" disabled>
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <a class="btn btn-success" ng-click="openProyecto()" title="Buscar por proyecto">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                        </a>
+                                    </div>
+                                   
+                                    <div class="clearfix"></div>
+                                </div>
+
+
+
+
+                            </div>
+                            
+                            <br/>
+
+                            <div class="col-xs-12 col-sm-12">
+
+                                <div style="margin-left:10px">
+                                    <div class="form-group">
+                                        <a class="btn btn-success" ng-click="buscar();">
+                                            <i class="glyphicon glyphicon-search"></i> Buscar
+                                        </a>
+                                        <a class="btn btn-primary" ng-click="LimpiarCampos();">
+                                            Limpiar
+                                        </a>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        
+                          </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="row" ng-show="botonBusqueda">
+            <div class="col-sm-12">
+
+                <div class="x_panel">
+
+                    <div class="x_content sin-desborde">
+                        <table id="MTBuscarInformesBecariosA1" datatable="" dt-options="showCase.dtOptions" dt-columns="showCase.dtColumns"
+                               dt-instance="showCase.dtInstance"
+                               class="display dt-responsive"
+                               cellspacing="0" width="100%"></table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br />
+    </div>
+</div>

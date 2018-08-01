@@ -1,0 +1,61 @@
+﻿<div class="modal-header">
+    <button type="button" class="close" ng-click="cancel()" data-dissmiss="modal">
+        <i class="glyphicon glyphicon-remove"></i>
+    </button>
+    <div class="col-xs-1"></div>
+    <div>
+        <h3>
+            Detalles de Evento
+        </h3>
+    </div>
+</div>
+
+
+<div class="modal-body">
+    <div data-ng-hide="authentication.isAuth">
+        No tiene permisos para ingresar a esta secci&oacute;n..<br /> Usuario no autentificado
+    </div>
+    <div data-ng-show="authentication.isAuth">
+        <div class="clearfix"></div>
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <!--<div class="x_title">
+                        <h2>Informaci&oacute;n general <small></small></h2>
+
+                        <div class="clearfix"></div>
+                    </div>-->
+                    <div class="x_content sin-desborde">
+                        <label class="detalle col-xs-12 " title="Nombre del evento">
+                            {{evento.nombreEvento}}
+                        </label>
+                        <!--<label class="tit col-xs-12">
+                            Descripci&oacute;n
+                        </label>-->
+                        <label class="cont col-xs-12">
+                            {{evento.tipoEvento.nombreEvento}}
+                        </label>
+                        <label class="tit col-xs-12">
+                            Fecha del evento
+                        </label>
+                        <label class="cont col-xs-12">
+                            {{evento.fechaEvento  | date:"dd/MM/yyyy"}}
+                        </label>
+                        <label class="tit col-xs-12">
+                            Lugar
+                        </label>
+                        <label class="cont col-xs-12">
+                            {{evento.ciudad}}
+                        </label>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+<div class="modal-footer">    
+    <button type="button" class="btn btn-primary" ng-click="cancel()">Aceptar</button>
+</div>

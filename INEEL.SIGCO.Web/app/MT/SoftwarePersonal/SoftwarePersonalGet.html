@@ -1,0 +1,148 @@
+<!-- page content -->
+<div class="vista">
+
+    <div class="page-title">
+        <div class="title_left">
+
+            <ol class="breadcrumb miga">
+                <li><i class="sg sg-software-des"></i> <a ui-sref="SoftwarePersonalGet">Software</a></li>
+                <li>Buscar software</li>
+            </ol>
+        </div>       
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Criterios de b&uacute;squeda</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li>
+                            <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content sin-desborde">
+
+                    <form name="form" id="form" class="form-horizontal form-label-left">
+                        <div class="col-xs-12 col-md-6">
+                            <div class="form-group ">
+                                <label class="col-xs-12">
+                                    T&iacute;tulo del software
+                                </label>
+                                <div class="col-xs-10">
+                                    <input type="text" ng-model="sw.nombre" placeholder="Buscar por t&iacute;tulo del software" id="nombre" maxlength="50" name="nombre" class="form-control" />
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="form-group ">
+                                <label class="col-xs-12">
+                                    Derecho de autor
+                                </label>
+                                <div class="col-xs-10">
+                                    
+                                <a derechos-autor-select state-form="ValidForm" template-url="app/vistasGenericas/directivas/buscarDerechosAutorDirective/buscarDerechosAutorDirective.html"
+                                ng-model="derechosAutor"> </a>
+                                    <!-- <input type="text" ng-model="sw.derechoAutor" placeholder="Buscar por derecho de autor" class="form-control" maxlength="50" name="derechoAutor" /> -->
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+
+                            <div class="form-group ">
+                                <label class="col-xs-12">
+                                    Tipo de software
+                                </label>
+                                <div class="col-xs-10">
+                                    <select id="tipoSoftwareId" name="tipoSoftwareId" class="form-control" ng-model="sw.tipoSoftwareId"
+                                            ng-options="e.tipoSoftwareId as e.nombre  for e in listaTipoSoftware">
+                                        <option value="">--Seleccione un tipo de software--</option>
+                                    </select>
+
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+
+                        </div>
+                        <div class="col-xs-12 col-md-6">
+                            <div class="form-group ">
+                                <label class="col-xs-12">
+                                    Autor
+                                </label>
+                                <div class="col-xs-10">
+                                    <input type="text" placeholder="Buscar por autor" ng-model="empleado.nombreCompleto" id="searchTextJefe" disabled
+                                           name="searchTextJefe" class="form-control">
+                                </div>
+                                <div class="col-xs-2">
+                                    <a class="btn btn-success" ng-click="openJefe()" title="Buscar autor">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </a>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="form-group ">
+                                <label class="col-xs-12">
+                                    Proyecto
+                                </label>
+
+
+                                <div class="col-xs-10">
+                                    <input type="text" class="form-control" placeholder="Buscar por proyecto" id="usr" name="proyecto" ng-model="proyecto.selected.nombre" disabled>
+                                </div>
+                                <div class="col-xs-2">
+                                    <a class="btn btn-success" ng-click="openProyecto()" title="Buscar proyecto">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </a>
+                                </div>
+
+                            </div>
+                            <div class="form-group ">
+                                <label class="col-xs-12">
+                                    Unidad organizacional
+                                </label>
+                                <div class="col-xs-12">
+                                    <div uo-modal2 nivel-min="2" nivel-max="3" fecha="" ng-model="claveUnidad">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                                                
+                    </form>
+
+                    <div class="col-xs-12 col-sm-12">
+                        <div style="margin-left:10px">
+                            <div class="form-group">
+                                <a class="btn btn-success" ng-click="buscar();">
+                                    <i class="glyphicon glyphicon-search"></i> Buscar
+                                </a>
+                                <a class="btn btn-primary" ng-click="limpiar();">
+                                    Limpiar
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="row" ng-show="botonBusqueda">
+        <div class="col-xs-12">
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+                    <table datatable="" id="SoftwareMTA1b" dt-options="showCase.dtOptions" dt-columns="showCase.dtColumns"
+                           dt-instance="showCase.dtInstance" 
+                           class="display dt-responsive"
+                           cellspacing="0" width="100%"></table>
+
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+
+</div>
+

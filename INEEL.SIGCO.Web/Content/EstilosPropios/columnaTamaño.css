@@ -1,0 +1,18 @@
+﻿.thCeldaA{
+    width:50%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    table-layout:fixed; 
+}
+.thCeldaB{
+    width:15%;
+}
+
+.btnAgregar {
+    font-size: 12px;
+    
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 24px;
+}

@@ -1,0 +1,433 @@
+﻿<div class="vista">
+    <div class="page-title">
+        <div class="title_full">
+            <ol class="breadcrumb miga">
+                <li>
+                    <i class="glyphicon glyphicon-file"></i>
+                    <a ui-sref="productoFI">Solicitudes FI</a>
+                </li>
+                <li class="active">Detalles</li>
+            </ol>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+                    <label class="detalle col-xs-12 " title="titulo">
+                        {{registro.nombreTecnico}}
+
+                    </label>
+                    <label class="cont emc col-xs-12 colorTit">
+                        {{registro.proyecto.nombre}} ({{registro.proyectoId}})
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="col-sm-6 col-md-6 col-lg-6">
+                    <div class="x_content sin-desborde">
+                        <div class="x_title">
+                            <h2>Informaci&oacute;n general</h2>
+                            <div class="clearfix"></div>
+                            <label class="tit col-xs-12">
+                                Gerencia que lider&oacute; el proyecto
+                            </label>
+                            <label class="cont col-xs-12">
+                                {{registro.unidad.nombreUnidad}}
+                            </label>
+                            <label class="tit col-xs-12">
+                                Nombre comercial del producto o servicio (en caso de que exista)
+                            </label>
+                            <label class="cont col-xs-12">
+                                {{registro.nombreComercial}}
+                            </label>
+                            <label class="tit col-xs-12">
+                                Necesidades que atiende
+                            </label>
+                            <label class="cont col-xs-12">
+                                {{registro.necesidades}}
+                            </label>
+                            <label class="tit col-xs-12">
+                                Segmento de mercado al que va dirigido
+                            </label>
+                            <label class="cont col-xs-12">
+                                {{registro.segmentoMercado.nomSegMerc}}
+                            </label>
+                            <label class="tit col-xs-12">
+                                Breve descripci&oacute;n del producto o servicio
+                            </label>
+                            <label class="cont col-xs-12">
+                                {{registro.descripcion}}
+                            </label>
+                            <!-- <label class="tit col-xs-12" style="font-size:15px;color:black">
+                                Factor de innovaci&oacute;n
+                            </label> -->
+                            <!-- <label class="cont col-xs-12" ng-if="registro.voBoDuenio==null">
+                                <select ng-model="registro.factorInnovacionId" ng-options="Factor.id as Factor.descripcion for Factor in Factores " class="form-control"></select>
+                            </label>
+                            <label class="cont col-xs-12" ng-if="registro.voBoDuenio!=null">
+                                <select ng-model="registro.factorInnovacionId" ng-options="Factor.id as Factor.descripcion for Factor in Factores " disabled
+                                    class="form-control"></select>
+                            </label> -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6 col-md-6 col-lg-6">
+                    <div class="x_content sin-desborde">
+                        <div class="x_title">
+                            <h2>Autores</h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group">
+                            <table id="CHPonenciaAdd" class="table table-hover" cellspacing="0" dt-options="dtOptions">
+                                <thead>
+                                    <tr>
+                                        <th data-priority="1">N&uacute;m empleado</th>
+                                        <th data-priority="1">Nombre de empleado</th>
+                                        <th data-priority="1">Contribuci&oacute;n</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="autor in registro.productoAutores">
+                                        <td ng-click="openProfile(autor.clavePersona)" title="Detalle de empleado" class="linkTabla">{{autor.clavePersona}}</td>
+                                        <td>{{autor.nombre}}</td>
+                                        <td>{{autor.contribucionAutor.contribucion}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Historial</h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+
+                    <form name="form">
+                        <!--Evaluacion gerencia-->
+                        <div ng-if="historial.evaluacionGerencia!=null" class="col-sm-4 col-md-4 col-lg-4 ">
+                            <div>
+                                <label class="col-xs-12" style="text-align:center">
+                                    Factor de innovaci&oacute;n evaluado en la gerencia
+                                </label>
+                                <label class="cont col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                    <input ng-model="historial.evaluacionGerencia" disabled class="form-control"></input>
+                                </label>
+                            </div>
+
+                            <div class="clearfix">
+                                <br />
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-12 col-sm-12 col-xs-12" style="text-align:center">
+                                    Justificaci&oacute;n
+                                </label>
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <textarea disabled class="form-control" rows="3" ng-minlength="1" ng-model="historial.comentarioGerencia" maxlength="500">
+                                        </textarea>
+                                    <label class="col-md-5 col-sm-5">
+                                        Fecha de evaluaci&oacute;n
+                                    </label>{{historial.fechaEvaluacionGerencia | date: 'dd-MM-yyyy'}}
+
+                                </div>
+                            </div>
+                        </div>
+                        <!--Evaluacion preliminar-->
+                        <div class="col-sm-4 col-md-4 col-lg-4 " ng-show="historial.evaluacionPreliminar!=null ">
+                            <div>
+                                <label class="col-xs-12" style="text-align:center">
+                                    Factor de innovaci&oacute;n preliminar
+                                </label>
+                                <label class="cont col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                    <input ng-model="historial.evaluacionPreliminar" disabled class="form-control"></input>
+                                </label>
+                            </div>
+
+                            <div class="clearfix">
+                                <br />
+                            </div>
+                            <div class="form-group">
+
+                                <label class="col-md-12 col-sm-12 col-xs-12" style="text-align:center">
+                                    Justificaci&oacute;n
+                                </label>
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <textarea disabled class="form-control" rows="3" ng-minlength="1" ng-model="historial.comentarioPreliminar" maxlength="500"></textarea>
+                                </div>
+                                <label class="col-md-5 col-sm-5">
+                                    Fecha de evaluaci&oacute;n
+                                </label>{{historial.fechaEvaluacionPreliminar | date: 'dd-MM-yyyy'}}
+                            </div>
+                        </div>
+                        <!--Evaluacion final-->
+                        <div class="col-sm-4 col-md-4 col-lg-4 " ng-show="registro.estadoFlujoComite!=16" ng-class="{'jumbotron-fondo' : registro.estadoFlujoComite==17 }">
+                            <div>
+                                <label class="col-xs-12" style="text-align:center" ng-class="{font-size:15px;color:black : registro.estadoFlujoComite==17 ">
+                                    Factor de innovaci&oacute;n final
+                                </label>
+                                <label class="col-xs-12" ng-if="registro.voBoDuenio==null && registro.estadoFlujoComite!=18">
+                                    <select ng-model="registro.factorInnovacionId" ng-options="Factor.id as Factor.descripcion for Factor in Factores " class="form-control"></select>
+                                </label>
+                                <label class="cont col-xs-12" ng-if="registro.estadoFlujoComite==18">
+                                    <input ng-model="historial.evaluacionFinal" disabled class="form-control"></input>
+                                </label>
+                            </div>
+
+                            <div class="clearfix">
+                                <br />
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-12 col-sm-12 col-xs-12" style="text-align:center">
+                                    Justificaci&oacute;n
+                                </label>
+
+                                <div ng-show="registro.voBoDuenio==null  && registro.estadoFlujoComite!=18" class="col-md-12 col-sm-12 col-xs-12">
+                                    <textarea class="form-control" rows="3" ng-minlength="1" placeholder="Escriba una justificaci&oacute;n" ng-model="justificacion" maxlength="500"></textarea>
+                                </div>
+                                <div ng-if="registro.estadoFlujoComite==18" class="col-md-12 col-sm-12 col-xs-12">
+                                    <textarea class="form-control" rows="3" disabled ng-model="historial.comentarioFinal"></textarea>
+                                </div>
+                                <div ng-if="registro.estadoFlujoComite==18">
+                                    <label class="col-md-5 col-sm-5">
+                                        Fecha de evaluaci&oacute;n
+                                    </label>{{historial.fechaEvaluacionFinal | date: 'dd-MM-yyyy'}}
+                                </div>
+
+                            </div>
+                            <div class="form-group" ng-if="registro.voBoDuenio==null">
+                                <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                    <div class="">
+                                        <br />
+                                        <br />
+                                        <button type="button" class="btn btn-success" ng-really-click="registrar()" ng-if="registro.estadoFlujoComite==17">
+                                            <i class="glyphicon glyphicon-saved"></i> Registrar FI
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+
+                </div>
+            </div>
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+                    <div class="x_title">
+                        <h2>Detalles de innovaci&oacute;n</h2>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="tit col-xs-12" style="text-align:justify">
+                            <a style="color:black;">
+                                <b>Innovaci&oacute;n: </b>
+                            </a>
+                            <label style="text-align:justify">Describa el desarrollo innovador generado en su proyecto (No describa el proyecto en si). ¿El
+                                desarrollo innovador generado es un producto, una capacidad de servicio, o una soluci&oacute;n
+                                a un problema cient&iacute;fico? ¿En qu&eacute; consiste? ¿Por qu&eacute; es importante?</label>
+                        </label>
+                        <label class="cont col-xs-12">
+                            <textarea type="text" ng-disabled="true" ng-maxlength="1000" rows="10" class="form-control" ng-model="rg.innovacion"></textarea>
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <div class="control-label col-md-12 col-sm-12 col-xs-12">
+                            <div class="x_title">
+                                <h2>Evidencia de innovaci&oacute;n</h2>
+                                <div class="clearfix"></div>
+                            </div>
+                            <table id="CHPonenciaAdd" class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" width="100%"
+                                dt-options="dtOptions">
+                                <thead>
+                                    <tr>
+                                        <th data-priority="1">Nombre</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="adjunto in rg.productoGISolicitudArchivosInnovacion">
+                                        <td>
+                                            <span class="fa fa-download"></span>&nbsp;&nbsp;
+                                            <a href="/Descargas.html#/q/{{adjunto.adjunto.adjuntoId | encriptar}}" class="linkTabla" target="_blank">{{adjunto.adjunto.nombre}} </a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+                    <div class="x_title">
+                        <h2>Detalles de desarrollo superior</h2>
+                        <div class="clearfix"></div>
+                    </div>
+                    <!--{{rg | json}}-->
+                    <div class="form-group">
+                        <label class="tit col-xs-12" style="text-align:justify">
+                            <a style="color:black;">
+                                <b>Desarrollo superior: </b>
+                            </a>
+                            <label style="text-align:justify"> En el caso de un producto o capacidad de servicio, ¿En qu&eacute; sentido es su desarrollo superior
+                                a lo que existe en el mercado? En el caso de un desarrollo cient&iacute;fico, ¿Qu&eacute;
+                                problema cient&iacute;fico resuelve y en qu&eacute; sentido es superior a soluciones anteriores?</label>
+                        </label>
+                        <label class="cont col-xs-12">
+                            <textarea type="text" ng-disabled="true" ng-maxlength="1000" rows="10" class="form-control" ng-model="rg.superior"></textarea>
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <div class="control-label col-md-12 col-sm-12 col-xs-12">
+                            <div class="x_title">
+                                <h2>Evidencia de desarrollo superior</h2>
+                                <div class="clearfix"></div>
+                            </div>
+                            <table id="CHPonenciaAdd" class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" width="100%"
+                                dt-options="dtOptions">
+                                <thead>
+                                    <tr>
+                                        <th data-priority="1">Nombre</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="adjunto in rg.productoGISolicitudArchivosSuperior">
+                                        <td>
+                                            <span class="fa fa-download"></span>&nbsp;&nbsp;
+                                            <a href="/Descargas.html#/q/{{adjunto.adjunto.adjuntoId | encriptar}}" class="linkTabla" target="_blank">{{adjunto.adjunto.nombre}} </a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+                    <div class="x_title">
+                        <h2>Detalles de fase de desarrollo y aplicaci&oacute;n</h2>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="tit col-xs-12" style="text-align:justify">
+                            <a style="color:black;">
+                                <b>Fase de desarrollo y aplicaci&oacute;n: </b>
+                            </a>
+                            <label style="text-align:justify"> En el caso del desarrollo de un producto o capacidad de servicio, ¿En qu&eacute; fase de desarrollo
+                                y aplicaci&oacute;n se encuentra (prototipo, en fase de prueba en planta/campo, probado extensamente,
+                                aplicado con &eacute;xito, etc.)?. En el caso de un desarrollo cient&iacute;fico, ¿En qu&eacute;
+                                fase se encuentra su desarrollo en cuanto a aceptaci&oacute;n por la comunidad cient&iacute;fica
+                                (a&uacute;n no comunicado, presentado y discutido en foros especializados, aceptado por una
+                                revista de primer nivel)? (Por favor anexe lo que considere evidencia importante para apoyar
+                                su respuesta)</label>
+                        </label>
+                        <label class="cont col-xs-12">
+                            <textarea type="text" ng-disabled="true" ng-maxlength="1000" rows="10" class="form-control" ng-model="rg.fase"></textarea>
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <div class="control-label col-md-12 col-sm-12 col-xs-12">
+                            <div class="x_title">
+                                <h2>Evidencia de fase de desarrollo y aplicaci&oacute;n</h2>
+                                <div class="clearfix"></div>
+                            </div>
+                            <table id="CHPonenciaAdd" class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" dt-options="dtOptions">
+                                <thead>
+                                    <tr>
+                                        <th data-priority="1">Nombre</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="adjunto in rg.productoGISolicitudArchivosFase">
+                                        <td>
+                                            <span class="fa fa-download"></span>&nbsp;&nbsp;
+                                            <a href="/Descargas.html#/q/{{adjunto.adjunto.adjuntoId | encriptar}}" class="linkTabla" target="_blank">{{adjunto.adjunto.nombre}} </a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="x_panel" ng-if="registro.estadoFlujoComite!=17">
+                <div class="x_content sin-desborde">
+                    <div class="x_title">
+                        <h2>Asignar evaluadores (comite FI)</h2>
+                        <div class="clearfix"></div>
+                        <div class="cont col-xs-12">
+                            <div ng-show="miembros.length === 0" class="alert advertencia">
+                                No hay registros de este grupo evaluador
+                            </div>
+                        </div>
+                        <div class="col-xs-12">
+                            <div ng-show="miembros.length != 0 && miembros!=null">
+                                <br />
+                                <br />
+                                <table class="table table-hover table-striped table-condensed dt-responsive" datatable="ng" cellspacing="0" dt-options="dtOptions">
+                                    <thead>
+                                        <tr>
+                                            <th data-priority="1">N&uacute;m empleado</th>
+                                            <th data-priority="2">Nombre de empleado</th>
+                                            <th ng-if="registro.voBoDuenio==null" data-priority="1">Seleccionar</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="miembro in miembros">
+                                            <td ng-click="openProfile(miembro.clavePersona)" title="Detalle de empleado" class="linkTabla">{{miembro.clavePersona}}</td>
+                                            <td>{{miembro.nombrePersona}}</td>
+                                            <td ng-if="registro.voBoDuenio==null">
+                                                <input type="checkbox" class="btn btn-info btn-circle" ng-model="miembro.seleccionado" ng-click="verificarnotificar(miembro.clavePersona)"
+                                                />
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-show="contador>0">
+                            <div class="col-xs-12">
+                                <div class="row center">
+                                    <button type="button" class="btn btn-success" ng-really-click="notificar()">
+                                        <i class="glyphicon glyphicon-saved"></i>Guardar y notificar al evaluador
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="x_panel" ng-if="registro.estadoFlujoComite==17">
+                <div class="x_content sin-desborde">
+                    <div class="x_title">
+                        <h2>Evaluador(comite FI)</h2>
+                        <div class="clearfix"></div>
+                        <label class="tit col-xs-12">
+                            Evaluador
+                        </label>
+                        <label class="cont col-xs-12">
+                            {{valido.nombrePersona}}
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <button type="button" confirma-regresar="globalRegresar()" state-form="form" class="btn btn-primary">
+                <span class="fa fa-arrow-left"></span> Regresar
+            </button>
+
+        </div>
+    </div>
+</div>
+<!--{{miembros | json}}-->

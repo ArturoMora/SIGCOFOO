@@ -1,0 +1,62 @@
+<div class="vista">
+    <div class="page-title">
+        <div class="title_left">
+            <ol class="breadcrumb miga">
+                <!--<li><i class="fa fa-list-ul"></i> <a>Tipo de Evento</a></li>-->
+                <li><i class="disabled fa fa-cogs"></i> <a>Administraci&oacute;n/Cat&aacute;logos/Tipos de eventos</a></li>
+            </ol>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+                    <form name="ValidForm" id="form" class="form-horizontal">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div ng-show="tiposEventos.length === 0" class="alert advertencia">
+                                    No existen tipos de eventos registrados
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" ng-show="!loading">
+                            <div class="col-lg-12">
+                                <div ng-hide="tiposEventos.length === 0">
+                                    <table id="CRtipoEventosGet" dt-instance="dtInstance" class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" datatable="ng" width="100%" dt-options="dtOptions">
+                                        <thead>
+                                            <tr>
+                                                <!--<th style="width:70px" data-priority="1">ID</th>-->
+                                                <th style="width:210px">Tipo de Evento</th>
+                                                <th>Fecha Alta</th>
+                                                <th>&iquest;Est&aacute; activo?</th>
+                                                <th>Opciones</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="t in tiposEventos">
+                                                <!--<td>{{t.tipoEventoONId}}</td>-->
+                                                <td>{{t.nombreEvento}}</td>
+                                                <td>{{t.fechaAlta | date:'yyyy-MM-dd'}}</td>
+                                                <td><input type="checkbox" class="btn btn-info btn-circle" ng-model="t.estado" ng-checked="t.estado == 1" ng-click="eliminacionLogica(t)" /></td>
+                                                <td>
+                                                    <a class="btn btn-warning" ng-click="editarTipoEvento(t.tipoEventoONId)" title="Editar">
+                                                        <i class="glyphicon glyphicon-pencil"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <button type="button" ng-click="agregarTipoEvento()" class="btn btn-success">
+                                    <span class="glyphicon glyphicon-plus"></span> Agregar
+                                </button>
+                            </div>
+                        </div>    
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

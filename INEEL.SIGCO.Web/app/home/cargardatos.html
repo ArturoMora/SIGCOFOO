@@ -1,0 +1,12 @@
+<div ng-show="respons == null || respons==undefined">
+    <img src="images/cargando.gif" />
+</div>
+<table>
+    <tr ng-repeat="prop in respons">
+        <td><label>{{prop.p}}:</label></td><td> <span>{{prop.v}}</span></td>
+    </tr>
+</table>
+
+<!--<div>
+    <input class="btn btn-primary" type="button" value="ir al home" ng-click="gotoHome()">
+</div>-->

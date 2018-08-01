@@ -1,0 +1,31 @@
+﻿<div class="modal-content" style="z-index:unset">
+    <div class="modal-header">
+        Asignar oportunidad {{nombreOportunidad.nombreOportunidad}} a unidad organizacional
+        <button type="button" class="close" ng-click="cancel()" data-dissmiss="modal">x</button>
+    </div>
+    <form role="form" ng-submit="ok()" name="asignaraunidadForm">
+        <div class="modal-body">
+            <div class="panel">
+                <!-- /.panel-heading -->
+                <div class="panel-body">
+                    <div uo-modal ng-model="unidad"></div>
+                    <div class="col-lg-12">
+                        <hr />
+                    </div>
+                    <div ng-show="responsable.nombre" class="col-lg-12">
+                        <label>Responsable: </label><span class="cont"> {{responsable.nombre}} {{responsable.apellidoPaterno}} {{responsable.apellidoMaterno}}</span>
+                    </div>
+                    <div class="col-lg-12">
+                        <label>Comentarios <span class="required">*</span></label>
+                        <textarea required type="text" name="nombreOportunidad" ng-model="oportunidad.comentariosEspecialista" class="form-control"
+                            ng-required="true" maxlength="500" rows="3"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-success" ng-disabled="asignaraunidadForm.$invalid" ng-click="asignarAUnidad()">Asignar oportunidad</button>
+            <button type="button" class="btn btn-primary" ng-click="cancel()">Cancelar</button>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,668 @@
+﻿<div data-ng-show="authentication.isAuth">
+    <!--<div ng-hide="registros.length >= 0">
+        <img src="images/cargando.gif" />
+    </div>-->
+    <div class="title_full">
+        <ol class="breadcrumb miga">
+            <li> <span class="fa fa-video-camera"></span> Video Tutoriales </li>
+        </ol>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Capital humano (CH)</h2>
+                    <div class="clearfix"></div>
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Video</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <a ng-click="abrirModal('Buscar personal','https://www.youtube.com/embed/Ta9e1U0QBz4?autoplay=1')" style="text-decoration:underline;cursor:pointer; font-weight:bold;">
+                                        Buscar personal 
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a ng-click="abrirModal('Consultar mis competencias','https://www.youtube.com/embed/yXqmvP-JsKo?autoplay=1')" style="text-decoration:underline;cursor:pointer; font-weight:bold;">
+                                        Consultar mis competencias
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a ng-click="abrirModal('','')" style="text-decoration:none;">
+                                        Consultar personal por familia de puestos
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a ng-click="abrirModal('Consultar familias de puestos por tipo de competencia','https://www.youtube.com/embed/qgCps7JaZcE?autoplay=1')" style="text-decoration:underline;cursor:pointer; font-weight:bold;">
+                                        Consultar familias de puestos por tipo de competencia
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a ng-click="abrirModal('Consultar familias de puestos por unidad organizacional','https://www.youtube.com/embed/rgol9J78IqU?autoplay=1')" style="text-decoration:underline;cursor:pointer; font-weight:bold;">
+                                        Consultar familias de puestos por unidad organizacional 
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a ng-click="abrirModal('Editar ficha curricular / artículos','https://www.youtube.com/embed/UgbOqm-i37A?autoplay=1')" style="text-decoration:underline;cursor:pointer; font-weight:bold;">
+                                        Editar ficha curricular / artículos
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a ng-click="abrirModal('Editar ficha curricular / participación en proyecto','https://www.youtube.com/embed/mY2UWzTR8n8?autoplay=1')" style="text-decoration:underline;cursor:pointer; font-weight:bold;">
+                                        Editar ficha curricular / participación en proyectos
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a ng-click="abrirModal('Editar ficha curricular / formación académica','https://www.youtube.com/embed/6lyxXWbds2g?autoplay=1')" style="text-decoration:underline;cursor:pointer; font-weight:bold;">
+                                        Editar ficha curricular / formación académica 
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a ng-click="abrirModal('Aprobar una solicitud de ficha curricular como Gerente','https://www.youtube.com/embed/5m7jkQcZEqE?autoplay=1')" style="text-decoration:underline;cursor:pointer; font-weight:bold;">
+                                        Aprobar una solicitud de ficha curricular como Gerente 
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a ng-click="abrirModal('Aprobar una solicitud de ficha curricular como Administrador de CH','https://www.youtube.com/embed/zACD5pWLMDA?autoplay=1')" style="text-decoration:underline;cursor:pointer; font-weight:bold;">
+                                        Aprobar una solicitud de ficha curricular como Administrador de CH
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Capital relacional (CR)</h2>
+                    <div class="clearfix"></div>
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Video</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <a ng-click="abrirModal('Consultar aliados','https://www.youtube.com/embed/7yKHPGkQtpY?autoplay=1')" style="text-decoration:underline;cursor:pointer; font-weight:bold;">
+                                        Consultar aliados 
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a ng-click="abrirModal('','')" style="text-decoration:none;">
+                                        Consultar clientes
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a ng-click="abrirModal('Consultar clientes / propuestas, iniciativas y ON ','https://www.youtube.com/embed/kxEgPOuAyoE?autoplay=1')" style="text-decoration:underline;cursor:pointer; font-weight:bold;">
+                                        Consultar clientes / propuestas, iniciativas y ON 
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a ng-click="abrirModal('','')" style="text-decoration:none;">
+                                        Consultar clientes / prospectos
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a ng-click="abrirModal('','')" style="text-decoration:none;">
+                                        Consultar clientes / proyectos vigentes
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a ng-click="abrirModal('Consultar competidores','https://www.youtube.com/embed/mvcGdMhcL0A?autoplay=1')" style="text-decoration:underline;cursor:pointer; font-weight:bold;">
+                                        Consultar competidores
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a ng-click="abrirModal('','')" style="text-decoration:none;">
+                                        Consultar estudios de mercado
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a ng-click="abrirModal('Consultar página inicial de fuentes de financiamiento ','https://www.youtube.com/embed/0RmLpydf-Qk?autoplay=1')" style="text-decoration:underline;cursor:pointer; font-weight:bold;">
+                                        Consultar página inicial de fuentes de financiamiento 
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a ng-click="abrirModal('Consultar convocatorias','https://www.youtube.com/embed/9ny0RzYR9jg?autoplay=1')" style="text-decoration:underline;cursor:pointer; font-weight:bold;">
+                                        Consultar convocatorias 
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a ng-click="abrirModal('Consultar fondos','https://www.youtube.com/embed/p5i1pDsv0DU?autoplay=1')" style="text-decoration:underline;cursor:pointer; font-weight:bold;">
+                                        Consultar fondos
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a ng-click="abrirModal('Consultar fuentes de financiamiento','https://www.youtube.com/embed/TCGQC08j7S8?autoplay=1')" style="text-decoration:underline;cursor:pointer; font-weight:bold;">
+                                        Consultar fuentes de financiamiento
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a ng-click="abrirModal('','')" style="text-decoration:none;">
+                                        Agregar oportunidad de negocio (ON) (con rol empleado)
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a ng-click="abrirModal('Canalizar Oportunidad de Negocio a Especialista con Rol Administrador','https://www.youtube.com/embed/1E2JlYryaw4?autoplay=1')" style="text-decoration:underline;cursor:pointer; font-weight:bold;">
+                                        Canalizar ON a especialista (con rol Administrador de CR) 
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a ng-click="abrirModal('','')" style="text-decoration:none;">
+                                        Asignar ON a Gerente (con rol especialista)
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a ng-click="abrirModal(' Asignar oportunidad de negocio a Investigador','https://www.youtube.com/embed/ErUDWsFGBr0?autoplay=1')" style="text-decoration:underline;cursor:pointer; font-weight:bold;">
+                                        Asignar ON a Investigador (con rol Gerente) 
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a ng-click="abrirModal('','')" style="text-decoration:none;">
+                                        Consultar mis oportunidades de negocio 
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a ng-click="abrirModal('Consultar mis oportunidades de negocio registradas','https://www.youtube.com/embed/q8qssaodbE0?autoplay=1')" style="text-decoration:underline;cursor:pointer; font-weight:bold;">
+                                        Consultar mis oportunidades de negocio registradas 
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a ng-click="abrirModal('','')" style="text-decoration:none;">
+                                        Dar serguimiento a mi oportunidad
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a ng-click="abrirModal('','')" style="text-decoration:none;">
+                                        Consultar redes de expertos
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Comunidades de práctica (CP)</h2>
+                    <div class="clearfix"></div>
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Video</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <a ng-click="abrirModal('Consultar comunidades de práctica','https://www.youtube.com/embed/DuFKwf6N5X0?autoplay=1')" style="text-decoration:underline;cursor:pointer; font-weight:bold;">
+                                        Consultar comunidades de práctica 
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a ng-click="abrirModal('Publicar un mensaje en la comunidad de práctica','https://www.youtube.com/embed/4QTTbDQHLdQ?autoplay=1')" style="text-decoration:underline;cursor:pointer; font-weight:bold;">
+                                        Publicar un mensaje en la comunidad de práctica 
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a ng-click="abrirModal('Agregar un documento','https://www.youtube.com/embed/E2uRTpTNXt0?autoplay=1')" style="text-decoration:underline;cursor:pointer; font-weight:bold;">
+                                        Agregar un documento 
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a ng-click="abrirModal('Agregar sitios de interés','https://www.youtube.com/embed/XrQULevd-xI?autoplay=1')" style="text-decoration:underline;cursor:pointer; font-weight:bold;">
+                                        Agregar sitios de interés  
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    
+                                    <a ng-click="abrirModal('Agregar preguntas frecuentes','https://www.youtube.com/embed/y0M9UHb9HCk?autoplay=1')" style="text-decoration:underline;cursor:pointer; font-weight:bold;">
+                                        Agregar preguntas frecuentes
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a ng-click="abrirModal('','')" style="text-decoration:none;">
+                                        Consultar nuevos OCs de las comunidades de práctica
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a ng-click="abrirModal('','')" style="text-decoration:none;">
+                                        Administrar comunidad de práctica (como líder ó secretario de la CP)
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a ng-click="abrirModal('Agregar avance de resultados como líder ó secretario de la CP','https://www.youtube.com/embed/a1APozd9f30?autoplay=1')" style="text-decoration:underline;cursor:pointer; font-weight:bold;">
+                                        Agregar avance de resultados (como líder ó secretario de la CP)  
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a ng-click="abrirModal('Agregar Expertos (como líder ó secretario de la CP)','https://www.youtube.com/embed/JOAS8xIkygw?autoplay=1')" style="text-decoration:underline;cursor:pointer; font-weight:bold;">
+                                        Agregar Expertos (como líder ó secretario de la CP) 
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a ng-click="abrirModal('Agregar Miembros (como líder ó secretario de la CP)','https://www.youtube.com/embed/WYfuuA7SdPU?autoplay=1')" style="text-decoration:underline;cursor:pointer; font-weight:bold;">
+                                        Agregar Miembros (como líder ó secretario de la CP) 
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a ng-click="abrirModal(' Agregar eventos (como líder ó secretario de la CP) ','https://www.youtube.com/embed/evPtEd09Y3o?autoplay=1')" style="text-decoration:underline;cursor:pointer; font-weight:bold;">
+                                        Agregar eventos (como líder ó secretario de la CP) 
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Memoria tecnológica (MT)</h2>
+                    <div class="clearfix"></div>
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Video</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <a ng-click="abrirModal('Buscar artículos','https://www.youtube.com/embed/xFQUHTLoB7s?autoplay=1')" style="text-decoration:underline;cursor:pointer; font-weight:bold;">
+                                        Buscar artículos
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a ng-click="abrirModal('Agregar capítulos de libros','https://www.youtube.com/embed/xAB4qTYTewY?autoplay=1')" style="text-decoration:underline;cursor:pointer; font-weight:bold;">
+                                        Agregar capítulos de libros 
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a ng-click="abrirModal('Buscar capítulos de libros','https://www.youtube.com/embed/34HR_FymiTw?autoplay=1')" style="text-decoration:underline;cursor:pointer; font-weight:bold;">
+                                        Buscar capítulos de libros
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a ng-click="abrirModal('Buscar cursos impartidos','https://www.youtube.com/embed/t-sTbwktz-A?autoplay=1')" style="text-decoration:underline;cursor:pointer; font-weight:bold;">
+                                        Buscar cursos impartidos
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td> 
+                                    <a ng-click="abrirModal('Agregar cursos impartidos','https://www.youtube.com/embed/LUb5cPWl8VA?autoplay=1')" style="text-decoration:underline;cursor:pointer; font-weight:bold;">
+                                        Agregar cursos impartidos
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a ng-click="abrirModal('Buscar informes de becarios','https://www.youtube.com/embed/W0GAU6vPqyA?autoplay=1')" style="text-decoration:underline;cursor:pointer; font-weight:bold;">
+                                        Buscar informes de becarios
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    
+                                    <a ng-click="abrirModal('Buscar informes técnicos finales (ITF)','https://www.youtube.com/embed/oFhSD9qlPcY?autoplay=1')" style="text-decoration:underline;cursor:pointer; font-weight:bold;">
+                                        Buscar informes técnicos finales (ITF)
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a ng-click="abrirModal('Agregar informes técnicos finales','https://www.youtube.com/embed/JbK4CAtH9LE?autoplay=1')" style="text-decoration:underline;cursor:pointer; font-weight:bold;">
+                                        Agregar informes técnicos finales 
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a ng-click="abrirModal('Aprobar un ITF como Gerente','https://www.youtube.com/embed/uL_pRWPb8LE?autoplay=1')" style="text-decoration:underline;cursor:pointer; font-weight:bold;">
+                                        Aprobar un ITF como Gerente 
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a ng-click="abrirModal('Aprobar un ITF como Administrador de MT','https://www.youtube.com/embed/H6g7kHlULI8?autoplay=1')" style="text-decoration:underline;cursor:pointer; font-weight:bold;">
+                                        Aprobar un ITF como Administrador de MT 
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a ng-click="abrirModal('Buscar ponencias','https://www.youtube.com/embed/9FledGRaVN4?autoplay=1')" style="text-decoration:underline;cursor:pointer; font-weight:bold;">
+                                        Buscar ponencias
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a ng-click="abrirModal('Buscar software','https://www.youtube.com/embed/0OczAkCbN2s?autoplay=1')" style="text-decoration:underline;cursor:pointer; font-weight:bold;">
+                                        Buscar software
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a ng-click="abrirModal('Agregar software','https://www.youtube.com/embed/HntlPA9u8VI?autoplay=1')" style="text-decoration:underline;cursor:pointer; font-weight:bold;">
+                                        Agregar software
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a ng-click="abrirModal('Aprobar un software como Gerente','https://www.youtube.com/embed/nlvCHIMT_hQ?autoplay=1')" style="text-decoration:underline;cursor:pointer; font-weight:bold;">
+                                        Aprobar un software como Gerente
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a ng-click="abrirModal('','')" style="text-decoration:none;">
+                                        Buscar insumos 
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a ng-click="abrirModal('Buscar lecciones aprendidas','https://www.youtube.com/embed/NlF-9inYUSY?autoplay=1')" style="text-decoration:underline;cursor:pointer; font-weight:bold;">
+                                        Buscar lecciones aprendidas 
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a ng-click="abrirModal('Buscar libros','https://www.youtube.com/embed/JlHewQJnaNE?autoplay=1')" style="text-decoration:underline;cursor:pointer; font-weight:bold;">
+                                        Buscar libros
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
+
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Gestión de la innovación (GI)</h2>
+                    <div class="clearfix"></div>
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Video</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <a ng-click="abrirModal('Buscar idea innovadora','https://www.youtube.com/embed/sP7dKE_d4Dk?autoplay=1')" style="text-decoration:underline;cursor:pointer; font-weight:bold;">
+                                        Buscar idea innovadora 
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a ng-click="abrirModal('Agregar idea innovadora','https://www.youtube.com/embed/RXw2eGAefns?autoplay=1')" style="text-decoration:underline;cursor:pointer; font-weight:bold;">
+                                        Agregar idea innovadora 
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a ng-click="abrirModal('Registrar resultado de evaluación de idea innovadora como evaluador','https://www.youtube.com/embed/xvta9RSlONQ?autoplay=1')" style="text-decoration:underline;cursor:pointer; font-weight:bold;">
+                                        Registrar resultado de evaluación de idea innovadora (como evaluador)
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a ng-click="abrirModal('Registrar resultado de evaluación de idea innovadora del comite (como Administrador de GI)','https://www.youtube.com/embed/UzKM--3VO1s?autoplay=1')" style="text-decoration:underline;cursor:pointer; font-weight:bold;">
+                                        Registrar resultado de evaluación de idea innovadora del comite (como Administrador de GI)
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a ng-click="abrirModal('Buscar propuestas innovadoras','https://www.youtube.com/embed/lWOeL8SpBQY?autoplay=1')" style="text-decoration:underline;cursor:pointer; font-weight:bold;">
+                                        Buscar propuestas innovadoras
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a ng-click="abrirModal('Agregar  propuesta innovadora tipo interna con fondos Ficydet','https://www.youtube.com/embed/FjZkmW33ItE?autoplay=1')" style="text-decoration:underline;cursor:pointer; font-weight:bold;">
+                                        Agregar  propuesta innovadora tipo interna con fondos Ficydet 
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td> 
+                                    <a ng-click="abrirModal('Agregar  propuesta innovadora tipo interna con otros fondos','https://www.youtube.com/embed/1PViOSZ0GOE?autoplay=1')" style="text-decoration:underline;cursor:pointer; font-weight:bold;">
+                                        Agregar  propuesta innovadora tipo interna con otros fondos
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a ng-click="abrirModal('Agregar  propuesta innovadora tipo externa','https://www.youtube.com/embed/77DBRTTaTCs?autoplay=1')" style="text-decoration:underline;cursor:pointer; font-weight:bold;">
+                                        Agregar  propuesta innovadora tipo externa
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a ng-click="abrirModal('','')" style="text-decoration:none;">
+                                        Registrar resultado de evaluación de propuesta innovadora del comite (como Administrador de GI)
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a ng-click="abrirModal('Buscar planes de negocio evolutivos','https://www.youtube.com/embed/qh9KD2gLN4o?autoplay=1')" style="text-decoration:underline;cursor:pointer; font-weight:bold;">
+                                        Buscar planes de negocio evolutivos 
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a ng-click="abrirModal('Consultar mis planes de negocio evolutivos','https://www.youtube.com/embed/IBvlDjT1AEI?autoplay=1')" style="text-decoration:underline;cursor:pointer; font-weight:bold;">
+                                        Consultar mis planes de negocio evolutivos
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a ng-click="abrirModal('Buscar productos innovadores','https://www.youtube.com/embed/neIIQ8MivpQ?autoplay=1')" style="text-decoration:underline;cursor:pointer; font-weight:bold;">
+                                        Buscar productos innovadores
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td> 
+                                    <a ng-click="abrirModal('','https://www.youtube.com/embed/EZobV4tRKMY?autoplay=1')" style="text-decoration:underline;cursor:pointer; font-weight:bold;">
+                                        Agregar producto innovador y enviar a aprobación del Gerente
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a ng-click="abrirModal('','')" style="text-decoration:none;">
+                                        Validar producto innovador (como Gerente)
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td> 
+                                    <a ng-click="abrirModal('Enviar solicitud de evaluación de factor de innovación al comité','https://www.youtube.com/embed/le0_XXXPZJY?autoplay=1')" style="text-decoration:underline;cursor:pointer; font-weight:bold;">
+                                        Enviar solicitud de evaluación de factor de innovación al comité 
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a ng-click="abrirModal('','')" style="text-decoration:none;">
+                                        Registrar resultados de evaluación del factor de innovación (como Admin de GI)
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a ng-click="abrirModal('Consultar resultados de evaluación del factor de innovación','https://www.youtube.com/embed/Jht5dKy9MIE?autoplay=1')" style="text-decoration:underline;cursor:pointer; font-weight:bold;">
+                                        Consultar resultados de evaluación del factor de innovación 
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a ng-click="abrirModal('Buscar tecnologías licenciadas','https://www.youtube.com/embed/H_XuBjOU768?autoplay=1')" style="text-decoration:underline;cursor:pointer; font-weight:bold;">
+                                        Buscar tecnologías licenciadas 
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td> 
+                                    <a ng-click="abrirModal('Agregar tecnología licenciada (como Administrador de CR)','https://www.youtube.com/embed/kGGAPvhTAiI?autoplay=1')" style="text-decoration:underline;cursor:pointer; font-weight:bold;">
+                                        Agregar tecnología licenciada (como Administrador de CR)
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a ng-click="abrirModal('Editar mis tecnologías licenciadas','https://www.youtube.com/embed/F-gdL_kM6AA?autoplay=1')" style="text-decoration:underline;cursor:pointer; font-weight:bold;">
+                                        Editar mis tecnologías licenciadas (como JP, Gerente o Gerencia de Area Jurídica)  
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Propiedad intelectual (PI)</h2>
+                    <div class="clearfix"></div>
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Video</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <a class="linkTabla" ng-click="abrirModal('Consultar derechos de autor','https://www.youtube.com/embed/R75zT4So0RE?autoplay=1')" style="text-decoration:underline;cursor:pointer; font-weight:bold;">
+                                        Consultar derechos de autor 
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a ng-click="abrirModal('Consultar propiedad industrial','https://www.youtube.com/embed/TuPLUtlsqIw?autoplay=1')" style="text-decoration:underline;cursor:pointer; font-weight:bold;">
+                                        Consultar propiedad industrial 
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

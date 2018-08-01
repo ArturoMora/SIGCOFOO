@@ -1,0 +1,70 @@
+﻿
+<div class="vista">
+
+    <div class="page-title">
+        <div class="title_left">
+
+            <ol class="breadcrumb miga">
+                <li><i class="fa fa-cogs"></i> <a ui-sref="SolicitudesITFs">Administraci&oacute;n/Solicitudes/ITF por aprobar</a></li>
+                
+            </ol>
+
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+                    <!-- se oculta, si usuario está logeado-->
+                    <div data-ng-hide="authentication.isAuth">
+                        No tiene permisos para ingresar a esta secci&oacute;n.<br /> Usuario no autentificado
+                    </div>
+                    <div data-ng-show="authentication.isAuth">
+
+                        <div ng-show="registros.length == 0" class="alert advertencia">
+                            No hay registros
+                        </div>
+                        <div ng-show="loading">
+                            <img src="images/cargando.gif" />
+                        </div>
+                        <div ng-show="!loading && registros.length>0">
+                            <!--Solicitud para aprobar ITF-->
+                            <table id="MTSolicitudITFGetGerente" dt-instance="dtInstance" dt-columns="dtColumns" class="display dt-responsive" cellspacing="0" datatable="ng" width="100%" dt-options="dtOptions">
+                                <thead>
+                                    <tr>
+                                        <th data-priority="1">T&iacute;tulo</th>
+                                        <th data-priority="2">N&uacute;m empleado</th>
+                                        <th>Nombre</th>
+                                        <th class="thAjuste text-center">Fin de proyecto</th>
+                                        
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="solicitud in registros">
+                                        <td >
+                                            <a 
+                                               ui-sref="ITF.infoGral({ id: solicitud.informeTecnicoFinalId, edit:false, foo:99  })" title="Detalles">
+                                                {{solicitud.titulo}}
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <a class="linkTabla" ng-click="openProfile(solicitud.proyecto.numjefeProyecto)" style="cursor: hand;cursor: pointer;" title="Detalle de empleado">
+                                                {{solicitud.proyecto.numjefeProyecto}}
+                                            </a>
+                                        </td>
+                                        <td>{{solicitud.proyecto.nombreJefeProyecto}}</td>
+                                        <td>{{solicitud.proyecto.fechaFin | date: "dd-MM-yyyy"}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

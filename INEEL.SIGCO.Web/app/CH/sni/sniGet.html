@@ -1,0 +1,61 @@
+﻿<div data-ng-show="authentication.isAuth">
+    <div ng-hide="registrosni.length >= 0">
+        <img src="images/cargando.gif" />
+    </div>
+    <div class="row">
+        <div class="col-md-12 col-lg-12 col-xs-12 sin-desborde">
+            <div ng-show="registrosni.length === 0" class="alert advertencia">
+                No hay registros de SNI.
+            </div>
+            <div ng-show="registrosni.length > 0">
+                <table id="CHsniGet" class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" datatable="ng" width="100%"
+                    dt-options="dtOptions">
+                    <thead>
+                        <tr>
+                            <th data-priority="1">Nivel SNI</th>
+                            <th>Área SNI</th>
+                            <th>Estado registro </th>
+                            <th>Fecha validación</th>
+                            <th data-priority="1" class="thAjuste text-center">Opciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="sni in registrosni">
+                            <!--<td ng-if="sni.estadoFlujoId==1">{{sni.nivelSNI.descripcion}}</td>
+                            <td ng-if="sni.estadoFlujoId!=1"><u><a ng-click="$event.stopPropagation();" ui-sref="snidetail({id:sni.sniId})" title="Detalle">{{sni.nivelSNI.descripcion}}</a></u></td>-->
+                            <td style="cursor: pointer;" class="link" ng-click="$event.stopPropagation();" ui-sref="snidetail({id:sni.sniId})" title="Detalle"><a>{{sni.nivelSNI.descripcion}}</a></td>
+
+                            <!--<td>{{sni.nivelSNI.descripcion}}</td>-->
+                            <td>{{sni.areaSNI.descripcion}}</td>
+                            <td>{{sni.estadoFlujo.descripcion}}</td>
+                            <td>{{sni.fechaValidacion === null ? 'Dato no disponible' : sni.fechaValidacion | date:"dd/MM/yyyy"}}</td>
+                            <td class="text-center">
+                                <a ng-if="idRol==1" ng-click="setGlobalID(sni.sniId);$event.stopPropagation();"
+                                   ui-sref="SNIDetailsAdmin({id:sni.sniId, id2: 1})" title="Aprobar registro" class="btn btn-warning">
+                                    <i class="glyphicon glyphicon-pencil"></i>
+                                </a>
+                                <div ng-if="sni.estadoFlujoId==1 || editarGestion==1">
+                                    <a ng-if="idRol!=1" ng-click="setGlobalID(sni.sniId);$event.stopPropagation();" ui-sref="sniedit" title="Editar" class="btn btn-warning">
+                                        <i class="glyphicon glyphicon-pencil"></i>
+                                    </a>
+                                    <a title="Eliminar" ng-if="sni.fechaValidacion === null && sni.estadoFlujoId!=3" ng-click="open(sni)" class="btn btn-danger">
+                                        <i class="glyphicon glyphicon-trash"></i>
+                                    </a>
+                                </div>
+                                <div ng-if="sni.estadoFlujoId==3">
+                                    <a ng-if="idRol!=1" ng-really-message="Está a punto de acceder a un registro 'Aceptado', si modifica algún atributo deberá ser validado nuevamente. ¿Desea continuar?" ng-really-click="setGlobalID(sni.sniId);$event.stopPropagation();navegador();" title="Editar" class="btn btn-warning">
+                                        <i class="glyphicon glyphicon-pencil"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <button ng-show="registrosni.length >= 0" type="button" ng-click="$event.stopPropagation();" ui-sref="sniadd" class="btn btn-success">
+                    <span class="glyphicon glyphicon-plus"></span> Agregar
+                </button>
+        </div>
+
+    </div>
+</div>

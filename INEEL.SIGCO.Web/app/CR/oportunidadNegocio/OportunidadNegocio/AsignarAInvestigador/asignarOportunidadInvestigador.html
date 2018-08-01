@@ -1,0 +1,47 @@
+﻿<div class="modal-content">
+    <div class="modal-header">
+        Asignar oportunidad a investigador
+        <button type="button" class="close" ng-click="cancel()" data-dissmiss="modal">x</button>
+    </div>
+    <form role="form" ng-submit="ok()" novalidate name="asignarainvestigador">
+        <div class="modal-body">
+            <div class="panel">
+                <!-- /.panel-heading -->
+                <div class="panel-body">
+                    <div class="col-lg-12">
+                        <div ng-hide="investigadores.length === 0">
+                            <table id="CRasignarOportunidadInvestigador" dt-instance="dtInstance" class="table table-hover table-striped table-condensed dt-responsive"
+                                cellspacing="0" datatable="ng" width="100%" dt-options="dtOptions">
+                                <thead>
+                                    <tr>
+                                        <th style="width:20px" data-priority="1">Clave persona</th>
+                                        <th style="width:200px">Nombre</th>
+                                        <th>Apellido paterno</th>
+                                        <th>Apellido materno</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="i in investigadores">
+                                        <td><a class="link" style="cursor:pointer" ng-click="investigadorSeleccionado(i)" title="Selecciona investigador">{{i.clavePersona}} </a></td>
+                                        <td>{{i.nombre}}</td>
+                                        <td>{{i.apellidoPaterno}}</td>
+                                        <td>{{i.apellidoMaterno}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <label ng-show="investigador.nombre">Se asignar&aacute; a: </label><span class="cont"> {{investigador.nombre}} {{investigador.apellidoPaterno}} {{investigador.apellidoMaterno}}</span>
+                        <div class="form-group">
+                            <label>Comentarios <span class="required">*</span></label>
+                            <textarea placeholder="Escriba una justificaci&oacute;n" required name="comentarios" class="form-control" ng-model="comentariosResponsable" rows="3"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-success" ng-disabled="asignarainvestigador.$invalid" ng-click="asignarAInvestigador()">Asignar oportunidad</button>
+            <button type="button" class="btn btn-primary" ng-click="cancel()">Cancelar</button>
+        </div>
+    </form>
+</div>

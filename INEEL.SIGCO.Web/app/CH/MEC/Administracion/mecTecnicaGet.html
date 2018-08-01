@@ -1,0 +1,224 @@
+﻿<div class="vista">
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="page-title">
+                <div class="title_left">
+
+                    <ol class="breadcrumb miga">
+                        <li><i class="sg sg-metodo-evaluacion-compet"></i> <a>Método de evaluación de competencias/Administración de métodos de evaluación de competencias</a></li>
+                        
+                    </ol>
+
+
+                   
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_content sin-desborde">
+                        <form name="ValidForm" id="form" class="form-horizontal">
+                            <div>
+                                <div class="x_title">
+                                    <h2>  Competencias t&eacute;cnicas</h2>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <!--<div class="form-group">
+                                Competencias T&eacute;cnicas
+                                <button type="button" style="float:right" ng-click="$event.stopPropagation();" ui-sref="manualCompetenciaTecnicasAdd" class="btn btn-success">
+                                    <span class="glyphicon glyphicon-plus"></span> Agregar
+                                </button>
+                            </div>-->
+                                <div ng-show="registrosTecnicos.length === 0" class="alert advertencia">
+                                    No hay registros de competencias t&eacute;cnicas.
+                                </div>
+                                <div ng-show="registrosTecnicos.length > 0">
+                                    <table class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <th data-priority="1">Período</th>
+                                                <th data-priority="1">P&uacute;blico</th>
+                                                <th data-priority="1">Versi&oacute;n</th>
+                                                <th data-priority="1" class="thAjusteColaboracion text-center">Opciones</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="registro in registrosTecnicos">
+                                                <td>{{registro.periodoEvaluacion.periodo}}</td>
+                                                <td ng-if="registro.accesoPublico=='0'">No</td>
+                                                <td ng-if="registro.accesoPublico=='1'">Si</td>
+                                                <td>{{registro.version}}</td>
+                                                <td class="text-center">
+                                                    <a ng-click="setId(registro.manualCompetenciaTecnicaId);$event.stopPropagation();" ui-sref="manualCompetenciaTecnicaEdit" title="Editar" class="btn btn-warning">
+                                                        <i class="glyphicon glyphicon-pencil"></i>
+                                                    </a>
+                                                    <a title="Eliminar" ng-click="openTecnico(registro)" class="btn btn-danger">
+                                                        <i class="glyphicon glyphicon-trash"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                               
+
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <button type="button" ng-click="$event.stopPropagation();" ui-sref="manualCompetenciaTecnicasAdd" class="btn btn-success">
+                                            <span class="glyphicon glyphicon-plus"></span> Agregar
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_content sin-desborde">
+                        <form name="ValidForm" id="form" class="form-horizontal">
+                            <div class="x_title">
+                                <h2>  Competencias conductuales</h2>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div ng-show="registrosConductual.length === 0" class="alert advertencia">
+                                No hay registros de competencias conductuales.
+                            </div>
+                            <div ng-show="registrosConductual.length > 0">
+                                <table class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>Período</th>
+                                            <th>P&uacute;blico</th>
+                                            <th data-priority="1">Versi&oacute;n</th>
+                                            <th data-priority="4" class="thAjusteColaboracion text-center">Opciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="registro in registrosConductual">
+                                            <td>{{registro.periodoEvaluacion.periodo}}</td>
+                                            <td ng-if="registro.accesoPublico=='0'">No</td>
+                                            <td ng-if="registro.accesoPublico=='1'">Si</td>
+                                            <td>{{registro.version}}</td>
+                                            <td class="text-center">
+                                                <a ng-click="setId(registro.manualCompetenciaConductualId);$event.stopPropagation();" ui-sref="manualCompetenciaConductualEdit" title="Detalles" class="btn btn-warning">
+                                                    <i class="glyphicon glyphicon-pencil"></i>
+                                                </a>
+                                                <a title="Eliminar" ng-click="openConductual(registro)" class="btn btn-danger">
+                                                    <i class="glyphicon glyphicon-trash"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                           
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <button type="button" ng-click="$event.stopPropagation();" ui-sref="manualCompetenciaConductualAdd" class="btn btn-success">
+                                        <span class="glyphicon glyphicon-plus"></span> Agregar
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<!--<div id="page-wrapper">
+    <div class="row">
+        <div class="col-lg-12">
+            <br /><br />
+            <div>
+                <fieldset class="scheduler-border">
+                    <legend>M&eacute;todo de evaluaci&oacute;n de competencias</legend>
+                    <div class="form-group">
+                        Competencias T&eacute;cnicas
+                        <button type="button" style="float:right" ng-click="$event.stopPropagation();" ui-sref="manualCompetenciaTecnicasAdd" class="btn btn-success">
+                            <span class="glyphicon glyphicon-plus"></span> Agregar
+                        </button>
+                    </div>
+                    <div ng-show="registrosTecnicos.length === 0" class="alert alert-danger">
+                        No hay registros de competencias t&eacute;cnicas.
+                    </div>
+                    <div ng-show="registrosTecnicos.length > 0">
+                        <table class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" datatable="ng" dt-options="dtOptions" >
+                            <thead>
+                                <tr>
+                                    <th data-priority="1">Periodo</th>
+                                    <th data-priority="1">P&uacute;blico</th>
+                                    <th data-priority="1">Versi&oacute;n</th>
+                                    <th data-priority="1" class="thAjuste text-center">Opciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="registro in registrosTecnicos">
+                                    <td>{{registro.periodoEvaluacion.periodo}}</td>
+                                    <td ng-if="registro.accesoPublico=='0'">No</td>
+                                    <td ng-if="registro.accesoPublico=='1'">Si</td>
+                                    <td>{{registro.version}}</td>
+                                    <td class="text-center">
+                                        <a ng-click="setId(registro.manualCompetenciaTecnicaId);$event.stopPropagation();" ui-sref="manualCompetenciaTecnicaEdit" title="Detalles" class="btn btn-default">
+                                            <i class="glyphicon glyphicon-align-justify"></i>
+                                        </a>
+                                        <a title="Eliminar" ng-click="openTecnico(registro)" class="btn btn-default">
+                                            <i class="glyphicon glyphicon-trash"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <br />
+                    <div class="form-group">
+                        Competencias Conductuales
+                        <button type="button" style="float:right" ng-click="$event.stopPropagation();" ui-sref="manualCompetenciaConductualAdd" class="btn btn-success">
+                            <span class="glyphicon glyphicon-plus"></span> Agregar
+                        </button>
+                    </div>
+                    <div ng-show="registrosConductual.length === 0" class="alert alert-danger">
+                        No hay registros de competencias conductuales.
+                    </div>
+                    <div ng-show="registrosConductual.length > 0">
+                        <table class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" datatable="ng" dt-options="dtOptions" >
+                            <thead>
+                                <tr>
+                                    <th>Periodo</th>
+                                    <th>P&uacute;blico</th>
+                                    <th data-priority="1">Versi&oacute;n</th>
+                                    <th data-priority="4" class="thAjuste text-center">Opciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="registro in registrosConductual">
+                                    <td>{{registro.periodoEvaluacion.periodo}}</td>
+                                    <td ng-if="registro.accesoPublico=='0'">No</td>
+                                    <td ng-if="registro.accesoPublico=='1'">Si</td>
+                                    <td>{{registro.version}}</td>
+                                    <td class="text-center">
+                                        <a ng-click="setId(registro.manualCompetenciaConductualId);$event.stopPropagation();" ui-sref="manualCompetenciaConductualEdit" title="Detalles" class="btn btn-default">
+                                            <i class="glyphicon glyphicon-align-justify"></i>
+                                        </a>
+                                        <a title="Eliminar" ng-click="openConductual(registro)" class="btn btn-default">
+                                            <i class="glyphicon glyphicon-trash"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+    </div>
+</div>-->

@@ -1,0 +1,211 @@
+<div class="vista">
+    <div class="page-title">
+        <div class="title_left">
+            <ol class="breadcrumb miga">
+                <li>
+                    <i class="sg sg-clientes"></i>
+                    <a ng-click="globalRegresar();"> Clientes / Proyectos </a>
+                </li>
+            </ol>
+
+        </div>
+    </div>
+
+    <div class="x_panel">
+        <div class="x_title">
+            <h2>Criterios de b&uacute;squeda</h2>
+            <ul class="nav navbar-right panel_toolbox">
+
+                <li>
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                </li>
+            </ul>
+            <div class="clearfix"></div>
+        </div>
+        <div class="x_content sin-desborde">
+
+            <form novalidate role="form" class="form-label-left">
+                <div class="row">
+                    <div class="col-xs-6 col-md-6">
+                        <div class="form-group">
+                            <label class="col-xs-12" style="height:30px; line-height:30px; text-align:left; ">Nombre del proyecto</label>
+                            <div class="col-xs-10">
+                                <!-- <input class="form-control frmSearch" type="text" id="s1" maxlength="50" placeholder="Nombre del proyecto" ng-model="cte.nombre" /> -->
+                                <input type="text" class="form-control" id="usr" name="proyecto" ng-model="cte.proyectoNombre" disabled placeholder="Seleccione un proyecto">
+
+                            </div>
+                            <button class="btn btn-success" ng-click="openProyecto()" title="Buscar proyecto" ng-disabled="desabilitar">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-xs-12" style="height:30px; line-height:30px; text-align:left; ">Cliente</label>
+                            <div class="col-xs-10">
+                                <input type="text" class="form-control" id="usr" name="cliente" ng-model="cte.nombreCliente" disabled placeholder="Seleccione un cliente">
+
+                            </div>
+                            <button class="btn btn-success" ng-click="openClientes()" title="Buscar cliente" ng-disabled="desabilitar">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                        </div>
+                        <!-- <div class="form-group">
+                            <label class="col-xs-12" for="palabras" style="height:30px; line-height:30px; text-align:left; ">Cliente</label>
+                            <div class="col-xs-10">
+                                <select ng-model="cte.claveEmpresa" ng-options="emp.idEmpresa as emp.nombreEmpresa for emp in empresas | orderBy:'nombreEmpresa'"
+                                    class="form-control">
+                                    <option value="">---Seleccione un cliente---</option>
+                                </select>
+                            </div>
+                        </div> -->
+
+                    </div>
+
+                    <div class="col-xs-6 col-md-6">
+                        <div class="form-group">
+                            <label class="col-xs-12" for="palabras" style="height:30px; line-height:30px; text-align:left; ">Vigencia del proyecto</label>
+                            <div class="col-xs-10">
+                                <select ng-model="cte.programasActivos" class="form-control">
+                                    <option value="">---Seleccione la vigencia---</option>
+                                    <option value="1">Vigente</option>
+                                    <option value="2">No vigente</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div><br/><br/><br/><br/></div>
+                        <div class="form-group">
+                            <label class="col-xs-12">
+                                Unidad organizacional
+                            </label>
+                            <div class="col-xs-12">
+                                
+                                <div uo-modal2 ng-model="unidadOselect" ng-change="{{cte.UnidadOrganizacionalId = unidadOselect.claveUnidad}}" requerido="false"
+                                    fecha=""></div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-xs-12">
+                    <br />
+                    <a class="btn btn-success" ng-click="buscar()" title="buscar">
+                        <span class="glyphicon glyphicon-search"></span> Buscar
+                    </a>
+                    <a class="btn btn-primary" ng-click="reset()" title="Limpiar formulario">
+                        Limpiar
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel" ng-show="busqueda">
+                <div class="x_title">
+                    <h2>Resultados</h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content sin-desborde">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <table id="CRproyectosvigentes" dt-column-defs="dtColumnDefs" datatable="ng" width="100%" class="table table-hover table-striped table-condensed"
+                                dt-options="dtOptions">
+                                <thead>
+                                    <tr>
+                                        <th data-priority="1">Nombre empresa</th>
+                                        <th data-priority="1">Nombre unidad</th>
+                                        <th>T&iacute;tulo</th>
+                                        <th>Facturaci&oacute;n</th>
+                                        <th data-priority="1">Fecha de inicio /
+                                            <br/>fin</th>
+                                        <th>Unidad organizacional</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="e in proyectos">
+                                        <td>
+                                            <div class="link" style="cursor:pointer" ng-if="e.nombreEmpresa !== null && e.nombreUnidadEmpresa==null" ng-click="setVariable('busquedaClientes', cte)"
+                                                ui-sref="consultasClientesGet({ id: e.empresaId }) " title="Detalles">
+                                                {{::e.nombreEmpresa}}
+                                            </div>
+                                            <div ng-if="e.nombreUnidadEmpresa != null">
+                                                {{::e.nombreEmpresa==null? 'No disponible' : e.nombreEmpresa}}
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="link" style="cursor:pointer" ng-if="e.claveUnidadEmpresa !== null" ng-click="setVariable('busquedaClientes', cte)"
+                                                ui-sref="consultaUnidadCliente({ id: e.claveUnidadEmpresa })" title="Detalles">
+                                                {{::e.nombreUnidadEmpresa}}
+                                            </div>
+                                            <div ng-if="e.claveUnidadEmpresa == null " title="Detalles">
+                                                {{'No disponible'}}
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <a load-proyectos idproyecto="{{e.proyectoId}}" title="Detalles"></a> - {{::e.nombre}}</td>
+                                        <td style="text-align:left">
+                                            Planeada: {{::e.facturacionPlaneada!== null? (e.facturacionPlaneada | currency:"$") : ('No disponible')}}
+                                            <br />
+                                            <br /> Real: {{::e.facturacionReal !== null? (e.facturacionReal | currency:"$") : ('No
+                                            disponible')}}
+                                        </td>
+                                        <td style="text-align:left">
+                                            {{e.fechaInicio | date:'dd/MM/yyyy'}} - {{::e.fechaFin | date:'dd/MM/yyyy'}}
+                                        </td>
+                                        <td>{{::e.nombreUnidad}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <a class="btn btn-success" ng-click="generarPDF()" target="_blank">
+                                <span class="fa fa-download"></span> Descargar PDF
+                            </a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <table id="proyectosvigentes" style="visibility: hidden;" class="table table-hover table-striped table-condensed wrap" ng-show="proyectospdf">
+                                <thead>
+                                    <tr>
+                                        <th>ID empresa</th>
+                                        <th>Nombre empresa</th>
+                                        <th>Nombre unidad</th>
+                                        <th>T&iacute;tulo</th>
+                                        <th>Facturaci&oacute;n</th>
+                                        <th>Fecha de inicio / fin</th>
+                                        <th>Unidad organizacional</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="e in proyectospdf" ultimo-item>
+                                        <td>{{e.empresaId}}</td>
+                                        <td>{{e.nombreEmpresa==null? 'No disponible' : e.nombreEmpresa}}</td>
+                                        <td>{{e.nombreUnidadEmpresa==null? 'No disponible' : e.nombreUnidadEmpresa}}</td>
+                                        <td>{{e.proyectoId}} - {{e.nombre}}</td>
+                                        <td style="text-align:left">
+                                            Planeada: {{::e.facturacionPlaneada!== null? (e.facturacionPlaneada | currency:"$") : ('No disponible')}} Real: {{::e.facturacionReal
+                                            !== null? (e.facturacionReal | currency:"$") : ('No disponible')}}
+                                        </td>
+                                        <td>{{e.fechaInicio | date:'dd/MM/yyyy'}} - {{::e.fechaFin | date:'dd/MM/yyyy'}}</td>
+                                        <td>{{::e.nombreUnidad}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- <button type="button" ng-click="globalRegresar();" ng-if="muestraBoton" class="btn btn-primary">
+        <span class="fa fa-arrow-left"></span> Regresar
+    </button> -->
+</div>

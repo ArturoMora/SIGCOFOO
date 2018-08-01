@@ -1,0 +1,66 @@
+
+<div class="row">
+    <div class="col-md-6">
+        <label> Jefe de proyecto:{{proyecto.nombreJefeProyecto}}</label><br />
+        <label> Proyecto:{{proyecto.nombre}}</label><br />
+    </div>
+    <div class="col-md-6">
+    <label> Fecha de inicio</label><br />
+    <label> Programada:{{proyecto.fechaInicio | date: 'dd-MM-yyyy'}} &nbsp;&nbsp;&nbsp; Real:{{proyecto.fechaInicio | date: 'dd-MM-yyyy'}}</label><br />
+    <label> Fecha de t&eacute;rmino</label><br />
+    <label> Programada:{{proyecto.fechaFin | date: 'dd-MM-yyyy'}} &nbsp;&nbsp;&nbsp; Real:{{proyecto.fechaFin | date: 'dd-MM-yyyy'}}</label><br />
+    </div>
+</div>
+<div class="row">
+    <!-- formulario para itf-->
+    <!--<form class="form-horizontal"  ENCTYPE = "multipart/form-data"  role="form" ng-submit="save()" validate name="form2">-->
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="resumen">*Resumen:</label>
+                <textarea type="text" class="form-control" name="resumen" ng-model="itf.resumen" ng-maxlength="300" required></textarea>
+            </div>
+            <span class="error" ng-show="formITF.resumen.$dirty && !formITF.resumen.$valid">Longitud m&aacute;xima: 300</span>
+
+
+            <div class="form-group">
+                <label for="tipoAcceso">*Tipo de acceso:</label>
+                <select type="text" class="form-control" name="tipoAcceso" ng-model="itf.tipoAcceso" ng-options="e.id as e.name  for e in selectTipo" required>
+                    <option value="">Tipo de acceso</option>
+                </select>
+                <span class="error" ng-show="formITF.tipoAcceso.$dirty &&  !formITF.tipoAcceso.$valid">Seleccione el tipo de acceso</span>
+            </div>
+
+            <div class="form-group">
+                <label for="archivos">*Archivo a adjuntar:</label>
+                <input type="hidden" class="form-control" name="archivos" ng-model="itf.archivos" required />
+                <input type="text" class="form-control" name="archivos" ng-model="fileNameNew" disabled />
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="hidden-xs hidden-sm"><br /><br /><br /><br /></div>            
+            
+            <div class="form-group">
+                <label class="control-label" for="file">Documento adjunto:</label>                
+                    <input class="input-file" type="file" name="file" id="file" multiple required
+                           onchange="angular.element(this).scope().getFileDetails(this)" />
+                    <span class="error" ng-show="formITF.file.$dirty && !formITF.file.$valid">Seleccione un documento y de clic en confirmar</span>
+                
+            </div>
+            
+                <!--<input type="button" class="btn btn-success" ng-click="uploadFiles()" value="Confirmar adjunto" />-->                                                
+            <!--ADD A PROGRESS BAR ELEMENT.-->
+            <p><progress id="pro" value="0"></progress></p>
+            <!--valid:{{formITF.$invalid}}:-->            
+        </div>
+    <!--</form>-->
+</div>
+    <button class="btn btn-success" ng-disabled="form2.$invalid" ng-click="save()">
+        <span class="glyphicon glyphicon-floppy-saved">&nbsp;Guardar</span>
+    </button>
+    <div class="form-group row">
+        <div class="col-xs-6 col-xs-offset-2">
+            <button class="btn btn-block btn-info" ng-disabled="form2.$invalid" ng-click="datoscompletos()">
+                Siguiente <span class="glyphicon glyphicon-circle-arrow-right"></span>
+            </button>
+        </div>
+    </div>

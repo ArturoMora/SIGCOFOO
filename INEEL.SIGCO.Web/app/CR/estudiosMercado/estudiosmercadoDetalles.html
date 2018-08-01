@@ -1,0 +1,178 @@
+﻿<div class="vista">
+    <div class="page-title">
+        <div class="title_full">
+            <ol class="breadcrumb miga">
+                <li><i class="sg sg-estudios-mercado"></i> <a ui-sref="estudiosmercado">Estudio de Mercado</a></li>
+                <li class="active">Detalles</li>
+            </ol>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+
+       
+        <div class="col-md-8 col-sm-8 col-xs-12">
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+                    <label class="detalle col-xs-12 " title="Nombre">
+                        {{registro.tema}}
+                    </label>
+                    <label class="cont col-xs-12 colorTit">
+                        {{registro.fecha | date:"dd/MM/yyyy"}}
+                    </label>
+                    <label class="tit col-xs-12">
+                        Prop&oacute;sito del estudio
+                    </label>
+                    <label class="cont col-xs-12">
+                        {{registro.proposito}}
+                    </label>
+                    <label class="tit col-xs-12">
+                        Unidad organizacional que lo realiz&oacute;
+                    </label>
+                    <label class="cont col-xs-12">
+                        {{registro.unidadOrganizacional.nombreUnidad}}
+                    </label>
+                    <label class="tit col-xs-12">
+                        Proyecto
+                    </label>
+                    <label class="cont col-xs-12">
+                        <a href="" load-proyectos idproyecto="{{registro.proyecto.proyectoId}}" title="Detalle de proyecto">{{registro.proyecto.proyectoId}}</a>- {{registro.proyecto.nombre}}</td>
+                        <!--{{registro.proyecto.proyectoId}} - {{registro.proyecto.nombre}}-->
+                    </label>
+                </div>
+            </div>
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Autores del estudio de mercado</h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content sin-desborde">
+                    <table ng-show="autores!=''" class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" width="100%"
+                        dt-options="dtOptions">
+                        <thead>
+                            <tr>
+                                <th data-priority="1">N&uacute;mero de empleado</th>
+                                <th data-priority="1">Nombre de empleado</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="autor in autores">
+                                <!--<td ng-show="autor.clavePersona!=''">{{autor.clavePersona}}</td>-->
+                                <td ng-show="autor.clavePersona!=''" ng-click="openProfile(autor.clavePersona)" title="Detalle de empleado" class="linkTabla">{{autor.clavePersona}}</td>
+                                <td ng-show="autor.clavePersona==''">Autor externo</td>
+                                <td>{{autor.nombrePersona}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div ng-show="autores==''" class="alert advertencia">
+                        No hay registros de autores
+                    </div>
+                </div>
+            </div>
+        </div>
+
+       
+
+        <div class="col-md-4 col-sm-4 col-xs-12" ng-if="registro.listaAdjuntos.length>0">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Documentaci&oacute;n</h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content sin-desborde">
+                    <form name="fromfa" id="form" class="form-horizontal">
+                        <div ng-if="registro.listaAdjuntos.length>0">
+                            <div ng-repeat="e in registro.listaAdjuntos">
+
+                                <!--Cuando el estudio de mercado es de acceso publico-->
+                                <div ng-if="registro.acceso=='Público'">
+                                    <span class="fa fa-download"></span>&nbsp;&nbsp;<a href="/Descargas.html#/q/{{e.adjuntoId | encriptar}}" class="linkTabla" target="_blank">Documento de estudio de mercado</a>
+                                </div>
+
+                                <!--Cuando es el autor del estudio de mercado-->
+                                <div ng-if="registro.acceso=='Privado'  && permiso==0 && !esjefe && idRol != 15 && esAutor">
+                                    <span class="fa fa-download"></span>&nbsp;&nbsp;<a href="/Descargas.html#/q/{{e.adjuntoId | encriptar}}" class="linkTabla" target="_blank">Documento de estudio de mercado</a>
+                                </div>
+
+                                <!--Cuando es el administrador de CR -->
+                                <div ng-if="registro.acceso=='Privado'  && permiso==0 && !esjefe && idRol == 15 && !esAutor">
+                                    <span class="fa fa-download"></span>&nbsp;&nbsp;<a href="/Descargas.html#/q/{{e.adjuntoId | encriptar}}" class="linkTabla" target="_blank">Documento de estudio de mercado</a>
+                                </div>
+
+                                <!--Cuando el usuario ya tiene permisos para descargar el estudio de mercado -->
+                                <div ng-if="registro.acceso=='Privado'  && permiso==1 && !esjefe && idRol != 15 && !esAutor">
+                                    <span class="fa fa-download"></span>&nbsp;&nbsp;<a href="/Descargas.html#/q/{{e.adjuntoId | encriptar}}" class="linkTabla" target="_blank">Documento de estudio de mercado</a>
+                                </div>
+
+                                <!--Cuando el usuario aun no tiene permisos para descargar el estudio de mercado -->
+                                <div ng-if="registro.acceso=='Privado'  && permiso==0  && !esjefe && idRol != 15 && !esAutor">
+                                    <span class="fa fa-lock"></span>&nbsp;&nbsp;<a class="alinea" >Documento de estudio de mercado</a>
+                                </div>
+
+                                <!--Cuando el usuario es un gerente  o director -->
+                                <div ng-if="registro.acceso=='Privado'  && permiso==0 && esjefe && (idRol == 4 || idRol == 5 ||  idRol == 16 ) && !esAutor ">
+                                    <span class="fa fa-download"></span>&nbsp;&nbsp;<a href="/Descargas.html#/q/{{e.adjuntoId | encriptar}}" class="linkTabla" target="_blank">Documento de estudio de mercado</a>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- <div class="form-group">
+                            <div class="form-group">
+                                <div class="alert aprobado col-xs-12" ng-if="registro.acceso=='Público'">
+                                    <span class="glyphicon glyphicon-info-sign"></span> Acceso: <strong> {{registro.acceso}} </strong>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="alert advertencia col-xs-12" ng-if="registro.acceso!='Público' && permiso==0 && esjefe==false && idRol!=15 &&  !esAutor">
+                                    <span class="glyphicon glyphicon-info-sign"></span> Acceso: <strong> {{registro.acceso}} </strong>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="alert alert-info col-xs-12" ng-if="registro.acceso =='Privado' && permiso == 0 &&  (idRol == 4 || idRol == 5 ||  idRol == 16  || idRol == 15) &&  esAutor==false">
+                                    Usuario <strong>autorizado </strong> para ver el contenido
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="alert alert-info col-xs-12" ng-if="registro.acceso =='Privado' && permiso == 1 && idRol != 15 &&  esAutor==false">
+                                    Usuario <strong>autorizado </strong> para ver el contenido
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="alert alert-info col-xs-12" ng-if="registro.acceso =='Privado' && permiso == 0 && idRol != 15 &&  esAutor==true">
+                                    Usuario <strong>autorizado </strong> para ver el contenido
+                                </div>
+                            </div>
+
+                        </div> -->
+                        <div class="alert advertencia" ng-show="permiso==2 && idRol!=15 && esjefe==false">
+                            <strong> Solicitud en proceso,</strong> espere respuesta de acceso
+                        </div>
+                        <div>
+                            <div class="form-group" ng-show="registro.acceso=='Privado' && permiso==0 && esjefe==false && idRol!=15 && !esAutor">
+                                <a ng-click="acceso()" class="btn btn-success btn-sm"> Solicitar Acceso </a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+
+            <button type="button" ng-click="globalRegresar()" class="btn btn-primary">
+                <span class="fa fa-arrow-left"></span> Regresar
+            </button>
+
+        </div>
+    </div>
+</div>
+

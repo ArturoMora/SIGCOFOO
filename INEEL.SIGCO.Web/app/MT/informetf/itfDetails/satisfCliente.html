@@ -1,0 +1,81 @@
+<div ng-show="ITFPublico || itf.itFgeneral.accesoTipo==1">
+    <div class="x_title">
+        <h2>Satisfacci&oacute;n del cliente</h2>
+        <div class="clearfix"></div>
+    </div>
+
+    <div ng-show="itf.satisCte==null">
+        <div class="alert advertencia">
+            No hay informaci&oacute;n disponible
+            <div class="clearfix"></div>
+        </div>
+    </div>
+    <div ng-show="itf.satisCte!=null">
+        <div ng-show="itf.satisCte==null">
+            <div class="alert advertencia">
+                <p ng-bind-html="msgDefault"></p>
+            </div>
+        </div>
+        <div ng-show="itf.satisCte!=null">
+            <div class="form-group">
+                <label class="labelDetail col-md-3 col-sm-3 col-xs-12">
+                    Calificaci&oacute;n
+                </label>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    {{itf.satisCte.calificacionCliente.nombre}}
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="labelDetail col-md-3 col-sm-3 col-xs-12">
+                    Justificaci&oacute;n
+                </label>
+                <div class="col-md-6 col-sm-6 col-xs-12 sin-desborde">
+                    {{itf.satisCte.justificacion}}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group" ng-show="itf.satisCte.adjunto.adjuntoId!=null">
+        <label class="control-label col-md-3 col-sm-3 col-xs-12">
+            Documento(s) adjunto(s)
+        </label>
+        <div class="col-md-6 col-sm-6 col-xs-12">
+            <div>
+                <span class="fa fa-download"></span>&nbsp;&nbsp;<a href="/Descargas.html#/q/{{itf.satisCte.adjunto.adjuntoId | encriptar}}" class="linkTabla" target="_blank">Descargar Archivo</a>
+                &nbsp;&nbsp;
+               
+            </div>
+
+     
+
+        </div>
+    </div>
+
+
+
+
+    <!--<div class="form-group">
+        <label class="labelDetail col-md-3 col-sm-3 col-xs-12">
+            &nbsp;
+        </label>
+        <div class="col-md-6 col-sm-6 col-xs-12">
+            <div class="row col-xs-6">
+                <button class="btn btn-block btn-info" ng-click="datoscompletos(3,'ITFdetalles.evaluaciones')">
+                 
+                    {{txtGuardar}}
+                </button>
+            </div>
+        </div>
+    </div>-->
+</div>
+
+<div class="alert informacion" ng-show="!permisoAccesoVigente && ITFPublico==false">
+
+
+    <div class="form-group">
+        Para acceder al contenido de est&aacute; secci&oacute;n <strong>deber&aacute; solicitar acceso a este ITF</strong>
+    </div>
+
+
+</div>

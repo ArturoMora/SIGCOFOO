@@ -1,0 +1,176 @@
+﻿<!-- page content -->
+<div class="vista">
+
+    <div class="page-title">
+        <div class="title_left">
+
+           
+            <ol class="breadcrumb miga">
+                <li><i class="sg sg-metodo-evaluacion-compet"></i> <a>Competencias conductuales</a></li>
+                <li><a ui-sref="evaluacionconductuales">Evaluación</a></li>
+                <li class="active">Formulario de evaluación</li>
+            </ol>
+
+
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Informaci&oacute;n general</h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content sin-desborde">
+
+
+
+
+                    <div class="form-group">
+                        <div class="col-xs-12 col-md-6">
+
+                            <label class="detalle col-xs-12 " title="Empleado">
+                                {{clave}} {{nombre}}
+                            </label>
+
+                            <label class="cont emc col-xs-12 colorTit">
+                                Período {{periodo}}
+                            </label>
+
+
+                            <label class="cont col-xs-12" title="Unidad organizacional">
+                                {{nombreUnidad}}
+                            </label>
+
+                            <label class="tit col-xs-12">
+                                Resultado de la evaluación general
+                            </label>
+                            <label class="cont col-xs-12">
+                                {{calificacion}}
+                            </label>
+
+                        </div>
+
+                        <div class="col-sm-6 col-xs-12 contenedor_gris">
+
+
+                            <label class="titFirst">Categoría (Nómina):</label>
+                            <label class="cont">{{cateemp}}</label>
+
+                            <br />
+                            <label class="titFirst"> Familia de puestos:</label>
+                            <label class="cont">{{nombreFamilia}}</label>
+
+                            <br />
+                            <label class="titFirst">  Categoría (Competencias conductuales):</label>
+                            <label class="cont">{{catcomp}}</label>
+
+                        </div>
+                    </div>
+
+                 </div>
+            </div>
+
+
+            <div class="clearfix"></div>
+
+
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Competencias a evaluar</h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content sin-desborde">
+
+
+
+                    <table id="tablaMatriz" class="table table-condensed table-hover">
+                        <thead>
+                            <tr>
+                                <th data-priority="1">Competencia</th>
+                                <th>Nivel de dominio exigido</th>
+                                <th>Comportamiento</th>
+                                <th>Valor de dominio real</th>
+                                <th>Justificación con hechos tangibles/comportamientos</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="obj in competenciasaevaluar">
+                                <td>{{obj.competencia}}</td>
+                                <td>{{obj.nivel}}</td>
+                                <td>{{obj.comportamiento}}</td>
+                                <td>
+                                    <input ng-keypress="onlyNumbers($event)" min="0" max="10" type="number" step="1" ng-pattern="/^[0-9]{1,8}$/" ng-model="obj.valorReal" required>
+                                </td>
+                                <td><textarea rows="8" cols="50" ng-model="obj.justificacion"></textarea></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <h2>Fortalezas</h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content sin-desborde">
+                            <textarea rows="4" cols="120" class="form-control" ng-model="datosevaluado.fortalezas"></textarea>
+                        </div>
+                    </div>
+
+
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <h2>Áreas de mejora</h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content sin-desborde">
+                            <textarea rows="4" cols="120" class="form-control" ng-model="datosevaluado.areasMejora"></textarea>
+
+                        </div>
+                    </div>
+
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <h2>Plan de acción</h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content sin-desborde">
+                            <textarea rows="4" cols="120" class="form-control" ng-model="datosevaluado.debilidades"></textarea>
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-12 col-sm-12 col-xs-12 col-md-offset-3">
+                        <div class="">
+
+                            <button type="submit" ng-click="save()" class="btn btn-success" style="padding-right:15px">
+                                <i class="glyphicon glyphicon-saved"></i> Guardar
+                            </button>
+                            <button type="button" ui-sref="reporteconductual({id:datosevaluado.evaluacionId})" ng-click="parametrosTransferencia()" class="btn btn-success" style="padding-right:15px">
+                                <span class="fa fa-arrow-left"></span> Generar reporte
+                            </button>
+                            <button type="submit" ng-click="finalizarEvaluacion()" class="btn btn-success" style="padding-right:15px">
+                                <span class="fa fa-arrow-left"></span>Finalizar evaluación
+                            </button>
+                            <button type="button" ui-sref="evaluacionconductuales" class="btn btn-primary" style="padding-right:15px">
+                                <span class="fa fa-arrow-left"></span> Regresar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+
+</div>
+
+
+
+

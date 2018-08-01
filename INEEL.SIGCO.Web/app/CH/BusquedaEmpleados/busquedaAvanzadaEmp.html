@@ -1,0 +1,227 @@
+﻿<div class="vista">
+    <div class="page-title">
+        <div class="title_left">
+            <ol class="breadcrumb miga">
+                <li>
+                    <i class="fa fa-users"></i>
+                    <a ui-sref="busquedaAvanzadaEmp">Búsqueda de personal / Por especialidad</a>
+                </li>
+            </ol>
+
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="clearfix">
+                    <br/>
+                </div>
+                <div class="x_content sin-desborde">
+                    <div class="row">
+
+                        <form role="form" name="formulario" ng-submit="buscar(criterio,opciones)">
+                            <div class="col-xs-12 col-sm-12">
+                                <div class="form-group">
+                                    <label class="control-label col-md-1 col-sm-1">Buscar por:</label>
+                                    <div class="col-xs-11 col-sm-11 col-md-11 col-lg-11">
+                                        <input type="text" required ng-model="criterio" id="criterioBusqueda" class="form-control" placeholder="Ej. Realidad virtual, energía, mercadotecnía, sistemas informáticos"
+                                            minlength="3" />
+                                    </div>
+                                    <div class="clearfix">
+                                        <br/>
+                                    </div>
+                                </div>
+                            </div>
+                            <br />
+                            <div class="col-xs-12 col-sm-12">
+                                <div style="margin-left:10px">
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-success">
+                                            <i class="glyphicon glyphicon-search"></i> Buscar
+                                        </button>
+                                        <a class="btn btn-primary" ng-click="limpiar()">
+                                            Limpiar
+                                        </a>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </form>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div ng-show="muestraResultados" class="col-md-12 col-sm-12 col-xs-12">
+        <div class="col-md-4 col-sm-4 col-xs-4"></div>
+        <div class="col-md-6 col-sm-6 col-xs-6">
+            <label class="control-label">Mostrando <label class="detalle_subtitulo">{{cantidadRegistros}}</label> de un total de <label class="detalle_subtitulo">{{resultados.length}}</label> registros </label>
+        </div>
+        <!-- <div class="col-md-3 col-sm-3 col-xs-3"></div> -->
+
+    </div>
+
+    <!--Panel de filtros y resultados-->
+    <div class="row">
+        <!--Panel de filtros-->
+        <div class="col-md-4 col-sm-4 col-xs-4" ng-show="muestraResultados">
+            <div class="x_panel">
+                <div class="x_content">
+                    <div class="x_title">
+                        <h2>Filtrar informaci&oacute;n</h2>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content sin-desborde">
+                        <div class="row">
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    &nbsp;&nbsp;
+                                    <input type="checkbox" class="btn btn-info btn-circle" ng-click="filtro.cursos==true? cambiaOpcion('CURSOS') : quitaOpcion('CURSOS')"
+                                        ng-model="filtro.cursos" value="">&nbsp;&nbsp;Cursos
+                                    <span ng-if="filtro.cursos==true" class="badge bg-green">{{obtieneContadoresCategorias('CURSOS')}}</span>
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    &nbsp;&nbsp;
+                                    <input type="checkbox" class="btn btn-info btn-circle" ng-click="filtro.derechos==true? cambiaOpcion('DERECHOS-AUTOR') : quitaOpcion('DERECHOS-AUTOR')"
+                                        ng-model="filtro.derechos" value="">&nbsp;&nbsp;Derechos de autor
+                                    <span ng-if="filtro.derechos==true" class="badge bg-green">{{obtieneContadoresCategorias('DERECHOS-AUTOR')}}</span>
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    &nbsp;&nbsp;
+                                    <input type="checkbox" class="btn btn-info btn-circle" ng-click="filtro.formacion==true? cambiaOpcion('FORMACION-ACADEMICA') : quitaOpcion('FORMACION-ACADEMICA')"
+                                        ng-model="filtro.formacion" value="">&nbsp;&nbsp;Formaci&oacute;n acad&eacute;mica
+                                    <span ng-if="filtro.formacion==true" class="badge bg-green">{{obtieneContadoresCategorias('FORMACION-ACADEMICA')}}</span>
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    &nbsp;&nbsp;
+                                    <input type="checkbox" class="btn btn-info btn-circle" ng-click="filtro.ponencias==true? cambiaOpcion('PONENCIAS') : quitaOpcion('PONENCIAS')"
+                                        ng-model="filtro.ponencias" value="">&nbsp;&nbsp;Ponencias
+                                    <span ng-if="filtro.ponencias==true" class="badge bg-green">{{obtieneContadoresCategorias('PONENCIAS')}}</span>
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    &nbsp;&nbsp;
+                                    <input type="checkbox" class="btn btn-info btn-circle" ng-click="filtro.propiedad==true? cambiaOpcion('PROPIEDAD-INDUSTRIAL') : quitaOpcion('PROPIEDAD-INDUSTRIAL')"
+                                        ng-model="filtro.propiedad" value="">&nbsp;&nbsp;Propiedad industrial
+                                    <span ng-if="filtro.propiedad==true" class="badge bg-green">{{obtieneContadoresCategorias('PROPIEDAD-INDUSTRIAL')}}</span>
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    &nbsp;&nbsp;
+                                    <input type="checkbox" class="btn btn-info btn-circle" ng-click="filtro.proyectos==true? cambiaOpcion('PROYECTOS') : quitaOpcion('PROYECTOS')"
+                                        ng-model="filtro.proyectos" value="">&nbsp;&nbsp;Proyectos
+                                    <span ng-if="filtro.proyectos==true" class="badge bg-green">{{obtieneContadoresCategorias('PROYECTOS')}}</span>
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    &nbsp;&nbsp;
+                                    <input type="checkbox" class="btn btn-info btn-circle" ng-click="filtro.publicaciones==true? cambiaOpcion('PUBLICACIONES') : quitaOpcion('PUBLICACIONES')"
+                                        ng-model="filtro.publicaciones" value="">&nbsp;&nbsp;Publicaciones
+                                    <span ng-if="filtro.publicaciones==true" class="badge bg-green">{{obtieneContadoresCategorias('PUBLICACIONES')}}</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="x_content">
+                    <div class="x_title">
+                        <h2>Estado del personal</h2>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content sin-desborde">
+                        <div>
+                            <div>
+                                <input type="radio" id="radio2" class="btn  btn-circle" ng-model="filtro.radio" ng-click="obtenerCantidad(2)" />
+                                <label class="control-label">
+                                    &nbsp;Todos
+                                </label>
+                            </div>
+                            <div>
+                                <input type="radio" id="radio0" class="btn  btn-circle" ng-model="filtro.radio" ng-click="obtenerCantidad(0)" />
+                                <label class="control-label">
+                                    &nbsp;Inactivo
+                                </label>
+                            </div>
+
+                            <div>
+                                <input type="radio" id="radio1" class="btn  btn-circle" ng-model="filtro.radio" ng-click="obtenerCantidad(1)" />
+                                <label class="control-label">
+                                    &nbsp;Activo
+                                </label>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--Panel de resultados-->
+        <div class="col-md-8 col-sm-8 col-xs-8" ng-show="muestraResultados">
+            <div ng-repeat="e in resultados ">
+                <div class="x_panel" id="contenedor" ng-show="filtro.personal==e.datosPersona.estado || filtro.mostrarTodos==true">
+                    <div class="x_content sin-desborde">
+                        <div>
+                            <div class="col-md-8 col-sm-8 col-xs-8">
+                                <div class="row">
+                                    <label class="detalle" style="cursor:pointer; text-decoration:underline" ng-click="openProfile(e.clavePersona)">{{e.datosPersona.nombreCompleto}} ({{e.clavePersona}})</label>
+                                </div>
+                                <div class="row">
+                                    <label class="detalle_subtitulo">{{e.nombreGerencia}} </label>
+                                </div>
+                                <!-- <div class="row">
+                                    <label>
+                                        Semblanza
+                                    </label>
+                                    <br />
+                                    <div ng-if="e.semblanza.extracto!=null" ng-bind-html="e.semblanza.extracto | highlight: criterio">
+                                        {{e}}
+                                    </div>
+                                    <div ng-if="e.semblanza.extracto==null">
+                                        Sin semblanza profesional registrada
+                                    </div>
+                                </div> -->
+                            </div>
+                            <div class="col-md-4 col-sm-4 col-xs-4">
+                                <div class="col-sm-12 col-lg-12 col-xs-12">
+                                    <label>
+                                        Coincidencias : {{e.ocs.length}}
+                                    </label>
+
+                                    <div class="linkTabla" ng-repeat="registros in e.ocs">
+                                        <div ng-if="registros.fieldC!='PROPIEDAD-INDUSTRIAL' &&  registros.fieldC!='DERECHOS-AUTOR' 
+                                                    && registros.fieldC!='SEMBLANZA' && registros.fieldC!='FORMACION-ACADEMICA'"
+                                            ng-click="cargarDetalle(registros.fieldC, registros.fieldD)">
+                                            {{registros.fieldC | capitalize : registros.fieldC }} ({{registros.fieldB}})
+                                        </div>
+                                        <div ng-if="registros.fieldC=='PROPIEDAD-INDUSTRIAL' || registros.fieldC=='DERECHOS-AUTOR' || registros.fieldC=='FORMACION-ACADEMICA'" ng-click="cargarDetalle(registros.fieldC, registros.fieldD)">
+                                            {{registros.fieldC | capitalizarGuiones : registros.fieldC }} ({{registros.fieldB}})
+                                        </div>
+                                        <div ng-show="registros.fieldC=='SEMBLANZA'" ng-click="cargarSemblanzaProfesional(e.clavePersona)">
+                                            {{registros.fieldC | capitalizarGuiones : registros.fieldC }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,378 @@
+﻿<div id="page-wrapper">
+    <div class="row">
+        <br />
+        <div class="col-lg-12">
+            <h1 class="page-header">Curriculum Vitae</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <form role="form" name="ValidForm">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                    </div>
+                    <div class="panel-body">
+                        <!-- Gerente -->
+                        <div ng-show="idRol!=8">
+                            <table id="CHHtmlPage" ng-show="idRol!=8" dt-instance="dtInstance" dt-columns="dtColumns" class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" datatable="ng" width="100%" dt-options="dtOptions">
+                                <thead>
+                                    <tr>
+                                        <th data-priority="1">N&uacute;mero de Empleado</th>
+                                        <th>Nombre</th>
+                                        <th data-priority="1">CV</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="registro in personas">
+                                        <td>{{registro.clavePersona}}</td>
+                                        <td>{{registro.nombreCompleto}}</td>
+                                        <td>
+                                            <button type="button" class="btn btn-success" aria-label="Left Align" ng-click="generar(registro)">
+                                                <span class="fa fa-download" aria-hidden="true"></span>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- Investigador -->
+                        <div class="col-lg-4" ng-show="idRol==8">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <label type="text" class="form-control ">Generar Curriculum Vitae</label>
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-success" aria-label="Left Align" ng-click="generar()">
+                                            <span class="fa fa-file-text" aria-hidden="true"></span>
+                                        </button>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="form-group" ng-show="generado==true">
+                                <div class="input-group">
+                                    <label type="text" class="form-control ">Descargar</label>
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-success" aria-label="Left Align" ng-click="download()">
+                                            <span class="fa fa-download" aria-hidden="true"></span>
+                                        </button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <table id="CHHtmlPage2" class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" datatable="ng" dt-options="dtOptions" ng-hide="true">
+                    <tbody>
+                        <tr ng-hide="true">
+                            <td>
+                                <table class="table" cellspacing="0" id="informacionPersonal">
+                                    <thead>
+                                        <tr>
+                                            <td>
+                                                <label>N&uacute;mero de empleado: {{datosUsuario.clavePersona}}</label>
+                                            </td>
+                                            <td>
+                                                <label>Fecha de ingreso: {{datosUsuario.fechaIngreso | date:"dd/MM/yyyy"}}</label>
+                                            </td>
+                                            <td>
+                                                <label>Categor&iacute;a actual: {{datosUsuario.categoria.descripcion}}</label>
+                                            </td>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr ng-hide="true">
+                            <td>
+                                <table class="table" cellspacing="0" id="informacionPersonal2">
+                                    <thead>
+                                        <tr>
+                                            <td>
+                                                <label>Nombre: {{datosUsuario.nombreCompleto}}</label>
+                                            </td>
+                                            <td>
+                                                <label>Gerencia: {{datosUsuario.unidadOrganizacional.nombreUnidad}}</label>
+                                            </td>
+                                            <td>
+                                                <label>Antig&uuml;edad: {{datosUsuario.antiguedad}}</label>
+                                            </td>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <fieldset class="scheduler-border">
+                                    <legend class="scheduler-border">Formaci&oacute;n Acad&eacute;mica:</legend>
+                                    <table class="table table-hover" cellspacing="0" id="formacionAcademica">
+                                        <thead>
+                                            <tr>
+                                                <th>Grado académico</th>
+                                                <th>Institución</th>
+                                                <th>Carrera</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="registro in informacion.formacionAcademica">
+                                                <td>{{registro.gradoAcademico.descripcion}}</td>
+                                                <td>{{registro.institucion.descripcion}}</td>
+                                                <td>{{registro.carrera.descripcion}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </fieldset>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <fieldset class="scheduler-border">
+                                    <legend class="scheduler-border">Idiomas:</legend>
+                                    <table class="table table-hover" cellspacing="0" id="idiomas">
+                                        <thead>
+                                            <tr>
+                                                <th>Idioma</th>
+                                                <th>Dominio</th>
+                                                <th>Conversaci&oacute;n</th>
+                                                <th>Escritura</th>
+                                                <th>Lectura</th>
+                                                <th>Punctuaci&oacute;n</th>
+                                                <th>Certificaci&oacute;n</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="registro in informacion.idiomas">
+                                                <td>{{registro.idioma.descripcion}}</td>
+                                                <td>{{registro.porcentajeGradoDominio}} %</td>
+                                                <td>{{registro.porcentajeConversacion}} %</td>
+                                                <td>{{registro.porcentajeEscritura}} %</td>
+                                                <td>{{registro.porcentajeLectura}}%</td>
+                                                <td>{{registro.puntuacion}}</td>
+                                                <td>{{registro.certificacion.descripcion}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </fieldset>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <fieldset class="scheduler-border">
+                                    <legend class="scheduler-border">Asociaci&oacute;n:</legend>
+                                    <table class="table table-hover" cellspacing="0" id="asociacion">
+                                        <thead>
+                                            <tr>
+                                                <th>Asociaci&oacute;n</th>
+                                                <th>Participaci&oacute;n</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="registro in informacion.asociacion">
+                                                <td>{{registro.asociacion.descripcion}}</td>
+                                                <td>{{registro.participacion}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </fieldset>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <fieldset class="scheduler-border">
+                                    <legend class="scheduler-border">Distinci&oacute;n:</legend>
+                                    <table class="table table-hover" cellspacing="0" id="distincion">
+                                        <thead>
+                                            <tr>
+                                                <th>Reconocimiento</th>
+                                                <th>Aprobado por</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="registro in informacion.distincion">
+                                                <td>{{registro.reconocimiento}}</td>
+                                                <td>{{registro.aprobado}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </fieldset>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <fieldset class="scheduler-border">
+                                    <legend class="scheduler-border">Becario Interno:</legend>
+                                    <table class="table table-hover" cellspacing="0" id="becarioInterno">
+                                        <thead>
+                                            <tr>
+                                                <th>Beca interna</th>
+                                                <th>Carrera</th>
+                                                <th>Instituci&oacute;n</th>
+                                                <th>Pais</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="registro in informacion.becarioInterno">
+                                                <td>{{registro.becaInterna.descripcion}}</td>
+                                                <td>{{registro.carrera.descripcion}}</td>
+                                                <td>{{registro.institucion.descripcion}}</td>
+                                                <td>{{registro.pais.descripcion}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </fieldset>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <fieldset class="scheduler-border">
+                                    <legend class="scheduler-border">Becario Externo:</legend>
+                                    <table class="table table-hover" cellspacing="0" id="becarioExterno">
+                                        <thead>
+                                            <tr>
+                                                <th>T&iacute;tulo</th>
+                                                <th>Instituci&oacute;n de procedencia</th>
+                                                <th>Proyecto</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="registro in informacion.becarioExterno">
+                                                <td>{{registro.titulo}}</td>
+                                                <td>{{registro.institucion.descripcion}}</td>
+                                                <td>{{registro.proyecto.nombre}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </fieldset>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <fieldset class="scheduler-border">
+                                    <legend class="scheduler-border">Experiencia Docente:</legend>
+                                    <table class="table table-hover" cellspacing="0" id="experienciaDocente">
+                                        <thead>
+                                            <tr>
+                                                <th>Programa</th>
+                                                <th>Curso impartido</th>
+                                                <th>Nivel de curso</th>
+                                                <th>Pa&iacute;s</th>
+                                                <th>Lugar</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="registro in informacion.experienciaDocente">
+                                                <td>{{registro.programa}}</td>
+                                                <td>{{registro.cursoImpartido}}</td>
+                                                <td>{{registro.nivelCurso.descripcion}}</td>
+                                                <td>{{registro.pais.descripcion}}</td>
+                                                <td>{{registro.lugar}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </fieldset>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <fieldset class="scheduler-border">
+                                    <legend class="scheduler-border">Participaci&oacute;n en Proyectos:</legend>
+                                    <table class="table table-hover" cellspacing="0" id="participacion">
+                                        <thead>
+                                            <tr>
+                                                <th>Participaci&oacute;n</th>
+                                                <th>Proyecto</th>
+                                                <th>Nombre de proyecto</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="registro in informacion.participacion">
+                                                <td>{{registro.participacion}}</td>
+                                                <td>{{registro.proyectoId}}</td>
+                                                <td>{{registro.proyecto.nombre}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </fieldset>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <fieldset class="scheduler-border">
+                                    <legend class="scheduler-border">Ponencias:</legend>
+                                    <table class="table table-hover" cellspacing="0" id="ponencia">
+                                        <thead>
+                                            <tr>
+                                                <th>Congreso</th>
+                                                <th>T&iacute;tulo de ponencia</th>
+                                                <th>&Aacute;mbito</th>
+                                                <th>Nivel de publicaci&oacute;n</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="registro in informacion.ponencia">
+                                                <td>{{registro.congreso.nombreCongreso}}</td>
+                                                <td>{{registro.tituloPonencia}}</td>
+                                                <td>{{registro.ambito.descripcion}}</td>
+                                                <td>{{registro.nivelPublicacion.descripcion}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </fieldset>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <fieldset class="scheduler-border">
+                                    <legend class="scheduler-border">Art&iacute;culos:</legend>
+                                    <table class="table table-hover" cellspacing="0" id="articulo">
+                                        <thead>
+                                            <tr>
+                                                <th>Revista</th>
+                                                <th>T&iacute;tulo de art&iacute;culo</th>
+                                                <th>&Aacute;mbito</th>
+                                                <th>Nivel de publicaci&oacute;n</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="registro in informacion.articulo">
+                                                <td>{{registro.revista.revistaNombre}}</td>
+                                                <td>{{registro.tituloPublicacion}}</td>
+                                                <td>{{registro.ambito.descripcion}}</td>
+                                                <td>{{registro.nivelPublicacion.descripcion}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </fieldset>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <fieldset class="scheduler-border">
+                                    <legend class="scheduler-border">Cursos:</legend>
+                                    <table class="table table-hover" cellspacing="0" id="cursos">
+                                        <thead>
+                                            <tr>
+                                                <th>T&iacute;tulo</th>
+                                                <th>Proyecto</th>
+                                                <th>Tipo de curso</th>
+                                                <th>Descripción</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="registro in informacion.cursos">
+                                                <td>{{registro.titulo}}</td>
+                                                <td>{{registro.proyecto.nombre}}</td>
+                                                <td>{{registro.tipoCurso.nombre}}</td>
+                                                <td>{{registro.descripcion}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </fieldset>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </form>
+        </div>
+    </div>
+</div>

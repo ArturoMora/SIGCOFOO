@@ -1,0 +1,93 @@
+<div class="x_title">
+    <h2>Resultados econ&oacute;micos</h2>
+    <div class="clearfix"></div>
+</div>
+<div class="form-group">
+    <label class="labelDetail col-md-3 col-sm-3 col-xs-12">
+        Ingresos
+    </label>
+    <div class="col-md-6 col-sm-6 col-xs-12">
+        {{proyecto.ingresos==NULL? 'No disponible':proyecto.ingresos}}
+    </div>
+</div>
+<div class="form-group">
+    <label class="labelDetail col-md-3 col-sm-3 col-xs-12">
+        Egresos
+    </label>
+    <div class="col-md-6 col-sm-6 col-xs-12">
+        {{proyecto.egresos==NULL? 'No disponible':proyecto.egresos}}
+    </div>
+</div>
+
+<div class="form-group">
+    <label class="labelDetail col-md-3 col-sm-3 col-xs-12">
+        Fondo de investigaci&oacuten
+    </label>
+    <div class="col-md-6 col-sm-6 col-xs-12">
+        {{proyecto.fondoplaneado==NULL? 'No disponible':proyecto.fondoplaneado}}
+    </div>
+</div>
+<div class="form-group">
+    <label class="control-label col-md-3 col-sm-3 col-xs-12">
+        Calificaci&oacute;n <span class="required">*</span>
+    </label>
+    <div class="col-md-6 col-sm-6 col-xs-12">
+        <select name="califResE" id="selectRE"
+                ng-model="itf.resultadosE.califResE" class="form-control" ng-required="true"
+                ng-options="e.califResultadosFinancierosId as e.nombre  for e in resultadosEconomicos"
+                ng-ini="itf.resultadosE.califResE=itf.resultadosE.califResE">
+            <option value="" ng-if="itf.resultadosE.califResE==null">Seleccione una opci&oacute;n </option>
+        </select>
+        <span class="error" ng-show="formITF.califResE.$dirty &&  !formITF.califResE.$valid"> --- Seleccione la calificaci&oacute;n --- </span>
+    </div>
+</div>
+
+<div class="x_title">
+    <h2>Resultados m&aacute;s relevantes </h2>
+    <div class="clearfix"></div>
+</div>
+<div class="form-group">
+    <label class="control-label col-md-3 col-sm-3 col-xs-12">
+        Resumen <span class="required">*</span>
+    </label>
+    <div class="col-md-6 col-sm-6 col-xs-12">
+        <textarea class="form-control" id="resultados"
+                  ng-model="itf.resultados.descripcion" name="resultados"
+                  ng-minlength="6" ng-maxlength="500" maxlength="500" ng-required="true"></textarea>
+        <span class="error" ng-show="formITF.resultados.$dirty &&  !formITF.resultados.$valid">
+            Dato requerido con una longitud m&iacute;nima de 6 caracteres y m&aacute;xima de 500
+        </span>
+    </div>
+</div>
+
+<div class="x_title">
+    <h2>Posibles proyectos futuros derivados de este proyecto </h2>
+    <div class="clearfix"></div>
+</div>
+<div class="form-group">
+    <label class="control-label col-md-3 col-sm-3 col-xs-12">
+        Proyectos identificados <span class="required">*</span>
+    </label>
+    <div class="col-md-6 col-sm-6 col-xs-12">
+        <textarea class="form-control" id="proyFuturo" name="proyFuturo"
+                  ng-model="itf.proyFuturo.descripcion" ng-minlength="6" maxlength="500" ng-maxlength="500" ng-required="true"></textarea>
+        <span class="error" ng-show="formITF.proyFuturo.$dirty &&  !formITF.proyFuturo.$valid">
+            Dato requerido con una longitud m&iacute;nima de 6 caracteres y m&aacute;xima de 500
+        </span>
+    </div>
+</div>
+
+<div class="form-group">
+    <label class="control-label col-md-3 col-sm-3 col-xs-12">
+        &nbsp;
+    </label>
+    <div class="col-md-6 col-sm-6 col-xs-12">
+        <div class="row col-xs-6" ng-hide="ocultarGuardar">
+            <button class="btn btn-block btn-info" ng-click="datoscompletos(2,'ITF.satisfCliente')"
+                    ng-disabled="(!formITF.califResE.$valid || !formITF.resultados.$valid || !formITF.proyFuturo.$valid) || click">
+                <!--ng-show="!detalles">-->
+                {{txtGuardar}}
+            </button>
+        </div>
+    </div>
+</div>

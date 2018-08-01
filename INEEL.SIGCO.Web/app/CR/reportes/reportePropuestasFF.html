@@ -1,0 +1,237 @@
+<!-- page content -->
+<div class="vista">
+
+    <div class="page-title">
+        <div class="title_left">
+
+            <ol class="breadcrumb miga">
+                <li><i class="sg sg-fuentes-financiamiento"></i> <a ui-sref="RepPropFF">Fuentes de financiamiento/Reportes</a></li>
+                <li> Propuestas por fuente</li>
+            </ol>
+
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Criterios de b&uacute;squeda</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li>
+                            <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content sin-desborde">
+
+                    <form name="form" id="form" class="form-horizontal form-label-left">
+                        <div class="col-xs-12 col-md-6">
+                            <div class="form-group ">
+                                <label class="control-label col-md-4 col-sm-4 col-xs-12">
+                                    Tipo Fuente de financiamiento
+                                </label>
+                                <div class="col-md-8 col-sm-8 col-xs-12">
+                                    <select ng-required="true" name="tipoFuenteFinanciamientoId" class="form-control" ng-model="tipoFuenteFinanciamientoId" scrolly style="overflow: scroll" ng-change="consultarFuentes()"
+                                            ng-options="tipoFuenteFinanciamiento.tipoFuenteFinanciamientoId as tipoFuenteFinanciamiento.nombre for tipoFuenteFinanciamiento in tiposFuenteFinanciamiento ">
+                                        <option value="" selected>Todas</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group ">
+                                <label class="control-label col-md-4 col-sm-4 col-xs-12">
+                                    Fuente de financiamiento
+                                </label>
+                                <div class="col-md-8 col-sm-8 col-xs-12">
+
+
+                                    <select ng-required="true" name="fondoProgramaId" class="form-control" ng-model="fuenteFinanciamientoId" scrolly style="overflow: scroll" ng-change="consultarFondos()"
+                                            ng-options="fuenteFinanciamiento.fuenteFinanciamientoId as fuenteFinanciamiento.nombreFF for fuenteFinanciamiento in fuentesFinanciamiento ">
+                                        <option value="" selected>Todas</option>
+                                    </select>
+
+
+                                </div>
+                            </div>
+                            <div class="form-group ">
+                                <label for="usr" class="control-label col-md-4 col-sm-4 col-xs-12">
+                                    Fondo o programa
+                                </label>
+                                <div class="col-md-8 col-sm-8 col-xs-12">
+
+                                    <div class="form-group" ng-show="!loading">
+                                        <select ng-required="true" name="fondoProgramaId" class="form-control" ng-model="fondoProgramaId" scrolly style="overflow: scroll" ng-change="consultarConvocatorias()"
+                                                ng-options="fondoPrograma.fondoProgramaId as fondoPrograma.nombreFP for fondoPrograma in fondosPrograma ">
+                                            <option value="" selected>Todos</option>
+                                        </select>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-md-6">
+                            <div class="form-group ">
+                                <label class="control-label col-md-4 col-sm-4 col-xs-12">
+                                    Convocatoria
+                                </label>
+                                <div class="row col-md-8 col-sm-8 col-xs-12">
+                                    <select ng-required="true" name="convocatoriaId" class="form-control" ng-model="convocatoriaId" scrolly style="overflow: scroll"
+                                            ng-options="convocatoria.convocatoriaId as convocatoria.nombreConvocatoria for convocatoria in convocatorias ">
+                                        <option value="" selected>Todas</option>
+                                    </select>
+
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                            <div class="form-group ">
+                                <label class="control-label col-md-4 col-sm-4 col-xs-12">
+                                    Unidad organizacional
+                                </label>
+                                <div class="row col-md-8 col-sm-8 col-xs-12">                                   
+                                    <div uo-modal2 ng-model="uoselecionada" ng-required="false"></div>
+                                </div>
+                            </div>
+
+
+
+                            <div class="form-group ">
+                                <label class="control-label col-md-4 col-sm-4 col-xs-12">
+
+                                </label>
+                                <div class="col-md-8 col-sm-8 col-xs-12">
+
+
+                                    <a class="btn btn-success" ng-click="obtenerInformacion()">
+                                        <i class="glyphicon glyphicon-search"></i> Buscar
+                                    </a>
+                                    <a ng-click="limpiar()" class="btn btn-primary"
+                                       title="Limpiar" ng-disabled="desabilitarLimpiar">
+                                        Limpiar
+                                    </a>
+
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="row" ng-show="consultas.length > 0">
+        <div class="col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Propuestas por fuente de financiamiento</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li>
+                            <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content sin-desborde">
+
+                    <div class="row"  style="display:none">
+                        <div class="col-lg-3">
+                            <a class="navbar-brand" href="">
+                                <img src="images/logo_sigco.png" />
+                            </a>
+                        </div>
+                        <div class="col-lg-9">
+                            <h3 class="row">Propuestas por fuente de financiamiento</h3>
+                        </div>
+                    </div>
+
+                    <div class="row" ng-show="consultas.length > 0">
+                        <div class="col-xs-12 col-md-12 col-lg-12">
+                            <div>
+                                <table id="tabla" datatable="ng" dt-options="dtOptions" class="table table-hover table-striped table-condensed" width="100%">
+                                    <thead>
+                                        <tr>
+                                            <th data-priority="1">Convocatoria</th>
+                                            <th>Vigencia</th>
+                                            <th>Num. Prop</th>
+                                            <th>Nombre Prop</th>
+                                            <th>Unidad</th>
+                                            <th>Estado Prop</th>
+                                            <th>Monto</th>
+                                            <th>Tipo de FF</th>
+                                            <th>Fuente Fin</th>
+                                            <th>Fondo Prog</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="consulta in consultas">
+                                            <td>{{consulta.nombreC}}</td>
+                                            <td>{{consulta.vigenciaC}}</td>
+                                            <td>{{consulta.numProp}}</td>
+                                            <td>{{consulta.nombreProp}}</td>
+                                            <td>{{consulta.unidadProp}}</td>
+                                            <td>{{consulta.estadoProp}}</td>
+                                            <td>${{consulta.montoProp}} </td>
+                                            <td>{{consulta.nombreTipoFF}}</td>
+                                            <td>{{consulta.nombreFF}}</td>
+                                            <td>{{consulta.nombreF}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div id="convocatorias" ng-show="false">
+                                <table id="tab_conv">
+                                    <thead>
+                                        <tr>
+                                            <th>Tipo de FF</th>
+                                            <th>Fuente Fin</th>
+                                            <th>Fondo Prog</th>
+                                            <th>Convocatoria</th>
+                                            <th>Vigencia</th>
+                                            <th>Num. Prop</th>
+                                            <th>Nombre Prop</th>
+                                            <th>Estado Prop</th>
+                                            <th>Monto</th>
+                                            <th>Unidad</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="consulta in consultas">
+                                            <td>{{consulta.nombreTipoFF}}</td>
+                                            <td>{{consulta.nombreFF}}</td>
+                                            <td>{{consulta.nombreF}}</td>
+                                            <td>{{consulta.nombreC}}</td>
+                                            <td>{{consulta.vigenciaC}}</td>
+                                            <td>{{consulta.numProp}}</td>
+                                            <td>{{consulta.nombreProp}}</td>
+                                            <td>{{consulta.estadoProp}}</td>
+                                            <td>${{consulta.montoProp}}</td>
+                                            <td>{{consulta.unidadProp}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <footer>
+                                    <div style='text-align:center;'>P&aacute;gina <span class="pageCounter"></span>/<span class="totalPages"></span></div>
+                                </footer>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+    <button type="button" ng-click="globalRegresar();" class="btn btn-primary">
+        <span class="fa fa-arrow-left"></span> Regresar
+    </button>
+</div>
+<!-- end page content -->
+
+    

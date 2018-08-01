@@ -1,0 +1,64 @@
+﻿
+<!--#region  lista de insumos-->
+<div ng-show="ITFPublico || itf.itFgeneral.accesoTipo==1">
+    <div class="col-md-12">
+
+        <div class="x_title">
+            <h2>Insumos</h2>
+            <div class="clearfix"></div>
+        </div>
+
+        <div ng-show="itf.listaInsumos==null || itf.listaInsumos.length === 0" class="alert advertencia">
+            No hay informaci&oacute;n disponible
+        </div>
+        <div ng-show="itf.listaInsumos!=null && itf.listaInsumos.length > 0">
+            <div ng-hide="itf.listaInsumos.length === 0">
+                <table id="MTinsumos" datatable="ng" dt-options="dtOptions"
+                       class="table table-hover table-striped table-condensed dt-responsive sin-desborde"
+                       width="100%">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Descripci&oacute;n</th>
+                            <th>Adjuntos  </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="e in itf.listaInsumos">
+                            <td class="sin-desborde" style="max-width:100px">{{e.nombreIns}}</td>
+                            <td class="sin-desborde" style="max-width:100px">{{e.descripcionIns}}</td>
+                            <td class="sin-desborde" style="max-width:100px">
+
+
+                                <span ng-show="ITFPublico==true" ng-repeat="fil in e.adjuntoITFInsumo">
+                                    <span style="max-width:200px" class="sin-desborde"><font class="fa fa-unlock">&nbsp;</font>&nbsp;<a href="/Descargas.html#/q/{{fil.adjunto.adjuntoId | encriptar}}" target="_blank">{{fil.adjunto.nombre}}</a></span>
+
+                                </span>
+                                <span ng-show="ITFPublico==false" ng-repeat="fil in e.adjuntoITFInsumo" title="debe solicitar permiso para ver el documento">
+                                    <span class="fa fa-lock">&nbsp;{{fil.adjunto.nombre}}</span>
+                                </span>
+
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+<div ng-show="debug">
+    itf.listaInsumos:{{itf.listaInsumos | json}}
+</div>
+<!--#endregion insumos-->
+
+<div class="alert informacion" ng-show="!permisoAccesoVigente && ITFPublico==false">
+
+
+    <div class="form-group">
+        Para acceder al contenido de est&aacute; secci&oacute;n <strong>deber&aacute; solicitar acceso a este ITF</strong>
+    </div>
+
+
+</div>

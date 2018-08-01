@@ -1,0 +1,65 @@
+﻿<!-- page content -->
+<div class="vista">
+    <div class="row">
+        <!-- se oculta, si usuario está logeado-->
+        <div data-ng-hide="authentication.isAuth">
+            No tiene permisos para ingresar a esta secci&oacute;n.<br /> Usuario no autentificado
+        </div>
+        <div data-ng-show="authentication.isAuth" class="sin-desborde">
+
+            <div ng-show="registros.length == 0" class="alert advertencia">
+                No hay registros
+            </div>
+
+            <div class="sin-desborde" ng-show="registros.length > 0">
+                <table id="CHCapitulosGet" class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" datatable="ng" width="100%"
+                       dt-options="dtOptions">
+                    <thead>
+                        <tr>
+                            <th data-priority="1">Cap&iacute;tulo</th>
+                            <!--<th>Libro</th>-->
+                            <th>Estado</th>
+                            <th>Fecha de validaci&oacute;n</th>
+                            <th data-priority="1" class="thAjuste text-center">Opciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="registro in registros">
+                            <td style="max-width:100px" class="linkTabla sin-desborde" ng-click="detalleCapitulos(registro.capitulosId)">
+                                {{registro.tituloCapitulo}}
+                            </td>
+                            <!--<td style="max-width:100px" class="sin-desborde">{{registro.tituloLibro}}</td>-->
+                            <td>{{registro.estadoFlujo.descripcion}}</td>
+                            <td>{{registro.fechaValidacion === null ? 'Dato no disponible' : registro.fechaValidacion | date:"dd/MM/yyyy"}}</td>
+                            <td class="text-center">
+                                <a ng-if="idRol==1" ng-click="setGlobalID(registro.capitulosId);$event.stopPropagation();"
+                                   ui-sref="capituloDetailsAdmin({id:registro.capitulosId, id2: 1})" title="Aprobar registro" class="btn btn-warning">
+                                    <i class="glyphicon glyphicon-pencil"></i>
+                                </a>
+                                <div ng-if="registro.estadoFlujoId==1">
+                                    <a ng-if="idRol!=1 && registro.clavePersona == EmpleadoQueConsulta" ng-click="setGlobalID(registro.capitulosId);$event.stopPropagation();" ui-sref="CapituloEdit" title="Editar" class="btn btn-warning">
+                                        <i class="glyphicon glyphicon-pencil"></i>
+                                    </a>
+                                    <a title="Eliminar" ng-if="registro.fechaValidacion === null && registro.estadoFlujoId!=3 && registro.clavePersona == EmpleadoQueConsulta" ng-click="open(registro)" class="btn btn-danger">
+                                        <i class="glyphicon glyphicon-trash"></i>
+                                    </a>
+                                </div>
+                                <div ng-if="registro.estadoFlujoId==3 && registro.clavePersona == EmpleadoQueConsulta">
+                                    <a ng-if="idRol!=1" ng-really-message="Está a punto de acceder a un registro 'Aceptado', si modifica algún atributo deberá ser validado nuevamente. ¿Desea continuar?" ng-really-click="setGlobalID(registro.capitulosId);$event.stopPropagation();navegador();" title="Editar" class="btn btn-warning">
+                                        <i class="glyphicon glyphicon-pencil"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <button ng-show="registros.length >= 0" type="button" ng-click="$event.stopPropagation();" ui-sref="CapituloAdd" class="btn btn-success">
+                <span class="glyphicon glyphicon-plus"></span> Agregar
+            </button>
+        </div>
+
+    </div>
+
+
+</div>

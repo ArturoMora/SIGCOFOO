@@ -1,0 +1,125 @@
+﻿<div class="vista">
+    <div class="page-title">
+        <div class="title_full">
+            <ol class="breadcrumb miga">
+                <li><i class="glyphicon glyphicon-file"></i> <a ui-sref="#">Participaci&oacute;n en proyecto</a></li>
+                <li class="active">Detalles</li>
+            </ol>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-8 col-sm-8 col-xs-12">
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+                    <label class="detalle col-xs-12 " title="Nombre">
+                        {{registro.proyectoId}} - {{registro.proyecto.nombre}}
+                    </label>
+                    <label class="cont col-xs-12 colorTit">
+                        {{registro.participacion}}
+                    </label>
+                    <label class="tit col-xs-12">
+                        Descripci&oacute;n de actividades
+                    </label>
+                    <label class="cont col-xs-12">
+                        {{registro.descripcionActividades}}
+                    </label>
+                </div>
+            </div>
+
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+                    <div class="x_title">
+                        <h2>Aprobaci&oacute;n de solicitud : Alta de proyecto </h2>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="form-group">
+                        <label>Justificaci&oacute;n:</label>
+                        <textarea class="form-control" ng-model="justificacion" maxlength="500" placeholder="Escriba una justificaci&oacute;n"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-success" ng-click="save(1)" ng-disabled="desactivar" ng-show="!regFile">
+                            <i class="glyphicon glyphicon-saved"></i> Aprobar solicitud
+                        </button>
+                        <button type="submit" class="btn btn-warning" ng-click="save(2)">
+                            <i class="fa fa-reply"></i> Regresar solicitud
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+
+
+        </div>
+        <div class="col-md-4 col-sm-4 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Evidencia</h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content sin-desborde">
+                    <form name="fromfa" id="form" class="form-horizontal">
+                        <div class="form-group" ng-hide="regFile">
+                            <span class="fa fa-download"></span>&nbsp;&nbsp;<a href="/Descargas.html#/q/{{registro.adjunto.adjuntoId | encriptar}}" class="linkTabla" target="_blank">Descargar Archivo </a>
+                        </div>
+                        <div class="form-group">
+                            <div class="alert advertencia col-xs-12" ng-if="registro.estadoFlujoId==2">
+                                <span class="glyphicon glyphicon-info-sign"></span> El registro se encuentra en <strong> Revisi&oacute;n </strong>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="alert aprobado col-xs-12" ng-if="registro.estadoFlujoId==3">
+                                <span class="glyphicon glyphicon-info-sign"></span> El registro est&aacute; <strong> Aprobado </strong>
+                            </div>
+                        </div>
+                        <!--<div class="form-group">
+                            <label>Justificaci&oacute;n:</label>
+                            <textarea class="form-control" ng-model="justificacion" maxlength="500"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-success" ng-click="save(1)" ng-disabled="desactivar" ng-show="!regFile">
+                                <i class="glyphicon glyphicon-saved"></i> Aprobar
+                            </button>
+                            <button type="submit" class="btn btn-warning" ng-click="save(2)">
+                                <i class="fa fa-reply"></i> Regresar
+                            </button>
+                        </div>-->
+                    </form>
+                </div>
+            </div>
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Per&iacute;odo de participaci&oacute;n</h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content sin-desborde">
+                    <form name="fromfa" id="form" class="form-horizontal">
+                        <div class="form-group">
+                            <label class="titFirst col-md-3 col-sm-3 col-xs-12">
+                                Inicio
+                            </label>
+                            <label class="cont  col-md-6 col-sm-6 col-xs-12">
+                                {{registro.fechaInicio | date: 'dd/MM/yyyy'}}
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label class="titFirst col-md-3 col-sm-3 col-xs-12">
+                                T&eacute;rmino
+                            </label>
+                            <label class="cont  col-md-6 col-sm-6 col-xs-12">
+                                {{registro.fechaTermino | date:'dd/MM/yyyy'}}
+                            </label>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <button type="button" ui-sref="solicitudesrh" class="btn btn-primary">
+                <span class="fa fa-arrow-left"></span> Regresar
+            </button>
+        </div>
+    </div>
+</div>

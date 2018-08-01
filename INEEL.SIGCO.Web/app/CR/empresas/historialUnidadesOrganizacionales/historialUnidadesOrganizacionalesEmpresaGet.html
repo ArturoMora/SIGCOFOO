@@ -1,0 +1,65 @@
+<div id="vista">
+    <div class="clearfix"></div>
+    <div class="tab-content">
+        <div class="x_panel">
+            <br/>
+            <br/>
+            <!-- <div class="x_title">
+                <h2>Contactos actuales </h2>
+                <div class="clearfix"></div>
+            </div> -->
+            <div ng-show="historial.length === 0" class="alert advertencia">
+                No existen movimientos registrados
+            </div>
+            <div ng-show="historial.length>0">
+
+                <div class="col-md-12 col-sm-12 col-lg-12">
+                    <table dt-column-defs="dtColumnDefs" id="historialUnidadesEdit" class="table table-hover table-striped table-condensed dt-responsive"
+                        cellspacing="0" datatable="ng" width="100%">
+                        <thead>
+                            <tr>
+                                <th class="hidden">Ordenamiento fechas</th>
+                                <th data-priority="1">Nombre unidad</th>
+                                <th data-priority="1">Nombre anterior</th>
+                                <th>Fecha de cambio</th>
+                                <th>Contacto</th>
+                                <th>Padre de la unidad</th>
+                                <th>Acci&oacute;n</th>
+                                <th class="text-center">Opciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="unidad in historial">
+                                <td class="hidden">{{unidad.fecha}}</td>
+                                <td>{{unidad.nombreUnidad}}</td>
+                                <td>{{unidad.nombreAnteriorUnidad}}</td>
+                                <td>{{unidad.fecha | date: 'dd-MM-yyyy'}}</td>
+                                <td>{{unidad.nombreContacto}}</td>
+                                <td>{{unidad.nombreUnidadPadre}}</td>
+                                <td>{{unidad.accion}}</td>
+                                <td class="text-center">
+                                    <a class="btn btn-danger" ng-really-click="eliminaRegistro(unidad.historialId)" title="Eliminar">
+                                        <i class="glyphicon glyphicon-trash"></i>
+                                    </a>
+                                    <a class="btn btn-warning" ng-click="editaRegistro(unidad.historialId)" title="Editar">
+                                        <i class="glyphicon glyphicon-pencil"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div>
+        <div class="alert informacion">
+            Los tipos de acciones son las siguientes:<br/>
+            <b>Cambio de titular: </b> cuando se cambia el titular de un nodo en la estructura organizacional de la empresa <br/>
+            <b>Se crea una nueva unidad: </b> cuando se agrega un nuevo nodo en la estructura organizacional de la empresa <br/>
+            <b>Cambio de padre: </b> cuando se agrupa un nodo en otro nodo en la estructura organizacional de la empresa <br/>
+        </div>
+    </div>
+    <br/><br/>
+</div>

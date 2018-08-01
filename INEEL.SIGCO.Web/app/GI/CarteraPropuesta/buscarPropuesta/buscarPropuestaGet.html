@@ -1,0 +1,201 @@
+﻿<!-- page content -->
+<div class="vista">
+
+    <div class="page-title">
+        <div class="title_left">
+            <ol class="breadcrumb miga">
+                <li><i class="glyphicon glyphicon-file"></i> <a ui-sref="buscarPropuestas">Propuestas de innovaci&oacute;n/ Buscar propuestas</a></li>
+            </ol>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Criterios de b&uacute;squeda</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li>
+                            <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content ">
+                    <form name="ValidForm" id="form" class="form-horizontal">
+                        <div class="col-xs-12">
+
+                            <div class="col-xs-12 col-md-6">
+                                <div class="form-group ">
+                                    <label class="col-md-12 col-sm-12 col-xs-12">
+                                        Principal proponente
+                                    </label>
+                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                        <input type="text" ng-model="propuesta.nombreProponentePrincipal" placeholder="Nombre proponente" class="frmSearch form-control" />
+                                    </div>
+                                </div><!--Form-G-->
+                                <div class="form-group ">
+                                    <label class="col-md-12 col-sm-12 col-xs-12">
+                                        Nombre t&eacute;cnico de la propuesta
+                                    </label>
+                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                        <input type="text"  class="frmSearch form-control"
+                                               ng-model="propuesta.nombreTecnico" placeholder="Nombre t&eacute;cnico de la propuesta" />
+                                    </div>
+                                </div><!--Form-G-->
+                                <div class="form-group ">
+                                    <label class="col-md-12 col-sm-12 col-xs-12">
+                                        Nombre propuesto para el producto o servicio innovador
+                                    </label>
+                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                        <input type="text" ng-model="propuesta.productoServicio" placeholder="Nombre propuesto" class="frmSearch form-control" />
+                                    </div>
+                                </div><!--Form-G-->
+
+
+                                <div class="form-group ">
+                                    <label class="col-md-12 col-sm-12 col-xs-12">
+                                        Segmento de mercado al que va dirigido
+                                    </label>
+                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                        <select ng-model="propuesta.segmentoMercadoId" ng-options="segmento.id as segmento.nombre for segmento in segmentos | orderBy:'nombre'"
+                                                class="form-control">
+                                            <option value="">---Seleccione un segmento de mercado---</option>
+                                        </select>
+                                    </div>
+                                </div><!--Form-G-->
+                            </div><!--div.col- -->
+                            <div class="col-xs-12 col-md-6">
+                                <div class="form-group ">
+                                    <label class="col-md-12 col-sm-12 col-xs-12">
+                                        Empresa que promueve la propuesta (Instituto, cliente)
+                                    </label>
+                                    <div class="col-md-10 col-sm-10 col-xs-10">
+                                        <input type="text" ng-model="propuesta.nombreEmpresa" readonly disabled placeholder="Empresa que promueve" class="frmSearch form-control" />
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <a ng-click="openEmpresa()" class="btn btn-success" title="Buscar empresa">
+                                            <i class="glyphicon glyphicon-search"></i>
+                                        </a>
+                                    </div>
+                                </div><!--Form-G-->
+
+
+                                <div class="form-group ">
+                                    <label class="col-md-12 col-sm-12 col-xs-12">
+                                        Gerencia que lidera la propuesta
+                                    </label>
+                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                        <div uo-modal2 ng-model="propuesta.uo" ng-change="{{propuesta.unidadOrganizacionalId = propuesta.uo.claveUnidad}}" requerido="false" fecha=""></div>
+                                    </div>
+                                </div><!--Form-G-->
+                                <label class="col-xs-12">Propuestas con fecha de registro entre el siguiente rango de fechas: </label>
+                                <div class="form-group">
+                                    <label class="col-md-12 col-sm-12 col-xs-12">Inicio </label>
+                                    <div class="col-xs-12">
+                                        <div class="row">
+                                            <div class="col-xs-10">
+                                                <!--<p class="input-group">-->
+                                                <input placeholder="dd/mm/yyyy" show-button-bar="false" uib-datepicker-popup='dd/MM/yyyy' ng-minlength="8" maxlength="10" datepicker-options="datePicker.FechaOptions" popup-placement="bottom" type="text" class="form-control fechaOnly"
+                                                       ng-model="propuesta.fechaInicioComparacion" is-open="open" close-text="Close" />
+                                                <!--</p>-->
+                                            </div>
+                                            <div class="col-xs-2">
+                                                <span class="input-group-btn">
+                                                    <button type="button" class="btn btn-success" ng-click="open=true; propuesta.busquedaFecha='ok'"><i class="glyphicon glyphicon-calendar"></i></button>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-xs-12">T&eacute;rmino </label>
+                                    <div class="col-xs-10">
+                                        <input placeholder="dd/mm/yyyy" show-button-bar="false" uib-datepicker-popup='dd/MM/yyyy' ng-minlength="8" maxlength="10" datepicker-options="datePicker.FechaOptions" popup-placement="bottom" type="text" class="form-control fechaOnly"
+                                               ng-model="propuesta.fechaFinalComparacion" is-open="open2" close-text="Close" />
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-success" ng-click="open2=true; propuesta.busquedaFecha='ok'"><i class="glyphicon glyphicon-calendar"></i></button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div><!--div.col- -->
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="col-xs-12 col-md-6">
+                                <div class="form-group ">
+                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                        <a class="btn btn-success" ng-click="buscar()" title="buscar">
+                                            <span class="glyphicon glyphicon-search"></span> Buscar
+                                        </a>
+                                        <button type="button" ng-click="reset()" class="btn btn-primary">
+                                             Limpiar
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!--obj:{{obj | json}}-->
+    <br />
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="x_panel" ng-show="busqueda">
+                <div class="x_content">
+                    <!--<div ng-hide="filtered==null || filtered.length>0" class="alert advertencia col-xs-12">
+                        Sin resultados
+                    </div>-->
+                    <div class="row">
+                        <table id="GIbuscarPropuestas" class="table table-hover table-striped table-condensed dt-responsive sin-desborde" datatable="ng"
+                               style="width: 100%;" dt-options="dtOptions"  dt-column-defs="dtColumnDefs">
+                            <thead>
+                                <tr>
+                                    <th>Clave propuesta</th>
+                                    <th>Fecha registro</th>
+                                    <!-- <th class="ng-hide">Fecha aprobaci&oacute;n</th> -->
+                                    <th>Tipo propuesta</th>
+                                    <!-- <th class="ng-hide">Nombre técnico</th> -->
+                                    <th>Producto/Servicio propuesto</th>
+                                    <th>Estado registro</th>
+                                    <th>Proponente</th>
+                                    <th>Empresa</th>
+                                    <!-- <th class="ng-hide">Segmento mercado</th>
+                                    <th class="ng-hide">Gerencia</th> -->
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="registro in registros">
+                                    <td><a class="linkTabla" ng-click="setVariable('busquedaPropuestas', propuesta);setGlobalID(registro.id)" ui-sref="buscarPropuestasDetails" title="Detalle">{{registro.propuestaId}}</a></td>
+                                    <td>{{registro.fechaRegistro=== null ? 'Dato no disponible' : registro.fechaRegistro | date:"dd/MM/yyyy"}}</td>
+                                    <!-- <td class="sin-desborde ng-hide">{{registro.fechaValidacion=== null ? 'Dato no disponible' : registro.fechaValidacion | date:"dd/MM/yyyy"}}</td> -->
+                                    <td >{{registro.propuestaInterna==true? 'Interna' : 'Externa'}}</td>
+                                    <!-- <td class="sin-desborde ng-hide">{{registro.nombreTecnico}}</td> -->
+                                    <td>{{registro.productoServicio}}</td>
+                                    <td class="sin-desborde">{{registro.estadoFlujoNombre}}</td>
+                                    <td><a ng-click="openProfile(registro.claveProponentePrincipal)" title="Detalle de empleado" class="linkTabla">{{registro.claveProponentePrincipal}}</a>- {{registro.proponente}}</td>
+                                    <td>{{registro.empresaPromotorNombre}}</td>
+                                    <!-- <td class="sin-desborde ng-hide"> {{registro.segmentoMercadoNombre}}</td>
+                                    <td class="sin-desborde ng-hide">{{registro.nombreUnidadOrganizacional}}</td> -->
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+
+</script>
+<!-- end page content -->
+<!--registros: {{registros | filter: obj | json}}-->

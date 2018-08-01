@@ -1,0 +1,205 @@
+﻿<div class="vista">
+    <div class="page-title">
+        <div class="title_full">
+            <ol class="breadcrumb miga">
+                <li>
+                    <i class="glyphicon glyphicon-file"></i>
+                    <a ui-sref="planNegocioEvolutivo">Plan de negocio evolutivo/ Mis planes de negocio evolutivo</a>
+                </li>
+                <li class="active">Detalles</li>
+            </ol>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <!--{{registro | json}}-->
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+                    <label class="detalle col-xs-12 " title="titulo">
+                        {{registro.titulo}}
+                    </label>
+                    <label class="cont emc col-xs-12 colorTit">
+                        {{registro.tema}}
+                    </label>
+                </div>
+                <div class="col-md-12 col-lg-12 col-xs-12" ng-show="registro.estadoFlujoId==10">
+                    <div class="alert informacion" >
+                        <i class="glyphicon glyphicon-info-sign"></i>
+                        <label>
+                            Motivo de aceptaci&oacute;n:
+                        </label>&nbsp; {{evaluacionPlan.justificacion ==null? 'Sin justificación' : evaluacionPlan.justificacion}}
+                    </div>
+                </div>
+                <div class="col-md-12 col-lg-12 col-xs-12" ng-show="registro.estadoFlujoId==6">
+                    <div class="alert advertencia" >
+                        <i class="glyphicon glyphicon-info-sign"></i>
+                        <label>
+                            Motivo de rechazo:
+                        </label>&nbsp; {{evaluacionPlan.justificacion ==null? 'Sin justificación' : evaluacionPlan.justificacion}}
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+                    <div class="x_title">
+                        <h2>Informaci&oacute;n general</h2>
+                        <div class="clearfix"></div>
+                        <label class="tit col-xs-12">
+                            Oferta de valor
+                        </label>
+                        <label class="cont col-xs-12">
+                            {{registro.ofertaDeValor}}
+                        </label>
+                        <label class="tit col-xs-12">
+                            Tipo de acceso
+                        </label>
+                        <label class="cont col-xs-12">
+                            {{registro.tipoAccesoGI.nombre}}
+                        </label>
+                        <label class="tit col-xs-12">
+                            Proyecto
+                        </label>
+                        <label class="cont col-xs-12">
+                            {{registro.proyecto.nombre}}
+                        </label>
+                        <label class="tit col-xs-12">
+                            Propuesta
+                        </label>
+                        <label class="cont col-xs-12">
+                            {{registro.propuesta.nombreTecnico}}
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+                    <div class="x_title">
+                        <h2>Autores</h2>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="form-group">
+                        <table id="CHPonenciaAdd" class="table table-hover" cellspacing="0" dt-options="dtOptions">
+                            <thead>
+                                <tr>
+                                    <th data-priority="1">N&uacute;m empleado</th>
+                                    <th data-priority="1">Nombre de empleado</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="autor in registro.planNegocioEvolAutores">
+                                    <td ng-click="openProfile(autor.clavePersona)" title="Detalle de empleado" class="linkTabla">{{autor.clavePersona}}</td>
+                                    <td>{{autor.nombre}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+                    <div class="x_title">
+                        <h2>Gerencias</h2>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="form-group">
+                        <table id="CHPonenciaAdd" class="table table-hover" cellspacing="0" dt-options="dtOptions">
+                            <thead>
+                                <tr>
+                                    <th data-priority="1">Nombre</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="reg in registro.planNegocioEvolGerencias">
+                                    <td>{{reg.nombreUnidad}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+                    <div class="x_title">
+                        <h2>Evidencia</h2>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="form-group">
+                        <table id="CHPonenciaAdd" class="table table-hover" cellspacing="0" dt-options="dtOptions" datatable="ng">
+                            <thead>
+                                <tr>
+                                    <th data-priority="1">Fecha</th>
+                                    <th data-priority="1">Nombre</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="arc in registro.planNegocioEvolArchivos">
+                                    <!--<td>{{arc.adjunto.nombre}}</td>-->
+                                    <td>{{arc.fecha | date: "yyyy/MM/dd"}}</td>
+                                    <td>
+                                        <span class="fa fa-download"></span>&nbsp;&nbsp;
+                                        <a href="/Descargas.html#/q/{{arc.adjunto.adjuntoId | encriptar}}"
+                                            class="linkTabla" target="_blank">{{arc.adjunto.nombre}}</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="x_panel" ng-show="rolId==4">
+                <form name="form" id="form">
+                    <div class="x_content sin-desborde">
+                        <div class="x_title">
+                            <h2>Justificaci&oacute;n</h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Justificaci&oacute;n
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <textarea class="form-control" ng-minlength="1" placeholder="Escriba una justificaci&oacute;n" name="justificacion" ng-model="justificacion" maxlength="500"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-4 col-sm-4 col-xs-12">
+
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <br />
+                                <!--{{registro | json}}-->
+
+                                <button type="button" class="btn btn-success" ng-really-click="acciones('aprobar')" ng-really-message="¿Esta seguro de que quiere aprobar la solicitud?"
+                                    ng-disabled="justificacion==null || justificacion==''">
+                                    <i class="glyphicon glyphicon-saved"></i> Aprobar Solicitud
+                                </button>
+                                <button type="button" ng-disabled="justificacion==null || justificacion==''" class="btn btn-warning" ng-really-click="acciones('rechazar')"
+                                    ng-really-message="¿Esta seguro de que quiere rechazar la solicitud?">
+                                    <i class="fa fa-reply"></i> Regresar Solicitud
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+<!-- {{registro | json}}  <br/><br/><br/><br/><br/> bitacora: {{bitacora | json}} -->
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <button type="button" ng-show="rolId!=4" confirma-regresar="globalRegresar()" state-form="form" class="btn btn-primary">
+                <span class="fa fa-arrow-left"></span> Regresar
+            </button>
+            <button type="button" ng-show="rolId==4" ng-click="globalRegresar()" class="btn btn-primary">
+                <span class="fa fa-arrow-left"></span> Regresar
+            </button>
+        </div>
+
+
+    </div>
+</div>
+<!--{{registro.planNegocioEvolArchivos}}-->

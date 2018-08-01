@@ -1,0 +1,55 @@
+﻿<div data-ng-show="authentication.isAuth">
+    <div ng-hide="registro.length >= 0">
+        <img src="images/cargando.gif" />
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div ng-show="registro.length === 0" class="alert alert-danger">
+                No hay registros de becario interno.
+            </div>
+            <div ng-show="registro.length > 0">
+                <table id="CHBecarioInternoGet" class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" datatable="ng" width="100%"
+                       dt-options="dtOptions">
+                    <thead>
+                        <tr>
+                            <th>Fecha Validación</th>
+                            <th>Estado Registro </th>
+                            <th data-priority="1">Tipo Beca/th>
+                            <th data-priority="2">Fecha de inicio</th>
+                            <th data-priority="3">Fecha de t&eacute;rmino</th>
+                            <th data-priority="4" class="thAjuste text-center">Opciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="reg in registro">
+                            <td>{{reg.fechaValidacion === null ? 'Dato no disponible' : reg.fechaValidacion | date:"dd/MM/yyyy"}}</td>
+                            <td>{{reg.estadoFlujo.descripcion}}</td>
+                            <td>{{reg.tipoBeca}}</td>
+                            <td>{{reg.fechaInicioBeca | date:"dd/MM/yyyy"}}</td>
+                            <td>{{reg.fechaTerminoBeca | date:"dd/MM/yyyy"}}</td>
+                            <td class="text-center">
+                                <div ng-if="reg.estadoFlujoId!=1">
+                                    <a class="btn btn-default" ng-click="$event.stopPropagation();" ui-sref="becarioInernodetail({id:reg.becarioInernoId})" title="Mostrar detalle">
+                                        <i class="glyphicon glyphicon-search"></i>
+                                    </a>
+                                </div>
+                                <div ng-if="reg.estadoFlujoId==1">
+                                    <a ng-click="$event.stopPropagation();" ui-sref="becarioInernoEdit({id:reg.becarioInernoId})" title="Editar" class="btn btn-default">
+                                        <i class="glyphicon glyphicon-pencil"></i>
+                                    </a>
+                                    <a title="Eliminar" ng-click="open(reg)" class="btn btn-default">
+                                        <i class="glyphicon glyphicon-trash"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <button ng-show="registro.length >= 0" type="button" ng-click="$event.stopPropagation();" ui-sref="becarioInernoAdd" class="btn btn-success">
+                <span class="glyphicon glyphicon-plus"></span> Agregar
+            </button>
+        </div>
+
+    </div>
+</div>

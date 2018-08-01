@@ -1,0 +1,187 @@
+﻿<div class="vista">
+    <div class="page-title">
+        <div class="title_left">
+            <ol class="breadcrumb miga">
+                <li><i class="sg sg-fuentes-financiamiento"></i> <a ui-sref="fondosProgramaGet">Fuentes de financiamiento / Fondos</a></li>
+                <li class="active">Editar</li>
+            </ol>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+                    <form name="form" id="form" class="form-horizontal">
+                        <div class="x_title">
+                            <h2>Informaci&oacute;n general </h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">
+                                Nombre del fondo o programa <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" ng-model="fondoPrograma.nombreFP" required class="form-control col-md-7 col-xs-12" name="nombreFP"
+                                    minlength="2" maxlength="250" />
+                                <span class="error" ng-show="form.nombreFP.$dirty && form.nombreFP.$invalid">
+                                    Dato incorrecto, se espera una longitud m&iacute;nima de 2 y m&aacute;ximo 250
+                                </span>
+                                <span class="error" ng-show="form.nombreFP.$dirty && !form.nombreFP.$valid || form.$submitted && form.nombreFP.$invalid">
+                                    El nombre no puede estar vac&iacute;o
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">
+                                Descripci&oacute;n
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <textarea rows="3" type="text" ng-model="fondoPrograma.descripcion" class="form-control col-md-7 col-xs-12" name="descripcion"
+                                    maxlength="300" />
+                                <span class="error" ng-show="form.descripcion.$dirty && form.descripcion.$invalid">
+                                    Dato incorrecto, se espera una longitud m&aacute;ximo 300
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Fuente de financiamiento del fondo o programa<span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <select required name="fuenteF" class="form-control" ng-model="fondoPrograma.fuenteFinanciamientoId" scrolly style="overflow: scroll"
+                                    ng-options="fuenteFinanciamiento.fuenteFinanciamientoId as fuenteFinanciamiento.nombreFF for fuenteFinanciamiento in fuentesFinanciamiento">
+                                    
+                                </select>
+                                <span class="error" ng-show="form.fuenteF.$invalid && form.fuenteF.$dirty || form.$submitted && form.fuenteF.$invalid">
+                                    Debes de seleccionar una opci&oacute;n
+                                </span>
+                            </div>
+                        </div>
+                        <div class="x_title">
+                            <br />
+                            <h2>Institución u organismo patrocinador </h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Organizaci&oacute;n p&uacute;blica o privada  <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" class="form-control" id="usr" name="empresa" ng-model="fondoPrograma.empresa.nombreEmpresa" readonly required>
+                                <input type="hidden" ng-model="fondoPrograma.empresaId" class="form-control" value="empresa.empresaId" />
+                                <span class="error" ng-show="form.empresa.$invalid && form.empresa.$dirty || form.$submitted && form.empresa.$invalid">
+                                    Debes de agregar una instituci&oacute;n
+                                </span>
+                            </div>
+                            <div class="col-xs-2">
+                                <a ng-click="openEmpresa()" class="btn btn-success" title="Buscar empresa" ng-disabled="desabilitarBuscarEmpresa">
+                                    <i class="glyphicon glyphicon-search"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="x_title">
+                            <br />
+                            <h2>Ligas de acceso </h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="url" class="form-control" id="usr" name="descripcionLiga" no-dirty-check ng-model="fondoPrograma.descripcionLiga">  
+                                <span class="error" ng-show="form.descripcionLiga.$dirty &&  !form.descripcionLiga.$valid || form.$submitted && form.descripcionLiga.$invalid">
+                                    Se requiere un sitio Web ejemplo: http://www.dominio.com
+                                </span>
+                            </div>
+                            <div class="col-xs-2">
+                                <a class="btn btn-success btn-sm" ng-click="addLiga()" ng-disabled="!form.descripcionLiga.$valid">
+                                    <i class="glyphicon glyphicon-plus"></i>
+                                </a><br />
+                            </div>
+                        </div>
+                        <div class="form-group" ng-show="fondoPrograma.sitioWebFondoPrograma.length > 0 || fondoPrograma.sitioWebFondoPrograma.length>0">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12 sin-desborde">
+                                <table id="CRfondoProgramaEdit" class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" datatable="ng" width="100%"
+                                    dt-options="dtOptions">
+                                    <thead>
+                                        <tr>
+                                            <th class="col-xs-8" data-priority="1">Ligas de Acceso</th>
+                                            <th class="col-xs-4 text-center">Eliminar</th>
+                                        </tr>
+                                    </thead>
+                                    <tr ng-repeat="obj in fondoPrograma.sitioWebFondoPrograma ">
+                                        <td style="max-width:200px" class="sin-desborde">
+                                            <a href="{{obj.url}}" target="_blank" title="{{obj.url}}">
+                                                {{obj.url}}
+                                                
+                                            </a>
+                                        </td>
+                                        <td class="text-center">
+                                            <button type="button" ng-click="deleteURL(obj)" class="btn btn-danger">
+                                                <i class="glyphicon glyphicon-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+
+                                </table>
+
+
+                            </div>
+                            <br/>
+
+                        </div>
+                        <div class="x_title">
+                            <h2>&Aacute;reas tem&aacute;ticas </h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group">
+
+                            <div class="check-box-panel" ng-repeat="x in areasSelected">
+                                <div class="action-checkbox">
+                                    <input type="checkbox" title="&Aacute;rea Tem&aacute;tica" ng-model="x.tematica.estado" value="{{x.tematica.estado}}" ng-change="toggleSelectionAnt(x.tematicaPorFondoProgramaId)"
+                                    />
+                                    <label for="{{x.tematica.tematicaId}}" class="col-sm-3 col-xs-12"></label> {{x.tematica.nombre}}
+                                </div>
+                            </div>
+
+                            <div class="check-box-panel">
+                                <div ng-repeat="e in areasNSelected">
+                                    <div class="action-checkbox">
+                                        <input id="{{e.tematicaId}}" type="checkbox" value="{{e.tematicaId}}" ng-checked="selection.indexOf(e.tematicaId) > -1" ng-click="toggleSelection(e.tematicaId);form.$setDirty()"
+                                        />
+                                        <label for="{{e.tematicaId}}" class="col-sm-3 col-xs-12"></label> {{e.nombre}}
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="selected-items-panel">
+                                <div ng-repeat="tematicaId in selection" class="selected-item">
+                                    {{tematicaId}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ln_solid"></div>
+                        <div class="form-group">
+                            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                <div class="">
+
+                                    <button type="submit" class="btn btn-success" ng-click="saveFondoPrograma()"  ng-disabled="form.$invalid"><i class="glyphicon glyphicon-saved"></i> Actualizar
+                                    </button>
+                                    <button type="button" confirma-regresar="globalRegresar()" state-form="form" class="btn btn-primary">
+                                        <span class="fa fa-arrow-left"></span>
+                                        Regresar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

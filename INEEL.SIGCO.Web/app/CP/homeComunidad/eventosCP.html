@@ -1,0 +1,72 @@
+﻿<div class="clearfix">
+    <br />
+</div>
+<div ng-controller="EventosComunidadCtrl" class="col-lg-12 col-md-12 col-xs-12">
+    <div class="col-lg-12 col-md-12 col-xs-12">
+        <div class="x_panel">
+
+            <div class="x_title">
+                <h2>Eventos de la comunidad</h2>
+                <div class="clearfix"></div>
+            </div>
+
+
+            <div class="x_content sin-desborde">
+                <div data-ng-hide="authentication.isAuth">
+                    No tiene permisos para ingresar a esta secci&oacute;n.
+                    <br /> Usuario no autentificado
+                </div>
+                <div ng-show="eventos.length === 0" class="alert advertencia">
+                    No hay registros
+                </div>
+
+                <div data-ng-show="authentication.isAuth">
+                    <div class="x_panel" ng-show="eventos.length > 0">
+
+                        <table class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" width="100%">
+                            <thead>
+                                <tr>
+                                    <th class="thCeldaB text-left">Asunto</th>
+                                    <th class="thCeldaB text-left">Lugar</th>
+                                    <th class="thCeldaB text-center">Fecha</th>
+                                    <th class="thCeldaB text-center">Hora</th>
+                                    <th class="thCeldaB text-center">Estado notificaci&oacute;n</th>
+                                    <th class="thCeldaB text-center" ng-hide="rol.invitado ==true || rol.miembro == true">Opciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="e in eventos " >
+                                    <td style="max-width:50%" class="thCeldaB text-justify">{{e.asunto}}</td>
+                                    <td style="max-width:20%" class="thCeldaB text-left">{{e.lugar}}</td>
+                                    <td style="max-width:10%" class="thCeldaB text-center">{{e.fechaReunion | date:'dd/MM/yyyy'}}</td>
+                                    <td style="max-width:10%" class="thCeldaB text-center">{{e.horaReunion | date:'HH:mm'}}</td>
+                                    <td class="thCeldaB text-center">{{e.notificacionEnviada==true? 'Se ha enviado una notificación previamente' : 'Notificación no enviada'}}</th>
+                                        <td style="max-width:10%" class="thCeldaB text-center" ng-hide="rol.invitado ==true || rol.miembro == true">
+                                            <a class="btn btn-success" title="Notificar a miembros de la comunidad" ng-click="notificacionEventoMiembros(e.agendaId, e)">
+                                                <i class="glyphicon glyphicon-envelope"></i>
+                                            </a>
+
+                                            <a class="btn btn-warning" ng-click="modificarEvento(e.agendaId);" title="Editar evento">
+                                                <i class="glyphicon glyphicon-pencil"></i>
+                                            </a>
+                                        </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <br />
+                        <br />
+
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+    <button type="button" ng-click="agregarEvento();" ng-hide="rol.invitado ==true || rol.miembro == true" class="btn btn-success">
+        <span class="glyphicon glyphicon-plus"></span> Agregar
+    </button>
+</div>
+
+</div>

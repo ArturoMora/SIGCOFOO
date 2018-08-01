@@ -1,0 +1,138 @@
+<div class="vista">
+    <div class="page-title">
+        <div class="title_left">
+            <ol class="breadcrumb miga">
+                <li><i class="sg sg-red-expertos"></i> <a ui-sref="expertosget">Redes de expertos</a></li>
+                <li class="active">Editar</li>
+            </ol>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Informaci&oacute;n general</h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content sin-desborde">
+                    <form name="expertoseditform">
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6 col-xs-12">
+                                    <div class="col-xs-10">
+                                        <label for="nombre">Nombre del experto</label>
+                                        <input type="text" ng-model="experto.contacto.nombreCompleto" class="form-control" id="nombre" disabled>
+                                    </div>
+                                    <div class="col-xs-10"><br>
+                                        <label>Tecnolog&iacute;a o linea de investigaci&oacute;n</label><span> *</span>
+                                        <select ng-required="true" class="form-control" name="medioComunicacion" ng-model="lineaDesarrolloTecnologicoId" ng-options="linea.lineaDesarrolloTecnologicoId as linea.nomLinDesTec for linea in lineas">
+                                            <option value="">--- Selecciona l&iacute;nea de investigaci&oacute;n ---</option>
+									    </select>
+                                    </div>
+                                    <div class="col-xs-10"><br>
+                                        <label>Especialidad</label> <span> *</span>
+                                        <input ng-required="true" class="form-control" name="especialidad" ng-model="experto.especialidad" />
+                                    </div>
+                                    <div class="col-xs-10">
+                                        <br>
+                                        <label>Comunidad de practica </label>
+                                        <select class="form-control" name="comunidad" ng-model="comunidad.comunidadId" ng-options="comunidad.comunidadId as comunidad.descripcion for comunidad in comunidades">
+                                            <option value="">--- Selecciona la comunidad de practica ---</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-xs-10"><br>
+                                        <label>Investigadores con los que interact&uacute;a </label> <span class="required"> *</span>                                        <span>(Por lo menos uno)</span>&nbsp;&nbsp;&nbsp;
+                                        <a ng-click="openUser()" class="btn btn-success">
+                                            <span class="fa fa-user-plus"></span> Buscar
+                                        </a>
+                                    </div>
+                                    <div ng-show="investigadores.length>0 || investigadoresNuevos.length>0" class="col-xs-10">
+                                        <table class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" datatable="ng" width="100%"
+                                            dt-options="dtOptions">
+                                            <thead>
+                                                <tr>
+                                                    <th>N&uacute;m empleado</th>
+                                                    <th data-priority="1">Nombre de empleado</th>
+                                                    <th data-priority="3" class="thAjuste text-center">Opciones</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-if="investigadores.length>0" ng-repeat="autor in investigadores">
+                                                    <!--<td>{{autor.clavePersona}}</td>-->
+                                                    <td ng-click="openProfile(autor.clavePersona)"class="linkTabla" title="Detalle de empleado" style="cursor:hand;cursor: pointer;">{{autor.clavePersona}}</td>
+                                                    <td>{{autor.nombreCompleto}}</td>
+                                                    <td class="text-center">
+                                                        <div>
+                                                            <a title="Eliminar" ng-click="deleteUser(autor)" class="btn btn-danger">
+                                                            <i class="glyphicon glyphicon-trash"></i>
+                                                        </a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-xs-12" ng-show="experto!= null">
+                                    <div class="x_panel">
+                                        <div class="x_title">
+                                            <h2>Detalles del contacto</h2>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        <div class="col-xs-10">
+                                            <div class="form-group">
+                                                <img ng-show="experto.contacto.adjunto64 === null" class="img-circle" src="images/incognito.png" alt="Base64 encoded image"
+                                                    width="60" height="60" />
+                                                <img ng-show="experto.contacto.adjunto64 != null" class="img-circle" ng-src="data:image/png;base64,{{experto.contacto.adjunto64}}"
+                                                    alt="Base64 encoded image" width="70" height="70" />
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-10">
+                                            <label>Instituci&oacute;n o empresa:</label>
+                                            <span style="color:black" class="text">{{experto.contacto.empresa.nombreEmpresa}}</span>
+                                        </div>
+                                        <div class="col-xs-10">
+                                            <label>Puesto:</label>
+                                            <span style="color:black" class="text">{{experto.contacto.puesto}}</span>
+                                        </div>
+                                        <div class="col-xs-10">
+                                            <label>Tel&eacute;fono:</label>
+                                            <span style="color:black" class="text">{{experto.contacto.telefono}}</span>
+                                        </div>
+                                        <div class="col-xs-10">
+                                            <label>Correo:</label>
+                                            <span style="color:black" class="text">{{experto.contacto.correo}}</span>
+                                        </div>
+                                        <div class="col-xs-10">
+                                            <label>Pa&iacute;s de origen:</label>
+                                            <span style="color:black" class="text">{{experto.contacto.paisOrigen.nombrePais}}</span>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xs-10"><br>
+                                    <button type="submit" ng-click="actualizarexperto()" class="btn btn-success">
+                                        <i class="glyphicon glyphicon-saved"></i> Actualizar
+                        </button>
+                                    <button type="button" confirma-regresar="globalRegresar()" state-form="expertoseditform" class="btn btn-primary">
+                                <span class="fa fa-arrow-left"></span> Regresar
+                            </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="page-wrapper">
+
+
+
+</div>

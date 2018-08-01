@@ -1,0 +1,266 @@
+﻿<div class="vista">
+    <div class="page-title">
+        <div class="title_left">
+            <ol class="breadcrumb miga">
+                <li><i class="fa fa fa-clock-o"></i> <a ui-sref="seguimientoOportunidad">Seguimiento a mis oportunidades</a></li>
+                <li class="active">Dar seguimiento</li>
+            </ol>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-8 col-sm-8 col-xs-12">
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+                    <label class="detalle col-xs-12 " title="Nombre de la oportunidad">
+                        {{oportunidad.nombreOportunidad}}
+                    </label>
+                    <label class="tit col-xs-12">
+                        N&uacute;m empleado
+                    </label>
+                    <label class="cont col-xs-12 " ng-click="openProfile(oportunidad.claveEmpleado)" title="Detalle de empleado" style="cursor:hand;cursor: pointer;text-decoration:underline">
+                        {{oportunidad.claveEmpleado}}
+                    </label>
+                    <!--<label class="cont col-xs-12 " title="No. Empleado">
+                        <span>{{oportunidad.claveEmpleado}}</span>
+                    </label>-->
+                    <label class="tit col-xs-12">
+                        Nombre de empleado
+                    </label>
+                    <label class="cont col-xs-12 " title="Autor">
+                        <span>{{oportunidad.autor}}</span>
+                    </label>
+                    <label class="tit col-xs-12">
+                        Fecha
+                    </label>
+                    <label class="cont col-xs-12 " title="Fecha de registro">
+                        <span>{{oportunidad.fecha| date:'dd-MM-yyyy'}}</span>
+                    </label>
+                    <label class="tit col-xs-12" ng-show="oportunidad.tipoEventoONId == null">
+                        <label>Medio de contacto ({{oportunidad.medioComunicacion}})</label>
+                    </label>
+                    <label class="cont col-xs-12 " title="Medio de contacto">
+                        <span>{{oportunidad.descripcionMedioContacto}}</span>
+                    </label>
+                    <label class="tit col-xs-12">
+                        Tipo de evento
+                    </label>
+                    <label class="cont col-xs-12 " title="tipo de evento">
+                        <span>{{oportunidad.tipoEvento.nombreEvento}}</span>
+                    </label>
+                    <div ng-show="oportunidad.tipoEvento != null">
+                        <label class="tit col-xs-12">
+                            Evento
+                        </label>
+                        <label class="cont col-xs-12 " title="tipo de evento">
+                            <span>{{oportunidad.evento.nombreEvento}}</span>
+                        </label>
+                    </div>
+                    <label class="tit col-xs-12">
+                        Comentarios del autor
+                    </label>
+                    <label class="cont col-xs-12 " title="tipo de evento">
+                        <span>{{oportunidad.descripcion}}</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- <div ng-show="oportunidad.comentariosAdministrador != null">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Comentarios del administrador</h2>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content sin-desborde">
+                        <span>{{oportunidad.descripcion}}</span>
+                    </div>
+                </div>
+            </div> -->
+            <div ng-show="oportunidad.comentariosEspecialista != null">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Comentarios del especialista</h2>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content sin-desborde">
+                        <span>{{oportunidad.comentariosEspecialista}}</span>
+                    </div>
+                </div>
+            </div>
+            <div ng-show="oportunidad.comentariosResponsable != null">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Comentarios del responsable</h2>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content sin-desborde">
+                        <span>{{oportunidad.comentariosResponsable}}</span>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Actividades</h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div ng-show="seguimientos.length === 0" class="alert advertencia">
+                            No existen actividades registradas
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div ng-hide="seguimientos.length === 0">
+                            <table id="CRseguimientoOportunidadDetails" dt-instance="dtInstance" class="table table-hover table-striped table-condensed dt-responsive"
+                                cellspacing="0" datatable="ng" width="100%" dt-options="dtOptions">
+                                <thead>
+                                    <tr>
+                                        <th>Actividad</th>
+                                        <th>Fecha</th>
+                                        <th ng-hide="estado.estadoactual !== 1">Opciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="s in seguimientos | orderBy:'-fechaRegistro'">
+                                        <td>{{s.actividad}}</td>
+                                        <td>{{s.fechaRegistro | date:'yyyy-MM-dd'}}</td>
+                                        <td ng-hide="estado.estadoactual !== 1">
+                                            <a class="btn btn-warning" ng-click="editarActividad(s)" title="Editar">
+                                                <i class="glyphicon glyphicon-pencil"></i>
+                                            </a>
+                                            <a class="btn btn-danger" ng-click="eliminarActividad(s.seguimientoOportunidadId)" title="Eliminar">
+                                                <i class="fa fa-trash-o"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="col-lg-12">
+
+                            <button ng-show="estado.estadoactual === 1" type="button" ng-click="agregarActividad(oportunidad)" class="btn btn-success">
+                                <span class="glyphicon glyphicon-plus"></span> Agregar Actividad
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-4 col-sm-4 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Detalles del contacto</h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content sin-desborde">
+                    <div class="col-md-12 col-sm-3 col-xs-12">
+                        <div class="foto" style="position: relative; left: 40px;">
+                            <div class="profile_img">
+                                <div id="crop-avatar">
+                                    <img class="img-thumbnail" ng-show="oportunidad.contacto.adjunto64 === null" src="images/incognito.png" width="500" height="180"
+                                    />
+                                    <img class="img-thumbnail" ng-show="oportunidad.contacto.adjunto64 != null" ng-src="data:image/png;base64,{{oportunidad.contacto.adjunto64}}"
+                                        width="180" height="180" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <br />
+                        <ul class="list-unstyled user_data">
+                            <li>
+                                <i class="fa fa fa-building"></i> {{oportunidad.empresa.nombreEmpresa}}
+                            </li>
+                            <li>
+                                <i class="fa fa-briefcase user-profile-icon"></i> {{oportunidad.contacto.puesto}}
+                            </li>
+                            <li class="m-top-xs">
+                                <i class="fa fa fa-envelope"></i> {{oportunidad.contacto.correo}}
+                            </li>
+                            <li class="m-top-xs">
+                                <i class="fa fa fa-phone"></i> {{oportunidad.contacto.telefono}} | {{oportunidad.contacto.extension}}
+                            </li>
+                            <li class="m-top-xs">
+                                <i class="fa fa fa-mobile-phone"></i> {{oportunidad.contacto.celular}}
+                            </li>
+                        </ul>
+                        <div class="x_title">
+                            <h2>Domicilio </h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <ul class="list-unstyled user_data">
+                            <li class="m-top-xs">
+                                <i class="fa fa"></i>Calle {{contacto.calle}},
+                            </li>
+                            <li class="m-top-xs">
+                                <i class="fa fa"></i>Colonia {{contacto.colonia}},
+                            </li>
+                            <li class="m-top-xs">
+                                <i class="fa fa"></i>Localidad {{contacto.localidad}},
+                            </li>
+                            <li class="m-top-xs" ng-show="oportunidad.contacto.paises.paisId ==16">
+                                <i class="fa fa"></i>{{oportunidad.contacto.estados.nombreEstado}} {{oportunidadHistorica.contacto.municipios.nombreMunicipio}},
+                                {{oportunidadHistorica.contacto.paises.nombrePais}}
+                            </li>
+                            <li class="m-top-xs" ng-show="oportunidad.contacto.paises.paisId !=16">
+                                <i class="fa fa"></i>{{oportunidad.contacto.edo}} {{oportunidadHistorica.contacto.munipio}},
+                                {{oportunidadHistorica.contacto.paises.nombrePais}}
+                            </li>
+                            <li class="m-top-xs">
+                                <i class="fa fa"></i>CP {{oportunidad.contacto.cp}}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div ng-hide="oportunidad.adjuntoPorOportunidad.length == 0">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Documentaci&oacute;n</h2>
+                        <div class="clearfix"></div>
+                        <div class="x_content sin-desborde">
+                            <ul ng-repeat="task in oportunidad.adjuntoPorOportunidad track by $index">
+                                <li>
+                                    <span class="sg sg-software-des icono"></span>
+                                    <a class="alinea" href="/Descargas.html#/q/{{task.adjunto.adjuntoId | encriptar}}" target="_blank" title="{{task.adjunto.nombre}}"> {{task.adjunto.nombre}} </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="x_panel">
+                <div class="x_title">
+
+                    <h2>Cambiar el estado de la oportunidad <br /> de negocio</h2>
+                    <div class="clearfix"></div>
+
+                </div>
+                <div class="x_content">
+                    <div ng-if="oportunidad !== null" ng-include src="'app/CR/oportunidadNegocio/OportunidadNegocio/SeguimientoOportunidad/CambioEstado.html'">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="ln_solid"></div>
+        <div class="form-group">
+            <div class="col-md-8 col-sm-8 col-xs-12">
+                <div class="">
+
+                    <button type="button" ui-sref="seguimientoOportunidad" title="Regresar a seguimiento a mis oportunidades" class="btn btn-primary">
+                        <span class="fa fa-arrow-left"></span> Regresar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

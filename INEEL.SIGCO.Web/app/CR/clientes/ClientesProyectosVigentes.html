@@ -1,0 +1,45 @@
+﻿ <div class="row" ng-controller="ClientesProyectosVigentesCtrl">
+            <div class="x_panel">
+                <div class="col-md-12 col-lg-12 col-sm-12">
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4">
+                        <div class="row col-md-6">
+                            <label>Buscar empresa / unidad</label>
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" ng-model="search">
+                        </div>
+                    </div>
+                    <div class="col-md-4"></div>
+                </div>
+                <div class="clearfix">
+                    <br/><br/><br/>
+                </div>
+                <div ng-repeat="e in proyectosClientes | filter: ignoreAccents: search  " class="col-sm-3 col-md-4 col-lg-3">
+                    <div class="x_panel" style="width: 300px; height: 190px">
+                        <div class="col-md-12 col-lg-12">
+                            <div class="col-md-3 col-lg-3 row">
+                                <div>
+                                    <img style="width: 100px; height: 50px;" src="images/empresa.png" class="img-thumbnail ng-scope" width="180" height="180" title={{e.nombreEmpresa}}>
+                                </div>
+                            </div>
+                            <div class="col-md-9 col-lg-9" >
+                                <label ng-if="e.claveUnidad==null" class="sin-desborde" load-empresas empresa="{{e.nombreEmpresa}}" idempresa="{{e.empresaId}}">{{e.nombreEmpresa}}</label>
+                                <label ng-if="e.claveUnidad!=null" class="sin-desborde" >{{e.nombreEmpresa}}</label>
+                                <br/>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 col-sm-12 col-lg-12">
+
+                            <label ng-if="e.claveUnidad!=null" class="sin-desborde" style="text-decoration: underline; cursor:pointer; color: #1ABB9C !important"
+                                ui-sref="consultaUnidadCliente({ id: e.claveUnidad })">{{e.nombreUnidad}}</label>
+                            <br ng-if="e.claveUnidad!=null" />
+                            <label class="cont">Proyectos vigentes: {{e.noProyectos}}</label>
+                            <br/>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div> 

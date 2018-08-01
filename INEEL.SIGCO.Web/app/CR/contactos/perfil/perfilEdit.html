@@ -1,0 +1,129 @@
+﻿<div class="modal-content">
+    <div class="modal-header">
+        Editar Perfil
+        <button type="button" class="close" ng-click="cancel()" data-dissmiss="modal">x</button>
+    </div>
+    <form role="form" ng-submit="EditContactoPerfil()" novalidate name="contactoPerfilEditForm">
+        <div class="modal-body">
+            <div class="panel">
+                <!-- /.panel-heading -->
+                <div class="panel-body">
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <label>Grado acad&eacute;mico<a> *</a> </label>
+                            <select class="form-control" name="gAcademico" ng-model="contactosEditPerfil.gradoAcademicoId" ng-options="grado.gradoAcademicoId as grado.descripcion for grado in gradosacademicos">
+                                <option value="">--- Selecciona un grado acad&eacute;mico ---</option>
+                            </select>
+                            <span class="error" ng-show="contactoPerfilEditForm.gAcademico.$invalid && contactoPerfilEditForm.gAcademico.$dirty || contactoPerfilEditForm.$submitted && contactoPerfilEditForm.gAcademico.$invalid">
+                                Debes de seleccionar una opci&oacute;n
+                            </span>
+                        </div>
+                        <div class="form-group">
+                            <label>Carrera <span class="required">*</span></label>
+                            <div class="row">
+                                <div class="col-xs-10">
+                                    <input type="text" class="form-control" id="selectcarreras" name="datalisttestinputcarreras" ng-model="selectedcarrera.descripcion"
+                                        disabled required placeholder="Buscar carrera">
+                                </div>
+                                <div class="col-xs-2">
+                                    <button class="btn btn-success" ng-click="opencarreras()" title="Buscar carrera">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                        </button>
+                                </div>
+                                <span ng-show="ValidForm.datalisttestinputcarreras.$dirty &&  ValidForm.datalisttestinputcarreras.$invalid" class="error">La carrera no se encuentra registrada en el cat&aacute;logo.</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <label>Especialidad</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <input type="text" name="carreraContacto" ng-model="contactosEditPerfil.especialidad" min="2" maxlength="100" class="form-control"
+                                    />
+                                </div>
+                                <span ng-show="ValidForm.carreraContacto.$dirty &&  ValidForm.carreraContacto.$invalid" class="error">El rango de caracteres debe ser m&iacute;nimo 2 y m&aacute;ximo 100.</span>
+                            </div>
+
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <label>Instituci&oacute;n <span class="required">*</span></label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-10">
+                                    <input type="text" class="form-control" id="usr" name="datalisttestinputinstitucion" ng-model="selectedinstitucion.descripcion"
+                                        disabled required placeholder="Buscar Instituci&oacute;n">
+                                </div>
+                                <div class="col-xs-2">
+                                    <a class="btn btn-success" ng-click="openInstituciones()" title="Buscar persona">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                        </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <label>Pa&iacute;s </label>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <input type="text" ng-model="selectedinstitucion.pais.descripcion" readonly disabled class="form-control" />
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <label>Per&iacute;odo <a> *</a> </label>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-6">
+                                <label> Inicio   <!--Fecha inicio-->  </label>
+                                <p class="input-group">
+                                    <input placeholder="dd/mm/yyyy" show-button-bar="false" name="fInico" uib-datepicker-popup='dd/MM/yyyy' popup-placement="bottom"
+                                        type="text" ng-minlength="8" maxlength="10" datepicker-options="datePicker.FechaOptions"
+                                        class="form-control fechaOnly" ng-model="contactosEditPerfil.fechaInicio" value="{{contactosEditPerfil.fechaInicio | date:'dd-MM-yyyy'}}"
+                                        is-open="open" required close-text="Close" />
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-success" ng-click="open=true"><i class="glyphicon glyphicon-calendar"></i></button>
+                                    </span>
+                                </p>
+                                <span class="error" ng-show="contactoPerfilEditForm.fInicio.$invalid &&contactoPerfilEditForm.fFinal.$invalid && contactoPerfilEditForm.$submitted">
+                                    Debes ingresar la fecha
+                                </span>
+                            </div>
+                            <div class="col-md-6">
+                                <label>  T&eacute;rmino     <!--Fecha t&eacute;rmino-->   </label>
+                                <p class="input-group">
+                                    <input placeholder="dd/mm/yyyy" show-button-bar="false" name="fFinal" uib-datepicker-popup='dd/MM/yyyy' popup-placement="bottom"
+                                        ng-minlength="8" maxlength="10" datepicker-options="datePicker.FechaOptions" type="text"
+                                        class="form-control fechaOnly" ng-model="contactosEditPerfil.fechaFinal" value="{{contactosEditPerfil.fechaFinal | date:'dd-MM-yyyy'}}"
+                                        is-open="open2" required close-text="Close" />
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-success" ng-click="open2=true"><i class="glyphicon glyphicon-calendar"></i></button>
+                                    </span>
+                                </p>
+                                <span class="error" ng-show="contactosEditPerfil.fechaInicio > contactosEditPerfil.fechaFinal">
+                                    La fecha inicio no debe ser mayor a la fecha final
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-success" ng-click="ok()" ng-disabled="contactoPerfilEditForm.$invalid"><i class="glyphicon glyphicon-saved"></i> Actualizar</button>
+            <button type="submit" class="btn btn-primary" ng-click="cancel()"><span class="fa fa-arrow-left"></span> Regresar</button>
+        </div>
+    </form>
+</div>

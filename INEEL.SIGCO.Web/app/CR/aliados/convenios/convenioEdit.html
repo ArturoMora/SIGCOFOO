@@ -1,0 +1,283 @@
+<div class="vista">
+    <div class="page-title">
+        <div class="title_left">
+
+            <ol class="breadcrumb miga">
+                <li><i class="sg sg-aliados"></i> <a  class="cursorPointer" ng-click="globalRegresar()">Aliados / Convenios</a></li>
+                <li class="active">Editar</li>
+            </ol>
+
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+                    <form name="form" id="form" class="form-horizontal">
+
+
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">
+                                Aliado
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <label class="cont col-xs-12 colorTit">
+                                    {{convenios.aliado.empresa.nombreEmpresa}}
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">
+                                No. de convenio <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input required type="text" name="noConvenio" ng-model="convenios.noConvenio" ng-minlength="2" class="form-control col-md-7 col-xs-12" />
+                                <span class="error" ng-show="form.noConvenio.$dirty && !form.noConvenio.$valid">
+                                    El rango de caracteres debe ser m&iacute;nimo 2.
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">
+                                Objeto del convenio <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <textarea rows="3" required type="text" name="objetoConvenio" ng-model="convenios.objetoConvenio" maxlength="300" ng-maxlength="300" class="form-control" />
+                                <span class="error" ng-show="form.objetoConvenio.$dirty && !form.objetoConvenio.$valid">
+                                    El n&uacute;mero m&aacute;ximo de caracteres debe ser 300.
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">
+                                Tipo de convenio <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <select required name="tipoConvenio" class="form-control" ng-model="convenios.tipoConvenioId" scrolly style="overflow: scroll"
+                                        ng-options="tipoConvenio.convenioId as tipoConvenio.nomTipConv for tipoConvenio in tiposConvenio ">
+                                    
+                                </select>
+                                <span class="error" ng-show="form.tipoConvenio.$invalid && form.tipoConvenio.$dirty || form.$submitted && form.tipoConvenio.$invalid">
+                                    Debes de seleccionar una opci&oacute;n
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">
+                                Tipo de acceso <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <select required name="tipoAccesoConvenio" class="form-control" ng-model="convenios.tipoAcceso" scrolly style="overflow: scroll">
+                                    
+                                    <option>P&uacute;blico</option>
+                                    <option>Restringido</option>
+                                </select>
+                                <span class="error" ng-show="form.tipoAccesoConvenio.$invalid && form.tipoAccesoConvenio.$dirty || form.$submitted && form.tipoAccesoConvenio.$invalid">
+                                    Debes de seleccionar una opci&oacute;n
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">
+                                Nombre de quien firma el convenio
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" name="nomFirmaConvenio" ng-model="convenios.firma" class="form-control" maxlength="200" ng-maxlength="200" />
+                                <span class="error" ng-show="form.nomFirmaConvenio.$dirty && ! form.nomFirmaConvenio.$valid">
+                                    El nombre no debe de tener mas de 200 caracteres
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">
+                                Ambito <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <select required name="ambito" class="form-control" ng-model="convenios.ambitoConvId"
+                                        scrolly style="overflow: scroll"
+                                        ng-options="ambitoConv.ambitoConvId as ambitoConv.nombre for ambitoConv in ambitosConv ">
+                                   
+                                </select>
+                                <span class="error" ng-show="form.ambito.$invalid && form.ambito.$dirty || form.$submitted && form.ambito.$invalid">
+                                    Debes de seleccionar una opci&oacute;n
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Duraci&oacute;n de convenio
+                            </label>
+
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                Si es por tiempo indefinido, marque la casilla  <input type="checkbox" ng-model="convenios.indefinido" class="btn btn-info btn-circle" />
+                            </div>
+
+
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Fecha de inicio<span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="row">
+                                    <div class="col-xs-10">
+                                        <input type="text" name="fechaInicio"  required
+                                               class="form-control fechaOnly" placeholder="dd/mm/yyyy" show-button-bar="false" popup-placement="bottom" datepicker-options="datePicker50.FechaOptions" uib-datepicker-popup="dd/MM/yyyy" ng-model="convenios.fechaInicio" value="{{ date | date: 'dd/MM/yyyy' }}" ng-init="openDate=false" is-open="openDate"  close-text="Close"  ng-change="validarFechasInicio()" />
+                                        <span ng-show="form.fechaInicio.$dirty &&  form.fechaInicio.$invalid" class="error">Formato inv&aacute;lido 'dd/MM/yyyy'</span>
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <button type="button" class="btn btn-success" ng-click="openDate=true"><i class="glyphicon glyphicon-calendar"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+
+                        <div class="form-group" ng-show="!convenios.indefinido">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Fecha de t&eacute;rmino <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="row">
+                                    <div class="col-xs-10">
+                                        <input  type="text" name="fechaTermino" class="form-control fechaOnly" placeholder="dd/mm/yyyy" show-button-bar="false" popup-placement="bottom" datepicker-options="datePicker50.FechaOptions" uib-datepicker-popup="dd/MM/yyyy" ng-model="convenios.fechaTermino" value="{{ date | date: 'dd/MM/yyyy' }}" ng-init="openDate2=false" is-open="openDate2"  close-text="Close" ng-change="validarFechas()" ng-required="!convenios.indefinido" />
+                                        <span ng-show="form.fechaTermino.$dirty &&  form.fechaTermino.$invalid" class="error">Formato inv&aacute;lido 'dd/MM/yyyy'</span>
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <button type="button" class="btn btn-success" ng-click="openDate2=true"><i class="glyphicon glyphicon-calendar"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">
+                                Observaciones del convenio
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <textarea rows="3" type="text" placeholder="Registre observaciones relevantes acerca de el convenio a registrar" name="observacion" ng-model="convenios.observaciones" ng-maxlength="300" class="form-control" />
+
+
+                                <span class="error" ng-show="form.observacion.$dirty && ! form.observacion.$valid">
+                                    El nombre no debe de tener mas de 200 caracteres
+                                </span>
+                            </div>
+                        </div>
+
+                    </form>
+
+                    <div class="form-horizontal">
+
+                        <div class="x_title">
+                            <h2>&Aacute;reas involucradas<small></small></h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Unidad organizacional <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div uo-modal2 ng-model="uoselecionada" enarreglo="false"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" ></label>
+                            <div class="col-md-6 col-sm-6 col-xs-12" ng-show="convenios.areaConvenio.length >= 0">
+                                <table id="CRconvenioEdit" class="table table-hover table-striped table-condensed">
+                                    <thead>
+                                        <tr>
+                                            <th class="col-xs-9" data-priority="1">Unidad organizacional</th>
+                                            <th class="col-xs-3 center" >Eliminar</th>
+                                        </tr>
+                                    </thead>
+                                    <tr ng-repeat="areasOList in convenios.areaConvenio track by $index">
+                                        <td>{{areasOList.unidadOrganizacional.nombreUnidad}}</td>
+                                        <td>
+                                            <button type="button"
+                                                    ng-click="deleteArea(areasOList)"
+                                                    class="btn btn-danger">
+                                                <i class="glyphicon glyphicon-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    
+                                </table>
+                            </div>
+                        </div>
+
+                                           
+                        <div class="x_title">
+                            <h2>Documentaci&oacute;n <small>Tama&ntilde;o m&aacute;ximo por archivo de 8 MB</small></h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Documento(s) adjunto(s)
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+
+                                <div class="form-group">
+                                    
+                                    <input class="input-file" type="file" name="filesGral" id="filesGral" ng-click="saveIG();" ng-model="filesGral" data-buttonName="btn-success" onchange="angular.element(this).scope().getFileDetails(this);" />
+                                    <span class="error" ng-show="form.filesGral.$dirty && !form.filesGral.$valid">Seleccione un documento</span>
+                                    
+                                </div>
+                                <div ng-show="archivosAdjuntos.length > 0|| tasklist.length>0" >
+                                    <table class="table table-hover table-striped table-condensed">
+                                        <thead>
+                                            <tr>
+                                                <th data-priority="1" class="col-xs-9">Archivo</th>
+                                                <th data-priority="2" class="col-xs-3 center">Opciones</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="archivo in archivosAdjuntos" ng-hide="archivosAdjuntos.length === 0">
+                                                <td style="max-width:200px" class="sin-desborde" >{{archivo.adjunto.nombre}}</td>
+                                                <td class="text-center">
+                                                    <div>
+                                                        <a title="Descargar" href="/Descargas.html#/q/{{archivo.adjunto.adjuntoId | encriptar}}"  target="_blank" class="btn btn-success">
+                                                            <i class="glyphicon glyphicon-download-alt"></i>
+                                                        </a>
+                                                        <a title="Eliminar" ng-click="deleteAdjunto(archivo)" class="btn btn-danger">
+                                                            <i class="glyphicon glyphicon-trash"></i>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            
+                            </div>
+                        </div>
+
+                     
+
+                    </div>
+
+
+
+                    <div class="ln_solid"></div>
+                    <div class="form-group">
+                        <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                            <div class="">
+
+                                <button type="submit" class="btn btn-success" ng-click="saveConvenio()"
+                                         ng-disabled="form.$invalid || convenios.areaConvenio.length ==0 ">
+                                    <i class="glyphicon glyphicon-saved"></i> Actualizar
+                                </button>
+                                <button type="button" confirma-regresar="globalRegresar()" state-form="form" class="btn btn-primary">
+                                    <span class="fa fa-arrow-left"></span> Regresar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

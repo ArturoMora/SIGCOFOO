@@ -1,0 +1,173 @@
+﻿﻿<!-- page content -->
+<div class="vista">
+
+    <div class="page-title">
+        <div class="title_left">
+            <div class="col-xs-12">
+                <h3 class="titColor">
+                    <img src="/Resources/icono_home_ch_verde.png" /> Capital humano (CH)</h3>
+            </div>
+            <div class="row">&nbsp;</div>
+        </div>
+
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-sm-7 col-xs-12">
+            <div class="col-sm-6 col-xs-12">
+
+                <div class="row top_tiles">
+                    <a ui-sref="perfilcurricularcolectivo">
+                        <div class="animated flipInY col-xs-12">
+                            <div class="tile-stats">
+                                <div class="icon2">
+                                    <i class="sg sg-inventario-rh"></i>
+                                </div>
+                                <div class="count">{{model.inventarioRH}}&nbsp;</div>
+                                <h3>Inventario de RH</h3>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a ui-sref="mecconsulta">
+                        <div class="animated flipInY col-xs-12">
+                            <div class="tile-stats">
+                                <div class="icon2">
+                                    <i class="sg sg-metodo-evaluacion-compet"></i>
+                                </div>
+                                <div class="count">{{model.metodoEvaluacionComp}}&nbsp;</div>
+                                <h3>M&eacute;todo de evaluaci&oacute;n de competencias</h3>
+                            </div>
+                        </div>
+                    </a>
+                    <a ui-sref="competenciatecnica" ng-show="idRol==1">
+                        <div class="animated flipInY col-xs-12">
+
+                            <div class="tile-stats">
+                                <div class="icon2">
+                                    <i class="sg sg-competencias-alcanzadas"></i>
+                                </div>
+                                <div class="count">
+                                    <!--{{model.compTecnicas}}-->&nbsp;</div>
+                                <h3>Competencias T&eacute;cnicas</h3>
+                            </div>
+                        </div>
+                    </a>
+
+
+
+                </div>
+            </div>
+
+            <div class="col-sm-6 col-xs-12">
+                <div class="row top_tiles">
+                    <a ui-sref="consultafamiliasgeneral" ng-show="idRol==1 || idRol==1026">
+                        <div class="animated flipInY col-xs-12">
+                            <div class="tile-stats">
+                                <div class="icon2">
+                                    <i class="sg sg-familia-puestos"></i>
+                                </div>
+                                <div class="count">{{model.familiaPuestos}}&nbsp;</div>
+                                <h3>Familia de puestos</h3>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a ui-sref="mievaluacion">
+                        <div class="animated flipInY col-xs-12">
+                            <div class="tile-stats">
+                                <div class="icon2">
+                                    <i class="sg sg-competencias-alcanzadas"></i>
+                                </div>
+                                <div class="count">
+                                    <!--{{model.compAlcanzadas}}-->&nbsp;</div>
+                                <h3>Competencias alcanzadas</h3>
+                            </div>
+                        </div>
+                    </a>
+
+
+
+                    <a ui-sref="competencias" ng-show="idRol==1">
+                        <div class="animated flipInY col-xs-12">
+                            <div class="tile-stats">
+                                <div class="icon2">
+                                    <i class="sg sg-competencias-alcanzadas"></i>
+                                </div>
+                                <div class="count">
+                                    <!--{{model.compConductuales}}-->&nbsp;</div>
+                                <h3>Competencias Conductuales</h3>
+                            </div>
+                        </div>
+                    </a>
+
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-md-5 col-sm-5 col-xs-12">
+
+            <div class="row">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>B&uacute;squeda de personal </h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li>
+                                <a class="collapse-link">
+                                    <i class="fa fa-chevron-up"></i>
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content sin-desborde">
+                        <div class="text-center">
+                            <a class="btn btn-app" ng-click="setGlobalGo('buscarPersonas')">
+                                <!--<span class="badge bg-green">&nbsp;</span>-->
+                                <i class="fa fa-users"></i> Por nombre / n&uacute;mero empleado
+                            </a>
+                            <a class="btn btn-app" ui-sref="busquedaAvanzadaEmp">
+                                    <!--<span class="badge bg-green">&nbsp;</span>-->
+                                    <i class="fa fa-users"></i> Por especialidad
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2 class="titColor">Última informaci&oacute;n agregada </h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li>
+                                <a class="collapse-link">
+                                    <i class="fa fa-chevron-up"></i>
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+
+                    <div class="x_content sin-desborde">
+                        <article class="media event" ng-repeat="n in nuevosOCs | limitTo: 30">
+                            <a class="pull-left date">
+                                <p class="month">{{n.fechaRegistro | date:'MMM'}}</p>
+                                <p class="day">{{n.fechaRegistro | date:'dd'}}</p>
+                            </a>
+                            <div class="media-body">
+                                <a class="title" href="{{n.liga}}">{{n.ocs.nombre}}</a>
+                                <p>{{n.descripcion}} </p>
+
+                            </div>
+                        </article>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- end page content -->

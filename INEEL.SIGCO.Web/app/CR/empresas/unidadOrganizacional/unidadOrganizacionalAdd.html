@@ -1,0 +1,85 @@
+﻿<form role="form" novalidate name="empresaUnidadAddForm">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content sin-desborde">
+                <i class="fa fa-sitemap fa-fw"></i> Unidad Organizacional
+                <div class="pull-right">
+                    <div class="btn-group">
+                        <a ng-click="addUnidad()" class="pull-right btn btn-success btn-xs" style="margin-right: 0px;">
+                            <span class="glyphicon glyphicon-plus"></span> Agregar nivel
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="x_content sin-desborde">
+                <div id="morris-area-chart" style="position: relative; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+                    <div class="col-md-12">
+                        <div ng-show="listaUnidades.length === 0" class="alert advertencia">
+                            No se ha agregado ninguna unidad organizacional
+                        </div>
+                    </div>
+                    <div ng-show="listaUnidades.length>0">
+                        <script type="text/ng-template" id="nodes_renderer.html">
+                            <div ui-tree-handle class="tree-node tree-node-content treeHover">
+                                <!--Elemento a repetir (elementos hojas)....-->
+                                <a class="btn btn-success btn-xs" ng-if="node.nodes && node.nodes.length > 0 "
+                                   data-nodrag ng-click="toggle(this)">
+                                    <span class="glyphicon"
+                                          ng-class="{
+                                                    'glyphicon-chevron-right': collapsed,
+                                                    'glyphicon-chevron-down': !collapsed
+                                                }"></span>
+                                </a>
+                                <a class="btn btn-success btn-xs" ng-if="node.nodes && node.nodes.length < 1"
+                                   data-nodrag ng-click="newSubItem(this)" style="margin-right: 8px;">
+                                    <span class="glyphicon glyphicon-plus" title="Expandir"
+                                          ng-if="!(node.hoja && node.hoja===true)"></span>
+                                    <span class="glyphicon glyphicon-minus" title="Sin elementos"
+                                          ng-if="node.hoja && node.hoja===true"></span>
+                                </a>
+                                <a class="pull-right btn btn-danger btn-xs" data-nodrag ng-click="delete(this)">
+                                    <span class="glyphicon glyphicon-trash"></span>
+                                </a>
+                                <a class="pull-right btn btn-primary btn-xs" data-nodrag ng-click="subUnidad(this)" style="margin-right: 8px;">
+                                    <span class="glyphicon glyphicon-plus"></span> Agregar subnivel
+                                </a>
+                                <a class="btn btn-link btn-md"
+                                   data-nodrag ng-click="seleccionarNodo(this)" style="margin-right: 8px;"
+                                   title="Seleccionar">
+                                    {{node.title}}
+                                </a>
+
+                            </div>
+                            <ol ui-tree-nodes="" ng-model="node.nodes" ng-class="{hidden: collapsed}">
+                                <!--Elementos ramas-->
+                                <li ng-repeat="node in node.nodes" ui-tree-node ng-include="'nodes_renderer.html'">
+                                    <!--Aqui se repite n veces el elemento definido en la parte superior-->
+                                </li>
+                            </ol>
+                        </script>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <button ng-click="expandAll()">Expandir todo</button>
+                                <button ng-click="collapseAll()">Contraer todo</button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div ui-tree="treeCallbacks" id="tree-root">
+                                    <ol ui-tree-nodes ng-model="listaUnidades">
+                                        <!--Elemento raiz-->
+                                        <!--El anidamiento va de abajo hacia arriba (hablando de codigo)-->
+                                        <li ng-repeat="node in listaUnidades" ui-tree-node ng-include="'nodes_renderer.html'"></li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

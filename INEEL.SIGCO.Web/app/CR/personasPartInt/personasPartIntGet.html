@@ -1,0 +1,77 @@
+
+<div class="vista">
+    <div class="page-title">
+        <div class="title_left">
+            <ol class="breadcrumb miga">
+                <li><i class="sg sg-partes-interesadas "></i> <a ui-sref="partesInteresadasAdmInicio">Partes Interesadas/Persona</a></li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+                    <!-- se oculta, si usuario está logeado-->
+                    <div data-ng-hide="authentication.isAuth">
+                        No tiene permisos para ingresar a esta secci&oacute;n.<br /> Usuario no autentificado
+                    </div>
+                    <div data-ng-show="authentication.isAuth">
+                        <div ng-hide="personasPartInt.length >= 0">
+                            <img src="images/cargando.gif" />
+                        </div>
+                        <div ng-show="personasPartInt.length === 0" class="alert advertencia">
+                            No existen personas interesadas registradas
+                        </div>
+                        <div ng-show="personasPartInt.length > 0">
+                            <table id="CRpersonasPartIntGet" class="table table-hover table-striped table-condensed responsive sin-desborde" width="100%" cellspacing="0" datatable="ng" >
+                                <thead>
+                                    <tr>
+                                        <th data-priority="1">Nombre</th>
+                                        <th>Tipo de interacci&oacute;n</th>
+                                        <th data-priority="2" class="text-center">&iquest;Est&aacute; activo?</th>
+                                        <th data-priority="3" class="text-center">Opciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="e in personasPartInt">
+                                        <td><a class="link" ui-sref="personaPartIntDetails({ id: e.personaPartIntId })" title="Detalles">{{e.nombre}}</a></td>
+                                        <td>{{e.naturalezaInteraccion.nombre}}</td>
+                                        <td class="text-center">
+                                            <div class="text-hide">
+                                                {{e.estado}}
+                                                <input type="checkbox" class="btn btn-info btn-circle" title="&iquest;Est&aacute; activo?" ng-model="e.estado" value="{{e.estado}}" ng-change="saveEstado(e)" />
+                                            </div>
+                                        </td>
+                                        <td class="text-center">
+                                           
+                                            <a class="btn btn-warning" ui-sref="personaPartIntEdit({ id: e.personaPartIntId })" title="Editar"> <i class="glyphicon glyphicon-pencil"></i>  </a>
+                                            <button type="button" ng-click="deleteP(e)" title="Eliminar persona interesada" class="btn btn-danger">
+                                                <i class="glyphicon glyphicon-trash"></i>
+                                            </button>
+                                    </tr>
+                                </tbody>
+                            </table>
+                           
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <button type="button" ui-sref="personaPartIntAdd" class="btn btn-success">
+                            <span class="glyphicon glyphicon-plus"></span> Agregar
+                        </button>
+
+                        <button type="button" ui-sref="partesInteresadasAdmInicio" class="btn btn-primary">
+                            <span class="fa fa-arrow-left"></span>
+                            Regresar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div>
+

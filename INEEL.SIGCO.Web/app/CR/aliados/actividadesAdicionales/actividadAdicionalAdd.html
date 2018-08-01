@@ -1,0 +1,163 @@
+<div class="vista">
+    <div class="page-title">
+        <div class="title_left">
+
+            <ol class="breadcrumb miga">
+                <li><i class="sg sg-aliados"></i> <a class="cursorPointer" ng-click="globalRegresar();">Aliados/Actividad Adicional</a></li>
+                <li class="active">Agregar</li>
+            </ol>
+
+        </div>
+    </div>
+
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_content ">
+
+
+                    <form name="form" id="form" class="form-horizontal">
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Descripci&oacute;n <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <textarea rows="4" ng-required="true" required placeholder="Registre la(s) actividades a realizar" type="text" name="descripcionActividad"
+                                    ng-model="actividadAdicional.descripcionActividad" maxlength="300" ng-maxlength="300" class="form-control"
+                                />
+                                <span class="error" ng-show="form.descripcionActividad.$dirty && !form.descripcionActividad.$valid">
+                                    El rango de caracteres debe ser m&iacute;nimo 2 y m&aacute;ximo 300.
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Fecha <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="row">
+
+
+
+
+                                    <div class="col-xs-10">
+                                        <input placeholder="dd/mm/yyyy" show-button-bar="false" uib-datepicker-popup='dd/MM/yyyy' popup-placement="bottom" type="text"
+                                            datepicker-options="datePicker50.FechaOptions" class="form-control fechaOnly" name="fechaActividad"
+                                            ng-model="actividadAdicional.FechaActividad" is-open="open" ng-required="true" required
+                                            close-text="Close" />
+                                        <span ng-show="form.fechaActividad.$dirty &&  form.fechaActividad.$invalid" class="error">Formato inv&aacute;lido 'dd/MM/yyyy'</span>
+
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <button type="button" class="btn btn-success" title="De clic para mostrar el calendario" ng-click="open=true"><i class="glyphicon glyphicon-calendar"></i></button>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+
+                    </form>
+
+                    <div class="form-horizontal">
+
+
+                        <div class="x_title">
+                            <h2>&Aacute;reas involucradas</h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Unidad organizacional <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div uo-modal2 state-form="form" ng-model="nombreUnidad" enarreglo="false"></div>
+                            </div>
+
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">  </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12" ng-show="unidadesO.length>0">
+                                <table class="display dt-responsive" cellspacing="0" width="100%">
+                                    <thead>
+                                        <tr>
+                                            <th class="col-xs-9" data-priority="1">Unidad organizacional</th>
+                                            <th class="col-xs-3">Eliminar</th>
+                                        </tr>
+                                    </thead>
+                                    <tr ng-repeat="unidadesOList in unidadesO track by $index">
+                                        <td>{{unidadesOList.nombreUnidad}}</td>
+                                        <td>
+                                            <button type="button" ng-click="deleteArea(unidadesOList,unidadesO.indexOf(unidadesOList))" class="btn btn-danger">
+                                                <i class="glyphicon glyphicon-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="x_title">
+                            <h2>Personal involucrado<small></small></h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Investigador <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="row">
+                                    <div class="col-xs-10">
+
+                                        <input type="text" placeholder="Seleccione un investigador" class="form-control" id="usr" name="asesor" ng-model="actividadAdicional.nombrePersona"
+                                            disabled>
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <a class="btn btn-success" ng-click="openPersona()" title="Buscar Persona">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name"></label>
+                            <div class="col-md-6 col-sm-6 col-xs-12" ng-show="personasO.length>0">
+                                <table class="display dt-responsive" cellspacing="0" width="100%">
+                                    <thead>
+                                        <tr>
+                                            <th class="col-xs-9" data-priority="1">Nombre</th>
+                                            <th class="col-xs-3">Eliminar</th>
+                                        </tr>
+                                    </thead>
+                                    <tr ng-repeat="personasOList in personasO track by $index">
+                                        <td>{{personasOList.nombreCompleto}}</td>
+                                        <td>
+                                            <button type="button" ng-click="deletePersona(personasOList,personasO.indexOf(personasOList))" title="De clic para eliminar de la lista el empleado seleccionado"
+                                                class="btn btn-danger">
+                                                <i class="glyphicon glyphicon-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="ln_solid"></div>
+                        <div class="form-group center">
+
+                            <button type="submit" class="btn btn-success" ng-click="AddActividadAdicional()" title="De clic para guardar la actividad"
+                                ng-disabled="form.$invalid  || personasO.length==0 || unidadesO.length==0">
+                                <i class="glyphicon glyphicon-saved"></i> Guardar
+                            </button>
+                            <button type="button" confirma-regresar="globalRegresar()" state-form="form" title="De clic para regresar a la p&aacute;gina anterior" class="btn btn-primary">
+                                <span class="fa fa-arrow-left"></span> Regresar
+                            </button>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

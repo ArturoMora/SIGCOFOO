@@ -1,0 +1,77 @@
+﻿<div class="modal-header">
+    <button type="button" class="close" ng-click="cancel()" data-dissmiss="modal">
+        <i class="glyphicon glyphicon-remove"></i>
+    </button>
+    <div class="col-xs-1"></div>
+    <div>
+        <h3>
+            Agregar una nueva función al rol
+        </h3>
+    </div>
+</div>
+<div class="modal-body">
+
+    <div class="row">
+
+        <br />
+
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <label for="usr">Rol : {{rolseleccionado.descripcion}}</label>
+                        </div>
+                    </div>
+
+                    <br />
+
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <select id="funcion" name="modulo" class="form-control" ng-change="myFunc(modulovalue)" ng-model="modulovalue" ng-options="e.moduloId as e.descripcion  for e in modulos" ng-required="true">
+                                <option value="">Seleccione un módulo</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <br />
+                    
+                <div class="panel-body" ng-show="funciones != null">
+                    
+                    <form role="form" name="FuncionesForm">
+
+                        <table id="GENRolFuncionesAdd" datatable="ng" dt-options="dtOptions" dt-instance="dtInstance"  class="table table-condensed table-hover">
+                            <thead>
+                                <tr>
+                                    <th style="text-align: left !important">Función</th>
+                                    <th style="text-align: left !important">Descripción</th>
+                                    <th style="text-align: left !important">URL</th>
+                                    <th style="text-align: left !important">Seleccione una función</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="f in funciones">
+                                    <td>{{f.nombre}}</td>
+                                    <td>{{f.descripcion}}</td>
+                                    <td>{{f.url}}</td>
+                                    <td style="width:100px">
+                                        <input type="checkbox"   ng-click="addFuncion(f,rolseleccionado)" >
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
+            </div>
+                  
+            <div class="form-group" ng-show="funciones != null">
+                <button type="submit" ng-click="save()"
+                        class="btn btn-success" style="padding-right:15px">
+                    <i class="glyphicon glyphicon-saved"></i> Guardar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

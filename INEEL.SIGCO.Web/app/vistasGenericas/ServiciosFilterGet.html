@@ -1,0 +1,89 @@
+﻿<div class="modal-header">
+    <button type="button" class="close" ng-click="cancel()" data-dissmiss="modal">
+        <i class="glyphicon glyphicon-remove"></i>
+    </button>
+    <div class="col-xs-1"></div>
+    <div>
+        <h3>
+            Servicios
+        </h3>
+    </div>
+</div>
+<div class="modal-body">
+    <div class="row">
+        <div class="col-xs-12" ng-show="servicios.length==0 || nueva===true">
+            <form class="form-horizontal" name="frmBuscar">
+
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="searchTextNombre">Servicio:</label>
+                    <div class="col-md-8">
+                        <input type="text" autofocus ng-model="servicio.NomServ" id="searchTextNombre"
+                               name="searchTextNombre" ng-change="servicio.ServicioId=null"
+                               class="form-control" placeholder="Buscar servicio..."
+                               ng-pattern="/^[ñáéíóúÑÁÉÍÓÚa-zA-Z]{2}[a-zA-ZñáéíóúÑÁÉÍÓÚ\s]*$/"
+                               
+                               ng-minlength="2" />
+                        <span class="error" ng-show="frmBuscar.searchTextNombre.$dirty && frmBuscar.searchTextNombre.$error.pattern">
+                            Contenido inv&aacute;lido para servicio <br />
+                        </span>
+                        <span class="error" ng-show="frmBuscar.searchTextNombre.$dirty && !frmBuscar.searchTextNombre.$valid">
+                            Longitud m&iacute;nima de 2 caracteres.
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-4"></div>
+                    <div class="col-md-2">
+                        <button class="btn btn-info btn-flat" ng-click="nueva=false;buscar(servicio)"
+                                ng-disabled="(
+                                (frmBuscar.searchTextNombre.$invalid)
+                                || (!frmBuscar.searchTextNombre.$dirty)
+                                )
+                                || click">
+
+
+                            Buscar <i class="glyphicon glyphicon-search"></i>
+                        </button>
+                    </div>
+                    <div class="col-md-2">
+                        <button class="btn btn-success btn-flat" ng-click="agregarServicio()">
+                            Agregar <i class="glyphicon glyphicon-plus"></i>
+                        </button>
+                    </div>
+                    <!--<div class="form-group">
+                        
+                    </div>-->
+                </div>
+            </form>
+        </div>
+        <div class="col-xs-1"></div>
+        
+        <div ng-hide="servicios.length==0 || nueva">
+            <button class="btn btn-info btn-flat" ng-click="nueva=true;servicios=[];">
+                Realizar nueva b&uacute;squeda <i class="glyphicon glyphicon-search"></i>
+            </button>
+        </div>
+    </div>
+    <hr/>
+    <div class="row">
+        <div class="col-sm-12" ng-hide="servicios.length==0">
+            <table  class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" datatable="ng" width="100%" dt-options="dtOptions">
+                <thead>
+                    <tr>
+
+                        <th>Clave Servicio</th>
+                        <th>Servicio</th>
+                   </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="servicio in servicios" style="cursor: pointer;text-decoration: underline;"
+                        ng-click="servicioSelect.emp = servicio; ok()" id="{{servicio.servicioId}}">
+                        <td>{{servicio.servicioId}}</td>
+                        <td>{{servicio.nomServ}}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>  

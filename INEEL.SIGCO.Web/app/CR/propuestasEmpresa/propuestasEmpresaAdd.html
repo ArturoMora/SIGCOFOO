@@ -1,0 +1,109 @@
+﻿<div class="vista">
+    <div class="page-title">
+        <div class="title_left">
+            <ol class="breadcrumb miga">
+                <li><i class="sg sg-software-des"></i> <a ui-sref="propuestasEmpresaGet">Propuestas no asociados</a></li>
+                <li class="active">Asociar datos empresa</li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+                    <label class="detalle col-xs-12 " title="No. proyecto">
+                        {{propuestaEmpresa.propuestaId}}  &nbsp;&nbsp;&nbsp;  {{propuestaEmpresa.titulo}}
+                    </label>
+                    <label class="tit col-xs-12">
+                        Clave de la propuesta
+                    </label>
+                    <label class="cont col-xs-12">
+                        {{propuestaEmpresa.claveEmpPropuesta}}
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Asociar datos de empresas</h2>
+                    <div class="clearfix"></div>
+                </div>
+
+                <div class="x_content sin-desborde">
+                    <form role="form" name="propuestaEmpresaAddForm" class="form-horizontal">
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Empresa <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <select required class="form-control" name="empresa" ng-model="empresas.empresaId" ng-change="limpiar()" ng-options="empresa.empresaId as empresa.nombreEmpresa for empresa in empresas">
+                                    <option value="">--- Selecciona una Empresa ---</option>
+                                </select>
+                                <span class="error" ng-show="contactoAddForm.empresa.$invalid && contactoAddForm.$submitted">
+                                    Debes seleccionar una Empresa
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Unidad Organizacional <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="row col-xs-10">
+                                    <input required type="text" class="form-control" id="usr" name="unidad" ng-model="ElementoSeleccionado.nombreUnidad" disabled="disabled" />
+                                </div>
+                                <div class="col-xs-2">
+                                    <a class="btn btn-success" ng-click="openEstructuraOrg(empresas.empresaId)" title="Buscar EO">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Contacto <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="row col-xs-10">
+                                    <input required type="text" class="form-control" id="usr" name="contacto" ng-model="nombreCompleto" disabled ng-required="true">
+                                    <input type="hidden" ng-model="contactoId" class="form-control" value="contactoId" />
+                                    <span class="error" ng-show="propuestaEmpresaAddForm.contacto.$invalid && propuestaEmpresaAddForm.contacto.$dirty || fondoProgramaForm.$submitted && fondoProgramaForm.contacto.$invalid">
+                                        Debes de agregar un contacto.
+                                    </span>
+                                </div>
+                                <div class="col-xs-2">
+                                    <a ng-click="openContacto()" class="btn btn-success" title="Buscar contacto" ng-disabled="desabilitarBuscarContacto">
+                                        <i class="glyphicon glyphicon-search"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                <div class="">
+                                    <button type="submit" class="btn btn-success" ng-click="AddPropuestaEmpresa()">
+                                        <!--pendientes: adjuntos y  proyecto.selected-->
+                                        <i class="glyphicon glyphicon-saved"></i> Guardar
+                                    </button>
+                                    <button type="button" ui-sref="propuestasEmpresaGet" class="btn btn-primary">
+                                        <span class="fa fa-arrow-left"></span> Regresar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

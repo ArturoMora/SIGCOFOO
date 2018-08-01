@@ -1,0 +1,61 @@
+﻿<div class="vista">
+    <div class="page-title">
+        <div class="title_left">
+
+            <ol class="breadcrumb miga">
+                <li><i class="fa fa-list-ul"></i> <a ui-sref="tematicaGet">Tem&aacute;ticas</a></li>
+                <li class="active">Detalles</li>
+            </ol>
+
+        </div>
+    </div>
+    <div data-ng-hide="authentication.isAuth">
+        No tiene permisos para ingresar a esta secci&oacute;n..<br /> Usuario no autentificado
+    </div>
+    <div data-ng-show="authentication.isAuth">
+        <div class="clearfix"></div>
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <!--<div class="x_title">
+                        <h2>Informaci&oacute;n general <small></small></h2>
+
+                        <div class="clearfix"></div>
+                    </div>-->
+                    <div class="x_content sin-desborde">
+                        <label class="detalle col-xs-12 " title="Nombre">
+                            {{tematica.nombre}}
+                        </label>
+                        <!--<label class="tit col-xs-12">
+                            Descripci&oacute;n
+                        </label>-->
+                        <label class="cont col-xs-12">
+                            {{tematica.descripcion}}
+                        </label>
+                        <label class="tit col-xs-12">
+                            Fecha Registro
+                        </label>
+                        <label class="cont col-xs-12">
+                            {{tematica.fechaRegistro  | date:"dd/MM/yyyy"}}
+                        </label>
+                        <label class="tit col-xs-12">
+                            Estado
+                        </label>
+                        <label class="cont col-xs-12">
+                            {{consultaEstado(tematica.estado)}}
+                        </label>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <button type="button" ng-click="globalRegresar()" class="btn btn-primary">
+                    <span class="fa fa-arrow-left"></span> Regresar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+

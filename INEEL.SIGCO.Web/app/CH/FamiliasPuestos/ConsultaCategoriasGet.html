@@ -1,0 +1,142 @@
+﻿<div class="vista">
+
+    <div class="page-title">
+        <div class="title_left">
+
+            <ol class="breadcrumb miga">
+                <li><i  class="sg sg-familia-puestos"></i> <a>Familia de puestos</a></li>
+
+                <li> <a ui-sref="familiaunidad({id:registro.familiaId})">Por unidad organizacional</a></li> 
+                <li class="active">Competencias</li>
+            </ol>
+
+
+
+        </div>
+    </div>
+
+
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+
+
+            <div class="x_panel">
+                
+                <div class="x_content sin-desborde">
+
+                    <label class="detalle col-xs-12 " title="Familia de puestos">
+                        {{registro.nombreFamilia}}
+                    </label>
+
+                    <label class="cont emc col-xs-12 colorTit">
+                        Período {{registro.periodo.periodo}}
+                    </label>
+
+                 
+                    <label class="cont col-xs-12" title="Unidad organizacional">
+                        {{nombreUnidad}}
+                    </label>
+
+                    <label class="tit col-xs-12">
+                        Descripción
+                    </label>
+                    <label class="cont col-xs-12">
+                        {{registro.descripcion}}
+                    </label>
+
+                    <br/>
+                    <br />
+                </div>
+                
+            </div>
+
+
+        </div>
+    </div>
+
+
+
+    
+
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="x_panel">
+                    <div class="x_content sin-desborde">
+
+                        <div class="x_title">
+                            <h2>Criterio de búsqueda</h2>
+                            <div class="clearfix"></div>
+
+                        </div>
+
+                        <div class="x_content sin-desborde">
+                            <div class="col-xs-12 col-md-6">
+
+                                <div class="form-group ">
+                                    <label class="control-label col-md-4 col-sm-4 col-xs-12">
+                                        Puesto
+                                    </label>
+                                    <div class="col-md-8 col-sm-8 col-xs-12">
+
+                                        <select id="categoriaId" name="categorias" class="form-control"
+                                                ng-change="cargarMatriz()"
+                                                ng-options="e.categoriaId as e.nombreCategoria  for e in categoriasfam"
+                                                ng-model="categoriaId"
+                                                ng-required="true">
+                                            <option value="">Elija uno </option>
+                                        </select>
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+                        <br/>
+                        <div ng-show="muestraListado === 1">
+
+                            <table id="CHConsultaCategoriasGet" dt-instance="dtInstance" class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" datatable="ng" width="100%" dt-options="dtOptions">
+                                <thead>
+                                    <tr>
+                                        <th data-priority="1">Competencia</th>
+                                        <th> Nivel de dominio esperado</th>
+                                        <th>Comportamiento</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="obj in matriz">
+                                        <td>{{obj.competencia.competencia}}</td>
+                                        <td>{{obj.descnivel.nivel.descripcion}}</td>
+                                        <td>
+                                            {{obj.descnivel.comportamiento}}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+                    
+                    
+                     </div>
+
+                </div>
+            </div>
+        </div>
+
+       
+
+        <div class="row">
+            <div class="col-xs-12">
+                <button type="button" ui-sref="familiaunidad({id:registro.familiaId})" class="btn btn-primary">
+                    <span class="fa fa-arrow-left"></span> Regresar
+                </button>
+            </div>
+        </div>
+
+
+    </div>
+
+

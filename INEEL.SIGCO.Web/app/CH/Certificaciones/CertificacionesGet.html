@@ -1,0 +1,110 @@
+﻿<div class="vista">
+    <div class="page-title">
+        <div class="title_left">
+            <ol class="breadcrumb miga">
+                <li><i class="disabled fa fa-cogs"></i> <a ui-sref="catalogosrh.certificaciones">Administraci&oacute;n/Cat&aacute;logos/Certificaciones de idiomas</a></li>
+            </ol>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+                    <form name="ValidacionForm" id="form" class="form-horizontal">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div ng-show="registros.length === 0" class="alert advertencia">No hay registrados</div>
+                            </div>
+                        </div>
+                        <div class="row" ng-show="!loading">
+                            <div class="col-lg-12 col-xs-12">
+                                <div ng-hide="registros.length === 0">
+                                    <table id="CHCertificacionesGet" dt-instance="dtInstance" class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" datatable="ng" width="100%" dt-options="dtOptions">
+                                        <thead>
+                                            <tr>
+                                                <th data-priority="1">Nombre</th>
+                                                <th class="thAjuste">Descripción</th>
+                                                <th class="thAjuste text-center" data-priority="1">¿Est&aacute; activo? </th>
+                                                <th class="thAjuste text-center" data-priority="2">Opciones</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="registro in registros">
+                                                <td>{{registro.descripcion}}</td>
+                                                <td>{{registro.descripcionCorta}}</td>
+                                                <td class="text-center text-hide">
+                                                    {{registro.estado}}
+                                                    <input type="checkbox" class="btn btn-info btn-circle" ng-model="registro.estado" value="{{registro.estado}}" ng-click="saveEstado(registro.certificacionId,registro.estado,registro.descripcion)" />
+                                                </td>
+                                                <td class="text-center">
+                                                    <a class="btn btn-warning" ui-sref="CertificacionesEdit({id:registro.certificacionId})" title="Editar">
+                                                        <i class="glyphicon glyphicon-pencil"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <button type="button" ui-sref="CertificacionesAdd" class="btn btn-success">
+                                    <span class="glyphicon glyphicon-plus"></span> Agregar
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+<!--<div id="page-wrapper">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">Administraci&oacute;n/Cat&aacute;logos/Certificaciones</h1>
+            <div ng-show="registros.length === 0" class="alert alert-danger">No hay registrados</div>
+        </div>
+    </div>
+    <div ng-show="loading">
+        <img src="images/cargando.gif" />
+    </div>
+    <div class="row" ng-show="!loading">
+        <div class="col-lg-12">
+            <div ng-hide="registros.length === 0">
+                <table dt-instance="dtInstance" class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" datatable="ng" width="100%" dt-options="dtOptions">
+                    <thead>
+                        <tr>
+                            <th>Descripción</th>
+                            <th class="thAjuste">Descripción Corta</th>
+                            <th class="thAjuste text-center" data-priority="1">¿Est&aacute; Activo? </th>
+                            <th class="thAjuste text-center">Opciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="registro in registros">
+                            <td>{{registro.descripcion}}</td>
+                            <td>{{registro.descripcionCorta}}</td>
+                            <td class="text-center text-hide">
+                                {{registro.estado}}
+                                <input type="checkbox" class="btn btn-info btn-circle" ng-model="registro.estado" value="{{registro.estado}}" ng-click="saveEstado(registro.certificacionId,registro.estado,registro.descripcion)" />
+                            </td>
+                            <td class="text-center">
+                                <a class="btn btn-default" ui-sref="CertificacionesEdit({id:registro.certificacionId})" title="Editar">
+                                    <i class="glyphicon glyphicon-pencil"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <button type="button" ui-sref="CertificacionesAdd" class="btn btn-success">
+                <span class="glyphicon glyphicon-plus"></span> Agregar
+            </button>
+        </div>
+    </div>
+</div>-->

@@ -1,0 +1,195 @@
+<div class="vista">
+    <div style="height:350px; width:100%">
+        <div>
+            <div uib-carousel active="active" interval="myInterval" no-wrap="noWrapSlides" style="max-width:944px;margin:auto;">
+                <div uib-slide ng-repeat="n in [1,2,3,4,5,6,7] track by $index" index="$index">
+                    <img  class="img-responsive" ng-src="/Resources/Banners/banner_sigco{{n}}.png" style="margin:auto;">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="height:auto;">
+        <div class="">
+            <div class="col-sm-8 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Capital humano</h2>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12" ng-controller="graficachCtrl">
+                            <canvas id="myChart" class="chart chart-bar" chart-data="datosgrafica.datos" chart-labels="datosgrafica.etiquetas" chart-series="datosgrafica.series"
+                                    chart-options="options" chart-colors="colors"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <!--<div class="row">
+                    <div class="col-xs-6 moduloCount">
+                        <div class="x_panel">
+                            <div class="x_title">
+                                <h2>Memoria Tecnol&oacute;gica </h2>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="li">
+                                <div class="col-xs-9">
+                                    <span class="glyphicon glyphicon-stop"></span> Total de Objetos de conocimiento
+                                </div>
+                                <div class="col-xs-3 w_right">
+                                    <span>{{model.mt.itf}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="col-xs-6 moduloCount">
+                        <div class="x_panel">
+                            <div class="x_title">
+                                <h2>Comunidades de pr&aacute;ctica</h2>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="li">
+                                <div class="col-xs-9">
+                                    <span class="glyphicon glyphicon-stop"></span> Total de Comunidades de Pr&aacute;ctica
+                                </div>
+                                <div class="col-xs-3 w_right">
+                                    <span>{{model.cp.totalComunidades}}</span>
+                                </div>
+                            </div>
+                            <div class="li">
+                                <div class="col-xs-9">
+                                    <span class="glyphicon glyphicon-stop"></span> Total de Miembros
+                                </div>
+                                <div class="col-xs-3 w_right">
+                                    <span>{{model.cp.totalMiembros}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-6 moduloCount">
+                        <div class="x_panel">
+                            <div class="x_title">
+                                <h2>Capital Relacional</h2>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="li">
+                                <div class="col-xs-9">
+                                    <span class="glyphicon glyphicon-stop"></span> En seguimiento
+                                </div>
+                                <div class="col-xs-3 w_right">
+                                    <span>{{model.cr.enSeguimiento}}</span>
+                                </div>
+                            </div>
+                            <div class="li">
+                                <div class="col-xs-9">
+                                    <span class="glyphicon glyphicon-stop"></span> Atendidas
+                                </div>
+                                <div class="col-xs-3 w_right">
+                                    <span>{{model.cr.atendidas}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-6 moduloCount">
+                        <div class="x_panel">
+                            <div class="x_title">
+                                <h2>Propiedad Intelectual</h2>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="li">
+                                <div class="col-xs-9">
+                                    <span class="glyphicon glyphicon-stop"></span> Total de Propiedad Industrial
+                                </div>
+                                <div class="col-xs-3 w_right">
+                                    <span>{{model.pi.totalPropiedadInd}}</span>
+                                </div>
+                            </div>
+                            <div class="li">
+                                <div class="col-xs-9">
+                                    <span class="glyphicon glyphicon-stop"></span> Total de Derechos de Autor
+                                </div>
+                                <div class="col-xs-3 w_right">
+                                    <span>{{model.pi.totalDerechosAutor}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-6 moduloCount">
+                        <div class="x_panel">
+                            <div class="x_title">
+                                <h2>Gesti&oacute;n de la Innovaci&oacute;n </h2>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="li">
+                                <div class="col-xs-9">
+                                    <span class="glyphicon glyphicon-stop"></span> Superiores a la oferta Internacional
+                                </div>
+                                <div class="col-xs-3 w_right">
+                                    <span>{{model.gi.superioresOfertaI}}</span>
+                                </div>
+                            </div>
+                            <div class="li">
+                                <div class="col-xs-9">
+                                    <span class="glyphicon glyphicon-stop"></span> Equiparables a la oferta Internacional
+                                </div>
+                                <div class="col-xs-3 w_right">
+                                    <span>{{model.gi.equiparablesOfertaI}}</span>
+                                </div>
+                            </div>
+                            <div class="li">
+                                <div class="col-xs-9">
+                                    <span class="glyphicon glyphicon-stop"></span> Superiores a la oferta Nacional
+                                </div>
+                                <div class="col-xs-3 w_right">
+                                    <span>{{model.gi.superioreOfertaNac}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>-->
+            </div>
+            <div class="col-sm-4 col-xs-6">
+                <div class="row">
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <h2 class="titColor">&Uacute;ltima informaci&oacute;n agregada </h2>
+                            <ul class="nav navbar-right panel_toolbox">
+                                <li>
+                                    <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                </li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+
+                        <div class="x_content sin-desborde" style="max-height:750px;overflow-y: auto;">
+                            <article class="media event" ng-repeat="n in nuevosOCs | limitTo: 30">
+                                <a class="pull-left date">
+                                    <p class="month">{{n.fechaRegistro | date:'MMM'}}</p>
+                                    <p class="day">{{n.fechaRegistro | date:'dd'}}</p>
+                                </a>
+                                <div class="media-body">
+                                    <a class="title noLink" title="Es necesario autenticarse">
+                                        {{n.ocs.nombre}} 
+                                    </a>
+                                    <p>{{n.descripcion}} </p>
+                                        
+                                </div>
+                            </article>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+
+
+        </div>
+
+        &nbsp;<br />
+    </div>
+
+
+</div>

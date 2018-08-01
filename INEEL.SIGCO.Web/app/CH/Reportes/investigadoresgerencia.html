@@ -1,0 +1,266 @@
+﻿<div class="vista">
+    <div class="page-title">
+        <div class="title_left">
+            <ol class="breadcrumb miga">
+                <li>
+                    <i class="disabled sg sg-inventario-rh"></i>
+                    <a ui-sref="investigadoresgerencia">Inventario RH/Investigadores por gerencia</a>
+                </li>
+            </ol>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <form name="ValidForm" id="form" class="form-horizontal">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_content">
+                        <form name="ValidForm" id="form" class="form-horizontal">
+                            <div class="row">
+                                <div class="col-xs-12 col-md-8">
+                                    <div class="col-lg-12">
+                                        <label>Fecha:</label>
+                                    </div>
+                                    <div class="col-lg-3 col-md-4 col-xs-6">
+                                        <input show-button-bar="false" ng-minlength="8" maxlength="10" datepicker-options="datePicker06.FechaOptions" uib-datepicker-popup='dd/MM/yyyy'
+                                            popup-placement="bottom" type="text" class="form-control" ng-change="cambiafecha()"
+                                            name="fechach" ng-model="fechach" is-open="open" ng-required="true" close-text="Close"
+                                        />
+                                    </div>
+                                    <div class="col-lg-9 col-md-8 col-xs-6">
+                                        <span>
+                                            <button type="button" class="btn btn-success" ng-click="open=true">
+                                                <i class="glyphicon glyphicon-calendar"></i>
+                                            </button>
+                                        </span>
+                                        <span>
+                                            <a class="btn btn-success" title="Descargar" ng-click="error || exportGrafica()" ng-disabled="error">
+                                                <i class="fa fa-download"></i> Descargar PDF
+                                            </a>
+                                        </span>
+                                        <span>
+                                            <a class="btn btn-success" title="Descargar" onclick="downloadExcelTableById('gerenciass', 'InvestigadoresGerencia')">
+                                                <i class="fa fa-download"></i> Descargar Excel
+                                            </a>
+                                        </span>
+                                        <span ng-show="ValidForm.fechach.$dirty &&  ValidForm.fechach.$invalid" class="error">Formato inválido 'dd/MM/yyyy'</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row table-responsive">
+                                <div class="col-xs-12">
+                                    <!---NOTA: El script que genera los reportes no soporta el rowspan ni colspan-->
+                                    <!---Esta tabla NO se imprime, es la que ve el usuario-->
+                                    <table id="tablaSoloLectura" class="display" style="font-size:12px">
+                                        <thead>
+                                            <tr class="bg-primary">
+                                                <!-- <th style="width:200px">
+                                                        División/Gerencias
+                                                    </th>
+                                                    <th style="width:90px; text-align:center">
+                                                        No. de Investigadores
+                                                    </th>
+                                                    <th style="width:33px;text-align:center">
+                                                        LIC
+                                                    </th>
+                                                    <th style="width:33px;text-align:center">
+                                                        MAE
+                                                    </th>
+                                                    <th style="width:33px;text-align:center">
+                                                        DOC
+                                                    </th> -->
+                                                <td colspan="5">
+
+                                                </td>
+                                                <!-- <th style="width:33px;text-align:center">
+                                                    </th>
+                                                    <th style="width:33px;text-align:center">
+                                                    </th> -->
+                                                <th style="text-align:center" colspan="4">
+                                                    NIVELES
+                                                </th>
+                                                <!-- <th style="width:33px;text-align:center">
+                                                    </th> -->
+
+                                                <th style="text-align:center" colspan="2">
+                                                    SNI
+                                                </th>
+                                                <!-- <th style="width:33px;text-align:center">
+                                                    </th>    -->
+
+                                            </tr>
+                                            <tr class="bg-primary">
+                                                <!-- <th style="width:33px;text-align:center">
+                                                    </th>   
+                                                    <th style="width:33px;text-align:center">
+                                                    </th>   
+                                                    <th style="width:33px;text-align:center">
+                                                    </th>   
+                                                    <th style="width:33px;text-align:center">
+                                                    </th>   
+                                                    <th style="width:33px;text-align:center">
+                                                    </th>    -->
+                                                <th style="width:200px">
+                                                    División/Gerencias
+                                                </th>
+                                                <th style="width:90px; text-align:center">
+                                                    No. de Investigadores
+                                                </th>
+                                                <th style="width:33px;text-align:center">
+                                                    LIC
+                                                </th>
+                                                <th style="width:33px;text-align:center">
+                                                    MAE
+                                                </th>
+                                                <th style="width:33px;text-align:center">
+                                                    DOC
+                                                </th>
+                                                <th style="width:33px;text-align:center">
+                                                    I
+                                                </th>
+                                                <th style="width:33px;text-align:center">
+                                                    II
+                                                </th>
+                                                <th style="width:33px;text-align:center">
+                                                    III
+                                                </th>
+                                                <th style="width:33px;text-align:center">
+                                                    IV
+                                                </th>
+                                                <th style="width:33px;text-align:center">
+                                                    CAN
+                                                </th>
+                                                <th style="width:33px;text-align:center">
+                                                    INV
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="aux in resultadosFull" class="{{aux.gerenciaNombre=='TOTAL DE LA DIVISIÓN'?'totales':aux.gerenciaNombre=='TOTAL INEEL'?'total':''}}">
+                                                <td style="width:200px">
+                                                    {{aux.gerenciaNombre}}
+                                                </td>
+                                                <td style="width:90px;text-align:center">
+                                                    {{aux.numInv}}
+                                                </td>
+                                                <td style="width:33px;text-align:center">
+                                                    {{aux.licenciados}}
+                                                </td>
+                                                <td style="width:33px;text-align:center">
+                                                    {{aux.maestros}}
+                                                </td>
+                                                <td style="width:33px;text-align:center">
+                                                    {{aux.doctores}}
+                                                </td>
+                                                <td style="width:33px;text-align:center">
+                                                    {{aux.nivel1}}
+                                                </td>
+                                                <td style="width:33px;text-align:center">
+                                                    {{aux.nivel2}}
+                                                </td>
+                                                <td style="width:33px;text-align:center">
+                                                    {{aux.nivel3}}
+                                                </td>
+                                                <td style="width:33px;text-align:center">
+                                                    {{aux.nivel4}}
+                                                </td>
+                                                <td style="width:33px;text-align:center">
+                                                    {{aux.cand}}
+                                                </td>
+                                                <td style="width:33px;text-align:center">
+                                                    {{aux.inv}}
+                                                </td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+
+                                    <!---Esta tabla es la que se imprime-->
+                                    <table id="gerenciass" class="hidden" style="font-size:12px">
+                                        <thead>
+                                            <tr class="bg-primary">
+                                                <th style="width:200px">
+                                                    División/Gerencias
+                                                </th>
+                                                <th style="width:90px; text-align:center">
+                                                    No. de Investigadores
+                                                </th>
+                                                <th style="width:33px;text-align:center">
+                                                    LIC
+                                                </th>
+                                                <th style="width:33px;text-align:center">
+                                                    MAE
+                                                </th>
+                                                <th style="width:33px;text-align:center">
+                                                    DOC
+                                                </th>
+                                                <th style="width:33px;text-align:center">
+                                                    I
+                                                </th>
+                                                <th style="width:33px;text-align:center">
+                                                    II
+                                                </th>
+                                                <th style="width:33px;text-align:center">
+                                                    III
+                                                </th>
+                                                <th style="width:33px;text-align:center">
+                                                    IV
+                                                </th>
+                                                <th style="width:33px;text-align:center">
+                                                    CAN
+                                                </th>
+                                                <th style="width:33px;text-align:center">
+                                                    INV
+                                                </th>
+
+                                            </tr>
+
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="aux in resultadosFull" class="{{aux.gerenciaNombre=='TOTAL DE LA DIVISIÓN'?'totales':aux.gerenciaNombre=='TOTAL INEEL'?'total':''}}">
+                                                <td style="width:200px">
+                                                    {{aux.gerenciaNombre}}
+                                                </td>
+                                                <td style="width:90px;text-align:center">
+                                                    {{aux.numInv}}
+                                                </td>
+                                                <td style="width:33px;text-align:center">
+                                                    {{aux.licenciados}}
+                                                </td>
+                                                <td style="width:33px;text-align:center">
+                                                    {{aux.maestros}}
+                                                </td>
+                                                <td style="width:33px;text-align:center">
+                                                    {{aux.doctores}}
+                                                </td>
+                                                <td style="width:33px;text-align:center">
+                                                    {{aux.nivel1}}
+                                                </td>
+                                                <td style="width:33px;text-align:center">
+                                                    {{aux.nivel2}}
+                                                </td>
+                                                <td style="width:33px;text-align:center">
+                                                    {{aux.nivel3}}
+                                                </td>
+                                                <td style="width:33px;text-align:center">
+                                                    {{aux.nivel4}}
+                                                </td>
+                                                <td style="width:33px;text-align:center">
+                                                    {{aux.cand}}
+                                                </td>
+                                                <td style="width:33px;text-align:center">
+                                                    {{aux.inv}}
+                                                </td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

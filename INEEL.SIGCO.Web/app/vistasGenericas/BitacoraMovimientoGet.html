@@ -1,0 +1,96 @@
+﻿
+<div class="vista">
+
+    <div class="page-title">
+        <div class="title_left">
+
+            <ol class="breadcrumb miga">
+                <li><i class="disabled fa fa-cogs"></i> <a ui-sref="BitacoraMovimientoGet">Administraci&oacute;n/Bit&aacute;cora</a></li>
+            </ol>
+
+        </div>
+        <!--</div><div id="page-wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">Bit&aacute;cora SIGCO</h1>
+                </div>
+            </div>-->
+
+        <div class="clearfix"></div>
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+
+                        <!--<ul class="nav navbar-right panel_toolbox">
+                            <li>
+                                <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                            </li>
+                        </ul>-->
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content sin-desborde">
+
+                        <div>
+                            <table id="tabla_movimientos" class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" datatable="ng" width="100%">
+
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            Fecha
+                                        </th>
+                                        <th>
+                                            Nombre de autor
+                                        </th>
+                                        <th>
+                                            Tipo de movimiento
+                                        </th>
+                                        <th>
+                                            Acciones
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="item in elementos">
+                                        <td>
+                                            <a href="#" name="@item._id" class="linkMovimiento" data-toggle="modal" data-target="#modalMovimiento">
+                                                {{item.fechaMovimiento | date: 'yyyy/MM/dd HH:mm:ss' }}
+                                            </a>
+                                        </td>
+                                        <td>
+                                            {{item.nombreAutor}}
+                                        </td>
+                                        <td>
+                                            {{item.tipoMovimiento}}
+                                        </td>
+                                        <td>
+                                            <span ng-repeat="e in item.detallesMovimiento">
+                                                <b ng-if="$first">{{e}}<br /></b>
+                                                <font ng-if="!$first">{{e}}</font>
+                                            </span>
+                                            <br />
+                                            <span ng-hide="item.justificacion==''">
+                                                Justificación:  {{item.justificacion}}
+                                            </span>
+                                            <!--@for (var i = 0; i < item.detallesMovimiento.Count; i++)
+                                            {
+                                            @(item.detallesMovimiento[i] + "||")
+                                            }
+                                            @if (item.justificacion != null && item.justificacion.Trim() != "") {
+                                            @("Justificación: "+item.justificacion.Trim())
+                                            }-->
+
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

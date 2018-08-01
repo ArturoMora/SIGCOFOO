@@ -1,0 +1,323 @@
+﻿<div class="vista">
+    <form name="ValidForm" id="form" ng-submit="agregar()" class="form-horizontal">
+        <div class="page-title">
+            <div class="title_full">
+                <ol class="breadcrumb miga">
+                    <li>
+                        <i class="glyphicon glyphicon-file"></i>
+                        <a ui-sref="productoInnovador">Solicitud FI</a>
+                    </li>
+                    <li class="active">Agregar</li>
+                </ol>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="row">
+            <!--{{registro | json}}-->
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_content sin-desborde">
+                        <label class="detalle col-xs-12 " title="titulo">
+                            {{registro.nombreTecnico}}
+
+                        </label>
+                        <label class="cont emc col-xs-12 colorTit">
+                            {{registro.proyecto.nombre}} ({{registro.proyectoId}})
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Informaci&oacute;n general</h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li>
+                                <a class="collapse-link">
+                                    <i class="fa fa-chevron-up"></i>
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content sin-desborde">
+
+                        <!--<div class="x_title">
+                            <h2>Informaci&oacute;n general</h2>
+                            <div class="clearfix"></div>-->
+                        <label class="tit col-xs-12">
+                            Gerencia que lider&oacute; el proyecto
+                        </label>
+                        <label class="cont col-xs-12">
+                            {{registro.unidad.nombreUnidad}}
+                        </label>
+                        <label class="tit col-xs-12">
+                            Nombre comercial del producto o servicio (en caso de que exista)
+                        </label>
+                        <label class="cont col-xs-12">
+                            {{registro.nombreComercial}}
+                        </label>
+                        <label class="tit col-xs-12">
+                            Necesidades que atiende
+                        </label>
+                        <label class="cont col-xs-12">
+                            {{registro.necesidades}}
+                        </label>
+                        <label class="tit col-xs-12">
+                            Segmento de mercado al que va dirigido
+                        </label>
+                        <label class="cont col-xs-12">
+                            {{registro.segmentoMercado.nomSegMerc}}
+                        </label>
+                        <label class="tit col-xs-12">
+                            Breve descripci&oacute;n del producto o servicio
+                        </label>
+                        <label class="cont col-xs-12">
+                            {{registro.descripcion}}
+                        </label>
+                        <label class="tit col-xs-12">
+                            Factor de innovaci&oacute;n
+                        </label>
+                        <label class="cont col-xs-12">
+                            {{registro.factorInnovacion.descripcion}}
+                        </label>
+                        <!--</div>-->
+                    </div>
+                </div>
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Autores</h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li>
+                                <a class="collapse-link">
+                                    <i class="fa fa-chevron-up"></i>
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content sin-desborde">
+
+                        <div class="form-group">
+                            <table id="CHPonenciaAdd" class="table table-hover" cellspacing="0" dt-options="dtOptions">
+                                <thead>
+                                    <tr>
+                                        <th data-priority="1">Clave</th>
+                                        <th data-priority="1">Nombre</th>
+                                        <th data-priority="1">Contribuci&oacute;n</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="autor in registro.productoAutores">
+                                        <td ng-click="openProfile(autor.clavePersona)" title="Detalle de empleado" class="linkTabla">{{autor.clavePersona}}</td>
+                                        <td>{{autor.nombre}}</td>
+                                        <td>{{autor.contribucionAutor.contribucion}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Solicitud</h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li>
+                                <a class="collapse-link">
+                                    <i class="fa fa-chevron-up"></i>
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <!--{{periodo}}-->
+                    <div class="form-group" ng-show="periodo==false">
+                        <div class="alert advertencia col-xs-12">
+                            <span class="glyphicon glyphicon-info-sign"></span> Nota: No existen las condiciones para enviar una solicitud
+                        </div>
+                    </div>
+                    <div ng-show="periodo==true" class="x_content sin-desborde">
+                        <div class="form-group col-xs-12">
+                            <div class="alert advertencia">
+                                <label class="col-md-12 col-lg-12" style="text-align:center">
+                                    Afirmo que la informaci&oacute;n capturada en esta solicitud es veraz y entiendo que puedo ser sujeto a sanciones al presentar
+                                    informaci&oacute;n fraudulenta
+                                </label>
+                                <input class="form-control" type="checkbox" ng-model="rg.afirmo" ng-init="rg.afirmo=true"/>
+                            </div>
+                            
+                        </div>
+                        <div class="form-group col-xs-12">
+                            <label style="text-align:justify" class="control-label col-md-3 col-sm-3 col-xs-12">
+                                <a style="color:black;">
+                                    <b>Innovaci&oacute;n: </b>
+                                </a> Describa el desarrollo innovador generado en su proyecto (No describa el proyecto en si).
+                                ¿El desarrollo innovador generado es un producto, una capacidad de servicio, o una soluci&oacute;n
+                                a un problema cient&iacute;fico? ¿En qu&eacute; consiste? ¿Por qu&eacute; es importante?
+                                <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <textarea type="text" ng-maxlength="1000" rows="10" placeholder="Ingresa la innovación..." class="form-control" ng-model="rg.innovacion"
+                                    ng-required="true" required></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Documento adjunto*
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input class="input-file form-control col-md-7 col-xs-12" type="file" name="filesGral" id="filesGral" data-buttonName="btn-success"
+                                    ng-model="filesGral" onchange="angular.element(this).scope().getFileDetails(this);" />
+                            </div>
+                        </div>
+                        <div class="form-group" ng-if="rg.productoGISolicitudArchivosInnovacion.length>0">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12 sin-desborde">
+                                <table id="CHPonenciaAdd" class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" width="100%"
+                                    dt-options="dtOptions">
+                                    <thead>
+                                        <tr>
+                                            <th data-priority="1">Nombre</th>
+                                            <th data-priority="1" class="thAjuste text-center">Opciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="adjunto in rg.productoGISolicitudArchivosInnovacion">
+                                            <td>{{adjunto.adjunto.nombre}}</td>
+                                            <td class="text-center">
+                                                <div>
+                                                    <a title="Eliminar" ng-really-click="eliminaradjunto1(adjunto)" class="btn btn-danger">
+                                                        <i class="glyphicon glyphicon-trash"></i>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="form-group col-xs-12">
+                            <label style="text-align:justify" class="control-label col-md-3 col-sm-3 col-xs-12">
+                                <a style="color:black;">
+                                    <b>Desarrollo superior: </b>
+                                </a> En el caso de un producto o capacidad de servicio, ¿En qu&eacute; sentido es su desarrollo
+                                superior a lo que existe en el mercado? En el caso de un desarrollo cient&iacute;fico, ¿Qu&eacute;
+                                problema cient&iacute;fico resuelve y en qu&eacute; sentido es superior a soluciones anteriores?
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <textarea type="text" ng-maxlength="1000" rows="10" placeholder="Ingresa el desarrollo superior..." class="form-control"
+                                    ng-model="rg.superior" ng-required="true" required></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Documento adjunto*
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input class="input-file form-control col-md-7 col-xs-12" type="file" data-buttonName="btn-success" onchange="angular.element(this).scope().getFileDetails2(this);"
+                                />
+                            </div>
+                        </div>
+                        <div class="form-group" ng-if="rg.productoGISolicitudArchivosSuperior.length>0">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12 sin-desborde">
+                                <table id="CHPonenciaAdd" class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" width="100%"
+                                    dt-options="dtOptions">
+                                    <thead>
+                                        <tr>
+                                            <th data-priority="1">Nombre</th>
+                                            <th data-priority="1" class="thAjuste text-center">Opciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="adjunto in rg.productoGISolicitudArchivosSuperior">
+                                            <td>{{adjunto.adjunto.nombre}}</td>
+                                            <td class="text-center">
+                                                <div>
+                                                    <a title="Eliminar" ng-really-click="eliminaradjunto2(adjunto)" class="btn btn-danger">
+                                                        <i class="glyphicon glyphicon-trash"></i>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="form-group col-xs-12">
+                            <label style="text-align:justify" class="control-label col-md-3 col-sm-3 col-xs-12">
+                                <a style="color:black;">
+                                    <b>Fase de desarrollo y aplicaci&oacute;n: </b>
+                                </a> En el caso del desarrollo de un producto o capacidad de servicio, ¿En qu&eacute; fase de
+                                desarrollo y aplicaci&oacute;n se encuentra (prototipo, en fase de prueba en planta/campo,
+                                probado extensamente, aplicado con &eacute;xito, etc.)?. En el caso de un desarrollo cient&iacute;fico,
+                                ¿En qu&eacute; fase se encuentra su desarrollo en cuanto a aceptaci&oacute;n por la comunidad
+                                cient&iacute;fica (a&uacute;n no comunicado, presentado y discutido en foros especializados,
+                                aceptado por una revista de primer nivel)? (Por favor anexe lo que considere evidencia importante
+                                para apoyar su respuesta)
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <textarea type="text" ng-maxlength="1000" rows="10" placeholder="Ingresa la evidencia..." class="form-control" ng-model="rg.fase"
+                                    ng-required="true" required></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Documento adjunto*
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input class="input-file form-control col-md-7 col-xs-12" type="file" data-buttonName="btn-success" onchange="angular.element(this).scope().getFileDetails3(this);"
+                                />
+                            </div>
+                        </div>
+                        <div class="form-group" ng-if="rg.productoGISolicitudArchivosFase.length>0">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12 sin-desborde">
+                                <table id="CHPonenciaAdd" class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" width="100%"
+                                    dt-options="dtOptions">
+                                    <thead>
+                                        <tr>
+                                            <th data-priority="1">Nombre</th>
+                                            <th data-priority="1" class="thAjuste text-center">Opciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="adjunto in rg.productoGISolicitudArchivosFase">
+                                            <td>{{adjunto.adjunto.nombre}}</td>
+                                            <td class="text-center">
+                                                <div>
+                                                    <a title="Eliminar" ng-really-click="eliminaradjunto3(adjunto)" class="btn btn-danger">
+                                                        <i class="glyphicon glyphicon-trash"></i>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <button type="button" confirma-regresar="globalRegresar()" state-form="ValidForm" class="btn btn-primary">
+                    <span class="fa fa-arrow-left"></span> Regresar
+                </button>
+                <button type="submit" class="btn btn-success" ng-if="periodo==true" ng-disabled="rg.afirmo==false">
+                    <i class="glyphicon glyphicon-saved"></i> Guardar y enviar solicitud
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+<!--{{rg | json}}-->

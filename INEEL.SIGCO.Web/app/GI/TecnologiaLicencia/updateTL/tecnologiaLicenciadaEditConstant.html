@@ -1,0 +1,369 @@
+﻿<div class="vista">
+    <div class="page-title">
+        <div class="title_full">
+            <ol class="breadcrumb miga">
+                <li><i class="glyphicon glyphicon-file"></i> <a ui-sref="tecnologiaLicenciada">Tecnolog&iacute;as licenciadas/ Mis tecnolog&iacute;as licenciadas</a></li>
+                <li class="active">Detalles</li>
+            </ol>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <form name="ValidForm" id="form" ng-submit="update()" class="form-horizontal">
+        <div class="row">
+            <!--{{registro | json}}-->
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_content sin-desborde">
+                        <label class="detalle col-xs-12 " title="titulo">
+                            {{registro.nombreTecnologiaLic}} ({{registro.numero}})
+                        </label>
+                        <label class="cont emc col-xs-12 colorTit">
+                            {{registro.tema}}
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_content sin-desborde">
+                        <div class="x_title">
+                            <h2>Informaci&oacute;n general</h2>
+                            <div class="clearfix"></div>
+                            <label class="tit col-xs-12">
+                                Receptor de la tecnolog&iacute;a licenciada
+                            </label>
+                            <label class="cont col-xs-12">
+                                {{registro.nombreReceptor}}
+                            </label>
+                            <label class="tit col-xs-12">
+                                Estado del licenciamiento
+                            </label>
+                            <label class="cont col-xs-12">
+                                {{registro.estadoLicenciamiento.descripcion}}
+                            </label>
+                            
+                            <label class="tit col-xs-12">
+                                Proyecto
+                            </label>
+                            <label class="cont col-xs-12" ng-show="idRol!=15">
+                                {{registro.proyectoNombre}}
+                            </label>
+                            <label class="cont col-xs-12" ng-show="idRol==15">
+                                <!--{{registro.proyecto.nombre}}-->
+                                <div>
+                                    <div class="col-xs-9">
+                                        <input type="text" class="form-control" id="usr" name="proyecto" ng-model="registro.proyectoNombre" disabled>
+                                    </div>
+                                    <div class="col-xs-3">
+                                        <a class="btn btn-success" ng-click="openProyecto()" title="Buscar proyecto">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                        </a>
+                                        <a class="btn btn-danger" ng-click="eliminar()" title="borrar">
+                                            <span class="glyphicon glyphicon-remove"></span>
+                                        </a>
+                                    </div>
+                                </div>
+                                
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="x_panel">
+                    <div class="x_content sin-desborde">
+                        <div class="x_title">
+                            <h2>Período de la tecnolog&iacute;a licenciada</h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <label class="tit col-xs-12">
+                            Inicio
+                        </label>
+                        <label class="cont col-xs-12">
+                            {{registro.fechaInicio | date:"dd/MM/yyyy"}}
+                        </label>
+                        <label class="tit col-xs-12">
+                            T&eacute;rmino
+                        </label>
+                        <label class="cont col-xs-12">
+                            {{registro.fechaTermino | date:"dd/MM/yyyy"}}
+                        </label>
+                    </div>
+                </div>
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Propiedad intelectual y Derechos de autor</h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li>
+                                <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <div class="form-group">
+                            <label  class="tit col-xs-12">
+                                Propiedad industrial
+                            </label>
+                            <!--<div class="col-md-6 col-sm-6 col-xs-12">
+
+                            </div>-->
+                        </div>
+                        <!--registro:{{registro.tecnologiaLicenciadaPIPIndustrial | json}}-->
+                        <div class="form-group" ng-if="registro.tecnologiaLicenciadaPIPIndustrial.length>0">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+
+                            </label>
+                            <div class="col-xs-12">
+                                <table id="CHPonenciaAdd" class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" width="100%"
+                                       dt-options="dtOptions">
+                                    <thead>
+                                        <tr>
+                                            <th data-priority="1">Nombre</th>
+                                            <th>Tipo</th>
+                                            <th>Expediente</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="registro in registro.tecnologiaLicenciadaPIPIndustrial">
+                                            <td>{{registro.propiedadIndustrial.titulo}}</td>
+                                            <!--<td>{{registro.propiedadIndustrial | json}}</td>-->
+                                            <td>
+                                                {{registro.propiedadIndustrial.tipoPropiedadIndustrial.descripcion}}
+                                            </td>
+                                            <td>
+                                                {{registro.propiedadIndustrial.expediente}}
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!--{{registro.tecnologiaLicenciadaPIPIndustrial | json}}-->
+                        <div class="clearfix"></div>
+                        <div class="form-group">
+                           <br />
+                            <label class="tit col-xs-12">
+                                Derechos de autor
+                            </label>
+
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+
+                            </div>
+                        </div>
+                        <!--{{registro.tecnologiaLicenciadaPIDA | json}}-->
+                        <div class="form-group" ng-if="registro.tecnologiaLicenciadaPIDA.length>0">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+
+                            </label>
+                            <div class="col-xs-12">
+                                <table class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" width="100%"
+                                       dt-options="dtOptions">
+                                    <thead>
+                                        <tr>
+                                            <th data-priority="1">Nombre</th>
+                                            <th>Rama</th>
+                                            <th>Certificado</th>
+                                            <!--<th data-priority="1" class="thAjuste text-center">Opciones</th>-->
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="registro in registro.tecnologiaLicenciadaPIDA">
+                                            <td>{{registro.derechosAutor.titulo}}</td>
+                                            <td>
+                                                {{registro.derechosAutor.rama.descripcion}}
+                                            </td>
+                                            <td>
+                                                {{registro.derechosAutor.certificado}}
+                                            </td>
+                                            <!--<td class="text-center">
+                                                <div>
+                                                    <a  ng-if="rolId == 15 || rolId == 1025" title="Eliminar" ng-really-click="eliminarDA(registro)" class="btn btn-danger">
+                                                        <i class="glyphicon glyphicon-trash"></i>
+                                                    </a>
+                                                </div>
+                                            </td>-->
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!--{{registro.tecnologiaLicenciadaPIDA | json}}-->
+
+                    </div>
+                </div>
+                <div class="x_panel">
+                    <div class="x_content sin-desborde">
+                        <div class="x_title">
+                            <h2>Gerencias</h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group">
+                            <table id="CHPonenciaAdd" class="table table-hover" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th data-priority="1">Nombre</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="reg in registro.gerencias">
+                                        <td>{{reg.nombreUnidad}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="x_panel" ng-show="idRol==4">
+                    <div class="x_content sin-desborde">
+                        <div class="x_title">
+                            <h2>Pagos programados</h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="tit col-xs-12">
+                                Fecha
+                            </label>
+                            <div class="cont col-xs-4">
+                                <input placeholder="dd/mm/yyyy" maxlength="10" ng-init="open=false"
+                                       type="text" show-button-bar="false" popup-placement="bottom" class="form-control col-lg-4 col-md-4 col-xs-12"
+                                       ng-minlength="8" name="fechaInicio"
+                                       uib-datepicker-popup="dd/MM/yyyy" ng-model="pago.fecha" value="{{ date | date: 'dd/MM/yyyy' }}"
+                                       is-open="open" close-text="Close" />
+                                <span ng-show="ValidForm.fechaInicio.$dirty &&  ValidForm.fechaInicio.$invalid" class="error">Formato inválido 'dd/MM/yyyy'</span>
+                            </div>
+                            <div class="cont col-xs-8">
+                                <button type="button" class="btn btn-success" ng-click="open=true"><i class="glyphicon glyphicon-calendar"></i></button>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="tit col-xs-12">
+                                Tipo de pago programado
+                            </label>
+                            <div class="cont col-xs-4">
+                                <select ng-model="pago.tipoPago" ng-options="tipoPago as tipoPago.descripcion for tipoPago in tipoPagos " class="form-control">
+                                    <option value="">--- Seleccione un tipo de pago ---</option>
+                                </select>
+                            </div>
+                            <div class="cont col-xs-8">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="tit col-xs-12">
+                                Descripci&oacute;n
+                            </label>
+                            <div class="cont col-xs-4">
+                                <textarea type="text" ng-maxlength="300" placeholder="Ingresa una descripción..." class="form-control" ng-model="pago.descripcion"></textarea>
+                            </div>
+                            <div class="cont col-xs-8">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="tit col-xs-12">
+                                Monto
+                            </label>
+                            <div class="cont col-xs-4">
+                                <input class="form-control" maxlength="7" name="puntuacion" valid-number ng-model="pago.monto" placeholder="0.00" allow-decimal="true" allow-negative="false" type="text">
+                            </div>
+                            <div class="cont col-xs-8">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="tit col-xs-12">
+                                <button type="button" ng-click="addPago()" class="btn btn-success">
+                                    <i class="glyphicon glyphicon-saved"></i> Agregar
+                                </button>
+                            </label>
+                        </div>
+                        <div class="form-group" ng-show="pagosTL.length>0">
+                            <table id="STLEdit" class="table table-hover" cellspacing="0" datatable="ng" dt-options="dtOptions">
+                                <thead>
+                                    <tr>
+                                        <th data-priority="1">Fecha</th>
+                                        <th data-priority="1">Tipo pago</th>
+                                        <th data-priority="1">Descripcí&oacute;n</th>
+                                        <th data-priority="1">($) Monto</th>
+                                        <th data-priority="1">Opciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="reg in pagosTL">
+                                        <td>{{reg.fecha | date: 'dd/MM/yyyy'}}</td>
+                                        <td>{{reg.tipoPagoDesc}}</td>
+                                        <td>{{reg.descripcion}}</td>
+                                        <td>{{reg.monto}}</td>
+                                        <td>
+                                            <a title="Eliminar" ng-if="reg.id==0" ng-really-click="delete(registro)" class="btn btn-danger">
+                                                <i class="glyphicon glyphicon-trash"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="x_panel">
+                    <div class="x_content sin-desborde">
+                        <div class="x_title">
+                            <h2>Lecciones aprendidas</h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="tit col-xs-12">
+                                Comentario
+                            </label>
+                            <div class="cont col-xs-4">
+                                <textarea type="text" ng-maxlength="300" placeholder="Ingresa una descripción..." class="form-control" ng-model="leccion.comentario"></textarea>
+                            </div>
+                            <div class="cont col-xs-8">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="tit col-xs-12">
+                                <button type="button" ng-click="addLeccion()" class="btn btn-success">
+                                    <i class="glyphicon glyphicon-saved"></i> Agregar
+                                </button>
+                            </label>
+                        </div>
+                        <div class="form-group" ng-show="lecciones.length>0">
+                            <br /><br />
+                            <table id="" class="table table-hover" cellspacing="0" datatable="ng" dt-options="dtOptions">
+                                <thead>
+                                    <tr>
+                                        <th data-priority="1">Fecha</th>
+                                        <th data-priority="1">Comentario</th>
+                                        <th data-priority="1">Registro</th>
+                                        <th data-priority="1">Opciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="reg in lecciones">
+                                        <td>{{reg.fecha | date: 'dd/MM/yyyy'}}</td>
+                                        <td>{{reg.comentario}}</td>
+                                        <td ng-if="reg.tipo==1">GCyDN</td>
+                                        <td ng-if="reg.tipo==2">GAJ</td>
+                                        <td ng-if="reg.tipo==3">Gerencia t&eacute;cnica</td>
+                                        <td>
+                                            <a title="Eliminar" ng-if="reg.id==0" ng-really-click="deleteLeccion(reg)" class="btn btn-danger">
+                                                <i class="glyphicon glyphicon-trash"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <button type="submit" class="btn btn-success">
+                    <i class="glyphicon glyphicon-saved"></i> Actualizar
+                </button>
+                <a confirma-regresar="globalRegresar()" state-form="ValidForm" class="btn btn-primary">
+                    <span class="fa fa-arrow-left"></span> Regresar
+                </a>
+            </div>
+        </div>
+    </form>
+</div>

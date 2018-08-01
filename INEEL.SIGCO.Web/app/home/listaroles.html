@@ -1,0 +1,16 @@
+<div class="modal-header">
+    <div class="col-xs-1"></div>
+    <div>
+        <h4>
+            Seleccione el rol con el que desea ingresar:
+        </h4>
+    </div>
+</div>
+<div class="modal-body">
+    <div class="row" ng-repeat="rol in roles">
+        <div class="col-sm-12">
+            <button type="button" ng-click="seleccionaRol(rol);" class="btn btn-outline btn-primary btn-lg btn-block">{{rol.rol.descripcion}}</button>
+            <br>
+        </div>
+    </div>
+</div>

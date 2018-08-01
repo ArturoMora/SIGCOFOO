@@ -1,0 +1,61 @@
+﻿<div class="vista">
+    <div class="page-title">
+        <div class="title_left">
+            <ol class="breadcrumb miga">
+                <li><i class="sg sg-oportunidades-neg"></i><a ui-sref="dashboard">Oportunidades de negocio</a></li>
+                <li><i class="active"></i>Asignar oportunidades de negocio</li>
+            </ol>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_content sin-desborde">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div ng-show="oportunidadesPorAsignar.length === 0" class="alert advertencia">
+                            No existen ON por asignar
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div ng-hide="oportunidadesPorAsignar.length === 0">
+                            <table id="CRoportunidadNegociosGet" dt-instance="dtInstance" class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" datatable="ng"
+                                width="100%" dt-options="dtOptions">
+                                <thead>
+                                    <tr>
+                                        <th style="width:20px" data-priority="1">ID</th>
+                                        <th style="width:200px">Oportunidad de negocio</th>
+                                        <th>Empresa</th>
+                                        <th>Fecha</th>
+                                        <th>Estado flujo</th>
+                                        <th>Opciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="o in oportunidadesPorAsignar | orderBy:'-oportunidadNegocioId'">
+                                        <td>{{o.oportunidadNegocioId}}</td>
+                                        <td><a class="link" ui-sref="oportunidadDetails({ id: o.oportunidadNegocioId })" title="Detalles">{{o.nombreOportunidad}}</a></td>
+                                        <td>{{o.empresa.nombreEmpresa}}</td>
+                                        <td><a class="hidden">{{o.fecha | date:'yyyy-MM-dd'}}</a>{{o.fecha | date:'dd-MM-yyyy'}}</td>
+                                        <td>{{o.estadoFlujoON.nombre}}</td>
+                                        <td>
+                                            <a ng-show="o.estadoFlujoON.estadoFlujoONId == 4" class="btn btn-success" ui-sref="oportunidadEdit({ id: o.oportunidadNegocioId })"
+                                                title="Revisar/Editar">
+                                                Revisar/Editar
+                                            </a>
+                                            <a ng-show="o.estadoFlujoON.estadoFlujoONId == 13" class="btn btn-success" ng-click="asignarOportunidad(o)" title="Asignar">
+                                                Asignar a especialista
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

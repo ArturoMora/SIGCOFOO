@@ -1,0 +1,37 @@
+﻿<div class="modal-header">
+    <button type="button" class="close" ng-click="cancel()" data-dissmiss="modal">
+        <i class="glyphicon glyphicon-remove"></i>
+    </button>
+    <div class="col-xs-1"></div>
+    <div>
+        <h3>
+            Organizaciones p&uacute;blicas o privadas
+        </h3>
+    </div>
+</div>
+<div class="modal-body">
+    <div class="row">
+        <div class="col-xs-1"></div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12" ng-hide="empresas.length==0">
+            <table  class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" datatable="ng" width="100%"
+                dt-options="dtOptions">
+                <thead>
+                    <tr>
+
+                        <th>Clave organizaci&oacute;n</th>
+                        <th>Nombre</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="empresa in empresas" style="cursor: pointer;text-decoration: underline;" ng-click="ok(empresa)">
+                        <td>{{empresa.empresaId}}</td>
+                        <td>{{empresa.nombreEmpresa}}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,28 @@
+<div id="page-wrapper">
+	<div class="row">
+		<div class="col-xs-12">
+			<table id="proyectosvigentes" datatable="" class="table table-hover table-striped table-condensed wrap" ng-show="proyectos">
+				<thead>
+					<th>Cliente</th>
+					<th>N&uacute;mero</th>
+					<th>Titulo</th>
+					<th>Monto <br> contratado</th>
+					<th>Fecha de inicio</th>
+					<th>Fecha de fin </th>
+					<th>Gerencia</th>
+				</thead>
+				<tbody>
+					<tr ng-repeat="proyecto in proyectos">
+						<td>{{proyecto.empresaId}}</td>
+						<td>{{proyecto.proyectoId}}</td>
+						<td>{{proyecto.nombre}}</td>
+						<td>{{proyecto.costo}}</td>
+						<td>{{proyecto.fechaInicio | date:'dd/MM/yyyy'}}</td>
+						<td>{{proyecto.fechaFin | date:'dd/MM/yyyy'}}</td>
+						<td>{{proyecto.unidadOrganizacional.nombreUnidad}}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>

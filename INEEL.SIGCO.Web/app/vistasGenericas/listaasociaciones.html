@@ -1,0 +1,45 @@
+ <div class="modal-header">
+    <button type="button" class="close" ng-click="cancel()" data-dissmiss="modal">
+        <i class="glyphicon glyphicon-remove"></i>
+    </button>
+    <div class="col-xs-1"></div>
+    <div>
+        <h3>
+            Asociaciones
+        </h3>
+    </div>
+
+
+</div>
+<div class="modal-body">
+    <div class="row">
+        <div class="col-sm-12">
+            <table  class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" datatable="ng" width="100%">
+                <thead>
+                    <tr>
+                        <th>N&uacute;mero</th>
+                        <th>Nombre de la asociación</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="asociacion in asociaciones" style="cursor: pointer;text-decoration: underline;"
+                        ng-click="ok(asociacion)" id="{{asociacion.asociacionId}}">
+                        <td>{{asociacion.asociacionId}}</td>
+                        <td>{{asociacion.descripcion}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div> 
+
+<!--  
+    
+    <div class="modal-footer">
+    <div class="form-group">
+        Si la asociaci&oacute;n que desea agregar no existe, de clic en el bot&oacute;n para a&ntilde;adirla al cat&aacute;logo   <button type="submit" ng-click="" class="btn btn-success" style="padding-right:15px"> <i class="glyphicon glyphicon-saved"></i> Agregar </button>
+    </div>
+
+</div>
+    -->
+

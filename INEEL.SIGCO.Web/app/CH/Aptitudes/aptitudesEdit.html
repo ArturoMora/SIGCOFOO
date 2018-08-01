@@ -1,0 +1,68 @@
+<div class="modal-header">
+    <button type="button" class="close" ng-click="cancel()" data-dissmiss="modal">
+        <i class="glyphicon glyphicon-remove"></i>
+    </button>
+    <div class="col-xs-1"></div>
+    <div>
+        <h3>
+            Modificar lista de aptitudes
+        </h3>
+    </div>
+
+
+</div>
+<div class="modal-body">
+    <div class="row">
+        <div class="col-sm-12">
+            <div ng-show="AptitudesEmpleado.length==0" class="alert advertencia">
+                No hay registros.
+            </div>
+            <div ng-show="AptitudesEmpleado.length > 0">
+                <div ng-repeat="a in AptitudesEmpleado" style="display:inline-block;margin-right:20px;">
+                    <a class="visible-print">{{a.name}} </a>
+                </div>
+                <div class="idden-print">
+                    <table class="" cellspacing="0" width="100%">
+                        <thead>
+                            <tr>
+                                <th style="min-width:165px; max-width:170px">&nbsp;</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!--{{a.aptitudesCatId}}-->
+                            <tr ng-repeat="a in AptitudesEmpleado |orderBy : '-votos' | limitTo:skills">
+                                <td>
+                                    <button type="button" class="btn btn-round btn-info pill pv-skill-entity__pill-contents sin-desborde" title="{{a.nombreAptitud}}"
+                                        ng-click="loadListLikes(a.aptitudId, idPersona, a.nombreAptitud, a.votos)">{{a.nombreAptitud}}</button>
+                                    <span class="badge bg-green badgeSup">{{a.votos}}</span>
+                                    <a title="Eliminar" ng-click="eliminar(a)" class="btn btn-sm btn-danger">
+                                        <i class="glyphicon glyphicon-trash"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+
+                    </table>
+                    <div class="col-xs-12">
+                        <div class="col-md-pull-5">
+                            <button type="button" ng-show="AptitudesEmpleadoCant>3" class="btn btn-link center-margin" ng-click="skills==999?skills=3:skills=999">
+                                        Mostrar todo <span class="fa fa-chevron-{{skills==999?'up':'down'}}"></span>
+                                    </button>
+                        </div>
+                    </div>
+
+                </div>
+                <br/>
+
+                <!--{{a | json}}-->
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <button type="submit" ng-disabled="AptitudesEmpleadoId.length<=0" class="btn btn-success" ng-click="guardaraptitudes()">
+<i class="glyphicon glyphicon-saved"></i> Guardar
+                                    </button>
+        </div>
+    </div>
+</div>

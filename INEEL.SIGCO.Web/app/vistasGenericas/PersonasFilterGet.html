@@ -1,0 +1,110 @@
+﻿<div class="modal-header">
+    <button type="button" class="close" ng-click="cancel()" data-dissmiss="modal">
+        <i class="glyphicon glyphicon-remove"></i>
+    </button>
+    <div class="col-xs-1"></div>
+    <div>
+        <h3>
+            Empleados
+        </h3>
+    </div>
+</div>
+<div class="modal-body">
+    <div class="row">
+        <div class="col-xs-12" ng-show="empleados.length==0">
+            <form class="form-horizontal" name="frmBuscar">
+
+                <div class="form-group">
+                    <label class="col-xs-12 col-md-4 control-label" for="searchTextClave">N&uacute;mero de empleado:</label>
+                    <div class="col-xs-12 col-md-8">
+                        <input  ng-model="persona.ClavePersona" id="searchTextClave"
+                               name="searchTextClave" ng-change="persona.Nombre=null"
+                               class="form-control numbersOnly" placeholder="N&uacute;mero de empleado"
+                               type="text" pattern="\d*" maxlength="6"
+                               ng-minlength="4" />
+                        <span class="error" ng-show="frmBuscar.searchTextClave.$dirty && !frmBuscar.searchTextClave.$valid">
+                            Longitud m&iacute;nima de 4
+                        </span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-xs-12 col-md-4 control-label" for="searchTextNombre">Nombre:</label>
+                    <div class="col-xs-12 col-md-8">
+                        <input type="text" ng-model="persona.Nombre" id="searchTextNombre"
+                               name="searchTextNombre" ng-change="persona.ClavePersona=null"
+                               class="form-control names" placeholder="Nombre(s) Apellido Paterno Apellido Materno"
+                               maxlength="45"
+                               
+                               ng-minlength="3" />
+                        <span class="error" ng-show="frmBuscar.searchTextNombre.$dirty && frmBuscar.searchTextNombre.$error.pattern">
+                            Contenido inv&aacute;lido para nombre <br/>
+                        </span>
+                        <span class="error" ng-show="frmBuscar.searchTextNombre.$dirty && !frmBuscar.searchTextNombre.$valid">
+                            Longitud m&iacute;nima de 3
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-4"></div>
+                    <div class="col-md-8">
+                        <button class="btn btn-info btn-flat" ng-click="buscar(persona); frmBuscar.$setPristine()"
+                                ng-disabled="(
+                                (frmBuscar.searchTextNombre.$invalid || frmBuscar.searchTextClave.$invalid)  
+                                || ((!frmBuscar.searchTextNombre.$dirty) && (!frmBuscar.searchTextClave.$dirty))
+                                )
+                                ">
+                            Buscar <i class="glyphicon glyphicon-search"></i>
+                        </button>
+                        
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-xs-1"></div>
+        <div ng-hide="empleados.length==0">
+            <button class="btn btn-info btn-flat" ng-click="empleados=[];persona={};nuevaBusqueda=true">
+                Realizar nueva b&uacute;squeda <i class="glyphicon glyphicon-search"></i>
+            </button>
+        </div>
+    </div>
+    <hr/>
+    <div class="row">
+        <div class="col-sm-12" ng-hide="empleados.length==0">
+            <table  class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" datatable="ng" width="100%" dt-options="dtOptions">
+                <thead>
+                    <tr>
+
+                        <th>N&uacute;mero de empleado</th>
+                        <th>Nombre</th>
+                        <!--<th>ClaveUnidad</th>-->
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="empleado in empleados" style="cursor: pointer;text-decoration: underline;"
+                        ng-click="empleadoSelect.emp = empleado; ok()" id="{{empleado.empleadoID}}">
+                        <td>{{empleado.clavePersona}}</td>
+                        <td>{{empleado.nombreCompleto}}</td>
+                        <!--<td>{{empleado.claveUnidad}}</td>-->
+                    </tr>
+                </tbody>
+            </table>            
+
+        </div>
+    </div>
+</div>  <!-- final modal body
+<div class="modal-footer">
+    <button type="button" class="btn btn-success animate-if" ng-click="ok()" ng-if="empleadoSelect.emp != null">Aceptar</button>
+    <button type="button" class="btn btn-cancel" ng-click="cancel()">Cancelar</button>
+</div>-->
+<script>
+    $(document).ready(function () {
+        jQuery('.numbersOnly').keyup(function () {
+            this.value = this.value.replace(/[^0-9\.]/g, '');
+        });
+        jQuery('.names').keyup(function () {
+            this.value = this.value.replace(/[^ñáéíóúÑÁÉÍÓÚa-zA-Z\. ]*/g, '');
+        });
+    });
+
+</script>

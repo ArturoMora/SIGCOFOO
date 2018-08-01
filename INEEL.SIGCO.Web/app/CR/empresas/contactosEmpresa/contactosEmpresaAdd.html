@@ -1,0 +1,44 @@
+<div id="vista">
+    <div class="clearfix"></div>
+    <div class="tab-content">
+        <div class="x_panel">
+            <!-- <div class="x_title">
+                <h2>Contactos actuales </h2>
+                <div class="clearfix"></div>
+            </div> -->
+            <div>
+                <br/><br/>
+                <div class="col-md-12 col-sm-12 col-lg-12">
+                    <table id="contactosEmpresaAdd" class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" datatable="ng"
+                        width="100%">
+                        <thead>
+                            <tr>
+                                <th data-priority="1">Nombre</th>
+                                <th>Puesto</th>
+                                <th data-priority="3" class="thCeldaB text-center">Opciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="e in contactos">
+                                <td>{{e.nombreContacto}} {{e.apellidoPaterno}} {{e.apellidoMaterno}} </td>
+                                <td>{{e.puesto ==null? 'No disponible' : e.puesto}}</td>
+                                <td class="text-center">
+                                    <a class="btn btn-danger" ng-really-click="eliminaContacto(e.contactoId)" title="Eliminar">
+                                        <i class="glyphicon glyphicon-trash"></i>
+                                    </a>
+                                    <a class="btn btn-warning" ui-sref="contactoEdit({id: e.contactoId})" title="Editar">
+                                        <i class="glyphicon glyphicon-pencil"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <button type="button" ng-click="crearContacto()" class="btn btn-success">
+                    <span class="glyphicon glyphicon-plus"></span> Agregar
+                </button>
+            </div>
+
+        </div>
+    </div>
+</div>

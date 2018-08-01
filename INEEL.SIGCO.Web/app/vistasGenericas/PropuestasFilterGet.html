@@ -1,0 +1,46 @@
+﻿<div class="modal-header">
+    <button type="button" class="close" ng-click="cancel()" data-dissmiss="modal">
+        <i class="glyphicon glyphicon-remove"></i>
+    </button>
+    <div class="col-xs-1"></div>
+    <div>
+        <h3>
+            Propuestas
+        </h3>
+    </div>
+</div>
+<div class="modal-body">
+    <div class="row">
+        <div class="col-sm-12" ng-hide="propuestas.length==0">
+            <table  class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" datatable="ng" width="100%" dt-options="dtOptions">
+                <thead>
+                    <tr>
+
+                        <th>Propuesta</th>
+                        <th>Título</th>
+                        <th>N&uacute;m emp</th>
+                        <th>Clave unidad organizacional</th>
+                        <th>Empresa</th>
+                        
+                        <!--<th>ClaveUnidad</th>-->
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="propuesta in propuestas" style="cursor: pointer;text-decoration: underline;"
+                        ng-click="propuestaSelect = propuesta; ok(propuesta)" id="{{propuesta}}">
+                        <td>{{propuesta.propuestaId}}</td>
+                        <td>{{propuesta.titulo}}</td>
+                        <td>{{propuesta.claveEmpPropuesta}}</td>
+                        <td>{{propuesta.unidadOrganizacionalId}}</td>
+                        <td>{{propuesta.empresa}}</td>
+                        <!--<td>{{propuesta.claveUnidad}}</td>-->
+                    </tr>
+                </tbody>
+            </table>            
+
+        </div>
+    </div>
+</div> 
+<div class="modal-footer">
+    <button type="button" class="btn btn-cancel" ng-click="cancel()">Cerrar</button>
+</div>

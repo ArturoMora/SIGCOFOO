@@ -1,0 +1,58 @@
+﻿<div data-ng-show="authentication.isAuth">
+    <div ng-hide="registroasociacion.length >= 0">
+        <img src="images/cargando.gif" />
+    </div>
+    <div class="row">
+        <div class="col-md-12 col-lg-12 col-xs-12 sin-desborde">
+            <div ng-show="registroasociacion.length === 0" class="alert advertencia">
+                No hay registros de asociaciones
+            </div>
+            <div ng-show="registroasociacion.length > 0">
+                <table id="TableasociacionGet" class="table table-hover table-striped table-condensed dt-responsive" dt-options="dtOptions" cellspacing="0" datatable="ng" width="100%"
+                       dt-options="dtOptions">
+                    <thead>
+                        <tr>
+                            <th data-priority="1">Asociación</th>
+                            <th class="thAjuste">Fecha de inicio participación</th>
+                            <th class="thAjuste">Fecha de término participación</th>
+                            <th>Estado registro</th>
+                            <th>Fecha validación</th>
+                            <th class="thAjuste text-center" data-priority="1">Opciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="asociacion in registroasociacion">
+                            <td ng-click="$event.stopPropagation();" ui-sref="asociacionesDetails({id:asociacion.asociacionesId})" title="Detalle" class="linkTabla">{{asociacion.asociacion.descripcion}}</td>
+                            <td class="text-center">{{ asociacion.fechaInicio | date:"dd/MM/yyyy"}}</td>
+                            <td class="text-center">{{asociacion.fechaTermino | date:"dd/MM/yyyy"}}</td>
+                            <td>{{asociacion.estadoFlujo.descripcion}}</td>
+                            <td>{{asociacion.fechaValidacion === null ? 'Dato no disponible' : asociacion.fechaValidacion | date: "dd/MM/yyyy"}}</td>
+                            <td class="text-center">
+                                <a ng-if="idRol==1" ng-click="setGlobalID(asociacion.asociacionesId);$event.stopPropagation();" 
+                                   ui-sref="AsociacionDetailsAdmin({id:asociacion.asociacionesId, id2: 1})" title="Aprobar registro" class="btn btn-warning">
+                                    <i class="glyphicon glyphicon-pencil"></i>
+                                </a>
+                                <div ng-if="asociacion.estadoFlujoId==1 || editarGestion==1">
+                                    <a ng-if="idRol!=1" class="btn btn-warning" ng-click="setGlobalID(asociacion.asociacionesId); $event.stopPropagation();" ui-sref="asociacionesEdit" title="Editar">
+                                        <i class="glyphicon glyphicon-pencil"></i>
+                                    </a>
+                                    <a class="btn btn-danger" ng-if="asociacion.fechaValidacion === null && asociacion.estadoFlujoId!=3" title="Eliminar" ng-click="open(asociacion)">
+                                        <i class="glyphicon glyphicon-trash"></i>
+                                    </a>
+                                </div>
+                                <div ng-if="asociacion.estadoFlujoId==3">
+                                    <a ng-if="idRol!=1" ng-really-message="Está a punto de acceder a un registro 'Aceptado', si modifica algún atributo deberá ser validado nuevamente. ¿Desea continuar?" ng-really-click="setGlobalID(asociacion.asociacionesId);$event.stopPropagation();navegador();" title="Editar" class="btn btn-warning">
+                                        <i class="glyphicon glyphicon-pencil"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <a ng-show="registroasociacion.length >= 0" type="button" ng-click="$event.stopPropagation();" ui-sref="asociacionesAdd" class="btn btn-success">
+                <span class="glyphicon glyphicon-plus"></span> Agregar
+            </a>
+        </div>
+    </div>
+</div>

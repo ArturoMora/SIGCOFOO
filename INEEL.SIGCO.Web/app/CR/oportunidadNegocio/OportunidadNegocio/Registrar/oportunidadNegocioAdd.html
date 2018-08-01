@@ -1,0 +1,197 @@
+﻿<div class="vista">
+    <div class="page-title">
+        <div class="title_left">
+            <ol class="breadcrumb miga">
+                <li><i class="sg sg-oportunidades-neg"></i><a ui-sref="dashboard">Oportunidades de negocio</a></li>
+                <li><i class="active"></i>Registrar oportunidad</li>
+            </ol>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+</div>
+<div class="row">
+    <div class="col-md-8 col-sm-8 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Informaci&oacute;n general </h2>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content sin-desborde">
+                <form role="form" name="oportunidadAddForm" class="form-horizontal">
+                    <div class="form-group">
+                        <label class="control-label col-md-4 col-sm-4 col-xs-12">
+                            Oportunidad de negocio<span class="required">*</span>
+                        </label>
+                        <div class="col-md-8 col-sm-8 col-xs-12" title="nombre de la oportunidad">
+                            <input placeholder="Nombre de la oportunidad" required type="text" name="nombreOportunidad" ng-model="oportunidad.nombreOportunidad"
+                                class="form-control" maxlength="200" />
+                            <span class="error" ng-show="oportunidadAddForm.nombreOportunidad.$invalid && oportunidadAddForm.nombreOportunidad.$dirty">
+                                Debes escribir el nombre de la oportunidad de negocio
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-4 col-sm-4 col-xs-12">Fecha de la oportunidad <span class="required">*</span></label>
+                        <div class="col-md-8 col-sm-8 col-xs-12">
+                            <p class="input-group">
+                                <input placeholder="dd/mm/yyyy" uib-datepicker-popup='dd/MM/yyyy' name="fechaon" maxlength="10" ng-minlength="10" show-button-bar="false"
+                                    uib-datepicker-popup='dd/MM/yyyy' popup-placement="bottom" type="text" class="form-control"
+                                    ng-model="oportunidad.fecha" is-open="open" ng-required="true" close-text="Close" />
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-success" ng-click="open=true"><i class="glyphicon glyphicon-calendar"></i></button>
+                                </span>
+                            </p>
+                            <span class="error" ng-show="oportunidadAddForm.fechaon.$invalid && oportunidadAddForm.fechaon.$dirty">
+                                Formato de fecha dd/MM/yyyy
+                            </span>
+                            <span class="error" ng-show="oportunidad.fecha > fechaActual">
+                                La fecha no debe ser mayor a la actual
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-4 col-sm-4 col-xs-12">Medio de contacto <span class="required">*</span></label>
+                        <div class="col-md-8 col-sm-8 col-xs-12">
+                            <select required class="form-control" name="medioComunicacion" ng-model="oportunidad.medio" ng-change="limpiar()" ng-options="medio as medio.nombre for medio in medios">
+                                <option value="">--- Selecciona medio de contacto ---</option>
+                            </select>
+                            <span class="error" ng-show="oportunidadAddForm.medioComunicacion.$invalid && oportunidadAddForm.$submitted">
+                                Debes seleccionar un medio de contacto
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group" ng-show="oportunidad.medio.medioId == 6"><!--Para cuando el medio de contacto es "OTRO"-->
+                        <label class="control-label col-md-4 col-sm-4 col-xs-12">Describa el medio de contacto<span class="required">*</span></label> 
+                        <div class="col-md-8 col-sm-8 col-xs-12">
+                            <input type="text" placeholder="P.E. Nombre del curso, Reunión de trabajo, Foros, Etc. " name="nombreMedioComunicacion" ng-model="oportunidad.descripcionMedioContacto"
+                                class="form-control" ng-required="oportunidad.medio.medioId ==6" />
+                            <span class="error" ng-show="oportunidadAddForm.nombreMedioComunicacion.$invalid && oportunidadAddForm.$submitted">
+                                Debes escribir el medio de contacto
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group" ng-show="oportunidad.medio.medioId == 5"> <!--cuando el evento es una expo industrial-->
+                        <label class="control-label col-md-4 col-sm-4 col-xs-12" for="usr">Evento <span class="required">*</span></label>
+                        <div class="col-md-8 col-sm-8 col-xs-12">
+                            <div class="row">
+                                <div class="col-xs-10">
+                                    <input ng-required="oportunidad.medio.medioId == 5" type="text" class="form-control" id="usr" name="evento" ng-model="nombreEvento"
+                                        disabled>
+                                    <input type="hidden" ng-model="oportunidad.eventoId" class="form-control" value="eventoId" />
+                                </div>
+                                <div class="col-xs-2">
+                                    <a ng-click="openEventos()" class="btn btn-success" title="Buscar evento" ng-disabled="desabilitarBuscarContacto">
+                                        <i class="glyphicon glyphicon-search"></i>
+                                    </a>
+                                </div>
+                                <span class="error" ng-show="oportunidadAddForm.evento.$invalid && oportunidadAddForm.$submitted">
+                                    Debes seleccionar el evento
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-4 col-sm-4 col-xs-12" for="usr">Contacto <span class="required">*</span></label>
+                        <div class="col-md-8 col-sm-8 col-xs-12">
+                            <div class="row">
+                                <div class="col-xs-10">
+                                    <input required type="text" class="form-control" id="usr" name="contacto" ng-model="contacto.nombreCompleto" disabled ng-required="true">
+                                    <input type="hidden" ng-model="contactoId" class="form-control" value="contactoId" />
+                                    <span class="error" ng-show="oportunidadAddForm.contacto.$invalid && oportunidadAddForm.contacto.$dirty || oportunidadAddForm.$submitted && oportunidadAddForm.contacto.$invalid">
+                                        Debes de agregar un contacto.
+                                    </span>
+                                </div>
+                                <div class="col-xs-2">
+                                    <a ng-click="openContacto()" class="btn btn-success" title="Buscar contacto" ng-disabled="desabilitarBuscarContacto">
+                                        <i class="glyphicon glyphicon-search"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-4 col-sm-4 col-xs-12">Comentarios <span class="required">*</span></label>
+                        <!--<div class="col-md-8 col-sm-8 col-xs-12">
+                            <input placeholder="Agregar informaci&oacute;n adicional relevante sobre la ON." type="text" name="nombreOportunidad" ng-model="oportunidad.descripcion"
+                                class="form-control" ng-required="true" maxlength="500" />
+                        </div>-->
+                        <div class="col-md-8 col-sm-8 col-xs-12">
+                            <textarea placeholder="Agregar informaci&oacute;n adicional relevante sobre la ON." name="nombreOportunidad" maxlength="500" ng-model="oportunidad.descripcion" class="form-control" required></textarea>
+                        </div>
+                    </div>
+                    <div lass="form-group">
+                        <label class="control-label col-md-4 col-sm-4 col-xs-12">Notificarme el progreso de esta oportunidad de negocio: </label>
+                        <div class="col-md-8 col-sm-8 col-xs-12">
+                            <input type="checkbox" ng-model="oportunidad.notificar" class="btn btn-info btn-circle" checked />
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="ln_solid"></div>
+                    <div class="form-group">
+                        <div class="col-md-8 col-sm-8 col-xs-12 col-md-offset-3">
+                            <button type="submit" ng-click="saveOportunidad()" class="btn btn-success">
+                                <i class="glyphicon glyphicon-saved"></i> Enviar a Comercializaci&oacute;n 
+                            </button>
+                            <button type="button" confirma-regresar="globalRegresar()" state-form="oportunidadAddForm"  class="btn btn-primary">
+                                <span class="fa fa-arrow-left"></span> Regresar
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 col-sm-4 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Autor</h2>
+                <div class="clearfix"></div>
+            </div>
+            <div class="form-group">
+                <label>No. Empleado:</label><span class="cont"> {{noEmpleado}}</span>
+            </div>
+            <div class="form-group">
+                <label>Empleado: </label><span class="cont"> {{nombreEmpleado}}</span>
+            </div>
+        </div>
+        <div class="x_panel" ng-show="detalles">
+            <div class="x_title">
+                <h2>Detalles del contacto</h2>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content sin-desborde">
+                <div class="col-xs-12">
+                    <div class="foto" style="position: relative;">
+                        <div class="profile_img">
+                            <div id="crop-avatar">
+                                <img class="img-thumbnail" ng-show="contacto.adjunto64 === null" src="images/incognito.png" width="180" height="180" />
+                                <img class="img-thumbnail" ng-show="contacto.adjunto64 != null" ng-src="data:image/png;base64,{{contacto.adjunto64}}" width="180"
+                                    height="180" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <br />
+                    <ul class="list-unstyled user_data">
+                        <li>
+                            <i class="fa fa fa-building"></i> {{contacto.nombreEmpresa}}
+                        </li>
+                        <li>
+                            <i class="fa fa-briefcase user-profile-icon"></i> {{contacto.puesto}}
+                        </li>
+                        <li class="m-top-xs">
+                            <i class="fa fa fa-envelope"></i> {{contacto.correo}}
+                        </li>
+                        <li class="m-top-xs">
+                            <i class="fa fa fa-phone"></i> {{contacto.telefono}} | {{contacto.extension}}
+                        </li>
+                        <li class="m-top-xs">
+                            <i class="fa fa fa-mobile-phone"></i> {{contacto.celular}}
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

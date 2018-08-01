@@ -1,0 +1,39 @@
+<div class="modal-header">
+    <button type="button" class="close" ng-click="cancel()" data-dissmiss="modal">
+        <i class="glyphicon glyphicon-remove"></i>
+    </button>
+    <div class="col-xs-1"></div>
+    <div>
+        <h3>
+            Congresos
+        </h3>
+    </div>
+
+
+</div>
+<div class="modal-body">
+    <div class="row">
+        <div class="col-sm-12">
+            <table  class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" datatable="ng" width="100%">
+                <thead>
+                    <tr>
+                        <th>N&uacute;mero de congreso</th>
+                        <th>Nombre del Congreso</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="congreso in congresos" style="cursor: pointer;text-decoration: underline;"
+                        ng-click="ok(congreso)" id="{{congreso.congresoId}}">
+                        <td>{{congreso.congresoId}}</td>
+                        <td>{{congreso.nombreCongreso}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <!--proyectos:{{proyectos | json}}-->
+        </div>
+    </div>
+</div>  <!-- final modal body-->
+<!--<div class="modal-footer">
+    <button type="button" class="btn btn-success animate-if" ng-click="ok()" ng-if="proyectoSelect.emp != null">Aceptar</button>
+    <button type="button" class="btn btn-cancel" ng-click="cancel()">Cancelar</button>
+</div>-->

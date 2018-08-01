@@ -1,0 +1,83 @@
+﻿<div class="modal-content" >
+    <div class="modal-header">
+        Editar Proyecto asociado
+        <button type="button" class="close" ng-click="cancel()" data-dissmiss="modal">x</button>
+    </div>
+    <form role="form" ng-submit="EditContactoPerfil()" novalidate name="proyectoAsginadoEditEditForm">
+        <div class="modal-body">
+            <div class="panel">
+                <!-- /.panel-heading -->
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label>No. Proyecto: </label>
+                                <span class="text">{{proyectoAsginadoEdit.proyectoId}}</span>
+                            </div>
+                            <div class="form-group">
+                                <label>Nombre: </label>
+                                <span class="text">{{proyectoAsginadoEdit.nombre}}</span>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label>Jefe de proyecto: </label>
+                                <span class="text">{{proyectoAsginadoEdit.nombreJefeProyecto}}</span>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <label>Asociar datos de Empresa</label>
+                            <hr />
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label>Empresa: </label>
+                                <span class="text">{{proyectoAsginadoEdit.empresa.nombreEmpresa}}</span>
+                            </div>
+                            <div class="form-group">
+                                <label for="usr">Unidad Organizacional: <a style="color:red;font-weight:bold">*</a></label>
+                                <div class="row">
+                                    <div class="col-xs-10">
+                                        <input required type="text" class="form-control" id="usr" name="unidad" ng-model="proyectoAsginadoEdit.unidadOrganizacionalEmpresas.nombreUnidad" disabled="disabled" />
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <a class="btn btn-default" ng-click="openEstructuraOrg(proyectoAsginadoEdit.empresa.empresaId)" title="Buscar EO">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="usr">Contacto:<a style="color:red;font-weight:bold">*</a></label>
+                                <div class="row">
+                                    <div class="col-xs-10">
+                                        <input required type="text" class="form-control" id="usr" name="contacto" ng-model="proyectoAsginadoEdit.contacto.nombreCompleto" disabled ng-required="true">
+                                        <input type="hidden" ng-model="contactoId" class="form-control" value="contactoId" />
+                                        <span class="error" ng-show="proyectoEmpresaAddForm.contacto.$invalid && proyectoEmpresaAddForm.contacto.$dirty || fondoProgramaForm.$submitted && fondoProgramaForm.contacto.$invalid">
+                                            Debes de agregar un contacto.
+                                        </span>
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <a ng-click="openContacto()" class="btn btn-default" title="Buscar contacto" ng-disabled="desabilitarBuscarContacto">
+                                            <i class="glyphicon glyphicon-search"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-success" ng-click="ok()">Actualizar</button>
+            <button type="button" class="btn btn-primary" ng-click="cancel()">Cancelar</button>
+        </div>
+    </form>
+</div>
+
+
+
+
+
+

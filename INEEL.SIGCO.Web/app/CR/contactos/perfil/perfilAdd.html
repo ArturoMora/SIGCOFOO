@@ -1,0 +1,169 @@
+﻿<div class="vista">
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Informaci&oacute;n acad&eacute;mica </h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <form role="form" ng-submit="AddContactoPerfil()"  name="contactoPerfilAddForm" class="form-horizontal">
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Grado acad&eacute;mico <span class="required"> *</span></label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <select required class="form-control" name="gAcademico" ng-model="contactoperfil.gradoAcademicoId" ng-options="grado.gradoAcademicoId as grado.descripcion for grado in gradosacademicos">
+                                    <!--<option value="">--- Selecciona un grado acad&eacute;mico ---</option>-->
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="usr">Carrera <span class="required"> *</span></label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="row">
+                                    <div class="col-xs-10">
+                                        <input type="text" class="form-control" id="selectcarreras" name="datalisttestinputcarreras" ng-model="selectedcarrera.descripcion"
+                                            disabled required placeholder="Buscar carrera">
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <button class="btn btn-success" ng-click="opencarreras()" title="Buscar carrera">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                        </button>
+                                    </div>
+                                    <!--<span ng-show="ValidForm.datalisttestinputcarreras.$dirty &&  ValidForm.datalisttestinputcarreras.$invalid" class="error">La carrera no se encuentra registrada en el cat&aacute;logo.</span>-->
+                                </div>
+                                <!--<span class="error" ng-show="contactoPerfilAddForm.datalisttestinputcarrera.$invalid && contactoPerfilAddForm.datalisttestinputcarrera.$dirty || contactoPerfilAddForm.$submitted && contactoPerfilAddForm.datalisttestinputcarrera.$invalid">
+                                    Debes de seleccionar una carrera.
+                                </span>-->
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Especialidad </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" name="carreraContacto" ng-model="contactoperfil.especialidad" min="2" maxlength="100" class="form-control"
+                                />
+                            </div>
+                            <!--<span ng-show="ValidForm.carreraContacto.$dirty &&  ValidForm.carreraContacto.$invalid" class="error">El rango de caracteres debe ser m&iacute;nimo 2 y m&aacute;ximo 100.</span>-->
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Instituci&oacute;n <span class="required"> *</span></label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="row">
+                                    <div class="col-xs-10">
+                                        <input type="text" class="form-control" id="usr" name="datalisttestinputinstitucion" ng-model="selectedinstitucion.descripcion"
+                                            disabled required placeholder="Buscar Instituci&oacute;n">
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <a class="btn btn-success" ng-click="openInstituciones()" title="Buscar persona">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Pa&iacute;s </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <input type="text" ng-model="selectedinstitucion.pais.descripcion" readonly disabled class="form-control" />
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="x_title">
+                            <h2>Per&iacute;odo </h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12"> Inicio  <!--Fecha inicio-->    <span class="required"> *</span></label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <p class="input-group">
+                                    <input placeholder="dd/mm/yyyy" show-button-bar="false" uib-datepicker-popup='dd/MM/yyyy' popup-placement="bottom" ng-minlength="8"
+                                        maxlength="10" datepicker-options="datePicker.FechaOptions" value="{{ date | date: 'dd/MM/yyyy' }}"
+                                        type="text" class="form-control fechaOnly" name="fechaInicio" ng-model="fechaInicio"
+                                        is-open="open" ng-required="true" close-text="Close" />
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-success" ng-click="open=true"><i class="glyphicon glyphicon-calendar"></i></button>
+                                    </span>
+
+                                </p>
+                                <!--<span ng-show="contactoPerfilAddForm.fechaInicio.$dirty &&  contactoPerfilAddForm.fechaInicio.$invalid" class="error">Formato inv&aacute;lido 'dd/MM/yyyy'</span>-->
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12"> T&eacute;rmino <!--Fecha t&eacute;rmino-->    <span class="required"> *</span></label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <p class="input-group">
+                                    <input placeholder="dd/mm/yyyy" name="fechatermino" required ng-init="open2=false" type="text" show-button-bar="false" popup-placement="bottom"
+                                        class="form-control fechaOnly" uib-datepicker-popup="dd/MM/yyyy" ng-minlength="8" maxlength="10"
+                                        datepicker-options="datePicker.FechaOptions" ng-model="fechaFinal" value="{{ date | date: 'dd/MM/yyyy' }}"
+                                        is-open="open2" ng-required="true" close-text="Close" />
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-success" ng-click="open2=true"><i class="glyphicon glyphicon-calendar"></i></button>
+                                    </span>
+
+                                </p>
+                                <!--<span ng-show="contactoPerfilAddForm.fechatermino.$dirty &&  contactoPerfilAddForm.fechatermino.$invalid" class="error">Formato inv&aacute;lido 'dd/MM/yyyy'</span>-->
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-4 col-sm-4 col-xs-12"></div>
+                            <label class="col-md-6 col-sm-6 col-xs-12 error" ng-show="fechaInicio > fechaFinal">La fecha inicio no debe ser mayor a la fecha final</label>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                <div class="">
+                                    <button type="submit" class="btn btn-success" ng-disabled="contactoPerfilAddForm.$invalid">
+                                        <i class="glyphicon glyphicon-saved"></i> Guardar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="x_panel">
+                        <div class="x_content sin-desborde">
+                            <div ng-show="contactosPerfil.length === 0" class="alert advertencia">
+                                No existen perfiles agregados para el contacto
+                            </div>
+                            <div ng-hide="contactosPerfil.length === 0">
+                                <table id="CRperfilAdd" class="table table-hover table-striped table-condensed" cellspacing="0"
+                                    datatable="ng" width="100%" dt-options="dtOptions">
+                                    <thead>
+                                        <tr>
+                                            <th data-priority="1">Grado acad&eacute;mico</th>
+                                            <th>Carrera</th>
+                                            <th>Instituci&oacute;n</th>
+                                            <th>Opciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="p in contactosPerfil">
+                                            <td><a class="link" ng-click="detallesContactoPerfil(p.contactoPerfilId)" style="cursor:pointer"
+                                                    title="Detalles">{{p.gradoAcademico.descripcion}}</a></td>
+                                            <td>{{p.carrera.descripcion}}</td>
+                                            <td>{{p.institucion.descripcion}}</td>
+                                            <td>
+                                                <a class="btn btn-warning" ng-click="editarContactoPerfil(p.contactoPerfilId)" title="Editar">
+                                                    <i class="glyphicon glyphicon-pencil"></i>
+                                                </a>
+                                                <a class="btn btn-danger" ng-click="eliminarPerfilContacto(p.contactoPerfilId, p.contactoId)" title="Eliminar">
+                                                    <i class="glyphicon glyphicon-trash"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

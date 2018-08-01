@@ -1,0 +1,426 @@
+﻿<div ng-include="'app/vistasGenericas/header/registroNombrePersonaAdmin.html'"> </div>
+<div class="vista">
+    <div class="page-title">
+        <div class="title_left">
+            <ol ng-if="editAdmin!='1'" class="breadcrumb miga">
+                <li><i class="fa fa-cogs"></i> <a ui-sref="#">Solicitudes</a></li>
+                <li><a ui-sref="#">Ponencia</a></li>
+                <li class="active">Detalles</li>
+            </ol>
+            <ol ng-if="editAdmin=='1'" class="breadcrumb miga">
+                <li><i class="fa fa-cogs"></i> <a ui-sref="#">Ponencia</a></li>
+                <li class="active">Detalles</li>
+            </ol>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+                    <form name="ValidForm" id="form" class="form-horizontal">
+                        <div class="x_title">
+                            <h2>Informaci&oacute;n general</h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                T&iacute;tulo de ponencia <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" auto-focus-campo maxlength="300" placeholder="Titulo de ponencia..." ng-model="registro.tituloPonencia" ng-required="true" name="tituloPonencia" required class="form-control" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Nivel de ponencia <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <select ng-model="registro.nivelPublicacionId" ng-required="true" name="nivelPublicacionId" ng-options="nivel.nivelPublicacionId as nivel.descripcion for nivel in niveles " required class="form-control"></select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                &Aacute;mbito de ponencia <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <select ng-model="registro.ambitoId" name="ambitoId" ng-required="true" ng-options="ambito.ambitoId as ambito.descripcion for ambito in ambitos " required class="form-control"></select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Estado de ponencia <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <select ng-model="registro.estadoPonenciaId" ng-required="true" name="estadoPonenciaId" ng-options="publicacion.estadoPonenciaId as publicacion.descripcion for publicacion in ponencias " required class="form-control"></select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Registrado por
+                            </label>
+                            <label class="span-label  col-md-6 col-sm-6 col-xs-12">
+                                {{registro.nombrePersona}}
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                P&aacute;ginas <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <div class="col-xs-3">
+                                            <input type="text" placeholder="de..." maxlength="4" ng-required="true" name="paginasde" numbers-only ng-model="registro.paginasde" class="form-control" required />
+                                        </div>
+                                        <div class="col-xs-1">
+                                            -
+                                        </div>
+                                        <div class="col-xs-3">
+                                            <input type="text" placeholder="hasta..." maxlength="4" numbers-only ng-required="true" name="paginashasta" ng-model="registro.paginashasta" class="form-control" required />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Palabras clave <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <textarea placeholder="Palabras Clave..." ng-required="true" name="palabrasClave" maxlength="300" ng-model="registro.palabrasClave" class="form-control" required></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Proyecto
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="row">
+                                    <div ng-class="registro.proyectoId == null  ? 'col-xs-10' : (registro.proyectoId != null ? 'col-xs-9' : 'col-xs-9')">
+                                        <input type="text" class="form-control" id="usr" name="proyecto" ng-model="registro.proyectoNombre" disabled>
+                                    </div>
+                                    <div ng-class="registro.proyectoId == null  ? 'col-xs-2' : (registro.proyectoId != null ? 'col-xs-3' : 'col-xs-3')">
+                                        <button class="btn btn-success" ng-click="openProyecto()" title="Buscar proyecto" ng-disabled="desabilitar">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                        </button>
+                                        <button type="button" ng-if="registro.proyectoId!=null" class="btn btn-danger" ng-click="clean();ValidForm.$setDirty();"><i class="glyphicon glyphicon-remove" title="borrar"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="x_title">
+                            <h2>Congreso</h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Congreso <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="row">
+                                    <div class="col-xs-10">
+                                        <input type="text" required placeholder="Buscar Congreso" class="form-control" id="usr" name="congresonombreSelect" ng-required="true" ng-model="registro.congresonombreSelect" disabled>
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <button class="btn btn-success" ng-click="openCongresos();" title="Buscar congreso" ng-disabled="desabilitar">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--<div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    <div angucomplete-alt match-class="highlight" id="selectcongreso" placeholder="Buscar Congreso..." pause="100" selected-object="selectedcongreso"
+                                         local-data="congresos" textNoResults="No se encontrar&oacute;n resultados" search-fields="nombreCongreso"
+                                         title-field="nombreCongreso" minlength="1" field-required="true" input-class="form-control required" initial-value="congresoset">
+                                    </div>
+                                </div>
+                            </div>-->
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                N&uacute;mero <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" maxlength="5" placeholder="Número..." ng-required="true" name="numero" numbers-only class="form-control" ng-model="registro.numero" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Fecha de inicio del congreso <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="row">
+                                    <div class="col-xs-10">
+                                        <input placeholder="dd/mm/yyyy" ng-minlength="8" name="fechaInicio" maxlength="10" required ng-init="open=false" type="text" show-button-bar="false" popup-placement="bottom"
+                                               class="form-control" uib-datepicker-popup="dd/MM/yyyy" ng-model="registro.fechaInicio" value="{{ date | date: 'dd/MM/yyyy' }}"
+                                               is-open="open" ng-required="true" close-text="Close" ng-change="validarFechas()" />
+                                        <span ng-show="ValidForm.fechaInicio.$dirty &&  ValidForm.fechaInicio.$invalid" class="error">Formato inválido 'dd/MM/yyyy'</span>
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <button type="button" readonly class="btn btn-success" ng-click="open=true"><i class="glyphicon glyphicon-calendar"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Especialidad
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" maxlength="150" placeholder="Especialidad..." ng-model="registro.especialidad" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Lugar del congreso <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <select required class="form-control" ng-required="true" name="pais" ng-model="registro.paisID" ng-options="pais.paisID as pais.descripcion for pais in paises "></select>
+                            </div>
+                        </div>
+                       
+                        
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                A&ntilde;o <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" maxlength="4" min="4" ng-required="true" name="year" numbers-only class="form-control" placeholder="Ejemplo: 1999" ng-model="registro.year" required>
+                            </div>
+                        </div>
+                        <div class="x_title">
+                            <h2>Autores de ponencia</h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Autores internos <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <a ng-click="openUser()" class="btn btn-success">
+                                    <span class="fa fa-user-plus"></span> Buscar
+                                </a>
+                                <div>
+                                    <div class="col-md-12" ng-if="PersonaSeleccionada.clavePersona!=null">
+                                        <div class="col-xs-6 col-md-3">
+                                            <input disabled class="form-control" ng-model="autorIIE.clavePersona" />
+                                        </div>
+                                        <div class="col-xs-6 col-md-5">
+                                            <input disabled class="form-control" ng-model="autorIIE.nombrePersona" />
+                                        </div>
+                                        <div class="col-xs-6 col-md-3">
+                                            <select class="form-control" ng-model="autorIIE.contribucion" ng-options="cn.id as cn.descripcion for cn in catNum | orderBy:'lugar' track by cn.lugar"></select>
+                                        </div>
+                                        <div class="col-xs-6 col-md-1">
+                                            <a title="Agregar" ng-click="add_user()" class="btn btn-success">
+                                                <i class="glyphicon glyphicon-ok"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div ng-show="AutoresIIE.length > 0">
+                                    <table id="CHponenciaAutoresIIE" class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" datatable="ng" width="100%" dt-options="dtOptions">
+                                        <thead>
+                                            <tr>
+                                                <th>Clave</th>
+                                                <th data-priority="1">Nombre</th>
+                                                <th>Contribuci&oacute;n</th>
+                                                <th data-priority="1" class="thAjuste text-center">Opciones</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="autor in AutoresIIE">
+                                                <td> <a class="linkTabla" ng-click="openProfile(autor.clavePersona)" style="cursor: hand;cursor: pointer;" title="Detalle de empleado"> {{autor.clavePersona}}</a></td>
+                                                <td>{{autor.nombreCompleto}}</td>
+                                                <td>{{autor.contribucion}}</td>
+                                                <td class="text-center">
+                                                    <div>
+                                                        <a title="Eliminar"  class="btn btn-danger" ng-really-click="delete(autor);ValidForm.$setDirty();"  ng-really-message="¿Está seguro de eliminar el autor interno?">
+                                                            <i class="glyphicon glyphicon-trash"></i>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Autores externos
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <a class="btn btn-success" ng-click="addExt=true">
+                                    <span class="fa fa-user-plus"></span> Agregar
+                                </a>
+                                <div ng-hide="!addExt">
+                                    <div class="col-md-12">
+                                        <div class="col-xs-6 col-md-4">
+                                            <input class="form-control" placeholder="Nombre" maxlength="150" ng-model="autorExt.nombre" />
+                                        </div>
+                                        <div class="col-xs-6 col-md-4">
+                                            <input class="form-control" placeholder="Organización" maxlength="200" ng-model="autorExt.institucion" />
+                                        </div>
+                                        <div class="col-xs-6 col-md-3">
+                                            <select class="form-control" ng-model="autorExt.contribucion" ng-options="cn.id as cn.descripcion for cn in catNum | orderBy:'lugar' track by cn.lugar"></select>
+                                        </div>
+                                        <div class="col-xs-6 col-md-1">
+                                            <a title="Agregar" ng-click="add_userExt();ValidForm.$setDirty();" class="btn btn-success">
+                                                <i class="glyphicon glyphicon-ok"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div ng-show="AutoresExt.length > 0">
+                                    <table id="CHponenciaAutoresExt" class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" datatable="ng" width="100%" dt-options="dtOptions">
+                                        <thead>
+                                            <tr>
+                                                <th data-priority="1">Nombre</th>
+                                                <th>Organización</th>
+                                                <th>Contribuci&oacute;n</th>
+                                                <th data-priority="1" class="thAjuste text-center">Opciones</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="autor in AutoresExt">
+                                                <td style="max-width:100px" class="sin-desborde">{{autor.nombre}}</td>
+                                                <td style="max-width:100px" class="sin-desborde">{{autor.institucion}}</td>
+                                                <td>{{autor.contribucion}}</td>
+                                                <td class="text-center">
+                                                    <div>
+                                                        <a title="Eliminar"  class="btn btn-danger" ng-really-click="deleteExt(autor);ValidForm.$setDirty();"  ng-really-message="¿Está seguro de eliminar el autor externo?">
+                                                            <i class="glyphicon glyphicon-trash"></i>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="x_title">
+                            <h2>Evidencia <small>Tama&ntilde;o m&aacute;ximo por archivo de 8 MB</small></h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Documento adjunto
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div ng-show="!regFile">
+                                    <span class="fa fa-download"></span>&nbsp;&nbsp;<a href="/Descargas.html#/q/{{registro.adjunto.adjuntoId | encriptar}}" class="linkTabla" target="_blank">Descargar Archivo</a>
+                                    &nbsp;&nbsp;
+                                    <a class="btn btn-danger" title="Eliminar Archivo" ng-click="deleteFile();ValidForm.$setDirty();">
+                                        <i class="glyphicon glyphicon-trash"></i>
+                                    </a>
+                                </div>
+                                <div class="form-group" ng-show="regFile">
+                                    <input class="input-file form-control col-md-7 col-xs-12" type="file" name="filesGral" id="filesGral" data-buttonName="btn-success"
+                                           ng-click="saveIG();" ng-model="filesGral"
+                                           onchange="angular.element(this).scope().getFileDetails(this);" />
+                                </div>
+                                <!--<label ng-disabled>Nota: Para enviar la solicitud es necesario incluir el documento adjunto de evidencia.</label>-->
+                            </div>
+                        </div>
+                        <div class="x_title">
+                            <h2>Observaciones</h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Nota
+                            </label>
+                            <div class="span-label  col-md-6 col-sm-6 col-xs-12">
+                                <textarea placeholder="" maxlength="500" ng-model="registro.nota" class="form-control"></textarea>
+                            </div>
+                        </div>
+                        <div class="jumbotron-fondo">
+                            <div class="x_title">
+                                <h2>Validación de información</h2>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                    Fecha
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <div class="row">
+                                        <div class="col-xs-10">
+                                            <input datepicker-options="datePicker.FechaOptions"
+                                                   placeholder="dd/mm/yyyy" ng-minlength="8" name="FechaValidacion" maxlength="10" ng-init="open3=false" type="text" show-button-bar="false" popup-placement="bottom" class="form-control" uib-datepicker-popup="dd/MM/yyyy" ng-model="FechaValidacionAux" value="{{ FechaValidacionAux | date: 'dd/MM/yyyy' }}" is-open="open3" close-text="Close" ng-required="true" />
+                                            <span ng-show="ValidForm.fechaval.$dirty &&  ValidForm.fechaval.$invalid" class="error">Formato inválido 'dd/MM/yyyy'</span>
+                                        </div>
+
+                                        <div class="col-xs-2">
+                                            <button type="button" class="btn btn-success" ng-click="open3=true"><i class="glyphicon glyphicon-calendar"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                    Justificaci&oacute;n
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <textarea class="form-control" ng-model="justificacion" maxlength="500"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">
+
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <button type="submit" class="btn btn-success" ng-really-click="save(2)"  ng-really-message="{{aprobacionQ}}"
+                                            ng-show="regFile || !regFile || editAdmin=='1'"
+                                            ng-disabled="desactivar || !ValidForm.tituloPonencia.$valid
+                                            ||!ValidForm.nivelPublicacionId.$valid ||!ValidForm.ambitoId.$valid
+                                            ||!ValidForm.estadoPonenciaId.$valid ||!ValidForm.paginasde.$valid
+                                            ||!ValidForm.paginashasta.$valid ||!ValidForm.palabrasClave.$valid
+                                            ||!ValidForm.congresonombreSelect.$valid ||!ValidForm.numero.$valid
+                                            ||!ValidForm.fechaInicio.$valid ||!ValidForm.pais.$valid
+                                            ||!ValidForm.year.$valid || AutoresIIE.length==0 ||!ValidForm.FechaValidacion.$valid || FechaValidacionAux==null">
+                                        <i class="glyphicon glyphicon-saved"></i> Aprobar Solicitud
+                                    </button>
+                                    <button type="submit" class="btn btn-warning" ng-really-click="save(3)" ng-if="editAdmin!='1'" ng-really-message="{{rechazoQ}}"
+                                            ng-disabled="desactivar || !ValidForm.tituloPonencia.$valid
+                                            ||!ValidForm.nivelPublicacionId.$valid ||!ValidForm.ambitoId.$valid
+                                            ||!ValidForm.estadoPonenciaId.$valid ||!ValidForm.paginasde.$valid
+                                            ||!ValidForm.paginashasta.$valid ||!ValidForm.palabrasClave.$valid
+                                            ||!ValidForm.congresonombreSelect.$valid ||!ValidForm.numero.$valid
+                                            ||!ValidForm.fechaInicio.$valid ||!ValidForm.pais.$valid
+                                            ||!ValidForm.year.$valid || AutoresIIE.length==0 || !ValidForm.FechaValidacion.$valid || FechaValidacionAux==null">
+                                        <i class="fa fa-reply"></i> Regresar Solicitud
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ln_solid"></div>
+                        <div class="form-group">
+                            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                <div class="">
+                                    <button type="submit" class="btn btn-success" ng-click="save(1)" 
+                                            ng-disabled="desactivar || !ValidForm.tituloPonencia.$valid
+                                            ||!ValidForm.nivelPublicacionId.$valid ||!ValidForm.ambitoId.$valid
+                                            ||!ValidForm.estadoPonenciaId.$valid ||!ValidForm.paginasde.$valid
+                                            ||!ValidForm.paginashasta.$valid ||!ValidForm.palabrasClave.$valid
+                                            ||!ValidForm.congresonombreSelect.$valid ||!ValidForm.numero.$valid
+                                            ||!ValidForm.fechaInicio.$valid ||!ValidForm.pais.$valid
+                                            ||!ValidForm.year.$valid || AutoresIIE.length==0">
+                                        <i class="glyphicon glyphicon-saved"></i> Actualizar
+                                    </button>
+                                    <button type="button" confirma-regresar="globalRegresar()" state-form="ValidForm"  class="btn btn-primary">
+                                        <span class="fa fa-arrow-left"></span> Regresar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

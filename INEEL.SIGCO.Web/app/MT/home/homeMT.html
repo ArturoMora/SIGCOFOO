@@ -1,0 +1,161 @@
+
+﻿<!-- page content -->
+<div class="vista">
+
+    <div class="page-title">
+        <div class="title_left">
+            <div class="col-xs-12">
+                <h3 class="titColor"><img src="/Resources/icono_home_mt_verde.png" /> Memoria tecnol&oacute;gica (MT)</h3>
+            </div>
+            <div class="row">&nbsp;</div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-sm-7 col-xs-12">
+            <div class="col-sm-6 col-xs-12">
+
+                <div class="row top_tiles">
+                    <a ui-sref="BuscarInformesBecarios">
+                        <div class="animated flipInY col-xs-12">
+
+                            <div class="tile-stats">
+                                <div class="icon2"><i class="sg sg-informes-bec"></i></div>
+                                <div class="count">{{model.informeBecarios}}</div>
+                                <h3>Informes de becarios</h3>
+                            </div>
+
+                        </div>
+                    </a>
+                    <a ui-sref="BuscarInsumos">
+                        <div class="animated flipInY col-xs-12">
+                            <div class="tile-stats">
+                                <div class="icon2"><i class="sg sg-insumos-proyect sg-1x"></i></div>
+                                <div class="count">{{model.insumos}}</div>
+                                <h3>Insumos de proyectos</h3>
+                            </div>
+                        </div>
+                    </a><a ui-sref="BuscarCursos">
+                        <div class="animated flipInY col-xs-12">
+                            <div class="tile-stats">
+                                <div class="icon2"><i class="sg sg-cursos-cap"></i></div>
+                                <div class="count">{{model.cursos}}</div>
+                                <h3>Cursos impartidos</h3>
+                            </div>
+                        </div>
+                    </a><a ui-sref="BuscarLeccionesAprendidas">
+                        <div class="animated flipInY col-xs-12">
+                            <div class="tile-stats">
+                                <div class="icon2"><i class="sg sg-lecciones-aprend"></i></div>
+                                <div class="count">{{model.leccionesAp}}</div>
+                                <h3>Lecciones aprendidas</h3>
+                            </div>
+                        </div>
+                    </a><a ui-sref="libros">
+                        <div class="animated flipInY col-xs-12">
+                            <div class="tile-stats">
+                                <div class="icon2"><i class="sg sg-libros"></i></div>
+                                <div class="count">{{model.libros}}</div>
+                                <h3>Libros</h3>
+                            </div>
+                        </div>
+                    </a>
+
+                </div>
+            </div>
+
+            <div class="col-sm-6 col-xs-12">
+                <div class="row top_tiles">
+                    <a ui-sref="ListaItf">
+                        <div class="animated flipInY col-xs-12">
+                            <div class="tile-stats">
+                                <div class="icon2"><i class="sg sg-informes-tecnico"></i></div>
+                                <div class="count">{{model.informesTF}}</div>
+                                <h3>Informes t&eacute;cnicos finales</h3>
+                            </div>
+                        </div>
+                    </a><a ui-sref="SoftwarePersonalGet">
+                        <div class="animated flipInY col-xs-12">
+                            <div class="tile-stats">
+                                <div class="icon2"><i class="sg sg-software-des"></i></div>
+                                <div class="count">{{model.software}}</div>
+                                <h3 style="font-style:italic">Software</h3>
+                            </div>
+                        </div>
+                    </a><a ui-sref="BuscarArticulos">
+                        <div class="animated flipInY col-xs-12">
+                            <div class="tile-stats">
+                                <div class="icon2"><i class="sg sg-articulos-ponencia-cap3"></i></div>
+                                <div class="count">{{model.articulos}}</div>
+                                <h3>Art&iacute;culos</h3>
+                            </div>
+                        </div>
+                    </a><a ui-sref="BuscarPonencias">
+                        <div class="animated flipInY col-xs-12">
+                            <div class="tile-stats">
+                                <div class="icon2"><i class="sg sg-articulos-ponencia-cap2"></i></div>
+                                <div class="count">{{model.ponencias}}</div>
+                                <h3>Ponencias</h3>
+                            </div>
+                        </div>
+                    </a><a ui-sref="BuscarCapitulos">
+                        <div class="animated flipInY col-xs-12">
+                            <div class="tile-stats">
+                                <div class="icon2"><i class="sg sg-articulos-ponencia-cap1"></i></div>
+                                <div class="count">{{model.capitulos}}</div>
+                                <h3>Cap&iacute;tulos</h3>
+                            </div>
+                        </div>
+
+                    </a>
+
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-md-5 col-sm-5 col-xs-12">
+            <div class="row">
+                <div class="x_panel">
+                    <div class="x_content sin-desborde">
+                        <div class="text-center">
+                            <a class="btn btn-app" ng-click="setGlobalGo('buscarProyectos')">
+                                <!--<span class="badge bg-green">&nbsp;</span>-->
+                                <i class="fa fa-file-powerpoint-o"></i> Buscar proyectos
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2 class="titColor">Última informaci&oacute;n agregada </h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li>
+                                <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+
+                    <div class="x_content sin-desborde">
+                        <article class="media event" ng-repeat="n in nuevosOCs | limitTo: 30">
+                            <a class="pull-left date">
+                                <p class="month">{{n.fechaRegistro | date:'MMM'}}</p>
+                                <p class="day">{{n.fechaRegistro | date:'dd'}}</p>
+                            </a>
+                            <div class="media-body">
+                                <a class="title" href="{{n.liga}}">{{n.ocs.nombre}} </a>
+                                <p>{{n.descripcion}} </p>
+                            </div>
+                        </article>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- end page content -->

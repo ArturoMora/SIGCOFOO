@@ -1,0 +1,43 @@
+﻿<div class="vista">
+    <div class="page-title">
+        <div class="title_left">
+            <ol class="breadcrumb miga">
+                <li ng-if="datosOk==false"><i class="disabled fa fa-file-text-o"></i> <a ui-sref="ConsultaLineamientos">Consultas/Lineamientos de comunidades de pr&aacute;ctica</a></li>
+                <li ng-if="datosOk==true"><i class="disabled fa fa-search"></i> <a ng-click="regresar()" href="">Lineamientos de comunidades de pr&aacute;ctica</a></li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-xs-12 col-lg-12 col-md-12">
+            <div  ng-repeat="e in lineamientos">
+                <div class="col-sm-6 col-md-6 col-lg-6">
+                    <div class="x_panel">
+                        <div class="x_content sin-desborde">
+                            <div style="height: 55px;">
+                                <h2><b>{{e.nombre}}</b></h2>
+                            </div>
+                            
+                            <span><b>Fecha de registro</b></span>&nbsp;&nbsp; {{e.fechaRegistro | date}}<br/>
+                            <span><b>Tipo de lineamiento</b></span> &nbsp;&nbsp;{{e.nombreTipoLineamiento}}<br/>
+                            <span><b>N&uacute;mero de comentarios</b></span>&nbsp;&nbsp;{{e.comentarios.length}}<br />
+                            <span ng-if="e.adjuntoId!=null" class="fa fa-download"></span>&nbsp;&nbsp;<a ng-if="e.adjuntoId!=null" href="/Descargas.html#/q/{{e.adjunto.adjuntoId | encriptar}}" class="linkTabla" target="_blank">{{e.nombreAdjunto}}</a><br/>
+                            <a ng-if="rol.invitado==false" class="btn btn-success" ui-sref="ConsultaComentariosLineamientos({ id: e.lineamientoId })" title="Ver comentarios">
+                                <i class="glyphicon glyphicon-comment"></i> Ver comentarios
+                            </a>
+                        </div>
+                    </div>
+                </div>    
+            </div>
+            
+        </div>
+    </div>
+    <div class="row">
+        <div ng-if="datosOk==true" class="col-xs-12">
+            <button type="button" ng-click="regresar()" class="btn btn-primary">
+                <span class="fa fa-arrow-left"></span> Regresar
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,119 @@
+﻿<div id="page-wrapper">
+    <br />
+    <div class="row">
+        <div class="col-lg-12">
+            <h2 class="page-header">
+                Resultados de la evaluación
+            </h2>
+        </div>
+    </div>
+
+    <br />
+    
+    <div class="row">
+        <div class="col-lg-12" style="vertical-align:top">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+
+                    <table id="personal" class="table table-condensed table-hover">
+                        <thead>
+                            <tr>
+                                <th>Datos generales del empleado</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Período : {{periodo}}</td>
+                            </tr>
+                            <tr>
+                                <td>Area : {{nombreUnidad}}</td>
+                            </tr>
+                            <tr>
+                                <td>Nombre : {{clave}} {{nombre}} </td>
+                            </tr>
+                            <tr>
+                                <td>Categoría (Nómina) : {{cateemp}}</td>
+                            </tr>
+                            <tr>
+                                <td>Familia de puestos : {{nombreFamilia}}</td>
+                            </tr>
+                            <tr>
+                                <td> Categoría  :  {{catcomp}}</td>
+                            </tr>
+                            <tr>
+                                <td> Resultado de la evaluación general : {{calificacion}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="panel-body" style="vertical-align:top">
+                    
+                        <h4><strong>Competencias</strong></h4>
+                        <table id="matriz" class="table table-condensed table-hover">
+                            <thead>
+                                <tr>
+                                    <th data-priority="1">Competencia</th>
+                                    <th>Nivel de dominio exigido</th>
+                                    <th>Comportamiento</th>
+                                    <th>Justificación con hechos tangibles/comportamientos</th>
+                                    <th>Nivel de dominio real</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="obj in competenciasaevaluar">
+                                    <td>{{obj.matriz.competencia.competencia}}</td>
+                                    <td>{{obj.matriz.descnivel.nivel.descripcion}}</td>
+                                    <td>{{obj.matriz.descnivel.comportamiento}}</td>
+                                    <td>{{obj.justificacion}}</td>
+                                    <td>{{obj.valorReal}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                  
+
+                    <div class="col-lg-12">               
+                        <table  id="anotaciones" class="table table-condensed table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Información adicional</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Fortalezas : </td>
+                                </tr>
+                                <tr>
+                                    <td>{{datosevaluado.fortalezas}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Areas de mejora : </td>
+                                </tr>
+                                <tr>
+                                    <td>{{datosevaluado.areasMejora}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Plan de acción : </td>
+                                </tr>
+                                <tr>
+                                    <td>{{datosevaluado.debilidades}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                    </div>
+                 
+                    
+                    <div class="form-group">
+                        <button type="button" ng-click="imprimirReporte()" class="btn btn-success" style="padding-right:15px">
+                            <span class="fa fa-arrow-left"></span> Imprimir
+                        </button>
+                        <button type="button" ui-sref="formularioevaluacionconductuales({id:datosevaluado.evaluacionId})" ng-click="parametrosTransferencia()" class="btn btn-default" style="padding-right:15px">
+                            <span class="fa fa-arrow-left"></span> Regresar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

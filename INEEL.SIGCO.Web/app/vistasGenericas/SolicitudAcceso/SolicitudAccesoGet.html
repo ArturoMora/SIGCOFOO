@@ -1,0 +1,139 @@
+﻿<!-- page content -->
+<div class="vista">
+
+    <div class="page-title">
+        <div class="title_left">
+
+            <ol class="breadcrumb miga">
+                <li> <a ui-sref="">Solicitudes de acceso</a></li>
+            </ol>
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Mostrar</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li>
+                            <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content sin-desborde">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            
+                            <div class="form-group col-lg-4">
+
+                                <select class="form-control" ng-model="opc" ng-change="cargaTabla(opc)">
+                                    <option value="8,11">Pendientes</option>
+                                    <option value="10,13">Aceptadas</option>
+                                    <option value="9,12"> Rechazadas</option>
+                                    <!--<option value="0"> Todas</option>-->
+                                </select>
+                            </div>
+                           
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+                    <table id="tablaSolicitudesAccesoMT" class="display dt-responsive" cellspacing="0" datatable="ng" width="100%" dt-options="dtOptions" dt-column-defs="dtColumnDefs">
+                        <thead>
+                            <tr>
+                                <th data-priority="1">Solicitante</th>
+                                <th>Fecha solicitud</th>
+                                <th>Tipo Informaci&oacute;n</th>
+                                <th style="max-width:30%;">Justificaci&oacute;n</th>
+                                <th>M&oacute;dulo</th>
+                                <th data-priority="2">Opciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="t in registros" >
+                                <td style="cursor: hand;cursor: pointer;">
+                                    <label class="linkTabla" ng-click="openProfile(t.clavePersonaSolicitante)"  title="Detalle de empleado">
+                                        {{t.clavePersonaSolicitante}}
+                                    </label>
+                                <label class="linkTabla" ng-click="DetallesOC(t)" title="Detalles de la solicitud">
+                                    - {{t.nombreCompletoSolicitante}}
+                                    </label>
+                                </td>
+                                <td>{{t.fechaSolicitud | date:'yyyy-MM-dd'}}</td>
+                                <td>{{t.tipoInformacion.descripcion}}</td>
+                                
+                                <td style="max-width:30%;">{{t.justificacion==null? 'Sin justificación' : t.justificacion}}</td>
+                                <td>{{t.moduloId}}</td>
+                                <td>
+                                    <!--SoftwarePersonalDetails({ id:  t.informacionOCId })-->
+
+                                    <a ng-show="t.estadoFlujoId==8 || t.estadoFlujoId==11" ng-click="AprobarAcceso(t)" class="btn btn-primary" title="Aceptar">
+                                        <span class="glyphicon glyphicon-ok"></span>
+                                    </a>
+                                    <a ng-show="t.estadoFlujoId==8 || t.estadoFlujoId==11" ng-click="DenegarAcceso(t)" class="btn btn-danger" title="Rechazar">
+                                        <span class="glyphicon glyphicon-remove"></span>
+                                    </a>
+                                    <a ng-click="$event.stopPropagation();" ui-sref="bitacoraSolicitudesAcceso({id:t.solicitudAccesoId})" title="Bit&aacute;cora"
+                                       class="btn btn-success">
+                                        <i class="fa fa-list-alt"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <!--<table dt-instance="dtInstance" class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" datatable="ng" width="100%" dt-options="dtOptions">
+                        <thead>
+                            <tr>
+                               
+                                <th data-priority="1">Solicitante</th>
+                                <th>Fecha solicitud</th>
+                                <th>Tipo Informaci&oacute;n</th>
+                                <th>M&oacute;dulo</th>
+                                <th data-priority="2">Opciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="t in registros">
+                                <td title="{{t.clavePersonaSolicitante}}">
+                                    <a href="" ng-click="DetallesOC(t)" class="linkTabla" title="Detalles de la solicitud">
+                                        {{t.nombreCompletoSolicitante}}
+                                    </a>
+                                </td>
+                                <td>{{t.fechaSolicitud | date:'yyyy-MM-dd'}}</td>
+                                <td>{{t.tipoInformacion.descripcion}}</td>
+                                <td>{{t.moduloId}}</td>
+                                <td>
+                             
+                                    <a ng-show="t.estadoFlujoId==8 || t.estadoFlujoId==11" ng-click="AprobarAcceso(t)" class="btn btn-primary" title="Aceptar">
+                                        <span class="glyphicon glyphicon-ok"></span>
+                                    </a>
+                                    <a ng-show="t.estadoFlujoId==8 || t.estadoFlujoId==11" ng-click="DenegarAcceso(t)" class="btn btn-danger" title="Rechazar">
+                                        <span class="glyphicon glyphicon-remove"></span>
+                                    </a>
+                                    <a ng-click="$event.stopPropagation();" ui-sref="bitacoraSolicitudesAcceso({id:t.solicitudAccesoId})" title="Bit&aacute;cora" 
+                                       class="btn btn-success">
+                                        <i class="fa fa-list-alt"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>-->
+                </div>
+            </div>
+        </div>
+        <!--registros: {{registros | json}}-->
+
+    </div>
+</div>
+<!-- end page content -->

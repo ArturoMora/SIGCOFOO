@@ -1,0 +1,77 @@
+﻿<div class="modal-content sin-desborde">
+    <div class="modal-header">
+
+
+
+        <!--<button type="button" class="close" ng-click="cancel()" data-dissmiss="modal">
+        <i class="glyphicon glyphicon-remove"></i>
+    </button>-->
+
+        <button type="button" confirma-regresar="cancel()" state-form="sitioAddForm" class="close" data-dissmiss="modal">
+            <i class="glyphicon glyphicon-remove"></i>
+        </button>
+
+
+        <div class="col-xs-1"></div>
+        <div>
+            <h3>
+                Agregar sitio de inter&eacute;s
+            </h3>
+        </div>
+
+
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <form ng-submit="agregarRegistro()" name="sitioAddForm" id="sitioAddForm" class="form-horizontal">
+                <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                        Categor&iacute;a del sitio <span class="required">*</span>
+                    </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <select required class="form-control" ng-model="sitiosInteres.idCategoria" ng-options="obj.catSitioId as obj.nombreCategoria for obj in categoriaSitio">
+                            <option value="">--- Selecciona una categor&iacute;a ---</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                        T&iacute;tulo<span class="required"> *</span>
+                    </label>
+                    <div class="col-md-6 col-sm-6 col-lg-6">
+                        <input required class="form-control" ng-model="sitiosInteres.titulo" minlength="2" maxlength="500"/>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                        Descripci&oacute;n
+                    </label>
+                    <div class="col-md-6 col-sm-6 col-lg-6">
+                        <textarea class="form-control" ng-model="sitiosInteres.descripcion" maxlength="300"></textarea>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                        URL<span class="required"> *</span>
+                    </label>
+                    <div class="col-md-6 col-sm-6 col-lg-6">
+                        <input required placeholder="http://www.dominio.com" class="form-control" ng-pattern="/^(http|https)?(:\/\/)(www)?(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?$/" ng-model="sitiosInteres.liga" maxlength="500" />
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">
+                        <i class="glyphicon glyphicon-saved"></i> Guardar
+                    </button>
+                </div>
+            </form>
+            
+        </div>
+        
+
+    </div>
+
+    
+</div>

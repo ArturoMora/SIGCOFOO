@@ -1,0 +1,104 @@
+﻿<div class="modal-content">
+    <div class="modal-header">
+        Agregar evento
+        <!--<button type="button" class="close" ng-click="cancel()" data-dissmiss="modal">x</button>-->
+        <button type="button" confirma-regresar="cancel()" state-form="eventoAddForm" class="close" data-dissmiss="modal">
+            <i class="glyphicon glyphicon-remove"></i>
+        </button>
+    </div>
+   
+        <div class="modal-body">
+          
+                <div class="panel">
+                    <div class="panel-body">
+                        <form  ng-submit="agregarEvento()" novalidate name="eventoAddForm" class="form-horizontal">
+
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">
+                                    Evento<span class="required"> *</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <textarea required  type="text" name="asunto" placeholder="Evento a programar" ng-model="asunto"  class="form-control col-md-7 col-xs-12"   rows="3" ng-minlength="2" ng-maxlength="300" maxlength="300" />
+                                    <span class="error" ng-show="eventoAddForm.asunto.$dirty && !eventoAddForm.asunto.$valid">
+                                        El rango de caracteres debe ser m&iacute;nimo 15 y m&aacute;ximo 250
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">
+                                    Lugar<span class="required"> *</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input  required type="text" name="lugar" ng-model="lugar" placeholder="Sitio en donde se llevara a cabo el evento"  class="form-control col-md-7 col-xs-12"   ng-minlength="2" ng-maxlength="300" minlength="2" maxlength="250" />
+                                    <span class="error" ng-show="eventoAddForm.lugar.$dirty && !eventoAddForm.lugar.$valid">
+                                        El rango de caracteres debe ser m&iacute;nimo 15 y m&aacute;ximo 100
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                    Fecha del evento<span class="required"> *</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <div class="row">
+                                        <div class="col-xs-10">
+                                            <input required type="text" name="fechaEvento" placeholder="dd/mm/yyyy" show-button-bar="false" popup-placement="bottom" class="form-control fechaOnly" datepicker-options="datePicker50.FechaOptions" uib-datepicker-popup="dd/MM/yyyy" ng-model="fechaReunion" value="{{ date | date: 'dd/MM/yyyy' }}" ng-init="openDate=false" is-open="openDate" close-text="Close" />
+                                            <span ng-show="eventoAddForm.fechaEvento.$dirty &&  eventoAddForm.fechaEvento.$invalid" class="error">Formato inv&aacute;lido 'dd/MM/yyyy'</span>
+                                        </div>
+                                        <div class="col-xs-2">
+                                            <button type="button" class="btn btn-success" ng-click="openDate=true"><i class="glyphicon glyphicon-calendar"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                    Hora del evento<span class="required"> *</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                            <input type="text"  required  id="horaReunion" name="horaReunion" ng-model="horaReunion" onfocus="(this.type='time')"  placeholder="HH:mm am/pm"  />
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">
+                                    Tipo de acceso<span class="required"> *</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <select required name="tipoacceso" class="form-control" ng-model="tipoAcceso" scrolly style="overflow: scroll">
+                                        <option value="" selected>--- Seleccione un tipo de acceso ---</option>
+                                        <option value="1">P&uacute;blico</option>
+                                        <option value="0">Restringido</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-success">
+                                    <i class="glyphicon glyphicon-saved"></i> Guardar
+                                </button>
+
+                           
+
+
+
+                                <button type="button" class="btn btn-primary" confirma-regresar="cancel()" state-form="eventoAddForm" >Cancelar</button>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+          
+        </div>
+       
+    
+</div>

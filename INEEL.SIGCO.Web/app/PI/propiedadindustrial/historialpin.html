@@ -1,0 +1,77 @@
+<div class="vista">
+    <div class="page-title">
+        <div class="title_left">
+            <ol class="breadcrumb miga">
+                <li><i class="glyphicon glyphicon-file"></i> <a ui-sref="propiedadindustrialget">Propiedad industrial</a></li>
+                <li class="active">Historial</li>
+            </ol>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+
+                <div class="x_content sin-desborde">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <label class="detalle col-xs-12" title="Nombre">
+                        {{propiedadindustrial.titulo}} 
+                    </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div ng-show="propiedadindustrial.historial.length === 0" class="alert advertencia">
+                                No hay historial para mostarar.
+                            </div>
+                            <div ng-show="propiedadindustrial.historial.length > 0">
+                                <table id="pisinst" class="table table-hover table-striped table-condensed dt-responsive" width="100%">
+                                    <thead>
+                                        <tr>
+                                            <th>Acci&oacute;n</th>
+                                            <th>Fecha</th>
+                                            <th>Adjunto</th>
+                                            <th data-priority="1" class="thAjuste text-center">Opciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="registro in propiedadindustrial.historial">
+                                            <td>
+                                                {{ registro.accion}}
+                                            </td>
+                                            <td>
+                                                {{registro.fechaAccion | date :'dd/MM/yyyy'}}
+                                            </td>
+                                            <td>
+                                                <div ng-show="registro.adjuntoId !==  null">
+                                                    <span class="fa fa-download"></span>&nbsp;&nbsp;<a href="/Descargas.html#/q/{{registro.adjuntoId | encriptar}}"
+                                                        class="linkTabla" target="_blank">Descargar Archivo</a> &nbsp;&nbsp;
+                                                </div>
+                                            </td>
+                                            <td class="text-center">
+                                                <a class="btn btn-warning" ui-sref="historialpineditar({ id: registro.historialPIId})" title="Editar PI">
+                                                    <i class="glyphicon glyphicon-pencil"></i>
+                                                </a>
+                                                <a title="Eliminar" ng-really-message="¿Seguro de eliminar la acción?" ng-really-click="eliminar(registro)" class="btn btn-danger">
+                                                            <i class="glyphicon glyphicon-trash"></i>
+                                                        </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button type="button" ui-sref="historialpinagregar({id :pinid})" class="btn btn-success">
+                            <span class="glyphicon glyphicon-plus"></span> Agregar </button>
+            <button type="button" ui-sref="propiedadindustrialget" class="btn btn-primary" style="padding-right:15px">
+                                        <span class="fa fa-arrow-left"></span> Regresar
+                                    </button>
+        </div>
+    </div>
+</div>

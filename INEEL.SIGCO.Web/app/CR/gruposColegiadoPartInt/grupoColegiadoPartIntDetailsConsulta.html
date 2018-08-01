@@ -1,0 +1,184 @@
+<div class="vista">
+    <div class="page-title">
+        <div class="title_left">
+
+            <ol class="breadcrumb miga">
+                <li><i class="sg sg-partes-interesadas"></i> <a class="cursorPointer" ng-click="globalRegresar()">Partes Interesadas /Grupo colegiado</a></li>
+                <li class="active">Detalles</li>
+            </ol>
+
+        </div>
+    </div>
+    <div data-ng-hide="authentication.isAuth">
+        No tiene permisos para ingresar a esta secci&oacute;n..<br /> Usuario no autentificado
+    </div>
+    <div data-ng-show="authentication.isAuth">
+        <div class="clearfix"></div>
+        <div class="row">
+            <div class="col-md-8 col-sm-8 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_content sin-desborde">
+                        <label class="detalle col-xs-12 " title="Nombre">
+                            {{gruposColegiadoPartInt.nombre}}
+                        </label>
+                        <label class="cont col-xs-12">
+                            {{gruposColegiadoPartInt.descripcion}}
+                        </label>
+                        <label class="tit col-xs-12">
+                            Naturaleza de su interacci&oacute;n
+                        </label>
+                        <label class="cont col-xs-12">
+                            {{gruposColegiadoPartInt.naturalezaInteraccion.nombre}}
+                        </label>
+                        <label class="tit col-xs-12">
+                            Fecha de incorporaci&oacute;n
+                        </label>
+                        <label class="cont col-xs-12">
+                            {{gruposColegiadoPartInt.fechaRegistro   | date:"dd/MM/yyyy"}}
+                        </label>
+                        <label class="tit col-xs-12">
+                            Estado del grupo
+                        </label>
+                        <label class="cont col-xs-12">
+                            {{consultaEstado(gruposColegiadoPartInt.estado)}}
+                        </label>
+                    </div>
+                </div>
+                <div class="x_panel" ng-show="gruposColegiadoPartInt.integranteGrupoColegiadoExterno.length > 0">
+                    <div class="x_title">
+                        <h2>Integrantes externos</h2>
+                        <div class="clearfix"></div>
+                    </div>
+                    
+                    <table class="table table-hover table-striped table-condensed dt-responsive sin-desborde " cellspacing="0" width="100%">
+                        <thead>
+                            <tr>
+                                <th data-priority="1">Nombre</th>
+                                <th>Cargo</th>
+                                <th>Empresa</th>
+                            </tr>
+                        </thead>
+                        <tr ng-repeat="integrantesGC in gruposColegiadoPartInt.integranteGrupoColegiadoExterno track by $index">
+                            <td><load-contacto registroid="{{integrantesGC.contacto.contactoId}}" descripcion="{{integrantesGC.contacto.nombreCompleto}}" /></td>
+                            <td>{{integrantesGC.cargoGC}}</td>
+                            <td>{{integrantesGC.contacto.empresa.nombreEmpresa}}</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="x_panel" ng-show="gruposColegiadoPartInt.integranteGrupoColegiadoInterno.length > 0">
+                    <div class="x_title">
+                        <h2>Integrantes internos</h2>
+                        <div class="clearfix"></div>
+                    </div>
+                    <table class="table table-hover table-striped table-condensed dt-responsive sin-desborde " cellspacing="0" width="100%">
+                        <thead>
+                            <tr>
+                                <th data-priority="1">Nombre</th>
+                                <th>Cargo</th>
+
+                            </tr>
+                        </thead>
+                        <tr ng-repeat="obj in gruposColegiadoPartInt.integranteGrupoColegiadoInterno track by $index">
+                            <td>{{obj.nombre}}</td>
+                            <td>{{obj.cargoGC}}</td>
+                        </tr>
+                    </table>
+                </div>
+
+            </div>
+            <div class="col-md-4 col-sm-4 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_content sin-desborde">
+                        <div class="x_title">
+                            <h2>Titular</h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <label class="titFirst col-xs-12 detalle_subtitulo">
+                            {{gruposColegiadoPartInt.contacto.nombreCompleto}}
+                        </label>
+                        <label class="titFirst col-xs-12">
+                            {{gruposColegiadoPartInt.contacto.empresa.nombreEmpresa}}
+                        </label>
+                        <label class="cont col-xs-12">
+                            {{gruposColegiadoPartInt.contacto.puesto}}
+                        </label><br />
+
+                        <label class="cont col-xs-12">
+                            {{gruposColegiadoPartInt.contacto.telefono}}
+                        </label>
+                        <label class="cont col-xs-12">
+                            {{gruposColegiadoPartInt.contacto.correo}}
+                        </label>
+                    </div>
+                </div>
+                <div class="x_panel">
+                    <div class="x_content sin-desborde">
+                        <div class="x_title">
+                            <h2>Domicilio</h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div ng-show="gruposColegiadoPartInt.calle.length > 0">
+                            <div ng-if="gruposColegiadoPartInt.colonia.length > 0">
+                                <label class="cont col-xs-12">
+                                    {{gruposColegiadoPartInt.calle}}, 
+                                </label>
+                            </div>
+                            <div ng-if="!gruposColegiadoPartInt.colonia.length > 0">
+                                <label class="cont col-xs-12">
+                                    {{gruposColegiadoPartInt.calle}}
+                                </label>
+                            </div>
+                        </div>
+                        <div ng-show="gruposColegiadoPartInt.colonia.length > 0">
+                            <div ng-if="gruposColegiadoPartInt.municipios">
+                                <label class="cont col-xs-12">
+                                    Colonia {{gruposColegiadoPartInt.colonia}},
+                                </label>
+                            </div>
+                            <div ng-if="!gruposColegiadoPartInt.municipios">
+                                <label class="cont col-xs-12">
+                                    Colonia {{gruposColegiadoPartInt.colonia}}
+                                </label>
+                            </div>
+                        </div>
+                        <div ng-show="gruposColegiadoPartInt.municipios">
+                            <div ng-if="gruposColegiadoPartInt.estados">
+                                <label class="cont col-xs-12">
+                                    {{gruposColegiadoPartInt.municipios.nombreMunicipio}}, {{gruposColegiadoPartInt.estados.nombreEstado}}
+                                </label>
+                            </div>
+                            <div ng-if="!gruposColegiadoPartInt.estados">
+                                <label class="cont col-xs-12">
+                                   {{gruposColegiadoPartInt.municipios.nombreMunicipio}}
+                                </label>
+                            </div>
+                        </div>
+                        <div ng-show="!gruposColegiadoPartInt.municipios">
+                            <div ng-if="gruposColegiadoPartInt.estados">
+                                <label class="cont col-xs-12">
+                                    {{gruposColegiadoPartInt.estados.nombreEstado}}
+                                </label>
+                            </div>
+                        </div>
+                        <div ng-show="gruposColegiadoPartInt.cp.length > 0">
+                                <label class="cont col-xs-12">
+                                    C.P. {{gruposColegiadoPartInt.cp}}
+                                </label>
+                        </div>
+                        
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <button type="button" ng-click="globalRegresar()" class="btn btn-primary">
+                    <span class="fa fa-arrow-left"></span> Regresar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+

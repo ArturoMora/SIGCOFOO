@@ -1,0 +1,37 @@
+<div class="vista">
+    <div class="page-title">
+        <div class="title_left">
+            <ol class="breadcrumb miga">
+                <li>
+                    <i class="sg sg-clientes"></i>
+                    <a href=""> Clientes</a>
+                </li>
+            </ol>
+        </div>
+    </div>
+    
+    <div class="clearfix"></div>
+    <div class="row">
+        <div ng-init="html='app/CR/clientes/ClientesProyectosVigentes.html'; tab=1; cambiaEstilo('p1','p2')">
+            <nav class="navbar pestanias_cp" style="cursor:pointer">
+                <div class="container-fluid">
+
+                    <ul class="nav navbar-nav">
+                        <li ng-class="{'pestania_activa' : tab==1, 'pestania_inactiva' : tab==2}">
+                            <a ng-click="html='app/CR/clientes/ClientesProyectosVigentes.html'; tab=1; cambiaEstilo('p1','p2')" id="p1" >Clientes con proyectos vigentes
+                                <span class="badge bg-green">{{vigentes}}</span>
+                            </a>
+                        </li>
+                        <li ng-class="{'pestania_activa' : tab==2, 'pestania_inactiva' : tab==1}">
+                            <a ng-click="html='app/CR/clientes/ClientesProyectosHistoricos.html'; tab=2; cambiaEstilo('p2', 'p1')" id="p2">Clientes con proyectos hist&oacute;ricos
+                                <span class="badge bg-green">{{historicos}}</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        <div ng-include="html+'?date='+now"></div>
+        
+    </div>
+</div>

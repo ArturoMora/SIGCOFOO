@@ -1,0 +1,80 @@
+﻿<div class="modal-header">
+    <button type="button" class="close" ng-click="cancel()" data-dissmiss="modal">
+        <i class="glyphicon glyphicon-remove"></i>
+    </button>
+    <div class="col-xs-1"></div>
+    <div>
+        <h3>
+            Organizaciones p&uacute;blicas o privadas
+        </h3>
+    </div>
+</div>
+<div class="modal-body">
+    <div class="row">
+        <div class="col-xs-12" ng-show="empresas.length==0 || nueva===true">
+            <form class="form-horizontal" name="frmBuscar">
+
+                <div class="form-group">
+                    <label class="col-xs-12 col-md-4 control-label" for="searchTextNombre">Nombre:</label>
+                    <div class="col-xs-12 col-md-8">
+                        <input type="text" autofocus ng-model="empresa.NombreEmpresa" id="searchTextNombre" name="searchTextNombre" ng-change="empresa.EmpresaId=null"
+                            class="form-control" placeholder="Nombre de la organizaci&oacute;n p&uacute;blica o privada " ng-pattern="/^[ñáéíóúÑÁÉÍÓÚa-zA-Z]{2}[a-zA-ZñáéíóúÑÁÉÍÓÚ\s]*$/"
+                            ng-minlength="2" />
+                        <span class="error" ng-show="frmBuscar.searchTextNombre.$dirty && frmBuscar.searchTextNombre.$error.pattern">
+                            Contenido inv&aacute;lido para nombre <br />
+                        </span>
+                        <span class="error" ng-show="frmBuscar.searchTextNombre.$dirty && !frmBuscar.searchTextNombre.$valid">
+                            Longitud m&iacute;nima de 2 caracteres.
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-4"></div>
+                    <div class="col-xs-12 col-md-8">
+                        <button class="btn btn-info btn-flat" ng-click="nueva=false;buscar(empresa)" ng-disabled="(
+                                (frmBuscar.searchTextNombre.$invalid)
+                                || (!frmBuscar.searchTextNombre.$dirty)
+                                )
+                                || click">
+                            Buscar <i class="glyphicon glyphicon-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-xs-1"></div>
+        <div ng-hide="empresas.length==0 || nueva">
+            <button class="btn btn-info btn-flat" ng-click="nueva=true;empresas=[];">
+                Realizar nueva b&uacute;squeda <i class="glyphicon glyphicon-search"></i>
+            </button>
+        </div>
+    </div>
+    <hr/>
+    <div class="row">
+        <div class="col-sm-12" ng-hide="empresas.length==0">
+            <table  class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" datatable="ng" width="100%"
+                dt-options="dtOptions">
+                <thead>
+                    <tr>
+
+                        <th>Clave organizaci&oacute;n</th>
+                        <th>Nombre</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="empresa in empresas" style="cursor: pointer;text-decoration: underline;" ng-click="empresaSelect.emp = empresa; ok()"
+                        id="{{empresa.empresaId}}">
+                        <td>{{empresa.empresaId}}</td>
+                        <td>{{empresa.nombreEmpresa}}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
+<!-- final modal body
+<div class="modal-footer">
+    <button type="button" class="btn btn-success animate-if" ng-click="ok()" ng-if="empleadoSelect.emp != null">Aceptar</button>
+    <button type="button" class="btn btn-cancel" ng-click="cancel()">Cancelar</button>
+</div>-->

@@ -1,0 +1,185 @@
+﻿<div class="vista">
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Informaci&oacute;n de puestos </h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content ">
+                    <form role="form" ng-submit="AddContactoPuesto()" novalidate name="contactoPuestoAddForm" class="form-horizontal" ng-init="trabajoActual=true">
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Empresa
+                                <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <select ng-required="true" class="form-control" name="empresa" ng-model="contactoPuesto.empresaId" ng-change="limpiar()" ng-options="empresa.empresaId as empresa.nombreEmpresa for empresa in empresas">
+                                    <option value="">--- Selecciona una Empresa ---</option>
+                                </select>
+                                <!-- <span class="error" ng-show="contactoForm.empresa.$invalid && contactoForm.$submitted">
+                                    Debes seleccionar una Empresa
+                                </span> -->
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Unidad organizacional 
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="row">
+                                    <div class="col-xs-11">
+                                        <input type="text" class="form-control" name="unidad" ng-model="contactoPuesto.unidadOrganizacionalEmpresas.nombreUnidad"
+                                            disabled="disabled" />
+                                    </div>
+                                    <div class="col-xs-1">
+                                        <button class="btn btn-success" ng-click="openUnidadesOrg(contactoPuesto.empresaId)" title="Buscar unidad organizacional">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <div class="form-group">
+                            <div class="clearfix"></div>
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Instituci&oacute;n o Empresa
+                                <span class="required"> *</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-10">
+                                <input type="text" class="form-control" id="empresa" name="empresa" ng-model="nombreEmpresa" disabled ng-required="true">
+                                <span class="error" ng-show="contactoPuestoAddForm.empresa.$invalid && contactoPuestoAddForm.empresa.$dirty">
+                                    Debes de agregar una empresa
+                                </span>
+                            </div>
+                            <div class="col-xs-2">
+                                <a ng-click="openEmpresa()" class="btn btn-success" title="Buscar empresa" ng-disabled="desabilitarBuscarEmpresa">
+                                    <i class="glyphicon glyphicon-search"></i>
+                                </a>
+                            </div>
+                        </div> -->
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Puesto
+                                <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input required type="text" name="puestoContacto" maxlength="150" ng-model="contactoPuesto.puesto" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="x_title">
+                            <h2>Per&iacute;odo </h2>
+                            <div class="clearfix"></div>
+                        </div>
+
+
+
+                        <!-- <div ng-show="!trabajoActual"> -->
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Fecha inicio
+                                <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <p class="input-group">
+                                    <input placeholder="dd/mm/yyyy" show-button-bar="false" uib-datepicker-popup='dd/MM/yyyy' ng-minlength="8" maxlength="10"
+                                        datepicker-options="datePicker.FechaOptions" popup-placement="bottom" type="text" class="form-control fechaOnly"
+                                        ng-model="contactoPuesto.fechaInicio" is-open="open" ng-required="true" close-text="Close"
+                                    />
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-success" ng-click="open=true">
+                                            <i class="glyphicon glyphicon-calendar"></i>
+                                        </button>
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Trabaja aqu&iacute; actualmente &nbsp;</label>
+                            <input type="checkbox" class="btn btn-info btn-circle" title="&iquest;Agregar fecha de término al puesto?" ng-model="trabajoActual"
+                            />
+                            <!-- <div class="col-md-3 col-sm-3 col-xs-12">
+                                    <input type="checkbox" class="btn btn-info btn-circle" title="&iquest;Agregar fecha de término al puesto?" ng-model="trabajoActual" />
+                                </div> -->
+                        </div>
+
+                        <div class="form-group" ng-show="!trabajoActual">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Fecha t&eacute;rmino
+                                <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <p class="input-group">
+                                    <input placeholder="dd/mm/yyyy" ng-required="!trabajoActual" ng-init="open2=false" type="text" show-button-bar="false" popup-placement="bottom"
+                                        class="form-control" uib-datepicker-popup="dd/MM/yyyy" ng-minlength="8" maxlength="10"
+                                        datepicker-options="datePicker.FechaOptions" ng-model="contactoPuesto.fechaFinal" value="{{ date | date: 'dd/MM/yyyy' }}"
+                                        is-open="open2" close-text="Close" />
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-success" ng-click="open2=true">
+                                            <i class="glyphicon glyphicon-calendar"></i>
+                                        </button>
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-4 col-sm-4 col-xs-12"></div>
+                            <label class="col-md-6 col-sm-6 col-xs-12 error" ng-show="contactoPuesto.fechaInicio!=null && (contactoPuesto.fechaInicio > contactoPuesto.fechaFinal) && !trabajoActual">La fecha inicio no debe ser mayor a la fecha final</label>
+                        </div>
+                        <!-- </div> -->
+
+                        <div class="form-group">
+                            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                <div class="">
+                                    <button type="submit" class="btn btn-success" ng-disabled="contactoPuestoAddForm.$invalid">
+                                        <i class="glyphicon glyphicon-saved"></i> Guardar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="x_panel">
+                        <div class="x_content sin-desborde">
+                            <div ng-show="contactosPuesto.length === 0" class="alert advertencia">
+                                No existen puestos agregados para el contacto
+                            </div>
+                            <div ng-hide="contactosPuesto.length === 0">
+                                <table id="CRpuestoAdd" dt-instance="dtInstance" class="table table-hover table-striped table-condensed" cellspacing="0"
+                                    datatable="ng" width="100%" dt-options="dtOptions">
+                                    <thead>
+                                        <tr>
+                                            <th data-priority="1">Empresa</th>
+                                            <th data-priority="1">Unidad organizacional</th>
+                                            <th>Puesto</th>
+                                            <th>Periodo</th>
+                                            <th data-priority="1">Opciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="p in contactosPuesto">
+                                            <td style="max-width:200px;" class="sin-desborde">{{p.empresa.nombreEmpresa}}</td>
+                                            <td>{{p.unidad.nombreUnidad}}</td>
+                                            <td>{{p.puesto}}</td>
+                                            <td>{{p.fechaInicio | date:'dd-MM-yyyy'}} - {{p.fechaFinal==null? 'Actualidad' :
+                                                p.fechaFinal | date:'dd-MM-yyyy'}}</td>
+                                            <td>
+                                                <a class="btn btn-warning" ng-click="editarPuestoContacto(p.contactoPuestoHistoricoId)" title="Editar">
+                                                    <i class="glyphicon glyphicon-pencil"></i>
+                                                </a>
+                                                <a class="btn btn-danger" ng-click="eliminarPuestoContacto(p.contactoPuestoHistoricoId, p.contactoId)" title="Eliminar">
+                                                    <i class="glyphicon glyphicon-trash"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

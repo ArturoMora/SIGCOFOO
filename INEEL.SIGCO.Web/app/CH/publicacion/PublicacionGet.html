@@ -1,0 +1,61 @@
+﻿<div data-ng-show="authentication.isAuth">
+    <div ng-hide="registros.length >= 0">
+        <img src="images/cargando.gif" />
+    </div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div ng-show="registros.length === 0" class="alert advertencia">
+                No hay registros de art&iacute;culos.
+            </div>
+            <div ng-show="registros.length > 0" class="sin-desborde">
+                <table id="CHPublicacionGet" class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" datatable="ng" width="100%" dt-column-defs="dtColumnDefs"
+                       dt-options="dtOptions">
+                    <thead>
+                        <tr>
+                            <th data-priority="1">T&iacute;tulo</th>
+                            <th class="text-center">Fecha<br />publicaci&oacute;n</th>
+                            <th class="text-center">Estado<br />registro</th>
+                            <th class="text-center">Fecha<br />validaci&oacute;n</th>
+                            <th data-priority="1" class="thAjuste text-center">Opciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                       
+                        <tr ng-repeat="registro in registros">
+                            <td style="max-width:300px" class="linkTabla sin-desborde" ng-click="$event.stopPropagation();" ui-sref="publicacionDetails({id:registro.publicacionId})" title="Detalle">{{registro.tituloPublicacion}}</td>
+                            <td class="text-center">{{registro.fechaPublicacion | date:"dd/MM/yyyy"}}</td>
+                            <td class="text-center">{{registro.estadoFlujo.descripcion}}</td>
+                            <td class="text-center">{{registro.fechaValidacion === null ? 'Dato no disponible' : registro.fechaValidacion | date:"dd/MM/yyyy"}}</td>
+                            <td class="text-center">
+
+                                <a ng-if="idRol==1" ng-click="setGlobalID(registro.publicacionId);$event.stopPropagation();" ui-sref="PublicacionDetailsAdmin({id:'',id2: 1})" title="Aprobar registro" class="btn btn-warning">
+                                    <i class="glyphicon glyphicon-pencil"></i>
+                                </a>
+                                <div ng-if="registro.estadoFlujoId==1 || editarGestion==1">
+                                    <a ng-if="idRol!=1" ng-click="setGlobalID(registro.publicacionId);$event.stopPropagation();" ui-sref="publicacionEdit" title="Editar" class="btn btn-warning">
+                                        <i class="glyphicon glyphicon-pencil"></i>
+                                    </a>
+
+                                    <a title="Eliminar" ng-if="registro.fechaValidacion === null && (registro.estadoFlujoId!=3 && registro.estadoFlujoId!=8)"
+                                       ng-click="open(registro)" class="btn btn-danger">
+                                        <i class="glyphicon glyphicon-trash"></i>
+                                    </a>
+                                </div>
+                                <div ng-if="registro.estadoFlujoId==3 && registro.clavePersona == EmpleadoQueConsulta ">
+                                    <a ng-if="idRol!=1" ng-really-message="Está a punto de acceder a un registro 'Aceptado', si modifica algún atributo deberá ser validado nuevamente. ¿Desea continuar?" ng-really-click="setGlobalID(registro.publicacionId);$event.stopPropagation();navegador();" title="Editar" class="btn btn-warning">
+                                        <i class="glyphicon glyphicon-pencil"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <button ng-show="registros.length >= 0" type="button" ng-click="$event.stopPropagation();" ui-sref="publicacionAdd" class="btn btn-success">
+                <span class="glyphicon glyphicon-plus"></span> Agregar
+            </button>
+        </div>
+
+    </div>
+</div>

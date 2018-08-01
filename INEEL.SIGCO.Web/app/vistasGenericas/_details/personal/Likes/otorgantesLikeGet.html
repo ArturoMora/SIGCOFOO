@@ -1,0 +1,51 @@
+﻿<div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" ng-click="cancel()" data-dissmiss="modal">x</button>
+        <font>
+            Aptitud: {{aptidud}}({{cant}})
+        </font>
+
+    </div>
+    <form role="form" ng-submit="ok()" novalidate name="eventoAddForm">
+        <div class="modal-body">
+            <div class="panel">
+                <div class="row">
+                    <div class="col-sm-12" ng-hide="personasOtorgantes.length==0">
+                        <table class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" width="100%">
+                            <!--<thead>
+                                <tr>
+                                    <th>Foto</th>
+                                    <th>Datos del validador</th>
+                                    <th>Nombre</th>
+
+                                </tr>
+                            </thead>-->
+                            <tbody>
+                                <tr ng-repeat="empleado in personasOtorgantes ">
+                                    <td>
+                                        <img ng-show="empleado.img64 === null" class="img-circle" src="images/incognito.png" alt="Base64 encoded image"
+                                             width="70" height="70" />
+                                        <img ng-show="empleado.img64 != null" class="img-circle" ng-src="data:image/png;base64,{{empleado.img64}}"
+                                             alt="Base64 encoded image" width="70" height="70" />
+
+                                    </td>
+                                    <td title="{{empleado.clavePersona}}">
+                                        <strong>{{empleado.nombre}} </strong><br />
+                                        <span title="{{empleado.categoria}}">{{empleado.tipoPersonal}} / {{empleado.unidad}}</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" ng-click="cancel()" class="btn btn-primary" style="padding-right:15px">
+                Aceptar
+            </button>
+        </div>
+    </form>
+</div>
+

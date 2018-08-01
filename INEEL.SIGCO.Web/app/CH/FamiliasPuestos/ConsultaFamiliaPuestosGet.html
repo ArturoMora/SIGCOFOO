@@ -1,0 +1,273 @@
+﻿<div class="vista">
+
+    <div class="page-title">
+        <div class="title_left">
+
+            <ol class="breadcrumb miga">
+                <li><i class="sg sg-familia-puestos"></i> <a>Familia de puestos/Por tipo de competencia</a></li>
+
+            </ol>
+
+        </div>
+    </div>
+
+
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Criterios de búsqueda</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li>
+                            <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content sin-desborde">
+
+                    <div class="form-horizontal form-label-center">
+
+                        <div class="form-group ">
+                            <label class="control-label col-md-4 col-sm-4 col-xs-12">
+                                Tipo de personal
+                            </label>
+                            <div class="col-md-4 col-sm-8 col-xs-12">
+                                <select ng-model="NivelPersonalSel" name="NivelPersona" ng-change="FiltrarCatalogos()" class="form-control">
+                                     <option value="0" ng-selected="0">Seleccione una de las opciones aquí mostradas</option>
+                                     <option ng-repeat="x in nivelPersonal" value="{{x.valor}}">{{x.descripcion}}</option>
+                                   
+                                </select>
+                            </div>
+                        </div>
+
+
+                        
+
+                        <div ng-show="FiltraCatalogoPorPersonal == 1 ">
+                            <div class="form-group ">
+                                <label class="control-label col-md-4 col-sm-4 col-xs-12">
+                                    Tipo de competencia
+                                </label>
+                                <div class="col-md-4 col-sm-8 col-xs-12">
+
+                                    <select id="tipoCompetencia" name="tipocompetencia" class="form-control"
+                                            ng-change="cargarCatalogos()"
+                                            ng-model="tipoCompetenciaId"
+                                            ng-options="e.tipoCompetenciaId as e.nombreCompetencia  for e in tipocompetencia" ng-required="true">
+                                        <option value="">Seleccione un tipo de competencia </option>
+                                    </select>
+
+                                </div>
+                            </div>
+
+                            <div ng-show="tipoCompetenciaConsultada == 1">
+                                <div class="form-group ">
+                                    <label class="control-label col-md-4 col-sm-4 col-xs-12">
+                                        Familia de puestos
+                                    </label>
+                                    <div class="col-md-4 col-sm-8 col-xs-12">
+
+                                        <select id="familiaId" name="familias" class="form-control"
+                                                ng-change="cargarCategorias()"
+                                                ng-model="familiaId"
+                                                ng-init="familiaId"
+                                                ng-options="e.familiaId as e.nombreFamilia  for e in familiasPuestos" ng-required="true">
+                                            <option value="">Seleccione una familia de puestos </option>
+                                        </select>
+
+                                    </div>
+                                </div>
+
+                                <div class="form-group ">
+                                    <label class="control-label col-md-4 col-sm-4 col-xs-12">
+                                        Categorías
+                                    </label>
+                                    <div class="col-md-4 col-sm-8 col-xs-12">
+
+                                        <select id="categoriaId" name="categorias" class="form-control"
+                                                ng-change="cargarMatriz()"
+                                                ng-model="categoriaId"
+                                                ng-init="categoriaId"
+                                                ng-options="e.categoriaId as e.nombreCategoria  for e in categoriasFamilias" ng-required="true">
+                                            <option value="">Seleccione una categoría </option>
+                                        </select>
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div ng-show="tipoCompetenciaConsultada == '2'">
+                                <div class="form-group ">
+                                    <label class="control-label col-md-4 col-sm-4 col-xs-12">
+                                        Tipo de área
+                                    </label>
+                                    <div class="col-md-4 col-sm-8 col-xs-12">
+
+                                        <select id="areaev" name="areaev" class="form-control"
+                                                ng-change="cargarNivelesPorArea()"
+                                                ng-model="tipoAreaId"
+                                                ng-options="e.tipoAreaId as e.area  for e in tipoarea" ng-required="true">
+                                            <option value="">Seleccione un tipo de área </option>
+                                        </select>
+
+                                    </div>
+                                </div>
+
+                                <div class="form-group ">
+                                    <label class="control-label col-md-4 col-sm-4 col-xs-12">
+                                        Nivel de competencia
+                                    </label>
+                                    <div class="col-md-4 col-sm-8 col-xs-12">
+
+                                        <select id="nvtec" name="NivelesTecnicas" class="form-control"
+                                                ng-change="cargarCompetenciasTecnicas()"
+                                                ng-model="nivelId"
+                                                ng-options="e.nivelCompetenciaId as e.descripcion  for e in niveles" ng-required="true">
+                                            <option value="">Seleccione un nivel de competencia</option>
+                                        </select>
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div ng-show="FiltraCatalogoPorPersonal == 2 ">
+
+                            <div class="form-group ">
+                                <label class="control-label col-md-4 col-sm-4 col-xs-12">
+                                    Familia de puestos
+                                </label>
+                                <div class="col-md-4 col-sm-8 col-xs-12">
+
+                                    <select id="familiaIdSind" name="familiasSind" class="form-control"
+                                            ng-change="cargarCategoriasSind()"
+                                            ng-model="familiaId"
+                                            ng-init="familiaId"
+                                            ng-options="e.familiaId as e.nombreFamilia  for e in familiasPuestosSind" ng-required="true">
+                                        <option value="">Seleccione una familia de puestos </option>
+                                    </select>
+
+                                </div>
+                            </div>
+
+                            <div class="form-group ">
+                                <label class="control-label col-md-4 col-sm-4 col-xs-12">
+                                    Categorías
+                                </label>
+                                <div class="col-md-4 col-sm-8 col-xs-12">
+
+                                    <select id="categoriaId" name="categorias" class="form-control"
+                                            ng-change="cargarMatrizSind()"
+                                            ng-model="categoriaId"
+                                            ng-init="categoriaId"
+                                            ng-options="e.categoriaId as e.nombreCategoria  for e in categoriasFamiliasSind" ng-required="true">
+                                        <option value="">Seleccione una categoría </option>
+                                    </select>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+   
+
+    <div ng-show="muestraListado === 1">
+
+        <div ng-show="tipoCompetenciaConsultada == 1 ">
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="x_panel">
+                        <div class="x_content sin-desborde">
+
+
+
+                            <div ng-show="FiltraCatalogoPorPersonal == 1 ">
+
+                                <table class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" width="100%">
+                                    <thead>
+                                        <tr>
+                                            <th data-priority="1">Competencia</th>
+                                            <th>Nivel</th>
+                                            <th>Comportamiento</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="obj in matriz">
+                                            <td>{{obj.competencia.competencia}}</td>
+                                            <td>{{obj.descnivel.nivel.descripcion}}</td>
+                                            <td>{{obj.descnivel.comportamiento}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                            </div>
+                           
+                            <div ng-show="FiltraCatalogoPorPersonal == 2 ">
+
+                                <table class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" width="100%">
+                                    <thead>
+                                        <tr>
+                                            <th data-priority="1">Competencia</th>
+                                            <th>Nivel</th>
+                                            <th>Comportamiento</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="obj in matriz">
+                                            <td>{{obj.relaciones.competenciasSind.competencia}}</td>
+                                            <td>{{obj.relaciones.niveles.descripcion}}</td>
+                                            <td>{{obj.relaciones.relacioncomportamiento.comportamientos.descripcion}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div ng-show="tipoCompetenciaConsultada == 2 ">
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="x_panel">
+                        <div class="x_content sin-desborde">
+
+                            <table class="table table-hover table-striped table-condensed dt-responsive">
+                                <thead>
+                                    <tr>
+                                        <th data-priority="1">Competencia</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="obj in registroCompetenciasTecnicas">
+                                        <td>{{obj.competencia}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+

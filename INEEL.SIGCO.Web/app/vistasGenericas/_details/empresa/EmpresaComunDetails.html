@@ -1,0 +1,793 @@
+﻿<div class="vista">
+    <div class="page-title">
+        <div class="title_left">
+            <ol class="breadcrumb miga">
+                <li><i class="fa fa fa-building"></i> <a>Empresa</a></li>
+                <li class="active">Detalles</li>
+            </ol>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-xs-12">
+            <!--Panel principal de empresa-->
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2 class="detalle">{{empresa.nombreEmpresa}}</h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content sin-desborde">
+                    <div class="col-md-6 col-xs-12 profile_left">
+                        <div class="profile_img">
+                            <div id="crop-avatar">
+                                <img ng-if="empresa.adjunto64" class="centered-and-cropped" ng-src="data:image/png;base64,{{empresa.adjunto64}}" width="300" height="180" title={{empresa.nombreEmpresa}}>
+                                <img width="300" height="180" ng-if="empresa.adjunto64 === null" src="images/empresa.png" />
+                                <a class="btn btn-success hidden-print" ng-click="full=!full" title="{{full?'Filtrar':'Mostrar todo'}}"><i class="fa fa-{{full?'compress':'expand'}}"></i></a>
+                            </div>
+                        </div>
+
+                        <br />
+                        <ul class="list-unstyled user_data">
+                            <li ng-show="empresa.empresa.tipoOrganizacion.nombre!=null">
+                                <i class="fa fa fa-institution"></i> {{empresa.tipoOrganizacion.nombre}}
+                            </li>
+                            <li ng-show="empresa.nombreTitular!=null">
+                                <i class="fa fa fa-user"></i> {{empresa.nombreTitular}}
+                            </li>
+                            <li lass="m-top-xs" ng-show="empresa.puesto!=null">
+                                <i class="fa fa-briefcase user-profile-icon"></i> {{empresa.puesto}}
+                            </li>
+                            <li lass="m-top-xs" ng-show="empresa.correo!=null">
+                                <i class="fa fa fa-envelope"></i> {{empresa.correo}}
+                            </li>
+                            <li lass="m-top-xs" ng-show="empresa.telefono!=null">
+                                <i class="fa fa fa-phone" title="Tel"></i> {{empresa.telefono}} | {{empresa.ext}}
+                            </li>
+                            <li lass="m-top-xs" ng-show="empresa.celular!=null">
+                                <i class="fa fa fa-mobile-phone" title="celular"></i> {{empresa.celular}}
+                            </li>
+                            <li lass="m-top-xs" ng-show="empresa.sitioWeb!=null">
+                                <i class="fa fa-briefcase user-profile-icon"></i> {{empresa.sitioWeb}}
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6 col-xs-12">
+                        <div ng-show="empresa.descripcion != null">
+                            <div class="x_title">
+                                <h2>Descripci&oacute;n </h2>
+                                <div class="clearfix"></div>
+                            </div>
+                            <ul class="list-unstyled user_data">
+                                <li class="m-top-xs">
+                                    <i class="fa fa"></i> {{empresa.descripcion}}
+                                </li>
+                            </ul>
+                        </div>
+                        <div ng-show="empresa.descripcion == null">
+                            <div class="alert advertencia">
+                                No hay informaci&oacute;n  registrada sobre la empresa
+                            </div>
+                        </div>
+                        <div class="x_title" ng-show="empresa.edo!=null || empresa.munipio!=null || empresa.calle!=null || empresa.colonia!=null || empresa.localidad!=null || empresa.cp!=null">
+                            <h2>Domicilio </h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <ul class="list-unstyled user_data">
+                            <li class="m-top-xs" ng-show="empresa.edo!=null">
+                                <i class="fa fa"></i>Estado: {{empresa.edo}}
+                            </li>
+                            <li class="m-top-xs" ng-show="empresa.munipio!=null">
+                                <i class="fa fa"></i>Municipio: {{empresa.munipio}}
+                            </li>
+                            <li class="m-top-xs" ng-show="empresa.calle!=null">
+                                <i class="fa fa"></i>Calle: {{empresa.calle}}
+                            </li>
+                            <li class="m-top-xs" ng-show="empresa.colonia!=null">
+                                <i class="fa fa"></i>Colonia: {{empresa.colonia}}
+                            </li>
+                            <li class="m-top-xs" ng-show="empresa.localidad!=null">
+                                <i class="fa fa"></i>Localidad: {{empresa.localidad}}
+                            </li>
+                            <li class="m-top-xs" ng-show="empresa.cp!=null">
+                                <i class="fa fa"></i>cp: {{empresa.cp}}
+                            </li>
+                        </ul>
+                        <div class="col-lg-12">
+                            <div uo-modal-empresas clave="empresaId" plantilla="2" readonly="true"></div>
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+            <!--Panel proyectos-->
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Proyectos</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li>
+                            <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div ng-init="tab=1; cambiaEstiloProyectos('pestaniaProyectos1','pestaniaProyectos2')">
+                    <nav class="navbar pestanias_cp">
+                        <div class="container-fluid">
+                            <ul class="nav navbar-nav" style="cursor:pointer">
+                                <li ng-class="{'pestania_activa' : tab==1, 'pestania_inactiva' : tab==2}"><a ng-click="tab=1; cambiaEstiloProyectos('pestaniaProyectos1','pestaniaProyectos2')" id="pestaniaProyectos1">Vigentes <span class="badge bg-green">{{proyectosVigentesEmpresa.length}}</span></a></li>
+                                <li ng-class="{'pestania_activa' : tab==2, 'pestania_inactiva' : tab==1}"><a ng-click="tab=2; cambiaEstiloProyectos('pestaniaProyectos2','pestaniaProyectos1')" id="pestaniaProyectos2">Hist&oacute;ricos <span class="badge bg-green">{{proyectosNoVigentesEmpresa.length}}</span></a></li>
+                            </ul>
+                        </div>
+                    </nav>
+                    <!--Pestania de proyectos vigentes-->
+                    <div class="x_panel" ng-show="tab==1">
+                        <div class="x_content sin-desborde">
+                            <form name="ValidForm" id="form" class="form-horizontal">
+                                <div class="clearfix"></div>
+                                <div class="col-lg-12">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <br />
+                                            <div ng-show="proyectosVigentesEmpresa.length === 0" class="alert advertencia">No existen proyectos vigentes asociados a la empresa {{empresa.nombreEmpresa}}</div>
+                                        </div>
+                                    </div>
+                                    <div class="row" ng-show="proyectosVigentesEmpresa.length>0">
+                                        <div class="col-lg-12">
+                                            <div>
+                                                <table id="CRclienteGetConsulta" dt-instance="dtInstance" class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" datatable="ng" width="100%" dt-options="dtOptions">
+                                                    <thead>
+                                                        <tr>
+                                                            <th style="width:70px" data-priority="1">N&uacute;mero de proyecto</th>
+                                                            <th style="width:210px">Nombre de proyecto</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr ng-repeat="p in proyectosVigentesEmpresa">
+                                                            <td><a href="" load-proyectos idproyecto="{{p.proyectoId}}" title="Detalle de proyecto">{{p.proyectoId}}</a></td>
+                                                            <td>{{p.nombre}}</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+
+                    <!--Pestania de proyectos no vigentes-->
+                    <div class="x_panel" ng-show="tab==2">
+                        <div class="x_content sin-desborde">
+                            <form name="ValidForm" id="form" class="form-horizontal">
+
+                                <div class="clearfix"></div>
+                                <div class="col-lg-12">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <br />
+                                            <div ng-show="proyectosNoVigentesEmpresa.length === 0" class="alert advertencia">No existen proyectos hist&oacute;ricos asociados a la empresa {{empresa.nombreEmpresa}}</div>
+                                        </div>
+                                    </div>
+                                    <div class="row" ng-show="proyectosNoVigentesEmpresa.length > 0">
+                                        <div class="col-lg-12">
+                                            <div>
+                                                <table id="CRclienteGetConsultaproyectosAsignadosEmpresa" dt-instance="dtInstance" class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" datatable="ng" width="100%" dt-options="dtOptions">
+                                                    <thead>
+                                                        <tr>
+                                                            <th style="width:70px" data-priority="1">N&uacute;mero de proyecto</th>
+                                                            <th style="width:210px">Nombre de proyecto</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr ng-repeat="p in proyectosNoVigentesEmpresa ">
+                                                            <td><a href="" load-proyectos idproyecto="{{p.proyectoId}}" title="Detalle de proyecto">{{p.proyectoId}}</a></td>
+                                                            <td>{{p.nombre}}</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!--Panel convenios-->
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Convenios</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li>
+                            <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div ng-init="tabConv=1; cambiaEstiloConvenios('pestaniaConvenios1','pestaniaConvenios2')">
+                    <nav class="navbar pestanias_cp">
+                        <div class="container-fluid">
+                            <ul class="nav navbar-nav" style="cursor:pointer">
+                                <li ng-class="{'pestania_activa' : tabConv==1, 'pestania_inactiva' : tabConv==2}"><a id="pestaniaConvenios1" ng-click="tabConv=1; cambiaEstiloConvenios('pestaniaConvenios1','pestaniaConvenios2')">Vigentes <span class="badge bg-green">{{conveniosVigentes.length}}</span></a></li>
+                                <li ng-class="{'pestania_activa' : tabConv==2, 'pestania_inactiva' : tabConv==1}"><a id="pestaniaConvenios2" ng-click="tabConv=2; cambiaEstiloConvenios('pestaniaConvenios2','pestaniaConvenios1')">No vigentes <span class="badge bg-green">{{conveniosNoVigentes.length}}</span></a></li>
+                            </ul>
+                        </div>
+                    </nav>
+                    <!--Convenios activos-->
+                    <div class="x_panel" ng-show="tabConv==1">
+                        <div class="x_content sin-desborde">
+                            <form name="ValidForm" id="form" class="form-horizontal">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div ng-show="conveniosVigentes.length === 0" class="alert advertencia">No existen convenios vigentes asociados a la empresa {{empresa.nombreEmpresa}}</div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div ng-hide="conveniosVigentes.length === 0">
+                                            <table id="CRclienteGetConsultaoportunidadNegocioEmpresa" dt-instance="dtInstance" class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" datatable="ng" width="100%" dt-options="dtOptions">
+                                                <thead>
+                                                    <tr>
+                                                        <th>No Convenio</th>
+                                                        <th>Objeto Convenio</th>
+                                                        <th>Fecha t&eacute;rmino</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr ng-repeat="convenio in conveniosVigentes">
+                                                        <td>
+                                                            <a title="Detalles" class="linkTabla" ui-sref="convenioDetails({id: convenio.convenioId})" target="_blank">{{convenio.noConvenio}}</a>
+                                                        </td>
+                                                        <td>{{convenio.objetoConvenio}}</td>
+                                                        <td><a class="hidden">{{convenio.fechaTermino | date:'yyyy-MM-dd'}}</a>{{convenio.fechaTermino | date:'dd-MM-yyyy'}}</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!--Convenios inactivos-->
+                    <div class="x_panel" ng-show="tabConv==2">
+                        <div class="x_content sin-desborde">
+                            <form name="ValidForm" id="form" class="form-horizontal">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div ng-show="conveniosNoVigentes.length === 0" class="alert advertencia">No existen convenios no vigentes asociados a la empresa {{empresa.nombreEmpresa}}</div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div ng-hide="conveniosNoVigentes.length == 0">
+                                            <table id="CRclienteGetConsultaoportunidadNegocioEmpresa" dt-instance="dtInstance" class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" datatable="ng" width="100%" dt-options="dtOptions">
+                                                <thead>
+                                                    <tr>
+                                                        <th>No Convenio</th>
+                                                        <th>Objeto Convenio</th>
+                                                        <th>Fecha t&eacute;rmino</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr ng-repeat="convenio in conveniosNoVigentes">
+                                                        <td>
+                                                            <a title="Detalles" class="linkTabla" ui-sref="convenioDetails({id: convenio.convenioId})" target="_blank">{{convenio.noConvenio}}</a>
+                                                        </td>
+                                                        <td>{{convenio.objetoConvenio}}</td>
+                                                        <td><a class="hidden">{{convenio.fechaTermino | date:'yyyy-MM-dd'}}</a>{{convenio.fechaTermino | date:'dd-MM-yyyy'}}</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!--Panel izquierdo-->
+            <div class="col-md-6 col-lg-6">
+                <!--Proyectos vigentes empresa-->
+                <!--<div class="x_panel" ng-show="proyectosNoVigentesEmpresa.length > 0 || full">
+                <div class="x_title">
+                    <h2>Proyectos vigentes</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li>
+                            <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content sin-desborde">
+                    <form name="ValidForm" id="form" class="form-horizontal">
+                        <div class="clearfix"></div>
+                        <div class="col-lg-12">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <br />
+                                    <div ng-show="proyectosVigentesEmpresa.length === 0" class="alert advertencia">No existen proyectos vigentes asociados a la empresa {{empresa.nombreEmpresa}}</div>
+                                </div>
+                            </div>
+                            <div class="row" ng-show="proyectosVigentesEmpresa.length>0">
+                                <div class="col-lg-12">
+                                    <div>
+                                        <table id="CRclienteGetConsulta" dt-instance="dtInstance" class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" datatable="ng" width="100%" dt-options="dtOptions">
+                                            <thead>
+                                                <tr>
+                                                    <th style="width:70px" data-priority="1">N&uacute;mero de proyecto</th>
+                                                    <th style="width:210px">Nombre de proyecto</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-repeat="p in proyectosVigentesEmpresa">
+                                                    <td><a href="" load-proyectos idproyecto="{{p.proyectoId}}" title="Detalle de proyecto">{{p.proyectoId}}</a></td>
+                                                    <td>{{p.nombre}}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>-->
+                <!--Propuestas-->
+                <div class="x_panel" ng-show="propuestasAsignadosEmpresa.length > 0 || full">
+                    <div class="x_title">
+                        <h2>Propuestas</h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li>
+                                <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content sin-desborde">
+                        <form name="ValidForm" id="form" class="form-horizontal">
+
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div ng-show="propuestasAsignadosEmpresa.length === 0" class="alert advertencia">No existen propuestas asociadas a la empresa {{empresa.nombreEmpresa}}</div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div ng-show="propuestasAsignadosEmpresa.length > 0">
+                                        <table id="CRclienteGetConsultapropuestasAsignadosEmpresa" dt-instance="dtInstance" class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" datatable="ng" width="100%" dt-options="dtOptions">
+                                            <thead>
+                                                <tr>
+                                                    <th data-priority="1">N&uacute;mero de propuesta</th>
+                                                    <th>Nombre de propuesta</th>
+                                                    <th class="thCeldaB">Fecha</th>
+
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-repeat="p in propuestasAsignadosEmpresa">
+                                                    <td><a href="" ng-click="detallePropuestaAsignado(p.propuestaId)" title="Detalles">{{p.propuestaId}}</a></td>
+                                                    <td>{{p.titulo}}</td>
+                                                    <td><a class="hidden">{{p.fecha | date:'yyyy-MM-dd'}}</a> {{p.fecha | date:'dd-MM-yyyy'}}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!--Oportunidades de negocio-->
+                <div class="x_panel" ng-show="oportunidadNegocioEmpresa.length > 0 || full">
+                    <div class="x_title">
+                        <h2>Oportunidades de negocio</h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li>
+                                <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content sin-desborde">
+                        <form name="ValidForm" id="form" class="form-horizontal">
+
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div ng-show="oportunidadNegocioEmpresa.length === 0" class="alert advertencia">No existen oportunidades de negocio asociados a la empresa {{empresa.nombreEmpresa}}</div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div ng-hide="oportunidadNegocioEmpresa.length === 0">
+                                        <table id="CRclienteGetConsultaoportunidadNegocioEmpresa" dt-instance="dtInstance" class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" datatable="ng" width="100%" dt-options="dtOptions">
+                                            <thead>
+                                                <tr>
+                                                    <th>Nombre</th>
+                                                    <th>Contacto</th>
+                                                    <th>Fecha Registro</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-repeat="p in oportunidadNegocioEmpresa">
+                                                    <td><a target="_blank" ui-sref="oportunidadHistorico({ id: p.oportunidadNegocioId })" title="Detalles">{{p.nombreOportunidad}}</a></td>
+                                                    <td>{{p.contacto.nombreCompleto}}</td>
+                                                    <td><a class="hidden">{{p.fechaRegistro | date:'yyyy-MM-dd'}}</a>{{p.fechaRegistro | date:'dd-MM-yyyy'}}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!--Convenios vigentes-->
+                <!--<div class="x_panel" ng-show="conveniosVigentes.length>0 || full">
+                <div class="x_title">
+                    <h2>Convenios vigentes</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li>
+                            <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content sin-desborde">
+                    <form name="ValidForm" id="form" class="form-horizontal">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div ng-show="conveniosVigentes.length === 0" class="alert advertencia">No existen convenios vigentes asociados a la empresa {{empresa.nombreEmpresa}}</div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div ng-hide="conveniosVigentes.length === 0">
+                                    <table id="CRclienteGetConsultaoportunidadNegocioEmpresa" dt-instance="dtInstance" class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" datatable="ng" width="100%" dt-options="dtOptions">
+                                        <thead>
+                                            <tr>
+                                                <th>No Convenio</th>
+                                                <th>Objeto Convenio</th>
+                                                <th>Fecha t&eacute;rmino</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="convenio in conveniosVigentes">
+                                                <td>
+                                                    <a title="Detalles" class="linkTabla" ui-sref="convenioDetails({id: convenio.convenioId})" target="_blank">{{convenio.noConvenio}}</a>
+                                                </td>
+                                                <td>{{convenio.objetoConvenio}}</td>
+                                                <td><a class="hidden">{{convenio.fechaTermino | date:'yyyy-MM-dd'}}</a>{{convenio.fechaTermino | date:'dd-MM-yyyy'}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>-->
+                <!--Productos como competidor-->
+                <div class="x_panel" ng-show="productos.length > 0 || full">
+                    ">
+                    di
+                    <div class="x_title">
+                        <h2>Productos como competidor</h2>
+                        </
+                        av
+                        <ul class="nav navbar-right panel_toolbox">
+                            ba
+                            <li>
+                                <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content sin-desborde">
+                        <form name="ValidForm" id="form" class="form-horizontal">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div ng-show="productos.length === 0" class="alert advertencia">No existen convenios vigentes asociados a la empresa {{empresa.nombreEmpresa}}</div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div ng-hide="productos.length == 0">
+                                        <table id="CRclienteGetConsultaoportunidadNegocioEmpresa" dt-instance="dtInstance" class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" datatable="ng" width="100%" dt-options="dtOptions">
+                                            <thead>
+                                                <tr>
+                                                    <th>Nombre</th>
+                                                    <th>Descripci&oacute;n</th>
+                                                    <th>Tipo competidor</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-repeat="producto in productos">
+                                                    <td>{{producto.nomProd}}</td>
+                                                    <td>{{producto.descProd ==null? 'Sin descripción' : producto.descProd}}</td>
+                                                    <td>{{producto.tipoCompetidor}}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+
+            <!--Panel derecho-->
+            <div class="col-md-6 col-lg-6">
+                <!--Proyectos no vigentes-->
+                <!--<div class="x_panel" ng-show="proyectosNoVigentesEmpresa.length > 0 || full">
+                <div class="x_title">
+                    <h2>Proyectos no vigentes</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li>
+                            <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content sin-desborde">
+                    <form name="ValidForm" id="form" class="form-horizontal">
+
+                        <div class="clearfix"></div>
+                        <div class="col-lg-12">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <br />
+                                    <div ng-show="proyectosNoVigentesEmpresa.length === 0" class="alert advertencia">No existen proyectos asociados a la empresa {{empresa.nombreEmpresa}}</div>
+                                </div>
+                            </div>
+                            <div class="row" ng-show="proyectosNoVigentesEmpresa.length > 0">
+                                <div class="col-lg-12">
+                                    <div>
+                                        <table id="CRclienteGetConsultaproyectosAsignadosEmpresa" dt-instance="dtInstance" class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" datatable="ng" width="100%" dt-options="dtOptions">
+                                            <thead>
+                                                <tr>
+                                                    <th style="width:70px" data-priority="1">N&uacute;mero de proyecto</th>
+                                                    <th style="width:210px">Nombre de proyecto</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-repeat="p in proyectosNoVigentesEmpresa ">
+                                                    <td><a href="" load-proyectos idproyecto="{{p.proyectoId}}" title="Detalle de proyecto">{{p.proyectoId}}</a></td>
+                                                    <td>{{p.nombre}}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>-->
+                <!--Iniciativas-->
+                <div class="x_panel" ng-show="iniciativasAsignadasEmpresa.length > 0 || full">
+                    <div class="x_title">
+                        <h2>Iniciativas</h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                             <
+                            <li>
+                                 <
+                                <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content sin-desborde">
+                        <form name="ValidForm" id="form" class="form-horizontal">
+
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div ng-show="iniciativasAsignadasEmpresa.length === 0" class="alert advertencia">No existen iniciativas asociadas a la empresa {{empresa.nombreEmpresa}}</div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div ng-hide="iniciativasAsignadasEmpresa.length === 0">
+                                        <table id="CRclienteGetConsultainiciativasAsignadasEmpresa" dt-instance="dtInstance" class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" datatable="ng" width="100%" dt-options="dtOptions">
+                                            <thead>
+                                                <tr>
+                                                    <th data-priority="1">N&uacute;mero de iniciativa</th>
+                                                    <th>Nombre de iniciativa</th>
+                                                    <th class="thCeldaB">Fecha</th>
+
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-repeat="i in iniciativasAsignadasEmpresa">
+                                                    <td><a href="" ng-click="detalleIniciativaAsignada(i.folioId)" title="Detalles">{{i.folioId}}</a></td>
+                                                    <td>{{i.titulo}}</td>
+                                                    <td><a class="hidden">{{p.fecha | date:'yyyy-MM-dd'}}</a>{{i.fecha | date:'dd-MM-yyyy'}}</td>
+
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!--Fondos-->
+                <div class="x_panel" ng-show="fondos.length>0 || full">
+                    <div class="x_title">
+                        <h2>Fondos</h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li>
+                                <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content sin-desborde">
+                        <form name="ValidForm" id="form" class="form-horizontal">
+
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div ng-show="fondos.length === 0" class="alert advertencia">No existen fondos asociados a la empresa {{empresa.nombreEmpresa}}</div>
+                                </div>
+                            </div>
+                            <div class="row" ng-show="fondos.length>0">
+                                <div class="col-lg-12">
+                                    <div>
+                                        <table id="CRclienteGetConsultainiciativasAsignadasEmpresa" dt-instance="dtInstance" class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" datatable="ng" width="100%" dt-options="dtOptions">
+                                            <thead>
+                                                <tr>
+                                                    <th data-priority="1">Nombre</th>
+                                                    <th>Descripci&oacute;n</th>
+                                                    <th>Fecha registro</th>
+
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-repeat="fondo in fondos">
+                                                    <td>
+                                                        <a class="linkTabla" target="_blank" title="Detalles" ui-sref="fondoProgramaDetails({id: fondo.fondoProgramaId})">
+                                                            {{fondo.nombreFP}}
+                                                        </a>
+                                                    </td>
+                                                    <td>{{fondo.descripcion==null? 'Sin descripción' : fondo.descripcion}}</td>
+                                                    <td><a class="hidden">{{fondo.fechaRegistro | date:'yyyy-MM-dd'}}</a>{{fondo.fechaRegistro | date:'dd-MM-yyyy'}}</td>
+
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!--Convenios NO vigentes-->
+                <!--<div class="x_panel" ng-show="conveniosNoVigentes.length > 0 || full">
+                <div class="x_title">
+                    <h2>Convenios no vigentes</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li>
+                            <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content sin-desborde">
+                    <form name="ValidForm" id="form" class="form-horizontal">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div ng-show="conveniosNoVigentes.length === 0" class="alert advertencia">No existen convenios vigentes asociados a la empresa {{empresa.nombreEmpresa}}</div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div ng-hide="conveniosNoVigentes.length == 0">
+                                    <table id="CRclienteGetConsultaoportunidadNegocioEmpresa" dt-instance="dtInstance" class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" datatable="ng" width="100%" dt-options="dtOptions">
+                                        <thead>
+                                            <tr>
+                                                <th>No Convenio</th>
+                                                <th>Objeto Convenio</th>
+                                                <th>Fecha t&eacute;rmino</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="convenio in conveniosNoVigentes">
+                                                <td>
+                                                    <a title="Detalles" class="linkTabla" ui-sref="convenioDetails({id: convenio.convenioId})" target="_blank">{{convenio.noConvenio}}</a>
+                                                </td>
+                                                <td>{{convenio.objetoConvenio}}</td>
+                                                <td><a class="hidden">{{convenio.fechaTermino | date:'yyyy-MM-dd'}}</a>{{convenio.fechaTermino | date:'dd-MM-yyyy'}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>-->
+                <!--Servicios como competidor-->
+                <div class="x_panel" ng-show="servicios.length > 0 || full">
+                    <div class="x_title">
+                        mo
+                        <h2>Servicios como competidor</h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                            ox
+                            <li>
+                                ox
+                                in
+                                <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content sin-desborde">
+                        <form name="ValidForm" id="form" class="form-horizontal">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div ng-show="servicios.length === 0" class="alert advertencia">No existen convenios vigentes asociados a la empresa {{empresa.nombreEmpresa}}</div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div ng-hide="servicios.length == 0">
+                                        <table id="CRclienteGetConsultaoportunidadNegocioEmpresa" dt-instance="dtInstance" class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" datatable="ng" width="100%" dt-options="dtOptions">
+                                            <thead>
+                                                <tr>
+                                                    <th>Nombre</th>
+                                                    <th>Descripci&oacute;n</th>
+                                                    <th>Tipo competidor</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-repeat="servicio in servicios">
+                                                    <td>{{servicio.nomServ}}</td>
+                                                    <td>{{producto.descProd ==null? 'Sin descripción' : producto.descProd}}</td>
+                                                    <td>{{servicio.tipoCompetidor}}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-xs-12 col-md-6">
+            <div class="col-xs-12 hidden-print">
+                <button type="button" onclick="window.close()" class="btn btn-primary">
+                    Cerrar
+                </button>
+            </div>
+        </div>
+    </div>
+    
+</div>

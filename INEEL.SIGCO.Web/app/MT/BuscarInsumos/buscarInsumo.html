@@ -1,0 +1,154 @@
+<!-- page content -->
+<div class="vista">
+
+    <div class="page-title">
+        <div class="title_left">
+
+            <ol class="breadcrumb miga">
+                <li><i class="sg sg-insumos-proyect"></i> <a ui-sref="BuscarInsumos">Insumos de proyectos</a></li>
+            </ol>
+
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Criterios de b&uacute;squeda</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li>
+                            <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+
+                    <form name="form" id="form">
+                        <div class="col-xs-12 col-md-6">
+                            <div class="form-group ">
+                                <label class="col-xs-12">
+                                    Jefe de proyecto
+                                </label>
+
+
+                                <div class="col-xs-10">
+                                    <input type="text" ng-model="jefeProyecto.nombreCompleto" id="searchTextJefe" disabled
+                                           name="searchTextJefe" class="form-control" placeholder="Buscar por jefe de proyecto">
+                                </div>
+                                <div class="col-xs-2">
+                                    <a class="btn btn-success" ng-click="openJefe();" title="Buscar jefe de proyecto" ng-disabled="BuscarJefe">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </a>
+                                </div>
+
+
+
+                                <div class="clearfix"></div>
+                            </div>
+
+                            <div class="form-group ">
+                                <label class="col-xs-12">
+                                    Proyecto
+                                </label>
+
+
+                                <div class="col-xs-10">
+                                    <input type="text" class="form-control" placeholder="Buscar por proyecto" id="usr" name="proyecto" ng-model="proyectoNombre" disabled>
+                                </div>
+                                <div class="col-xs-2">
+                                    <a class="btn btn-success" ng-click="openProyecto()" title="Buscar proyecto">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </a>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="form-group ">
+                                <label class="col-xs-12">
+                                    Unidad organizacional
+                                </label>
+                                <div class="col-xs-12">
+                                    <div uo-modal2 nivel-min="2" nivel-max="3" fecha="" ng-model="claveUnidad"></div>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-md-6">
+                            <div class="form-group ">
+                                <label class="col-xs-12">
+                                    Buscar por
+                                </label>
+                                <div class="col-xs-10">
+                                    <input type="text" ng-model="PalabraClave" id="searchTextPalabra" maxlength="50"
+                                           name="searchTextPalabra" class="form-control" placeholder="Insumo, responsable, ubicaci&oacute;n"
+                                           ng-minlength="3" />
+                                    <span class="error" ng-show="formulario.searchTextPalabra.$dirty && !formulario.searchTextPalabra.$valid">
+                                        Longitud m&iacute;nima de 3
+                                    </span>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+
+
+                            <div class="form-group ">
+                                <label class="col-xs-12">
+                                    Tipo de insumo
+                                </label>
+                                <div class="col-xs-10">
+
+                                    <select class="form-control" id="tipoIns" name="tipoIns"
+                                            ng-model="tipoInsumoId"
+                                            ng-options="e.tipoInsumoId as e.descripcionInsumo  for e in TipoInsumo">
+                                        <option value="">--Seleccione un tipo de insumo--</option>
+                                    </select>
+
+
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+
+
+                            <div class="clearfix"></div>
+                        </div>
+                    </form>
+                    <br />
+
+                    <div class="col-xs-12 col-sm-12">
+                        <div style="margin-left:10px">
+                            <div class="form-group">
+                                <a class="btn btn-success" ng-click="buscar();">
+                                    <i class="glyphicon glyphicon-search"></i> Buscar
+                                </a>
+                                <a class="btn btn-primary" ng-click="limpiar();">
+                                    Limpiar
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="row" ng-show="botonBusqueda">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+                    <table datatable="" id="MTBuscarInsumosAI" dt-options="showCase.dtOptions" dt-columns="showCase.dtColumns"
+                           dt-instance="showCase.dtInstance"
+                           class="display dt-responsive"
+                           cellspacing="0" width="100%"></table>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+

@@ -1,0 +1,315 @@
+<div>
+
+      <div class="x_title">
+        <h2>Informaci&oacute;n general</h2>
+        <div class="clearfix"></div>
+    </div>
+           
+  
+
+    <div class="form-group">
+        <label class="control-label col-md-3 col-sm-3 col-xs-12" ng-right-click="disabledEnabled()">
+            T&iacute;tulo <span class="required">*</span>
+        </label>
+        <div class="col-md-6 col-sm-6 col-xs-12">
+
+
+            <textarea class="form-control col-md-7 col-xs-12" id="titulo" name="titulo"
+                      ng-disabled="disabledTitulo"
+                      ng-right-click="disabledEnabled()"
+                      ng-model="itf.titulo" ng-maxlength="350" maxlength="350"
+                      ng-minlength="10" ng-required="true"></textarea>
+            <span class="error" ng-show="formITF.titulo.$dirty && !formITF.titulo.$valid">Dato requerido, con longitud m&iacute;nima de 10 y m&aacute;xima de 350</span>
+        </div>
+    </div>
+
+ 
+
+    <div class="form-group">
+        <label class="control-label col-md-3 col-sm-3 col-xs-12">
+            Resumen <span class="required">*</span>
+        </label>
+        <div class="col-md-6 col-sm-6 col-xs-12">
+            <textarea class="form-control col-md-7 col-xs-12" id="resumen" name="resumen"
+                      ng-model="itf.itFgeneral.resumen" ng-maxlength="4000" maxlength="4000"
+                      ng-minlength="20" ng-required="true" rows="28"></textarea>
+            <span class="error" ng-show="formITF.resumen.$dirty && !formITF.resumen.$valid">Dato requerido, con longitud m&iacute;nima de 10 y m&aacute;xima de 2000</span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-3 col-sm-3 col-xs-12">
+            N&uacute;mero de informe <span class="required">*</span>
+        </label>
+        <div class="col-md-6 col-sm-6 col-xs-12">
+            <input id="signatura" name="numInforme" type="text" placeholder="I001, I002, etc"
+                   class="form-control col-md-7 col-xs-12 input-md"
+                   ng-model="itf.numInforme"
+                   ng-required="true"
+                   ng-maxlength="40" maxlength="40"
+                   ng-minlength="3" />
+            <!-- <span class="glyphicon glyphicon-question-sign" title="consecutivo asignado por cada gerencia de acuerdo con los informes desarrollados en un proyecto. Ejemplo: I001, I002, etc."></span> -->
+            <span class="error" ng-show="formITF.numInforme.$dirty && !formITF.numInforme.$valid">
+                Longitud m&iacute;nima de 3 y m&aacute;xima de 40
+            </span>
+            <br/><br/>
+            <div class="alert informacion">
+                <span class="glyphicon glyphicon-exclamation-sign" ></span>
+                consecutivo asignado por cada gerencia de acuerdo con los informes desarrollados en un proyecto. Ejemplo: I001, I002, etc.
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-3 col-sm-3 col-xs-12">
+            Clave &uacute;nica de identificaci&oacute;n <span class="required">*</span>
+        </label>
+        <div class="col-md-6 col-sm-6 col-xs-12">
+            <input id="signatura" name="signatura" type="text" placeholder="INEEL/04/15/12791/I001/F/DC/A1/V1"
+                   class="form-control col-md-7 col-xs-12 input-md"
+                   ng-model="itf.clasificacionSignatura" maxlength="60"
+                   ng-pattern="/^(IIE\/|INEEL\/){1}[\w\d\/-]{15,100}$/" />
+
+            <!-- <span class="glyphicon glyphicon-question-sign" title="Asignada en cada informe por la gerencia, consta de las iniciales de la instituci&oacute;n, el n&uacute;mero de la divisi&oacute;n, el n&uacute;mero de departamento, el n&uacute;mero de proyecto, el consecutivo del informe, el tipo de informe, anexos, volumen etc."> </span> -->
+            <span class="error" ng-show="formITF.signatura.$dirty && !formITF.signatura.$valid">
+                Se espera el prefijo IIE/  o  INEEL/, en general considerar:<br />
+                El n&uacute;mero de la divisi&oacute;n, el n&uacute;mero de gerencia, el n&uacute;mero de proyecto, el consecutivo del informe (Letra "I" seguida del consecutivo de 3 d&iacute;gitos), el tipo de informe (F: Final o P: Parcial), volumen(Letra "V" seguida de su identificaci&uacute;n de volumen)
+            </span>
+            <br/><br/>
+                 <div class="alert informacion">
+                     <span class="glyphicon glyphicon-exclamation-sign"></span> Clave &uacute;nica de identificaci&oacute;n consta de :<br/>
+                     Las iniciales de la instituci&oacute;n.<br /> El n&uacute;mero de la divisi&oacute;n. <br />  El n&uacute;mero de gerencia. <br />  El n&uacute;mero de proyecto. <br />  El consecutivo del informe (Letra "I" seguida del consecutivo de 3 d&iacute;gitos). <br />  El tipo de informe (F: Final o P: Parcial). <br />  Volumen(Letra "V" seguida de su identificaci&uacute;n de volumen)
+                 </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-3 col-sm-3 col-xs-12">
+            A&ntilde;o de elaboraci&oacute;n <span class="required">*</span>
+        </label>
+        <div class="col-md-6 col-sm-6 col-xs-12">
+            <input id="anno" name="anno" ng-maxlength="4" type="text" 
+                   min="1975" max="{{anioActual}}" 
+                   placeholder="{{anioActual}}"
+                   class="form-control col-md-7 col-xs-12 input-md numbersOnly" 
+                   ng-required="true"
+                   maxlength="4"                   
+                   ng-model="itf.anioElaboracion"
+                   ng-change="rangoanioIncorrecto(itf.anioElaboracion)"
+                   ng-pattern="/^[1234567890]{4}$/" />
+            <span class="error" ng-show="mostrarError || (formITF.anno.$dirty && !formITF.anno.$valid)">
+                A&ntilde;o a cuatro d&iacute;gitos<br />
+                y el a A&ntilde;o debe estar en el rango: 1975 - {{anioActual}}
+            </span>
+        </div>
+    </div>
+
+
+    <div class="x_title">
+        <h2>Documentaci&oacute;n <small>Tama&ntilde;o m&aacute;ximo por archivo de 20MB, el formato de los archivos puede ser: PDF, DOC, DOCX  </small></h2>
+        <div class="clearfix"></div>
+    </div>
+
+
+    
+
+    <div class="form-group">
+        <label class="control-label col-md-3 col-sm-3 col-xs-12">
+            Documento ITF *
+        </label>
+        <div class="col-md-6 col-sm-6 col-xs-12">
+            <div ng-show="itf.adjuntoId!=null">
+                <span class="fa fa-download"></span>&nbsp;&nbsp;<a href="/Descargas.html#/q/{{itf.adjuntoId | encriptar}}" class="linkTabla" target="_blank">Descargar Archivo</a>
+                &nbsp;&nbsp;
+                <a class="btn btn-danger" title="Eliminar Archivo" ng-click="deleteFile()">
+                    <i class="glyphicon glyphicon-trash"></i>
+                </a>
+            </div>
+            <div class="form-group" ng-show="itf.adjuntoId==null">
+                <input class="input-file form-control col-md-7 col-xs-12" type="file" name="filesGral1" id="filesGral1" data-buttonName="btn-success"
+                       ng-model="filesGral1"
+                       onchange="angular.element(this).scope().getFileDetailsPrincipal(this);" />
+            </div>
+            <!--<label ng-disabled>Nota: Para enviar la solicitud es necesario incluir el documento adjunto de evidencia.</label>-->
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-3 col-sm-3 col-xs-12">
+            Anexos
+        </label>
+        <div class="col-md-6 col-sm-6 col-xs-12">
+            <input class="input-file" type="file" name="filesGral" id="filesGral" 
+                   ng-click="saveIG();" ng-model="filesGral" data-buttonName="btn-success"
+                   onchange="angular.element(this).scope().getFileDetails(this);" />
+            <span class="error" ng-show="formITF.filesGral.$dirty && !formITF.filesGral.$valid">Seleccione un documento</span>
+            <!--Task list-->
+            <div class="form-group" ng-show="adjuntosITFList.length ===0 || tasklist.length>0">
+                <!--<label class="col-xs-12 ">Archivo(s) a adjuntar:</label>-->
+                <input type="hidden" class="form-control col-md-7 col-xs-12" />
+
+                
+                <div class="row">
+                    <div class="col-xs-12" ng-show="tasklist.length > 0">
+                        <table id="adjuntos" class="table table-hover table-striped table-condensed dt-responsive">
+                            <thead>
+                                <tr>
+                                    <th data-priority="2" style="max-width:190px;">Archivo</th>
+                                    <th data-priority="1" class="thAjuste text-center">Opciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="archivo in tasklist">
+                                    <td style="max-width:190px;" class="sin-desborde">{{archivo.nameFile}}</td>
+                                    <td class="text-center">
+                                        <div>
+                                            <a title="Eliminar" ng-click="deleteTask(tasklist.indexOf(archivo))" class="btn btn-danger">
+                                                <i class="glyphicon glyphicon-trash"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    </div>
+
+                </div>
+
+            <div class="form-group" ng-hide="adjuntosITFList.length ===0">
+
+
+                <input type="hidden" class="form-control col-md-7 col-xs-12" />
+                <div>
+                    <table id="MTinfoGeneral" class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" datatable="ng" width="100%" dt-options="dtOptions">
+                        <thead>
+                            <tr>
+                                <th data-priority="1">Archivos</th>
+                                <th data-priority="1" class="thAjuste text-center">Opciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="archivo in adjuntosITFList">
+                                <td class="sin-desborde" style="max-width:190px;">
+                                    <span class="sin-desborde">
+                                        <a href="/Descargas.html#/q/{{archivo.adjuntoId | encriptar}}"
+                                           target="_blank">{{archivo.adjunto.nombre}}</a>
+                                    </span>
+                                </td>
+                                <td class="text-center">
+                                    <div>
+                                        <a title="Eliminar" ng-click="deleteAdjuntoITF(archivo)" class="btn btn-danger">
+                                            <i class="glyphicon glyphicon-trash"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    <div class="x_title">
+        <h2>Autores</h2>
+        <div class="clearfix"></div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-3 col-sm-3 col-xs-12">
+            Autores <span class="required">*</span>
+        </label>
+        <div class="col-md-6 col-sm-6 col-xs-12">
+            <a ng-click="openUser()" class="btn btn-success">
+                <span class="fa fa-user-plus"></span> Buscar
+            </a>
+
+            <div ng-show="AutoresIIE.length > 0">
+                <table id="MTinfoGeneralAutoresIIE" class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" datatable="ng" width="100%" dt-options="dtOptions">
+                    <thead>
+                        <tr>
+                            <th>Clave</th>
+                            <th data-priority="1">Nombre</th>
+                            <th data-priority="3" class="thAjuste text-center">Opciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="autor in AutoresIIE">
+                            <td>{{autor.claveAutor}}</td>
+                            <td>{{autor.nombreCompleto}}</td>
+                            <td class="text-center">
+                                <div ng-if="authentication.userprofile.clavePersona!=autor.claveAutor">
+                                    <a title="Eliminar" ng-click="eliminarAutor(autor)" class="btn btn-danger">
+                                        <i class="glyphicon glyphicon-trash"></i>
+                                    </a>
+                                </div>
+
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+    <!--<div class="x_title">
+        <h2>Seguridad</h2>
+        <div class="clearfix"></div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-3 col-sm-3 col-xs-12" ng-right-click="disabledEnabled('tipoAcceso')">
+            Tipo de acceso <span class="required">*</span>
+        </label>
+        <div class="col-md-6 col-sm-6 col-xs-12">
+            <select id="tipoAcceso" name="tipoAcceso" 
+                    ng-disabled="disabledTipoAcceso"
+                    class="form-control col-md-7 col-xs-12" ng-model="itf.itFgeneral.accesoTipo"
+                    ng-init="itf.itFgeneral.accesoTipo=1"
+                    ng-options="e.tipoAccesoId as e.nombre  for e in selectTipo" ng-required="true">                
+            </select>
+           
+            <span class="error" ng-show="formITF.tipoAcceso.$dirty &&  !formITF.tipoAcceso.$valid">Seleccione el tipo de acceso</span>
+        </div>
+    </div>-->
+
+
+
+
+
+    <div class="form-group">
+        <label class="control-label col-md-3 col-sm-3 col-xs-12">
+            &nbsp;
+        </label>
+        <div class="col-md-6 col-sm-6 col-xs-12" ng-hide="ocultarGuardar">
+            <div class="row col-xs-6">
+                <button class="btn btn-block btn-info" ng-click="datoscompletos(1,'ITF.resultadosP')"
+                        ng-disabled="!formITF.resumen.$valid
+                || !formITF.titulo.$valid
+                || formITF.anno.$invalid
+                || !formITF.signatura.$valid
+                || !formITF.numInforme.$valid
+                || mostrarError
+                || itf.adjuntoId==null || click">
+                    <!--ng-show="!detalles">-->
+                    {{txtGuardar}}
+                </button>
+            </div>
+        </div>
+        <div class="" ng-show="ocultarGuardar">
+            <div class="alert advertencia" role="alert">
+                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                De acuerdo al estatus del presente ITF, no es posible guardar cambios.
+            </div>
+        </div>
+    </div>
+
+   
+
+</div>
+<script>
+    $(document).ready(function () {
+        jQuery('.numbersOnly').keyup(function () {
+            this.value = this.value.replace(/[^0-9\.]/g, '');
+        });
+    });
+
+</script>

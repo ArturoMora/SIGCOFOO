@@ -1,0 +1,370 @@
+﻿<div class="vista">
+    <div class="row">
+        <div class="col-lg-12">
+            <div data-ng-hide="authentication.isAuth">
+                No tiene permisos para ingresar a esta sección.<br /> Usuario no autentificado
+            </div>
+        </div>
+    </div>
+    <div class="page-title">
+        <div class="title_full">
+
+            <ol class="breadcrumb miga">
+                <li><i class="glyphicon glyphicon-file"></i> <a ui-sref="fichapersonal">{{''|getFichaPersonal}}</a></li>
+            </ol>
+
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="col-xs-12" ng-show="id!=null">
+                <a type="submit" ng-click="salir()" class="btn btn-success" style="float:right">
+                    <span class="fa fa-arrow-left"></span> Regresar
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="col-xs-12">
+                <div class="x_panel">
+                    <div class="x_content sin-desborde">
+                        <div class="col-sm-2 col-xs-5">
+                            <div class="profile_img">
+                                <div id="crop-avatar">
+                                    <img class="img-thumbnail" ng-src="data:image/png;base64,{{persona.adjunto64}}" width="180" height="180" title={{persona.nombreCompleto}}>
+                                </div>
+                                <a  ng-click="openEditarFoto();" class="btn btn-warning btn-xs">
+                                    <span class="glyphicon glyphicon-pencil"></span> Editar
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-sm-10 col-xs-7">
+                            <div class="col-xs-12 col-sm-7">
+                                <div class="form-group">
+                                    <label class="detalle">{{persona.nombreCompleto}} ({{persona.clavePersona}})</label>
+                                    <br />
+                                    <label class="detalle_subtitulo">{{persona.unidadOrganizacional.nombreUnidad}}</label>
+                                    <br />
+                                    <label class="cont">{{persona.categoria.descripcion}}</label>
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12 col-sm-5 contenedor_gris">
+                                <label class="titFirst">Fecha ingreso:</label>
+                                <label class="cont" >{{persona.fechaIngreso | date:"dd/MM/yyyy"}}</label>
+                                <br />
+                                <label class="titFirst" ng-if="persona.estado==0">Fecha de salida:</label>
+                                <label class="cont" ng-if="persona.estado==0">{{persona.fechaEfectiva | date:"dd/MM/yyyy"}}</label>
+                                <br ng-if="persona.estado==0" />
+                                <label class="titFirst">Antig&uuml;edad:</label>
+                                <label class="cont" title="{{persona.antiguedad}}" ng-show="!detail">{{persona.antiguedad | getFloor}}</label>
+                                <label class="cont" ng-show="detail">{{persona.antiguedad}}</label>
+                                <br />
+                                <label class="titFirst">Experiencia previa:</label>
+                                <label ng-show="id==null" class="cont">{{persona.experienciaPrevia}}</label>
+                                <input class="cont" style="width:65px;" ng-show="id!=null" type="text" ng-disabled="experiencia" ng-model="persona.experienciaPrevia">
+
+                                <a class="btn btn-warning btn-xs" ng-show="guardar && id!=null" ng-click="editar();" title="Editar">
+                                    <i class="glyphicon glyphicon-pencil"></i>
+                                </a>
+                                <a class="btn btn-success btn-xs" ng-show="!guardar && id!=null" ng-click="save();" title="Guardar">
+                                    <i class="glyphicon glyphicon-ok"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-sm-6 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Datos personales</h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content sin-desborde">
+                    <div class="left col-xs-10">
+                        <ul class="list-unstyled">
+
+                            <li><strong>Correo electr&oacute;nico: </strong>{{persona.correo}}</li>
+
+                            <li>
+                                <!--<strong>Tel&eacute;fono oficial: </strong>{{persona.detallePersona.celular}}-->
+                            </li>
+                            <li>
+                                <strong>Ext.: </strong>{{persona.detallePersona.extension}}
+                            </li>
+                            <li><strong>Ubicaci&oacute;n: </strong>{{persona.detallePersona.ubicacion}}</li>
+                                                        
+                            <li>&nbsp;</li>
+                            <li><strong>Alma mater: </strong> {{almamater.institucion.descripcion}}, {{almamater.institucion.pais.descripcion}}.</li>
+                            <!--<li><strong>Fecha de titulación: </strong> {{almamater.fechaTermino | date:"dd/MM/yyyy"}} </li>-->
+                            <!--<li><strong>Fecha de titulación: </strong> {{almamater.fechaTermino === null ? 'Indefinida' : almamater.fechaTermino | date:"dd/MM/yyyy"}}</li>-->
+                            <li><strong>División: </strong> {{persona.unidadOrganizacional.claveUnidadPadre.nombreUnidad}}</li>
+                            <li><strong>Gerencia: </strong> {{persona.unidadOrganizacional.nombreUnidad}}</li>
+                            <li><strong>Puesto: </strong> {{persona.categoria.descripcion}}</li>
+                            <li><strong>Plaza: </strong> {{persona.plazaTrabajo}}</li>
+                            <li><strong>Fecha de ingreso: </strong> {{persona.fechaIngreso | date:"dd/MM/yyyy"}}</li>
+                            <!--<li><strong>Sistema Nacional de Investigadores (SNI): </strong> </li>-->
+                        </ul>
+                    </div>
+                </div>
+                <!--persona.detallePersona: {{persona.detallePersona | json}}-->
+            </div>
+        </div>
+        <div class="col-sm-6 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Semblanza profesional</h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content sin-desborde">
+                    <div class="col-sm-10">
+                        <div ng-show="extractoProfesional.extracto==null" class="alert advertencia">
+                            No hay registros de Semblanza profesional.
+                        </div>
+                        <font ng-bind-html="extractoProfesional.extracto"></font>
+                    </div>
+                    <div class="col-sm-2">
+                        <a  ng-click="openEditarExtracto();" class="btn btn-warning btn-xs">
+                            <span class="glyphicon glyphicon-pencil"></span> Editar
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+     <!--Para mayor informacion de como se hizo esto visitar https://angular-ui.github.io/bootstrap/-->
+     <!--Para mayor informacion de como se hizo esto visitar https://angular-ui.github.io/bootstrap/-->
+        <div class="col-xs-12">
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+                    <uib-accordion close-others="true">
+                        <!--<uib-accordion-group ui-sref="fichapersonal.aptitudes" is-open="seccionaptitudes">
+                            <uib-accordion-heading>
+                                <p>Aptitudes&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <i class="pull-left glyphicon" ng-class="{'glyphicon-chevron-down': seccionaptitudes, 'glyphicon-chevron-right': !seccionaptitudes}">&nbsp;&nbsp;</i>
+                                </p>
+
+                            </uib-accordion-heading>
+                            <div ui-view="aptitudes"></div>
+                        </uib-accordion-group>-->
+                        <uib-accordion-group ui-sref="fichapersonal.publicacion" is-open="seccionbpub">
+                            <uib-accordion-heading>
+                                <p>Art&iacute;culos&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <i class="pull-left glyphicon" ng-class="{'glyphicon-chevron-down': seccionbpub, 'glyphicon-chevron-right': !seccionbpub}">&nbsp;&nbsp;</i>
+                                </p>
+
+                            </uib-accordion-heading>
+                            <div ui-view="publicacion"></div>
+                        </uib-accordion-group>
+                        <uib-accordion-group style="padding-top: 0px;padding-left: 0px;padding-right: 0px;padding-bottom: 0px;" ui-sref="fichapersonal.asociacion" is-open="secciona">
+                            <!--<uib-accordion-group ui-sref="fichapersonal.asociacion(seccion='asociacion')" ng-click="secciona=true" style="cursor: pointer;" is-open="secciona">-->
+                            <uib-accordion-heading>
+                                <p>
+                                    Asociaciones&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <i class="pull-left glyphicon" ng-class="{'glyphicon-chevron-down': secciona, 'glyphicon-chevron-right': !secciona}">&nbsp;&nbsp;</i>
+                                </p>
+
+                            </uib-accordion-heading>
+                            <div ui-view="Asociaciones"></div>
+                        </uib-accordion-group>
+                        <uib-accordion-group style="padding-top: 0px;padding-left: 0px;padding-right: 0px;padding-bottom: 0px;" ui-sref="fichapersonal.becariodirigido" is-open="seccionbd">
+                            <uib-accordion-heading>
+                                <p>Becario dirigido&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <i class="pull-left glyphicon" ng-class="{'glyphicon-chevron-down': seccionbd, 'glyphicon-chevron-right': !seccionbd}">&nbsp;&nbsp;</i>
+                                </p>
+
+                            </uib-accordion-heading>
+                            <div ui-view="becariodirigido"></div>
+                        </uib-accordion-group>
+                        <uib-accordion-group ui-sref="fichapersonal.becarioexterno" is-open="seccionbe">
+                            <uib-accordion-heading>
+                                <p>Becario externo&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <i class="pull-left glyphicon" ng-class="{'glyphicon-chevron-down': seccionbe, 'glyphicon-chevron-right': !seccionbe}">&nbsp;&nbsp;</i>
+                                </p>
+                            </uib-accordion-heading>
+                            <div ui-view="becarioexterno"></div>
+                        </uib-accordion-group>
+                        <uib-accordion-group ui-sref="fichapersonal.becariointerno" is-open="seccionbi">
+                            <uib-accordion-heading>
+                                <p>
+                                    Becario interno&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                     <i class="pull-left glyphicon" ng-class="{'glyphicon-chevron-down': seccionbi, 'glyphicon-chevron-right': !seccionbi}">&nbsp;&nbsp;</i>
+                                </p>
+                            </uib-accordion-heading>
+                            <div ui-view="becariointerno"></div>
+                        </uib-accordion-group>
+                        <uib-accordion-group ui-sref="fichapersonal.capacitacionesycert" is-open="capacitacionesycert">
+                            <uib-accordion-heading>
+                                <p>
+                                    Capacitaci&oacute;n recibida&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <i class="pull-left glyphicon" ng-class="{'glyphicon-chevron-down': capacitacionesycert, 'glyphicon-chevron-right': !capacitacionesycert}">&nbsp;&nbsp;</i>
+                                </p>
+                            </uib-accordion-heading>
+                            <div ui-view="capacitacionesycert"></div>
+                        </uib-accordion-group>
+
+                        <uib-accordion-group ui-sref="fichapersonal.capitulo" is-open="capitulo">
+                            <uib-accordion-heading>
+                                <p>
+                                    Cap&iacute;tulo de libro&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <i class="pull-left glyphicon" ng-class="{'glyphicon-chevron-down': capitulo, 'glyphicon-chevron-right': !capitulo}">&nbsp;&nbsp;</i>
+                                </p>
+                            </uib-accordion-heading>
+                            <div ui-view="capitulo"></div>
+                        </uib-accordion-group>
+
+
+                        <uib-accordion-group ui-sref="fichapersonal.certificacionesobtenidas" is-open="certificacionesobtenidas">
+                            <uib-accordion-heading>
+                                <p>
+                                    Certificaciones obtenidas&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                     <i class="pull-left glyphicon" ng-class="{'glyphicon-chevron-down': certificacionesobtenidas, 'glyphicon-chevron-right': !certificacionesobtenidas}">&nbsp;&nbsp;</i>
+                                </p>
+                            </uib-accordion-heading>
+                            <div ui-view="certificacionesobtenidas"></div>
+                        </uib-accordion-group>
+                        <uib-accordion-group ui-sref="fichapersonal.cursointerno" is-open="seccioncursointerno">
+                            <uib-accordion-heading>
+                                <p>
+                                    Cursos impartidos&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                     <i class="pull-left glyphicon" ng-class="{'glyphicon-chevron-down': seccioncursointerno, 'glyphicon-chevron-right': !seccioncursointerno}">&nbsp;&nbsp;</i>
+                                </p>
+                            </uib-accordion-heading>
+                            <div ui-view="cursointerno"></div>
+                        </uib-accordion-group>
+                        <uib-accordion-group ui-sref="fichapersonal.daexterno" is-open="secciondaexterno">
+                            <uib-accordion-heading>
+                                <p>
+                                    Derechos de autor&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <i class="pull-left glyphicon" ng-class="{'glyphicon-chevron-down': secciondaexterno, 'glyphicon-chevron-right': !secciondaexterno}">&nbsp;&nbsp;</i>
+                                </p>
+                            </uib-accordion-heading>
+                            <div ui-view="daexterno"></div>
+                        </uib-accordion-group>
+                        <uib-accordion-group ui-sref="fichapersonal.experienciadocente" is-open="seccioned">
+                            <uib-accordion-heading>
+                                <p>
+                                    Experiencia docente&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                     <i class="pull-left glyphicon" ng-class="{'glyphicon-chevron-down': seccioned, 'glyphicon-chevron-right': !seccioned}">&nbsp;&nbsp;</i>
+                                </p>
+
+                            </uib-accordion-heading>
+                            <div ui-view="experienciadocente"></div>
+                        </uib-accordion-group>
+                        <uib-accordion-group ui-sref="fichapersonal.experienciaexterna" is-open="seccionee">
+                            <uib-accordion-heading>
+                                <p>
+                                    Experiencia externa&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                     <i class="pull-left glyphicon" ng-class="{'glyphicon-chevron-down': seccionee, 'glyphicon-chevron-right': !seccionee}">&nbsp;&nbsp;</i>
+                                </p>
+                            </uib-accordion-heading>
+                            <div ui-view="experienciaexterna"></div>
+                        </uib-accordion-group>
+                        <uib-accordion-group ui-sref="fichapersonal.fa" is-open="seccionf">
+                            <uib-accordion-heading>
+                                <p>
+                                    Formaci&oacute;n acad&eacute;mica&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                     <i class="pull-left glyphicon" ng-class="{'glyphicon-chevron-down': seccionf, 'glyphicon-chevron-right': !seccionf}">&nbsp;&nbsp;</i>
+                                </p>
+                            </uib-accordion-heading>
+                            <div ui-view="formacionacademica"></div>
+                        </uib-accordion-group>
+                        <uib-accordion-group ui-sref="fichapersonal.idiomas(seccion='idiomas')" is-open="seccioni">
+                            <uib-accordion-heading>
+                                <p>
+                                    Idiomas&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                     <i class="pull-left glyphicon" ng-class="{'glyphicon-chevron-down': seccioni, 'glyphicon-chevron-right': !seccioni}">&nbsp;&nbsp;</i>
+                                </p>
+                            </uib-accordion-heading>
+                            <div ui-view="idiomas"></div>
+                        </uib-accordion-group>
+                        <uib-accordion-group ui-sref="fichapersonal.participacion" is-open="seccionpartipro">
+                            <uib-accordion-heading>
+                                <p>
+                                    Participación en proyectos&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                     <i class="pull-left glyphicon" ng-class="{'glyphicon-chevron-down': seccionpartipro, 'glyphicon-chevron-right': !seccionpartipro}">&nbsp;&nbsp;</i>
+                                </p>
+                            </uib-accordion-heading>
+                            <div ui-view="participacion"></div>
+                        </uib-accordion-group>
+                        <uib-accordion-group ui-sref="fichapersonal.ponencia" is-open="seccionpon">
+                            <uib-accordion-heading>
+                                <p>
+                                    Ponencias&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <i class="pull-left glyphicon" ng-class="{'glyphicon-chevron-down': seccionpon, 'glyphicon-chevron-right': !seccionpon}">&nbsp;&nbsp;</i>
+                                </p>
+                            </uib-accordion-heading>
+                            <div ui-view="ponencia"></div>
+                        </uib-accordion-group>
+                        <uib-accordion-group ui-sref="fichapersonal.piexterno" is-open="seccionpiexterno">
+                            <uib-accordion-heading>
+                                <p>
+                                    Propiedad industrial&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                     <i class="pull-left glyphicon" ng-class="{'glyphicon-chevron-down': piexterno, 'glyphicon-chevron-right': !piexterno}">&nbsp;&nbsp;</i>
+                                </p>
+                            </uib-accordion-heading>
+                            <div ui-view="piexterno"></div>
+                        </uib-accordion-group>
+                        <uib-accordion-group ui-sref="fichapersonal.distincion" is-open="secciond">
+                            <uib-accordion-heading>
+                                <p>
+                                    Reconocimientos&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                     <i class="pull-left glyphicon" ng-class="{'glyphicon-chevron-down': secciond, 'glyphicon-chevron-right': !secciond}">&nbsp;&nbsp;</i>
+                                </p>
+                            </uib-accordion-heading>
+                            <div ui-view="distincion"></div>
+                        </uib-accordion-group>
+                        <uib-accordion-group ui-sref="fichapersonal.sni" is-open="seccions">
+                            <uib-accordion-heading>
+                                <p>
+                                    Sistema Nacional de Investigadores (SNI)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                     <i class="pull-left glyphicon" ng-class="{'glyphicon-chevron-down': seccions, 'glyphicon-chevron-right': !seccions}">&nbsp;&nbsp;</i>
+                                </p>
+                            </uib-accordion-heading>
+                            <div ui-view="sni"></div>
+                        </uib-accordion-group>
+                        <uib-accordion-group ui-sref="fichapersonal.tesisdirigida" is-open="secciontd">
+                            <uib-accordion-heading>
+                                <p>
+                                    Tesis dirigida&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                     <i class="pull-left glyphicon" ng-class="{'glyphicon-chevron-down': secciontd, 'glyphicon-chevron-right': !secciontd}">&nbsp;&nbsp;</i>
+                                </p>
+                            </uib-accordion-heading>
+                            <div ui-view="tesisdirigida"></div>
+                        </uib-accordion-group>
+
+
+
+
+
+
+
+
+
+
+
+                        <!--<uib-accordion-group ui-sref="fichapersonal.logrosreconocimientos" is-open="logrosreconocimientos">
+                            <uib-accordion-heading>
+
+                                Logros y reconocimientos <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': logrosreconocimientos, 'glyphicon-chevron-right': !logrosreconocimientos}"></i>
+
+                            </uib-accordion-heading>
+                            <div ui-view="logrosreconocimientos"></div>
+                        </uib-accordion-group>-->
+                    </uib-accordion>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

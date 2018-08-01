@@ -1,0 +1,556 @@
+﻿<div class="row">
+    <div class="col-xs-12 col-md-12 col-lg-12">
+        <!--panel izquierdo-->
+        <div class="col-xs-12 col-md-6 col-lg-6">
+            <!-- Detalles del proyecto -->
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Proyecto</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li>
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content sin-desborde">
+                    <div class="col-xs-12">
+                        <div class="form-group">
+                            <label class="detalle">{{proyecto.nombre}} ({{proyecto.proyectoId}})</label>
+                            <label class="detalle_subtitulo">{{proyecto.unidadOrganizacional.claveUnidadPadre.nombreUnidad}}</label>
+                            <br/>
+                            <label class="cont">{{proyecto.unidadOrganizacional.nombreUnidad}}</label>
+                            <div>
+                                <!-- <a class="btn btn-success hidden-print" title="Imprimir" onclick="window.print()"><i class="fa fa-print"></i></a> -->
+                                <a class="btn btn-success hidden-print" ng-click="full=!full" title="{{full?'Filtrar':'Mostrar todo'}}"><i class="fa fa-{{full?'compress':'expand'}}"></i></a>
+                            </div>
+                            
+                        </div>
+                        
+                    </div>
+                    <div class="col-xs-12">
+                        <div ng-if="proyecto.tipoProyecto!=null" class="form-group">
+                            <label>Tipo de proyecto </label>
+                            <span class="text">{{proyecto.tipoProyecto}}</span>
+                        </div>
+                        <div class="form-group">
+                            <label>Jefe de proyecto </label>
+                            <span class="text">{{proyecto.nombreJefeProyecto=='' ||proyecto.nombreJefeProyecto==null ?'No definido':proyecto.nombreJefeProyecto}}</span>
+                        </div>
+                    </div>
+                    <div class="col-xs-12">
+                        <div class="form-group">
+                            <label for="usr">Monto </label>
+                            {{proyecto.costo=='' ||proyecto.costo==null ?'No definido':proyecto.costo}}
+                        </div>
+                        <div ng-if="proyecto.facturacionPlaneada!=null" class="form-group">
+                            <label for="usr">Facturaci&oacute;n planeada </label>
+                            {{proyecto.facturacionPlaneada | currency}}
+                        </div>
+                        <div ng-if="proyecto.facturacionReal!=null" class="form-group">
+                            <label for="usr">Facturaci&oacute;n real </label>
+                            {{proyecto.facturacionReal | currency}}
+                        </div>
+                        <div class="form-group">
+                            <label for="usr">Fecha de inicio: </label>
+                            {{proyecto.fechaInicio | date:'dd-MM-yyyy'}}
+                        </div>
+                        <div class="form-group">
+                            <label for="usr">Fecha de t&eacute;rmino: </label>
+                            {{proyecto.fechaFin | date:'dd-MM-yyyy'}}
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <!--Fondos del proyecto-->
+            <div class="x_panel" ng-show="fondos.length>0 || full">
+                <div class="x_content sin-desborde">
+                    <div class="x_title">
+                        <h2>Fondos asociados
+                            
+                        </h2>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div ng-show="fondos.length>0" >
+                        <table id="proyectosFondo" class="table display responsive"  dt-options="dtOptions" cellspacing="0"datatable="ng" width="100%">
+                            <thead>
+                                <tr>
+                                    <th data-priority="1" >Nombre del fondo</th>
+                                    <th>Descripci&oacute;n</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="e in fondos">
+                                    <td>
+                                        <a class="link" href="indexCR.html#/fondoProgramaDetails/{{e.fondoProgramaId}}" target="blank" >{{e.nombreFP}}</a>
+                                    </td>
+                                    <td>
+                                        {{e.descripcion ==null? 'Sin descripción' : e.descripcion}}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div ng-show="fondos==null" >
+                        <div class="alert advertencia">
+                            No hay fondos registrados
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            <!--LA del proyecto-->
+            <div ng-show="lecciones.length>0" class="x_panel">
+                <div class="x_title">
+                    <h2>Lecciones aprendidas</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li>
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content sin-desborde">
+                    <div ng-if="lecciones.length>0" ng-repeat="e in lecciones">
+                        <div ng-show="e.lAproy!=null && e.lActe!=null && e.lAcap!=null || full" class="x_panel">
+                            <h4>Informe t&eacute;cnico n&uacute;mero {{e.informeTecnicoFinalId}}</h4>
+                            <div ng-if="e.lAproy!=null" class="col-xs-12">
+                                <label class="detalle_subtitulo">Desarrollo del proyecto</label>
+                                <br/>
+                                <div class="form-group">
+                                    <label>En sus insumos tecnol&oacute;gicos </label>
+                                    <span class="text">{{e.lAproy.insumos}}</span>
+                                </div>
+                                <div class="form-group">
+                                    <label>Equipo de trabajo </label>
+                                    <span class="text">{{e.lAproy.equipo}}</span>
+                                </div>
+                                <div class="form-group">
+                                    <label>Gesti&oacute;n del proyecto </label>
+                                    <span class="text">{{e.lAproy.gestion}}</span>
+                                </div>
+                                <div class="form-group">
+                                    <label>Cumplimiento del tiempo, costo y alcance original </label>
+                                    <span class="text">{{e.lAproy.cumplimiento}}</span>
+                                </div>
+                            </div>
+                            <br/>
+                            <div ng-if="e.lActe!=null" class="col-xs-12">
+                                <label class="detalle_subtitulo">Relaci&oacute;n con el cliente</label>
+                                <br/>
+                                <div ng-if="e.lActe.negociacion!=null" class="form-group">
+                                    <label>En su negociaci&oacute;n </label>
+                                    <span class="text">{{e.lActe.negociacion}}</span>
+                                </div>
+                                <div ng-if="e.lActe.desarrollo!=null" class="form-group">
+                                    <label>En el desarrollo </label>
+                                    <span class="text">{{e.lActe.desarrollo}}</span>
+                                </div>
+                                <div ng-if="e.lActe.cierre!=null" class="form-group">
+                                    <label>En el cierre </label>
+                                    <span class="text">{{e.lActe.cierre}}</span>
+                                </div>
+                            </div>
+                            <br/>
+                            <div ng-if="e.lAcap!=null" class="col-xs-12">
+                                <label class="detalle_subtitulo">Capacidad del instituto</label>
+                                <br/>
+                                <div ng-if="e.lAcap.instalaciones!=null" class="form-group">
+                                    <label>En sus instalaciones </label>
+                                    <span class="text">{{e.lAcap.instalaciones}}</span>
+                                </div>
+                                <div ng-if="e.lAcap.servicios!=null" class="form-group">
+                                    <label>Servicios y apoyos administrativos </label>
+                                    <span class="text">{{e.lAcap.servicios}}</span>
+                                </div>
+                            </div>
+                            <div ng-if="e.lAproy==null && e.lActe==null && e.lAcap==null">
+                            <div class="alert advertencia">
+                                No hay informaci&oacute;n
+                            </div>
+                        </div>
+                        </div>
+                        <!--<div ng-if="e.lAproy==null && e.lActe==null && e.lAcap==null">
+                            <div ng-init="noShow=true" class="alert advertencia">
+                                No hay informaci&oacute;n
+                            </div>
+                        </div>-->
+                    </div>
+                    <div ng-if="lecciones.length==0">
+                        <div class="alert advertencia">
+                            No hay informaci&oacute;n de lecciones aprendidas
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            <!-- Insumos del proyecto-->
+            <div ng-show="insumos.length>0 || full" class="x_panel">
+                <div class="x_title">
+                    <h2>Insumos de proyecto</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li>
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content sin-desborde" >
+                    <div ng-show="insumos.length>0">
+                        <table class="table table-hover table-striped table-condensed dt-responsive" dt-options="dtOptions" cellspacing="0" datatable="ng" width="100%">
+                            <thead>
+                            <tr>
+                                <th>ITF asociado</th>
+                                <th>Nombre</th>
+                                <th>Descripci&oacute;n</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat-start="lista in insumos">
+
+                            </tr>
+                            <tr ng-repeat="insumo in lista" ng-repeat-end>
+                                <td>{{insumo.informeTecnicoFinalId}}</td>
+                                <td><a ui-sref="BuscarInsumosDetails({id:{{insumo.insumosId}}, id2:''})">{{insumo.nombreIns}}</a></td>
+                                <td>{{insumo.descripcionIns}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div ng-show="insumos.length==0" class="alert advertencia">
+                        No hay insumos registrados
+                    </div>
+                </div>
+            </div>
+            <!--Productos innovadores-->
+            <div ng-show="productos.length>0 || full" class="x_panel">
+                <div class="x_title">
+                    <h2>Productos innovadores relacionados</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li>
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <div ng-if="productos.length>0">
+                        <div ng-repeat="producto in productos">
+                            <font class="t1"><a class="linkTabla" ui-sref="productoInnovadorDetails({id:producto.productoId})">{{producto.nombreTecnico | uppercase}}</a></font><br />
+                            <font class="t2"><b>Segmento:</b> {{producto.segmentoMercado}} </font><br />
+                            <font class="t3"><b>Factor de innovaci&oacute;n:</b> {{producto.factorInnovacion}}</font>
+                            <br />
+                            <br />
+                        </div>
+                    </div>
+                    <div ng-if="productos.length==0">
+                        <div class="alert advertencia">
+                            No hay produtos innovadores relacionados
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!--panel derecho-->
+        <div class="col-xs-12 col-md-6 col-lg-6">
+            <!--Detalles de la empresa asociada-->
+            <div ng-show="empresa!=null || full" class="x_panel">
+                <div class="x_title">
+                    <h2>Empresa</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li>
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"><br/>
+                    </div>
+                </div>
+                <div ng-if="empresa!=null" class="x_content sin-desborde">
+                    <!--panel izquierdo empresa-->
+                    <div class="col-md-6 col-xs-12 profile_left" ng-show="proyecto.empresaId!=null">
+                        <div class="profile_img">
+                            <div id="crop-avatar">
+                                <img ng-if="empresa.adjunto64!=null" class="img-thumbnail" ng-src="data:image/png;base64,{{empresa.adjunto64}}" width="180" height="180" title={{empresa.nombreEmpresa}}>
+                                <img ng-if="empresa.adjunto64==null" src="images/empresa.png" class="img-thumbnail" width="180" height="180" title={{empresa.nombreEmpresa}}>
+                            </div>
+                        </div>
+                        <br/>
+                        <ul class="list-unstyled user_data">
+                            <li>
+                                <i class="fa fa fa-institution"></i> {{empresa.tipoOrganizacion.nombre}}
+                            </li>
+                            <li>
+                                <i class="fa fa fa-user"></i> {{empresa.nombreTitular}}
+                            </li>
+                            <li lass="m-top-xs">
+                                <i class="fa fa-briefcase user-profile-icon"></i> {{empresa.puesto}}
+                            </li>
+                            <li lass="m-top-xs">
+                                <i class="fa fa fa-envelope"></i> {{empresa.correo}}
+                            </li>
+                            <li lass="m-top-xs">
+                                <i class="fa fa fa-phone" title="Tel"></i> {{empresa.telefono}} | {{empresa.ext}}
+                            </li>
+                            <li lass="m-top-xs">
+                                <i class="fa fa fa-mobile-phone" title="celular"></i> {{empresa.celular}}
+                            </li>
+                            <li lass="m-top-xs">
+                                <i class="fa fa-briefcase user-profile-icon"></i> {{empresa.sitioWeb}}
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- panel derecho empresa-->
+                    <div class="col-md-6 col-xs-12">
+                        <h2 class="detalle">{{empresa.nombreEmpresa}}</h2>
+                        <br/>
+
+                        <div ng-if="empresa.descripcion != null">
+                            <div class="x_title">
+                                <h2>Descripci&oacute;n </h2>
+                                <div class="clearfix"></div>
+                            </div>
+                            <ul class="list-unstyled user_data">
+                                <li class="m-top-xs">
+                                    <i class="fa fa"></i> {{empresa.descripcion}}
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="x_title">
+                            <h2>Domicilio </h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <ul class="list-unstyled user_data">
+                            <li class="m-top-xs">
+                                <i class="fa fa"></i><b>Pa&iacute;s</b> {{empresa.paises.nombrePais}}
+                            </li>
+                            <li class="m-top-xs">
+                                <i class="fa fa"></i><b>Estado</b> {{empresa.estados.nombreEstado}}
+                            </li>
+                            <li class="m-top-xs">
+                                <i class="fa fa"></i><b>Municipio</b> {{empresa.municipios.nombreMunicipio}}
+                            </li>
+                            <li class="m-top-xs">
+                                <i class="fa fa"></i><b>Calle</b> {{empresa.calle}}
+                            </li>
+                            <li ng-if="empresa.colonia!=null" class="m-top-xs">
+                                <i class="fa fa"></i><b>Colonia</b> {{empresa.colonia}}
+                            </li>
+                            <li ng-if="empresa.localidad!=null" class="m-top-xs">
+                                <i class="fa fa"></i><b>Localidad</b> {{empresa.localidad}}
+                            </li>
+                            <li class="m-top-xs">
+                                <i class="fa fa"></i><b>CP</b> {{empresa.cp}}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div ng-if="empresa==null" class="col-xs-12">
+                    <div class="alert advertencia">
+                        No hay informaci&oacute;n sobre alguna empresa relacionada
+                    </div>
+                </div>
+
+            </div>
+            <!--Participacion en proyectos-->
+            <div ng-show="personal.length>0 || full" class="x_panel">
+                <div class="x_title">
+                    <h2>Personal participante</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li>
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content sin-deborde">
+                    <div ng-if="personal.length>0 ">
+                        <table class="table table-hover table-striped table-condensed dt-responsive" dt-options="dtOptions" cellspacing="0" datatable="ng" width="100%">
+                            <thead>
+                            <tr>
+                                <th>Clave</th>
+                                <th>Nombre</th>
+                                <th>Horas registradas</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="persona in personal | orderBy: 'horas'">
+                                <td><a style="cursor: pointer;" ng-click="openProfile(persona.clavePersona)"  title="Detalle de empleado" href="">{{persona.clavePersona}}</a></td>
+                                <td>{{persona.persona.nombreCompleto}}</td>
+                                <td>{{persona.horas}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div ng-show="personal.length==0">
+                        <div class="alert advertencia">
+                            No hay personal registrado
+                        </div>
+                    </div>
+                </div>
+                <!--{{personal |json}}-->
+            </div>
+            <!--Publicaciones-->
+            <div ng-show="publicaciones.length>0 || full" class="x_panel">
+                <div class="x_title">
+                    <h2>Publicaciones relacionadas</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li>
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content sin-desborde">
+                    <div ng-if="publicaciones.length>0">
+                        <div ng-repeat="publicacion in publicaciones">
+                            <font class="t1"><a class="linkTabla" ui-sref="BuscarArticulosDetails({id:publicacion.publicacionId})">{{publicacion.tituloPublicacion | uppercase}}</a></font><br />
+                            
+                            <font class="t2">{{publicacion.revista.revistaNombre}}</font>
+                            <br />
+                            <font class="t3">{{publicacion.estadoPublicacion.descripcion}} {{publicacion.year | getYear:'' | concatPrefixIf: ' / '}}</font>
+                            <br /><br />
+                        
+                        </div>
+                    </div>
+                    <div ng-show="publicaciones.length==0">
+                        <div class="alert advertencia">
+                            No hay art&iacute;culos relacionados
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!---Ponencias-->
+            <div ng-show="ponencias.length>0 || full" class="x_panel">
+                <div class="x_title">
+                    <h2>
+                        Ponencias
+                    </h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li>
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content sin-desborde">
+                    <div ng-if="ponencias.length>0">
+                        <div ng-repeat="ponencia in ponencias">
+                            <font class="t1"><a class="linkTabla" ui-sref="BuscarPonenciasDetails({id:ponencia.ponenciaId})">{{ponencia.tituloPonencia}}</a></font><br />
+                            <font class="t2">{{ponencia.nombreCongreso}} </font>
+                            <br />
+                            <font class="t3">{{ponencia.ambito}} {{ponencia.year | getYear:'' | concatPrefixIf: ' / '}}</font><br />
+                            <font class="t3"><b>Pa&iacute;s:</b> {{ponencia.nombrePais}}</font>
+                            <br />
+                            <br />
+                        </div>
+                    </div>
+                    <div ng-show="ponencias.length==0">
+                        <div class="alert advertencia">
+                            No hay ponencias relacionadas
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--Derechos de autor-->
+            <div class="x_panel" ng-show="derechos.length>0 || full">
+                <div class="x_title">
+                    <h2>Derechos de autor derivados</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li>
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <div ng-if="derechos.length>0">
+                        <div ng-repeat="derecho in derechos">
+                            <font class="t1"><a class="linkTabla" ui-sref="detallederechoautor({id:derecho.derechosAutorId})">{{derecho.titulo | uppercase}}</a></font><br />
+                            <font class="t2" ng-if="derecho.sintesis!=null">{{derecho.sintesis}} </font><br ng-if="derecho.sintesis!=null"/>
+                            <font class="t2"><b>Rama:</b> {{derecho.nombreRama}} </font><br />
+                            <font class="t3"><b>Fecha expedici&oacute;n:</b> {{derecho.fechaExpedicion | date: "dd/MM/yyyy"}}</font>
+                            <br />
+                            <br />
+                        </div>
+                    </div>
+                   <div ng-if="derechos.length==0">
+                       <div class="alert advertencia">
+                           No hay derechos de autor relacionados
+                       </div>
+                   </div>
+                </div>
+
+            </div>
+            <!--Propiedad industrial-->
+            <div ng-show="pindustrial.length>0 || full" class="x_panel">
+                <div class="x_title">
+                    <h2>Propiedad industrial derivada</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li>
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <div ng-if="pindustrial.length>0">
+                        <div ng-repeat="pi in pindustrial">
+                            <font class="t1"><a class="linkTabla" ui-sref="propiedadindustrialdetalle({id:pi.propiedadIndustrialId})">{{pi.titulo | uppercase}}</a></font><br />
+                            <font class="t2" ng-if="pi.observaciones!=null">{{pi.observaciones}} </font><br ng-if="pi.observaciones!=null" />
+                            <font class="t2"><b>Tipo:</b> {{pi.tipo}} </font><br />
+                            <font class="t3"><b>Fecha expedici&oacute;n:</b> {{pi.fechaExpedicion | date: "dd/MM/yyyy"}}</font>
+                            <br />
+                            <br />
+                        </div>
+                    </div>
+                    <div ng-if="pindustrial.length==0">
+                        <div class="alert advertencia">
+                            No hay propiedad industrial relacionada
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!--regresar-->
+            <!--<div class="col-xs-12">
+                <button type="button" ng-click="globalRegresar()" class="btn btn-primary">
+                    <span class="fa fa-arrow-left"></span> Regresar
+                </button>
+            </div>-->
+
+        </div>
+        <div class="col-xs-12 col-md-6">
+            <div class="col-xs-12 hidden-print">
+                <button type="button" onclick="window.close()" class="btn btn-primary">
+                    Cerrar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

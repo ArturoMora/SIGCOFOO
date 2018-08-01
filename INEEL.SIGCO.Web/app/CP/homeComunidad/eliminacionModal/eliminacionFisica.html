@@ -1,0 +1,17 @@
+<div class="modal-content sin-desborde">
+    <div class="modal-header">
+        Confirmaci&oacuten
+        <button type="button" class="close" ng-click="cancel()" data-dissmiss="modal">x</button>
+    </div>
+    <div class="modal-body" ng-show="datosUsuario == 'LiSe'">
+        {{mensajeEliminacion}}
+    </div>
+    <div class="modal-body" ng-show="datosUsuario != 'LiSe'">
+        &iquest {{mensajeEliminacion}}?
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-danger"  ng-hide="datosUsuario=='Si' || datosUsuario=='LiSe'" ng-really-click="eliminar();" ng-really-message="Eliminar definitivamente al miembro" >Eliminar</button>
+        <button type="button" class="btn btn-success" ng-hide="datosUsuario=='Ex' ||  datosUsuario=='LiSe'" ng-click="desactivar();">Dar de baja</button>
+        <button type="button" class="btn btn-primary" ng-click="cancel();">Cancelar</button>
+    </div>
+</div>

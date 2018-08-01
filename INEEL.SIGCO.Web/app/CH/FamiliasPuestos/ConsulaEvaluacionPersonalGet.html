@@ -1,0 +1,210 @@
+﻿<div class="vista">
+
+    <div class="page-title">
+        <div class="title_left">
+
+
+            <ol class="breadcrumb miga">
+                <li><i  class="sg sg-familia-puestos"></i> <a>Familia de puestos/Competencias por persona</a></li>
+               
+            </ol>
+        </div>
+    </div>
+
+    <div class="clearfix"></div>
+
+    <div ng-show="idRol !== 5">
+
+        <div class="row">
+
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_content sin-desborde">
+
+                        <div class="x_title">
+                            <h2>Criterios de búsqueda</h2>
+                            <ul class="nav navbar-right panel_toolbox">
+                                <li>
+                                    <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                </li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group">
+
+                            <div class="col-xs-12 col-md-6">
+                                <div class="form-group ">
+                                    <label class="control-label col-md-4 col-sm-4 col-xs-12">
+                                        Empleado
+                                    </label>
+                                    <div class="col-md-8 col-sm-8 col-xs-12">
+
+                                        <div class="c80">
+                                            <input type="text" ng-model="PersonaSeleccionada.nombreCompleto" id="searchTextJefe" disabled
+                                                   name="searchTextJefe" class="form-control" placeholder="Buscar">
+                                        </div>
+                                        <div class="c20">
+                                            <a class="btn btn-default" ng-click="open()" title="Buscar jefe de proyecto">
+                                                <span class="glyphicon glyphicon-search"></span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group ">
+                                    <label class="control-label col-md-4 col-sm-4 col-xs-12">
+                                        Período de evaluación
+                                    </label>
+                                    <div class="col-md-8 col-sm-8 col-xs-12">
+
+                                        <select id="periodoId" name="periodoev" class="form-control"
+                                                ng-model="periodoId"
+                                                ng-options="e.periodoEvaluaionId as e.periodo  for e in periodosEv" ng-required="true">
+                                            <option value="">Seleccione un período de evaluación </option>
+                                        </select>
+
+                                    </div>
+                                </div>
+
+                                <div class="form-group ">
+                                    <label class="control-label col-md-4 col-sm-4 col-xs-12">
+                                        Tipo de competencia
+                                    </label>
+                                    <div class="col-md-8 col-sm-8 col-xs-12">
+
+                                        <select id="tipoCompetencia" name="tipocompetencia" class="form-control"
+                                                ng-change="obtenDatosEmpleado()"
+                                                ng-model="tipoCompetenciaId"
+                                                ng-options="e.tipoCompetenciaId as e.nombreCompetencia  for e in tipocompetencia" ng-required="true">
+                                            <option value="">Seleccione un tipo de competencia </option>
+                                        </select>
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="col-sm-6 col-xs-12 contenedor_gris">
+                                <div ng-show="tipoCompetenciaId === 1  ">
+                                    <div ng-show="conductual === 1  ">
+
+                                        <label class="titFirst">Familia de puestos:</label>
+                                        <label class="cont">{{nombreFamiliaPuestos}}</label>
+
+                                        <br />
+                                        <label class="titFirst">Categoría:</label>
+                                        <label class="cont">{{categoriaCompetencia}}</label>
+
+                                    </div>
+                                </div>
+
+                                <div ng-show="tipoCompetenciaId === 2  ">
+                                    <div ng-show="tecnica === 1  ">
+                                        <label class="titFirst">Categoría:</label>
+                                        <label class="cont">{{categoriaCompetencia}}</label>
+                                        <br />
+                                        
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div ng-show="muestraDatos === 1  ">
+
+                 
+
+                    <div class="x_panel">
+                        <div class="x_content sin-desborde">
+                            <div class="x_title">
+                                <h2>Competencias evaluadas</h2>
+                                <div class="clearfix"></div>
+                            </div>
+
+                            <div ng-show="tipoCompetenciaId === 1  ">
+                                <div ng-show="conductual === 1  ">
+                                    <table class="table table-condensed table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th data-priority="1">Competencia</th>
+                                                <th>Nivel de dominio exigido</th>
+                                                <th>Comportamiento</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="obj in competenciasaevaluar">
+                                                <td>{{obj.matriz.competencia.competencia}}</td>
+                                                <td>{{obj.matriz.descnivel.nivel.descripcion}}</td>
+                                                <td>{{obj.matriz.descnivel.comportamiento}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <div ng-show="tipoCompetenciaId === 2  ">
+                                <div ng-show="tecnica === 1  ">
+
+                                    <table class="table table-condensed table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th data-priority="1">Competencia</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="obj in competenciasaevaluar">
+                                                <td>{{obj.competencia.competencia}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            
+              </div>
+        </div>
+    </div>
+
+    <div ng-show="idRol === 5">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Mensaje del sistema</h2>
+                <ul class="nav navbar-right panel_toolbox">
+                    <li>
+                        <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content sin-desborde">
+                <div class="col-xs-12 col-md-6">
+                    No hay competencias asignadas al Puesto de Director Divisional
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

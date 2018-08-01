@@ -1,0 +1,128 @@
+﻿﻿<!-- page content -->
+<div class="vista">
+
+    <div class="page-title">
+        <div class="title_left">
+            <div class="col-xs-12">
+                <h3 class="titColor"><img src="/Resources/icono_home_gi_verde.png" /> Gesti&oacute;n de la innovaci&oacute;n (GI)</h3>
+            </div>
+            <div class="row">&nbsp;</div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-sm-7 col-xs-12">
+            <div class="col-sm-6 col-xs-12">
+
+                <div class="row top_tiles">
+                    <a ui-sref="buscarIdeaInnovadora">
+                        <div class="animated flipInY col-xs-12">
+
+                            <div class="tile-stats">
+                                <div class="icon2"><i class="fa fa-lightbulb-o"></i></div>
+                                <div class="count">{{model.ideaInnovadora}}</div>
+                                <h3>Ideas innovadoras</h3>
+                            </div>
+
+                        </div>
+                    </a>
+                    <a ui-sref="buscarPropuestas">
+                        <div class="animated flipInY col-xs-12">
+                            <div class="tile-stats">
+                                <div class="icon2"><i class="fa fa-book"></i></div>
+                                <div class="count">{{model.propuestas}}</div>
+                                <h3>Propuestas de innovaci&oacute;n</h3>
+                            </div>
+                        </div>
+                    </a>
+                    <a ui-sref="buscarplanNegocio">
+                        <div class="animated flipInY col-xs-12">
+                            <div class="tile-stats">
+                                <div class="icon2"><i class="fa fa-refresh"></i></div>
+                                <div class="count">{{model.planNegocio}}</div>
+                                <h3>Plan de negocio evolutivo</h3>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-sm-6 col-xs-12">
+                <div class="row top_tiles">
+                    <a ui-sref="buscarProductoInnovador">
+                        <div class="animated flipInY col-xs-12">
+                            <div class="tile-stats">
+                                <div class="icon2"><i class="fa fa-file-powerpoint-o"></i></div>
+                                <div class="count">{{model.productos}}</div>
+                                <h3>Productos innovadores</h3>
+                            </div>
+                        </div>
+                    </a>
+                    <a ui-sref="buscarTecnologiaLicenciada">
+                        <div class="animated flipInY col-xs-12">
+                            <div class="tile-stats">
+                                <div class="icon2"><i class="fa fa-copyright"></i></div>
+                                <div class="count">{{model.stl}}</div>
+                                <h3>Tecnolog&iacute;as licenciadas</h3>
+                            </div>
+                        </div>
+                    </a>
+                    <a ui-sref="creafin">
+                        <div class="animated flipInY col-xs-12">
+                            <div class="tile-stats">
+                                <div class="icon2"><i class="fa fa-external-link"></i></div>
+                                <div class="count">{{model.compendioFI}}</div>
+                                <h3>Compendio del factor de innovaci&oacute;n</h3>
+                            </div>
+                        </div>
+                    </a>
+
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-md-5 col-sm-5 col-xs-12">
+            <!--<div class="row">
+                <div class="x_panel">
+                    <div class="x_content sin-desborde">
+                        <div class="text-center">
+                            <a class="btn btn-app" ng-click="setGlobalGo('buscarEmpresas')">
+                                <i class="fa fa-institution"></i> Buscar empresas
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>-->
+            <div class="row">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2 class="titColor">&Uacute;ltima informaci&oacute;n agregada </h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li>
+                                <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+
+                    <div class="x_content sin-desborde">
+                        <article class="media event" ng-repeat="n in nuevosOCs | limitTo: 30">
+                            <a class="pull-left date">
+                                <p class="month">{{n.fechaRegistro | date:'MMM'}}</p>
+                                <p class="day">{{n.fechaRegistro | date:'dd'}}</p>
+                            </a>
+                            <div class="media-body">
+                                <a class="title" href="{{n.liga}}">{{n.ocs.nombre}} </a>
+                                <p>{{n.descripcion}} </p>
+                            </div>
+                        </article>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- end page content -->

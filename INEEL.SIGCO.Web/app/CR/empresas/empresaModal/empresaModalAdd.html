@@ -1,0 +1,48 @@
+﻿<div class="modal-content">
+    <div class="modal-header">
+        Agregar empresa
+        <button type="button" class="close" ng-click="cancel()" data-dissmiss="modal">x</button>
+    </div>
+    <form role="form" ng-submit="AddEmpresa()" name="empresaAddForm">
+        <div class="modal-body">
+            <div class="modal-body">
+                <div class="panel">
+                    <div class="panel-body">
+                        <div class="col-lg-12">
+                            <div class="form-group col-xs-12">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                    Nombre
+                                    <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input required type="text" name="nombreEmpresa" ng-model="empresa.nombreEmpresa" ng-minlength="2" ng-maxlength="250" class="form-control"/>
+                                    <span class="error" ng-show="empresaAddForm.nombreEmpresa.$dirty && !empresaAddForm.nombreEmpresa.$valid">
+                                        El rango de caracteres debe ser m&iacute;nimo 15 y m&aacute;ximo 250
+                                    </span>
+                                </div>
+
+                            </div>
+                            <div class="form-group col-xs-12">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Tipo de organizaci&oacute;n
+                                    <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <select required name="tipoOrganizacion" class="form-control" ng-model="empresa.tipoOrganizacionId" ng-options="tipoOrganizacion.tipoOrganizacionId as tipoOrganizacion.nombre for tipoOrganizacion in tiposOrganizaciones">
+                                        <option value="">- Selecciona tipo de organizaci&oacute;n -</option>
+                                    </select>
+                                    <span class="error" ng-show="empresaAddForm.tipoOrganizacion.$invalid && empresaAddForm.tipoOrganizacion.$dirty || empresaAddForm.$submitted && empresaAddForm.tipoOrganizacion.$invalid">
+                                        Debes de seleccionar una opci&oacute;n
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-success" >Agregar</button>
+            <button type="button" class="btn btn-primary" ng-click="cancel()">Cancelar</button>
+        </div>
+    </form>
+</div>

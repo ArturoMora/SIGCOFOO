@@ -1,0 +1,99 @@
+
+<!-- page content -->
+<div class="vista">
+
+    <div class="page-title">
+        <div class="title_left">
+
+            <ol class="breadcrumb miga">
+                <li><i class="sg sg-software-des"></i> <a ui-sref="SoftwarePersonal">Software</a></li>
+                <li>Mi software</li>
+            </ol>
+
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+                    <table id="MTSoftwarePersonal" class="display dt-responsive" cellspacing="0" datatable="ng" width="100%" dt-column-defs="dtColumnDefs">
+                        <thead>
+                            <tr>
+                                <th class="thAjuste" data-priority="1">Tipo</th>
+                                <th>Software</th>
+                              
+                                <th>Proyecto</th>
+
+                                <th>Estado</th>
+                                <th data-priority="2">Opciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="obj in registros">
+                                <td>
+                                    {{obj.tipoSoftware.nombre}}
+                                </td>
+                                <td class="linkTabla" ng-click="detalles(obj.softwarePersonalId)"
+                                    title="responsable del registro: {{obj.clavePersona}}">
+                                    {{obj.nombre}}
+                                </td>
+
+                                <td>
+                                    <a href="" load-proyectos idproyecto="{{obj.proyecto.proyectoId}}" title="Detalle de proyecto">{{obj.proyecto.proyectoId}}</a>-   {{obj.proyecto.nombre}}
+                                </td>
+                                
+                        
+                                <td>
+                                    {{obj.estadoFlujo.descripcion}}
+
+                                </td>
+
+                                <td align="center">
+
+
+                                    <button ng-if="obj.clavePersona == clavePersonaId && obj.estadoFlujoId!=8" title="Editar"
+                                            ng-click="setGlobalID(obj.softwarePersonalId)"
+                                            ui-sref="SoftwarePersonalEdit"
+                                            class="btn btn-warning">
+                                        <i class="glyphicon glyphicon-pencil"></i>
+                                    </button>
+
+                                    <button ng-if="obj.estadoFlujoId==1 && obj.clavePersona == clavePersonaId" title="Eliminar" ng-really-click="eliminarSW(obj)" class="btn btn-danger">
+                                        <i class="glyphicon glyphicon-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+
+                    </table>
+
+                </div>
+                
+            </div>
+        </div>
+
+        
+        <div class="col-xs-12">
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+                    <div class="alert informacion">
+                        <span class="glyphicon glyphicon-info-sign"></span> Nota: Ud. se encuentra considerado en {{numRegistrosNOpublicados}} registros aun no autorizados / aceptados </div>
+                </div>
+            </div>
+        </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-12">
+                        <button type="button" ui-sref="SoftwarePersonalAdd" class="btn btn-success">
+                            <span class="glyphicon glyphicon-plus"></span> Agregar
+                        </button>
+                    </div>
+                </div>
+            </div>
+            

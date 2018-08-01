@@ -1,0 +1,68 @@
+<div data-ng-show="authentication.isAuth">
+    <div ng-hide="becarios.length >=0">
+        <img src="images/cargando.gif" />
+    </div>
+    <div class="row">
+        <div class="col-md-12 col-lg-12 col-xs-12 sin-desborde">
+            <div ng-show="becarios.length == 0" class="alert advertencia">
+                No hay registros de becario externo
+            </div>
+            <div ng-show="becarios.length > 0 " class="sin-desborde">
+                <table class="table table-hover table-striped table-condensed dt-responsive" id="tableBecarioExterno" cellspacing="0" datatable="ng" width="100%"
+                       dt-options="dtOptions">
+                    <thead>
+                        <tr>
+                            <th class="text-center" data-priority="1">T&iacute;tulo</th>
+                            <th class="text-center">Proyecto</th>
+                            <th class="text-center">Tipo de beca</th>
+                            <th class="text-center">Estado</th>
+                            <th class="text-center">Fecha</th>
+                            <!-- <th class="text-center" data-priority="1">Opciones</th> -->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="becario in becarios">
+                            <td style="max-width:300px" class="sin-desborde linkTabla" ng-click="setGlobalID(becario.becarioId);$event.stopPropagation();" ui-sref="BecarioExternoDetails({id:becario.becarioId})" title="Detalle">{{becario.tituloEstancia}}</td>
+                            <td>
+                                    <label ng-if="becario.proyecto.proyectoId!=0&&becario.proyecto.proyectoId!=null" href="" load-proyectos idproyecto="{{becario.proyecto.proyectoId}}" title="Detalle de proyecto">{{becario.proyecto.proyectoId}}</label>
+                                    <label ng-if="becario.proyecto.proyectoId!=0&&becario.proyecto.proyectoId!=null"> - </label> {{becario.proyecto.nombre}}
+                            </td>
+                            <td>{{becario.tipoBeca}}</td>
+                            <td>{{becario.estadoFlujo}}</td>
+                            <td class="text-center"><p ng-bind="becario.fechaInicio | date:'dd/MM/yyyy'"> </p> </td>
+                            <!-- <td>
+
+                                <a ng-if="idRol==1" ng-click="setGlobalID(becario.becarioExternoId);$event.stopPropagation();"
+                                   ui-sref="BecarioExternoDetailsAdmin({id:becario.becarioExternoId, id2: 1})" title="Aprobar registro" class="btn btn-warning">
+                                    <i class="glyphicon glyphicon-pencil"></i>
+                                </a>
+                                <div ng-if="becario.estadoFlujoId==1 || editarGestion==1">
+                                    <a ng-if="idRol!=1" class="btn btn-warning" ng-click="setGlobalID(becario.becarioExternoId);$event.stopPropagation();" ui-sref="BecarioExternoEdit" title="Editar">
+                                        <i class="glyphicon glyphicon-pencil"></i>
+                                    </a>
+                                    <button type="button" ng-if="becario.fechaValidacion === null && becario.estadoFlujoId!=3" ng-click="$event.stopPropagation();open(becario)" class="btn btn-danger">
+                                        <i class="glyphicon glyphicon-trash"></i>
+                                    </button>
+                                </div>
+                                <div ng-if="becario.estadoFlujo.estadoFlujoId==3">
+                                    <a ng-if="idRol!=1" ng-really-message="Est&aacute a punto de acceder a un registro 'Aceptado', si modifica alg&uacuten atributo deber&aacute ser validado nuevamente. &iquest;Desea continuar?" ng-really-click="setGlobalID(becario.becarioExternoId);$event.stopPropagation();navegador();" title="Editar" class="btn btn-warning">
+                                        <i class="glyphicon glyphicon-pencil"></i>
+                                    </a>
+                                </div>
+                            </td> -->
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- <a ng-show="becarios.length >= 0" type="button" ng-click="$event.stopPropagation();" ui-sref="BecarioExternoAdd" class="btn btn-success">
+                <span class="glyphicon glyphicon-plus"></span> Agregar
+            </a> -->
+            <a ng-show="idRol==1" type="button" ng-click="$event.stopPropagation();" ui-sref="RelacionaBecasPersonal" class="btn btn-success">
+                 Asociar / Desasociar
+            </a>
+        </div>
+    </div>
+</div>
+
+
+

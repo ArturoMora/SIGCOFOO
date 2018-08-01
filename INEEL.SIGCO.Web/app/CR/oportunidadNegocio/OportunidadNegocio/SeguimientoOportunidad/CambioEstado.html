@@ -1,0 +1,61 @@
+﻿<div ng-controller="CambioEstadoCtrl" id="fooname2">
+    <form name="formcambioestado">
+        <div class="form-group">
+            <select ng-disabled="estadoactual==3||estadoactual==4" name="estado" class="form-control" ng-model="oportunidad.estadoONId"
+                ng-init="estadoactual = oportunidad.estadoONId;" ng-options="estadoON.estadoONId as estadoON.nombre for estadoON in estadosON">
+            <option value="">- Seleccione un estado -</option>
+        </select>
+        </div>
+        <div class="form-group" ng-show="oportunidad.estadoONId=== 2">
+            <label>¿Por qu&eacute; se suspendi&oacute; temporalmente? <span class="required">*</span></label>
+            <textarea ng-disabled="estadoactual ===2" name="comentarios" class="form-control" ng-model="oportunidad.porQueSuspende" rows="3"></textarea>
+        </div>
+        <div class="form-group" ng-show="oportunidad.estadoONId ===3">
+            <label>¿Por qu&eacute; se cancel&oacute;? <span class="required">*</span></label>
+            <textarea ng-disabled="estadoactual ===3" name="comentarios" class="form-control" ng-model="oportunidad.porQueCancela" rows="3"></textarea>
+        </div>
+        <div class="form-group" ng-show="oportunidad.estadoONId === 4">
+            <label>Titulo de iniciativa o propuesta <span class="required">*</span></label>
+            <textarea ng-disabled="estadoactual ===4" name="comentarios" class="form-control" ng-model="oportunidad.tituloPropuesta"
+                rows="3"></textarea>
+        </div>
+        <div class="form-group" ng-show="oportunidad.estadoONId === 4">
+            <label>N&uacute;mero de Iniciativa <span class="required">*</span></label>
+            <input ng-disabled="estadoactual===4" type="text" name="numeroIniciativa" ng-model="oportunidad.noIniciativa" class="form-control"
+             maxlength="10" />
+        </div>
+        <div class="form-group" ng-show="oportunidad.estadoONId === 4">
+            <label>N&uacute;mero Propuesta <span class="required">*</span></label>
+            <input ng-disabled="estadoactual===4" required type="text" name="numeroPropuesta" ng-model="oportunidad.noPropuesta" class="form-control"
+             maxlength="10" />
+        </div>
+        <div class="form-group" ng-show="oportunidad.estadoONId=== 2">
+            <label>Fecha de reactivaci&oacute;n <span class="required">*</span></label>
+            <p class="input-group">
+                <input ng-required="oportunidad.estadoONId=== 2" placeholder="dd/mm/yyyy" uib-datepicker-popup='dd/MM/yyyy' show-button-bar="false" popup-placement="bottom" type="text"
+                    class="form-control fechaOnly" ng-model="oportunidad.fechaReactivacion" is-open="open" close-text="Close"
+                />
+                <span class="input-group-btn">
+                <button type="button" class="btn btn-success" ng-click="open=true"><i class="glyphicon glyphicon-calendar"></i></button>
+            </span>
+            </p>
+            <span class="error" ng-show="oportunidadDetailsForm.fecha.$invalid && oportunidadDetailsForm.$submitted">
+            Debes ingresar la fecha
+        </span>
+        </div>
+
+        <div class="ln_solid"></div>
+        <div class="form-group" ng-show="estadoactual ===1 || estadoactual === 2">
+            <div class="col-md-8 col-sm-8 col-xs-12">
+                <div class="">
+                    <button type="submit" class="btn btn-warning" title="Modificar el estado de la oportunidad de negocio"
+                        ng-click="cambiarestado()">
+                    <i class="glyphicon glyphicon-saved"></i> Modificar estado 
+                </button>
+
+                </div>
+            </div>
+
+        </div>
+    </form>
+</div>

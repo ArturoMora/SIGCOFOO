@@ -1,0 +1,160 @@
+<div class="vista">
+    <div class="page-title">
+        <div class="title_left">
+            <ol class="breadcrumb miga">
+                <li><i class="sg sg-red-expertos"></i> <a ui-sref="expertosget">Redes de expertos</a></li>
+            </ol>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Criterios de b&uacute;squeda</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <!-- <li>
+                            <button ng-if="rolId==15|| rolId==1032" type="button" ui-sref="expertosadd" class="btn btn-success pull-right">
+                                <span class="glyphicon glyphicon-plus"></span> Agregar experto
+                            </button>
+                        </li> -->
+                        <li>
+                            <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    
+                    <form role="form" class="form-label-left">
+                        <div class="col-xs-6 col-md-6">
+                            <div class="form-group">
+                                <label class="col-xs-12" style="height:30px; line-height:30px; text-align:left; ">Nombre del experto</label>
+                                <div class="col-xs-10">
+                                    <input class="form-control frmSearch" type="text" id="s1" maxlength="50" placeholder="Nombre del experto" ng-model="exp.nombreCompleto" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-xs-12" style="height:30px; line-height:30px; text-align:left; ">L&iacute;nea de desarrollo tecnol&oacute;gico</label>
+                                <div class="col-xs-10">
+                                    <select id="s2" ng-model="exp.lineaDesarrolloTecnologicoId" name="ramaId" ng-options="linea.idLinea as linea.nombreLinea for linea in lineas | orderBy:'nombreLinea'"
+                                            class="form-control">
+                                        <option value="">---Seleccione una l&iacute;nea de desarrollo---</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-xs-12" style="height:30px; line-height:30px; text-align:left; ">Empresa</label>
+                                <div class="col-xs-10">
+                                    <select id="s2" ng-model="exp.empresaId"  ng-options="empresa.empresaId as empresa.nombreEmpresa for empresa in empresas | orderBy:'nombreEmpresa'"
+                                            class="form-control">
+                                        <option value="">---Seleccione una empresa---</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <br />
+                            <br />
+                        </div>
+
+                        <div class="col-xs-6 col-md-6">
+                            <div class="form-group">
+                                <label class="col-xs-12" style="height:30px; line-height:30px; text-align:left; ">Comunidad de pr&aacute;ctica con expertos registrados</label>
+                                <div class="col-xs-10">
+                                    <select id="s2" ng-model="exp.comunidadId"ng-options="com.idComunidad as com.nombreComunidad for com in comunidades | orderBy:'nombreComunidad'"
+                                            class="form-control">
+                                        <option value="">---Seleccione una comunidad---</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-xs-12" style="height:30px; line-height:30px; text-align:left; ">Pa&iacute;s</label>
+                                <div class="col-xs-10">
+                                    <select id="s2" ng-model="exp.paisId" name="ramaId" ng-options="pai.paisId as pai.nombrePais for pai in paises | orderBy:'nombrePais'"
+                                            class="form-control">
+                                        <option value="">---Seleccione un pais---</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <br />
+                            <br />
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="col-xs-12 col-md-6">
+                                <div class="form-group ">
+                                    <br>
+                                    <a class="btn btn-success" ng-click="buscar()" title="buscar">
+                                        <span class="glyphicon glyphicon-search"></span> Buscar
+                                    </a>
+                                    <a class="btn btn-primary" ng-click="reset()" title="Limpiar campos">
+                                        Limpiar
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+            <div ng-show="busqueda" class="x_panel">
+                <div class="x_content sin-desborde">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <!--<div ng-show="expertos.length === 0" class="alert advertencia">
+                                No hay registros de Redes de Expertos.
+                            </div>-->
+                            <div >
+                                <table id="CRexpertosGet" datatable="ng" class="table table-hover table-striped table-condensed dt-responsive" width="100%"
+                                    dt-options="dtOptions">
+                                    <thead>
+                                        <tr>
+                                            <th class="hidden">Nombre</th>  <!--Esta columna oculta permite ordenar los datos por nombre-->
+                                            <th data-priority="1">Nombre del experto</th>
+                                            <th>L&iacute;nea de investigaci&oacute;n</th>
+                                            <th style="width: 15%" class="sin-desborde">Especialidad</th>
+                                            <th>Empresa</th>
+                                            <th>Comunidad<br> de pr&aacute;ctica</th>
+                                            <th>Pais</th>
+                                            <th class="thAjuste" data-priority="2" ng-show="rolId == 15 || rolId==1032 || rolId==1031">Opciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="experto in expertos | orderBy: 'nombreExperto'">
+                                            <td class="hidden">{{experto.nombreExperto}}</td><!--Esta columna oculta permite ordenar los datos por nombre-->
+                                            <td class="linkTabla">
+                                                <a style="cursor:pointer" ng-click="detalleRegistro(experto.expertoId)">{{experto.nombreExperto}}</a>
+                                            </td>
+                                            <td>{{experto.lineaInvestigacion}}</td>
+                                            <td style="width: 15%">{{experto.especialidad}}</td>
+                                            <td>{{experto.nombreEmpresa}}</td>
+                                            <td>{{experto.nombreComunidad == null ? 'Ninguna' : experto.nombreComunidad}}</td>
+                                            <td>{{experto.nombrePais}}</td>
+                                            <td ng-show="rolId == 15|| rolId==1032 || rolId==1031">
+                                                <a ng-show="rolId == 15|| rolId==1032 || rolId==1031" class="btn btn-warning" ng-click="editarRegistro(experto.expertoId)"  title="Editar experto">
+                                                    <i class="glyphicon glyphicon-pencil"></i>
+                                                </a>
+                                                <!--<a ng-show="rolId == 15|| rolId==1032" class="btn btn-warning" ui-sref="expertosedit({ id:experto.expertoId })" title="Editar experto">
+                                                    <i class="glyphicon glyphicon-pencil"></i>
+                                                </a>-->
+                                                <button ng-show="rolId == 15|| rolId==1032 || rolId==1031" class="btn btn-danger" ng-click="openModalEliminacion(experto)" title="Eliminar experto">
+                                                    <i class="glyphicon glyphicon-trash"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button ng-if="rolId==15|| rolId==1032 || rolId==1031" type="button" ui-sref="expertosadd" class="btn btn-success">
+                <span class="glyphicon glyphicon-plus"></span> Agregar
+            </button>
+        </div>
+    </div>
+</div>

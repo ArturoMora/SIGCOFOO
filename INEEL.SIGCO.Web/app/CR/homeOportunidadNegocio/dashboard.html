@@ -1,0 +1,327 @@
+﻿<div class="vista">
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="row">
+                <div class="col-md-6 col-sm-6 col-xs-12 col-lg-4">
+                    <div class="x_panel col-md-6 col-xs-12">
+                        <div class="x_title">
+                            <h2>Oportunidades de negocio</h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content sin-desborde">
+                            <div ng-show="oportunidades.length === 0" class="alert advertencia">
+                                No existen oportunidades registradas
+                            </div>
+                            <div ng-show="oportunidades.length > 0" id="morris-donut-chart" class="col-xs-12">
+                                <canvas width="5" height="5" id="doughnut" class="chart chart-doughnut" chart-data="data" chart-labels="labels" chart-options="options"
+                                    chart-colors="colors"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div ng-if="rolid == 15 " class="col-md-6 col-sm-6 col-xs-12 col-lg-8 pull-right">
+                    <div class="x_panel">
+                        <h2><a ui-sref="asignarOportunidad" style="cursor: hand;cursor: pointer;" class="link"> Asignar ON</a></h2>
+                        <div ng-show="oportunidadesPorAsignar.length === 0" class="alert advertencia">
+                            No existen oportunidades por asignar
+                        </div>
+                        <div ng-show="oportunidadesPorAsignar.length > 0">
+                            <table class="table table-hover table-sm table-striped">
+                                <thead>
+                                    <tr>
+                                        <th style="cursor:default">Nombre de la oportunidad</th>
+                                        <th style="cursor:default">Fecha de la oportunidad</th>
+                                        <th style="cursor:default">Fecha de registro</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="o in oportunidadesPorAsignar | orderBy : '-fechaRegistro' |limitTo:3">
+                                        <td>
+                                            <a>
+                                                <span>
+                                    <span ng-if="o.estadoFlujoONId !== 13" class="message sin-desborde linkTabla" ui-sref="oportunidadEdit({ id: o.oportunidadNegocioId })">{{o.nombreOportunidad}}</span>
+                                                <span ng-if="o.estadoFlujoONId === 13" class="message sin-desborde linkTabla" ui-sref="asignarOportunidad({ id: o.oportunidadNegocioId })">{{o.nombreOportunidad}}</span>
+                                                </span>
+                                                <br>{{o.empresa.nombreEmpresa}}
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <span class="time">{{o.fecha | date:'dd-MM-yyyy'}}</span>
+                                        </td>
+                                        <td>
+                                            <span class="time">{{o.fechaRegistro | date:'dd-MM-yyyy'}}</span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="2" class="text-center"> <a ui-sref="asignarOportunidad">Ver todo...</a></td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div ng-if="rolid === 4 || rolid === 5" class="col-md-6 col-sm-6 col-xs-12 col-lg-8 pull-right">
+                    <div class="x_panel">
+                        <h2><a ui-sref="oportunidadesPorAsignar"> Oportunidades por asignar</a></h2>
+                        <div ng-show="oportunidadesPorAsignar.length === 0" class="alert advertencia">
+                            No hay oportunidades por asignar
+                        </div>
+                        <div ng-show="oportunidadesPorAsignar.length > 0">
+                            <table class="table table-hover table-sm table-striped">
+                                <thead>
+                                    <tr>
+                                        <th style="cursor:default">Nombre de la oportunidad</th>
+                                        <th style="cursor:default">Fecha de la oportunidad</th>
+                                        <th style="cursor:default">Fecha de registro</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="o in oportunidadesPorAsignar | orderBy : '-fechaRegistro' |limitTo:3 ">
+                                        <td>
+                                            <a>
+                                                <span>
+                                                    <span class="message sin-desborde linkTabla" ui-sref="oportunidadesPorAsignar">{{o.nombreOportunidad}}</span>
+                                                </span>
+                                                <br>{{o.empresa.nombreEmpresa}}
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <span class="time">{{o.fecha | date:'dd-MM-yyyy'}}</span>
+                                        </td>
+                                        <td>
+                                            <span class="time">{{o.fechaRegistro | date:'dd-MM-yyyy'}}</span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="2" class="text-center"> <a ui-sref="oportunidadesPorAsignar">Ver todo...</a></td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div ng-if="rolid == 1025" class="col-md-6 col-sm-6 col-xs-12 col-lg-8 pull-right">
+                    <div class="x_panel">
+                        <h2><a ui-sref="misOportunidadesAsignadas"> Mis oportunidades asignadas</a></h2>
+                        <div ng-show="oportunidadesAsignadas.length === 0" class="alert advertencia">
+                            No existen oportunidades asignadas
+                        </div>
+                        <div ng-show="oportunidadesAsignadas.length > 0">
+                            <table class="table table-hover table-sm table-striped">
+                                <thead>
+                                    <tr>
+                                        <th style="cursor:default">Nombre de la oportunidad</th>
+                                        <th style="cursor:default">Fecha de la oportunidad</th>
+                                        <th style="cursor:default">Fecha de registro</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="o in oportunidadesAsignadas | orderBy : '-fechaRegistro' |limitTo:3 ">
+                                        <td>
+                                            <a>
+                                                <span>
+                                                    <span class="message sin-desborde linkTabla" ui-sref="oportunidadEspecialistaEdit({ id: o.oportunidadNegocioId })">{{o.nombreOportunidad}}</span>
+                                                </span>
+                                                <br>{{o.empresa.nombreEmpresa}}
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <span class="time">{{o.fecha | date:'dd-MM-yyyy'}}</span>
+                                        </td>
+                                        <td>
+                                            <span class="time">{{o.fechaRegistro | date:'dd-MM-yyyy'}}</span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="2" class="text-center"> <a ui-sref="misOportunidadesAsignadas">Ver todo...</a></td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div ng-if="rolid == 15 || rolid == 1025 || rolid == 4 || rolid == 5 " class="col-md-6 col-sm-6 col-xs-12 col-lg-8 pull-right">
+                    <div class="x_panel">
+                        <h2><a ui-sref="historialOportunidades" style="cursor: hand;cursor: pointer;" class="link"> Historial de oportunidades</a></h2>
+                        <div ng-show="historial.length === 0" class="alert advertencia">
+                            No hay historial que mostrar
+                        </div>
+                        <div ng-show="historial.length > 0">
+                            <table class="table table-hover table-sm table-striped">
+                                <thead>
+                                    <tr>
+                                        <th style="cursor:default">Nombre de la oportunidad</th>
+                                        <th style="cursor:default">Fecha de la oportunidad</th>
+                                        <th style="cursor:default">Fecha de registro</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="o in historial  | orderBy : '-fechaRegistro' |limitTo:3">
+                                        <td>
+                                            <a>
+                                                <span>
+                                    <span class="message sin-desborde linkTabla" ui-sref="oportunidadHistorico({ id: o.oportunidadNegocioId })">{{o.nombreOportunidad}}</span>
+                                                </span>
+                                                <br>{{o.empresa.nombreEmpresa}}
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <span class="time">{{o.fecha | date:'dd-MM-yyyy'}}</span>
+                                        </td>
+                                        <td>
+                                            <span class="time">{{o.fechaRegistro | date:'dd-MM-yyyy'}}</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2" class="text-center"> <a ui-sref="historialOportunidades">Ver todo...</a></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-sm-6 col-xs-12 col-lg-8 pull-right">
+                    <div class="x_panel">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <h2><a ui-sref="misOportunidadesRegistradas"> Mis oportunidades registradas</a></h2>
+                            </div>
+                            <div class="col-xs-12">
+                                <button type="button" ui-sref="registrarOportunidad" class="btn btn-sm btn-success pull-right">
+            <span class="glyphicon glyphicon-plus"></span> Agregar oportunidad de negocio </button>
+                            </div>
+                        </div>
+                        <div ng-show="oportunidadesRegistradas.length === 0" class="alert advertencia">
+                            No existen oportunidades registradas
+                        </div>
+                        <div ng-show="oportunidadesRegistradas.length > 0">
+                            <table class="table table-hover table-sm table-striped">
+                                <thead>
+                                    <tr>
+                                        <th style="cursor:default">Nombre de la oportunidad</th>
+                                        <th style="cursor:default">Fecha de la oportunidad</th>
+                                        <th style="cursor:default">Fecha de registro</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="o in oportunidadesRegistradas  | orderBy : '-fechaRegistro' |limitTo:3">
+                                        <td>
+                                            <a>
+                                                <span>
+                                                    <span class="message sin-desborde linkTabla" ui-sref="oportunidadHistorico({ id: o.oportunidadNegocioId })">{{o.nombreOportunidad}}</span>
+                                                </span>
+                                                <br>{{o.empresa.nombreEmpresa}}
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <span class="time">{{o.fecha | date:'dd-MM-yyyy'}}</span>
+                                        </td>
+                                        <td>
+                                            <span class="time">{{o.fechaRegistro | date:'dd-MM-yyyy'}}</span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="2" class="text-center"> <a ui-sref="misOportunidadesRegistradas">Ver todo...</a></td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div ng-if="rolid == 8" class="col-md-6 col-sm-6 col-xs-12 col-lg-8 pull-right">
+                    <div class="x_panel">
+                        <h2><a ui-sref="misOportunidadesAsignadas"> Mis oportunidades asignadas</a></h2>
+                        <div ng-show="oportunidadesAsignadas.length === 0" class="alert advertencia">
+                            No existen oportunidades asignadas
+                        </div>
+                        <div ng-show="oportunidadesAsignadas.length > 0">
+                            <table class="table table-hover table-sm table-striped">
+                                <thead>
+                                    <tr>
+                                        <th style="cursor:default">Nombre de la oportunidad</th>
+                                        <th style="cursor:default">Fecha de la oportunidad</th>
+                                        <th style="cursor:default">Fecha de registro</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="o in oportunidadesAsignadas | orderBy : '-fechaRegistro' |limitTo:3">
+                                        <td>
+                                            <a>
+                                                <span>
+                                                    <span class="message sin-desborde linkTabla" ui-sref="oportunidadDetails({ id: o.oportunidadNegocioId })">{{o.nombreOportunidad}}</span>
+                                                </span>
+                                                <br>{{o.empresa.nombreEmpresa}}
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <span class="time">{{o.fecha | date:'dd-MM-yyyy'}}</span>
+                                        </td>
+                                        <td>
+                                            <span class="time">{{o.fechaRegistro | date:'dd-MM-yyyy'}}</span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="2" class="text-center"> <a ui-sref="misOportunidadesAsignadas">Ver todo...</a></td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div ng-if="rolid == 8 " class="col-md-6 col-sm-6 col-xs-12 col-lg-8 pull-right">
+                    <div class="x_panel">
+                        <h2><a ui-sref="seguimientoOportunidad">Seguimiento a mi oportunidad</a></h2>
+                        <div ng-show="oportunidadesEnSeguimiento.length === 0" class="alert advertencia">
+                            No existen oportunidades en seguimiento
+                        </div>
+                        <div ng-show="oportunidadesEnSeguimiento.length > 0">
+                            <table class="table table-hover table-sm table-striped">
+                                <thead>
+                                    <tr>
+                                        <th style="cursor:default">Nombre de la oportunidad</th>
+                                        <th style="cursor:default">Fecha de la oportunidad</th>
+                                        <th style="cursor:default">Fecha de registro</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="o in oportunidadesEnSeguimiento | orderBy : '-fechaRegistro' |limitTo:3">
+                                        <td>
+                                            <a>
+                                                <span>
+                                                    <span class="message sin-desborde linkTabla" ui-sref="seguimientoONDetails({ id: o.oportunidadNegocioId })">{{o.nombreOportunidad}}</span>
+                                                </span>
+                                                <br>{{o.empresa.nombreEmpresa}}
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <span class="time">{{o.fecha | date:'dd-MM-yyyy'}}</span>
+                                        </td>
+                                        <td>
+                                            <span class="time">{{o.fechaRegistro | date:'dd-MM-yyyy'}}</span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="2" class="text-center"> <a ui-sref="seguimientoOportunidad">Ver todo...</a></td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

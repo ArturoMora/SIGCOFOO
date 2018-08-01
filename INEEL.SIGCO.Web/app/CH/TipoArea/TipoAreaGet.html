@@ -1,0 +1,64 @@
+﻿<div class="vista">
+
+    <div class="page-title">
+        <div class="title_left">
+
+            <ol class="breadcrumb miga">
+                <li><i class="disabled fa fa-cogs"></i> <a>Administración/Catálogos competencias/Tipos de áreas</a></li>
+            </ol>
+
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+
+                    <table id="CHTipoAreaGet" dt-instance="dtInstance" class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" datatable="ng" width="100%" dt-options="dtOptions">
+                        <thead>
+                            <tr>
+                                <th data-priority="1">Tipo de área </th>
+                                <th>Descripción</th>
+                                <th class="thAjuste text-center" data-priority="2">¿Está activo? </th>
+                                <th class="thAjuste text-center" data-priority="3">Opciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="obj in registro">
+                                <td>{{obj.area}}</td>
+                                <td>{{obj.descripcion}}</td>
+                                <td class="text-center text-hide">
+                                    {{obj.estado}}
+                                    <input type="checkbox" class="btn btn-info btn-circle" ng-model="obj.estado" ng-click="saveEstado(obj.tipoAreaId,obj.estado)" />
+                                </td>
+                                <td class="text-center">
+                                    <a class="btn btn-warning" ui-sref="tipoareaEdit({id:obj.tipoAreaId})" title="Editar">
+                                        <i class="glyphicon glyphicon-pencil"></i>
+                                    </a>
+
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                  
+
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+   
+    <div class="row">
+        <div class="col-xs-12">
+            <button type="button" ui-sref="tipoareaAdd" class="btn btn-success">
+                <span class="glyphicon glyphicon-plus"></span> Agregar
+            </button>
+          
+        </div>
+    </div>
+</div>

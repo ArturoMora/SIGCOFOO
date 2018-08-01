@@ -1,0 +1,114 @@
+﻿<!-- Default Validation Template -->
+<div class="validation"
+     ng-show="attrs.required===''|| attrs.required">
+    <!-- Show errors for invalid fields, when it has been either focused,
+     has been changed or the user tried to submit the form without success
+     (requires the setDirtyOnSubmit-option to be set-->
+    <ul class="list-unstyled validation-errors"
+        ng-show="field.$invalid && (field.$touched || field.$dirty || form.$triedSubmit)"
+        ng-messages="field.$error">
+        <li ng-message="required">Dato requerido</li>
+        <!--<li ng-message="password">Please enter a valid password</li>-->
+        <li ng-message="password">Por favor ingresa una contraseña v&aacute;lida</li>
+        <!--<li ng-message="email">Please enter a valid e-mail</li>-->
+        <li ng-message="email">Por favor ingresa un correo v&aacute;lido</li>
+        <!--<li ng-message="pattern">Invalid input format</li>-->
+        <li ng-message="pattern">Formato de dato inv&aacute;lido</li>
+        <!--<li ng-message="date">Please enter a valid date</li>-->
+        <li ng-message="date">Por favor ingresa una fecha v&aacute;lida</li>
+        <!--<li ng-message="time">Please enter a valid time</li>-->
+        <li ng-message="time">Por favor ingresa una hora v&aacute;lida</li>
+        <!--<li ng-message="datetime">Please enter a valid date and time</li>-->
+        <li ng-message="datetime">Por favor ingresa una fecha y hora v&aacute;lida</li>
+        <!--<li ng-message="datetime-local">Please enter a valid date and time</li>-->
+        <li ng-message="datetime-local">Por favor ingresa una fecha y hora v&aacute;lida</li>
+        <!--<li ng-message="number">This field must be numeric</li>-->
+        <li ng-message="number">Este campo debe ser num&eacute;rico</li>
+        <!--<li ng-message="color">Please enter a valid color</li>-->
+        <li ng-message="color">Por favor ingresa un color v&aacute;lido</li>
+        <!--<li ng-message="range">Please enter a valid range</li>-->
+        <li ng-message="range">Por favor ingresa un rango v&aacute;lido</li>
+        <!--<li ng-message="month">Please enter a valid month</li>-->
+        <li ng-message="month">Por favor ingresa un mes v&aacute;lido</li>
+        <!--<li ng-message="url">Please enter a valid URL</li>-->
+        <li ng-message="url">Por favor ingresa una URL v&aacute;lida</li>
+        <!--<li ng-message="file">Invalid file</li>-->
+        <li ng-message="file">Archivo inv&aacute;lido</li>
+
+        <!-- ng-fab-form provides you with access to the
+        input-element-attributes, allowing you to display their values
+        inside of the message-->
+        <!--<li ng-message="minlength">Please use at least {{ attrs.minlength }} characters</li>-->
+        <li ng-message="minlength">Por favor usa al menos {{ attrs.minlength }} caracteres</li>
+        <!--<li ng-message="maxlength">Please do not exceed {{ attrs.maxlength }} characters</li>-->
+        <li ng-message="maxlength">Por favor no exceder de {{ attrs.maxlength }} caracteres</li>
+
+        <!--<li ng-if="attrs.type === 'time' "
+            ng-message="min">
+            The time provided should be no earlier than {{ attrs.min |date: 'HH:MM' }}
+        </li>-->
+        <li ng-if="attrs.type === 'time' "
+            ng-message="min">
+            El tiempo proporcionado no debe ser menor a  {{ attrs.min |date: 'HH:MM' }}
+        </li>
+        <!--<li ng-message="ngFabMatch">The {{ attrs.type ==='password'? 'passwords' : 'values' }} should match</li>-->
+        <li ng-message="ngFabMatch">La {{ attrs.type ==='password'? 'passwords' : 'values' }} debe coincidir</li>
+
+
+        <!-- you can use ng-if or ng-show for more advanced
+        error messages -->
+        <!--<li ng-if="attrs.type === 'time' "
+            ng-message="min">
+            The time provided should after {{ attrs.min |date: 'HH:MM' }}
+        </li>-->
+        <li ng-if="attrs.type === 'time' "
+            ng-message="min">
+            El tiempo proporcionado debe ser mayor a {{ attrs.min |date: 'HH:MM' }}
+        </li>
+        <!--<li ng-message="max"
+            ng-if="attrs.type === 'time' ">
+            The time provided should be before {{attrs.max |date: 'HH:MM'}}
+        </li>-->
+        <li ng-message="max"
+            ng-if="attrs.type === 'time' ">
+            El tiempo proporcionado debe ser menor a {{attrs.max |date: 'HH:MM'}}
+        </li>
+        <!--<li ng-message="min"
+            ng-if="attrs.type === 'date' ">
+            The date provided should be after {{attrs.min|date:'dd.MM.yy'}}
+        </li>-->
+        <li ng-message="min"
+            ng-if="attrs.type === 'date' ">
+           La fecha proporcionada deber ser mayor a {{attrs.min|date:'dd.MM.yy'}}
+        </li>
+        <!--<li ng-message="max"
+            ng-if="attrs.type === 'date' ">
+            The date provided should be before {{attrs.max |date: 'dd.MM.yy'}}
+        </li>-->
+        <li ng-message="max"
+            ng-if="attrs.type === 'date' ">
+            La fecha proporcionada deber ser menor a {{attrs.max |date: 'dd.MM.yy'}}
+        </li>
+        <!--<li ng-message="min"
+            ng-if="attrs.type === 'number' ">
+            The number provided should be at least {{attrs.min}}
+        </li>-->
+        <li ng-message="min"
+            ng-if="attrs.type === 'number' ">
+            El número proporcionado debe ser al menos {{attrs.min}}
+        </li>
+        <!--<li ng-message="max"
+            ng-if="attrs.type === 'number' ">
+            The number provided should be at max {{attrs.max}}
+        </li>-->
+        <li ng-message="max"
+            ng-if="attrs.type === 'number' ">
+            El número proporcionado debe ser m&aacute;ximo {{attrs.max}}
+        </li>
+    </ul>
+    <!-- It is also possible to show a success element
+    using the standard form syntax -->
+    <div class="validation-success"
+         ng-show="field.$valid && !field.$invalid">
+    </div>
+</div>

@@ -1,0 +1,179 @@
+﻿<div class="vista">
+    <div class="page-title">
+        <div class="title_left">
+            <ol class="breadcrumb miga">
+                <li><i class="glyphicon glyphicon-file"></i> <a ui-sref="#">Plan de negocio evolutivo/ Buscar planes de negocio evolutivo </a></li>
+            </ol>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Criterios de b&uacute;squeda</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li>
+                            <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <form name="Search" id="Search" class="form-horizontal">
+                        <div class="col-xs-12">
+                            <div class="col-xs-12 col-md-6">
+                                <div class="form-group ">
+                                    <label class="col-md-12 col-sm-12 col-xs-12">
+                                        Plan de negocio
+                                    </label>
+                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                        <input type="text" class="frmSearch form-control"
+                                               placeholder="Plan de negocio" ng-model="plan.titulo" />
+                                    </div>
+                                </div><!--Form-G-->
+                                <div class="form-group ">
+                                    <label class="col-md-12 col-sm-12 col-xs-12">
+                                        Propuesta relacionada
+                                    </label>
+                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                        <input type="text" class="frmSearch form-control"
+                                               placeholder="Propuesta relacionada"  ng-model="plan.nombreProyecto" />
+                                    </div>
+                                </div><!--Form-G-->
+
+                                <div class="form-group ">
+                                    <label class="col-md-12 col-sm-12 col-xs-12">
+                                        Proyecto relacionado
+                                    </label>
+                                    <div class="col-xs-10">
+                                        <input type="text" class="form-control" placeholder="Buscar por proyecto" id="usr" name="proyecto" ng-model="plan.proyectoNombre" disabled>
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <a class="btn btn-success" ng-click="openProyecto()" title="Buscar por proyecto">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                        </a>
+                                    </div>
+                                </div><!--Form-G-->
+                                <div class="form-group ">
+                                    <label class="col-md-12 col-sm-12 col-xs-12">
+                                        Oferta de valor
+                                    </label>
+                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                        <input type="text" class="frmSearch form-control"  ng-model="plan.ofertaDeValor"
+                                               placeholder="Oferta de valor" />
+                                    </div>
+                                </div><!--Form-G-->
+                            </div>
+                            <div class="col-xs-12 col-md-6">
+                                <div class="form-group ">
+                                    <label class="col-md-12 col-sm-12 col-xs-12">
+                                        Autor o responsable
+                                    </label>
+                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                        <input type="text" class="frmSearch form-control"  ng-model="plan.nombrePersona"
+                                               placeholder="Autor o responsable" />
+                                    </div>
+                                </div><!--Form-G-->
+                                <div class="form-group ">
+                                    <label class="col-md-12 col-sm-12 col-xs-12">
+                                        Gerencia
+                                    </label>
+                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                        <div uo-modal2 ng-model="plan.unidadOselect" ng-change="{{plan.claveUnidad = plan.unidadOselect.claveUnidad}}" requerido="false" fecha=""></div>
+                                    </div>
+                                </div><!--Form-G-->
+                                <div class="form-group ">
+                                    <label class="col-md-12 col-sm-12 col-xs-12">
+                                        Tipo de acceso
+                                    </label>
+                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                        <select id="s2" ng-model="plan.tipoAcceso"  class="form-control">
+                                            <option value="">---Seleccione un tipo---</option>
+                                            <option value="1">Libre</option>
+                                            <option value="2">Restringido</option>
+                                        </select>
+                                    </div>
+                                </div><!--Form-G-->
+                            </div>
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="col-xs-12 col-md-6">
+                                <div class="form-group ">
+                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                        <button type="button" ng-click="buscar()" class="btn btn-success">
+                                            <span class="glyphicon glyphicon-search"></span> Buscar
+                                        </button>
+                                        <button type="button" ng-click="reset()" class="btn btn-primary">
+                                            Limpiar
+                                        </button>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!--{{registros | json}}-->
+        <div class="col-xs-12">
+            <div ng-show="busqueda" class="x_panel">
+                <div class="x_content sin-desborde">
+                    <form name="ValidForm" id="form" class="form-horizontal">
+                        <div class="col-xs-12">
+                            <!--<div ng-show="registros.length === 0 || registros==null" class="alert advertencia">
+                                No hay registros de plan de negocio evolutivo.
+                            </div>-->
+                            <div>
+                                <table id="GIbuscarPlanNegocio" class="table table-hover table-striped table-condensed dt-responsive" dt-column-defs="dtColumnDefs" dt-options="dtOptions" datatable="ng"  cellspacing="0" width="100%">
+                                    <thead>
+                                        <tr>
+                                            <th data-priority="1">T&iacute;tulo</th>
+                                            <th data-priority="1">Proyecto</th>
+                                            <th data-priority="1">Propuesta</th>
+                                            <th data-priority="2">Fecha<br />registro</th>
+                                            <th>Oferta valor</th>
+                                            <th>Autor o responsable</th>
+                                            <th>Gerencia</th>
+                                            <th ng-show="false">Tipo Acceso</th>
+                                            <th ng-show="rolId==1028">Acceso p&uacute;blico</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="registro in registros">
+                                            <td style="max-width:300px" class="sin-desborde linkTabla"><a ng-click="setVariable('busquedaPlanesNegocio', plan);setGlobalID(registro.planNegocioEvolutivoId)" ui-sref="buscarplanNegocioDetails" title="Detalle">{{registro.titulo}}</a></td>
+                                            <td href="" load-proyectos idproyecto="{{registro.proyectoId}}" title="Detalle de proyecto">{{registro.proyectoId}}</td>
+                                            <!--<td>{{registro.proyecto}}</td>-->
+                                            <td>{{registro.propuesta}}</td>
+                                            <td><a class="hidden">{{registro.fechaRegistro | date:"yyyy/MM/dd"}}</a> {{registro.fechaRegistro | date:"dd/MM/yyyy"}}</td>
+                                            <td>{{registro.ofertaDeValor}}</td>
+                                            <!--<td>{{registro.planNegocioEvolAutores.join(', ')}}</td>-->
+                                            <td>
+                                                <ul ng-repeat="aut in registro.planNegocioEvolAutores" style="margin-left:0; padding-left:0;" >
+                                                    <li >
+                                                        <a ng-click="openProfile(aut.substring(0,5))" title="Detalle de empleado" class="linkTabla ">
+                                                            {{aut.substring(0,5)}}
+                                                        </a>- {{aut.substring(5)}}
+                                                    </li>
+                                                </ul>
+                                            </td>
+                                            <td>{{registro.planNegocioEvolGerencias.join(', ')}}</td>
+                                            <td ng-show="false">{{registro.tipoAccesoGI}}</td>
+                                            <td ng-show="rolId==1028" class="text-center text-hide">
+                                                {{registro.accesoPublico}}
+                                                <input type="checkbox" class="btn btn-info btn-circle" ng-model="registro.accesoPublico" ng-really-click="cambiar(registro)" ng-really-cancel="regresar(registro)" ng-really-message="¿Está seguro de cambiar el tipo de acceso?" />
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--{{nombres}}-->

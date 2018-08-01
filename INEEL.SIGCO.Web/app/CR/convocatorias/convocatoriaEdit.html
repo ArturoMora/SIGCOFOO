@@ -1,0 +1,352 @@
+<div class="vista">
+    <div class="page-title">
+        <div class="title_left">
+            <ol class="breadcrumb miga">
+                <li><i class="sg sg-fuentes-financiamiento"></i> <a ui-sref="convocatoriasGet">Fuentes de financiamiento / Convocatorias</a></li>
+                <li class="active">Editar</li>
+            </ol>
+
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+                    <form name="form" id="form" class="form-horizontal">
+                        <div class="x_title">
+                            <h2>Informaci&oacute;n general </h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">
+                                Nombre de la convocatoria <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" ng-model="convocatorias.nombreConvocatoria" ng-required="true" class="form-control col-md-7 col-xs-12"
+                                    name="nombreConvocatoria" minlength="2" maxlength="250" />
+                                <!-- <span class="error" ng-show="form.nombreConvocatoria.$dirty && form.nombreConvocatoria.$invalid">
+                                    Dato incorrecto, se espera una longitud m&iacute;nima de 2 y m&aacute;ximo 250
+                                </span> -->
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">
+                                Descripci&oacute;n
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <textarea rows="3" type="text" ng-model="convocatorias.descripcion" class="form-control col-md-7 col-xs-12" name="descripcion"/>
+                                <!-- <span class="error" ng-show="form.descripcion.$dirty && form.descripcion.$invalid">
+                                    Dato incorrecto, se espera una longitud m&aacute;ximo 300
+                                </span> -->
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">
+                                Fondo o programa <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <select ng-required="true" name="fondoProgramaId" class="form-control" ng-model="convocatorias.fondoProgramaId" scrolly style="overflow: scroll"
+                                    ng-options="fondoPrograma.fondoProgramaId as fondoPrograma.nombreFP for fondoPrograma in fondosPrograma ">
+                                    <option value="" selected>--- Selecciona un Fondo o programa ---</option>
+                                </select>
+                                <span class="error" ng-show="form.fondoProgramaId.$invalid && form.fondoProgramaId.$dirty || form.$submitted && form.fondoProgramaId.$invalid">
+                                    Debes de seleccionar una opci&oacute;n
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">
+                                Tipo de convocatoria <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <select ng-required="true" ng-init="tipoconvocatoriaselected" name="tipoconvocatoria" class="form-control" ng-model="tipoconvocatoriaselected"
+                                    scrolly style="overflow: scroll" ng-options="tipoconvocatoria.nombre for tipoconvocatoria in tiposconvocatoria track by  tipoconvocatoria.tipoFuenteFinanciamientoId">
+                                    <option value="" selected>--- Seleccione un tipo ---</option>
+                                </select>
+                                <span class="error" ng-show="form.tipoconvocatoria.$invalid && form.tipoconvocatoria.$dirty">
+                                    Debes de seleccionar una opci&oacute;n
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="form-group" ng-if="(tipoconvocatoriaselected.nombre==='Internacional')">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">
+                                Paises involucrados <span ng-if="(tipoconvocatoriaselected.nombre==='Internacional')" class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <tags-input ng-required="(tipoconvocatoriaselected.nombre==='Internacional')" ng-disabled="!(tipoconvocatoriaselected.nombre==='Internacional')"
+                                            ng-model="paisesinvolucrados" display-property="descripcion" placeholder="Agregar País"
+                                            replace-spaces-with-dashes="false" add-from-autocomplete-only="true">
+                                            <auto-complete source="filtro($query)" min-length="1" load-on-focus="false" load-on-empty="false" max-results-to-show="5"></auto-complete>
+                                        </tags-input>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">
+                                Observaciones
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <!-- Para mas info:  https://github.com/textAngular/textAngular/wiki-->
+                                <div text-angular ng-model="convocatorias.observaciones" ></div>
+                            </div>
+                        </div>
+                        
+                        <div class="x_title">
+                            <h2>Vigencia</h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Fecha de apertura <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="row">
+                                    <div class="col-xs-10">
+                                        <input placeholder="dd/mm/yyyy" show-button-bar="false" uib-datepicker-popup='dd/MM/yyyy' popup-placement="bottom" type="text"
+                                            class="form-control fechaOnly" ng-model="convocatorias.fechaInicio" required is-open="open"
+                                            name="fechaInicio" close-text="Close" ng-change="validarFechasInicio()" />
+
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <button type="button" class="btn btn-success" ng-click="open=true"><i class="glyphicon glyphicon-calendar"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Fecha de cierre <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="row">
+                                    <div class="col-xs-10">
+
+                                        <input placeholder="dd/mm/yyyy" required ng-init="open2=false" type="text" show-button-bar="false" popup-placement="bottom"
+                                            class="form-control fechaOnly" uib-datepicker-popup="dd/MM/yyyy" ng-model="convocatorias.fechaTermino"
+                                            ng-change="validarFechas()" name="fechaTermino" value="{{ date | date: 'dd/MM/yyyy' }}"
+                                            is-open="open2" ng-required="true" close-text="Close" />
+                                    </div>
+                                    <div class="col-xs-2">
+
+                                        <button type="button" class="btn btn-success" ng-click="open2=true"><i class="glyphicon glyphicon-calendar"></i></button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="x_title">
+                            <h2>Datos de contacto </h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Contacto
+                            </label>
+
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="row">
+                                    <div class="col-xs-10">
+                                        <input type="text" class="form-control" id="usr" name="contacto" ng-model="contacto" readonly>
+                                        <input type="hidden" ng-model="contacto.contactoId" class="form-control" value="contacto.contactoId" />
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <a ng-click="openContacto()" class="btn btn-success" title="Buscar contacto" ng-disabled="desabilitarBuscarContacto">
+                                            <i class="glyphicon glyphicon-search"></i>
+                                        </a>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="form-group">
+                            <div class="row">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12"> </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <table  ng-show="nomcontactos.length>0 ||nomcontactosNuevos.length>0 " class="table table-hover table-striped table-condensed dt-responsive"
+                                        cellspacing="0"  width="100%" >
+                                        <thead>
+                                            <tr>
+                                                <th class="col-xs-9" data-priority="1">Contactos</th>
+                                                <th class="col-xs-3">Eliminar</th>
+                                            </tr>
+                                        </thead>
+                                        <tr ng-repeat="nomcontact in nomcontactos track by $index">
+                                            <td>{{nomcontact.contacto.nombreCompleto}}</td>
+                                            <td>
+                                                <button type="button" ng-click="deleteContactoAnt(nomcontactos.indexOf(nomcontact),nomcontact.contactoPorConvocatoriaId)"
+                                                    class="btn btn-danger">
+                                                    <i class="glyphicon glyphicon-trash"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr ng-repeat="task in nomcontactosNuevos track by $index">
+                                            <td>{{task}}</td>
+                                            <td>
+                                                <button type="button" ng-click="deleteContactoNew(nomcontactosNuevos.indexOf(task))" class="btn btn-danger">
+                                                    <i class="glyphicon glyphicon-trash"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <!--ng-show="nomcontactos.length>0 || nomcontactosNuevos.length>0"-->
+                            </div>
+
+                        </div>
+
+
+                        <div class="x_title">
+                            <h2>Ligas de acceso </h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12"> </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="row">
+                                    <div class="col-xs-10">
+                                        <input type="url" name="descripcionLiga" class="form-control" ng-model="convocatorias.descripcionLiga" ng-minlength="8" placeholder="http://www.dominio.com"
+                                        />
+                                        <span class="error" ng-show="form.descripcionLiga.$dirty &&
+                                       !form.descripcionLiga.$valid || (form.$submitted
+                                       && form.descripcionLiga.$invalid) ">
+                                            Se requiere un sitio Web ejemplo: http://www.dominio.com
+                                        </span>
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <button class="btn btn-success btn-sm" ng-click="addLiga()" ng-disabled="(
+                                                         (!form.descripcionLiga.$dirty )
+                                                         || (form.descripcionLiga.$invalid)
+                                                         )|| click">
+                                            <i class="glyphicon glyphicon-plus"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12"> </label>
+                            <div ng-if="sitiosWeb.length>0 || sitiosWebNuevos.length>0" class="col-md-6 col-sm-6 col-xs-12">
+                                <table id="CRconvocatoriaEditsitiosWeb" class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0"
+                                     width="100%" >
+                                    <thead>
+                                        <tr>
+                                            <th class="col-xs-9" data-priority="1">Ligas de acceso</th>
+                                            <th class="col-xs-3 text-center">Eliminar</th>
+                                        </tr>
+                                    </thead>
+                                    <tr ng-repeat="task in sitiosWeb">
+                                        <td>
+                                            <a href="{{task.url}}" ta target="_blank" title="{{task.url}}">
+                                                {{task.url}}
+                                            </a>
+                                        </td>
+                                        <td class="text-center">
+                                            <button type="button" ng-click="deleteTaskAnt(sitiosWeb.indexOf(task),task.sitioWebPorConvocatoriaId);form.$setDirty()" class="btn btn-danger">
+                                                <i class="glyphicon glyphicon-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr ng-repeat="task in sitiosWebNuevos track by $index">
+                                        <td>
+                                            <a href="{{task}" ta target="_blank" title="{{task}}">
+                                                {{task}}
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <button type="button" ng-click="deleteTaskNew(sitiosWebNuevos.indexOf(task));form.$setDirty()" class="btn btn-danger">
+                                                <i class="glyphicon glyphicon-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+
+
+                        <div class="x_title">
+                            <h2>Documentaci&oacute;n </h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">
+                                Documento(s) adjunto(s)
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input class="input-file" type="file" name="filesGral" id="filesGral" ng-click="saveIG();" ng-model="filesGral" onchange="angular.element(this).scope().getFileDetails(this);"
+                                    data-buttonName="btn-success" />
+                                <!--<span class="error" ng-show="form.filesGral.$dirty && !form.filesGral.$valid">Seleccione un documento</span>-->
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12" ng-show="adjuntos.length>0 || tasklist.length>0">
+                                <table id="CRconvocatoriaEditadjuntos" class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0"
+                                     width="100%" >
+                                    <thead>
+                                        <tr>
+                                            <th data-priority="2">Arhivos adjuntos</th>
+                                            <th class="text-center">Descargar</th>
+                                            <th class="text-center" data-priority="1">Eliminar</th>
+                                        </tr>
+                                    </thead>
+                                    <tr ng-repeat="e in adjuntos ">
+                                        <td style="max-width:200px" class="sin-desborde">{{e.adjunto.nombre}}</td>
+                                        <td class="text-center">
+                                            <a href="/Descargas.html#/q/{{e.adjunto.adjuntoId | encriptar}}" class="btn btn-success" ta target="_blank" title="Descargar {{e.adjunto.nombre}}">
+                                                <i class="glyphicon glyphicon-download-alt"></i>
+                                            </a>
+                                        </td>
+                                        <td class="text-center">
+                                            <button type="button" ng-click="deleteAdjuntoAnt(adjuntos.indexOf(e),e.adjuntoPorConvocatoriaId,e.adjunto.adjuntoId)" class="btn btn-danger">
+                                                <i class="glyphicon glyphicon-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr ng-repeat="task in tasklist track by $index">
+                                        <td style="max-width:200px" class="sin-desborde">{{task.nameFile}}</td>
+                                        <td></td>
+                                        <td class="text-center">
+                                            <button type="button" ng-click="deleteTaskAdjunto(tasklist.indexOf(task))" class="btn btn-danger">
+                                                <i class="glyphicon glyphicon-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="ln_solid"></div>
+                        <div class="form-group">
+                            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                <div class="">
+
+                                    <button type="button" class="btn btn-success" ng-click="saveConvocatoria()" ng-disabled="form.$invalid">
+                                        <i class="glyphicon glyphicon-saved"></i> Actualizar
+                                    </button>
+                                    <button type="button" confirma-regresar="globalRegresar()" state-form="form" class="btn btn-primary">
+                                        <span class="fa fa-arrow-left"></span>
+                                        Regresar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

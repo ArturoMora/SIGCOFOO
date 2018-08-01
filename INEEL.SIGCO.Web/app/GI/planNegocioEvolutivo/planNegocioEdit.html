@@ -1,0 +1,244 @@
+﻿<div class="vista">
+    <div class="page-title">
+        <div class="title_left">
+            <ol class="breadcrumb miga">
+                <li><i class="glyphicon glyphicon-file"></i> <a ui-sref="planNegocioEvolutivo">Plan de negocio evolutivo/ Mis planes de negocio evolutivo</a></li>
+                <li class="active">Editar</li>
+            </ol>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+                    <form name="ValidForm" id="form" ng-submit="actualizar()" class="form-horizontal">
+                        <div class="x_title">
+                            <h2>Informaci&oacute;n general</h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                T&iacute;tulo del plan de negocio evolutivo
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <textarea ng-disabled="true" type="text" ng-maxlength="300" placeholder="Ingresa el título del plan de negocio evolutivo..." class="form-control" ng-model="registro.titulo" ng-required="true" required></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Propuesta
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" class="form-control" ng-model="propuesta.nombreTecnico" disabled>
+                            </div>
+                        </div>
+                        <div class="form-group" >
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Proyecto
+                            </label>
+                            <div class="col-md-7 col-sm-7 col-xs-12">
+                                <div class="row">
+                                    <div class="col-xs-9">
+                                        <input type="text" class="form-control" id="usr" name="proyecto" ng-model="registro.proyectoNombre" disabled>
+                                    </div>
+                                    <div class="col-xs-3">
+                                        <a class="btn btn-success" ng-click="openProyecto()" title="Buscar proyecto">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                        </a>
+                                        <a class="btn btn-danger" ng-hide="registro.proyectoNombre=='' || registro.proyectoNombre==null" ng-click="eliminar()" title="borrar">
+                                            <span class="glyphicon glyphicon-remove"></span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Autores <!--<span class="required">*</span>-->
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <!-- <div personas-select state-form="ValidForm" ng-model="autoresPNENew" enarreglo="true"></div> -->
+                                <a ng-click="openUser()" class="btn btn-success">
+                                    <span class="glyphicon glyphicon-search"> Seleccione...</span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-if="autoresPNE.length>0">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <table id="CHPonenciaAdd" class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" width="100%"
+                                       dt-options="dtOptions">
+                                    <thead>
+                                        <tr>
+                                            <th data-priority="1">Clave</th>
+                                            <th data-priority="1">Nombre</th>
+                                            <th data-priority="1" class="thAjuste text-center" ng-show="autoresPNENew.length>0">Opciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="autor in autoresPNE">
+                                            <td>{{autor.clavePersona}}</td>
+                                            <td>{{autor.nombreCompleto}}</td>
+                                            <td class="text-center" ng-show="autoresPNENew.length>0">
+                                                <div>
+                                                    <!--<a title="Eliminar" ng-really-click="eliminarautor(autor)" class="btn btn-danger">
+                                                        <i class="glyphicon glyphicon-trash"></i>
+                                                    </a>-->
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr ng-repeat="autor in autoresPNENew">
+                                            <td>{{autor.clavePersona}}</td>
+                                            <td>{{autor.nombreCompleto}}</td>
+                                            <td class="text-center" ng-show="autoresPNENew.length>0">
+                                                <div>
+                                                    <a title="Eliminar" ng-really-click="eliminarautor(autor)" class="btn btn-danger">
+                                                        <i class="glyphicon glyphicon-trash"></i>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Unidad Organizacional <!--<span class="required">*</span>-->
+                            </label>
+                            <!--<div class="col-md-6 col-sm-6 col-xs-12">
+                                <div uo-modal ng-model="registro.planNegocioEvolGerencias" template-url="app/vistasGenericas/uomodalSeleccione.html" enarreglo="true"></div>
+                            </div>-->
+                        </div>
+                        <div class="form-group" ng-if="registro.planNegocioEvolGerencias.length>0">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <table id="CHPonenciaAdd" class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" width="100%"
+                                       dt-options="dtOptions">
+                                    <thead>
+                                        <tr>
+                                            <th data-priority="1">Nombre</th>
+                                            <!--<th data-priority="1" class="thAjuste text-center">Opciones</th>-->
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="area in registro.planNegocioEvolGerencias">
+                                            <td>{{area.nombreUnidad}}</td>
+                                            <!--<td class="text-center">
+                                                <div>
+                                                    <a title="Eliminar" ng-really-click="eliminararea(area)" class="btn btn-danger">
+                                                        <i class="glyphicon glyphicon-trash"></i>
+                                                    </a>
+                                                </div>
+                                            </td>-->
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Tema especifico <!--<span class="required">*</span>-->
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <textarea type="text" ng-disabled="true" ng-maxlength="300" ng-required="true" placeholder="Ingresa el tema del plan de negocio evolutivo..." class="form-control" ng-model="registro.tema"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Oferta de valor <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <textarea type="text" ng-maxlength="300" ng-required="true" placeholder="Ingresa la oferta de valor del plan de negocio evolutivo..." class="form-control" ng-model="registro.ofertaDeValor"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Tipo de acceso <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <select ng-model="registro.tipoAcceso" ng-required="true" ng-options="tipoAcceso.id as tipoAcceso.nombre for tipoAcceso in tiposAccesos " class="form-control"></select>
+                            </div>
+                        </div>
+                        <div class="x_title">
+                            <h2>Evidencia <small>Tama&ntilde;o m&aacute;ximo por archivo de 8 MB</small></h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Documento adjunto <!--<span class="required">*</span>-->
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input class="input-file form-control col-md-7 col-xs-12" type="file" name="filesGral" id="filesGral" data-buttonName="btn-success"
+                                       ng-model="filesGral"
+                                       onchange="angular.element(this).scope().getFileDetails(this);" />
+                            </div>
+                        </div>
+                        <!--{{registro.planNegocioEvolArchivos}}-->
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <table id="CHPonenciaAdd" class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" width="100%"
+                                       dt-options="dtOptions">
+                                    <thead>
+                                        <tr>
+                                            <th data-priority="1">Nombre</th>
+                                            <th data-priority="1" class="thAjuste text-center" ng-show="planNegocioEvolArchivosNew.length>0">Opciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="adjunto in registro.planNegocioEvolArchivos">
+                                            <td>{{adjunto.adjunto.nombre}}</td>
+                                            <td class="text-center" ng-show="planNegocioEvolArchivosNew.length>0">
+                                                <div>
+                                                    <!--<a title="Eliminar" ng-really-click="eliminaradjunto(adjunto)" class="btn btn-danger">
+                                                        <i class="glyphicon glyphicon-trash"></i>
+                                                    </a>-->
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr ng-repeat="adjunto in planNegocioEvolArchivosNew">
+                                            <td>{{adjunto.adjunto.nombre}}</td>
+                                            <td class="text-center" ng-show="planNegocioEvolArchivosNew.length>0">
+                                                <div>
+                                                    <a title="Eliminar" ng-really-click="eliminaradjunto(adjunto)" class="btn btn-danger">
+                                                        <i class="glyphicon glyphicon-trash"></i>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="ln_solid"></div>
+                        <div class="form-group">
+                            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                <div class="">
+                                    <button type="submit" class="btn btn-success">
+                                        <i class="glyphicon glyphicon-saved"></i> Actualizar
+                                    </button>
+                                    <button type="button" ng-click="validar()" class="btn btn-warning">
+                                        <i class="glyphicon glyphicon-saved"></i> Enviar solicitud
+                                    </button>
+                                    <button type="button" confirma-regresar="globalRegresar()" state-form="ValidForm" class="btn btn-primary">
+                                        <span class="fa fa-arrow-left"></span> Regresar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

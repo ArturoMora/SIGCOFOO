@@ -1,0 +1,198 @@
+﻿<div class="vista">
+    <div class="page-title">
+        <div class="title_left">
+            <ol class="breadcrumb miga">
+                <li>
+                    <i class="sg sg-fuentes-financiamiento"></i>
+                    <a ui-sref="fondosProgramaGet">Fuentes de financiamiento / Fondos</a>
+                </li>
+            </ol>
+        </div>
+    </div>
+    <!--Panel de busquedas-->
+    <div class="x_panel">
+        <div class="x_title">
+            <h2>Criterios de b&uacute;squeda</h2>
+            <ul class="nav navbar-right panel_toolbox">
+
+
+                <li>
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                </li>
+            </ul>
+            <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+
+            <form novalidate role="form" class="form-label-left">
+                <div class="row">
+                    <div class="col-xs-6 col-md-6">
+                        <div class="form-group">
+                            <label class="col-xs-12" style="height:30px; line-height:30px; text-align:left;">Nombre del fondo</label>
+                            <div class="col-xs-10">
+                                <input class="form-control frmSearch" type="text" id="s1" maxlength="50" placeholder="Nombre del fondo" ng-model="fp.nombreFP"
+                                />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-xs-12" for="palabras" style="height:30px; line-height:30px; text-align:left; ">Fuente de financiamiento</label>
+                            <div class="col-xs-10">
+                                <select ng-model="fp.fuenteFinanciamientoId" name="ramaId" ng-options="fuente.idFuente as fuente.nombreFF for fuente in fuentes | orderBy:'nombreFF'"
+                                    class="form-control">
+                                    <option value="">---Seleccione una fuente de financiamiento---</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-xs-12" for="palabras" style="height:30px; line-height:30px; text-align:left; ">Organismo patrocinador</label>
+                            <div class="col-xs-10">
+                                <select ng-model="fp.empresaId" name="ramaId" ng-options="empresa.idEmpresa as empresa.nombreEmpresa for empresa in empresas | orderBy:'nombreEmpresa'"
+                                    class="form-control">
+                                    <option value="">---Seleccione una empresa---</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-6 col-md-6">
+                        <div class="clearfix"></div>
+                        <br />
+                        <label class="col-xs-12">Fondos con fecha de registro entre el siguiente rango de fechas: </label>
+                        <div class="clearfix"></div>
+                        <div class="form-group">
+                            <label class="col-xs-12" style="height:30px; line-height:30px; text-align:left;">Inicio </label>
+                            <div class="col-xs-10">
+                                <input placeholder="dd/mm/yyyy" show-button-bar="false" uib-datepicker-popup='dd/MM/yyyy' ng-minlength="8" maxlength="10"
+                                    datepicker-options="datePicker.FechaOptions" popup-placement="bottom" type="text" class="form-control fechaOnly"
+                                    ng-model="fp.fechaInicioComparacion" is-open="open" close-text="Close" />
+                            </div>
+                            <div class="col-xs-2">
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-success" ng-click="open=true; fp.busquedaFecha='ok'">
+                                        <i class="glyphicon glyphicon-calendar"></i>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-xs-12">T&eacute;rmino </label>
+                            <div class="col-xs-10">
+                                <input placeholder="dd/mm/yyyy" show-button-bar="false" uib-datepicker-popup='dd/MM/yyyy' ng-minlength="8" maxlength="10"
+                                    datepicker-options="datePicker.FechaOptions" popup-placement="bottom" type="text" class="form-control fechaOnly"
+                                    ng-model="fp.fechaFinalComparacion" is-open="open2" close-text="Close" />
+                            </div>
+                            <div class="col-xs-2">
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-success" ng-click="open2=true; fp.busquedaFecha='ok'">
+                                        <i class="glyphicon glyphicon-calendar"></i>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-xs-12">
+                    <br />
+                    <a class="btn btn-success" ng-click="buscar()" title="buscar">
+                        <span class="glyphicon glyphicon-search"></span> Buscar
+                    </a>
+                    <a class="btn btn-primary" ng-click="reset()" title="Limpiar campos">
+                        Limpiar
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="x_panel" ng-show="busqueda">
+                <div class="x_content sin-desborde">
+                    <div class="col-xs-12">
+                        <table id="CRfondosProgramaGet" class="table display responsive" dt-column-defs="dtColumnDefs" dt-options="dtOptions" cellspacing="0"
+                            datatable="ng" width="100%">
+                            <thead>
+                                <tr>
+                                    <th class="hidden">Nombre</th> <!--El Datatable tiene problemas para ordenar celdas con contenido html, por lo que esto ayuda a ordenar la tabla-->
+                                    <th data-priority="1" class="thCeldaB text-center">Nombre</th>
+                                    <th class="text-center">&Aacute;rea tem&aacute;tica</th>
+                                    <th>Patrocinador</th>
+                                    <th>Convocatorias</th>
+                                    <th data-priority="1" class="text-center" ng-if="idRol==15|| idRol==1031 || idRol==1032"> &iquest;Est&aacute; activo?</th>
+                                    <th class="thCeldaB text-center" ng-if="idRol==15 || idRol==1031|| idRol==1032">Opciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="e in fondos | orderBy : 'nombreFP'" >
+                                    <td class="hidden">{{e.nombreFP}}</td> <!--El Datatable tiene problemas para ordenar celdas con contenido html, por lo que esto ayuda a ordenar la tabla-->
+                                    <td class="linktabla">
+                                        <div class="link" style="cursor:pointer" ng-click="detalleRegistro(e.fondoProgramaId)" title="Detalles">
+                                            {{e.nombreFP}}
+                                        </div>
+                                    </td>
+                                    <td class="text-left">
+                                        <ul ng-repeat="x in e.listaNombretematicas">
+                                            <li>
+                                                {{x}}
+                                            </li>
+                                        </ul>
+                                    </td>
+                                    <td class="thCeldaB">{{e.nombreEmpresa}}</td>
+                                    <td class="thCeldaB text-center">
+                                        <div ng-if="e.numConvocatorias == 0">
+                                            {{e.numConvocatorias}}
+                                        </div>
+                                        <div ng-if="e.numConvocatorias > 0">
+                                            <a class="link" style="cursor:pointer" ng-click="detalleConvocatorias(e.fondoProgramaId)" title="Detalles Convocatoria">{{e.numConvocatorias}} </a>
+                                            <!--<a class="link" ui-sref="convocatoriaDetailsByFP({ id: e.fondoProgramaId })" title="Detalles Convocatoria">{{e.numConvocatorias}} </a>-->
+                                        </div>
+                                    </td>
+                                    <td class="thCeldaB text-center" ng-if="idRol==15 || idRol==1031|| idRol==1032">
+                                        <div class="text-hide">
+                                            {{e.estado}}
+                                            <input type="checkbox" class="btn btn-info btn-circle" title="&iquest;Est&aacute activo?" ng-model="e.estado" value="{{e.estado}}"
+                                                ng-change="saveEstado(e)" />
+                                        </div>
+                                    </td>
+                                    <td class="thCeldaB text-center" ng-if="idRol==15 || idRol==1031|| idRol==1032">
+                                        <a class="btn btn-warning" ng-click="editarRegistro(e.fondoProgramaId)" title="Editar">
+                                            <i class="glyphicon glyphicon-pencil"></i>
+                                        </a>
+                                        <div ng-show="e.numConvocatorias == 0">
+                                            <a class="btn btn-danger" ng-really-click="eliminarRegistro(e.fondoProgramaId)" ng-really-message="¿Desea eliminar el registro?"
+                                                title="Eliminar">
+                                                <i class="glyphicon glyphicon-trash"></i>
+                                            </a>
+                                        </div>
+                                        <div ng-if="e.numConvocatorias > 0">
+                                            <a class="btn btn-danger" ng-click="mostrarAlerta()" title="Eliminar">
+                                                <i class="glyphicon glyphicon-trash"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <br />
+                        <br />
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <button type="button" ui-sref="fondoProgramaAdd" class="btn btn-success" ng-if="idRol==15 || idRol==1031|| idRol==1032">
+        <span class="glyphicon glyphicon-plus"></span> Agregar
+    </button>
+</div>

@@ -1,0 +1,68 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2036
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "INEEL.WebAPI", "INEEL.WebAPI\INEEL.WebAPI.csproj", "{F0453AFF-4C6A-4079-96F1-E744734313ED}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "INEEL.DataAccess", "INEEL.DataAccess\INEEL.DataAccess.csproj", "{E5958980-03EA-44A5-9F6B-E2B12E4B53C4}"
+EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "INEEL.SIGCO.Web", "INEEL.SIGCO.Web\", "{8E86C7D8-2539-4C46-90B6-B72EC5622E76}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.5.2"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_50391"
+		Debug.AspNetCompiler.PhysicalPath = "INEEL.SIGCO.Web\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_50391\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_50391"
+		Release.AspNetCompiler.PhysicalPath = "INEEL.SIGCO.Web\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_50391\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "50391"
+		SlnRelativePath = "INEEL.SIGCO.Web\"
+		DefaultWebSiteLanguage = "Visual C#"
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "INEEL.DataAccess.GEN", "INEEL.DataAccess.GEN\INEEL.DataAccess.GEN.csproj", "{AC66A2FD-2B99-4D5B-9561-6049AF0FACCB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9F9B8E67-E574-4B85-8355-A1C69B734198}"
+	ProjectSection(SolutionItems) = preProject
+		WebEssentials2015-Settings.json = WebEssentials2015-Settings.json
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F0453AFF-4C6A-4079-96F1-E744734313ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F0453AFF-4C6A-4079-96F1-E744734313ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F0453AFF-4C6A-4079-96F1-E744734313ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F0453AFF-4C6A-4079-96F1-E744734313ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E5958980-03EA-44A5-9F6B-E2B12E4B53C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E5958980-03EA-44A5-9F6B-E2B12E4B53C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E5958980-03EA-44A5-9F6B-E2B12E4B53C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E5958980-03EA-44A5-9F6B-E2B12E4B53C4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8E86C7D8-2539-4C46-90B6-B72EC5622E76}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E86C7D8-2539-4C46-90B6-B72EC5622E76}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E86C7D8-2539-4C46-90B6-B72EC5622E76}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E86C7D8-2539-4C46-90B6-B72EC5622E76}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{AC66A2FD-2B99-4D5B-9561-6049AF0FACCB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC66A2FD-2B99-4D5B-9561-6049AF0FACCB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC66A2FD-2B99-4D5B-9561-6049AF0FACCB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC66A2FD-2B99-4D5B-9561-6049AF0FACCB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {01C64715-014B-4B87-9867-C264D701B119}
+	EndGlobalSection
+EndGlobal

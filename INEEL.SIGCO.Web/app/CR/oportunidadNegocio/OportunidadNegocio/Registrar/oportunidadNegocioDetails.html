@@ -1,0 +1,218 @@
+<div class="vista">
+    <div class="page-title">
+        <div class="title_left">
+            <ol class="breadcrumb miga">
+                <li><i class="sg sg-oportunidades-neg"></i><a ui-sref="dashboard">Oportunidades de negocio</a></li>
+                <li class="active">Detalles</li>
+            </ol>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-8 col-sm-8 col-xs-12">
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+                    <label class="detalle col-xs-12 " title="Nombre de la oportunidad">
+                        {{oportunidad.nombreOportunidad}}
+                    </label>
+                    <label class="tit col-xs-12">
+                        N&uacute;mero de empleado
+                    </label>
+                    <label class="col-xs-12 link" title="No. Empleado">
+                        <!--<span>{{oportunidad.claveEmpleado}}</span>-->
+                        <span ng-click="openProfile(oportunidad.claveEmpleado)" title="Detalle de empleado" style="cursor:hand;cursor: pointer;">{{oportunidad.claveEmpleado}}</span>
+                    </label>
+                    <label class="tit col-xs-12">
+                        Nombre de empleado
+                    </label>
+                    <label class="cont col-xs-12 " title="Autor">
+                        <span>{{oportunidad.autor}}</span>
+                    </label>
+                    <label class="tit col-xs-12">
+                        Fecha
+                    </label>
+                    <label class="cont col-xs-12 " title="Fecha de registro">
+                        <span>{{oportunidad.fecha| date:'dd-MM-yyyy'}}</span>
+                    </label>
+                    <label class="tit col-xs-12" ng-show="oportunidad.tipoEvento == null">
+                        <label>Medio de contacto ({{oportunidad.medioComunicacion}})</label>
+                    </label>
+                    <label class="cont col-xs-12 " title="Medio de contacto">
+                        <span>{{oportunidad.descripcionMedioContacto}}</span>
+                    </label>
+                    <div ng-show="oportunidad.tipoEvento != null">
+                        <label class="tit col-xs-12">
+                            Tipo de evento
+                        </label>
+                        <label class="cont col-xs-12 " title="tipo de evento">
+                            <span>{{oportunidad.tipoEvento.nombreEvento}}</span>
+                        </label>
+                    </div>
+
+
+                    <div ng-show="oportunidad.tipoEvento != null">
+                        <label class="tit col-xs-12">
+                            Evento
+                        </label>
+                        <label class="cont col-xs-12 " title="tipo de evento">
+                            <span>{{oportunidad.evento.nombreEvento}}</span>
+                        </label>
+                    </div>
+                    <label class="tit col-xs-12">
+                        Comentarios del autor
+                    </label>
+                    <label class="cont col-xs-12 " title="tipo de evento">
+                        <span>{{oportunidad.descripcion}}</span>
+                    </label>
+                </div>
+            </div>
+
+            <div ng-show="oportunidad.comentariosAdministrador != null && idRol==15">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Comentarios del administrador</h2>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content sin-desborde">
+                        <span>{{oportunidad.comentariosAdministrador}}</span>
+                    </div>
+                </div>
+            </div>
+            <div ng-show="oportunidad.comentariosEspecialista != null">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Comentarios del especialista</h2>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content sin-desborde">
+                        <span>{{oportunidad.comentariosEspecialista}}</span>
+                    </div>
+                </div>
+            </div>
+            <div ng-show="oportunidad.comentariosResponsable != null">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Comentarios del responsable</h2>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content sin-desborde">
+                        <span>{{oportunidad.comentariosResponsable}}</span>
+                    </div>
+                </div>
+            </div>
+
+            <div ng-show='menuState.show'>
+                <div class="x_panel">
+                    <div class="x_content sin-desborde">
+                        <button type="button" ng-click="aceptarON(oportunidad)" class="btn btn-success">
+                            <span class="fa fa-check-circle"></span> Aceptar
+                        </button>
+                        <button type="button" ng-click="recharzarON(oportunidad)" class="btn btn-danger">
+                            <span class="fa fa-times-circle"></span> Rechazar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 col-sm-4 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Detalles del contacto</h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content sin-desborde">
+                    <div class="col-md-12 col-sm-3 col-xs-12 text-overflow">
+                        <div class="foto" style="position: relative; left: 40px;">
+                            <div class="profile_img">
+                                <div id="crop-avatar">
+                                    <img class="img-thumbnail" ng-show="oportunidad.contacto.adjunto64 != null" ng-src="data:image/png;base64,{{oportunidad.contacto.adjunto64}}"
+                                        width="180" height="180" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <br />
+                        <ul class="list-unstyled user_data">
+                            <li>
+                                <i class="fa fa fa-user"></i> {{oportunidad.contacto.nombreCompleto}}
+                            </li>
+                            <li>
+                                <i class="fa fa fa-building"></i> {{oportunidad.empresa.nombreEmpresa}}
+                            </li>
+                            <li>
+                                <i class="fa fa-briefcase user-profile-icon"></i> {{oportunidad.contacto.puesto}}
+                            </li>
+                            <li class="m-top-xs">
+                                <i class="fa fa fa-envelope"></i> {{oportunidad.contacto.correo}}
+                            </li>
+                            <li class="m-top-xs">
+                                <i class="fa fa fa-phone"></i> {{oportunidad.contacto.telefono}} | {{oportunidad.contacto.extension}}
+                            </li>
+                            <li class="m-top-xs">
+                                <i class="fa fa fa-mobile-phone"></i> {{oportunidad.contacto.celular}}
+                            </li>
+                        </ul>
+                        <div class="x_title">
+                            <h2>Domicilio </h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <ul class="list-unstyled user_data">
+                            <li class="m-top-xs">
+                                <i class="fa fa"></i>Calle {{oportunidad.contacto.calle}},
+                            </li>
+                            <li class="m-top-xs">
+                                <i class="fa fa"></i>Colonia {{oportunidad.contacto.colonia}},
+                            </li>
+                            <li class="m-top-xs">
+                                <i class="fa fa"></i>Localidad {{oportunidad.contacto.localidad}},
+                            </li>
+                            <li class="m-top-xs" ng-show="oportunidad.contacto.paises.paisId ==16">
+                                <i class="fa fa"></i>{{oportunidad.contacto.estados.nombreEstado}} {{oportunidad.contacto.municipios.nombreMunicipio}},
+                                {{oportunidad.contacto.paises.nombrePais}}
+                            </li>
+                            <li class="m-top-xs" ng-show="oportunidad.contacto.paises.paisId !=16">
+                                <i class="fa fa"></i>{{oportunidad.contacto.edo}} {{oportunidad.contacto.munipio}}, {{oportunidad.contacto.paises.nombrePais}}
+                            </li>
+                            <li class="m-top-xs">
+                                <i class="fa fa"></i>CP {{oportunidad.contacto.cp}}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div ng-hide="oportunidad.adjuntoPorOportunidad.length == 0">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Documentaci&oacute;n</h2>
+                        <div class="clearfix"></div>
+                        <div class="x_content sin-desborde">
+                            <ul ng-repeat="task in oportunidad.adjuntoPorOportunidad track by $index">
+                                <li>
+                                    <span class="sg sg-software-des icono"></span>
+                                    <a class="alinea" href="/Descargas.html#/q/{{task.adjunto.adjuntoId | encriptar}}" target="_blank" title="{{task.adjunto.nombre}}"> {{task.adjunto.nombre}} </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+        <div class="ln_solid"></div>
+        <div class="form-group">
+
+
+
+
+            <button type="button" ng-click="globalRegresar();" class="btn btn-primary">
+                <span class="fa fa-arrow-left"></span> Regresar
+            </button>
+
+        </div>
+
+
+    </div>
+</div>

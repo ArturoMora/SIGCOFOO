@@ -1,0 +1,173 @@
+﻿<div class="vista">
+
+    <div class="page-title">
+        <div class="title_left">
+            <ol class="breadcrumb miga">
+                <li><i class="sg sg-metodo-evaluacion-compet"></i> <a>Competencias conductuales</a></li>
+                <li><a ui-sref="consultaconductual">Historial de evaluaciones</a></li>
+                <li class="active">Detalle de la evaluación</li>
+            </ol>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Informaci&oacute;n general</h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content sin-desborde">                  
+                    <div class="form-group">
+                        <div class="col-xs-12 col-md-6">
+
+                            <label class="detalle col-xs-12 " title="Empleado">
+                                {{clave}} {{nombre}}
+                            </label>
+
+                            <label class="cont emc col-xs-12 colorTit">
+                                Período {{periodo}}
+                            </label>
+
+
+                            <label class="cont col-xs-12" title="Unidad organizacional">
+                                {{nombreUnidad.nombreUnidad}}
+                            </label>
+
+                            <label class="tit col-xs-12">
+                                Resultado de la evaluación general
+                            </label>
+                            <label class="cont col-xs-12">
+                                {{calificacion}}
+                            </label>
+
+                        </div>
+
+                        <div class="col-sm-6 col-xs-12 contenedor_gris">
+
+
+                            <label class="titFirst">Categoría (Nómina):</label>
+                            <label class="cont">{{cateemp}}</label>
+
+                            <br />
+                            <label class="titFirst"> Familia de puestos:</label>
+                            <label class="cont">{{nombreFamilia}}</label>
+
+                            <br />
+                            <label class="titFirst">  Categoría (Competencias conductuales):</label>
+                            <label class="cont">{{catcomp}}</label>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group ">
+                <div class="col-xs-12 col-md-4">
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <h2>Fortalezas</h2>
+                            <ul class="nav navbar-right panel_toolbox">
+                                <li>
+                                    <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                </li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content sin-desborde">
+                            <div class="col-xs-12 col-md-12">
+                                <div class="col-md-8 col-sm-8 col-xs-12">
+                                    {{datosevaluado.fortalezas}}
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xs-12 col-md-4">
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <h2>Áreas de mejora</h2>
+                            <ul class="nav navbar-right panel_toolbox">
+                                <li>
+                                    <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                </li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content sin-desborde">
+                            <div class="col-xs-12 col-md-12">
+                                <div class="col-md-8 col-sm-8 col-xs-12">
+                                    {{datosevaluado.areasMejora}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xs-12 col-md-4">
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <h2>Planes de acción</h2>
+                            <ul class="nav navbar-right panel_toolbox">
+                                <li>
+                                    <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                </li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content sin-desborde">
+
+                            <div class="col-xs-12 col-md-12">
+                                <div class="col-md-8 col-sm-8 col-xs-12">
+                                    {{datosevaluado.debilidades}}
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Competencias evaluadas</h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content sin-desborde">
+
+                    <table dt-options="dtOptions" dt-instance="dtInstance" class="table table-condensed table-hover">
+                        <thead>
+                            <tr>
+                                <th data-priority="1">Competencia</th>
+                                <th>Nivel de dominio exigido</th>
+                                <th>Comportamiento</th>
+                                <th>Justificación con hechos tangibles/comportamientos</th>
+                                <th>Nivel de dominio real</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="obj in competenciasaevaluar">
+                                <td>{{obj.matriz.competencia.competencia}}</td>
+                                <td>{{obj.matriz.descnivel.nivel.descripcion}}</td>
+                                <td>{{obj.matriz.descnivel.comportamiento}}</td>
+                                <td>{{obj.justificacion}}</td>
+                                <td>{{obj.valorReal}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <button type="button" ui-sref="consultaconductual" class="btn btn-primary">
+                <span class="fa fa-arrow-left"></span> Regresar
+            </button>
+        </div>
+    </div>
+
+</div>

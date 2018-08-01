@@ -1,0 +1,71 @@
+﻿<!-- page content -->
+<div class="vista">
+
+    <div class="page-title">
+        <div class="title_left">
+
+            <ol class="breadcrumb miga">
+                <li><i class="sg sg-articulos-ponencia-cap2"></i> <a ui-sref="Ponencias">Ponencias/Mis ponencias</a></li>
+            </ol>
+
+        </div>
+    </div>
+
+
+    <div class="">
+        <div class="">
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+                    <div class="row">
+                        <div class="col-xs-12 sin-desborde">
+                            <div ng-show="registros.length === 0" class="alert advertencia">
+                                No hay registros de ponencias.
+                            </div>
+                            <div ng-show="registros.length > 0">
+                                <table id="CHPonenciaGet" class="table table-hover table-striped table-condensed dt-responsive" dt-column-defs="dtColumnDefs" cellspacing="0" datatable="ng" width="100%"
+                                      dt-options="dtOptions" >
+                                    <thead>
+                                        <tr>
+                                            <th data-priority="1">T&iacute;tulo</th>
+                                            <th data-priority="2">Congreso</th>
+                                            <th>Lugar</th>
+                                            <th>Año</th>
+                                            <th>Estado<br />registro</th>
+                                            <th>Fecha<br />validaci&oacute;n</th>
+                                            <th data-priority="1" class="thAjuste text-center">Opciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="registro in registros">
+                                            <td style="max-width:300px;"><a ng-click="" ui-sref="ponenciaDetails({id:registro.ponenciaId})" title="Detalle">{{registro.tituloPonencia}}</a></td>
+                                            <td style="max-width:300px;">{{registro.congreso.nombreCongreso}}</td>
+                                            <td>{{registro.pais.descripcion}}</td>
+                                            <td>{{registro.year}} </td>
+                                            <td>{{registro.estadoFlujo.descripcion}}</td>
+                                            <td>{{registro.fechaValidacion === null ? 'Dato no disponible' : registro.fechaValidacion | date:"dd/MM/yyyy"}}</td>
+                                            <td class="text-center">
+                                                <div ng-if="registro.estadoFlujoId==1 || editarGestion==1 || registro.estadoFlujoId==3">
+                                                    <a ng-click="setOrigen('MT');setGlobalID(registro.ponenciaId);" ui-sref="ponenciaEdit" title="Editar" class="btn btn-warning">
+                                                        <i class="glyphicon glyphicon-pencil"></i>
+                                                    </a>
+                                                    <a title="Eliminar" ng-if="registro.fechaValidacion === null && registro.estadoFlujoId!=3" ng-click="open(registro)" class="btn btn-danger">
+                                                        <i class="glyphicon glyphicon-trash"></i>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <button  type="button" ng-click="setOrigen('MT');" ui-sref="ponenciaAdd" class="btn btn-success">
+                                <span class="glyphicon glyphicon-plus"></span> Agregar
+                            </button>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

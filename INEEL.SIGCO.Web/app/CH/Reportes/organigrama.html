@@ -1,0 +1,146 @@
+<div class="vista">
+    <div class="page-title">
+        <div class="title_left">
+            <ol class="breadcrumb miga">
+                <li>
+                    <i class="sg sg-inventario-rh"></i>
+                    <a ui-sref="organigrama">Inventario RH/Organigrama hist&oacute;rico</a>
+                </li>
+            </ol>
+
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <form name="ValidForm" id="form" class="form-horizontal">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Criterios de b&uacute;squeda</h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li>
+                                <a class="collapse-link">
+                                    <i class="fa fa-chevron-up"></i>
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content ">
+                        <div class="col-xs-12">
+                            <div class="col-lg-3 col-md-4 col-xs-6">
+                                <div class="form-group ">
+                                    <label class="col-md-12 col-sm-12 col-xs-12">Fecha:</label>
+                                    <div class="col-xs-10">
+                                        <input show-button-bar="false" ng-minlength="8" maxlength="10" datepicker-options="datePicker.FechaOptions" uib-datepicker-popup='dd/MM/yyyy'
+                                            popup-placement="bottom" type="text" class="form-control" ng-model="fechach" ng-change="cambiafecha()"
+                                            is-open="open" ng-required="true" close-text="Close" name="fechach" />
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-success" ng-click="open=true">
+                                                <i class="glyphicon glyphicon-calendar"></i>
+                                            </button>
+                                        </span>
+                                        <span ng-show="ValidForm.fechach.$dirty &&  ValidForm.fechach.$invalid" class="error">Formato inválido 'dd/MM/yyyy'</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-12">
+                                <div class="col-xs-12 col-md-6">
+                                    <div class="form-group ">
+                                        <a class="btn btn-success" ng-click="consultarorganigrama();">
+                                            <i class="glyphicon glyphicon-search"></i> Buscar
+                                        </a>
+                                        <a class="btn btn-primary" ng-click="reset();" title="Limpiar campos">
+                                            Limpiar
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <style>
+                            table {
+                                border-spacing: 0;
+                                border-collapse: separate;
+                            }
+
+                            .google-visualization-orgchart-connrow-small {
+                                height: 102px;  /***Distancia entre un nodo y otro*/
+                                font-size: 10px;
+                            }
+
+                            .title {
+                                white-space: nowrap;
+                            }
+
+                            .customBox {
+                                font-size: 1.4em;
+                                font-weight: bold;
+                            }
+
+                            .division {
+                                color: #1AA607;
+                            }
+
+                            .gerencia {
+                                color: #05708F;
+                            }
+
+                            /**Información que cura***/
+                            /**El día en que se agreguen mas gerencias/divisiones al organigrama se va a necesitar cambiar las propiedades width,margin-top, left (se incrementarán)
+                            Por ahora no hay formula de eso, es a prueba y error, o bien, se puede dejar como inicialmente estaba el organigrama, horizontal,
+                            para eso solo tienen que borrar las siguientes clases .....***/
+
+                            .my_chart { /**contenedor del organigrama, en este caso son las propiedades del div*/
+                                transform: rotate(-90deg); /***rotamos el elemento */
+                                overflow: visible;  /***Establecemos que queremos desbordamiento por parte del div */
+                                width: 5000px;   /***Establecemos el tamano del organigrama */
+                                margin-top: 1700px; /***margen superior, necesario para que se vea completo el organigrama */
+                                left: -2000px; /***margen izquierdo, necesario para que se vea completo el organigrama */
+                            }
+
+                            /***nodos del organigrama***/    
+                            .google-visualization-orgchart-node {
+                                transform: rotate(90deg);
+                            }
+
+                            .google-visualization-orgchart-space-small {
+                                /* adjust this height as needed since this is really based on the width of your tree'sroot element */
+                                height: 10px;
+                            }
+
+                        </style>
+
+
+
+
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Resultados</h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content sin-desborde">
+                    <div class="row">
+                        <div class="col-md-12 col-lg-12 col-xs-12 sin-desborde">
+                            <!-- <div class="table-responsive"> -->
+                            <div style="overflow:auto"  >
+                                <div id="organigrama" ng-model="chartData"  class="my_chart col-lg-12 col-md-12" org-chart="chartData">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

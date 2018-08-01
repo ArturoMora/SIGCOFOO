@@ -1,0 +1,259 @@
+﻿<div ng-include="'app/vistasGenericas/header/registroNombrePersonaAdmin.html'"> </div>
+<div class="vista">
+    <div class="page-title">
+        <div class="title_left">
+            <ol ng-if="editAdmin!='1'"  class="breadcrumb miga">
+                <li><i class="fa fa-cogs"></i> <a ui-sref="#">Solicitudes</a></li>
+                <li><a ui-sref="#">Formaci&oacute;n Acad&eacute;mica</a></li>
+                <li class="active">Detalles</li>
+            </ol>
+            <ol ng-if="editAdmin=='1'" class="breadcrumb miga">
+                <li><i class="fa fa-cogs"></i><a ui-sref="#">Formaci&oacute;n Acad&eacute;mica</a></li>
+                <li class="active">Editar</li>
+            </ol>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+                    <form name="fromfa" id="form" class="form-horizontal">
+                        <div class="x_title">
+                            <h2>Informaci&oacute;n general</h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Grado acad&eacute;mico <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <select auto-focus-campo name="selectgradoacademico" id="selectgradoacademico" ng-model="FA.gradoAcademico" class="form-control" required
+                                    ng-required="true" ng-options="grado.descripcion for grado in gradosacademicos track by grado.gradoAcademicoId" ></select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Titulado <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="btn-group">
+                                    <label style="vertical-align: top;" >NO</label>&nbsp;&nbsp;<switch ng-click="fromfa.$setDirty();" name="enviarcorreo"  ng-model="FA.estaTitulado"></switch>&nbsp;&nbsp;<label style="vertical-align: top;">SI</label>
+                                    <!--<label class="btn btn-success btn-xs" ng-model="FA.estaTitulado" uib-btn-radio="true">Si</label>
+                                    <label class="btn btn-success btn-xs" ng-model="FA.estaTitulado" uib-btn-radio="false">No</label>-->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-show="FA.estaTitulado">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                C&eacute;dula <span class="required" ng-show="FA.cedu">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="btn-group">
+                                    <label style="vertical-align: top;">NO</label>&nbsp;&nbsp;<switch ng-click="fromfa.$setDirty();" name="enviarcorreo" ng-model="FA.cedu"></switch>&nbsp;&nbsp;<label style="vertical-align: top;">SI</label>
+                                    <!--<label class="btn btn-success btn-xs" ng-model="FA.cedu" uib-btn-radio="true">Si</label>
+                                    <label class="btn btn-success btn-xs" ng-model="FA.cedu" uib-btn-radio="false">No</label>-->
+                                </div>
+
+                                <div class="form-group" ng-show="FA.cedu">
+                                    <br />
+                                    <!--<label for="usr">Cédula:</label>-->
+                                    <input type="text" placeholder="Cédula..."  ng-pattern="/^[a-zA-Z0-9]*$/" ng-required="FA.cedu" maxlength="8" class="form-control col-md-7 col-xs-12" id="usr"
+                                        ng-model="FA.cedula" name="cedula" {{FA.cedu ? 'required' : ''}}>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Carrera <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="row">
+                                    <div class="col-xs-10">
+                                        <input type="text" class="form-control" id="selectcarreras" name="datalisttestinputcarreras" ng-model="selectedcarrera.descripcion"
+                                            disabled required placeholder="Buscar carrera">
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <button class="btn btn-success" ng-click="opencarreras()" title="Buscar carrera">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                        </button>
+                                    </div>
+                                    <span ng-show="ValidForm.datalisttestinputcarreras.$dirty &&  ValidForm.datalisttestinputcarreras.$invalid" class="error">La carrera no se encuentra registrada en el cat&aacute;logo.</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Especialidad
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" maxlength="100" class="form-control" name="especialidad" ng-model="FA.especialidad">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Instituci&oacute;n <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="row">
+                                    <div class="col-xs-10">
+                                        <input type="text" class="form-control" id="usr" name="datalisttestinputinstitucion" ng-model="selectedinstitucion.descripcion"
+                                            disabled required placeholder="Buscar Instituci&oacute;n">
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <a class="btn btn-success" ng-click="openInstituciones()" title="Buscar persona">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="x_title">
+                            <h2>Per&iacute;odo de estudio</h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Inicio <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="row">
+                                    <div class="col-xs-10">
+                                        <input ng-minlength="8" name="fechaInicio" placeholder="dd/mm/yyyy" maxlength="10" ng-init="open=false" type="text" show-button-bar="false"
+                                            popup-placement="bottom" class="form-control" uib-datepicker-popup="dd/MM/yyyy" ng-model="FA.fechaInicio"
+                                            value="{{ FA.fechaInicio | date: 'dd/MM/yyyy' }}" is-open="open" close-text="Close"
+                                            ng-required="true" />
+                                        <span ng-show="fromfa.fechaInicio.$dirty &&  fromfa.fechaInicio.$invalid" class="error">Formato inválido 'dd/MM/yyyy'</span>
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <button type="button" class="btn btn-success" ng-click="open=true"><i class="glyphicon glyphicon-calendar"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                T&eacute;rmino <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="row">
+                                    <div class="col-xs-10">
+                                        <input name="fechaTermino" ng-minlength="8" placeholder="dd/mm/yyyy" maxlength="10" ng-init="open2=false" type="text" show-button-bar="false"
+                                            popup-placement="bottom" class="form-control" uib-datepicker-popup="dd/MM/yyyy" ng-model="FA.fechaTermino"
+                                            value="{{ FA.fechaTermino | date: 'dd/MM/yyyy' }}" is-open="open2" close-text="Close"
+                                            ng-required="true" />
+                                        <span ng-show="fromfa.fechaTermino.$dirty &&  fromfa.fechaTermino.$invalid" class="error">Formato inválido 'dd/MM/yyyy'</span>
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <button type="button" class="btn btn-success" ng-click="open2=true"><i class="glyphicon glyphicon-calendar"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="x_title">
+                            <h2>Evidencia <small>Tama&ntilde;o m&aacute;ximo por archivo de 8 MB</small></h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Documento adjunto
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div ng-show="!regFile">
+                                    
+                                    <span class="fa fa-download"></span>&nbsp;&nbsp;<a href="/Descargas.html#/q/{{FA.adjunto.adjuntoId | encriptar}}"
+                                        class="linkTabla" target="_blank">Descargar Archivo</a> &nbsp;&nbsp;
+                                    <a class="btn btn-danger" title="Eliminar Archivo" ng-click="deleteFile();fromfa.$setDirty();">
+                                        <i class="glyphicon glyphicon-trash"></i>
+                                    </a>
+                                    <!--<a class="btn"><i class="fa fa-trash-o fa-lg error" title="Eliminar Archivo" ng-click="deleteFile()"></i></a>-->
+                                </div>
+                                <div class="form-group" ng-show="regFile">
+                                    <input class="input-file form-control col-md-7 col-xs-12" type="file" name="filesGral" id="filesGral" data-buttonName="btn-success"
+                                        ng-click="saveIG();" ng-model="filesGral" onchange="angular.element(this).scope().getFileDetails(this);"
+                                    />
+                                    <span class="error" ng-show="fromfa.filesGral.$dirty && !fromfa.filesGral.$valid">Seleccione un documento y de clic en confirmar</span>
+                                </div>
+                                <!--<label ng-disabled>Nota: Para enviar la solicitud es necesario incluir el documento adjunto de evidencia.</label>-->
+                            </div>
+                        </div>
+                        <div class="jumbotron-fondo">
+                            <div class="x_title">
+                                <h2>Validación de información</h2>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                    Fecha
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <div class="row">
+                                        <div class="col-xs-10">
+                                            <input datepicker-options="datePicker.FechaOptions"
+                                                   placeholder="dd/mm/yyyy" ng-minlength="8" name="FechaValidacion" maxlength="10" ng-init="open3=false" type="text"
+                                                   show-button-bar="false" popup-placement="bottom" class="form-control" uib-datepicker-popup="dd/MM/yyyy"
+                                                   ng-model="FechaValidacionAux" value="{{ FechaValidacionAux | date: 'dd/MM/yyyy' }}"
+                                                   is-open="open3" close-text="Close" />
+                                            <span ng-show="fromfa.FechaValidacion.$dirty &&  fromfa.FechaValidacion.$invalid" class="error">Formato inválido 'dd/MM/yyyy'</span>
+                                        </div>
+                                        <div class="col-xs-2">
+                                            <button type="button" class="btn btn-success" ng-click="open3=true"><i class="glyphicon glyphicon-calendar"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                    Justificaci&oacute;n
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <textarea class="form-control" ng-model="justificacion" maxlength="500"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">
+
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <!--||!fromfa.cedula.$valid-->
+                                    <button  type="submit" class="btn btn-success"  ng-really-click="Actualizar(2)" ng-really-message="{{aprobacionQ}}"
+                                            ng-disabled="desactivar || !fromfa.selectgradoacademico.$valid
+                                            ||!fromfa.cedula.$valid
+                                            ||!(selectedcarrera!=null) || !(selectedinstitucion!=null)
+                                            ||!fromfa.fechaInicio.$valid ||!fromfa.fechaTermino.$valid ||!fromfa.FechaValidacion.$valid || FechaValidacionAux==null">
+                                        <i class="glyphicon glyphicon-saved"></i> Aprobar Solicitud
+                                    </button>
+                                    <button type="submit" class="btn btn-warning"  ng-really-click="Actualizar(3)" ng-if="editAdmin!='1'"  ng-really-message="{{rechazoQ}}"
+                                            ng-disabled="desactivar || !fromfa.selectgradoacademico.$valid
+                                            ||!fromfa.cedula.$valid
+                                            ||!(selectedcarrera!=null) || !(selectedinstitucion!=null)
+                                            ||!fromfa.fechaInicio.$valid ||!fromfa.fechaTermino.$valid ||!fromfa.FechaValidacion.$valid || FechaValidacionAux==null">
+                                        <i class="fa fa-reply"></i> Regresar Solicitud
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ln_solid"></div>
+                        <div class="form-group">
+                            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                <div class="">
+                                    <button type="submit" class="btn btn-success" ng-click="Actualizar(1)" ng-disabled="desactivar || !fromfa.selectgradoacademico.$valid
+                                            ||!fromfa.cedula.$valid
+                                            ||!(selectedcarrera!=null) || !(selectedinstitucion!=null)
+                                            ||!fromfa.fechaInicio.$valid ||!fromfa.fechaTermino.$valid">
+                                        <i class="glyphicon glyphicon-saved"></i> Actualizar
+                                    </button>
+                                    <button type="button" confirma-regresar="globalRegresar()" state-form="fromfa"  class="btn btn-primary">
+                                        <span class="fa fa-arrow-left"></span> Regresar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--FA: {{FA | json}}<br/>
+registrofa: {{registrofa | json}}-->

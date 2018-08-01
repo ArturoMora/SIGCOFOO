@@ -1,0 +1,71 @@
+﻿<div class="vista">
+    <div class="page-title">
+        <div class="title_left">
+            <ol class="breadcrumb miga">
+                <li><i class="disabled fa fa-cogs"></i> <a ui-sref="configuracionPeriodo">Administraci&oacute;n/Configuraci&oacute;n per&iacute;odo</a></li>
+            </ol>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+                    <form name="ValidacionForm" id="form" class="form-horizontal">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div ng-show="registros.length === 0" class="alert advertencia">No hay registrados de per&iacute;odos</div>
+                            </div>
+                        </div>
+                        <div class="row" ng-show="registros.length>0">
+                            <div class="col-lg-12 col-xs-12">
+                                <div ng-hide="registros.length === 0">
+                                    <table id="CHregistrosconfig"  dt-column-defs="dtColumnDefs" class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" datatable="ng"  dt-options="dtOptions">
+                                        <thead>
+                                            <tr>
+                                                <th data-priority="1">Nombre</th>
+                                                <th class="thAjuste">Descripción</th>
+                                                <th class="thAjuste">Fecha inicio</th>
+                                                <th class="thAjuste">Fecha t&eacute;rmino</th>
+                                                <th class="thAjuste">Fecha t&eacute;rmino real</th>
+                                                <th class="thAjuste text-center" data-priority="1">Per&iacute;odo abierto </th>
+                                                <th class="thAjuste text-center" data-priority="1">Opciones</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="registro in registros">
+                                                <td>{{registro.nombre}}</td>
+                                                <td>{{registro.descripcion}}</td>
+                                                <td>{{registro.fechaInicioPlaneada | date:"yyyy/MM/dd"}}</td>
+                                                <td>{{registro.fechaTerminoPlaneada | date:"yyyy/MM/dd"}}</td>
+                                                <td>{{registro.fechaTerminoReal | date:"yyyy/MM/dd"}}</td>
+                                                <td class="text-center text-hide">
+                                                    {{registro.estado}}
+                                                    <input type="checkbox" class="btn btn-info btn-circle" ng-model="registro.estado" value="{{registro.estado}}" ng-click="saveEstado(registro.periodoFIId,registro.estado,registro.descripcion)" />
+                                                </td>
+                                                <td class="text-center">
+                                                    <a class="btn btn-warning" ng-click="setGlobalID(registro.periodoFIId)" ui-sref="configuracionPeriodoEdit" title="Editar">
+                                                        <i class="glyphicon glyphicon-pencil"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                              
+                            </div>
+                        </div>
+                        <div ng-show="activo" class="alert informacion col-xs-12">
+                            <span class="glyphicon glyphicon-info-sign"></span> Nota: Mientras un per&iacute;odo se encuentre abierto, no se podr&aacute; registrar uno nuevo.
+                        </div>
+                        <button ng-show="!activo" type="button" ui-sref="configuracionPeriodoAdd" class="btn btn-success">
+                            <span class="glyphicon glyphicon-plus"></span> Agregar
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--{{registros | json}}-->
+<!--{{activo}}-->

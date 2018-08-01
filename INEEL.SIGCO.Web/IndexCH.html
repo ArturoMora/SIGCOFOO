@@ -1,0 +1,865 @@
+﻿<!DOCTYPE html>
+<html lang="es-mx" ng-app="ineelCH">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta http-equiv="Expires" content="-1">
+    <meta http-equiv="Last-Modified" content="0">
+    <meta http-equiv="Cache-Control" content="no-cache, mustrevalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+
+    <title>Capital humano</title>
+    <!-- build:css Content/stylesCH.min.css -->
+    <!-- inject:css -->
+    <!-- Bootstrap -->
+    <link href="vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="vendors/nprogress/nprogress.css" rel="stylesheet">
+    <!-- iCheck -->
+    <link href="vendors/iCheck/skins/flat/green.css" rel="stylesheet">
+    <!-- bootstrap-progressbar -->
+    <link href="vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
+    <!-- JQVMap -->
+    <link href="vendors/jqvmap/dist/jqvmap.min.css" rel="stylesheet" />
+    <!-- bootstrap-daterangepicker -->
+    <link href="vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+    <!-- Custom Theme Style -->
+    <link href="Content/custom.css" rel="stylesheet">
+
+    <link href="Content/EstilosPropios/fabForm.css" rel="stylesheet" />
+    <!--Mensajes Toastr-->
+    <link href="Content/toastr.css" rel="stylesheet" />
+
+    <!--Tablas responsivas-->
+    <link href="Content/EstilosPropios/jquery.dataTablesINEEL.css" rel="stylesheet" />
+    <link href="Content/DataTables/css/dataTables.responsive.css" rel="stylesheet" />
+    <!--Estilos propios-->
+    <!--<link href="Content/EstilosPropios/StyleAuthorize.css" rel="stylesheet" />-->
+    <link href="Content/EstilosPropios/StyleModulos.css" rel="stylesheet" />
+    <link href="Content/EstilosPropios/datatable.tamaños.css" rel="stylesheet" />
+    <link href="Content/Curriculum/curriculum.css" rel="stylesheet" />
+    <!--stilos reportes-->
+
+    <link href="Content/DataTables/css/buttons.dataTables.css" rel="stylesheet" />
+    <link href="Content/angular-ui-tree/angular-ui-tree.css" rel="stylesheet" />
+    <link href="Content/angular-block-ui.min.css" rel="stylesheet" />
+    <link href="Scripts/knob/jquery.circliful.css" rel="stylesheet" />
+    <link href="Scripts/getorgchart-1.1/getorgchart.css" rel="stylesheet" />
+    <link href="Content/switch/angular-ui-switch.css" rel="stylesheet" />
+    <link href="Content/angucomplete-alt.css" rel="stylesheet" />
+    <link href="Content/ng-tags-input.css" rel="stylesheet" />
+    <link href="Content/ng-tags-input-personal.css" rel="stylesheet" />
+    <!-- endinject -->
+    <!-- endbuild -->
+    <!--
+       IE8 support, see AngularJS Internet Explorer Compatibility http://docs.angularjs.org/guide/ie
+       For Firefox 3.6, you will also need to include jQuery and ECMAScript 5 shim
+     -->
+    <!--[if lt IE 9]>
+      <script src="Scripts/jquery1.11.0.js"></script>
+      <script src="Scripts/es5-shim.min.js"></script>
+      <script>
+        document.createElement('ui-select');
+        document.createElement('ui-select-match');
+        document.createElement('ui-select-choices');
+      </script>
+    <![endif]-->
+    <!--<link href="Content/dx.common.css" rel="stylesheet" />-->
+    <!-- build:js Scripts/scriptsCH.min.js -->
+    <!-- inject:js -->
+    <script src="Scripts/jquery-2.1.0.min.js"></script>
+    <script src="Scripts/jquery-ui-1.11.3.min.js"></script>
+
+    <!-- <script src="Scripts/jquery-1.9.1.js"></script>-->
+    <script src="Scripts/bootstrap.js"></script>
+
+    <!-- plantilla -->
+    <!-- FastClick -->
+    <script src="vendors/fastclick/lib/fastclick.js"></script>
+    <!-- NProgress -->
+    <script src="vendors/nprogress/nprogress.js"></script>
+    <!-- Chart.js -->
+    <script src="vendors/echarts/dist/echarts.min.js"></script>
+    <script src="vendors/Chart.js/dist/Chart.min.js"></script>
+    <!-- gauge.js -->
+    <script src="vendors/gauge.js/dist/gauge.min.js"></script>
+    <!-- bootstrap-progressbar -->
+    <script src="vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+    <!-- iCheck -->
+    <script src="vendors/iCheck/icheck.min.js"></script>
+    <!-- Skycons -->
+    <script src="vendors/skycons/skycons.js"></script>
+    <!-- Flot -->
+    <script src="vendors/Flot/jquery.flot.js"></script>
+    <script src="vendors/Flot/jquery.flot.pie.js"></script>
+    <script src="vendors/Flot/jquery.flot.time.js"></script>
+    <script src="vendors/Flot/jquery.flot.stack.js"></script>
+    <script src="vendors/Flot/jquery.flot.resize.js"></script>
+    <!-- Flot plugins -->
+    <script src="vendors/flot.orderbars/js/jquery.flot.orderBars.js"></script>
+    <script src="vendors/flot-spline/js/jquery.flot.spline.min.js"></script>
+    <script src="vendors/flot.curvedlines/curvedLines.js"></script>
+    <!-- DateJS -->
+    <script src="vendors/DateJS/build/date.js"></script>
+    <!-- JQVMap -->
+    <script src="vendors/jqvmap/dist/jquery.vmap.js"></script>
+    <script src="vendors/jqvmap/dist/maps/jquery.vmap.world.js"></script>
+    <script src="vendors/jqvmap/examples/js/jquery.vmap.sampledata.js"></script>
+
+
+    <script src="Scripts/toastr.js"></script>
+    <script src="Scripts/getorgchart-1.1/getorgchart.js"></script>
+
+
+
+
+
+    <script src="Scripts/angular.js"></script>
+    <script src="Scripts/angular-ui-router.js"></script>
+
+    <script src="Scripts/angular-animate.min.js"></script>
+    <script src="Scripts/i18n/angular-locale_es-mx.js"></script>
+    <script src="Scripts/angular-ui/ui-bootstrap-tpls.js"></script>
+    <script src="Scripts/angular-local-storage.min.js"></script>
+    <script src="Scripts/angular-block-ui.min.js"></script>
+    <script src="Scripts/angular-resource.js"></script>
+
+    <!--stilos reportes-->
+    <scrip src="Scripts/html2canvas.js"></scrip>
+    <script src="Scripts/jquery.canvasjs.min.js"></script>
+    <script src="Scripts/canvasjs.min.js"></script>
+    <!-- chart JS -->
+    <!--<script src="Scripts/node_modules/angular-chart.js/node_modules/chart.js/dist/Chart.min.js"></script>-->
+    <script src="Scripts/node_modules/angular-chart.js/dist/angular-chart.min.js"></script>
+    <!--Tablas-->
+    <script src="Scripts/DataTables/jquery.dataTables.js"></script>
+
+    <script src="Scripts/angular-datatables/angular-datatables.js"></script>
+    <script src="Scripts/DataTables/dataTables.bootstrap.js"></script>
+    <script src="Scripts/DataTables/dataTables.responsive.min.js"></script>
+    <script src="Scripts/angular-datatables/angular-datatables.js"></script>
+    <script src="Scripts/angular-datatables/angular-datatables.util.js"></script>
+    <script src="Scripts/angular-datatables/angular-datatables.options.js"></script>
+    <script src="Scripts/angular-datatables/angular-datatables.instances.js"></script>
+    <script src="Scripts/angular-datatables/angular-datatables.factory.js"></script>
+    <script src="Scripts/angular-datatables/angular-datatables.renderer.js"></script>
+    <script src="Scripts/angular-datatables/angular-datatables.directive.js"></script>
+    <script src="Scripts/DataTables/dataTables.columnFilter.js"></script>
+    <script src="Scripts/angular-datatables/plugins/columnfilter/angular-datatables.columnfilter.js"></script>
+
+    <script src="Scripts/jquery.highlight.js"></script>
+    <script src="Scripts/dataTables.searchHighlight.min.js"></script>
+
+
+
+    <!-- modulo CH -->
+    <script src="Content/switch/angular-ui-switch.js"></script>
+    <script src="Scripts/angular-ui-tree/angular-ui-tree.js"></script>
+
+    <script src="Scripts/angular-sanitize.js"></script>
+
+    <script src="Scripts/angular-messages.min.js"></script>
+    <script src="Scripts/ng-fab-form.js"></script>
+
+    <script src="app/_services/ineel.services.js"></script>
+    <script src="app/_services/factories/adjuntarArchivo.js"></script>
+    <script src="app/_services/factories/ComunDetails.js"></script>
+    <script src="Scripts/ng-tags-input.js"></script>
+    <script src="app/vistasGenericas/directivas/directivasSIGCO.js"></script>
+    <script src="app/_services/ineel.controllers.js"></script>
+
+    <script src="Scripts/bootstrap-filestyle.js"></script>
+    <script src="app/vistasGenericas/SolicitudAcceso/controllers/SolicitudesAcceso.ctrl.js"></script>
+
+    <script src="app/vistasGenericas/_details/personal/controllers/PersonaProfileComun.ctrl.js"></script>
+    <script src="app/vistasGenericas/controllers/ConfirmacionContinue.js"></script>
+
+    <script src="Scripts/globalINEEL.js?v=1.0"></script>
+    <script src="app/_services/factories/Comun.service.js"></script>
+    <script src="app/_services/factories/ComunCount.service.js"></script>
+    <script src="app/vistasGenericas/controllers/NotificationCtrl.js"></script>
+
+
+    <script src="app/CH/appCH.js"></script>
+    <script src="Scripts/aes.js"></script>
+    <script src="Scripts/mdo-angular-cryptography.js"></script>
+    <script src="Scripts/angular-google-chart.js"></script>
+    <script src="app/_services/factories/Descargas.js"></script>
+    <script src="app/CH/_services/ineel.CH.services.js"></script>
+    <script src="app/_services/factories/authService.js"></script>
+    <script src="app/_services/factories/menu.service.js"></script>
+    <script src="app/_services/factories/permisos.service.js"></script>
+    <script src="app/_services/factories/personas.service.js"></script>
+
+    <script src="app/_services/factories/authInterceptorService.js"></script>
+    <script src="app/_services/factories/NuevoOC.js"></script>
+    <script src="app/CH/_services/factories/formacionacademica.CH.service.js"></script>
+
+    <!--Vistas genericas-->
+    <script src="app/GEN/_services/ineel.GEN.services.js"></script>
+    <script src="app/vistasGenericas/buscarProyectosGEN/buscarProyectosPorSubprograma.service.js"></script>
+    <script src="app/vistasGenericas/buscarProyectosGEN/proyectosFilterSubprograma.ctrl.js"></script>
+    <script src="app/vistasGenericas/buscarProyectosGEN/comunServiceProyectos.service.js"></script>
+    <script src="app/vistasGenericas/detallesProyectosGEN/controllers/proyectoDetails.GEN.ctrl.js"></script>
+    <script src="app/vistasGenericas/detallesBusquedaPersonal/services/comunServiceDetallesPersonal.service.js"></script>
+    <script src="app/vistasGenericas/detallesBusquedaPersonal/controllers/detallesBusquedaPersonal.GEN.ctrl.js"></script>
+    <script src="app/vistasGenericas/detallesBusquedaPersonal/controllers/detalleSemblanzaPersonalGEN.js"></script>
+    <script src="app/vistasGenericas/controllers/EstructuraOrganizacionalEmpresasFilterGet.ctrl.js"></script>
+    <!--Vistas genericas-->
+
+    <script src="app/CH/home/controllers/homeCH.ctrl.js"></script>
+    <script src="app/auth/controllers/changepassword.ctrl.js"></script>
+    <script src="app/CH/inventario/controllers/inventarioRH.ctrl.js"></script>
+    <script src="app/CH/inventario/_template/controller/catalogoRH.ctrl.js"></script>
+    <script src="app/CH/inventario/_template/controller/solicitudesRH.ctrl.js"></script>
+    <script src="Scripts/angular-file-upload.js"></script>
+    <script src="app/CH/_services/factories/idiomas.CH.service.js"></script>
+    <script src="app/CH/_services/factories/sni.CH.service.js"></script>
+    <script src="app/CH/_services/factories/distincion.CH.service.js"></script>
+    <script src="app/CH/_services/catalogos/ambito.CH.service.js"></script>
+    <script src="app/CH/_services/catalogos/areasni.CH.service.js"></script>
+    <script src="app/CH/_services/catalogos/asistente.CH.service.js"></script>
+    <script src="app/CH/_services/catalogos/asociacion.CH.service.js"></script>
+    <script src="app/CH/_services/catalogos/campo.CH.service.js"></script>
+    <script src="app/CH/_services/catalogos/carrera.CH.service.js"></script>
+    <script src="app/CH/_services/catalogos/disciplina.CH.service.js"></script>
+    <script src="app/CH/_services/catalogos/tipobeca.CH.service.js"></script>
+    <script src="app/CH/_services/catalogos/becainterna.CH.service.js"></script>
+    <script src="app/CH/_services/catalogos/congreso.CH.service.js"></script>
+    <script src="app/CH/_services/catalogos/estadopublicacion.CH.service.js"></script>
+    <script src="app/CH/_services/catalogos/evento.CH.service.js"></script>
+    <script src="app/CH/_services/catalogos/idioma.CH.service.js"></script>
+    <script src="app/CH/_services/catalogos/gradoacademico.CH.service.js"></script>
+    <script src="app/CH/_services/catalogos/institucion.CH.service.js"></script>
+    <script src="app/CH/_services/catalogos/nivelcurso.CH.service.js"></script>
+    <script src="app/CH/_services/catalogos/nivelpublicacion.CH.service.js"></script>
+    <script src="app/CH/_services/catalogos/nivelsni.CH.service.js"></script>
+    <script src="app/CH/_services/catalogos/pais.CH.service.js"></script>
+    <script src="app/CH/_services/catalogos/revista.CH.service.js"></script>
+    <script src="app/CH/_services/catalogos/encargadoDespacho.CH.service.js"></script>
+    <script src="app/CH/_services/factories/solicitud.CH.service.js"></script>
+    <script src="app/CH/_services/factories/solicitudCP.CH.service.js"></script>
+    <script src="app/CH/_services/factories/asociacion.CH.service.js"></script>
+    <script src="app/CH/_services/factories/becariointerno.CH.service.js"></script>
+    <script src="app/CH/_services/factories/tesisdirigida.CH.service.js"></script>
+    <script src="app/CH/_services/catalogos/certificaciones.CH.service.js"></script>
+    <script src="app/CH/_services/factories/becariodirigido.CH.service.js"></script>
+    <script src="app/CH/_services/factories/experienciaDocente.CH.service.js"></script>
+    <script src="app/CH/_services/factories/experienciaExterna.CH.service.js"></script>
+    <script src="app/CH/_services/factories/publicacion.CH.service.js"></script>
+    <script src="app/CH/_services/factories/ponencia.CH.service.js"></script>
+    <script src="app/CH/_services/factories/capitulo.CH.service.js"></script>
+    <script src="app/CH/_services/factories/participacion.CH.service.js"></script>
+    <script src="app/CH/_services/factories/cursointerno.CH.service.js"></script>
+    <script src="app/CH/_services/factories/daexterno.CH.service.js"></script>
+
+    <script src="app/CH/_services/factories/piexterno.CH.service.js"></script>
+    <script src="app/CH/_services/factories/bitacorasolicitudes.CH.service.js"></script>
+    <script src="app/CH/_services/factories/mecadministracion.CH.service.js"></script>
+    <script src="app/CH/_services/factories/capacitacionycertificado.CH.service.js"></script>
+    <script src="app/CH/_services/factories/logrosreconocimientos.CH.service.js"></script>
+    <script src="app/CH/_services/factories/certificacionesobtenidas.CH.service.js"></script>
+    <script src="app/CH/_services/factories/software.CH.service.js"></script>
+
+    <script src="app/CH/_services/factories/curriculumvitae.CH.service.js"></script>
+    <script src="app/CH/_services/factories/ExtractoProfesional.CH.service.js"></script>
+    <!--reubicación de MT-->
+    <script src="app/CH/capitulos/controllers/capitulosAdd.ctrl.js"></script>
+    <script src="app/CH/capitulos/controllers/capitulosDetails.ctrl.js"></script>
+    <script src="app/CH/capitulos/controllers/capitulosEdit.ctrl.js"></script>
+    <script src="app/CH/capitulos/controllers/capitulosGet.ctrl.js"></script>
+    <!--END reubicación de MT-->
+    <!--Informes de becarios-->
+    <!--Externos-->
+    <script src="app/CH/_services/factories/InformeBecario.CH.service.js"></script>
+    <script src="app/CH/InformesBecarios/Externos/controllers/InformeBecarioExternoGet.ctrl.js"></script>
+    <script src="app/CH/InformesBecarios/Externos/controllers/InformeBecarioExternoAdd.ctrl.js"></script>
+    <script src="app/CH/InformesBecarios/Externos/controllers/InformeBecarioExternoEdit.ctrl.js"></script>
+    <script src="app/CH/InformesBecarios/Externos/controllers/InformeBecarioExternoDetails.ctrl.js"></script>
+    <script src="app/CH/Admin/becarioExterno/agregaBecarioExterno/controllers/agregaBecasPersonalAdd.ctrl.js"></script>
+
+    <!--Internos-->
+    <script src="app/CH/InformesBecarios/Internos/controllers/InformeBecarioInternoGet.ctrl.js"></script>
+    <script src="app/CH/InformesBecarios/Internos/controllers/InformeBecarioInternoAdd.ctrl.js"></script>
+    <script src="app/CH/InformesBecarios/Internos/controllers/InformeBecarioInternoEdit.ctrl.js"></script>
+    <script src="app/CH/InformesBecarios/Internos/controllers/InformeBecarioInternoDetails.ctrl.js"></script>
+
+    <script src="app/CH/BecarioInerno/controllers/becariointernoGet.ctrl.js"></script>
+    <!--End informes de becarios-->
+
+    <script src="app/CH/extractoProfesional/controllers/ExtractoProfesionalAdd.ctrl.js"></script>
+    <script src="app/CH/formacionacademica/controllers/formacionacademicasGet.ctrl.js"></script>
+    <script src="app/CH/formacionacademica/controllers/formacionacademicaAdd.ctrl.js"></script>
+    <script src="app/CH/formacionacademica/controllers/formacionacademicaEdit.ctrl.js"></script>
+    <script src="app/CH/formacionacademica/controllers/formacionacademicaDetails.ctrl.js"></script>
+
+    <script src="app/CH/sni/controllers/sniGet.ctrl.js"></script>
+    <script src="app/CH/sni/controllers/sniAdd.ctrl.js"></script>
+    <script src="app/CH/sni/controllers/sniEdit.ctrl.js"></script>
+    <script src="app/CH/sni/controllers/sniDetails.ctrl.js"></script>
+
+    <script src="app/CH/distincion/controllers/distincionGet.ctrl.js"></script>
+    <script src="app/CH/distincion/controllers/distincionAdd.ctrl.js"></script>
+    <script src="app/CH/distincion/controllers/distincionEdit.ctrl.js"></script>
+    <script src="app/CH/distincion/controllers/distincionDetails.ctrl.js"></script>
+
+    <script src="app/CH/Ambito/controllers/ambitoGet.ctrl.js"></script>
+    <script src="app/CH/Ambito/controllers/ambitoAdd.ctrl.js"></script>
+    <script src="app/CH/Ambito/controllers/ambitoEdit.ctrl.js"></script>
+
+    <script src="app/CH/AreaSNI/controllers/areasniGet.ctrl.js"></script>
+    <script src="app/CH/AreaSNI/controllers/areasniAdd.ctrl.js"></script>
+    <script src="app/CH/AreaSNI/controllers/areasniEdit.ctrl.js"></script>
+
+    <script src="app/CH/Asistente/controllers/asistenteGet.ctrl.js"></script>
+    <script src="app/CH/Asistente/controllers/asistenteAdd.ctrl.js"></script>
+    <script src="app/CH/Asistente/controllers/asistenteEdit.ctrl.js"></script>
+
+    <script src="app/CH/Asociaciones/controllers/asociacionGet.ctrl.js"></script>
+    <script src="app/CH/Asociaciones/controllers/asociacionAdd.ctrl.js"></script>
+    <script src="app/CH/Asociaciones/controllers/asociacionEdit.ctrl.js"></script>
+
+    <script src="app/CH/Campo/controllers/campoGet.ctrl.js"></script>
+    <script src="app/CH/Campo/controllers/campoAdd.ctrl.js"></script>
+    <script src="app/CH/Campo/controllers/campoEdit.ctrl.js"></script>
+
+    <script src="app/CH/Carrera/controllers/carreraGet.ctrl.js"></script>
+    <script src="app/CH/Carrera/controllers/carreraAdd.ctrl.js"></script>
+    <script src="app/CH/Carrera/controllers/carreraEdit.ctrl.js"></script>
+
+    <script src="app/CH/Disciplinas/controllers/disciplinaAdd.ctrl.js"></script>
+    <script src="app/CH/Disciplinas/controllers/disciplinaEdit.ctrl.js"></script>
+    <script src="app/CH/Disciplinas/controllers/disciplinaGet.ctrl.js"></script>
+
+    <script src="app/CH/TipoBeca/controllers/tipobecaGet.ctrl.js"></script>
+    <script src="app/CH/TipoBeca/controllers/tipobecaAdd.ctrl.js"></script>
+    <script src="app/CH/TipoBeca/controllers/tipobecaEdit.ctrl.js"></script>
+
+    <script src="app/CH/BecasInternas/controllers/becainternaGet.ctrl.js"></script>
+    <script src="app/CH/BecasInternas/controllers/becainternaAdd.ctrl.js"></script>
+    <script src="app/CH/BecasInternas/controllers/becainternaEdit.ctrl.js"></script>
+
+    <script src="app/CH/Congreso/controllers/congresoGet.ctrl.js"></script>
+    <script src="app/CH/Congreso/controllers/congresoAdd.ctrl.js"></script>
+    <script src="app/CH/Congreso/controllers/congresoEdit.ctrl.js"></script>
+
+    <script src="app/CH/EstadoPublicacion/controllers/estadopublicacionAdd.ctrl.js"></script>
+    <script src="app/CH/EstadoPublicacion/controllers/estadopublicacionEdit.ctrl.js"></script>
+    <script src="app/CH/EstadoPublicacion/controllers/estadopublicacionGet.ctrl.js"></script>
+
+    <script src="app/CH/Eventos/controllers/eventoAdd.ctrl.js"></script>
+    <script src="app/CH/Eventos/controllers/eventoEdit.ctrl.js"></script>
+    <script src="app/CH/Eventos/controllers/eventoGet.ctrl.js"></script>
+
+    <script src="app/CH/Idioma/controllers/idiomaEdit.ctrl.js"></script>
+    <script src="app/CH/Idioma/controllers/idiomaGet.ctrl.js"></script>
+    <script src="app/CH/Idioma/controllers/idiomaAdd.ctrl.js"></script>
+
+    <script src="app/CH/GradoAcademico/controllers/gradoacademicoAdd.ctrl.js"></script>
+    <script src="app/CH/GradoAcademico/controllers/gradoacademicoEdit.ctrl.js"></script>
+    <script src="app/CH/GradoAcademico/controllers/gradoacademicoGet.ctrl.js"></script>
+
+    <script src="app/CH/Institucion/controllers/institucionAdd.ctrl.js"></script>
+    <script src="app/CH/Institucion/controllers/institucionEdit.ctrl.js"></script>
+    <script src="app/CH/Institucion/controllers/institucionGet.ctrl.js"></script>
+
+    <script src="app/CH/NivelCurso/controllers/nivelcursoEdit.ctrl.js"></script>
+    <script src="app/CH/NivelCurso/controllers/nivelcursoGet.ctrl.js"></script>
+    <script src="app/CH/NivelCurso/controllers/nivelcursoAdd.ctrl.js"></script>
+
+    <script src="app/CH/NivelPublicacion/controllers/nivelpublicacionAdd.ctrl.js"></script>
+    <script src="app/CH/NivelPublicacion/controllers/nivelpublicacionEdit.ctrl.js"></script>
+    <script src="app/CH/NivelPublicacion/controllers/nivelpublicacionGet.ctrl.js"></script>
+
+    <script src="app/CH/NivelSNI/controllers/nivelsniAdd.ctrl.js"></script>
+    <script src="app/CH/NivelSNI/controllers/nivelsniEdit.ctrl.js"></script>
+    <script src="app/CH/NivelSNI/controllers/nivelsniGet.ctrl.js"></script>
+
+    <script src="app/CH/Pais/controllers/paisAdd.ctrl.js"></script>
+    <script src="app/CH/Pais/controllers/paisEdit.ctrl.js"></script>
+    <script src="app/CH/Pais/controllers/paisGet.ctrl.js"></script>
+
+    <script src="app/CH/Revista/controllers/revistaAdd.ctrl.js"></script>
+    <script src="app/CH/Revista/controllers/revistaEdit.ctrl.js"></script>
+    <script src="app/CH/Revista/controllers/revistaGet.ctrl.js"></script>
+
+    <script src="app/CH/Admin/solicitudes/controllers/solicitudeGet.ctrl.js"></script>
+    <script src="app/CH/Admin/solicitudescp/controllers/solicitudescpGet.ctrl.js"></script>
+
+    <script src="app/CH/idiomas/controllers/idiomasGet.ctrl.js"></script>
+    <script src="app/CH/idiomas/controllers/idiomasAdd.ctrl.js"></script>
+    <script src="app/CH/idiomas/controllers/idiomasEdit.ctrl.js"></script>
+    <script src="app/CH/idiomas/controllers/idiomasDetails.ctrl.js"></script>
+
+    <script src="app/CH/asociacion/controllers/asociacionGet.ctrl.js"></script>
+    <script src="app/CH/asociacion/controllers/asociacionAdd.ctrl.js"></script>
+    <script src="app/CH/asociacion/controllers/asociacionEdit.ctrl.js"></script>
+    <script src="app/CH/asociacion/controllers/asociacionDetails.ctrl.js"></script>
+
+    <!--<script src="app/CH/BecarioInerno/controllers/becariointernoGet.ctrl.js"></script>
+    <script src="app/CH/BecarioInerno/controllers/becariointernoAdd.ctrl.js"></script>
+    <script src="app/CH/BecarioInerno/controllers/becariointernoEdit.ctrl.js"></script>
+    <script src="app/CH/BecarioInerno/controllers/becariointernoDetails.ctrl.js"></script>-->
+
+    <script src="app/CH/TesisDirigida/controllers/tesisdirigidaGet.ctrl.js"></script>
+    <script src="app/CH/TesisDirigida/controllers/tesisdirigidaAdd.ctrl.js"></script>
+    <script src="app/CH/TesisDirigida/controllers/tesisdirigidaEdit.ctrl.js"></script>
+    <script src="app/CH/TesisDirigida/controllers/tesisdirigidaDetails.ctrl.js"></script>
+
+    <script src="app/CH/Certificaciones/controllers/certificacionesGet.ctrl.js"></script>
+    <script src="app/CH/Certificaciones/controllers/certificacionesAdd.ctrl.js"></script>
+    <script src="app/CH/Certificaciones/controllers/certificacionesEdit.ctrl.js"></script>
+
+    <script src="app/CH/BecarioDirigido/controllers/becariodirigidoGet.ctrl.js"></script>
+    <script src="app/CH/BecarioDirigido/controllers/becariodirigidoAdd.ctrl.js"></script>
+    <script src="app/CH/BecarioDirigido/controllers/becariodirigidoEdit.ctrl.js"></script>
+    <script src="app/CH/BecarioDirigido/controllers/becariodirigidoDetail.ctrl.js"></script>
+
+    <script src="app/CH/experienciaDocente/controllers/experienciadocenteGet.ctrl.js"></script>
+    <script src="app/CH/experienciaDocente/controllers/experienciadocenteAdd.ctrl.js"></script>
+    <script src="app/CH/experienciaDocente/controllers/experienciadocenteEdit.ctrl.js"></script>
+    <script src="app/CH/experienciaDocente/controllers/experienciadocenteDetails.ctrl.js"></script>
+
+    <script src="app/CH/experienciaExterna/controllers/experienciaexternaGet.ctrl.js"></script>
+    <script src="app/CH/experienciaExterna/controllers/experienciaexternaAdd.ctrl.js"></script>
+    <script src="app/CH/experienciaExterna/controllers/experienciaexternaEdit.ctrl.js"></script>
+    <script src="app/CH/experienciaExterna/controllers/experienciaexternaDetails.ctrl.js"></script>
+
+    <script src="app/CH/publicacion/controllers/publicacionGet.ctrl.js"></script>
+    <script src="app/CH/publicacion/controllers/publicacionAdd.ctrl.js"></script>
+    <script src="app/CH/publicacion/controllers/publicacionEdit.ctrl.js"></script>
+    <script src="app/CH/publicacion/controllers/publicacionDetails.ctrl.js"></script>
+    <script src="app/vistasGenericas/controllers/listarevistas.ctrl.js"></script>
+
+    <script src="app/CH/ponencia/controllers/ponenciaGet.ctrl.js"></script>
+    <script src="app/CH/ponencia/controllers/ponenciaAdd.ctrl.js"></script>
+    <script src="app/CH/ponencia/controllers/ponenciaEdit.ctrl.js"></script>
+    <script src="app/CH/ponencia/controllers/ponenciaDetails.ctrl.js"></script>
+    <script src="app/vistasGenericas/controllers/listacongresos.ctrl.js"></script>
+
+    <script src="app/CH/participacionProyecto/controllers/participacionGet.ctrl.js"></script>
+    <script src="app/CH/participacionProyecto/controllers/participacionAdd.ctrl.js"></script>
+    <script src="app/CH/participacionProyecto/controllers/participacionEdit.ctrl.js"></script>
+    <script src="app/CH/participacionProyecto/controllers/participacionDetails.ctrl.js"></script>
+
+    <script src="app/CH/cursointerno/controllers/cursointernoGet.ctrl.js"></script>
+    <script src="app/CH/cursointerno/controllers/cursointernoAdd.ctrl.js"></script>
+    <script src="app/CH/cursointerno/controllers/cursointernoEdit.ctrl.js"></script>
+    <script src="app/CH/cursointerno/controllers/cursosPersonalDetails.ctrl.js"></script>
+
+    <script src="app/PI/_services/factories/catalogos.service.js"></script>
+    <script src="app/PI/_services/factories/propiedadindustrial.service.js"></script>
+    <script src="app/CH/DAExterno/controllers/daexternoGet.ctrl.js"></script>
+    <script src="app/CH/DAExterno/controllers/daexternoAdd.ctrl.js"></script>
+    <script src="app/CH/DAExterno/controllers/derechosautoragregar.ctrl.js"></script>
+    <script src="app/CH/DAExterno/controllers/daexternoEdit.ctrl.js"></script>
+    <script src="app/CH/DAExterno/controllers/derechosautoreditar.ctrl.js"></script>
+    <script src="app/CH/DAExterno/controllers/daexternoDetails.ctrl.js"></script>
+    <script src="app/CH/DAExterno/controllers/deaintpatrimonialDetails.ctrl.js"></script>
+
+    <script src="app/CH/PIExterno/controllers/piexternoGet.ctrl.js"></script>
+    <script src="app/CH/PIExterno/controllers/piexternoAdd.ctrl.js"></script>
+    <script src="app/CH/PIExterno/controllers/piexternoEdit.ctrl.js"></script>
+    <script src="app/CH/PIExterno/controllers/piexternoDetails.ctrl.js"></script>
+    <script src="app/CH/PIExterno/controllers/piintpatrimonialDetails.ctrl.js"></script>
+
+    <script src="app/CH/CapacitacionyCertificacionesObtenidas/controllers/capacitacionesycertGet.ctrl.js"></script>
+    <script src="app/CH/CapacitacionyCertificacionesObtenidas/controllers/capacitacionycertAdd.ctrl.js"></script>
+    <script src="app/CH/CapacitacionyCertificacionesObtenidas/controllers/capacitacionycertEdit.ctrl.js"></script>
+    <script src="app/CH/CapacitacionyCertificacionesObtenidas/controllers/capacitacionycertDetails.ctrl.js"></script>
+
+    <script src="app/CH/logrosreconocimientos/controllers/logrosreconocimientosAdd.ctrl.js"></script>
+    <script src="app/CH/logrosreconocimientos/controllers/logrosreconocimientosDetails.ctrl.js"></script>
+    <script src="app/CH/logrosreconocimientos/controllers/logrosreconocimientosEdit.ctrl.js"></script>
+    <script src="app/CH/logrosreconocimientos/controllers/logrosreconocimientosGet.ctrl.js"></script>
+
+    <script src="app/CH/CertificacionesObtenidas/controllers/certificacionesobtenidasAdd.ctrl.js"></script>
+    <script src="app/CH/CertificacionesObtenidas/controllers/certificacionesobtenidasDetails.ctrl.js"></script>
+    <script src="app/CH/CertificacionesObtenidas/controllers/certificacionesobtenidasEdit.ctrl.js"></script>
+    <script src="app/CH/CertificacionesObtenidas/controllers/certificacionesobtenidasGet.ctrl.js"></script>
+    <!--Aprobar o rechazar un capitulo-->
+    <script src="app/CH/Admin/capitulo/controllers/capituloDetalles.ctrl.js"></script>
+    <script src="app/CH/Admin/capitulo/controllers/capituloDetallesGerente.ctrl.js"></script>
+    <script src="app/CH/Admin/capitulo/controllers/capituloInfo.ctrl.js"></script>
+    <script src="app/CH/CurriculumVitae/controllers/curriculumvitae.ctrl.js"></script>
+
+    <!-- Gestion de Fichas -->
+    <script src="app/CH/gestionfichas/controllers/gestionfichas.ctrl.js"></script>
+    <script src="app/CH/_services/factories/gestionfichas.CH.service.js"></script>
+
+    <!--//////////BITACORA//////////-->
+    <script src="app/CH/BitacoraSolicitudes/controllers/bitacorasolicitudesDetails.ctrl.js"></script>
+    <!--//////////// Scripts Admin ////////////-->
+    <script src="app/CH/Admin/formacionAcademica/controllers/formacionacademicaDetails.ctrl.js"></script>
+    <script src="app/CH/Admin/idiomas/controllers/idiomasDetalles.ctrl.js"></script>
+    <script src="app/CH/Admin/distincion/controllers/distincionDetalles.ctrl.js"></script>
+    <script src="app/CH/Admin/sni/controllers/sniDetalles.ctrl.js"></script>
+    <script src="app/CH/Admin/asociacion/controllers/asociacionDetalles.ctrl.js"></script>
+    <script src="app/CH/Admin/BecarioInerno/controllers/becariointernoDetalles.ctrl.js"></script>
+    <script src="app/CH/Admin/tesisDirigida/controllers/tesisdirigidaDetalles.ctrl.js"></script>
+    <script src="app/CH/Admin/becarioExterno/controllers/becarioexternoDetalles.ctrl.js"></script>
+    <script src="app/CH/Admin/becarioDirigido/controllers/becariodirigidoDetalles.ctrl.js"></script>
+    <script src="app/CH/Admin/experienciaDocente/controllers/experienciadocenteDetalles.ctrl.js"></script>
+    <script src="app/CH/Admin/experienciaExterna/controllers/experienciaexternaDetalles.ctrl.js"></script>
+    <script src="app/CH/Admin/publicacion/controllers/publicacionDetalles.ctrl.js"></script>
+    <script src="app/CH/Admin/publicacion/controllers/publicacionDetallesGerente.ctrl.js"></script>
+    <script src="app/CH/Admin/publicacion/controllers/publicacionInfo.ctrl.js"></script>
+    <script src="app/CH/Admin/ponencia/controllers/ponenciaDetalles.ctrl.js"></script>
+    <script src="app/CH/Admin/ponencia/controllers/ponenciaDetallesGerente.ctrl.js"></script>
+    <script src="app/CH/Admin/ponencia/controllers/ponenciaInfo.ctrl.js"></script>
+    <script src="app/CH/Admin/participacionProyecto/controllers/participacionDetalles.ctrl.js"></script>
+    <script src="app/CH/Admin/participacionProyecto/controllers/participacionDetallesGerente.js"></script>
+    <script src="app/CH/Admin/DAExterno/controllers/daexternoDetalles.ctrl.js"></script>
+    <script src="app/CH/Admin/PIExterno/controllers/piexternoDetalles.ctrl.js"></script>
+    <script src="app/CH/Admin/cursointerno/controllers/cursointernoDetalles.ctrl.js"></script>
+    <script src="app/CH/Admin/CapacitacionyCertificacionesObtenidas/controllers/capacitacionycertificacionDetalles.ctrl.js"></script>
+    <script src="app/CH/Admin/logrosreconocimientos/controllers/logrosyreconocimientosDetalles.ctrl.js"></script>
+    <script src="app/CH/Admin/certificacionesobtenidas/controllers/certificacionesobtenidasDetalles.ctrl.js"></script>
+    <script src="app/CH/Admin/software/controllers/softwareDetailsGerente.ctrl.js"></script>
+
+
+
+
+
+    <!-- Plugin para el autocompletado-->
+    <script src="Scripts/angucomplete-alt.js"></script>
+    <!-- aptitudes-->
+    <script src="app/CH/aptitudes/controllers/aptitudesget.ctrl.js"></script>
+    <!-- BecarioExterno-->
+    <script src="app/CH/_services/factories/BecarioExterno.CH.service.js"></script>
+    <script src="app/CH/BecarioExterno/controllers/BecarioExternoAdd.ctrl.js"></script>
+    <script src="app/CH/BecarioExterno/controllers/BecarioExternoDetails.ctrl.js"></script>
+    <script src="app/CH/BecarioExterno/controllers/BecarioExternoEdit.ctrl.js"></script>
+    <script src="app/CH/BecarioExterno/controllers/BecarioExternoGet.ctrl.js"></script>
+    <!-- Reportes -->
+    <script src="app/CH/_services/factories/inventariorh.CH.service.js"></script>
+    <script src="app/CH/Reportes/controllers/catalogoInvestigadores.ctrl.js"></script>
+    <script src="app/CH/Reportes/controllers/edadpromedio.ctrl.js"></script>
+    <script src="app/CH/Reportes/controllers/organigrama.ctrl.js"></script>
+    <script src="app/CH/Reportes/controllers/perfilcurricularcolectivo.ctrl.js"></script>
+    <script src="app/CH/Reportes/controllers/evolucionplantilla.ctrl.js"></script>
+    <script src="app/CH/Reportes/controllers/gradossni.ctrl.js"></script>
+    <script src="app/CH/Reportes/controllers/piramidecategorias.ctrl.js"></script>
+    <script src="app/CH/Reportes/controllers/investigadoresgerencia.ctrl.js"></script>
+    <script src="app/CH/Reportes/controllers/investigadoresdisciplina.ctrl.js"></script>
+    <script src="app/CH/Reportes/controllers/composicionespescialidades.ctrl.js"></script>
+    <script src="app/CH/Reportes/controllers/movimientosPersonal.ctrl.js"></script>
+
+    <!--Consultas para la comunidad-->
+    <script src="app/CH/ConsultasIIE/controllers/personalinvestigacion.ctrl.js"></script>
+    <script src="app/CH/ConsultasIIE/controllers/personalsni.ctrl.js"></script>
+    <script src="app/CH/ConsultasIIE/controllers/personalsnidatos.ctrl.js"></script>
+    <script src="app/CH/ConsultasIIE/controllers/estudios.ctrl.js"></script>
+    <script src="app/CH/ConsultasIIE/controllers/institucioneseducativas.ctrl.js"></script>
+    <script src="app/CH/ConsultasIIE/controllers/personalvigente.ctrl.js"></script>
+    <script src="app/CH/ConsultasIIE/controllers/analisissni.ctrl.js"></script>
+
+    <!-- Busquedas genericas-->
+    <script src="app/CH/_services/factories/fechach.CH.service.js"></script>
+    <script src="app/vistasGenericas/_services/buscarPersonas.CH.service.js"></script>
+    <script src="app/vistasGenericas/_services/buscarProyectos.GEN.service.js"></script>
+    <script src="app/vistasGenericas/controllers/PersonasFilterGet.ctrlGEN.js"></script>
+    <script src="app/vistasGenericas/controllers/ProyectosFilterGet.ctrlGEN.js"></script>
+
+    <!-- FIN de Busquedas genericas-->
+    <script src="app/PI/_services/factories/derechosautor.service.js"></script>
+
+    <script src="app/vistasGenericas/controllers/EstructuraOrganizacionalFilterGet.ctrl.js"></script>
+    <script src="app/GEN/_services/catalogos/notificacion.GEN.service.js"></script>
+
+
+
+
+    <!--  CONTROLADORES COMPETENCIAS TECNICAS Y CONDUCTUALES             -->
+
+    <script src="app/CH/_services/catalogos/periodoevaluacion.CH.service.js"></script>
+    <script src="app/CH/PeriodoEvaluacion/controllers/PeriodoEvaluacionAdd.ctrl.js"></script>
+    <script src="app/CH/PeriodoEvaluacion/controllers/PeriodoEvaluacionEdit.ctrl.js"></script>
+    <script src="app/CH/PeriodoEvaluacion/controllers/PeriodoEvaluacionGet.ctrl.js"></script>
+
+    <script src="app/CH/_services/catalogos/tipocompetencia.CH.service.js"></script>
+    <script src="app/CH/TipoCompetencia/controllers/tipocompetenciaGet.ctrl.js"></script>
+    <script src="app/CH/TipoCompetencia/controllers/tipocompetenciaEdit.ctrl.js"></script>
+    <script src="app/CH/TipoCompetencia/controllers/tipocompetenciaAdd.ctrl.js"></script>
+
+
+    <script src="app/CH/_services/catalogos/tipoarea.CH.service.js"></script>
+    <script src="app/CH/TipoArea/controllers/tipoareaGet.ctrl.js"></script>
+    <script src="app/CH/TipoArea/controllers/tipoareaAdd.ctrl.js"></script>
+    <script src="app/CH/TipoArea/controllers/tipoareaEdit.ctrl.js"></script>
+
+    <script src="app/CH/_services/catalogos/estadoevaluacion.CH.service.js"></script>
+    <script src="app/CH/EstadoEvaluacion/Controllers/EstadoEvaluacionGet.ctrl.js"></script>
+    <script src="app/CH/EstadoEvaluacion/Controllers/EstadoEvaluacionAdd.ctrl.js"></script>
+    <script src="app/CH/EstadoEvaluacion/Controllers/EstadoEvaluacionEdit.ctrl.js"></script>
+
+    <script src="app/CH/_services/catalogos/familiapuestos.CH.service.js"></script>
+    <script src="app/CH/_services/catalogos/matrizcompetencias.CH.service.js"></script>
+    <script src="app/CH/FamiliasPuestos/controllers/familiapuestosGet.ctrl.js"></script>
+    <script src="app/CH/FamiliasPuestos/controllers/familiapuestosEdit.ctrl.js"></script>
+    <script src="app/CH/FamiliasPuestos/controllers/familiapuestosAdd.ctrl.js"></script>
+
+    <script src="app/CH/_services/catalogos/familiacategorias.CH.service.js"></script>
+    <script src="app/CH/_services/catalogos/unidadfamilia.CH.service.js"></script>
+    <script src="app/CH/FamiliasPuestos/controllers/familiacategoriasGet.ctrl.js"></script>
+    <script src="app/CH/FamiliasPuestos/controllers/familiacategoriasAdd.ctrl.js"></script>
+    <script src="app/CH/FamiliasPuestos/controllers/familiacategoriasEdit.ctrl.js"></script>
+    <script src="app/CH/FamiliasPuestos/controllers/categoriacompetenciaGet.ctrl.js"></script>
+    <script src="app/CH/FamiliasPuestos/controllers/categoriacompetenciaAdd.ctrl.js"></script>
+    <script src="app/CH/FamiliasPuestos/controllers/familiaunidadAdd.ctrl.js"></script>
+    <script src="app/CH/FamiliasPuestos/controllers/familiaunidadGet.ctrl.js"></script>
+    <script src="app/CH/FamiliasPuestos/controllers/consultacategoriasGet.ctrl.js"></script>
+
+    <script src="app/CH/FamiliasPuestos/controllers/personalarea.ctrl.js"></script>
+    <script src="app/CH/FamiliasPuestos/controllers/tipounidadGet.ctrl.js"></script>
+    <script src="app/CH/FamiliasPuestos/controllers/tipounidadAdd.ctrl.js"></script>
+
+    <script src="app/CH/_services/catalogos/competencias.CH.service.js"></script>
+    <script src="app/CH/Competencias/controllers/competenciasGet.ctrl.js"></script>
+    <script src="app/CH/Competencias/controllers/competenciasAdd.ctrl.js"></script>
+    <script src="app/CH/Competencias/controllers/competenciasEdit.ctrl.js"></script>
+
+    <script src="app/CH/_services/catalogos/nivelcompetencia.CH.service.js"></script>
+    <script src="app/CH/NivelCompetencia/controllers/NivelCompetenciaGet.ctrl.js"></script>
+    <script src="app/CH/NivelCompetencia/controllers/NivelCompetenciaAdd.ctrl.js"></script>
+    <script src="app/CH/NivelCompetencia/controllers/NivelCompetenciaEdit.ctrl.js"></script>
+
+    <script src="app/CH/_services/catalogos/nivelcompetenciatecnica.CH.service.js"></script>
+    <script src="app/CH/NivelComptenciaTecnica/controllers/NivelCompetenciaTecnicaGet.ctrl.js"></script>
+    <script src="app/CH/NivelComptenciaTecnica/controllers/NivelCompetenciaTecnicaAdd.ctrl.js"></script>
+    <script src="app/CH/NivelComptenciaTecnica/controllers/NivelCompetenciaTecnicaEdit.ctrl.js"></script>
+
+    <script src="app/CH/_services/catalogos/competenciatecnica.CH.service.js"></script>
+    <script src="app/CH/CompetenciaTecnica/Controllers/CompetenciaTecnicaGet.ctrl.js"></script>
+    <script src="app/CH/CompetenciaTecnica/Controllers/CompetenciaTecnicaEdit.ctrl.js"></script>
+    <script src="app/CH/CompetenciaTecnica/Controllers/CompetenciaTecnicaAdd.ctrl.js"></script>
+
+    <script src="app/CH/_services/catalogos/descripcioncomportamiento.CH.service.js"></script>
+    <script src="app/CH/_services/catalogos/descripcionnivel.CH.service.js"></script>
+    <script src="app/CH/Competencias/controllers/competenciascomportamientoGet.ctrl.js"></script>
+
+
+    <script src="app/CH/_services/catalogos/detalleevaluacionconductual.CH.service.js"></script>
+    <script src="app/CH/_services/catalogos/detalletecnica.CH.service.js"></script>
+    <script src="app/CH/_services/catalogos/evaluacionconductual.CH.service.js"></script>
+    <script src="app/CH/_services/catalogos/evaluaciontecnica.CH.service.js"></script>
+    <script src="app/CH/ConsultaEvaluacionesConductuales/controllers/consultaevaluacionesconductuales.ctrl.js"></script>
+    <script src="app/CH/ConsultaEvaluacionesConductuales/controllers/detalleevaluacionesconductuales.ctrl.js"></script>
+    <script src="app/CH/ConsultaEvaluacionesTecnicas/controllers/consultaevaluaciones.ctrl.js"></script>
+    <script src="app/CH/ConsultaEvaluacionesTecnicas/controllers/detalleevaluacionestecnicas.ctrl.js"></script>
+
+    <script src="app/CH/ConsultaEvaluacionesConductuales/controllers/administrapersonalconductualesGet.ctrl.js"></script>
+    <script src="app/CH/ConsultaEvaluacionesConductuales/controllers/formularioedicionconductualesEdit.ctrl.js"></script>
+    <script src="app/CH/ConsultaEvaluacionesConductuales/controllers/evaluacionpersonalconductualesGet.ctrl.js"></script>
+    <script src="app/CH/ConsultaEvaluacionesConductuales/controllers/formularioevaluacionconductualEdit.ctrl.js"></script>
+    <script src="app/CH/ConsultaEvaluacionesTecnicas/controllers/administrapersonaltecnicas.ctrl.js"></script>
+    <script src="app/CH/ConsultaEvaluacionesTecnicas/controllers/formularioediciontecnicas.ctrl.js"></script>
+    <script src="app/CH/ConsultaEvaluacionesTecnicas/controllers/evaluacionpersonaltecnicas.ctrl.js"></script>
+    <script src="app/CH/ConsultaEvaluacionesTecnicas/controllers/formularioevaluaciontecnicas.ctrl.js"></script>
+
+    <script src="app/CH/ConsultaEvaluacionesConductuales/controllers/iniciaperiodoevaluacionGet.ctrl.js"></script>
+    <script src="app/CH/ConsultaEvaluacionesTecnicas/controllers/iniciaperiodoevaluacionTecnicaGet.ctrl.js"></script>
+
+    <script src="app/CH/EncargadoDespacho/controllers/encargadoDespachoAdd.ctrl.js"></script>
+    <script src="app/CH/EncargadoDespacho/controllers/encargadoDespachoEdit.ctrl.js"></script>
+    <script src="app/CH/EncargadoDespacho/controllers/encargadoDespachoGet.ctrl.js"></script>
+
+    <script src="app/CH/MEC/Administracion/controllers/mecGet.ctrl.js"></script>
+    <script src="app/CH/MEC/Administracion/CompetenciaTecnica/controllers/competenciaTecnicaAdd.ctrl.js"></script>
+    <script src="app/CH/MEC/Administracion/CompetenciaTecnica/controllers/competenciaTecnicaEdit.ctrl.js"></script>
+    <script src="app/CH/MEC/Administracion/CompetenciaConductual/controllers/competenciaConductualEdit.ctrl.js"></script>
+    <script src="app/CH/MEC/Administracion/CompetenciaConductual/controllers/competenciaConductualAdd.ctrl.js"></script>
+    <script src="app/CH/MEC/ConsultaMEC/controllers/consultasMECGet.ctrl.js"></script>
+
+    <script src="app/CH/ConsultaEvaluacionesTecnicas/controllers/consultaevaluacionesAdm.ctrl.js"></script>
+    <script src="app/CH/ConsultaEvaluacionesTecnicas/controllers/detalleevaluacionestecnicasAdm.ctrl.js"></script>
+    <script src="app/CH/ConsultaEvaluacionesConductuales/controllers/consultaevaluacionesconductualesAdm.ctrl.js"></script>
+    <script src="app/CH/ConsultaEvaluacionesConductuales/controllers/detalleevaluacionesconductualesAdm.ctrl.js"></script>
+    <script src="app/CH/ConsultaEvaluacionesConductuales/controllers/reporteconductuales.ctrl.js"></script>
+    <script src="app/CH/FamiliasPuestos/controllers/consultafamiliapuestosGet.ctrl.js"></script>
+    <script src="app/CH/FamiliasPuestos/controllers/consultafamiliapuestosPersonalGet.ctrl.js"></script>
+    <script src="app/CH/FamiliasPuestos/controllers/consultapersonalGet.ctrl.js"></script>
+
+    <script src="app/CH/FamiliasPuestos/controllers/familiaunidadAdmGet.ctrl.js"></script>
+    <script src="app/CH/FamiliasPuestos/controllers/consultacategoriasAdmGet.ctrl.js"></script>
+    <script src="app/CH/ConsultaEvaluacionesTecnicas/controllers/consultaevaluacionestecalcanzadas.ctrl.js"></script>
+    <script src="app/CH/ConsultaEvaluacionesConductuales/controllers/consultaevaluacionesalcanzadas.ctrl.js"></script>
+
+    <script src="app/CH/FamiliasPuestos/controllers/consultaevaluacionpersonalGet.ctrl.js"></script>
+    <script src="app/CH/_services/catalogos/graficaRPCond.ctrl.js"></script>
+    <script src="app/CH/FamiliasPuestos/controllers/familiaunidadAdmGet.ctrl.js"></script>
+    <script src="app/CH/FamiliasPuestos/controllers/consultacategoriasAdmGet.ctrl.js"></script>
+
+    <script src="app/CH/_services/catalogos/clasificaareas.CH.service.js"></script>
+    <script src="app/CH/_services/catalogos/clasificacategoriastecnicas.CH.service.js"></script>
+    <script src="app/CH/FamiliasPuestos/controllers/clasifcaareasGet.ctrl.js"></script>
+    <script src="app/CH/FamiliasPuestos/controllers/clasificaareasAdd.ctrl.js"></script>
+    <script src="app/CH/FamiliasPuestos/controllers/clasificaareasEdit.ctrl.js"></script>
+    <script src="app/CH/CompetenciaTecnica/Controllers/clasificacategoriastecnicasAdd.ctrl.js"></script>
+    <script src="app/CH/CompetenciaTecnica/Controllers/clasificacategoriastecnicasGet.ctrl.js"></script>
+    <script src="app/CH/ConsultaEvaluacionesConductuales/controllers/promediocompetenciasGet.ctrl.js"></script>
+    <script src="app/CH/_services/catalogos/clasificacategoriasconductuales.CH.service.js"></script>
+    <script src="app/CH/Competencias/controllers/clasificacategoriasconductualesAdd.ctrl.js"></script>
+    <script src="app/CH/Competencias/controllers/clasificacategoriasconductualesGet.ctrl.js"></script>
+    <script src="app/CH/FamiliasPuestos/controllers/familiaclasificacategoriasAdmGet.ctrl.js"></script>
+    <script src="app/CH/FamiliasPuestos/controllers/clasificacategoriasconductualesunidadAdd.ctrl.js"></script>
+    <script src="app/CH/_services/catalogos/evaluacionsindicalizados.CH.service.js"></script>
+    <script src="app/MT/_services/factories/buscarArticulos.MT.service.js"></script>
+    <script src="app/MT/BuscarArticulos/controllers/buscarArticulosDetails.ctrl.js"></script>
+
+    <script src="app/MT/BuscarPonencias/controllers/buscarPonenciasDetails.ctrl.js"></script>
+    <script src="app/vistasGenericas/search/controllers/PersonalSearchCtrlComun.ctrl.js"></script>
+    <!--  SERVICIOS COMPETENCIAS TECNICAS Y CONDUCTUALES             -->
+    <script src="app/vistasGenericas/_details/personal/controllers/PersonaDetailsComun.ctrl.js"></script>
+
+
+    <script src="Scripts/jspdf.min.js"></script>
+    <script src="Scripts/jspdf.plugin.autotable.src.js"></script>
+
+    <script src="Scripts/angular.easypiechart.min.js"></script>
+    <script src="app/vistasGenericas/SolicitudAcceso/controllers/BitacoraSolicitudesAcceso.ctrl.js"></script>
+    <script src="app/vistasGenericas/directivas/echartGraph.js"></script>
+
+    <script src="app/CH/BusquedaEmpleados/controllers/busquedaAvanzadaEmp.ctrl.js"></script>
+    <script src="app/MT/_services/factories/IndicadoresMTService.js"></script>
+
+
+    <script src="app/vistasGenericas/controllers/EstructuraOrganizacionalDivFilterGet.ctrl.js"></script>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+    <!-- endinject -->
+    <!-- endbuild -->
+</head>
+
+<body class="nav-md" data-ng-controller="IndexCHCtrl">
+    <div class="info-servidor-desplegado">{{'' | getInfoServidorDesplegado}}</div>
+    <div class="container body">
+        <div class="main_container">
+            <div class="col-md-3 left_col">
+                <div class="left_col scroll-view bg-gradient-menuv">
+                    <div class="navbar nav_title bg-gradient-menuv" style="border: 0;">
+                        <a href="sigco.html" class="site_title">
+                            <img src="images/logo_sigco.png" />
+                            <span class="titLogo">&nbsp;SIGCO</span>
+                        </a>
+                    </div>
+                    <div class="clearfix"></div>
+
+                    <br />
+
+
+                    <!-- sidebar menu -->
+
+
+                    <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+                        <div class="menu_section">
+                            <h3>&nbsp;</h3>
+                            <ul class="nav side-menu">
+                                <li ng-repeat="opcion in funciones" ng-if="opcion.funcion.nivel==0" ng-show="opcion.funcion.idModulo==modulo">
+                                    <a ng-if="opcion.funcion.children.length ==0" ng-href="{{opcion.funcion.url}}">
+                                        <i class="{{opcion.funcion.claseIcono}}"> </i>&nbsp;{{opcion.funcion.nombre}}
+                                    </a>
+
+                                    <a ng-if="opcion.funcion.children.length > 0">
+                                        <i class="{{opcion.funcion.claseIcono}}"></i> &nbsp;{{opcion.funcion.nombre}}
+                                        <span class="fa fa-chevron-down"></span>
+                                    </a>
+                                    <ul ng-if="opcion.funcion.children.length > 0 " class="nav child_menu">
+                                        <li ng-repeat="opc in funciones" ng-if="opc.funcion.nivel==1 && opc.funcion.idPadre == opcion.funcion.funcionesId">
+                                            <a ng-if="opc.funcion.children.length ==0" ui-sref="{{opc.funcion.state}}"> &nbsp;{{opc.funcion.nombre}} </a>
+
+                                            <a ng-if="opc.funcion.children.length > 0">
+                                                &nbsp;{{opc.funcion.nombre}}<span class="fa fa-chevron-down"></span>
+                                            </a>
+                                            <ul class="nav child_menu" ng-if="opc.funcion.children.length > 0 ">
+                                                <li ng-repeat="opc3 in funciones" ng-if="opc3.funcion.nivel==2 && opc3.funcion.idPadre == opc.funcion.funcionesId">
+
+                                                    <a href="{{opc3.funcion.url}}" ng-show="opc3.funcion.idModulo ==modulo"> &nbsp;{{opc3.funcion.nombre}}</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+
+                            </ul>
+                            <!--funciones : {{funciones | json}}-->
+                        </div>
+
+
+
+                    </div>
+                    <!-- /sidebar menu -->
+
+                </div>
+            </div>
+            <!-- top navigation -->
+            <div class="top_nav ">
+                <div class="nav_menu">
+                    <nav class="" role="navigation">
+                        <div class="nav toggle">
+                            <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+                        </div>
+
+                        <div ng-include="'app/vistasGenericas/header/profileNotification.html'">
+                        </div>
+                    </nav>
+                </div>
+                <div class="toolbar-top visible-xs">
+                    <div ng-include="'app/vistasGenericas/header/navegacionpormodulo.html'">
+                    </div>
+                </div>
+
+
+            </div>
+            <!-- /top navigation -->
+            <!-- page content -->
+            <div role="main" class="right_col">
+                <!-- top tiles -->
+                <div ui-view>
+
+                </div>
+            </div>
+            <!-- /page content -->
+            <!-- footer content -->
+            <footer>
+                <div class="pull-right">
+                    SIGCO3
+                </div>
+                <div class="clearfix"></div>
+            </footer>
+            <!-- /footer content -->
+        </div>
+    </div>
+
+    <!-- Custom Theme Scripts -->
+    <script src="Scripts/custom.js"></script>
+    <script src="Scripts/getorgchart-1.1/getorgchart.js"></script>
+    <link href="Scripts/getorgchart-1.1/getorgchart.css" rel="stylesheet" />
+    <script src="Scripts/knob/jquery.circliful.min.js"></script>
+
+    <!-- endPlantilla-->
+    <!--scripts para reportes-->
+    <script src="Scripts/DataTables/dataTables.buttons.js"></script>
+    <script src="Scripts/DataTables/buttons.bootstrap.js"></script>
+    <script src="Scripts/angular-datatables/plugins/buttons/angular-datatables.buttons.js"></script>
+    <script src="Scripts/DataTables/buttons.html5.js"></script>
+    <script src="Scripts/jszip.min.js"></script>
+    <script src="vendors/pdfmake/build/pdfmake.min.js"></script>
+    <script src="vendors/pdfmake/build/vfs_fonts.js"></script>
+    <script src="Scripts/DataTables/buttons.print.js"></script>
+    <script src="Scripts/DataTables/buttons.flash.js"></script>
+    <script src="Scripts/DataTables/buttons.colVis.js"></script>
+
+
+
+
+</body>
+
+</html>

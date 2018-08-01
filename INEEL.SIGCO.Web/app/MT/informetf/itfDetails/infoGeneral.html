@@ -1,0 +1,205 @@
+<div>
+
+    <div class="x_title">
+        <h2>Informaci&oacute;n general</h2>
+        <div class="clearfix"></div>
+    </div>
+
+    <div class="form-group">
+        <label class="labelDetail col-md-3 col-sm-3 col-xs-12">
+            T&iacute;tulo
+        </label>
+        <div class="col-md-8 col-sm-8 col-xs-12 sin-desborde">
+            <span class="text">{{itf.titulo}}</span>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="labelDetail col-md-3 col-sm-3 col-xs-12">
+            Resumen
+        </label>
+        <div class="col-md-8 col-sm-8 col-xs-12 sin-desborde">
+
+            <pre style="white-space:pre-wrap; font-family:Arial; color:#73879C; border-style:none; background-color:#ffffff">{{itf.itFgeneral.resumen}}</pre>
+
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="labelDetail col-md-3 col-sm-3 col-xs-12">
+            N&uacute;mero de informe
+        </label>
+        <div class="col-md-8 col-sm-8 col-xs-12 sin-desborde">
+            <span class="text">{{itf.numInforme}}</span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="labelDetail col-md-3 col-sm-3 col-xs-12">
+            Clave &uacute;nica de identificaci&oacute;n
+        </label>
+        <div class="col-md-8 col-sm-8 col-xs-12 sin-desborde">
+            <span class="text">{{itf.clasificacionSignatura}}</span>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="labelDetail col-md-3 col-sm-3 col-xs-12">
+            A&ntilde;o de elaboraci&oacute;n
+        </label>
+        <div class="col-md-8 col-sm-8 col-xs-12 sin-desborde">
+            <span class="text">{{itf.anioElaboracion}}</span>
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <label class="labelDetail col-md-3 col-sm-3 col-xs-12">
+            <font title="No incluye el documento ITF">Ficha de ITF</font>
+        </label>
+        <div class="col-md-8 col-sm-8 col-xs-12">
+            <font class="fa fa-download">
+                <a ng-click="itf.divFciha = true;jsPDF_ExportPDFficha('itfFicha', 'fichaITF', 1100)" class="linkTabla">
+                    Descargar
+                </a>
+            </font>
+        </div>
+    </div>
+
+
+
+    <div class="x_title" ng-show="itf.adjuntoId!=null || adjuntosITFList.length >  0 ">
+        <h2>Documentaci&oacute;n</h2>
+        <div class="clearfix"></div>
+    </div>
+
+    <div class="form-group" ng-show="ITFPublico == false && (itf.adjuntoId!=null || adjuntosITFList.length >  0) ">
+        <div class="alert advertencia">
+            <span class="glyphicon glyphicon-info-sign"></span>
+
+            El acceso a la documentaci&oacute;n de este ITF así como a las secciones de:
+            <br />
+            <br />
+            <div style="margin-left:3em">
+                <div ng-show="itf.resultadosE!=null">  <span class="fa fa-check"></span>  Resultados              <br /></div>
+                <div ng-show="itf.satisCte!=null">  <span class="fa fa-check"></span>  Satisfacción al cliente    <br /></div>
+                <div ng-show="itf.evaluaciones==null">  <span class="fa fa-check"></span>  Evaluaciones            <br /></div>
+
+                <div g-show="itf.listaInsumos!=null">  <span class="fa fa-check"></span>  Insumos      </div>
+            </div>
+            <br />
+            <strong> Es restringida. </strong>
+            <br />
+            Para poder acceder a su contenido,  <strong>  favor de solicitar acceso.</strong>
+        </div>
+    </div>
+
+
+
+
+
+<div class="form-group" ng-if="ITFPublico == false && (itf.adjuntoId!=null  || adjuntosITFList.length >  0) ">
+    <label class="labelDetail col-md-3 col-sm-3 col-xs-12">&nbsp;</label>
+    <div class="col-md-8 col-sm-8 col-xs-12">
+        <div class="row col-xs-6">
+            <button ng-show="!ocultarSolicitarAcceso" ng-click="solicitarAcceso();" class="btn btn-block btn-success" ng-disabled="ocultarSolicitarAcceso">
+                Solicitar acceso
+            </button>
+        </div>
+        <div class="row col-xs-12">
+            <div class="alert advertencia" ng-show="ocultarSolicitarAcceso">
+                <strong>Solicitud en proceso</strong>, espere respuesta de acceso.
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="form-group" ng-if="(permisoAccesoVigente  && (itf.adjuntoId!=null  || adjuntosITFList.length >  0) ) || ITFPublico==true ">
+    <label class="labelDetail col-md-3 col-sm-3 col-xs-12" ng-show="itf.adjuntoId!=null">
+        Documento ITF
+    </label>
+    <div class="col-md-8 col-sm-8 col-xs-12">
+        <div id="todo-list">
+            <p ng-class='item' ng-if="itf.estadoITFFlujoId<4" class="sin-desborde">
+                <span>
+                    <font class="fa fa-download">&nbsp;&nbsp;<a href="/Descargas.html#/q/{{itf.adjuntoId | encriptar}}" target="_blank" class="linkTabla"> Documento ITF </a></font>
+                </span>
+            </p>
+
+            <p ng-class='item' ng-if="itf.estadoITFFlujoId>3" ng-show="itf.adjuntoId!=null" class="sin-desborde">
+                <span ng-show="ITFPublico==true">
+                    <font class="fa fa-download">
+                        &nbsp;&nbsp;<a href="/Descargas.html#/q/{{itf.adjuntoId | encriptar}}" target="_blank" class="linkTabla">Documento ITF</a>
+                    </font>
+                </span>
+
+                <span ng-show="ITFPublico==false">
+                    <font class="fa fa-lock">
+                        &nbsp;&nbsp;<a href="" target="_blank" class="linkTabla">Documento ITF</a>
+                    </font>
+                </span>
+            </p>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="form-group" ng-if=" (permisoAccesoVigente ||  ITFPublico==true) && adjuntosITFList.length >  0">
+    <label class="labelDetail col-md-3 col-sm-3 col-xs-12">
+        Documentos anexos
+    </label>
+    <div class="col-md-8 col-sm-8 col-xs-12">
+        <div class="" id="todo-list">
+            <table class="table table-hover" ng-if="itf.estadoITFFlujoId<4">
+                <thead>
+                    <tr>
+                        <th>Archivo(s) adjunto(s): </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="task in adjuntosITFList track by $index" ng-class='item'>
+                        <td>
+                            <span class="fa fa-download"></span>&nbsp;&nbsp;<a href="/Descargas.html#/q/{{task.adjuntoId | encriptar}}" target="_blank" class="linkTabla"> {{task.adjunto.nombre}} </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!--Se muestra cuando al usuario se le otorga permiso de descargar los adjuntos-->
+            <table class="table table-hover" ng-if="itf.estadoITFFlujoId>3 ">
+                <thead>
+                    <tr>
+                        <th>Archivo(s) adjunto(s):</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="task in adjuntosITFList track by $index" ng-class='item'>
+                        <td ng-show="ITFPublico==true && !mostrarLeyendaLineamientos">
+                            <span class="fa fa-download"></span>&nbsp;&nbsp;
+                            <a href="/Descargas.html#/q/{{task.adjuntoId | encriptar}}" target="_blank" class="linkTabla">
+                                {{task.adjunto.nombre}}
+                            </a>
+                        </td>
+                        <td ng-if="ITFPublico==true && mostrarLeyendaLineamientos">
+                            <span class="fa fa-download"></span>&nbsp;&nbsp;
+                            <a ng-really-click="AceptaResponsabilidadDescargaUsuario()" ng-really-message="<h2>La consulta de este documento queda condicionada a la aceptación de las siguientes condiciones de uso:</h2> <br/> <ul><li>Este documento debe ser usado únicamente con fines de educación o investigación <br/></li><li>No se autoriza su reproducción con finalidades de lucro <br/> </li><li>Esta reserva de derechos afecta tanto los datos del documento como a sus contenidos </li><li>En la utilización o cita de partes del documento es obligado indicar la fuente y los autores</li></ul>" target="_blank" class="linkTabla">
+                                {{task.adjunto.nombre}}
+                            </a>
+                        </td>
+                        <td ng-show="ITFPublico==false">
+                            <span class="fa fa-lock"></span>&nbsp;&nbsp;
+                            {{task.adjunto.nombre}}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+
+        </div>
+    </div>
+</div>
+
+
+
+
+</div>

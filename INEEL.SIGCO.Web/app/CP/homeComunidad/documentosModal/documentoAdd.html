@@ -1,0 +1,94 @@
+﻿<div class="modal-content">
+    <div class="modal-header">
+        Agregar documentos
+        <button type="button" class="close" ng-click="cancel()" data-dissmiss="modal">x</button>
+    </div>
+   
+        <div class="modal-body">
+          
+                <div class="panel">
+                    <div class="panel-body">
+                        <form  ng-submit="save()" novalidate name="documentoAddForm" class="form-horizontal">
+
+                          
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Tipo de documento <span class="required">*</span></label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <select required class="form-control" name="tipodocumento" ng-model="documento.idTipoDocumento" ng-options="obj.tipoDocumentoId as obj.nombre for obj in tipodocumento">
+                                        <option value="">--- Seleccione un tipo de documento ---</option>
+                                    </select>
+                                    
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">
+                                    Palabras clave 
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input type="text" ng-model="documento.palabraClave" placeholder="Palabras clave" class="form-control col-md-7 col-xs-12" name="palabraclave" minlength="2" maxlength="150" />
+                                </div>
+                            </div>                                                   
+
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">
+                                    Tipo de acceso <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <select required name="tipoacceso" class="form-control" ng-model="documento.tipoAcceso" scrolly style="overflow: scroll">
+                                        <option value="" selected>--- Seleccione un tipo de acceso ---</option>
+                                        <option value="1">P&uacute;blico</option>
+                                        <option value="0">Restringido</option>
+                                    </select>
+                                   
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">
+                                    Estatus del documento <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <select name="estatus" required class="form-control" ng-model="documento.estado" scrolly style="overflow: scroll">
+                                        <option value="" selected>--- Seleccione el estatus del documento ---</option>
+                                        <option value="1">Aprobado</option>
+                                        <option value="0">En revisi&oacute;n</option>
+                                    </select>
+                                    
+                                </div>
+                            </div>
+
+
+                            <div class="x_title">
+                                <h2>Documento <small>Tama&ntilde;o m&aacute;ximo por archivo de 8 MB</small></h2>
+                                <div class="clearfix"></div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                    Archivo  <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input class="input-file form-control" type="file" name="filesGral" id="filesGral" data-buttonName="btn-success" ng-click="saveIG();" ng-model="filesGral" onchange="angular.element(this).scope().getFileDetails(this);" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">
+                                    Nombre para el documento <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input type="text" class="form-control" required ng-model="documento.nombreDocumento" placeholder="Nombre del documento" minlength="2" maxlength="150"/>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-success" ><i class="glyphicon glyphicon-saved"></i>Guardar</button>
+                                <button type="button" class="btn btn-primary" ng-click="cancel()">Cancelar</button>
+                            </div>    
+                        </form>
+                    </div>
+                </div>       
+        </div>
+
+      
+    
+</div>

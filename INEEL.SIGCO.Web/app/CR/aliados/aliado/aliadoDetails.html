@@ -1,0 +1,303 @@
+<div class="vista">
+    <div class="page-title">
+        <div class="title_full">
+            <ol class="breadcrumb miga">
+                <li><i class="sg sg-aliados"></i> <a ui-sref="aliadosGet">Aliados</a></li>
+                <li class="active">Detalles</li>
+            </ol>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-8 col-sm-8 col-xs-12">
+            <!--Detalles aliado-->
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+                    <label class="detalle col-xs-12 " title="Nombre">
+                       {{aliados.empresa.nombreEmpresa}}
+                    </label>
+                    <label class="cont col-xs-12 colorTit">
+                        {{aliados.descripcion}}
+                    </label>
+                    <label class="cont col-xs-12 colorTit">
+                        {{organizacionTipo}}
+                    </label>
+                </div>
+            </div>
+            <!--Contactos-->    
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Contactos</h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content sin-desborde">
+                    <div ng-show="aliados.listaContactosRegistrados.length > 0" class="form-group">
+                        <table class="table table-hover table-striped table-condensed dt-responsive " cellspacing="0" datatable="ng" width="100%" dt-options="dtOptions">
+                            <thead>
+                                <tr>
+                                    <th data-priority="1">Nombre</th>
+                                    <th>Direcci&oacute;n</th>
+                                    <th>Correo</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="contacto in aliados.listaContactosRegistrados">
+                                    <td>{{contacto.contacto.nombreCompleto}}</td>
+                                    <td>{{contacto.contacto.direccion}}</td>
+                                    <td>{{contacto.contacto.correo}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!--actividades-->
+        <div class="col-md-4 col-sm-4 col-xs-12">
+            <!--<div class="x_panel">
+                <div class="x_title">
+                    <h2>Contacto</h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content sin-desborde">
+                    <form name="fromfa" id="form" class="form-horizontal">
+                        <div class="form-group">
+                            <label class="titFirst col-md-3 col-sm-3 col-xs-12">
+                                Direcci&oacute;n
+                            </label>
+                            <label class="cont  col-md-6 col-sm-6 col-xs-12">
+                               {{aliados.direccion}}
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label class="titFirst col-md-3 col-sm-3 col-xs-12">
+                                Titular
+                            </label>
+                            <label class="cont  col-md-6 col-sm-6 col-xs-12">
+                               {{aliados.contacto.nombreCompleto}}
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label class="titFirst col-md-3 col-sm-3 col-xs-12">
+                                Correo
+                            </label>
+                            <label class="cont  col-md-6 col-sm-6 col-xs-12">
+                               {{aliados.contacto.correo}}
+                            </label>
+                        </div>
+                    </form>
+                </div>
+            </div>-->
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Actividades</h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content sin-desborde">
+
+                    <form name="fromfa" id="form" class="form-horizontal">
+                        <div ng-show="aliados.actividadAdicional.length === 0" class="alert advertencia">
+                            No hay actividades registradas
+                        </div>
+                        <div ng-show="aliados.actividadAdicional.length > 0" class="form-group">
+
+                            <table   class="table table-hover table-striped table-condensed dt-responsive " cellspacing="0" width="100%" >
+                                <thead>
+                                    <tr>
+                                        <th data-priority="1">Descripci&oacute;n</th>
+                                        <th class="col-xs-2">Fecha</th>
+                                        <!--<th class="col-xs-2 text-center">Opciones</th>-->
+                                    </tr>
+                                </thead>
+                                <tr ng-repeat="actividadesR in aliados.actividadAdicional track by $index">
+                                    <td><u><a class="linkTabla" ui-sref="actividadAdicionalDetails({ id: actividadesR.actividadAdicionalId  })" title="Detalles">{{actividadesR.descripcion}}</a></u></td>
+                                    <td>
+                                        <span class="text" ng-bind="actividadesR.fechaActividad | date:'dd/MM/yyyy'"></span>
+                                    </td>
+                                    <!--<td class="text-center">
+                                        <a class="btn btn-default" ui-sref="actividadAdicionalDetails({ id: actividadesR.actividadAdicionalId  })" title="Detalles">
+                                            <i class="glyphicon glyphicon-align-justify"></i>
+                                        </a>
+                                    </td>-->
+                                </tr>
+                            </table>
+                        </div>
+                        
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!--convenios,ons, proyectos, etc-->
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <!--Convenios-->
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Convenios</h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content sin-desborde">
+                    <div ng-show="aliados.convenio.length === 0" class="alert advertencia">
+                        No hay convenios registrados
+                    </div>
+                    <div ng-show="aliados.convenio.length > 0">
+                        <table class="display dt-responsive " cellspacing="0" width="100%">
+                            <thead>
+                                <tr>
+                                    <th>Objeto</th>
+                                    <th>Tipo</th>
+                                    <th>Fecha de t&eacute;rmino</th>
+                                    <th>Vigencia</th>
+                                </tr>
+                            </thead>
+                            <tr ng-repeat="aliadosR in aliados.convenio track by $index">
+                                <td>
+                                    <u><a class="linkTabla" ui-sref="convenioDetails({ id: aliadosR.convenioId  })" title="Detalles">{{aliadosR.objetoConvenio}}</a></u>
+
+                                </td>
+
+                                <td>{{aliadosR.tipoConvenio.nomTipConv}}</td>
+
+                                <td>
+                                    {{aliadosR.fechaTermino!=null? (aliadosR.fechaTermino | date:'dd/MM/yyyy') : 'Indefinido'}}
+                                </td>
+                                <td><span ng-show="aliadosR.indefinido"> Por tiempo indefinido</span>  <span ng-show="!aliadosR.indefinido">   {{aliadosR.fechaTermino  | date:'dd/MM/yyyy'}}</span> </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!--proyectos-->
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Proyectos</h2>
+                    <div class="clearfix"></div>
+                </div>
+
+
+                <div class="x_content sin-desborde">
+
+                    <form name="fromfa" id="form" class="form-horizontal">
+                        <div ng-show="proyectosAsignadosEmpresa.length === 0" class="alert advertencia">
+                            No hay proyectos registrados
+                        </div>
+                        <div ng-show="proyectosAsignadosEmpresa.length > 0" class="form-group">
+
+                            <table id="CRaliadoDetails" class="table table-hover table-striped table-condensed dt-responsive " cellspacing="0" datatable="ng" width="100%" dt-options="dtOptions">
+                                <thead>
+                                    <tr>
+                                        <th data-priority="1">N&uacute;m de proyecto</th>
+                                        <th>Nombre de proyecto</th>
+                                        <th>A&ntilde;o inicio</th>
+                                        <th>Jefe de proyecto</th>
+                                    </tr>
+                                </thead>
+
+                                <tr ng-repeat="proyectos in proyectosAsignadosEmpresa track by $index">
+                                    <!--<td>{{proyectos.proyectoId}}</td>-->
+                                    <td><a href="" load-proyectos idproyecto="{{proyectos.proyectoId}}" title="Detalle de proyecto">{{proyectos.proyectoId}}</a></td>
+                                    <td>{{proyectos.nombre}}</td>
+                                    <td>
+                                        <span class="text" ng-bind="proyectos.fechaInicio | date:'yyyy'"></span>
+
+                                    </td>
+                                    <td>
+                                        <label class="cont"><a ng-click="openProfile(proyectos.numjefeProyecto)" title="Detalle de empleado" class="link" style="cursor:hand;cursor: pointer;">{{proyectos.numjefeProyecto}}
+                                           </a> -{{proyectos.nombreJefeProyecto}}
+                                        </label>
+                                    </td>
+                                    <!--<td>{{proyectos.nombreJefeProyecto}}</td>-->
+                                </tr>
+
+                            </table>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!--propuestas-->
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Propuestas</h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content sin-desborde">
+                    <form name="fromfa" id="form" class="form-horizontal">
+                        <div ng-show="propuestasAsignadosEmpresa.length === 0" class="alert advertencia">
+                            No hay propuestas registradas
+                        </div>
+                        <div  ng-show="propuestasAsignadosEmpresa.length > 0" class="form-group">
+
+
+                            <table id="CRaliadoDetailspropuestasAsignadosEmpresa" class="table table-hover table-striped table-condensed dt-responsive " cellspacing="0" datatable="ng" width="100%" dt-options="dtOptions">
+                                <thead>
+                                    <tr>
+
+                                 <th data-priority="1">N&uacute;m de propuesta</th>
+
+                                        <th>Nombre</th>
+                                        <th>A&ntilde;o inicio</th>
+
+                                    </tr>
+                                </thead>
+
+                                <tr ng-repeat="propuestasA in propuestasAsignadosEmpresa track by $index">
+                                    <td>{{propuestasA.propuestaId}}</td>
+                                    <td>{{propuestasA.titulo}}</td>
+                                    <td>
+                                        <span class="text" ng-bind="propuestasA.fecha | date:'yyyy'"></span>
+                                    </td>
+
+                                </tr>
+
+                            </table>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!--oportunidades de negocio-->
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Oportunidades de negocio </h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content sin-desborde">
+                    <form name="fromfa" id="form" class="form-horizontal">
+                        <div ng-show="oportunidadNegocioEmpresa.length === 0" class="alert advertencia">
+                            No hay Oportunidades de negocio registradas
+                        </div>
+                        <div ng-show="oportunidadNegocioEmpresa.length > 0"  class="form-group">
+
+                            <table id="CRaliadoDetailsoportunidadNegocioEmpresa"  class="table table-hover table-striped table-condensed dt-responsive " cellspacing="0" datatable="ng" width="100%" dt-options="dtOptions">
+                                <thead>
+                                    <tr>
+                                        <th data-priority="1">Nombre</th>
+                                        <th class="col-xs-2">Fecha registro</th>
+                                        <th class="col-xs-2">Contacto</th>
+                                        <th class="col-xs-2">Correo</th>
+                                        <th class="col-xs-2">Tel&eacute;fono</th>
+                                    </tr>
+                                </thead>
+
+                                <tr ng-repeat="oportunidades in oportunidadNegocioEmpresa track by $index">
+                                    <td>{{oportunidades}}</td>
+                                    <td>{{oportunidades.cargoGC}}</td>
+                                    <td>{{oportunidades.contacto.empresa.nombreEmpresa}}</td>
+                                </tr>
+
+                            </table>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <button type="button" ng-click="globalRegresar();" class="btn btn-primary">
+                <span class="fa fa-arrow-left"></span> Regresar
+            </button>
+        </div>
+    </div>
+
+</div>
+

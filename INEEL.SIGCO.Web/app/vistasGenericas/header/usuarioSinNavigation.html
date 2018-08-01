@@ -1,0 +1,20 @@
+﻿<div class="pull-right">
+    <ul data-ng-hide="!authentication.isAuth" class="nav navbar-top-links navbar-right">
+        <!--usuarios -->
+        <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="">
+                <i class="fa fa-user fa-fw"></i> {{rolDescripcion}} <i class="fa fa-caret-down"></i>
+            </a>
+            <ul class="dropdown-menu dropdown-user">
+                <li>
+                    <a><i class="fa fa-user fa-fw"></i>{{authentication.nombreCompleto}}</a>
+                </li>
+                <!--<li class="divider"></li>
+                <li><a href="" data-ng-click="logOut()"><sp class="glyphicon glyphicon-volume-down"></sp>Suscripciones</a></li>-->
+                <li class="divider"></li>
+                <li><a href="" data-ng-click="logOut()"><i class="fa fa-sign-out fa-fw"></i>Cerrar sesi&oacute;n</a></li>
+            </ul>
+            <!-- /.dropdown-user -->
+        </li>
+    </ul>
+</div>

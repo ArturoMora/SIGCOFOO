@@ -1,0 +1,73 @@
+<div id="page-wrapper">
+
+    <div class="row">
+        <div class="col-xs-12">
+            <table id="propuestas" class="table table-hover table-striped table-condensed wrap" ng-show="propuestas">
+                <thead>
+                    <th>N&uacutemero</th>
+                    <th>Nombre del propuesta</th>
+                    <th>Monto estimado</th>
+                    <th>Fecha</th>
+                    <th>Gerencia</th>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="propuesta in propuestas">
+                        <td>{{propuesta.propuestaId}}</td>
+                        <td>{{propuesta.titulo}}</td>
+                        <td style="text-align:right">{{propuesta.costos | currency}}</td>
+                        <td>{{propuesta.fecha | date :'dd/MM/yyyy'}}</td>
+                        <td>{{propuesta.unidadOrganizacional.nombreUnidad}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-xs-12">
+            <table id="iniciativas" class="table table-hover table-striped table-condensed wrap" ng-show="iniciativas">
+                <thead>
+                    <th>Cliente</th>
+                    <th>N&uacute;mero</th>
+                    <th>Titulo</th>
+                    <th style="text-align:right">Monto<br> estimado</th>
+                    <th>Fecha</th>
+                    <th>Gerencia</th>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="iniciativa in iniciativas">
+                        <td>{{iniciativa.empresa.nombreEmpresa}}</td>
+                        <td>{{iniciativa.claveEmpIniciativa}}</td>
+                        <td>{{iniciativa.titulo}}</td>
+                        <td>{{iniciativa.costos| currency}}</td>
+                        <td>{{iniciativa.fecha | date:'dd/MM/yyyy'}}</td>
+                        <td>{{iniciativa.unidadOrganizacional.nombreUnidad}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <table id="oportunidades" class="table table-hover table-striped table-condensed wrap" ng-show="oportunidades">
+                <thead>
+                    <th>Contacto</th>
+                    <th>N&uacutemero</th>
+                    <th>Fecha</th>
+                    <th>Descripci&oacute;n</th>
+                    <th>Investigador</th>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="oportunidad in oportunidades">
+                        <td>{{oportunidad.empresa.nombreEmpresa}}</td>
+                        <td>{{oportunidad.oportunidadNegocioId}}</td>
+                        <td>{{oportunidad.fechaRegistro | date:'dd/MM/yyyy'}}</td>
+                        <td>{{oportunidad.nombreOportunidad}}</td>
+                        <td>{{oportunidad.nombreInvestigador}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,82 @@
+﻿
+<div class="vista">
+
+    <div class="page-title">
+        <div class="title_left">
+
+            <ol class="breadcrumb miga">
+                <li><i class="disabled fa fa-cogs"></i> <a ui-sref="SolicitudITFGetGerente">Administraci&oacute;n/Solicitudes/ITFs aprobados para publicaci&oacute;n</a></li>
+            </ol>
+
+        </div>
+    </div>
+
+   
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+                    <!-- se oculta, si usuario está logeado-->
+                    <div data-ng-hide="authentication.isAuth">
+                        No tiene permisos para ingresar a esta secci&oacute;n.<br /> Usuario no autentificado
+                    </div>
+                    <div data-ng-show="authentication.isAuth">
+
+                        <div ng-show="registros.length == 0" class="alert advertencia">
+                            No hay registros
+                        </div>
+                        <div ng-show="loading">
+                            <img src="images/cargando.gif" />
+                        </div>
+                        <div ng-show="!loading && registros.length>0">
+                            <!--Solicitud para aprobar ITF-->
+                            <table id="MTSolicitudITFGetAdminMT" dt-instance="dtInstance" dt-columns="dtColumns" class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" datatable="ng" width="100%" dt-options="dtOptions">
+                                <thead>
+                                    <tr>
+                                        <th>Fecha de solicitud</th>
+                                        <th>N&uacute;m proyecto</th>
+                                        <th data-priority="1" class="thAjuste text-center">Proyecto</th>
+                                        <th class="thAjuste text-center">Jefe de proyecto</th>
+                                        <th data-priority="2"> Bit&aacute;cora</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="solicitud in registros">
+                                        <td>{{solicitud.fechaSolicitud | date: "dd-MM-yyyy"}}</td>
+                                        <!--<td>{{solicitud.informeTecnicoFinal.proyecto.proyectoId}}</td>-->
+                                        <td href="" load-proyectos idproyecto="{{solicitud.informeTecnicoFinal.proyecto.proyectoId}}" title="Detalle de proyecto">{{::solicitud.informeTecnicoFinal.proyecto.proyectoId}}</td>
+                                        <td>
+                                            <a class="linkTabla" ng-click="setAdmin()"
+                                               ui-sref="ITFdetalles.infoGral({ id: solicitud.informeTecnicoFinalId, edit:false, foo:99  })" title="Detalles">
+                                                {{solicitud.informeTecnicoFinal.proyecto.nombre}}
+
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <a class="linkTabla" ng-click="openProfile(solicitud.informeTecnicoFinal.proyecto.numjefeProyecto)" style="cursor: hand;cursor: pointer;" title="Detalle de empleado">
+                                                {{solicitud.informeTecnicoFinal.proyecto.numjefeProyecto}}
+                                            </a> - {{solicitud.informeTecnicoFinal.proyecto.nombreJefeProyecto}}
+
+                                        </td>
+               
+                                        <td>
+                                            <a ui-sref="bitacoraSolicitudesDetails({id:21,id2: solicitud.informeTecnicoFinalId})" title="Bitácora" class="btn btn-success">
+                                                <i class="fa fa-list-alt"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+    
+
+                            <!--registros:{{registros | json}}-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br/>

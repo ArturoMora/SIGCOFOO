@@ -1,0 +1,104 @@
+﻿<div class="vista">
+    <div class="page-title">
+        <div class="title_left">
+            <ol class="breadcrumb miga">
+                <li><i class="disabled fa fa-cogs"></i> <a ui-sref="catalogosrh.EncargadoDespachoGet">Administraci&oacute;n/Cat&aacute;logos/Encargados de despacho</a></li>
+            </ol>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+                    <form name="ValidacionForm" id="form" class="form-horizontal">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div ng-show="registros.length === 0" class="alert advertencia">No hay registros de Encargado de Despacho</div>
+                            </div>
+                        </div>
+                        <div class="row" ng-show="!loading">
+                            <div class="col-lg-12 col-xs-12">
+                                <div ng-hide="registros.length === 0">
+                                    <table id="EncargadoDespachoGet" class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" datatable="ng" dt-options="dtOptions">
+                                        <thead>
+                                            <tr>
+                                                <th style="text-align: left !important">Núm. empleado</th>
+                                                <th data-priority="1" style="text-align: left !important">Nombre</th>
+                                                <th style="text-align: left !important">Fecha<br />nombramiento</th>
+                                                <th style="text-align: left !important">Unidad organizacional</th>
+                                                <th data-priority="1" style="text-align: left !important">Opciones</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="registro in registros">
+                                                <td>{{registro.clavePersona}}</td>
+                                                <td>{{registro.nombrePersona}}</td>
+                                                <td>{{registro.fechaEfectivaNombramiento | date: 'dd/MM/yyyy'}}</td>
+                                                <td>{{registro.unidadOrganizacional.nombreUnidad}}</td>
+                                                <td style="width:100px">
+                                                    <button type="button" ng-click="setId(registro.encargadoDespachoId);" ui-sref="EncargadoDespachoEdit" title="Editar" class="btn btn-warning btn-sm">
+                                                        <i class="glyphicon glyphicon-pencil"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <button type="button" ui-sref="EncargadoDespachoAdd" class="btn btn-success">
+                                    <span class="glyphicon glyphicon-plus"></span> Agregar
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--<div id="page-wrapper">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">Administraci&oacute;n/Cat&aacute;logos/Encargado de Despacho</h1>
+            <div ng-show="registros.length === 0" class="alert alert-danger">No hay registros de Encargado de Despacho</div>
+        </div>
+    </div>
+    <div ng-show="loading">
+        <img src="images/cargando.gif" />
+    </div>
+    <div class="row" ng-show="!loading">
+        <div class="col-lg-12">
+            <div ng-hide="registros.length === 0">
+                <table class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" datatable="ng" dt-options="dtOptions">
+                    <thead>
+                        <tr>
+                            <th data-priority="1" style="text-align: left !important">Núm. Empleado</th>
+                            <th style="text-align: left !important">Nombre</th>
+                            <th style="text-align: left !important">Fecha<br />Nombramiento</th>
+                            <th style="text-align: left !important">Unidad Organizacional</th>
+                            <th data-priority="1" style="text-align: left !important">Opciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="registro in registros">
+                            <td>{{registro.clavePersona}}</td>
+                            <td>{{registro.nombrePersona}}</td>
+                            <td>{{registro.fechaEfectivaNombramiento | date: 'dd/MM/yyyy'}}</td>
+                            <td>{{registro.unidadOrganizacional.nombreUnidad}}</td>
+                            <td style="width:100px">
+                                <button type="button" ng-click="setId(registro.encargadoDespachoId);" ui-sref="EncargadoDespachoEdit" title="Editar" class="btn btn-warning btn-sm">
+                                    <i class="glyphicon glyphicon-pencil"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <button type="button" ui-sref="EncargadoDespachoAdd" class="btn btn-success">
+                <span class="glyphicon glyphicon-plus"></span> Agregar
+            </button>
+        </div>
+    </div>
+</div>-->

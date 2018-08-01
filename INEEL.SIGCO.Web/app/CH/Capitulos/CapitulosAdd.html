@@ -1,0 +1,355 @@
+﻿<style>
+    input {
+        outline-style: none;
+    }
+
+    select {
+        outline-style: none;
+    }
+
+    textarea {
+        outline-style: none;
+    }
+</style>
+<div ng-include="'app/vistasGenericas/header/registroNombrePersona.html'"> </div>
+<div class="vista">
+
+    <div class="page-title">
+        <div class="title_left">
+
+            <ol class="breadcrumb miga">
+                <li><i class="sg sg-articulos-ponencia-cap1"></i> <a ui-sref="fichapersonal.capitulo({seccion:'capitulo'})">Cap&iacute;tulos/Mis cap&iacute;tulos</a></li>
+                <li class="active">Agregar</li>
+            </ol>
+
+        </div>
+    </div>
+
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+                    <form name="ValidForm" id="form" ng-submit="add()" class="form-horizontal">
+                        <div class="x_title">
+                            <h2>Informaci&oacute;n general <small>&iquest;De qu&eacute; se trata el cap&iacute;tulo del libro?</small></h2>
+
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                T&iacute;tulo del libro<span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" class="form-control" id="usr" maxlength="300"  required ng-model="registro.tituloLibro" name="tituloLibro" placeholder="Título del libro">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                    T&iacute;tulo del cap&iacute;tulo<span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input type="text" class="form-control" id="usr" required ng-model="registro.tituloCapitulo" name="tituloCapitulo" maxlength="300" placeholder="Título del capítulo del libro">
+                                </div>
+                            </div>
+
+                            <div class="x_title">
+                                <h2>Editorial</h2>
+
+                                <div class="clearfix"></div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                        Editorial<span class="required">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <input type="text" class="form-control" id="usr" required ng-model="registro.editorial" name="editorial" maxlength="200" placeholder="Editorial">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                        Pa&iacute;s<span class="required">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <select name="pais" ng-required="true" required class="form-control" ng-model="pais" ng-options="pais.paisID as pais.descripcion for pais in paises">
+                                            <option value="">--- Selecciona un Pa&iacute;s ---</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                        A&ntilde;o<span class="required">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <input type="text" maxlength="4" min="4"
+                                               ng-maxlength="4"
+                                               ng-minlength="4"
+                                               numbers-only class="form-control" placeholder="Ejemplo: 1999" ng-model="registro.year"
+                                               ng-required="true" name="year" required>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                        ISBN
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <input type="text" name="isbn" ng-minlength="13" ng-maxlength="22" 
+                                               class="form-control" id="isbn" ng-model="registro.isbn" placeholder="Por ejemplo: ISBN:978-607-0000-00-0">
+                                        <span class="error" ng-show="ValidForm.isbn.$dirty && !ValidForm.isbn.$valid">
+                                            longitud m&iacute;nima de 13 y m&aacute;xima de 22
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                        Resumen
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <textarea ng-minlength="13" ng-maxlength="300" class="form-control" rows="5"
+                                                  id="abstract" name="abstract" ng-model="registro.abstract" placeholder="Resumen del libro en el que se público el capítulo"></textarea>
+                                        <span class="error" ng-show="ValidForm.abstract.$dirty && !ValidForm.abstract.$valid">
+                                            longitud m&iacute;nima de 13 y m&aacute;xima de 300
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!--Titulo Separador-->
+                            <div class="x_title">
+                                <h2>Autores del cap&iacute;tulo</h2>
+                                <div class="clearfix"></div>
+                            </div>
+                            <!--FIN Titulo Separador-->
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                    <span class="required">Autores internos*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <a ng-click="openUser()" class="btn btn-success">
+                                        <span class="fa fa-user-plus"></span> Buscar
+                                    </a>
+
+                                    <div class="col-xs-12" ng-if="PersonaSeleccionada.clavePersona!=null">
+                                        <div class="col-xs-6 col-md-3">
+                                            <input disabled class="form-control" ng-model="autorIIE.clavePersona" />
+                                        </div>
+                                        <div class="col-xs-6 col-md-5">
+                                            <input disabled class="form-control" ng-model="autorIIE.nombrePersona" />
+                                        </div>
+                                        <div class="col-xs-6 col-md-3">
+                                            <select class="form-control" ng-model="autorIIE.contribucion" ng-options="cn.id as cn.descripcion for cn in catNum | unique1: 'id' | orderBy:'descripcion' track by cn.id"></select>
+                                        </div>
+                                        <!--<div class="col-xs-1">
+                                        </div>-->
+                                        <div class="col-xs-6 col-md-1">
+                                            <a title="Agregar" ng-click="add_user()" class="btn btn-success">
+                                                <i class="glyphicon glyphicon-ok"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+
+
+                                    <div ng-show="AutoresIIE.length > 0">
+                                        <table id="CHCapitulosAddAutoresIIE" class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" datatable="ng" width="100%" dt-options="dtOptions">
+                                            <thead>
+                                                <tr>
+                                                    <th>Clave</th>
+                                                    <th data-priority="1">Nombre</th>
+                                                    <th>Contribuci&oacute;n</th>
+                                                    <th data-priority="1" class="thAjuste text-center">Opciones</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-repeat="autor in AutoresIIE">
+                                                    <td>{{autor.clavePersona}}</td>
+                                                    <td>{{autor.nombreCompleto}}</td>
+                                                    <td>{{autor.contribucion}}</td>
+                                                    <td class="text-center">
+                                                        <div>
+                                                            <a title="Eliminar" ng-click="eliminarAutor(autor);ValidForm.$setDirty();" class="btn btn-danger">
+                                                                <i class="glyphicon glyphicon-trash"></i>
+                                                            </a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                    <span class="required">Autores externos</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12 sin-desborde">
+                                    <a ng-click="addExt=true" class="btn btn-success">
+                                        <span class="fa fa-user-plus"></span> Agregar
+                                    </a>
+
+                                    <div class="col-xs-12" ng-hide="!addExt">
+                                        <div class="col-xs-6 col-md-4">
+                                            <input class="form-control" placeholder="Nombre" maxlength="150" ng-model="autorExt.nombre" />
+                                        </div>
+                                        <div class="col-xs-6 col-md-4">
+                                            <input class="form-control" placeholder="Organización" maxlength="200" ng-model="autorExt.institucion" />
+                                        </div>
+                                        <div class="col-xs-6 col-md-3">
+                                            <select class="form-control" ng-model="autorExt.contribucion" ng-options="cn.id as cn.descripcion for cn in catNum  | unique1: 'id' | orderBy:'descripcion'  track by cn.id"></select>
+                                        </div>
+                                        <div class="col-xs-6 col-md-1">
+                                            <a title="Agregar" ng-click="add_userExt();ValidForm.$setDirty();" class="btn btn-success">
+                                                <i class="glyphicon glyphicon-ok"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    
+
+                                    <div ng-show="AutoresExt.length > 0">
+                                        <table id="CHCapitulosAddAutoresExt" class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" datatable="ng" width="100%" dt-options="dtOptions">
+                                            <thead>
+                                                <tr>
+                                                    <th data-priority="1">Nombre</th>
+                                                    <th >Organizaci&oacute;n</th>
+                                                    <th >Contribuci&oacute;n</th>
+                                                    <th data-priority="1" class="thAjuste text-center">Opciones</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-repeat="autor in AutoresExt">
+                                                    <td style="max-width:100px" class="sin-desborde">{{autor.nombre}}</td>
+                                                    <td style="max-width:100px" class="sin-desborde">{{autor.institucion}}</td>
+                                                    <td>{{autor.contribucion}}</td>
+                                                    <td class="text-center">
+                                                        <div>
+                                                            <a title="Eliminar" ng-click="eliminarAutorExt(autor);ValidForm.$setDirty();" class="btn btn-danger">
+                                                                <i class="glyphicon glyphicon-trash"></i>
+                                                            </a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!--Titulo Separador-->
+                            <div class="x_title">
+                                <h2>Editores</h2>
+                                <div class="clearfix"></div>
+                            </div>
+                            <!--FIN Titulo Separador-->
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                    <span class="required">Editor*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12 sin-desborde">
+                                    <div class="row col-xs-12">
+                                        <a ng-click="addEditorr=true" class="btn btn-success">
+                                            <span class="fa fa-user-plus"></span> Agregar
+                                        </a>
+                                    </div>
+                                    <div class="row col-xs-12" ng-show="addEditorr==true">
+                                        <div class="row col-xs-6 col-md-11">
+                                            <input type="text" class="form-control" id="usr" maxlength="200" ng-model="descripcioneditor" placeholder="Editor">
+                                        </div>
+                                        <div class="col-xs-6 col-md-1">
+                                            <a class="btn btn-success btn-sm" ng-click="addEditor();ValidForm.$setDirty();">
+                                                <i class="glyphicon glyphicon-plus"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div ng-hide="editores.length==0">
+                                        <table id="CHCapitulosAddeditores" class="table table-hover table-striped table-condensed dt-responsive " cellspacing="0" datatable="ng" width="100%" dt-options="dtOptions">
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-xs-9" data-priority="1">Editores</th>
+                                                    <th class="col-xs-3" data-priority="1">Opciones</th>
+                                                </tr>
+                                            </thead>
+                                            <tr ng-repeat="task in editores track by $index">
+                                                <td style="max-width:100px" class="sin-desborde">
+                                                    
+                                                        {{task}}
+                                                    
+                                                </td>
+                                                <td>
+                                                    <button type="button" ng-really-click="deleteTask(editores.indexOf(task));ValidForm.$setDirty();" class="btn btn-danger">
+                                                        <i class="glyphicon glyphicon-trash"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+
+
+                                </div>
+                            </div>
+
+                            <!--Titulo Separador-->
+                            <div class="x_title">
+                                <h2>Evidencia <small>Tama&ntilde;o m&aacute;ximo por archivo de 8 MB, el formato de los archivos puede ser: PDF, DOC, DOCX</small></h2>
+                                <div class="clearfix"></div>
+                            </div>
+                            <!--FIN Titulo Separador-->
+
+                            <div class="form-group">
+
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                    Documento adjunto
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input class="input-file" type="file" name="filesGral" id="filesGral"
+                                           data-buttonName="btn-success"
+                                           ng-click="saveIG();" ng-model="filesGral"
+                                           onchange="angular.element(this).scope().getFileDetails(this);" />
+                                </div>
+
+                                
+                                <div class="form-group">
+                                    <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                        <div class="">
+                                            <button type="submit" class="btn btn-success" >
+                                                <i class="glyphicon glyphicon-saved"></i> Guardar
+                                            </button>
+                                            <button type="button" confirma-regresar="regresar()" state-form="ValidForm" class="btn btn-primary">
+                                                <span class="fa fa-arrow-left"></span> Regresar
+                                            </button>
+                                            <!-- <button type="button" ui-sref="fichapersonal.capitulo({seccion:'capitulo'})" class="btn btn-primary">
+                                                <span class="fa fa-arrow-left"></span> Regresar
+                                            </button> -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        jQuery('.numbersOnly').keyup(function () {
+            this.value = this.value.replace(/[^0-9\.]/g, '');
+        });
+    });
+    
+</script>

@@ -1,0 +1,147 @@
+﻿<div class="vista">
+
+    <div class="page-title">
+        <div class="title_left">
+
+
+            <ol class="breadcrumb miga">
+                <li><i class="fa fa-cogs"></i> <a>Administración/Operación CC</a></li>
+                <li><a ui-sref="administrapersonalconductuales">Administración de personal</a></li>
+                <li class="active">Editar</li>
+            </ol>
+
+        </div>
+    </div>
+    <div class="clearfix"></div>
+
+
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Informaci&oacute;n general</h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content sin-desborde">
+
+                    <label class="detalle col-xs-12 " title="Nombre del empleado">
+                        {{clave}} {{nombre}}
+                    </label>
+
+                    <label class="cont emc col-xs-12 colorTit">
+                        Área {{nombreUnidad.nombreUnidad}}   /   Período  {{periodo}}
+                    </label>
+
+                    <label class="tit col-xs-12">
+                        Categoría (Nómina)
+                    </label>
+                    <label class="cont col-xs-12">
+                        {{cateemp}}
+                    </label>
+
+
+                    <label class="tit col-xs-12">
+                        Familia de puestos
+                    </label>
+                    <label class="cont col-xs-12">
+                        {{nombreFamilia}}
+                    </label>
+
+
+                    <label class="tit col-xs-12">
+                        Categoría (Competencias conductuales)
+                    </label>
+                    <label class="cont col-xs-12">
+                        {{catcomp}}
+                    </label>
+                    <br />
+
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+
+            <div class="x_panel">
+
+                <div class="x_title">
+                    <h2>Actualizar</h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content sin-desborde">
+
+                    <form role="form" name="datosPersonaForm" class="form-horizontal">
+
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Familia de puestos: <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+
+                                <select id="familiaId" name="familias" class="form-control"
+                                        ng-change="cargarCategorias()"
+                                        ng-model="familiaId"
+                                        ng-init="familiaId"
+                                        ng-options="e.familiaId as e.nombreFamilia  for e in familiasPuestos" ng-required="true">
+                                    <option value="">Seleccione una familia de puestos </option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Categoría  <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <select id="categoriaId" name="categorias" class="form-control"
+                                        ng-model="categoriaId"
+                                        ng-init="categoriaId"
+                                        ng-options="e.categoriaId as e.nombreCategoria  for e in categoriasFamilias" ng-required="true">
+                                    <option value="">Seleccione una categoría </option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Unidad organizacional
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div uo-modal2 fecha="" ng-model="nombreUnidadNueva" enarreglo="false"></div>
+                            </div>
+                        </div>
+
+                        
+                    </form>
+                </div>
+              
+
+                <div class="form-group">
+                    <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                        <div class="">
+                            <button type="submit" class="btn btn-success" ng-click="save()">
+                                <!--pendientes: adjuntos y  proyecto.selected-->
+                                <i class="glyphicon glyphicon-saved"></i> Guardar
+                            </button>
+                            <button type="button" ui-sref="administrapersonalconductuales" class="btn btn-primary">
+                                <span class="fa fa-arrow-left"></span>
+                                Regresar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<!-- end page content -->

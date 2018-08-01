@@ -1,0 +1,63 @@
+<div data-ng-hide="authentication.isAuth" class="text-center">
+    No tiene permisos para ingresar a esta secci&oacute;n.<br /> Usuario no autentificado
+</div>
+<div data-ng-show="authentication.isAuth">
+    <div id="page-wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">&Aacute;reas de Investigaci&oacute;n</h1>
+                <div ng-show="areasInvestigacion.length === 0" class="alert alert-danger">No hay registros</div>
+            </div>
+        </div>
+        <div ng-show="loading">
+            <img src="images/cargando.gif" />
+        </div>
+        <div class="row" ng-show="!loading">
+            <div class="col-lg-12">
+                <div ng-hide="areasInvestigacion.length === 0">
+                    <table id="CRproveedoresGet" dt-instance="dtInstance" class="table table-hover table-striped table-condensed" cellspacing="0" datatable="ng" width="100%" dt-options="dtOptions">
+                        <thead>
+                            <tr>
+                                <th data-priority="1">Nombre</th>
+                                <th>Descripci&oacute;n</th>
+                                <!--<th>FechaRegistro</th>
+                                <th>FechaEfectiva</th>-->
+                                <th data-priority="2">&iquest;Est&aacute; activo?</th>
+                                <th data-priority="3">Opciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="e in areasInvestigacion">
+                                <td class="thCeldaB"><!--<a class="link" ui-sref="areaInvestigacionDetails({ id: e.areaInvestigacionId })" title="Detalles">-->{{e.nombre}} </td>
+                                <td>{{e.descripcion}}</td>
+                                <!--<td class="text-center"><p ng-bind="e.fechaRegistro | date:'dd/MM/yyyy'"> </p> </td>
+                                <td class="text-center"><p ng-bind="e.fechaEfectiva | date:'dd/MM/yyyy'"> </p> </td>-->
+                                <td class="thCeldaB text-center">
+                                    <div class="text-hide">
+                                        {{e.estado}}
+                                        <input type="checkbox" class="btn btn-info btn-circle" title="&iquest;Est&aacute; activo?" ng-model="e.estado" value="{{e.estado}}" ng-change="saveEstado(e.areaInvestigacionId,e.estado,e.nombre)" />
+                                    </div>
+                                </td>
+                                <td class="thCeldaB">
+                                    <a class="btn btn-default" ui-sref="areaInvestigacionDetails({ id: e.areaInvestigacionId })" title="Detalles">
+                                        <i class="glyphicon glyphicon-align-justify"></i>
+                                    </a>
+                                    <a class="btn btn-default" ui-sref="areaInvestigacionEdit({ id: e.areaInvestigacionId })" title="Editar">
+                                        <i class="glyphicon glyphicon-pencil"></i>
+                                    </a>
+                                    <!--<a class="btn btn-default" ng-click="open(e)" title="Eliminar">
+                                        <i class="fa fa-check-square-o" ng-if="estado == true"></i>
+                                        <i class="fa fa-square-o" ng-if="estado == false"></i>
+                                    </a>-->
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <button type="button" ui-sref="areaInvestigacionAdd" class="btn btn-success">
+                    <span class="glyphicon glyphicon-plus"></span> Agregar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

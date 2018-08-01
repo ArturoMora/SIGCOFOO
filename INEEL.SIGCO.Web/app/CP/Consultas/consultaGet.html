@@ -1,0 +1,665 @@
+﻿<div class="vista">
+    <div class="page-title">
+        <div class="title_left">
+            <ol class="breadcrumb miga">
+                <li>
+                    <i class="disabled fa fa-area-chart"></i>
+                    <a ui-sref="consultaCP">Informes de comunidades de pr&aacute;ctica</a>
+                </li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+                    <div data-ng-hide="authentication.isAuth">
+                        No tiene permisos para ingresar a esta secci&oacute;n.
+                        <br /> Usuario no autentificado
+                    </div>
+
+                    <div data-ng-show="authentication.isAuth">
+
+
+
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="x_panel">
+                                    <div class="x_title">
+                                        <h2>Criterios de b&uacute;squeda</h2>
+                                        <ul class="nav navbar-right panel_toolbox">
+                                            <li>
+                                                <a class="collapse-link">
+                                                    <i class="fa fa-chevron-up"></i>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                    <div class="x_content">
+                                        <form role="form" name="formulario">
+                                            <div class="col-xs-12 col-sm-6">
+
+                                                <!---Tipo informe-->
+                                                <div class="col-xs-12">
+                                                    <label>Seleccione un tipo de informe</label>
+                                                    <select name="rolComunidad" class="form-control" ng-model="idTipoFiltro" ng-change="otrasOpciones();">
+                                                        <option value="0" ng-selected="true">--- Seleccione un tipo de informe ---</option>
+                                                        <option value="1">Listado de comunidades</option>
+                                                        <option value="2">Seguimiento</option>
+                                                        <option value="3">Resultados</option>
+                                                        <option value="4">Resumen</option>
+                                                    </select>
+                                                </div>
+                                                
+                                                <!---End tipo informe-->
+                                                <!---Categorias-->
+                                                <div ng-show="idTipoFiltro==4" class="col-xs-12">
+                                                    <br />
+                                                    <label>Categor&iacute;a </label>
+                                                    <select class="form-control" name="categriaComunidad" ng-model="idCategoria" ng-options="obj.catCPId as obj.nombre for obj in categorias"
+                                                        ng-change="buscaPorCategoria();">
+                                                        <option value="">--- Seleccione una categor&iacute;a ---</option>
+
+                                                    </select>
+                                                </div>
+                                                
+                                                <!---End Categorias-->
+                                                <!---Comunidades-->
+                                                <div ng-show="idTipoFiltro==2 || (idTipoFiltro==4 && idCategoria!=-1)" class="col-xs-12">
+                                                    <br />
+                                                    <label>Comunidad </label>
+                                                    <select class="form-control" name="categriaComunidad" ng-model="nombreComunidad" ng-options="obj.comunidad for obj in resultadoReporte.resultadoConsulta">
+                                                        <option value="">Todas</option>
+                                                    </select>
+                                                    <!--{{nombreComunidad}}-->
+                                                </div>
+                                                
+                                                <!---Roles-->
+                                                <div ng-show="idTipoFiltro==4" class="col-xs-12">
+                                                    <br />
+                                                    <label>Roles</label>
+                                                    <select name="rolComunidad" class="form-control" ng-model="idRol">
+                                                        <option value="">--- Seleccione un tipo de rol ---</option>
+                                                        <option value="3">Líder</option>
+                                                        <option value="4">Secretario</option>
+                                                        <option value="2">Miembro</option>
+                                                        <option value="10">Todos</option>
+                                                        <option value="11">No mostrar roles</option>
+                                                    </select>
+                                                </div>
+                                                
+                                                <!---End Roles-->
+                                                <!---botones de descarga-->
+                                                <div class="col-xs-12">
+                                                    <br />
+                                                    <button type="button" class="btn btn-success" ng-click="jsPDF_ExportPDF('consultaRep', 'reporte.pdf', 1111)" ng-show="idTipoFiltro != 0 ">
+                                                        <span class="fa fa-download"></span> Descargar reporte
+                                                    </button>
+                                                    <button type="button" ng-click="limpiaCampos()" class="btn btn-primary">
+                                                        <span></span> Limpiar
+                                                    </button>
+                                                </div>
+                                            </div>
+
+
+                                            <!---Fechas-->
+                                            <div class="col-xs-6">
+                                                <label class="col-xs-12">Ingrese una fecha de inicio y t&eacute;rmino para buscar una comunidad dentro
+                                                    de un per&iacute;odo de tiempo.</label>
+                                                <br />
+                                                <div class="form-group">
+                                                    <label class="col-xs-12">Fecha de inicio</label>
+                                                    <div class="col-xs-10">
+                                                        <input placeholder="dd/mm/yyyy" ng-minlength="8" name="fechaInicio" maxlength="10" ng-init="open=false" type="text" show-button-bar="false"
+                                                            popup-placement="bottom" class="form-control" uib-datepicker-popup="dd/MM/yyyy"
+                                                            ng-model="FechaInicio" value="{{ date | date: 'dd/MM/yyyy' }}" is-open="open"
+                                                            close-text="Close" ng-change="desabilitar=false; validaFechas();">
+                                                    </div>
+                                                    <div class="col-xs-2">
+                                                        <button type="button" class="btn btn-success" ng-click="open=true;">
+                                                            <i class="glyphicon glyphicon-calendar"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-xs-12">Fecha de t&eacute;rmino</label>
+                                                    <div class="col-xs-10">
+                                                        <input placeholder="dd/mm/yyyy" name="fechaTermino" ng-minlength="8" maxlength="10" ng-init="open2=false" type="text" show-button-bar="false"
+                                                            popup-placement="bottom" class="form-control" uib-datepicker-popup="dd/MM/yyyy"
+                                                            ng-model="FechaTermino" value="{{ date | date: 'dd/MM/yyyy' }}" is-open="open2"
+                                                            close-text="Close" ng-change="desabilitar=false; validaFechas();">
+                                                    </div>
+                                                    <div class="col-xs-2">
+                                                        <button type="button" class="btn btn-success" ng-click="open2=true;">
+                                                            <i class="glyphicon glyphicon-calendar"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+
+                                                <!--<div class="form-group">
+                                                    <button type="button" class="btn btn-success" ng-click="jsPDF_ExportPDFficha('consultaRep', 'reporte.pdf', 1100)" class="btn btn-primary">
+                                                        <span class="fa fa-download"></span> Descargar reporte
+                                                    </button>
+                                                    <button type="button" ng-click="limpiaCampos()" class="btn btn-primary">
+                                                        <span></span> Limpiar
+                                                    </button>
+                                                </div>-->
+                                            </div>
+                                            <!---End Fechas-->
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+                        <div ng-show="resultadoReporte == null" class="alert advertencia">
+                            No hay registros
+                        </div>
+
+                        <div class="" id="consultaRep">
+
+                            
+                            <div class="row" ng-show="imprime == true">
+                                <div class="col-sm-6">
+                                    <img ng-src="{{logo}}" width="200" height="100" />
+                                </div>
+                                <div class="col-sm-6" style="padding-top: 24pt; color: #434343; font-size: 16pt; padding-bottom: 4pt; font-family:Arial; line-height: 1.15; page-break-after: avoid; orphans: 2;widows: 2;text-align: center">Informe de comunidades de pr&aacute;ctica</div>
+                            </div>
+
+
+                            <!-- Listado, seguimiento y resultados de una comunidad  -->
+                            <div ng-if="idTipoFiltro == 1 || idTipoFiltro == 2 || idTipoFiltro == 3">
+
+                                <div class="x_panel" ng-repeat="obj in resultadoReporte.resultadoConsulta | filter:nombreComunidad.comunidad">
+
+                                    <div class="row">
+                                        <div class="col-sm-8">
+
+                                            <div class="row">
+                                                <div class="col-sm-6" style="overflow-wrap:break-word; text-overflow:clip; text-wrap:inherit; word-wrap: break-word; word-break:break-all; word-break: break-all">
+                                                    <span style="color: #1ABB9C;font-weight:600; font-family:Arial; font-size:12px;" title="{{obj.comunidad}}"> {{obj.comunidad}}</span>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <span style="color: black;font-weight:600; font-family:Arial; font-size:12px; ">Fecha registro</span>
+                                                    <br /> {{obj.fecha | date:'dd/MM/yyyy'}}
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                        <div class="col-sm-4">
+
+                                            <!--Resultados-->
+                                            <div ng-if="idTipoFiltro ==3">
+
+                                                <span style="color:black;font-weight:600; font-family:Arial; font-size:12px; ">Resultados </span>
+                                                <br />
+                                                <div>
+                                                    <div class="row">
+                                                        <div class="col-sm-6 col-md-6">
+                                                            <b>Resultados esperados</b>
+                                                        </div>
+                                                        <div class="col-sm-6 col-md-6">
+                                                            <b>Resultados entregados</b>
+                                                        </div>
+
+                                                    </div>
+
+
+                                                    <div class="row">
+                                                        <div class="col-sm-6 col-md-6">{{obj.noCompromisos}} </div>
+                                                        <div class="col-sm-6 col-md-6">{{obj.comTerminados}} </div>
+
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!--Seguimiento de resultados-->
+                                            <div ng-if="idTipoFiltro ==2 && obj.avance.length> 0">
+
+                                                <span style="color:black;font-weight:600; font-family:Arial; font-size:12px; ">Seguimiento de los compromisos comunidad </span>
+                                                <br />
+                                                <div class="x_content">
+                                                    <div class="row">
+                                                        <div class="col-sm-4 col-md-4">
+                                                            <b>Compromiso</b>
+                                                        </div>
+                                                        <div class="col-sm-4 col-md-4">
+                                                            <b>Resultado</b>
+                                                        </div>
+                                                        <div class="col-sm-4 col-md-4">
+                                                            <b>Avance a la fecha</b>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="row" ng-repeat="obj2 in obj.avance ">
+
+                                                        <div class="col-sm-4 col-md-4">{{obj2.meta}} </div>
+                                                        <div class="col-sm-4 col-md-4">{{obj2.resultado.resultadoEsperado}} </div>
+                                                        <div class="col-sm-4 col-md-4">{{ obj2.descripcion}}</div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--Listado de comunidades-->
+                                            <div ng-if="idTipoFiltro ==1">
+                                                <div class="row">
+                                                    <div class="col-sm-6 col-md-6">
+                                                        <span style="color: black;font-weight:600;  font-family:Arial; font-size:12px; ">No. miembros </span>
+                                                    </div>
+                                                    <div class="col-sm-6 col-md-6">{{obj.noMiembros}}</div>
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="col-sm-6 col-md-6">
+                                                        <span style="color: black;font-weight:600;  font-family:Arial; font-size:12px; ">No. expertos </span>
+                                                    </div>
+                                                    <div class="col-sm-6 col-md-6">{{obj.noExpertos}}</div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-6 col-md-6">
+                                                        <span style="color: black;font-weight:600;  font-family:Arial; font-size:12px; ">No. documentos </span>
+                                                    </div>
+                                                    <div class="col-sm-6 col-md-6">{{obj.noDocumentos}}</div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-6 col-md-6">
+                                                        <span style="color: black;font-weight:600;  font-family:Arial; font-size:12px; ">No. sitios de interes </span>
+                                                    </div>
+                                                    <div class="col-sm-6 col-md-6">{{obj.noSitios}}</div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-6 col-md-6">
+                                                        <span style="color: black;font-weight:600;  font-family:Arial; font-size:12px; ">No. de preguntas </span>
+                                                    </div>
+                                                    <div class="col-sm-6 col-md-6">{{obj.noPreguntas}}</div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-6 col-md-6">
+                                                        <span style="color: black;font-weight:600;  font-family:Arial; font-size:12px; ">No. de publicaciones </span>
+                                                    </div>
+                                                    <div class="col-sm-6 col-md-6">{{obj.noPosts}}</div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- Categorias sin filtro  -->
+                            <div ng-if="idTipoFiltro == 4 || idTipoFiltro == 4|| idCategoria == -1 || idCategoria == -2 || idCategoria == -3">
+
+                                <div ng-repeat="rep in resultadoReporte">
+                                    <div class="x_panel" ng-if="rep.categoria!= null && rep.categoria.cantidad > 0">
+
+                                        <span style="font-weight:600; font-family:Arial; font-size:14px;  text-wrap:avoid">Categor&iacute;a</span>
+                                        {{rep.categoria.nombreCategoria}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <span style="font-weight:600; font-family:Arial; font-size:14px;  text-wrap:avoid">N&uacute;m. comunidades</span>
+                                        {{rep.categoria.cantidad}}
+
+                                        <br />
+                                        <br />
+
+                                        <div class="x_panel" ng-repeat="obj in rep.resultadoConsulta">
+
+                                            <div class="row">
+                                                <div class="col-sm-8">
+
+                                                    <div class="row">
+                                                        <div class="col-sm-5" style="overflow-wrap:break-word; text-overflow:clip; text-wrap:inherit; word-wrap: break-word; word-break:break-all; word-break: break-all">
+                                                            <span style="color: #1ABB9C;font-weight:600; font-family:Arial; font-size:12px; "> {{obj.comunidad}}</span>
+
+                                                            <br />
+
+                                                            <div ng-if="idCategoria == -2" style="overflow-wrap:break-word">
+                                                                <span style="font-weight:600; font-family:Arial; font-size:12px;  text-wrap:avoid">Misi&oacute;n</span>
+                                                                <p style="font-family:Arial; font-size:12px;  text-wrap:avoid">{{obj.mision}}</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-3">
+                                                            <span style="color: black;font-weight:600; font-family:Arial; font-size:12px; ">Fecha registro</span>
+                                                            <br /> {{obj.fecha | date:'dd/MM/yyyy'}}
+                                                        </div>
+                                                        <div class="col-sm-4">
+                                                            <div ng-if="idRol == 3 || idRol == 10 || idRol  ==-8">
+                                                                <span style="color: black;font-weight:600;  font-family:Arial; font-size:12px; ">Líder </span>
+                                                                <br />
+                                                                <a class="thCeldaB text-left link" style="cursor: hand;cursor: pointer;" ng-click="openProfile(obj.lider[0].idPersonas)"
+                                                                    title="Detalle de empleado"> {{obj.lider[0].idPersonas}}</a>
+                                                                <a ng-if obj.lider[0].nombrePersona!=Null>-{{obj.lider[0].nombrePersona}}</a>
+                                                                <br />
+                                                            </div>
+                                                            <div ng-if="idRol == 4 || idRol == 10 || idRol == -8">
+                                                                <span style="color: black;font-weight:600; font-family:Arial; font-size:12px; ">Secretario </span>
+                                                                <br />
+                                                                <a class="thCeldaB text-left link" style="cursor: hand;cursor: pointer;" ng-click="openProfile(obj.secretario[0].idPersonas)"
+                                                                    title="Detalle de empleado"> {{obj.secretario[0].idPersonas}}</a>
+                                                                <a ng-if obj.lider[0].nombrePersona!=Null>-{{obj.secretario[0].nombrePersona}}</a>
+                                                                <br />
+                                                            </div>
+                                                            <div ng-if="obj.soloMiembros.length > 0 && (idRol == 2 || idRol == 10  || idRol == -8)">
+                                                                <span style="color:black;font-weight:600; font-family:Arial; font-size:12px; ">Miembros </span>
+                                                                <br />
+                                                                <div ng-repeat="obj2 in obj.soloMiembros">
+                                                                    -{{obj2}}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!--<div class="col-sm-4" ng-W="idRol == -8 || idRol == 11">
+                                                            BAC
+                                                            <div>
+                                                                <span style="color: black;font-weight:600;  font-family:Arial; font-size:12px; ">Lider  </span><br />
+                                                                {{obj.lider[0].nombrePersona}}<br />
+                                                            </div>
+                                                            <div>
+                                                                <span style="color: black;font-weight:600; font-family:Arial; font-size:12px; ">Secretario  </span><br />
+                                                                {{obj.secretario[0].nombrePersona}}<br />
+                                                            </div>
+                                                            <div ng-if="obj.soloMiembros.length > 0">
+                                                                <span style="color:black;font-weight:600; font-family:Arial; font-size:12px; ">Miembros  </span><br />
+                                                                <div ng-repeat="obj2 in obj.soloMiembros">
+                                                                    {{ obj2}}
+                                                                </div>
+                                                            </div>
+
+
+                                                        </div>-->
+
+
+
+                                                    </div>
+
+
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <div>
+
+
+                                                        <div class="row">
+                                                            <div class="col-sm-6 col-md-6">
+                                                                <span style="color: black;font-weight:600;  font-family:Arial; font-size:12px; ">No. miembros </span>
+                                                            </div>
+                                                            <div class="col-sm-6 col-md-6">{{obj.noMiembros}}</div>
+                                                        </div>
+
+                                                        <div class="row">
+                                                            <div class="col-sm-6 col-md-6">
+                                                                <span style="color: black;font-weight:600;  font-family:Arial; font-size:12px; ">No. expertos </span>
+                                                            </div>
+                                                            <div class="col-sm-6 col-md-6">{{obj.noExpertos}}</div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-sm-6 col-md-6">
+                                                                <span style="color: black;font-weight:600;  font-family:Arial; font-size:12px; ">No. documentos </span>
+                                                            </div>
+                                                            <div class="col-sm-6 col-md-6">{{obj.noDocumentos}}</div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-sm-6 col-md-6">
+                                                                <span style="color: black;font-weight:600;  font-family:Arial; font-size:12px; ">No. sitios de interes </span>
+                                                            </div>
+                                                            <div class="col-sm-6 col-md-6">{{obj.noSitios}}</div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-sm-6 col-md-6">
+                                                                <span style="color: black;font-weight:600;  font-family:Arial; font-size:12px; ">No. de preguntas </span>
+                                                            </div>
+                                                            <div class="col-sm-6 col-md-6">{{obj.noPreguntas}}</div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-sm-6 col-md-6">
+                                                                <span style="color: black;font-weight:600;  font-family:Arial; font-size:12px; ">No. de publicaciones </span>
+                                                            </div>
+                                                            <div class="col-sm-6 col-md-6">{{obj.noPosts}}</div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!--<ul class="nav navbar-nav navbar-right" ng-if="imprime == false && idCategoria != -2 ">
+                                                        <li role="presentation">
+                                                            <a class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false" title="Número de miembros de la comunidad">
+                                                                <i class="fa fa-user" style="font-size:18px;color:gray"></i>
+                                                                <span class="badge bg-green">{{obj.noMiembros}}</span>
+                                                            </a>
+                                                        </li>
+                                                        <li role="presentation">
+                                                            <a class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false" title="Número de expertos con los que cuenta la comunidad">
+                                                                <i class="fa fa-users" style="font-size:18px;color:gray"></i>
+                                                                <span class="badge bg-green">{{obj.noExpertos}}</span>
+                                                            </a>
+                                                        </li>
+                                                        <li role="presentation">
+                                                            <a class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false" title="Número de documentos que la comunidad ha publicado">
+                                                                <i class="fa fa-file" style="font-size:18px;color:gray"></i>
+                                                                <span class="badge bg-green">{{obj.noDocumentos}}</span>
+                                                            </a>
+                                                        </li>
+                                                        <li role="presentation">
+                                                            <a class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false" title="Número de sitios de interes que la comunidad ha publicado">
+                                                                <i class="fa fa-external-link" style="font-size:18px;color:gray"></i>
+                                                                <span class="badge bg-green">{{obj.noSitios}}</span>
+                                                            </a>
+                                                        </li>
+                                                        <li role="presentation">
+                                                            <a class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false" title="Número de preguntas que los miembros han realizado">
+                                                                <i class="fa fa-question" style="font-size:18px;color:gray"></i>
+                                                                <span class="badge bg-green">{{obj.noPreguntas}}</span>
+                                                            </a>
+                                                        </li>
+                                                        <li role="presentation">
+                                                            <a class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false" title="Número posts que se han realizado">
+                                                                <i class="fa fa-comment-o" style="font-size:18px;color:gray"></i>
+                                                                <span class="badge bg-green">{{obj.noPosts}}</span>
+                                                            </a>
+                                                        </li>
+                                                    </ul>-->
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <!-- categorias con filtro  -->
+                            <div ng-if="resultadoReporte != null && idTipoFiltro == 4">
+                                <div class="x_panel" ng-if="resultadoReporte.categoria!= null">
+                                    <span style="font-weight: 600; font-family: Arial; font-size: 14px; text-wrap: avoid">Categor&iacute;a</span>
+                                    {{resultadoReporte.categoria.nombreCategoria}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <span style="font-weight: 600; font-family: Arial; font-size: 14px; text-wrap: avoid">N&uacute;m. comunidades</span>
+                                    {{resultadoReporte.categoria.cantidad}}
+
+                                    <br />
+                                    <br />
+
+                                    <div ng-repeat="obj in resultadoReporte.resultadoConsulta | filter:nombreComunidad.comunidad">
+
+                                        <div class="x_panel">
+                                            <div class="row">
+                                                <div class="col-sm-8">
+                                                    <div class="row">
+                                                        <div class="col-sm-5" style="overflow-wrap:break-word; text-overflow:clip; text-wrap:inherit; word-wrap: break-word; word-break:break-all; word-break: break-all">
+                                                            <span style="color: #1ABB9C; font-weight: 600; font-family: Arial; font-size: 12px;"> {{obj.comunidad}}</span>
+
+                                                            <br />
+
+                                                            <div ng-if="idCategoria == -2" style="overflow-wrap: break-word">
+                                                                <span style="font-weight: 600; font-family: Arial; font-size: 12px; text-wrap: avoid">Misi&oacute;n</span>
+                                                                <p style="font-family: Arial; font-size: 12px; text-wrap: avoid">{{obj.mision}}</p>
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="col-sm-3">
+                                                            <span style="color: black; font-weight: 600; font-family: Arial; font-size: 12px;">Fecha registro</span>
+                                                            <br /> {{obj.fecha | date:'dd/MM/yyyy'}}
+                                                        </div>
+                                                        <div class="col-sm-4">
+                                                            <div ng-if="idRol == 3 || idRol == 10 || idRol ==  -8">
+                                                                <span style="color: black; font-weight: 600; font-family: Arial; font-size: 12px;">Líder </span>
+                                                                <br />
+                                                                <a class="thCeldaB text-left link" style="cursor: hand;cursor: pointer;" ng-click="openProfile(obj.lider[0].idPersonas)"
+                                                                    title="Detalle de empleado"> {{obj.lider[0].idPersonas}}</a>
+                                                                <a ng-if obj.lider[0].nombrePersona!=Null>-{{obj.lider[0].nombrePersona}}</a>
+                                                                <br />
+                                                            </div>
+                                                            <div ng-if="idRol == 4 || idRol == 10 || idRol == -8">
+                                                                <span style="color: black; font-weight: 600; font-family: Arial; font-size: 12px;">Secretario </span>
+                                                                <br />
+                                                                <a class="thCeldaB text-left link" style="cursor: hand;cursor: pointer;" ng-click="openProfile(obj.secretario[0].idPersonas)"
+                                                                    title="Detalle de empleado"> {{obj.secretario[0].idPersonas}}</a>
+                                                                <a ng-if obj.lider[0].nombrePersona!=Null>-{{obj.secretario[0].nombrePersona}}</a>
+                                                                <br />
+                                                            </div>
+                                                            <div ng-if="obj.soloMiembros.length > 0 && (idRol == 2 || idRol == 10 || idRol ==  -8)">
+                                                                <span style="color: black; font-weight: 600; font-family: Arial; font-size: 12px;">Miembros </span>
+                                                                <br />
+
+                                                                <div ng-repeat="obj2 in obj.soloMiembros">
+                                                                    <label class="thCeldaB text-left link" ng-click="openProfile(obj2.substring(0,5))" style="cursor: hand;cursor: pointer;"
+                                                                        title="Detalle de empleado"> {{obj2.substring(0,5)}} </label>- {{obj2.substring(5)}}
+                                                                    <!--{{obj2}}-->
+                                                                </div>
+
+                                                            </div>
+
+
+                                                        </div>
+                                                        <!--<div class="col-sm-4" ng-if="idRol -8 || idRol == 11">
+                                                            BAC
+                                                            <div>
+                                                                <span style="color: black; font-weight: 600; font-family: Arial; font-size: 12px;">Lider  </span><br />
+                                                                {{obj.lider[0].nombrePersona}}<br />
+                                                            </div>
+                                                            <div>
+                                                                <span style="color: black; font-weight: 600; font-family: Arial; font-size: 12px;">Secretario  </span><br />
+                                                                {{obj.secretario[0].nombrePersona}}<br />
+                                                            </div>
+                                                            <div ng-if="obj.soloMiembros.length > 0">
+                                                                <span style="color: black; font-weight: 600; font-family: Arial; font-size: 12px;">Miembros  </span><br />
+
+                                                                <div ng-repeat="obj2 in obj.soloMiembros">
+                                                                    {{ obj2}}
+                                                                </div>
+
+                                                            </div>
+
+                                                        </div>-->
+                                                    </div>
+
+                                                </div>
+                                                <div class="col-sm-4">
+
+                                                    <div>
+                                                        <div class="row">
+                                                            <div class="col-sm-6 col-md-6">
+                                                                <span style="color: black; font-weight: 600; font-family: Arial; font-size: 12px;">No. miembros </span>
+                                                            </div>
+                                                            <div class="col-sm-6 col-md-6">{{obj.noMiembros}}</div>
+                                                        </div>
+
+                                                        <div class="row">
+                                                            <div class="col-sm-6 col-md-6">
+                                                                <span style="color: black; font-weight: 600; font-family: Arial; font-size: 12px;">No. expertos </span>
+                                                            </div>
+                                                            <div class="col-sm-6 col-md-6">{{obj.noExpertos}}</div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-sm-6 col-md-6">
+                                                                <span style="color: black; font-weight: 600; font-family: Arial; font-size: 12px;">No. documentos </span>
+                                                            </div>
+                                                            <div class="col-sm-6 col-md-6">{{obj.noDocumentos}}</div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-sm-6 col-md-6">
+                                                                <span style="color: black; font-weight: 600; font-family: Arial; font-size: 12px;">No. sitios de interes </span>
+                                                            </div>
+                                                            <div class="col-sm-6 col-md-6">{{obj.noSitios}}</div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-sm-6 col-md-6">
+                                                                <span style="color: black; font-weight: 600; font-family: Arial; font-size: 12px;">No. de preguntas </span>
+                                                            </div>
+                                                            <div class="col-sm-6 col-md-6">{{obj.noPreguntas}}</div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-sm-6 col-md-6">
+                                                                <span style="color: black; font-weight: 600; font-family: Arial; font-size: 12px;">No. de publicaciones </span>
+                                                            </div>
+                                                            <div class="col-sm-6 col-md-6">{{obj.noPosts}}</div>
+                                                        </div>
+
+
+                                                    </div>
+
+                                                    <!--<ul class="nav navbar-nav navbar-right" ng-if="imprime == false && idCategoria != -2">
+                                                        <li role="presentation">
+                                                            <a class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false" title="Número de miembros de la comunidad">
+                                                                <i class="fa fa-user" style="font-size: 18px; color: gray"></i>
+                                                                <span class="badge bg-green">{{obj.noMiembros}}</span>
+                                                            </a>
+                                                        </li>
+                                                        <li role="presentation">
+                                                            <a class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false" title="Número de expertos con los que cuenta la comunidad">
+                                                                <i class="fa fa-users" style="font-size: 18px; color: gray"></i>
+                                                                <span class="badge bg-green">{{obj.noExpertos}}</span>
+                                                            </a>
+                                                        </li>
+                                                        <li role="presentation">
+                                                            <a class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false" title="Número de documentos que la comunidad ha publicado">
+                                                                <i class="fa fa-file" style="font-size: 18px; color: gray"></i>
+                                                                <span class="badge bg-green">{{obj.noDocumentos}}</span>
+                                                            </a>
+                                                        </li>
+                                                        <li role="presentation">
+                                                            <a class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false" title="Número de sitios de interes que la comunidad ha publicado">
+                                                                <i class="fa fa-external-link" style="font-size: 18px; color: gray"></i>
+                                                                <span class="badge bg-green">{{obj.noSitios}}</span>
+                                                            </a>
+                                                        </li>
+                                                        <li role="presentation">
+                                                            <a class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false" title="Número de preguntas que los miembros han realizado">
+                                                                <i class="fa fa-question" style="font-size: 18px; color: gray"></i>
+                                                                <span class="badge bg-green">{{obj.noPreguntas}}</span>
+                                                            </a>
+                                                        </li>
+                                                        <li role="presentation">
+                                                            <a class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false" title="Número posts que se han realizado">
+                                                                <i class="fa fa-comment-o" style="font-size: 18px; color: gray"></i>
+                                                                <span class="badge bg-green">{{obj.noPosts}}</span>
+                                                            </a>
+                                                        </li>
+                                                    </ul>-->
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

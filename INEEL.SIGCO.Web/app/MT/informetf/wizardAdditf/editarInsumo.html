@@ -1,0 +1,176 @@
+﻿<div class="vista">
+    <form  name="formITF" class="form-horizontal">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <!-- especificar las columnas para las diferentes pantallas -->
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Editar insumo</h2>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content sin-desborde">
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Nombre <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input id="nombreIns" name="nombreIns" type="text" placeholder="Nombre del insumo" class="form-control col-md-7 col-xs-12 input-md"
+                                       ng-model="registro.nombreIns" ng-minlength="5" ng-maxlength="100" ng-required="true" />
+                                <span class="error" ng-show="formITF.nombreIns.$dirty && !formITF.nombreIns.$valid">Dato requerido con un longitud m&aacute;xima de 100</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Tipo de insumo <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <select class="form-control col-md-7 col-xs-12" id="tipoIns" name="tipoIns"
+                                        ng-model="registro.tipoIns"
+                                        ng-options="e.tipoInsumoId as e.descripcionInsumo  for e in TipoInsumo" ng-required="true">
+                                    <option value="">Tipo insumo</option>
+                                </select>
+                                <span class="error" ng-show="formITF.tipoIns.$dirty &&  !formITF.tipoIns.$valid">Seleccione el tipo de insumo</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Descripci&oacute;n <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <textarea class="form-control col-md-7 col-xs-12" id="descripcionIns" name="descripcionIns"
+                                          ng-model="registro.descripcionIns" ng-minlength="5" ng-maxlength="300" ng-required="true"></textarea>
+                                <span class="error" ng-show="formITF.descripcionIns.$dirty && !formITF.descripcionIns.$valid">Dato requerido con un longitud m&aacute;xima de 300</span>
+                            </div>
+                        </div>
+                        <!--<div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Responsable <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input id="responsableIns" name="responsableIns" type="text"
+                                       class="form-control col-md-7 col-xs-12 input-md" ng-model="registro.responsableIns"
+                                       ng-required="true" ng-minlength="5" ng-maxlength="150" />
+                                <span class="error" ng-show="formITF.responsableIns.$dirty && !formITF.responsableIns.$valid">Se requiere un responsable con un longitud m&aacute;xima de 150</span>
+                            </div>
+                        </div>-->
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Responsable <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="row">
+                                    <div class="col-xs-10">
+                                        <input id="responsableIns" name="responsableIns" type="text" placeholder="Escriba y Seleccione..." class="form-control" ng-model="registro.responsableIns" disabled required>
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <a class="btn btn-success" ng-click="openResponsable()" title="Buscar persona" ng-disabled="desabilitarBuscarResponsable">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Ubicaci&oacute;n <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input id="ubicacionResIns" name="ubicacionResIns" type="text" class="form-control col-md-7 col-xs-12 input-md"
+                                       ng-model="registro.ubicacionResIns"
+                                       ng-required="true" ng-minlength="5" ng-maxlength="450" />
+                                <span class="error" ng-show="formITF.ubicacionResIns.$dirty && !formITF.ubicacionResIns.$valid">Se requiere una ubicaci&oacute;n con un longitud m&aacute;xima de 450</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Tipo de acceso <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <select id="tipoAccesoInsumo" name="tipoAccesoInsumo"
+                                        class="form-control col-md-7 col-xs-12" ng-model="registro.tipoAccesoIns"
+                                        ng-options="e.tipoAccesoId as e.nombre  for e in selectTipo" ng-required="true">
+                                    <option value="">Tipo de acceso</option>
+                                </select>
+                                <span class="error" ng-show="formITF.tipoAccesoInsumo.$dirty &&  !formITF.tipoAccesoInsumo.$valid">Seleccione el tipo de acceso</span>
+                            </div>
+                        </div>
+
+
+
+
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Documento(s) adjunto(s) <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input id="fileInsumo" name="fileInsumo" class="input-file" type="file"
+                                       onchange="angular.element(this).scope().getFileDetailsInsumos(this)" />
+                                <span class="error" ng-show="formITF.fileInsumo.$dirty && !formITF.fileInsumo.$valid">Seleccione un documento</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                &nbsp;
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                
+                                <div class="row col-md-12" ng-show="true">
+                                    <table class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0"  width="100%">
+                                        <thead>
+                                            <tr>
+                                                <th data-priority="1">Archivos</th>
+                                                <th data-priority="1" class="thAjuste text-center">Opciones</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="archivo in registro.adjuntoITFInsumo">
+                                                <td style="max-width:200px" class="sin-desborde">
+                                                    <span class="sin-desborde">
+                                                        <a class="linkTabla" href="/Descargas.html#/q/{{archivo.adjuntoId | encriptar}}"
+                                                           target="_blank">{{archivo.adjunto.nombre}}</a>
+                                                    </span>
+                                                </td>
+                                                <td class="text-center">
+                                                    <div>
+                                                        <a title="Eliminar" ng-click="eliminarAdjunto(registro.adjuntoITFInsumo.indexOf(archivo), archivo)" class="btn btn-danger">
+                                                            <i class="glyphicon glyphicon-trash"></i>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                &nbsp;
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="row col-xs-6">
+                                    <button class="btn btn-block btn-success"
+                                            ng-click="update(registro)"
+                                            ng-disabled="!formITF.nombreIns.$valid
+                || !formITF.descripcionIns.$valid
+                || !formITF.tipoIns.$valid
+                || !formITF.responsableIns.$valid
+                || !formITF.ubicacionResIns.$valid
+                || !formITF.tipoAccesoInsumo.$valid || click">
+                                        <!--ng-show="!detalles">-->
+                                        <i class="glyphicon glyphicon-saved"></i> Actualizar insumo
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</form>
+    <button type="submit" ng-click="globalRegresar();" class="btn btn-primary">
+        <span class="fa fa-arrow-left"></span> Regresar
+    </button>
+    <!--registro: {{registro | json}}-->
+</div>

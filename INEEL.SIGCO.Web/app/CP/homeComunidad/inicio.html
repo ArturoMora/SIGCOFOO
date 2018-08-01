@@ -1,0 +1,271 @@
+﻿<div class="clearfix"><br /></div>
+<div  ng-controller="InicioComunidadGetCtrl" class="col-lg-12 col-md-12 col-xs-12">
+ 
+    <!-- noticias de la comunidad-->
+    <div class="col-lg-3 col-sm-3 col-md-3 col-xs-12">
+        <div class="x_panel sin-desborde"> <!-- panel de noticias-->
+            <div class="x_title text-center">
+                <h2>Avisos y Noticias</h2>
+
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <div ng-show="comunidad.noticias.length==0" class="alert advertencia">
+                    No hay noticias registradas
+                </div>
+                <div style="word-wrap: break-word;" ng-if="comunidad.noticias.length>0" ng-repeat="e in comunidad.noticias">
+                    <b>{{e.nombre}}</b><br/>
+                    {{e.descripcion}}<br/>
+                    <a ng-if="rol.administrador || rol.secretario || rol.lider" class="btn btn-warning" ng-click="editaNoticia(e)" title="Editar">
+                        <i class="glyphicon glyphicon-pencil"></i>
+                    </a>
+                    <a ng-if="rol.administrador || rol.secretario || rol.lider" class="btn btn-danger" ng-click="eliminaNoticia(e)" title="Eliminar">
+                        <i class="glyphicon glyphicon-trash"></i>
+                    </a>
+                    <br/><br/>
+                </div>
+                <a ng-if="rol.administrador || rol.secretario || rol.lider" class="btn btn-success col-xs-12" ng-click="agregaNoticia()" title="Agregar">
+                    <i class="glyphicon glyphicon-plus"></i>Agregar
+                </a>
+            </div>
+        </div>
+
+        <div class="x_panel sin-desborde">
+            <div class="x_title text-center">
+                <h2>Eventos</h2>
+
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <div ng-if="!rol.invitado">
+
+                    <div ng-show="eventos.length>0" ng-repeat="e in eventos">
+                        <div class="x_panel sin-desborde">
+                            <div style="color: #1ABB9C; font-size: 10px; font-size: small; margin-bottom: 0px;">
+                                <i title="{{e.asunto}}">{{e.asunto}}</i>
+                            </div>
+                            <div>{{e.lugar}}</div>
+                            <div>El {{e.fechaReunion | date:'dd/MM/yyyy'}} a las {{e.horaReunion | date:'HH:mm'}}</div>
+
+
+                            <br/>
+                            <div ng-if="rol.administrador || rol.secretario || rol.lider">
+                                <a class="btn btn-success" ng-show="e.notificacionEnviada ==0" ng-click="notificacionEventoMiembros(e.agendaId, e)" title="Notificar a miembros de la comunidad">
+                                    <i class="glyphicon glyphicon-envelope"></i>
+                                </a>
+                                <a class="btn btn-warning" ng-click="modificarEvento(e.agendaId)" title="Editar evento">
+                                    <i class="glyphicon glyphicon-pencil"></i> Editar
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div ng-if="rol.invitado">
+
+                    <div ng-show="eventos.length>0" ng-repeat="e in eventos">
+                        <div class="x_panel sin-desborde" ng-show="e.estado == true">
+                            <div style="color: #1ABB9C; font-size: 10px; font-size: small; margin-bottom: 0px;">
+                                <i title="{{e.asunto}}">{{e.asunto}}</i>
+                            </div>
+                            <div>{{e.lugar}}</div>
+                            <div>El {{e.fechaReunion | date:'dd/MM/yyyy'}} a las {{e.horaReunion | date:'HH:mm'}}</div>
+
+
+                            <br/>
+                            <div ng-if="rol.administrador || rol.secretario || rol.lider">
+                                <a class="btn btn-success" ng-show="e.notificacionEnviada ==0" ng-click="notificacionEventoMiembros(e.agendaId, e)" title="Notificar a miembros de la comunidad">
+                                    <i class="glyphicon glyphicon-envelope"></i>
+                                </a>
+                                <a class="btn btn-warning" ng-click="modificarEvento(e.agendaId)" title="Editar evento">
+                                    <i class="glyphicon glyphicon-pencil"></i>Editar
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div ng-show="eventos.length==0" class="alert advertencia">
+                    No hay eventos pr&oacute;ximos
+                </div>
+            </div>
+
+        </div>
+        
+    </div>
+
+    <!--posts de la comunidad-->
+    <div class="col-lg-6 col-sm-6 col-xs-12">
+        <!--caja de texto-->
+        <!--<div ng-show="!rol.invitado" class="x_panel">
+            <label ng-click="crearPost=true" href="">
+                <h3 class="placeHolderTextAngular">Escribir contenido a la comunidad... <i class="fa fa-pencil"></i></h3>
+            </label><br/><br />
+        </div>-->
+        <div ng-show="!rol.invitado">
+            <div class="ta-editor" text-angular ng-model="post" placeholder="Publica en la comunidad...."></div>
+        </div>
+        <br ng-show="!rol.invitado"/>
+        <div ng-show="!rol.invitado">
+            <div class="row col-xs-10 col-md-10 col-lg-10">
+            </div>
+            <div class="col-xs-3 col-md-2 col-lg-2">
+                <a class="btn btn-success" ng-click="agregaPost()" title="Agregar Post">
+                    <i></i>Publicar
+                </a>
+            </div>
+        </div>
+        <!-- end caja de texto-->
+
+        <br ng-show="!rol.invitado"/><br ng-show="!rol.invitado"/><br ng-show="!rol.invitado"/><br ng-show="!rol.invitado"/>
+    
+        <div ng-if="postis.length>0" infinite-scroll='cargaPost()'>
+            <div ng-repeat="e in postis">
+                <!--Estructura post-->
+                <div class="x_panel sin-desborde">
+                    <!--Cabecera post-->
+                    <div class="x_title col-xs-12">
+                        <div class="row col-xs-9">
+                            <img ng-src="data:image/png;base64,{{e.adjunto64}}" class="fotoUsuarioPost img-circle"/>
+                            <a class="link" style="cursor: pointer;" title="Detalle de empleado" ng-click="openProfile(e.miembro.idPersonas)">
+                                {{e.miembro.nombrePersona}}
+                            </a>
+
+                        </div>
+                        <div class="nav navbar-right panel_toolbox col-xs-3">
+                            <!--<a ng-if="!e.publico" class="fa fa-lock"></a>
+                            <a ng-if="e.publico" class="fa fa-unlock"></a>-->
+                            <a class="fa fa-calendar"></a>
+                            {{e.fechaRegistro | date: 'dd-MM-yyyy'}}
+                        </div>
+                    </div>
+                    <!-- end cabecera-->
+
+                    <!--Contenido post-->
+                    <div ta-bind  ng-model="e.descripcion"></div><br/>
+                    <!-- boton ver comentarios-->
+                    <div class="x_title">
+                        <div class="col-md-8 col-xs-8 col-sm-8 col-lg-8"></div>
+                        <div class="col-md-3 col-xs-3 col-sm-3 col-lg-4 ">
+                            <a class="btn btn-success" ng-hide="comentariosPost[0].postId==e.postId" ng-click="verComentarios(e.postId)" title="Ver comentarios">
+                                <i class="fa fa-comments"></i>&nbsp;{{e.numeroComentarios}} comentarios
+                            </a>
+                        </div>
+                    </div>
+                    <!-- end boton ver comentarios-->
+
+                    <div class="fondoComentariosPost" ng-if="comentariosPost.length>0 && comentariosPost[0].postId==e.postId" ng-repeat="c in comentariosPost">
+                        <div class="col-md-6">
+                            <table>
+                                <tr>
+                                    <td>
+                                        <img ng-src="data:image/png;base64,{{c.adjunto64}}" class="fotoUsuarioComentario img-circle" />
+                                    </td>
+                                    <td>
+                                        <small><b ng-click="openProfile(c.idPersonas)" title="Detalle de empleado" style="cursor: pointer;" class="link">{{c.nombrePersona}}</b></small><br />
+                                    </td>
+                                </tr>
+                            </table>    
+                        </div>
+                        <div class="col-md-6 text-right">{{c.fechaRegistro | date: 'dd-MM-yyyy'}}<br /><br />  </div>
+                        <div>
+                            {{c.comentario}} <br /><br />    
+                        </div>
+                        
+                        <div class="x_title"></div>
+                    </div>
+                </div>
+                <br/>
+                <!--{{coment}}-->
+                <!--Seccion de comentarios-->
+                <!--Para invitados -->
+                <div ng-if="comunidad.tipoAcceso && rol.invitado" ng-show="comentariosPost[0].postId==e.postId || (comentariosPost.length==0 && idPostActual==e.postId)">
+                    <!--<textarea class="form-control col-xs-12" type="text" ng-model="e.comentarios.nuevoComentario" placeholder="Escribe un comentario ..." rows="2"></textarea>-->
+                    <textarea class="form-control col-xs-12" type="text" id="{{e.postId}}" name="{{e.postId}}" ng-model="comentarioUsuario" placeholder="Escribe un comentario ..." rows="2"></textarea>
+                    <div>
+                        <div class="col-md-10"></div>
+                        <div class="row col-md-2">
+                            <a class="btn btn-success" ng-click="agregarComentario(e.postId,comentarioUsuario,postis.indexOf(e))" title="Agregar comentario">
+                                <i></i> Comentar
+                            </a>
+                            <br /><br />
+                        </div>
+                    </div>
+                </div>
+                <!-- Para miembros de la comunidad (incluyendo el administrador)-->
+                <div ng-if="!rol.invitado" ng-show="comentariosPost[0].postId==e.postId || (comentariosPost.length==0 && idPostActual==e.postId) ">
+                    <!--<textarea required class="form-control col-xs-12" type="text" ng-model="e.comentarios.nuevoComentario" placeholder="Escribe un comentario ..." rows="2"></textarea>-->
+                    <textarea required class="form-control col-xs-12" type="text" id="{{e.postId}}" name="{{e.postId}}" ng-model="comentarioUsuario" placeholder="Escribe un comentario ..." rows="2"></textarea>
+                    <br/><br/><br/>
+                    <div>
+                        <div class="col-md-10"></div>
+                        <div class="row col-md-2">
+                            <a class="btn btn-success" ng-click="agregarComentario(e.postId,comentarioUsuario,postis.indexOf(e))" title="Agregar comentario">
+                                <i></i> Comentar
+                            </a>
+                            <br/><br />
+                        </div>
+                    </div>
+                </div>
+                <!-- end seccion comentarios-->
+            </div>
+            <!-- end post-->
+            
+        </div>
+    </div>
+
+    <!-- objetos de conocimiento y metas de la comunidad-->
+    <div class="col-lg-3 col-sm-3 col-xs-12 container-fluid">
+        <!---objetos de conocimiento-->
+        <div class="x_panel sin-deborde container-fluid">
+            <div class="container">
+                <div style="text-overflow:ellipsis;  word-wrap: break-word !important">
+
+                    <a class="btn btn-success btn-block col-sm-12 col-md-12  col-xs-12" ui-sref="EstadoArteGetAll({id:comunidad.comunidadId})" title="Estado del arte y de la práctica">
+                        <div class="text-overflow">  <i class="fa fa-paint-brush"></i>  Estado del arte y de práctica </div>
+                    </a>
+                    <a ui-sref="EstudiosEspecializadosGetAll({id:comunidad.comunidadId})" class="btn btn-success btn-block col-sm-12 col-md-12  col-xs-12 col-xs-12 " title="Estudios especializados">
+                        <div class="text-overflow">  <i class="fa fa-book"></i> Estudios especializados</div>
+                    </a>
+                    <a ui-sref="InformeAnualGetAll({id:comunidad.comunidadId})" class="btn btn-success btn-block col-sm-12 col-md-12  col-xs-12 col-xs-12 " title="Informes anuales">
+                        <div class="text-overflow">  <i class="fa fa-file-text"></i> Informes anuales</div>
+                    </a>
+                    <a ui-sref="MapasRutaGetAll({id:comunidad.comunidadId})" class="btn btn-success btn-block col-sm-12 col-md-12  col-xs-12 col-xs-12 " title="Mapas de ruta y prospectiva tec.">
+                        <div class="text-overflow">
+                            <i class="fa fa-map-marker"></i> Mapa de rutas y prospectiva tec.
+                        </div>
+                    </a>
+                <a ui-sref="PlanAnualGetAll({id:comunidad.comunidadId})" class="btn btn-success btn-block col-sm-12 col-md-12  col-xs-12 col-xs-12 " title="Planes anuales">
+                    <div class="text-overflow">   <i class="fa fa-th-list"></i> Planes anuales de trabajo</div>
+                </a>
+                <a ui-sref="TemasInnovacionGetAll({id:comunidad.comunidadId})" class="btn btn-success btn-block col-sm-12 col-md-12  col-xs-12 col-xs-12 " title="Temas de innovación">
+                    <div class="text-overflow">  <i class="fa fa-lightbulb-o"></i> Temas de innovación</div>
+                </a>
+                <a ui-sref="ConsultaLineamientos({id:comunidad.comunidadId})" class="btn btn-success btn-block col-sm-12 col-md-12  col-xs-12 col-xs-12 " title="Lineamientos de la comunidad">
+                    <div class="text-overflow">  <i class="fa fa-search"></i> Lineamientos comunidad</div>
+                </a>
+            </div>
+            </div>
+        </div>
+
+        <!---mision de la comunidad-->
+        <!-- <div class="x_panel">
+            <div class="x_title ">
+                <h2>Misi&oacute;n de la comunidad</h2>
+
+                <div class="clearfix"></div>
+            </div>
+            <div ng-if="comunidad.mision!=null" class="x_content" style="word-wrap: break-word;">
+                {{comunidad.mision}}
+            </div>
+
+            <div ng-show="comunidad.mision==null" class="alert advertencia">
+                La comunidad no tiene misi&oacute;n registrada
+            </div>
+        </div> -->
+
+    </div>
+
+</div>
+

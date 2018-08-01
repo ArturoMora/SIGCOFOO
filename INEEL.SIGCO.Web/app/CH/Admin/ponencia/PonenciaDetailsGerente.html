@@ -1,0 +1,257 @@
+﻿<div class="vista">
+    <div class="page-title">
+        <div class="title_full">
+
+            <ol class="breadcrumb miga">
+                <li><i class="sg sg-articulos-ponencia-cap2"></i> <a ui-sref="solicitudesrh">Ponencia</a></li>
+                <li class="active">Detalles</li>
+            </ol>
+
+        </div>
+    </div>
+  
+    <div class="row">
+        <div class="col-md-8 col-sm-8 col-xs-12">
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+                    <label class="detalle col-xs-12 sin-desborde" title="titulo">
+                        {{registro.tituloPonencia}}
+                    </label>
+                    <label class="cont emc col-xs-12 colorTit">
+                        {{registro.ambito.descripcion}} / {{registro.nivelPublicacion.descripcion}}
+                    </label>
+                    <label class="cont col-xs-12">
+                        <strong>Registrado por:</strong> {{registro.nombrePersona}}
+                    </label>
+
+                    <label class="tit col-xs-12">
+                        Estado de ponencia
+                    </label>
+                    <label class="cont col-xs-12">
+                        {{registro.estadoPonencia.descripcion}}
+                    </label>
+                    <label class="tit col-xs-12">
+                        P&aacute;ginas
+                    </label>
+                    <label class="cont col-xs-12">
+                        {{registro.paginasde}}-{{registro.paginashasta}}
+                    </label>
+                    <label class="tit col-xs-12">
+                        Palabras clave
+                    </label>
+                    <label class="cont col-xs-12 sin-desborde">
+                        {{registro.palabrasClave}}
+                    </label>
+                    <label class="tit col-xs-12">
+                        Proyecto
+                    </label>
+                    <label class="cont col-xs-12">
+                        {{registro.proyectoNombre}}
+                    </label>
+                </div>
+            </div>
+
+
+
+
+
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+                    <div class="x_title">
+                        <h2>Autores </h2>
+                        <div class="clearfix"></div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label>Autores internos:</label><br />
+                        <div ng-show="autoriie.length === 0" class="alert advertencia">
+                            No hay registros de autores internos
+                        </div>
+                        <table class="table table-hover" ng-show="autoriie.length > 0">
+                            <thead>
+                                <tr>
+                                    <th class="thAjuste">Clave</th>
+                                    <th>Nombre</th>
+                                    <th class="thAjusteColaboracion text-center">Orden de autor</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="registro in autoriie">
+                                    <td>
+                                        <a class="linkTabla" ng-click="openProfile(registro.clavePersona)" style="cursor: hand;cursor: pointer;" title="Detalle de empleado"> {{registro.clavePersona}}</a>
+                                   </td>
+                                    <td>{{registro.nombreCompleto}}</td>
+                                    <td class="text-center">{{registro.contribucion}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="form-group">
+                        <label>Autores externos:</label><br />
+                        <div ng-show="autorexterno.length === 0" class="alert advertencia">
+                            No hay registros de autores externos
+                        </div>
+                        <table class="table table-hover" ng-show="autorexterno.length > 0">
+                            <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Organizaci&oacute;n</th>
+                                    <th class="text-center">Orden de autor</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="registro in autorexterno">
+                                    <td style="max-width:100px" class="sin-desborde">{{registro.nombre}}</td>
+                                    <td style="max-width:100px" class="sin-desborde">{{registro.institucion}}</td>
+                                    <td class="text-center thAjusteColaboracion">{{registro.contribucion}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+                    <div class="x_title">
+                        <h2>Observaciones </h2>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="cont col-xs-12 sin-desborde">
+                            {{registro.nota}}
+                        </label>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+                    <form name="ValidForm" id="form" class="form-horizontal">
+                        <div class="x_title">
+                            <h2>Aprobaci&oacute;n de solicitud : Alta de ponencia </h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group">
+                            <label>Justificaci&oacute;n</label><span class="required">*</span>
+                            <textarea id="just" name="just" class="form-control" placeholder="Gerente: favor de escribir una justificaci&oacute;n para activar los botones Aprobar y Regresar solicitud" ng-model="justificacion" maxlength="500" ng-required="true" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-success" ng-really-click="save(1)" ng-disabled="!ValidForm.just.$valid" ng-really-message="{{aprobacionQ}}">
+                                <i class="glyphicon glyphicon-saved"></i> Aprobar solicitud
+                            </button>
+                            <button type="submit" class="btn btn-warning" ng-really-click="save(2)" ng-disabled="!ValidForm.just.$valid" ng-really-message="{{rechazoQ}}">
+                                <i class="fa fa-reply"></i> Regresar solicitud
+                            </button>
+                        </div>
+                     </form>
+                </div>
+            </div>
+
+
+        </div>
+        <div class="col-md-4 col-sm-4 col-xs-12 sin-desborde">
+            <div class="x_panel sin-desborde" ng-show="registro.adjunto!=null">
+                <div class="x_title">
+                    <h2>Evidencia</h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="form-group sin-desborde">
+                    <!--<label>Archivo Adjunto:</label>-->
+                    <span class="fa fa-unlock"></span><a class="linkArchivo" title="Descargar" href="/Descargas.html#/q/{{registro.adjunto.adjuntoId | encriptar}}" ta target="_blank"> {{registro.adjunto.nombre}}</a>
+                    <!--<a href="/Descargas.html#/q/{{registro.adjunto.adjuntoId | encriptar}}" class="btn btn-default btn-sm" target="_blank"> Descargar Archivo </a>-->
+                </div>
+
+
+                <div class="form-group">
+                    <div class="alert advertencia col-xs-12" ng-if="registro.estadoFlujoId==2">
+                        <span class="glyphicon glyphicon-info-sign"></span> El registro se encuentra en <strong> Revisi&oacute;n </strong>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="alert aprobado col-xs-12" ng-if="registro.estadoFlujoId==3">
+                        <span class="glyphicon glyphicon-info-sign"></span> El registro est&aacute;: <strong> {{registro.estadoFlujo.descripcion}} </strong>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="alert advertencia" ng-if="registro.estadoFlujoId!=2 && registro.estadoFlujoId!=3 ">
+                        <span class="glyphicon glyphicon-info-sign"></span> El registro est&aacute;: <strong> {{registro.estadoFlujo.descripcion}} </strong>
+                    </div>
+                </div>
+                <!--<div class="form-group">
+                    <label>Justificaci&oacute;n:</label>
+                    <textarea class="form-control" ng-model="justificacion" maxlength="500"></textarea>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-success" ng-click="save(1)" ng-disabled="desactivar" ng-show="!regFile">
+                        <i class="glyphicon glyphicon-saved"></i> Aprobar
+                    </button>
+                    <button type="submit" class="btn btn-warning" ng-click="save(2)">
+                        <i class="fa fa-reply"></i> Regresar
+                    </button>
+                </div>-->
+            </div>
+
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+                    <div class="x_title">
+                        <h2>Congreso</h2>
+                        <div class="clearfix"></div>
+                    </div>
+                    <label class="titFirst detalle_subtitulo col-xs-12">
+                        {{registro.congreso.nombreCongreso}}
+                    </label>
+                    <label class="tit col-xs-12">
+                        N&uacute;mero
+                    </label>
+                    <label class="cont col-xs-12">
+                        {{registro.numero}}
+                    </label>
+                    <label class="tit col-xs-12">
+                        Fecha de inicio del congreso
+                    </label>
+                    <label class="cont col-xs-12">
+                        {{registro.fechaInicio | date: 'dd/MM/yyyy'}}
+                    </label>
+                    <label class="tit col-xs-12">
+                        Especialidad
+                    </label>
+                    <label class="cont col-xs-12 sin-desborde">
+                        {{registro.especialidad}}
+                    </label>
+                    <label class="tit col-xs-12">
+                        Lugar del congreso
+                    </label>
+                    <label class="cont col-xs-12">
+                        {{registro.pais.descripcion}}
+                    </label>
+                    <label class="tit col-xs-12">
+                        &Aacute;mbito
+                    </label>
+                    <label class="cont col-xs-12">
+                        {{registro.ambito.descripcion}}
+                    </label>
+                    <label class="tit col-xs-12">
+                        A&ntilde;o
+                    </label>
+                    <label class="cont col-xs-12">
+                        {{registro.year}}
+                    </label>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <button type="button" ui-sref="solicitudesrh" class="btn btn-primary">
+                <span class="fa fa-arrow-left"></span> Regresar
+            </button>
+        </div>
+    </div>
+
+
+
+</div>

@@ -1,0 +1,16 @@
+<div class="row">
+    <div class="col-xs-9">
+        <input type="text" class="form-control"
+               id="inputBuscarPropuesta" 
+               name="inputBuscarPropuesta" ng-model="ngModel.nombre" disabled>
+        <!-- NO hacerlo requerido, en caso de que se necesite, usar otra plantilla con el atributo templateUrl -->
+    </div>
+    <div class="col-xs-3">
+    <a class="btn btn-success" ng-click="openModalPropuesta()" title="Buscar propuesta">
+        <span class="glyphicon glyphicon-search"></span>
+    </a>
+        <a class="btn btn-danger" ng-click="eliminarModalPropuesta()" ng-hide="ngModel.nombre=='' || ngModel.nombre==null" title="Borrar propuesta">
+            <span class="glyphicon glyphicon-remove"></span>
+        </a>
+</div>    
+</div>

@@ -1,0 +1,24 @@
+
+    <div class="modal-header">
+        Solicitud de acceso
+        <button type="button" class="close" ng-click="cancel()" data-dissmiss="modal">x</button>
+    </div>
+    <div class="modal-body">
+        <p ng-bind-html="message"></p>
+        <strong>Justificaci&oacute;n</strong><a class="required">*</a>
+        <div class="form-group">
+            <form class="form-horizontal" name="Buscar">
+                <textarea class="form-control" id="justificacion" name="justificacion"
+                          ng-model="justificacion" ng-maxlength="500"
+                          maxlength="500"
+                          ng-minlength="10" required ></textarea>
+                <span class="error" ng-show="Buscar.justificacion.$dirty && !Buscar.justificacion.$valid">Dato requerido, con longitud m&iacute;nima de 10 y m&aacute;xima de 500</span>
+            </form>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-success" ng-click="ok(justificacion)"
+                ng-disabled="!Buscar.justificacion.$valid">Aceptar</button>
+        <button type="button" class="btn btn-primary" ng-click="cancel()">Cancelar</button>
+    </div>
+

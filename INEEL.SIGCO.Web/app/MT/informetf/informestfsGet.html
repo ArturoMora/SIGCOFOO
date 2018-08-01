@@ -1,0 +1,247 @@
+﻿<!-- page content -->
+<div class="vista">
+
+    <div class="page-title">
+        <div class="title_left">
+
+            <ol class="breadcrumb miga">
+                <li><i class="sg sg-informes-tecnico"></i> <a ui-sref="ListaItf">Informes técnicos finales/Buscar informes</a></li>
+            </ol>
+
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Criterios de b&uacute;squeda</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li>
+                            <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content sin-desborde">
+
+                    <form id="frmSearch" name="frmSearch">
+                        <div class="col-xs-12 col-md-6">
+
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    <label class="col-xs-12" for="titulo">T&iacute;tulo</label>
+                                    <div class="col-xs-12">
+                                        <input id="titulo" name="titulo"
+                                               maxlength="120"
+                                               ng-maxlength="120" type="text" placeholder="Buscar por t&iacute;tulo del ITF"
+                                               class="form-control input-md"
+                                               ng-model="search.titulo" ng-pattern="/^[ñáéíóúÑÁÉÍÓÚ$\w]{3}[ñáéíóúÑÁÉÍÓÚ\w\s]*$/" />
+                                        <span class="error" ng-show="frmSearch.titulo.$dirty && frmSearch.titulo.$invalid">
+                                            Se requiere dato v&aacute;lido con una
+                                            longitud total m&aacute;xima de 120
+                                        </span>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+
+
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    <label class="col-xs-12" for="titulo">Resumen</label>
+                                    <div class="col-xs-12">
+                                        <input id="resumen" name="resumen"
+                                               maxlength="120"
+                                               ng-maxlength="120" type="text" placeholder="Buscar por resumen del ITF"
+                                               class="form-control input-md"
+                                               ng-model="search.resumen" ng-pattern="/^[ñáéíóúÑÁÉÍÓÚ$\w]{3}[ñáéíóúÑÁÉÍÓÚ\w\s]*$/" />
+                                        <span class="error" ng-show="frmSearch.resumen.$dirty && frmSearch.resumen.$invalid">
+                                            Se requiere dato v&aacute;lido con una
+                                            longitud total m&aacute;xima de 120
+                                        </span>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+
+                            <!--<div class="col-xs-12">
+        <div class="form-group">
+            <label class="col-xs-12" for="palabras">Que contenga</label>
+            <div class="col-xs-12">
+                <input id="palabras" name="palabras" type="text"
+                       placeholder="P. ej.: T&iacute;tulo, Resumen"
+                       class="form-control input-md"
+                       ng-model="search.palabras"
+                       maxlength="50"
+                       ng-maxlength="50"
+                       ng-pattern="/^[ñáéíóúÑÁÉÍÓÚ$\w]{3}[ñáéíóúÑÁÉÍÓÚ\w\s]*$/" />
+                <span class="error" ng-show="frmSearch.palabras.$dirty && frmSearch.palabras.$invalid">
+                    Se requiere dato v&aacute;lido con una
+                    longitud total m&aacute;xima de 50<br />
+                    Se sugiere que cada palabra contenga por lo menos tres caracteres
+                </span>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>-->
+
+
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    <label class="col-xs-12" for="anno">A&ntilde;o de elaboración</label>
+                                    <div class="col-xs-12">
+                                        <input id="anno" name="anno"
+                                               maxlength="4"
+                                               ng-maxlength="25" type="text" placeholder="Buscar por año de elaboración ej : 2016"
+                                               class="form-control input-md"
+                                               ng-model="search.anno"
+                                               ng-pattern="/^[1234567890]{4}$/" />
+                                        <span class="error" ng-show="frmSearch.anno.$dirty && frmSearch.anno.$invalid">
+                                            A&ntilde;o a cuatro d&iacute;gitos
+                                        </span>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-12 col-md-6">
+
+                            <!--<div class="col-xs-12">
+                                <div class="form-group">
+                                 
+                                        <label class="col-xs-12">B&uacute;squeda por contenido en archivos adjuntos</label>
+                                        <div class="col-xs-10">
+
+                                            <input id="vocabulario" name="vocabulario" type="text"
+                                                   placeholder="P. ej.: Sistema, proyecto, an&aacute;lisis"
+                                                   class="form-control input-md"
+                                                   ng-model="search.vocabulario"
+                                                   maxlength="50"
+                                                   ng-maxlength="50"
+                                                   ng-pattern="/^[ñáéíóúÑÁÉÍÓÚ$\w]{3}[ñáéíóúÑÁÉÍÓÚ\w\s]*$/" />
+                                          
+                                        </div>
+                                       <div class="clearfix"></div>
+                                </div>
+                            </div>-->
+
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                   
+                                        <label class="col-xs-12">Proyecto</label>
+                                        
+
+                                            <div class="col-xs-10">
+                                                <input type="text" placeholder="Buscar por proyecto" class="form-control" id="usr" name="proyecto" ng-model="registro.proyectoNombre" disabled>
+                                            </div>
+                                            <div class="col-xs-2">
+                                                <a class="btn btn-success" ng-click="openProyecto()" title="Buscar proyecto" ng-disabled="desabilitar">
+                                                    <span class="glyphicon glyphicon-search"></span>
+                                                </a>
+                                            </div>
+                                       
+                                    <div class="clearfix"></div>
+                                </div>
+
+
+                            </div>
+                            <div class="col-xs-12">
+                                <div class="form-group">
+
+                                    
+                                        <div uo-modal nivel-min=2 nivel-max=3 ng-model="unidad" fecha=""></div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    
+                                        <label class="col-xs-12">Autor / participante</label>
+                                        <div class="col-xs-10">
+                                            <input type="text" ng-model="autor.nombreCompleto" id="searchTextJefe" disabled
+                                                   name="searchTextJefe" class="form-control" placeholder="Buscar por autor">
+
+                                        </div>
+                                        <div class="col-xs-2">
+                                            <a class="btn btn-success" ng-click="openAutor();" title="Buscar jefe de proyecto" ng-disabled="BuscarJefe">
+                                                <span class="glyphicon glyphicon-search"></span>
+                                            </a>
+                                        </div>
+                                    <div class="clearfix"></div>
+                                    </div>
+                            </div>
+                        </div>
+
+                    </form>
+
+                </div>
+
+              
+
+
+                <div class="clearfix"></div>
+               
+                <div class="col-xs-12 col-sm-12">
+
+
+
+                    <div style="margin-left:25px">
+                        <div class="form-group">
+                            <a class="btn btn-success" ng-click="buscar();visible=!visible">
+                                <i class="glyphicon glyphicon-search"></i> Buscar
+                            </a>
+                            <a class="btn btn-primary" ng-click="mostrarTodo();">
+                                Limpiar
+                            </a>
+                            <a class="btn btn-info" ng-show="generaFolio" ng-really-click="generarFolio();" >
+                                Enviar evidencia de b&uacute;squeda
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                    
+
+                </div>
+
+                    <!-- {{paramsDT}} <br/>//////<br/>
+                    {{tableParams}} <br/>/////<br/>
+                    {{showCase.dtInstance | json}} -->
+
+
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="row"  ng-show="BotonBusqueda">
+        <div class="col-xs-12">
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+                    <table datatable="" id="ITFBusquedaA1MT" dt-options="showCase.dtOptions" dt-columns="showCase.dtColumns"
+                           dt-instance="showCase.dtInstance"
+                           class="table table-hover table-striped table-condensed dt-responsive"
+                           cellspacing="0" width="100%"></table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!--<div class="row">
+        <div class="col-xs-12">
+            <button type="button" ui-sref="AddITF" class="btn btn-success">
+                <span class="glyphicon glyphicon-plus"></span> Agregar
+            </button>
+
+
+        </div>
+    </div>-->
+
+
+
+</div>
+

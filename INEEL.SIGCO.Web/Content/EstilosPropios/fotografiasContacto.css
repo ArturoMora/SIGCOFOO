@@ -1,0 +1,22 @@
+﻿.container {
+    width: 100%;
+}
+
+.circle {
+    border-radius: 50%;
+    width: 100%;
+    padding-bottom: 100%;
+    background: #fff;
+    position:relative;
+    overflow:hidden;
+    z-index:2;
+}
+.image {
+        z-index: 1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: auto;
+    height: auto;
+    max-height: 100%;
+}

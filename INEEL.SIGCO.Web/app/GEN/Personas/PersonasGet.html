@@ -1,0 +1,57 @@
+﻿<div id="page-wrapper">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">Listado de personal </h1>
+            <div ng-show="registro.length === 0" class="alert alert-danger">No hay caetgorias registradas</div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-5">
+            <select id="unidad" name="unidad" class="form-control" ng-change="myFunc(myvalue)" ng-model="claveuUnidad" ng-options="e.claveUnidad as e.nombreUnidad  for e in unidades" ng-required="true">
+                <option value="">Seleccione una unidad organizacional</option>
+            </select>
+        </div>
+    </div>
+
+    <br/>
+
+    <div ng-show="loading">
+        <img src="images/cargando.gif" />
+    </div>
+    <div class="row" ng-show="!loading">
+        <div class="col-lg-12">
+            <div ng-hide="registro.length === 0">
+                <table id="GENPersonasGet" dt-instance="dtInstance" class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" datatable="ng" width="100%" dt-options="dtOptions">
+                    <thead>
+                        <tr>
+                            <th data-priority="1">No. Empleado</th>
+                            <th class="thAjuste text-center" data-priority="2">Nombre</th>
+                            <th class="thAjuste text-center" data-priority="3">Correo electrónico</th>
+                            <th class="thAjuste text-center" data-priority="6">Opciones</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr ng-repeat="obj in registro">
+                            <td>{{obj.clavePersona}}</td>
+                            <td>{{obj.nombre}} {{obj.apellidoPateno}} {{obj.apellidoMaterno}}</td>
+                            <td>{{obj.correo}}</td>
+                           
+                            <td class="text-center">
+                                <a class="btn btn-default" ui-sref="personasEdit({id:obj.clavepersona})" title="Editar">
+                                    <i class="glyphicon glyphicon-pencil"></i>
+                                </a>
+                            </td>
+
+
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <button type="button" ui-sref="personasAdd" class="btn btn-success">
+                <span class="glyphicon glyphicon-plus"></span> Agregar
+            </button>
+        </div>
+    </div>
+</div>

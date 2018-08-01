@@ -1,0 +1,321 @@
+<div class="vista">
+    <div class="page-title">
+        <div class="title_left">
+            <ol class="breadcrumb miga">
+                <li>
+                    <i class="disabled fa fa-cogs"></i>
+                    <a ui-sref="empresasGet">Administraci&oacute;n/Cat&aacute;logos/Empresas</a>
+                </li>
+                <li class="active">Detalles</li>
+            </ol>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="x_panel">
+                <div class="x_title sin-desborde">
+                    <h2 class="detalle">{{empresa.nombreEmpresa}}</h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content sin-desborde">
+                    <div class="col-md-3 col-sm-3 col-xs-12 profile_left">
+                        <div class="profile_img">
+                            <div id="crop-avatar">
+                                <img class="img-thumbnail" ng-src="data:image/png;base64,{{empresa.adjunto64}}" width="180" height="180" title={{empresa.nombreEmpresa}}>
+                            </div>
+                        </div>
+                        <br />
+                        <ul class="list-unstyled user_data">
+                            <li>
+                                <i class="fa fa fa-institution"></i> {{empresa.tipoOrganizacion.nombre}}
+                            </li>
+                            <li>
+                                <i class="fa fa fa-user"></i> {{empresa.nombreTitular}}
+                            </li>
+                            <li lass="m-top-xs">
+                                <i class="fa fa-briefcase user-profile-icon"></i> {{empresa.puesto}}
+                            </li>
+                            <li lass="m-top-xs">
+                                <i class="fa fa fa-envelope"></i> {{empresa.correo}}
+                            </li>
+                            <li lass="m-top-xs">
+                                <i class="fa fa fa-phone" title="Tel"></i> {{empresa.telefono}} - ext.{{empresa.ext}}
+                            </li>
+                            <li lass="m-top-xs">
+                                <i class="fa fa fa-mobile-phone" title="celular"></i> {{empresa.celular}}
+                            </li>
+                            <li lass="m-top-xs">
+                                <i class="fa fa-briefcase user-profile-icon"></i> {{empresa.sitioWeb}}
+                            </li>
+                        </ul>
+                        <div ng-show="empresa.descripcion != null">
+                            <div class="x_title">
+                                <h2>Descripci&oacute;n </h2>
+                                <div class="clearfix"></div>
+                            </div>
+                            <ul class="list-unstyled user_data">
+                                <li class="m-top-xs">
+                                    <i class="fa fa"></i> {{empresa.descripcion}}
+                                </li>
+                            </ul>
+                        </div>
+                        <br/>
+                        <div class="x_title">
+                            <h2>Domicilio </h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <ul class="list-unstyled user_data">
+                            <li class="m-top-xs">
+                                <i class="fa fa"></i>Calle: {{empresa.calle}}
+                            </li>
+                            <li class="m-top-xs">
+                                <i class="fa fa"></i>Colonia: {{empresa.colonia}}
+                            </li>
+                            <li class="m-top-xs">
+                                <i class="fa fa"></i>Localidad: {{empresa.localidad}}
+                            </li>
+                            <li class="m-top-xs">
+                                <i class="fa fa"></i>cp: {{empresa.cp}}
+                            </li>
+                        </ul>
+                    </div>
+                    <!--Tabs de detalles-->
+                    <div class="col-md-9 col-sm-9 col-xs-12">
+                        <div class="" role="tabpanel" data-example-id="togglabe-tabs">
+                            <ul id="myTab" class="nav nav-tabs tabs-responsive" role="tablist">
+                                <li role="presentation" class={{active2}}>
+                                    <a ng-click="tab = 2;newTAB()" data-toggle="tab" role="tab" aria-expanded="true" style="cursor: pointer">Unidad Organizacional</a>
+                                </li>
+
+                                <li role="presentation" class={{active3}}>
+                                    <a ng-click="tab = 3;newTAB()" data-toggle="tab" role="tab" aria-expanded="true" style="cursor:pointer">Proyectos</a>
+                                </li>
+                                <li role="presentation" class={{active4}}>
+                                    <a ng-click="tab = 4;newTAB()" data-toggle="tab" role="tab" aria-expanded="true" style="cursor:pointer">Propuestas</a>
+                                </li>
+                                <li role="presentation" class={{active5}}>
+                                    <a ng-click="tab = 5;newTAB()" data-toggle="tab" role="tab" aria-expanded="true" style="cursor:pointer">Iniciativas</a>
+                                </li>
+                                <li role="presentation" class={{active6}}>
+                                    <a ng-click="tab = 6;newTAB()" data-toggle="tab" role="tab" aria-expanded="true" style="cursor:pointer">Contactos actuales</a>
+                                </li>
+                                <li role="presentation" class={{active7}}>
+                                    <a ng-click="tab = 7;newTAB()" data-toggle="tab" role="tab" aria-expanded="true" style="cursor:pointer">Historial unidades organizacionales</a>
+                                </li>
+                            </ul>
+                            <div ng-show="tab == 2" class="tab-content">
+                                <br/>
+                                <br/>
+                                <div class="col-xs-12 sin-desborde">
+                                    <div ng-show="data.length === 0" class="alert advertencia">
+                                        No se ha agregado Unidad Organizacional {{empresa.nombreEmpresa}}
+                                    </div>
+
+                                </div>
+                                <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="home-tab">
+                                    <div ng-show="data.length>0">
+                                        <script type="text/ng-template" id="nodes_renderer.html">
+                                            <div ui-tree-handle class="tree-node-content">
+                                                <a class="btn btn-success btn-xs" ng-if="node.nodes && node.nodes.length > 0 "
+                                                   data-nodrag ng-click="toggle(this)">
+                                                    <span class="glyphicon"
+                                                          ng-class="{
+                                              'glyphicon-chevron-right': collapsed,
+                                              'glyphicon-chevron-down': !collapsed
+                                            }"></span>
+                                                </a>
+                                                <a class="btn btn-success btn-xs" ng-if="node.nodes && node.nodes.length < 1"
+                                                   data-nodrag ng-click="newSubItem(this)" style="margin-right: 8px;">
+                                                    <span class="glyphicon glyphicon-plus" title="Expandir"
+                                                          ng-if="!(node.hoja && node.hoja===true)"></span>
+                                                    <span class="glyphicon glyphicon-minus" title="Sin elementos"
+                                                          ng-if="node.hoja && node.hoja===true"></span>
+                                                </a>
+                                                <a class="btn btn-link btn-md" ng-click="verDetalle(this)"
+                                                    data-nodrag style="margin-right: 8px;"
+                                                   title="Seleccionar">
+                                                    {{node.title}}
+                                                </a>
+                                            </div>
+                                            <ol ui-tree-nodes="" data-nodrop-enabled ng-model="node.nodes" ng-class="{hidden: collapsed}">
+                                                <li ng-repeat="node in node.nodes" ui-tree-node ng-include="'nodes_renderer.html'">
+                                                </li>
+                                            </ol>
+                                        </script>
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <button class="btn btn-success" ng-click="expandAll()">Ver toda la organizaci&oacute;n</button>
+                                                <button class="btn btn-primary" ng-click="collapseAll()">Contraer todo</button>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-xs-12">
+                                                <div ui-tree id="tree-root" data-nodrop-enabled>
+                                                    <ol ui-tree-nodes ng-model="data" data-nodrop-enabled>
+                                                        <li ng-repeat="node in data" ui-tree-node ng-include="'nodes_renderer.html'"></li>
+                                                    </ol>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div ng-show="tab == 3" class="tab-content">
+                                <br/>
+                                <br/>
+                                <div ng-show="proyectosAsignadosEmpresa.length === 0" class="alert advertencia">
+                                    No existen proyectos asociados a la empresa {{empresa.nombreEmpresa}}
+                                </div>
+                                <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="home-tab">
+                                    <div ng-hide="proyectosAsignadosEmpresa.length === 0">
+                                        <table id="CRempresaDetails" dt-instance="dtInstance" class="table table-hover table-striped table-condensed" cellspacing="0"
+                                            datatable="ng" width="100%" dt-options="dtOptions">
+                                            <thead>
+                                                <tr>
+                                                    <th data-priority="1">N&uacute;mero</th>
+                                                    <th>Nombre</th>
+                                                    <th>Contacto</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-repeat="p in proyectosAsignadosEmpresa">
+                                                    <td>{{p.proyectoId}}</td>
+                                                    <td>
+                                                        <a class="link" style="cursor:pointer" ng-click="detalleProyectoAsignado(p.proyectoId)" title="Detalles">{{p.nombre}}</a>
+                                                    </td>
+                                                    <td>{{p.contacto.nombreContacto}} {{p.contacto.apellidoPaterno}} {{p.contacto.apellidoMaterno}}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div ng-show="tab == 4" class="tab-content">
+                                <br/>
+                                <br/>
+                                <div ng-show="propuestasAsignadasEmpresa.length === 0" class="alert advertencia">
+                                    No existen propuestas asociadas a la empresa {{empresa.nombreEmpresa}}
+                                </div>
+                                <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="home-tab">
+                                    <div ng-hide="propuestasAsignadasEmpresa.length === 0">
+                                        <table id="CRempresaDetailspropuestasAsignadasEmpresa" dt-instance="dtInstance" class="table table-hover table-striped table-condensed"
+                                            cellspacing="0" datatable="ng" width="100%" dt-options="dtOptions">
+                                            <thead>
+                                                <tr>
+                                                    <th data-priority="1">N&uacute;mero propuesta</th>
+                                                    <th>Nombre</th>
+                                                    <th>Contacto</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-repeat="p in propuestasAsignadasEmpresa">
+                                                    <td>{{p.propuestaId}}</td>
+                                                    <td>
+                                                        <a class="link" style="cursor:pointer" ng-click="detallePropuestaAsignado(p.propuestaId)">{{p.titulo}}</a>
+                                                    </td>
+                                                    <td>{{p.contacto.nombreContacto}} {{p.contacto.apellidoPaterno}} {{p.contacto.apellidoMaterno}}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div ng-show="tab == 5" class="tab-content">
+                                <br/>
+                                <br/>
+                                <div ng-show="iniciativasAsignadasEmpresa.length === 0" class="alert advertencia">
+                                    No existen iniciativas asociadas a la empresa {{empresa.nombreEmpresa}}
+                                </div>
+                                <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="home-tab">
+                                    <div ng-hide="iniciativasAsignadasEmpresa.length === 0">
+                                        <table id="CRempresaDetailsiniciativasAsignadasEmpresa" dt-instance="dtInstance" class="table table-hover table-striped table-condensed"
+                                            cellspacing="0" datatable="ng" width="100%" dt-options="dtOptions">
+                                            <thead>
+                                                <tr>
+                                                    <th data-priority="1">N&uacute;mero iniciativa</th>
+                                                    <th>Nombre</th>
+                                                    <th>Contacto</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-repeat="i in iniciativasAsignadasEmpresa">
+                                                    <td>{{i.folioId}}</td>
+                                                    <td>
+                                                        <a class="link" style="cursor:pointer" ng-click="detalleIniciativaAsignada(i.folioId)" title="Detalles">{{i.titulo}}</a>
+                                                    </td>
+                                                    <td>{{i.contacto.nombreContacto}} {{i.contacto.apellidoPaterno}} {{i.contacto.apellidoMaterno}}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div ng-show="tab == 6" class="tab-content">
+                                <br/>
+                                <br/>
+                                <div ng-show="contactos.length === 0" class="alert advertencia">
+                                    No existen contactos asociados a la empresa {{empresa.nombreEmpresa}}
+                                </div>
+                                <div ng-show="contactos.length > 0">
+                                    <table id="contactosEmpresaAdd" dt-options="dtOptions" class="table table-hover table-striped table-condensed dt-responsive"
+                                        cellspacing="0" datatable="ng" width="100%">
+                                        <thead>
+                                            <tr>
+                                                <th data-priority="1">Nombre</th>
+                                                <th>Puesto</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="e in contactos">
+                                                <td>{{e.nombreContacto}} {{e.apellidoPaterno}} {{e.apellidoMaterno}} </td>
+                                                <td>{{e.puesto ==null? 'No disponible' : e.puesto}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+                            <div ng-show="tab == 7" class="tab-content">
+                                <br/>
+                                <br/> 
+                                <div ng-show="historial.length === 0" class="alert advertencia">
+                                    No existen movimientos registrados
+                                </div>
+                                <div ng-show="historial.length > 0">
+                                    <table id="historialUnidades" dt-options="dtOptions" class="table table-hover table-striped table-condensed dt-responsive"
+                                        cellspacing="0" datatable="ng" width="100%">
+                                        <thead>
+                                            <tr>
+                                                <th data-priority="1">Nombre unidad</th>
+                                                <th data-priority="1">Nombre anterior</th>
+                                                <th>Fecha de cambio</th>
+                                                <th>Contacto</th>
+                                                <th>Padre de la unidad</th>
+                                                <th>Acci&oacute;n</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="unidad in historial">
+                                                <td>{{unidad.nombreUnidad}}</td>
+                                                <td>{{unidad.nombreAnteriorUnidad}}</td>
+                                                <td>{{unidad.fecha | date: 'dd-MM-yyyy'}}</td>
+                                                <td>{{unidad.nombreContacto!=null? unidad.nombreContacto : '--'}}</td>
+                                                <td>{{unidad.nombreUnidadPadre!=null? unidad.nombreUnidadPadre: '--'}}</td>
+                                                <td>{{unidad.accion}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button type="button" class="btn btn-primary" ng-click="globalRegresar()">
+                    <span class="fa fa-arrow-left"></span> Regresar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

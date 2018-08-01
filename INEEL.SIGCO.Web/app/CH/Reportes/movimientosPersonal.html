@@ -1,0 +1,160 @@
+﻿<div id="page-wrapper">
+    <div class="row">
+        <div class="col-lg-12">
+            <ol class="breadcrumb miga">
+                <li>
+                    <i class="sg sg-inventario-rh"></i>
+                    <a ui-sref="ConsultaMovimientosPersonal">Inventario RH / Movimientos de personal</a>
+                </li>
+            </ol>
+        </div>
+    </div>
+    <div class="row">
+        <form name="ValidForm" id="form" class="form-horizontal">
+            <div class="col-md-12 x_panel">
+                <div class="x_title">
+                    <h2>Criterios de b&uacute;squeda</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li>
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <!---Calendarios-->
+                <div class="row col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="col-lg-6 col-md-6 col-xs-6">
+                        <label class="col-md-12 col-sm-12 col-xs-12">
+                            Fecha inicial
+                        </label>
+                        <div class="col-lg-10 col-md-10 col-xs-10">
+                            <input show-button-bar="false" ng-minlength="8" maxlength="10" datepicker-options="datePicker06.FechaOptions" uib-datepicker-popup='dd/MM/yyyy'
+                                popup-placement="bottom" type="text" class="form-control" ng-model="fechaInicio" is-open="open"
+                                ng-required="true" close-text="Close" name="fechach" />
+                        </div>
+                        <div class="col-md-2 col-lg-2 col-xs-2">
+                            <span>
+                                <button type="button" class="btn btn-success" ng-click="open=true">
+                                    <i class="glyphicon glyphicon-calendar"></i>
+                                </button>
+                            </span>
+                        </div>
+
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-xs-6">
+                        <label class="col-md-12 col-sm-12 col-xs-12">
+                            Fecha final
+                        </label>
+                        <div class="row col-lg-10 col-md-10 col-xs-10">
+                            <input show-button-bar="false" ng-minlength="8" maxlength="10" datepicker-options="datePicker06.FechaOptions" uib-datepicker-popup='dd/MM/yyyy'
+                                popup-placement="bottom" type="text" class="form-control" ng-model="fechaTermino" is-open="open2"
+                                ng-required="true" close-text="Close" name="fechach" />
+                        </div>
+                        <div class="col-md-2 col-lg-2 col-xs-2">
+                            <span>
+                                <button type="button" class="btn btn-success" ng-click="open2=true">
+                                    <i class="glyphicon glyphicon-calendar"></i>
+                                </button>
+                            </span>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="clearfix">
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                </div>
+
+                <!---Botones de accion-->
+                <div class="col-lg-12 col-md-12 col-xs-12">
+                    <div class="col-md-2 col-sm-2 col-lg-2 col-xs-2">
+                        <button type="button" class="btn btn-success" ng-click="buscar()">Generar reporte</button>
+                    </div>
+                    <div>
+                        <span>
+                            <button type="button" class="btn btn-success" ng-click="exportGrafica()" ng-disabled="error">Descargar PDF</button>
+                        </span>
+                        <span>
+                            <button type="button" class="btn btn-success" onclick="downloadExcelTableById('tablaMovimientosPersonal', 'movimientosPersonal'); ">Descargar Excel</button>
+                        </span>
+                        <span ng-show="ValidForm.fechach.$dirty &&  ValidForm.fechach.$invalid" class="error">Formato inválido 'dd/MM/yyyy'</span>
+                    </div>
+
+
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="row">
+        <div class="col-md-12 col-lg-12 col-xs-12 sin-desborde">
+            <form role="form">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="table-responsive" ng-show="!buscandoInformacion">
+                            <table id="tablaMovimientosPersonal" class="table table-hover table-striped table-condensed dt-responsive">
+                                <thead>
+                                    <tr class="bg-primary">
+                                        <th style="text-align:center;max-width:150px;min-width:150px">Movimiento</th>
+                                        <th style="text-align:center;max-width:130px;min-width:130px">Cantidad</th>
+                                        <th style="text-align:left;max-width:420px;min-width:130px">Nombre</th>
+                                        <th style="text-align:center;max-width:420px;min-width:130px">Gerencia</th>
+                                        <th style="text-align:center;max-width:200px;min-width:130px">Categor&iacute;a</th>
+                                        <th style="text-align:center;max-width:130px;min-width:130px">Fecha cambio</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!--Iteramos los encabezados de los registros-->
+                                    <tr ng-repeat-start="reg in resultados">
+                                        <td>
+                                            <label class="control-label">
+                                                {{reg.tipoMovimiento==null? 'DESCONOCIDO' : reg.tipoMovimiento}}
+                                            </label>
+                                        </td>
+                                        <td>
+                                            <label class="control-label">
+                                                {{reg.cantidadMovimientos}}
+                                            </label>
+                                        </td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <!--Iteramos  los registros-->
+                                    <tr ng-repeat="e in reg.registros| orderBy : -(e.fecha | date: 'yyyy/MM/dd')" ng-repeat-end>
+                                        <td></td>
+                                        <td></td>
+                                        <td style="text-align:left;max-width:420px;min-width:130px">
+                                            <a ng-click="openProfile(e.clave)" title="Detalle de empleado" class="linkTabla" style="cursor:hand;cursor: pointer;">
+                                                {{e.clave}} {{e.nombre}}
+                                            </a>
+                                            
+                                        </td>
+                                        <td style="text-align:center;max-width:420px;min-width:130px">{{e.nombreDepartamento}}</td>
+                                        <td style="text-align:center;max-width:200px;min-width:130px">{{e.claveCategoria}}</td>
+                                        <td style="text-align:center;max-width:130px;min-width:130px">{{e.fecha | date: 'dd/MM/yyyy'}}</td>
+                                    </tr>
+
+                                    <!-- <tr ng-repeat-start="reg in resultados">
+                                        <td rowspan="{{reg.cantidadMovimientos+1}}">{{reg.tipoMovimiento}}</td>
+                                        <td rowspan="{{reg.cantidadMovimientos+1}}">{{reg.cantidadMovimientos}}</td>
+                                        <tr ng-repeat="e in reg.registros" ng-repeat-end>
+                                            <td style="text-align:center;max-width:130px;min-width:130px">{{e.nombre}}</td>
+                                            <td style="text-align:center;max-width:130px;min-width:130px">{{e.nombreDepartamento}}</td>
+                                            <td style="text-align:center;max-width:130px;min-width:130px">{{e.claveCategoria}}</td>
+                                            <td style="text-align:center;max-width:130px;min-width:130px">{{e.fecha | date: 'dd/MM/yyyy'}}</td>
+                                        </tr>
+                                    </tr> -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

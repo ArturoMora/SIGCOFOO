@@ -1,0 +1,174 @@
+﻿<!DOCTYPE html>
+<html lang="es-mx" ng-app="ineelDESCARGAS">
+
+<head>
+    <style>
+        /* Sticky footer styles
+        -------------------------------------------------- */
+        html {
+            position: relative;
+            min-height: 100%;
+        }
+
+        body {
+            /* Margin bottom by footer height */
+            margin-bottom: 60px;
+        }
+
+        .pie_de_pagina {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            /* Set the fixed height of the footer here */
+            height: 90px;
+            background-color: #2A3F54;
+            border-top: 3px solid #1ABB9C;
+        }
+
+        .encabezado_sigco {
+            height: 60px;
+            background-color: #2A3F54;
+            border-bottom: 3px solid #1ABB9C;
+            color: #FFFFFF !important;
+            padding: 0px;
+        }
+
+        .titulo_sigco_descargas {
+            font-size: 22px;
+        }
+
+
+        /* Custom page CSS
+        -------------------------------------------------- */
+        /* Not required for template or sticky footer method. */
+
+        body > .container {
+            padding: 60px 15px 0;
+        }
+
+        .container .text-muted {
+            margin: 20px 0;
+        }
+
+        .footer > .container {
+            padding-right: 15px;
+            padding-left: 15px;
+        }
+
+        code {
+            font-size: 80%;
+        }
+    </style>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="INEEL">
+
+    <title>Descargas</title>
+    <!-- Bootstrap -->
+    <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+
+
+
+
+    <script src="Scripts/jquery-2.1.0.min.js"></script>
+    <script src="Scripts/jquery-ui-1.11.3.min.js"></script>
+
+    <!-- <script src="Scripts/jquery-1.9.1.js"></script>-->
+    <script src="Scripts/bootstrap.js"></script>
+    <script src="Scripts/toastr.js"></script>
+
+    <script src="Scripts/angular.js"></script>
+    <script src="Scripts/angular-ui-router.js"></script>
+
+    <script src="Scripts/angular-block-ui.min.js"></script>
+
+    <script src="Scripts/angular-animate.min.js"></script>
+    <script src="Scripts/angular-resource.js"></script>
+
+
+    <script src="Scripts/angular-ui/ui-bootstrap-tpls.js"></script>
+    <script src="Scripts/angular-local-storage.min.js"></script>
+
+    <!--Tablas-->
+    <!--<script src="Scripts/DataTables/jquery.dataTables.min.js"></script>
+    <script src="Scripts/angular-datatables/angular-datatables.js"></script>
+    <script src="Scripts/DataTables/dataTables.bootstrap.js"></script>-->
+
+    <script src="Scripts/aes.js"></script>
+    <script src="Scripts/mdo-angular-cryptography.js"></script>
+    <script src="scripts/globalineel.js"></script>
+    <script src="app/_services/ineel.services.js"></script>
+    <script src="app/_services/factories/Descargas.js"></script>
+
+
+    <!--   <script src="app/MT/_services/factories/auth.MT.service.js"></script>-->
+    <script src="app/_services/factories/authService.js"></script>
+    <script src="app/_services/factories/menu.service.js"></script>
+    <script src="app/_services/factories/permisos.service.js"></script>
+    <script src="app/_services/factories/authInterceptorService.js"></script>
+    <link href="Content/angular-block-ui.min.css" rel="stylesheet" />
+
+    <script src="app/Descargas/appDESCARGAS.js"></script>
+
+
+    <script src="app/Descargas/Vistas/Controller/homeDescargas.ctrl.js"></script>
+    <script src="app/Descargas/Vistas/Controller/DescargasQ.ctrl.js"></script>
+    <script src="app/CR/clientes/controllers/proyectosvigentespdf.ctrl.js"></script>
+    <script src="app/CR/clientes/controllers/propuestasiniciativasonpdf.ctrl.js"></script>
+    <script src="app/Descargas/Vistas/Controller/DescargaITF.js"></script>
+    <script src="app/Descargas/Vistas/Controller/DescargaITFcaratula.js"></script>
+
+    <script src="Scripts/jspdf.min.js"></script>
+    <script src="Scripts/jspdf.plugin.autotable.src.js"></script>
+
+</head>
+
+
+
+<body>
+
+    <!-- Fixed navbar -->
+    <div class="encabezado_sigco">
+        <div class="container">
+            <div class="navbar-header">
+                <img src="Content/images/logo_sigco_encabezado_descargas.png" />
+                <span class="titulo_sigco_descargas">Gesti&oacute;n del conocimiento (SIGCO)</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Begin page content -->
+    <div class="container">
+        <div class="col-lg-6"></div>
+        <div class="jumbotron">
+            <h1 class="text-center"><span class="fa fa-download"></span></h1>
+            <h3 class="text-center">Descargando archivo...</h3>
+        </div>
+
+        <div data-ng-controller="indexControllerDescargas">
+            <div class="headerFull">
+            </div>
+            <div class="col-xs-12 text-center">
+                <div ui-view></div>
+
+                <button id="singlebutton" name="singlebutton" class="btn btn-primary" ng-click="close()" title="Cerrar y continuar">Continuar</button>
+            </div>
+
+        </div>
+
+    </div>
+
+    <footer class="pie_de_pagina">
+        <div class="container">
+            <br />
+            <img class="pull-right" src="Resources/logo_ineel.png" />
+        </div>
+    </footer>
+</body>
+
+
+</html>

@@ -1,0 +1,175 @@
+﻿<ul class="hidden-xs nav navbar-nav navbar-left" data-ng-hide="!authentication.isAuth || !isModulo">
+    <li class="" ng-repeat="mod in modulos">
+        <a href="{{mod.url}}" title="{{mod.descripcion}}" class="btn-moduls {{modulo==mod.moduloId?'colorActivo':''}}">
+            <font class="whiteM">{{mod.moduloId}}</font>
+        </a>
+    </li>    
+</ul>
+<!--
+<ul ng-if="isSigco" class="hidden-xs nav navbar-nav navbar-left" data-ng-hide="!authentication.isAuth">
+    <li>
+        <a style="cursor:default" href="">&nbsp;</a>
+    </li>
+</ul>
+    -->
+<ul ng-if="isSigco" class="hidden-xs nav navbar-nav navbar-left">
+    <li>
+        <a style="cursor:default" class="titLogo">Gesti&oacute;n del conocimiento </a>
+    </li>
+</ul>
+    
+<ul class="nav navbar-nav navbar-right">
+
+    <li class="">
+        <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                    <span class="glyphicon glyphicon-user"></span>&nbsp;{{authentication.nombreCompleto}}&nbsp;<font class="hidden-xs">/&nbsp;{{rolDescripcion}}</font>
+                    <span class=" fa fa-angle-down"></span>
+                </a>
+        <ul class="dropdown-menu dropdown-usermenu pull-right">
+            <!-- <li><a ng-click="openchangepassword();"><i class="glyphicon glyphicon-lock pull-right"></i>Cambiar contraseña</a></li> -->
+            <!--<li><a href="IndexCH.html#/fichapersonal/" ng-click="reseteaFicha()"><i class="glyphicon glyphicon-user pull-right"></i>{{''|getFichaPersonal}}</a></li>-->
+            <li><a href="IndexCH.html#/fichapersonal/" ><i class="glyphicon glyphicon-user pull-right"></i>{{''|getFichaPersonal}}</a></li>
+            <li><a href="" data-ng-click="logOut()"><i class="fa fa-sign-out pull-right"></i>Cerrar sesi&oacute;n</a></li>
+        </ul>
+    </li>
+    <!--///-->
+    <li class="" ng-if="rol==1 || rol==4 || rol==5 || rol==2 || rol==16 || rol==19 || rol==1026 || rol==1028 || rol==1029 || externas==true || rol==15 || rol==1025" >
+        <a href="javascript:;" ng-click="getNotificaciones()" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+            <span class="glyphicon glyphicon-file"></span>&nbsp;Solicitudes&nbsp;
+            <span class="fa fa-angle-down"></span>
+        </a>
+        <ul class="dropdown-menu dropdown-usermenu pull-right">
+            <li ng-if="soliResult.length>0" ng-repeat="soli in soliResult">
+                <a href="{{soli.state}}">
+                    <i class="badge pull-right">{{soli.contador}}</i>
+                   {{soli.nombre}}
+                </a>
+            </li>
+            <li ng-if="soliResult.length==0">
+                <a>
+                    No hay solicitudes
+                </a>
+            </li>
+        </ul>
+    </li>
+    <!--ACCESOS RAPIDOS 
+                <li role="presentation" class="dropdown">
+                <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
+                    <i class="fa fa-bar-chart"></i>
+                    
+                </a>
+                <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
+                    <li class="informacion"><h5 class="pull-right colorTit">Accesos r&aacute;pidos  &nbsp;</h5></li>
+                    <li>
+                        <a href="indexCH.html#/perfilcurricularcolectivo">
+                            <span class="image fa fa-line-chart"></span>
+                            <span>
+                                <span>Perfil curricular</span>
+                            </span>
+                            <span class="message">
+                                Perfil curricular: experiencia profesional, edad, distribución por plaza, etc.
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="sigco.html#/proyectosPorUnidad/{{anioActual}}">
+                            <span class="image fa fa-line-chart"></span>
+                            <span>
+                                <span>Proyectos por unidad organizacional</span>
+                                
+                            </span>
+                            <span class="message">
+                                Muestra un listado de la cantidad de proyectos por gerencia
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="sigco.html#/facturacionRealPorUnidad/{{anioActual}}">
+                            <span class="image fa fa-line-chart"></span>
+                            <span>
+                                <span>Facturaci&oacute;n real por gerencia</span>
+                                
+                            </span>
+                            <span class="message">
+                                Muestra un listado de la facturaci&oacute;n real por gerencia
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="sigco.html#/facturacionPlaneadaPorUnidad/{{anioActual}}">
+                            <span class="image fa fa-line-chart"></span>
+                            <span>
+                                <span>Facturaci&oacute;n planeada por gerencia</span>
+                                
+                            </span>
+                            <span class="message">
+                                Muestra un listado de la facturaci&oacute;n planeada por gerencia
+                            </span>
+                        </a>
+                    </li>
+
+
+                </ul>
+            </li>-->
+    <!-- NOTIFICACIONES pendiente 
+            <li ng-if="rol!=8" role="presentation" class="dropdown" data-ng-controller="NotificationCtrl">
+                <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
+                    <i class="fa fa-envelope-o"></i>
+                    <span class="badge {{pendientes<=5&&pendientes>0?'bg-orange':pendientes>5?'bg-red':'bg-green' }}">{{pendientes}}</span>
+                </a>
+                <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
+
+                    <li>
+                        <div class="text-center" ng-show="pendientes>0">
+                            <a href="indexCH.html#/solicitudesrh">
+                                <strong>Atender {{pendientes}} solicitudes</strong>&nbsp;
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        </div>
+                        <div class="text-center" ng-show="pendientes==0">
+                            <a>
+                                <strong>No tiene solicitudes</strong>&nbsp;
+
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+            </li>
+    -->
+
+    <!--<li ng-if="rol!=8" role="presentation" class="dropdown" data-ng-controller="NotificationCtrl">-->
+    <li>
+        <a href="sigco.html#/tablero">
+            <i class="fa fa-bar-chart"></i>
+        </a>
+    </li>
+    <li role="presentation" class="dropdown" data-ng-controller="NotificationCtrl">
+
+        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+            <i class="fa fa-question-circle"></i>
+        </a>
+        <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
+
+            <li>
+                <div class="text-center">
+                    <a href="/archivos/documentacion.html" target="_blank">
+                        <strong>Manuales de usuario</strong>&nbsp;
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                </div>
+                <div class="text-center">
+                    <a href="sigco.html#/videotutoriales" target="_blank" >
+                        <strong>Video tutoriales</strong>&nbsp;
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                </div>
+                <div class="text-center">
+                    <a href="sigco.html#/ResponsablesModulos" target="_blank">
+                            <strong>Responsables de módulos </strong>&nbsp;
+                            <i class="fa fa-angle-right"></i>
+                        </a>
+                </div>
+            </li>
+        </ul>
+    </li>
+</ul>

@@ -1,0 +1,56 @@
+<div class="modal-content">
+    <div class="modal-header">
+        Editar contacto
+        <button type="button" class="close" ng-click="cancel()" data-dissmiss="modal">x</button>
+    </div>
+    <form role="form" ng-submit="ok()" novalidate name="contactoEditForm">
+        <div class="modal-body">
+            <div class="panel">
+                <div class="panel-body">
+                    <div class="col-lg-12">
+                      <div class="form-group">
+                          <label>Empresa: </label>
+                          <input required type="text" name="nombreEmpresa" ng-model="contacto.empresa.nombreEmpresa" class="form-control" ng-maxlength="200" />
+                      </div>
+                        <div class="form-group">
+                            <label>Nombre Contacto: </label>
+                            <input type="text" name="puesto" ng-model="contacto.nombreContacto" class="form-control" ng-maxlength="200" />
+                        </div>
+                        <div class="form-group">
+                            <label>A. Paterno: </label>
+                            <input type="text" name="puesto" ng-model="contacto.apellidoPaterno" class="form-control" ng-maxlength="200" />
+                        </div>
+                        <div class="form-group">
+                            <label>A. Materno: </label>
+                            <input type="text" name="puesto" ng-model="contacto.apellidoMaterno" class="form-control" ng-maxlength="200" />
+                        </div>
+                        <div class="form-group">
+                            <label>Puesto: </label>
+                            <input type="text" name="puesto" ng-model="contacto.puesto" class="form-control" ng-maxlength="200" />
+                        </div>
+                        <div class="form-group">
+                            <label>Ciudad o Localidad: </label>
+                            <input type="text" name="localidad" ng-model="contacto.localidad" class="form-control" ng-maxlength="200" />
+                        </div>
+                        <div class="form-group">
+                            <label>Correo: </label>
+                            <input type="text" name="correo" ng-model="contacto.correo" class="form-control" ng-maxlength="200" />
+                        </div>
+                        <div class="form-group">
+                            <label>Tel&eacute;fono: </label>
+                            <input type="text" name="telefono" ng-model="contacto.telefono" class="form-control" ng-maxlength="200" />
+                        </div>
+                        <div class="form-group">
+                        <label>Celular: </label>
+                            <input type="text" name="celular" ng-model="contacto.celular" class="form-control" ng-maxlength="200" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-success" ng-click="ok()">Actualizar</button>
+            <button type="button" class="btn btn-primary" ng-click="cancel()">Cancelar</button>
+        </div>
+    </form>
+</div>

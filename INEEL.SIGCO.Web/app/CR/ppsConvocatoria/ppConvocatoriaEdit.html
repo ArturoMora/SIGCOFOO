@@ -1,0 +1,166 @@
+<div class="vista">
+    <div class="page-title">
+        <div class="title_left">
+
+            <ol class="breadcrumb miga">
+                <li><i class="sg sg-fuentes-financiamiento"></i> <a ui-sref="ppsConvocatoriaGet">Fuentes de financiamiento/ Asociar propuesta/proyecto por fondo</a></li>
+                <li class="active">Editar</li>
+            </ol>
+
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+                <form name="form" id="form" class="form-horizontal">
+                    <div class="x_title">
+                        <h2>Informaci&oacute;n general</h2>
+                        <div class="clearfix"></div>
+                    </div>
+                <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">
+                        Fondo
+                    </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input type="text" class="form-control" id="usr" name="nombreConvocatoria" ng-model="fondos.nombreFP" disabled>
+
+                    </div>
+
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                        Fuente de financiamiento
+                    </label>
+                    <label class="span-label  col-md-6 col-sm-6 col-xs-12">
+                        {{fondos.fuenteFinanciamiento.nombreFF}}
+                    </label>
+                </div>
+                
+                <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                        Proyectos<span class="required"> *</span>
+                    </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input type="text" class="form-control" id="usr" name="proyecto"  ng-model="proyecto" readonly oninvalid="setCustomValidity('Dato requerido')" oninput="setCustomValidity('')">
+                        <span class="error" ng-show="form.proyecto.$invalid && form.proyecto.$dirty || form.$submitted && form.proyecto.$invalid">
+                                    Debes de agregar un proyecto.
+                                </span>
+                    </div>
+                    <div class="col-md-2 col-sm-2 col-xs-12">
+                        <a ng-click="openProyecto()" class="btn btn-success" title="Buscar proyecto" ng-disabled="desabilitarBuscarProyecto">
+                            <i class="glyphicon glyphicon-search"></i>
+                        </a>
+                    </div>
+                </div>
+                <!--<div class="form-group" ng-show="proyectos.length > 0 || proyectosN.length > 0">-->
+                    <div class="form-group" ng-show="proyectosAgregados.length > 0 ">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12">
+
+                    </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <table id="CRppConvocatoriaEdit" class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" datatable="ng" width="100%" dt-options="dtOptions">
+                            <thead>
+                            <tr>
+                                <th class="thCeldaB text-center" data-priority="1">N&uacute;mero / Nombre</th>
+                                <th class="col-xs-2">Gerencia / Jefe de proyecto</th>
+                                <th class="thCeldaB text-center" data-priority="3">Monto</th>
+                                <th class="thCeldaB text-center" data-priority="2">Eliminar</th>
+                            </tr>
+                            </thead>
+
+                            <tr ng-repeat="e in proyectosAgregados ">
+                                <td><b>{{e.proyectoId}}</b> / {{e.proyecto.nombre}}</td>
+                                <td><b>{{e.proyecto.unidadOrganizacional.nombreUnidad}}</b> / {{e.proyecto.nombreJefeProyecto}}</td>
+                                <td>
+                                    <div ng-show="e.proyecto.monto!=null">
+                                        ${{e.proyecto.costo}}
+                                    </div>
+                                    <div ng-show="e.proyecto.costo==null">
+                                        Dato no disponible
+                                    </div>
+                                </td>
+                                <td class="thCeldaB text-center">
+                                    <button type="button" ng-click="deleteProyecto(e.proyectoId)" class="btn btn-danger">
+                                        <i class="glyphicon glyphicon-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <br/>
+                <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                        Propuestas <span class="required"> *</span>
+                    </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input type="text" class="form-control" id="usr" name="propuesta"  ng-model="propuesta" readonly oninvalid="setCustomValidity('Dato requerido')" oninput="setCustomValidity('')">
+                        <span class="error" ng-show="form.propuesta.$invalid && form.propuesta.$dirty || form.$submitted && form.propuesta.$invalid">
+                                    Debes de agregar una propuesta.
+                                </span>
+                    </div>
+                    <div class="col-md-2 col-sm-2 col-xs-12">
+                        <a ng-click="openPropuesta()" class="btn btn-success" title="Buscar propuesta" ng-disabled="desabilitarBuscarPropuesta">
+                            <i class="glyphicon glyphicon-search"></i>
+                        </a>
+                    </div>
+                </div>
+                    <div class="form-group" ng-show="propuestasAgregadas.length > 0">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">
+
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <table id="CRppConvocatoriaEditpropuestasAgregadas" class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" datatable="ng" width="100%" dt-options="dtOptions">
+                                <thead>
+                                    <tr>
+                                        <th class="col-xs-2" data-priority="1">N&uacute;mero/Nombre</th>
+                                        <th class="col-xs-2">Gerencia/Responsable</th>
+                                        <th class="thCeldaB text-center">Monto</th>
+                                        <th class="thCeldaB text-center" data-priority="2">Eliminar</th>
+                                    </tr>
+                                </thead>
+                                <tr ng-repeat="e in propuestasAgregadas">
+                                    <td><b>{{e.propuestaId}}</b> / {{e.propuestas.titulo}}</td>
+                                    <td><b>{{e.propuestas.unidadOrganizacional.nombreUnidad}}</b> / {{e.propuestas.claveEmpPropuesta}}</td>
+                                    <td class="thCeldaB text-center">
+                                        <div ng-show="e.propuesta.costos!=null">
+                                            ${{e.propuesta.costos}}
+                                        </div>
+                                        <div ng-show="e.propuesta.costos==null">
+                                            Dato no disponible
+                                        </div>
+                                    </td>
+                                    <td class="thCeldaB text-center">
+                                        <button type="button" ng-click="deletePropuesta(e.propuestaId)" class="btn btn-danger">
+                                            <i class="glyphicon glyphicon-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                <div class="ln_solid"></div>
+                <div class="form-group">
+                    <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                        <div class="">
+
+                            <button type="submit" class="btn btn-success" ng-click="saveppConvocatoria()"
+                                    ng-disabled="claveProyectos.length == 0 || clavePropuestas.length == 0">
+                                <!--pendientes: adjuntos y proyecto.selected-->
+                                <i class="glyphicon glyphicon-saved"></i> Actualizar
+                            </button>
+                            <button type="button" confirma-regresar="globalRegresar()" state-form="form" class="btn btn-primary">
+                                <span class="fa fa-arrow-left"></span>
+                                Regresar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

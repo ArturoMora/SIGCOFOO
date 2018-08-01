@@ -1,0 +1,45 @@
+﻿<div class="vista">
+
+    <div class="page-title">
+        <div class="title_left">
+
+            <ol class="breadcrumb miga">
+                <li><i class="disabled fa fa-cogs"></i><a> Categorías de empleados </a></li>
+            </ol>
+
+        </div>
+    </div>
+
+
+    <div class="clearfix"></div>
+ 
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+                    <table id="GENCategoriasGet" dt-instance="dtInstance" class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" datatable="ng" width="100%" dt-options="dtOptions">
+                        <thead>
+                            <tr>
+                                <th data-priority="1">Clave categoría</th>
+                                <th class="thAjuste text-center" data-priority="2">Descripción</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr ng-repeat="obj in registro">
+                                <td>{{obj.categoriaId}}</td>
+                                <td>{{obj.descripcion}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+
+
+   
+</div>

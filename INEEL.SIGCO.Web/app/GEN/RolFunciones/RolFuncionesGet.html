@@ -1,0 +1,105 @@
+﻿
+<div class="vista">
+
+    <div class="page-title">
+        <div class="title_left">
+
+            <ol class="breadcrumb miga">
+                <li><i class="fa fa-list-ul"></i><a> Asignación de funciones a roles de usuario</a></li>
+            </ol>
+
+        </div>
+    </div>
+
+
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Rol de usuario</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li>
+                            <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content sin-desborde">
+
+                   
+                        <div class="col-xs-12 col-md-6">
+                           
+
+                            <select id="rol" name="rol" class="form-control" ng-cloak
+                                    ng-change="cargarregistros(idRol)"
+                                    ng-options="e.rolId as e.descripcion  for e in roles"
+                                    ng-init="idRol=rolPrevio"
+                                    ng-model="idRol">
+                                <option value="">Seleccione un rol</option>
+                            </select>
+                        </div>
+                        
+                  
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+
+                       <table id="GENRolFuncionesGet" dt-instance="dtInstance"
+                           class="table table-hover table-striped table-condensed dt-responsive"
+                           cellspacing="0" datatable="ng"
+                           width="100%" dt-options="dtOptions">
+                        <thead>
+                            <tr>
+                                <th data-priority="1">Función</th>
+                                <th class="thAjuste text-center">Descripción</th>
+                                <th class="thAjuste text-center">URL</th>
+                                <th class="thAjuste text-center">Modulo</th>
+                                <th class="thAjuste text-center">¿Est&aacute; activo? </th>
+                                <th class="thAjuste text-center">¿Desea eliminar? </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="obj in registro">
+                                <td>{{obj.funcion.nombre}}</td>
+                                <td>{{obj.funcion.descripcion}}</td>
+                                <td>{{obj.funcion.url}}</td>
+                                <td>{{obj.funcion.idModulo}}</td>
+                                <td class="text-center text-hide">
+                                    {{obj.estado}}
+                                    <input type="checkbox" class="btn btn-info btn-circle" ng-model="obj.estado" value="{{obj.estado}}" ng-click="saveEstado(obj.funcionesRolId,obj.estado,obj.descripcion)" />
+                                </td>
+                                <td class="text-center">
+                                    <a class="btn btn-danger" ng-model="obj.funcionesRolId" ng-click="eliminaUsuario(obj.funcionesRolId)" title="Eliminar">
+                                        <i class="glyphicon glyphicon-trash"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+
+
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+    <div class="row" ng-show="haSeleccionadoRol === 1">
+        <div class="col-xs-12">
+            <button type="button" ng-click="open()" class="btn btn-success">
+                <span class="glyphicon glyphicon-plus"></span> Agregar
+            </button>
+        </div>
+    </div>
+</div>

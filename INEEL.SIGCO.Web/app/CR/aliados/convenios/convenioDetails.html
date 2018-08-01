@@ -1,0 +1,142 @@
+<div class="vista">
+    <div class="page-title">
+        <div class="title_full">
+            <ol class="breadcrumb miga">
+                <li><i class="sg sg-aliados"></i> <a class="cursorPointer" ng-click="globalRegresar();">Aliados / Convenios</a></li>
+                <li class="active">Detalles</li>
+            </ol>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-8 col-sm-8 col-xs-12">
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+                    <label class="detalle col-xs-12" >
+                      {{convenios.noConvenio}} / {{convenios.aliado.empresa.nombreEmpresa}} 
+                    </label>
+                    <label class="cont col-xs-12 colorTit">
+                       {{convenios.tipoConvenio.nomTipConv}}
+                    </label>
+                    <label class="cont col-xs-12" >
+                       {{convenios.objetoConvenio}}
+                    </label>
+                    <label class="tit col-xs-12">
+                      &Aacute;mbito
+                    </label>
+                    <label class="cont col-xs-12">
+                       {{convenios.ambitoConv.nombre}}
+                    </label>
+                    <label class="tit col-xs-12">
+                        Nombre de quien firma el convenio
+                    </label>
+                    <label class="cont col-xs-12">
+                        {{convenios.firma}}
+                    </label>
+                    <label class="tit col-xs-12">
+                        Estado
+                    </label>
+                    <label class="cont col-xs-12">
+                        <span class="text" ng-bind="consultaEstado(convenios.estado)"></span>
+                    </label>
+                </div>
+
+            </div>
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>&Aacute;reas involucradas</h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content sin-desborde">
+                    <div class="form-group">
+                        <!-- <label for="usr">&Aacute;reas involucradas:</label>-->
+                        <table id="CRconvenioDetails" class="table table-hover table-striped table-condensed dt-responsive " cellspacing="0" datatable="ng" width="100%" dt-options="dtOptions">
+                            <thead>
+                                <tr>
+                                    <th class="col-xs-9" data-priority="1">Unidad organizacional:</th>
+                                </tr>
+                            </thead>
+                            <tr ng-repeat="unidadesOList in areasM track by $index">
+                                <td>{{unidadesOList.unidadOrganizacional.nombreUnidad}}</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-md-4 col-sm-4 col-xs-12" >
+            <div class="x_panel" ng-show="convenios.tipoAcceso!='Restringido'" >
+                <div class="x_title">
+                    <h2>Evidencia</h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content sin-desborde">
+                    <table id="CRconvenioDetailsadjuntos" class="table table-hover table-striped table-condensed dt-responsive " cellspacing="0" datatable="ng" width="100%" dt-options="dtOptions">
+                        <thead>
+                            <tr>
+                                <th class="col-xs-9" data-priority="1">Documento adjunto:</th>
+                            </tr>
+                        </thead>
+                        <tr ng-repeat="task in adjuntos track by $index">
+                            <td>
+                                <!-- {{task.adjunto.nombre}}-->
+                                <a href="/Descargas.html#/q/{{task.adjunto.adjuntoId | encriptar}}" target="_blank" title="{{task.adjunto.nombre}}"> {{task.adjunto.nombre}} </a>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Vigencia</h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content sin-desborde">
+                    <form name="fromfa" id="form" class="form-horizontal">
+                        <div class="form-group">
+                            <label class="titFirst col-md-3 col-sm-3 col-xs-12">
+                                Inicio:
+                            </label>
+                            <label class="cont  col-md-6 col-sm-6 col-xs-12">
+                                {{convenios.fechaInicio | date: 'dd/MM/yyyy'}}
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label class="titFirst col-md-3 col-sm-3 col-xs-12">
+                                T&eacute;rmino:
+                            </label>
+                            <label class="cont  col-md-6 col-sm-6 col-xs-12">
+                                <span ng-show="convenios.indefinido"> Por tiempo indefinido</span>  <span ng-show="!convenios.indefinido">   {{convenios.fechaTermino  | date:'dd/MM/yyyy'}}</span>
+                               
+                            </label>
+                        </div>
+                        <div class="form-group"> 
+                            <div class="alert advertencia col-xs-12" >
+                                <span class="glyphicon glyphicon-info-sign"></span> Tipo de acceso: <strong> {{convenios.tipoAcceso}} </strong>
+                            </div>
+                        </div>
+                        <!--<div class="form-group">
+                            <div class="alert aprobado col-xs-12" ng-if="convenios.tipoAcceso!='Restringido'">
+                                <span class="glyphicon glyphicon-info-sign"></span> Tipo de acceso: <strong> {{convenios.tipoAcceso}} </strong>
+                            </div>
+                        </div>-->
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <button type="button" ng-click="globalRegresar();" class="btn btn-primary">
+                <span class="fa fa-arrow-left"></span> Regresar
+            </button>
+        </div>
+    </div>
+</div>
+
+
+
+

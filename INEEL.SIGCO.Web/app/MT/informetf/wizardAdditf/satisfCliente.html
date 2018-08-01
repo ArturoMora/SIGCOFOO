@@ -1,0 +1,71 @@
+<div class="x_title">
+    <h2>Satisfacci&oacute;n del cliente</h2>
+    <div class="clearfix"></div>
+</div>
+
+<div class="form-group">
+    <label class="control-label col-md-3 col-sm-3 col-xs-12">
+        Calificaci&oacute;n <span class="required">*</span>
+    </label>
+    <div class="col-md-6 col-sm-6 col-xs-12">
+        <select class="form-control" id="calificacionClienteId" name="calificacionClienteId"
+                ng-model="itf.satisCte.calificacionClienteId" ng-required="true"
+                ng-options="e.calificacionClienteId as e.nombre  for e in CalificacionCliente">
+            <option value="">--- Seleccione calificaci&oacute;n --- </option>
+        </select>
+        <span class="error" ng-show="formITF.calificacionClienteId.$dirty &&  !formITF.calificacionClienteId.$valid">--- Seleccione calificaci&oacute;n --- </span>
+    </div>
+</div>
+<div class="form-group">
+    <label class="control-label col-md-3 col-sm-3 col-xs-12">
+        Justificaci&oacute;n <span class="required">*</span>
+    </label>
+    <div class="col-md-6 col-sm-6 col-xs-12">
+        <textarea class="form-control" id="justificacion" name="justificacion" ng-model="itf.satisCte.justificacion"
+                  ng-minlength="6" ng-maxlength="500" maxlength="500" ng-required="true"></textarea>
+        <span class="error" ng-show="formITF.justificacion.$dirty &&  !formITF.justificacion.$valid">
+            Dato requerido con una longitud m&iacute;nima de 6 caracteres y m&aacute;xima de 500
+        </span>
+    </div>
+</div>
+
+<div class="form-group">
+    <label class="control-label col-md-3 col-sm-3 col-xs-12">
+        Documento(s) adjunto(s)
+    </label>
+    <div class="col-md-6 col-sm-6 col-xs-12">
+        <div ng-show="itf.satisCte.adjunto.adjuntoId!=null">
+            <span class="fa fa-download"></span>&nbsp;&nbsp;<a href="/Descargas.html#/q/{{itf.satisCte.adjunto.adjuntoId | encriptar}}" class="linkTabla" target="_blank">Descargar Archivo</a>
+            &nbsp;&nbsp;
+            <a class="btn btn-danger" title="Eliminar Archivo" ng-click="deleteCalidadFile()">
+                <i class="glyphicon glyphicon-trash"></i>
+            </a>
+        </div>
+
+        <div class="form-group" ng-show="itf.satisCte.adjuntoId==null">
+            <input class="input-file form-control col-md-7 col-xs-12" type="file" name="filescalidad" id="filescalidad" data-buttonName="btn-success" ng-click="saveIG();"
+                   ng-model="filescalidad"
+                   onchange="angular.element(this).scope().getFileDetailsCalidad(this);" />
+        </div>
+        Nota : <small>Tama&ntilde;o m&aacute;ximo por archivo de 8MB, el formato de los archivos puede ser: PDF, DOC, DOCX  </small>
+    </div>
+</div>
+
+
+  
+
+
+<div class="form-group" ng-hide="ocultarGuardar">
+    <label class="control-label col-md-3 col-sm-3 col-xs-12">
+        &nbsp;
+    </label>
+    <div class="col-md-6 col-sm-6 col-xs-12">
+        <div class="row col-xs-6">
+            <button class="btn btn-block btn-info" ng-click="datoscompletos(3,'ITF.evaluaciones')"
+                    ng-disabled="!formITF.calificacionClienteId.$valid || !formITF.justificacion.$valid || click">
+                <!--ng-show="!detalles">-->
+                {{txtGuardar}}
+            </button>
+        </div>
+    </div>
+</div>

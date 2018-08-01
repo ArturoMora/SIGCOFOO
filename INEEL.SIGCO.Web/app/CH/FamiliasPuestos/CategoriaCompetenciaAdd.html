@@ -1,0 +1,118 @@
+﻿<div class="vista">
+
+    <div class="page-title">
+        <div class="title_left">
+
+            <ol class="breadcrumb miga">
+                <li><i class="disabled fa fa-cogs"></i> <a ui-sref="categoriacompetenciaGet">Administración/Operación CC/Competencias por categoría</a></li>
+                <li class="active">Agregar</li>
+            </ol>
+
+        </div>
+    </div>
+
+    <div class="clearfix"></div>
+
+
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+
+                <div class="x_content sin-desborde">
+
+                    <label class="detalle col-xs-12 " title="Familia de puestos">
+                        {{categoriaSeleccionada.familiaPuestos.nombreFamilia}}
+                    </label>
+
+                    <label class="cont emc col-xs-12 colorTit">
+                        Período {{periodofamilia}}
+                    </label>
+
+                    <label class="tit col-xs-12">
+                       Categoría
+                    </label>
+                    <label class="cont col-xs-12">
+                        {{categoriaSeleccionada.nombreCategoria}}
+                    </label>
+
+                    <br />
+
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="x_panel">
+                
+
+
+                <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                        Competencia <span class="required">*</span>
+                    </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <select id="competenciaId" name="competencias" class="form-control"
+                                ng-change="cargarNieles()"
+                                ng-model="competenciaId"
+                                ng-options="e.competenciaId as e.competencia  for e in catalogoCompetencias" ng-required="true">
+                            <option value="">Seleccione una competencia </option>
+                        </select>
+                    </div>
+                </div>
+
+
+                <br/>
+                <br/>
+                <div class="x_content sin-desborde">
+
+                    <table dt-options="dtOptions" dt-instance="dtInstance" class="table table-hover table-striped table-condensed dt-responsive">
+                        <thead>
+                            <tr>
+                                <th style="text-align: left !important">Nivel de dominio esperado</th>
+                                <th style="text-align: left ">Descripción del nivel</th>
+                                <th style="text-align: left !important">Comportamiento</th>
+                                <th style="text-align: left !important"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="f in nivelesCompetencias">
+                                <td>{{f.nivel.descripcion}}</td>
+                                <td>{{f.descripcion}}</td>
+                                <td>
+                                    {{f.comportamiento}}
+                                </td>
+                                <td >
+                                    <input type="radio" ng-model="$parent.idRadio" ng-checked="f.descNivelId==nivelYaAsignado" ng-value="f.descNivelId" name="radio" />
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+
+            <button type="submit" ng-click="save()" class="btn btn-success" style="padding-right:15px">
+                <i class="glyphicon glyphicon-saved"></i> Guardar
+            </button>
+          
+            <button type="button" ui-sref="categoriacompetenciaGet" class="btn btn-primary">
+                <span class="fa fa-arrow-left"></span> Regresar
+            </button>
+        </div>
+    </div>
+
+</div>
+
+
+
+

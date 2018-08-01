@@ -1,0 +1,386 @@
+<div class="vista">
+
+    <div class="page-title">
+        <div class="title_left">
+
+            <ol class="breadcrumb miga">
+                <li>
+                    <i class="sg sg-software-des"></i>
+                    <a ui-sref="SoftwarePersonal">Software / Mi software</a>
+                </li>
+                <li class="active">Editar</li>
+            </ol>
+
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Informaci&oacute;n general
+                        <small>&iquest;De qu&eacute; se trata el software?</small>
+                    </h2>
+
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content sin-desborde">
+
+                    <form name="form" id="form" class="form-horizontal" ng-submit="actualizar()">
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">
+                                Titulo del software
+                                <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" ng-model="SoftwarePersonal.nombre" required class="form-control col-md-7 col-xs-12" name="nombre" ng-minlength="4"
+                                    maxlength="300" />
+                                <span class="error" ng-show="form.nombre.$dirty && form.nombre.$invalid">
+                                    Dato incorrecto, se espera una longitud m&iacute;nima de 4
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">
+                                Tipo de software
+                                <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <select id="tipoSoftwareId" name="tipoSoftwareId" class="form-control col-md-7 col-xs-12" ng-model="SoftwarePersonal.tipoSoftwareId"
+                                    ng-options="e.tipoSoftwareId as e.nombre  for e in listaTipoSoftware" required></select>
+                                <span class="error" ng-show="form.tipoSoftwareId.$dirty &&  ((!form.tipoSoftwareId.$valid) || form.tipoSoftwareId.$modelValue==null)  ">
+                                    Seleccione el tipo de software
+                                </span>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Descripci&oacute;n
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+
+                                <textarea ng-model="SoftwarePersonal.descripcionFuncional" class="form-control col-md-7 col-xs-12" placeholder="explique su uso y aplicaci&oacute;n"
+                                    name="descripcionFuncional" ng-maxlength="600" maxlength="600"></textarea>
+                                <span class="error" ng-show="form.descripcionFuncional.$dirty && form.descripcionFuncional.$invalid">
+                                    Dato incorrecto, se espera una longitud m&iacute;nima de 10 y m&aacute;xima de 600
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Derecho de autor
+                            </label>
+                            <!-- <div ng-class="{'col-xs-6' : derechosAutor==null, 'col-xs-5' : derechosAutor!=null}">
+                                <a derechos-autor-select state-form="ValidForm" template-url="app/vistasGenericas/directivas/buscarDerechosAutorDirective/buscarDerechosAutorDirective.html"
+                                    ng-model="derechosAutor"> </a>
+                                
+                            </div> -->
+                            <!-- <div class="col-md-1 col-sm-1 col-xs-1">
+                                &nbsp;
+                                <button type="button" ng-show="derechosAutor!=null" class="btn btn-danger" ng-click="derechosAutor=null; SoftwarePersonal.derechosAutorId=null">
+                                    <i class="glyphicon glyphicon-remove" title="borrar"></i>
+                                </button>
+                            </div> -->
+                            <div class="col-md-5 col-sm-5 col-xs-5">
+                                <a derechos-autor-select state-form="ValidForm" template-url="app/vistasGenericas/directivas/buscarDerechosAutorDirective/buscarDerechosAutorDirective.html"
+                                    ng-model="derechosAutor"> </a>
+                                
+                            </div>
+                            <div class="col-md-1 col-sm-1 col-xs-1">
+                                &nbsp;
+                                <button type="button" class="btn btn-danger" ng-click="derechosAutor=null; SoftwarePersonal.derechosAutorId=null">
+                                    <i class="glyphicon glyphicon-remove" title="borrar"></i>
+                                </button>
+                            </div>
+                            
+                            <!-- <div class="row col-md-1 col-sm-1 col-xs-1">
+                                    
+                                            
+                                        
+                            </div> -->
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Observaciones
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" ng-model="SoftwarePersonal.derechoAutor" placeholder="Observaciones sobre el estado del derecho de autor"
+                                    class="form-control col-md-7 col-xs-12" name="derechoAutor" ng-minlength="4" ng-maxlength="500"
+                                    maxlength="100" />
+                                <!-- <span class="error" ng-show="form.derechoAutor.$dirty && form.derechoAutor.$invalid">
+                                        Dato incorrecto, se espera una longitud m&iacute;nima de 4
+                                    </span> -->
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Comentarios
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" ng-model="SoftwarePersonal.comentarios" class="form-control col-md-7 col-xs-12" name="comentarios" ng-maxlength="300"
+                                    maxlength="300" />
+                                <span class="error" ng-show="form.comentarios.$dirty && form.comentarios.$invalid">
+                                    Dato requerido con una longitud m&aacute;xima de 300
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="x_title">
+                            <h2>Informaci&oacute;n t&eacute;cnica</h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                A&ntilde;o de la versi&oacute;n
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input ng-model="SoftwarePersonal.anioVersion" class="form-control col-md-7 col-xs-12 numbersOnly" ng-pattern="/^[1234567890]{4}$/"
+                                    maxlength="4" name="anioVersion" ng-maxlength="4" type="text" min="1975" max="{{anioActual}}"
+                                />
+                                <!--<span class="error" ng-show="form.anioVersion.$dirty && !form.anioVersion.$valid">
+                A&ntilde;o a cuatro d&iacute;gitos<br />
+                y el a A&ntilde;o debe estar en el rango: 1975 - {{anioActual}}
+            </span>-->
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                N&uacute;mero de Versi&oacute;n
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" ng-model="SoftwarePersonal.numeroVersion" class="form-control col-md-7 col-xs-12" name="numeroVersion"
+                                    ng-pattern="/^[0-9]{1,2}(\.[0-9]{1,2})?$/" maxlength="5" />
+                                <span class="error" ng-show="form.numeroVersion.$dirty && form.numeroVersion.$invalid">
+                                    Dato incorrecto, se espera un entero y/o decimal de m&aacute;ximo 2 digitos
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Plataforma de desarrollo
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+
+                                <input type="text" ng-model="SoftwarePersonal.plataformaDesarrollo" class="form-control col-md-7 col-xs-12" placeholder="Hardware y Software utilizado, incluyendo su versi&oacute;n"
+                                    name="plataformaDesarrollo" ng-minlength="0" ng-maxlength="500" maxlength="500" />
+                                <span class="error" ng-show="form.plataformaDesarrollo.$dirty && form.plataformaDesarrollo.$invalid">
+                                    Dato incorrecto, se espera una longitud m&iacute;nima de 6
+                                </span>
+                            </div>
+                        </div>
+                        <div class="x_title">
+                            <h2>Documentaci&oacute;n
+                                <small>Tama&ntilde;o m&aacute;ximo por archivo de 20 MB, el formato de los archivos puede ser: PDF,
+                                    DOC, DOCX</small>
+                            </h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group" ng-show="SoftwarePersonal.adjuntoManualUsuario!=null">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Manual de usuario *</label>&nbsp;
+                            <div class="col-md-6 col-sm-6 col-xs-12 sin-desborde">
+                                <span class="fa fa-download"></span>&nbsp;&nbsp;
+                                <a href="/Descargas.html#/q/{{SoftwarePersonal.adjuntoManualUsuario.adjuntoId | encriptar}}" target="_blank" title="{{SoftwarePersonal.adjuntoManualUsuario.nombre | trim}}">
+                                    Descargar Archivo
+                                </a>&nbsp;&nbsp;
+                                <button type="button" ng-click="deleteFile('adjuntoManualUsuario')" class="btn btn-warning">
+                                    <i class="glyphicon glyphicon-pencil" title="Cambiar Archivo"></i>
+                                </button>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="form-group" ng-show="SoftwarePersonal.adjuntoManualUsuario==null">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Manual de usuario *
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input class="input-file form-control col-md-7 col-xs-12" type="file" name="manualUsuario" id="manualUsuario" ng-model="manualUsuario"
+                                    data-buttonName="btn-success" onchange="angular.element(this).scope().getFileDetails(this, 'pdf;doc;docx');"
+                                />
+                                <!-- <span class="error" ng-show="form.manualUsuario.$dirty && !form.manualUsuario.$valid">Se requiere documento adjunto</span> -->
+                            </div>
+                        </div>
+                        <div class="form-group" ng-show="SoftwarePersonal.adjuntoManualTecnico!=null">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Manual t&eacute;cnico*</label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <span class="fa fa-download"></span>&nbsp;&nbsp;
+                                <a href="/Descargas.html#/q/{{SoftwarePersonal.adjuntoManualTecnico.adjuntoId | encriptar}}" target="_blank" title="{{SoftwarePersonal.adjuntoManualTecnico.nombre | trim}}">
+                                    Descargar Archivo
+                                </a>&nbsp;&nbsp;
+                                <button type="button" ng-click="deleteFile('adjuntoManualTecnico');" class="btn btn-warning">
+                                    <i class="glyphicon glyphicon-pencil" title="Cambiar Archivo"></i>
+                                </button>
+                            </div>
+
+                        </div>
+                        <div class="form-group" ng-show="SoftwarePersonal.adjuntoManualTecnico==null">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Manual t&eacute;cnico*
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input class="input-file form-control col-md-7 col-xs-12" type="file" name="manualTecnico" id="manualTecnico" ng-model="manualTecnico"
+                                    data-buttonName="btn-success" onchange="angular.element(this).scope().getFileDetails(this, 'pdf;doc;docx');"
+                                />
+                                <!-- <span class="error" ng-show="form.manualTecnico.$dirty && !form.manualTecnico.$valid">Se requiere documento adjunto</span> -->
+                            </div>
+                        </div>
+
+                        <div class="form-group" ng-show="SoftwarePersonal.adjuntoCodigoFuente!=null">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">C&oacute;digo fuente</label>&nbsp;
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <span class="fa fa-download"></span>&nbsp;&nbsp;
+                                <a href="/Descargas.html#/q/{{SoftwarePersonal.adjuntoCodigoFuente.adjuntoId | encriptar}}" target="_blank" title="{{SoftwarePersonal.adjuntoCodigoFuente.nombre | trim}}">
+                                    Descargar Archivo
+                                </a>&nbsp;&nbsp;
+                                <button type="button" ng-click="deleteFile('adjuntoCodigoFuente');" class="btn btn-warning">
+                                    <i class="glyphicon glyphicon-pencil" title="Cambiar Archivo"></i>
+                                </button>
+                            </div>
+                            <!--<font class="col-xs-2"> <a class="btn btn-danger"><i class="fa fa-trash-o fa-lg" title="Eliminar Archivo" ng-click="deleteFile('adjuntoCodigoFuente')"></i></a></font>-->
+                        </div>
+                        <div class="form-group" ng-show="SoftwarePersonal.adjuntoCodigoFuente==null">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                C&oacute;digo fuente
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input class="input-file form-control col-md-7 col-xs-12" type="file" name="codigoFuente" id="codigoFuente" ng-model="codigoFuente"
+                                    data-buttonName="btn-success" onchange="angular.element(this).scope().getFileDetails(this, '*');"
+                                />
+                                <!-- <span class="error" ng-show="form.codigoFuente.$dirty && !form.codigoFuente.$valid">Se requiere documento adjunto</span> -->
+                            </div>
+                        </div>
+                        <div class="x_title">
+                            <h2>Origen</h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Proyecto *
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="row">
+                                    <div ng-class="SoftwarePersonal.proyectoId == null  ? 'col-xs-10' : (SoftwarePersonal.proyectoId != null ? 'col-xs-9' : 'col-xs-9')">
+                                        <input type="text" class="form-control" id="usr" name="proyecto" ng-model="SoftwarePersonal.proyecto.nombre" disabled>
+                                    </div>
+                                    <div ng-class="SoftwarePersonal.proyectoId == null  ? 'col-xs-2' : (SoftwarePersonal.proyectoId != null ? 'col-xs-3' : 'col-xs-3')">
+                                        <button type="button" class="btn btn-success" ng-click="openProyecto()" title="Buscar proyecto">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                        </button>
+                                        <button type="button" ng-if="SoftwarePersonal.proyectoId!=null" class="btn btn-danger" ng-click="clean();">
+                                            <i class="glyphicon glyphicon-remove" title="borrar"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="x_title">
+                            <h2>Autores del software</h2>
+                            <div class="clearfix"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Autores
+                                <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <a ng-click="openUser()" class="btn btn-success">
+                                    <span class="fa fa-user-plus"></span> Buscar
+                                </a>
+
+                                <div ng-show="SoftwarePersonal.autores.length > 0">
+                                    <table id="MTSoftwarePersonalEdit" class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0"
+                                        datatable="ng" width="100%" dt-options="dtOptions">
+                                        <thead>
+                                            <tr>
+                                                <th>Clave</th>
+                                                <th data-priority="1">Nombre</th>
+                                                <th data-priority="1" class="thAjuste text-center">Opciones</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="autor in SoftwarePersonal.autores">
+                                                <td>{{autor.claveAutor}}</td>
+                                                <td>{{autor.nombreCompleto}}</td>
+                                                <td class="text-center">
+                                                    <div>
+                                                        <a ng-hide="authentication.userprofile.clavePersona==autor.claveAutor" title="Eliminar" ng-click="eliminarAutor(autor)" class="btn btn-danger">
+                                                            <i class="glyphicon glyphicon-trash"></i>
+                                                        </a>
+                                                        <!--<a ng-hide="authentication.userprofile.clavePersona!=autor.claveAutor"
+                                       title="Eliminar" ng-click="deleteAuth()" class="btn btn-danger">
+                                        <i class="glyphicon glyphicon-trash"></i>
+                                    </a>-->
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="x_title">
+                            <h2>Seguridad</h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Tipo de acceso
+                                <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <select id="tipoAcceso" name="tipoAcceso" class="form-control col-md-7 col-xs-12" ng-model="SoftwarePersonal.tipoAcceso"
+                                    ng-options="e.tipoAccesoId as e.nombre for e in selectTipo" required></select>
+                                <span class="error" ng-show="form.tipoAcceso.$dirty &&  ((!form.tipoAcceso.$valid) || form.tipoAcceso.$modelValue==null)  ">
+                                    Seleccione el tipo de acceso
+                                </span>
+                            </div>
+                        </div>
+                        <div class="ln_solid"></div>
+                        <div class="form-group">
+                            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                <div class="">
+
+                                    <button type="submit" class="btn btn-success">
+                                        <!--pendientes: adjuntos y  proyecto.selected-->
+                                        <i class="glyphicon glyphicon-saved"></i> Actualizar
+                                    </button>
+
+                                    <button type="button" confirma-regresar="regresar()" state-form="form" class="btn btn-primary">
+                                        <span class="fa fa-arrow-left"></span> Regresar
+                                    </button>
+
+                                   
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- manual {{verificaManualUsuario}} / tecnico {{verificaManualTecnico}}
+    <br/> -->
+
+</div>
+<script>
+    $(document).ready(function () {
+        jQuery('.numbersOnly').keyup(function () {
+            this.value = this.value.replace(/[^0-9\.]/g, '');
+        });
+    });
+
+</script>
+<!--SoftwarePersonal:{{SoftwarePersonal | json}}-->

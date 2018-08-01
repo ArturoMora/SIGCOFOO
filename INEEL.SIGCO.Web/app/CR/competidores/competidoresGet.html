@@ -1,0 +1,201 @@
+<div class="vista">
+    <div class="page-title">
+        <div class="title_left">
+            <ol class="breadcrumb miga">
+                <li>
+                    <i class="sg sg-competidores"></i>
+                    <a ui-sref="competidorGet">Competidores</a>
+                </li>
+            </ol>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+
+    <div class="row">
+        <div class="x_content sin-desborde">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Competidores</h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content sin-desborde">
+                    <div echart-graph-barr ng-model="expProf" idgraph="GraphCompetidores" stilo="{'height':'350px', 'width':'98%'}" titulo="Por línea de investigación"
+                        labels="expProf.labels" datos="expProf.datos"></div>
+                </div>
+            </div>
+        </div>
+
+
+        <!--Panel de busquedas-->
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Criterios de b&uacute;squeda</h2>
+                <ul class="nav navbar-right panel_toolbox">
+                    <li>
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content sin-desborde">
+
+                <form role="form" class="form-label-left">
+                    <div class="row">
+                        <div class="col-xs-6 col-md-6">
+                            <div class="form-group">
+                                <label class="col-xs-12" style="height:30px; line-height:30px; text-align:left; ">Competidor</label>
+                                <div class="col-xs-10">
+                                    <select ng-model="comp.empresaId" ng-options="emp.idEmpresa as emp.nombreEmpresa for emp in empresas | orderBy:'nombreEmpresa'"
+                                        class="form-control">
+                                        <option value="">---Seleccione un competidor---</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-xs-12" style="height:30px; line-height:30px; text-align:left; ">Tipo de competidor</label>
+                                <div class="col-xs-10">
+                                    <select ng-model="comp.tipoCompetidor" class="form-control">
+                                        <option value="">---Seleccione un tipo---</option>
+                                        <option value="Directo">Directo</option>
+                                        <option value="Indirecto">Indirecto</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-xs-12" style="height:30px; line-height:30px; text-align:left; ">Segmento de mercado</label>
+                                <div class="col-xs-10">
+                                    <select ng-model="comp.segmentoMercadoId" ng-options="seg.idSegmento as seg.nombre for seg in segmentos | orderBy:'nombre'"
+                                        class="form-control">
+                                        <option value="">---Seleccione un segmento de mercado---</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-6 col-md-6">
+                            <div class="form-group">
+                                <label class="col-xs-12"  style="height:30px; line-height:30px; text-align:left; ">L&iacute;nea de investigaci&oacute;n</label>
+                                <div class="col-xs-10">
+                                    <select ng-model="comp.lineaDesarrolloTecnologicoId" ng-options="linea.lineaDesarrolloTecnologicoId as linea.nomLinDesTec for linea in lineas | orderBy:'nomLinDesTec'"
+                                        class="form-control">
+                                        <option value="">---Seleccione una l&iacute;nea---</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-xs-12" style="height:30px; line-height:30px; text-align:left; ">Productos</label>
+                                <div class="col-xs-10">
+                                    <select ng-model="comp.idProducto" ng-options="prod.productoId as prod.nombre for prod in productos | orderBy:'nombre'" class="form-control">
+                                        <option value="">---Seleccione un producto---</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-xs-12" style="height:30px; line-height:30px; text-align:left; ">Servicios</label>
+                                <div class="col-xs-10">
+                                    <select ng-model="comp.idServicio" ng-options="serv.servicioId as serv.nombre for serv in servicios | orderBy:'nombre'" class="form-control">
+                                        <option value="">---Seleccione un servicio---</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="col-xs-12">
+                        <br />
+                        <a class="btn btn-success" ng-click="buscar()" title="buscar">
+                            <span class="glyphicon glyphicon-search"></span> Buscar
+                        </a>
+                        <a class="btn btn-primary" ng-click="reset()" title="Limpiar campos">
+                            Limpiar
+                        </a>
+
+
+                    </div>
+                </form>
+            </div>
+        </div>
+
+
+        <div class="x_panel" ng-show="busqueda">
+            <div class="x_content sin-desborde">
+                <div class="x_content sin-desborde">
+                    <div>
+                        <table id="CRcompetidoresGet" class="table table-hover table-striped table-condensed responsive" cellspacing="0" datatable="ng"
+                            width="100%" dt-options="dtOptions">
+                            <thead>
+                                <tr>
+                                    <th class="hidden">Nombre</th>
+                                    <th data-priority="1">Nombre</th>
+
+                                    <th>Tipo de competidor</th>
+                                    <th>Segmento de mercado</th>
+                                    <th>L&iacute;nea de <br/>investigaci&oacute;n</th>
+                                    <th>Productos</th>
+                                    <th>Servicios</th>
+                                    <th data-priority="2" style="width: 10%" class="text-center" ng-if="idRol==15">&iquest;Est&aacute; activo?</th>
+                                    <th data-priority="3" style="width: 10%" class="text-center" ng-if="idRol==15">Opciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="e in competidores | orderBy: 'nombreEmpresa'">
+                                    <td class="hidden">{{e.nombreEmpresa}}</td>
+                                    <td class="thCeldaB">
+                                        <a class="link" style="cursor:pointer" ng-click="detalleRegistro(e.competidorId)" title="Detalles">{{e.nombreEmpresa}}</a>
+                                    </td>
+                                    <td>{{e.tipoCompetidor==null? 'No definido' : e.tipoCompetidor}}</td>
+                                    <td>{{e.segmentoMercado==null? 'No definido': e.segmentoMercado}}</td>
+                                    <td>{{e.lineaInvestigacion==null? 'No disponible': e.lineaInvestigacion}}</td>
+                                    <td>
+                                        <div ng-if="e.listaProductos!=''" ng-repeat="producto in e.listaProductos">
+                                            - {{producto}}
+                                            <br />
+                                        </div>
+                                        <div ng-if="e.listaProductos==''">
+                                            Sin productos registrados
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div ng-if="e.listaServicios!=''" ng-repeat="servicio in e.listaServicios">
+                                            - {{servicio}}
+                                            <br />
+                                        </div>
+                                        <div ng-if="e.listaServicios==''">
+                                            Sin servicios registrados
+                                        </div>
+                                    </td>
+                                    <td style="width: 10%" class="text-center" ng-if="idRol==15">
+                                        <input type="checkbox" class="btn btn-info btn-circle" title="&iquest;Est� activo?" ng-model="e.estado" value="{{e.estado}}"
+                                            ng-change="saveEstado(e)" />
+                                    </td>
+                                    <td style="width: 10%" class="text-center" ng-if="idRol==15">
+                                        <a class="btn btn-warning" ng-click="editarRegistro(e.competidorId)" title="Editar">
+                                            <i class="glyphicon glyphicon-pencil"></i>
+                                        </a>
+                                        <button type="button" ng-click="preguntaEliminar(e)" class="btn btn-danger">
+                                            <i class="glyphicon glyphicon-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <br />
+                        <br />
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+        <button ng-if="idRol==15" type="button" ui-sref="competidorAdd" class="btn btn-success">
+            <span class="glyphicon glyphicon-plus"></span> Agregar
+        </button>
+
+
+    </div>
+
+</div>

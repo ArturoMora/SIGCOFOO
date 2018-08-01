@@ -1,0 +1,338 @@
+﻿<div class="vista">
+    <div class="page-title">
+        <div class="title_left">
+            <ol class="breadcrumb miga">
+                <li>
+                    <i class="sg sg-oportunidades-neg"></i>
+                    <a ui-sref="dashboard">Oportunidades de negocio</a>
+                </li>
+                <li class="active">Detalles</li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-8 col-sm-8 col-xs-12">
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+                    <label class="detalle col-xs-12 " title="Nombre de la oportunidad">
+                        {{oportunidad.nombreOportunidad}}
+                    </label>
+                    <label class="tit col-xs-12">
+                        N&uacute;mero de empleado
+                    </label>
+                    <label class="cont col-xs-12 linkTabla" ng-click="openProfile(oportunidad.claveEmpleado)" title="Detalle de empleado" style="cursor:hand;cursor: pointer;">
+                        {{oportunidad.claveEmpleado}}
+                    </label>
+                    <!--<label class="cont col-xs-12 " title="No. Empleado">
+                        <span>{{oportunidad.claveEmpleado}}</span>
+                    </label>-->
+                    <label class="tit col-xs-12">
+                        Nombre de empleado
+                    </label>
+                    <label class="cont col-xs-12 " title="Autor">
+                        <span>{{oportunidad.autor}}</span>
+                    </label>
+                    <label class="tit col-xs-12">
+                        Fecha
+                    </label>
+                    <label class="cont col-xs-12 " title="Fecha de registro">
+                        <span>{{oportunidad.fecha| date:'dd-MM-yyyy'}}</span>
+                    </label>
+                    <label class="tit col-xs-12" ng-show="oportunidad.tipoEvento == null">
+                        <label>Medio de contacto ({{oportunidad.medioComunicacion}})</label>
+                    </label>
+                    <label class="cont col-xs-12 " title="Medio de contacto">
+                        <span>{{oportunidad.descripcionMedioContacto}}</span>
+                    </label>
+                    <label class="tit col-xs-12">
+                        Tipo de evento
+                    </label>
+                    <label class="cont col-xs-12 " title="tipo de evento">
+                        <span>{{oportunidad.tipoEvento.nombreEvento}}</span>
+                    </label>
+                    <div ng-show="oportunidad.tipoEvento != null">
+                        <label class="tit col-xs-12">
+                            Evento
+                        </label>
+                        <label class="cont col-xs-12 " title="tipo de evento">
+                            <span>{{oportunidad.evento.nombreEvento}}</span>
+                        </label>
+                    </div>
+                    <label class="tit col-xs-12">
+                        Comentarios del autor
+                    </label>
+                    <label class="cont col-xs-12 " title="tipo de evento">
+                        <span>{{oportunidad.descripcion}}</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="x_panel" ng-show="idRol==1025 || idRol==15">
+                <div class="x_title">
+                    <h2>Cambiar el estado de la oportunidad de negocio </h2>
+                    <div class="clearfix"></div>
+
+                </div>
+                <div class="x_content">
+                    <form name="formcambioestado">
+                        <div class="form-group">
+                            <select ng-disabled="estadoactual==3||estadoactual==4" name="estado" class="form-control" ng-model="oportunidad.estadoONId"
+                                ng-init="estadoactual = oportunidad.estadoONId;" ng-options="estadoON.estadoONId as estadoON.nombre for estadoON in estadosON">
+                                <option value="">- Seleccione un estado -</option>
+                            </select>
+                        </div>
+                        <div class="form-group" ng-show="oportunidad.estadoONId=== 2">
+                            <label>¿Por qu&eacute; se suspendi&oacute; temporalmente?
+                                <span class="required">*</span>
+                            </label>
+                            <textarea ng-disabled="estadoactual ===2" name="comentarios" class="form-control" ng-model="oportunidad.porQueSuspende" rows="3"></textarea>
+                        </div>
+                        <div class="form-group" ng-show="oportunidad.estadoONId ===3">
+                            <label>¿Por qu&eacute; se cancel&oacute;?
+                                <span class="required">*</span>
+                            </label>
+                            <textarea ng-disabled="estadoactual ===3" name="comentarios" class="form-control" ng-model="oportunidad.porQueCancela" rows="3"></textarea>
+                        </div>
+                        <div class="form-group" ng-show="oportunidad.estadoONId === 4">
+                            <label>Titulo de iniciativa o propuesta
+                                <span class="required">*</span>
+                            </label>
+                            <textarea ng-disabled="estadoactual ===4" name="comentarios" class="form-control" ng-model="oportunidad.tituloPropuesta"
+                                rows="3"></textarea>
+                        </div>
+                        <div class="form-group" ng-show="oportunidad.estadoONId === 4">
+                            <label>N&uacute;mero de Iniciativa
+                                <span class="required">*</span>
+                            </label>
+                            <input ng-disabled="estadoactual===4" type="text" name="numeroIniciativa" ng-model="oportunidad.noIniciativa" class="form-control"
+                                maxlength="10" />
+                        </div>
+                        <div class="form-group" ng-show="oportunidad.estadoONId === 4">
+                            <label>N&uacute;mero Propuesta
+                                <span class="required">*</span>
+                            </label>
+                            <input ng-disabled="estadoactual===4" required type="text" name="numeroPropuesta" ng-model="oportunidad.noPropuesta" class="form-control"
+                                maxlength="10" />
+                        </div>
+                        <div class="form-group" ng-show="oportunidad.estadoONId=== 2">
+                            <label>Fecha de reactivaci&oacute;n
+                                <span class="required">*</span>
+                            </label>
+                            <p class="input-group">
+                                <input ng-required="oportunidad.estadoONId=== 2" placeholder="dd/mm/yyyy" uib-datepicker-popup='dd/MM/yyyy' show-button-bar="false"
+                                    popup-placement="bottom" type="text" class="form-control fechaOnly" ng-model="oportunidad.fechaReactivacion"
+                                    is-open="open" close-text="Close" />
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-success" ng-click="open=true">
+                                        <i class="glyphicon glyphicon-calendar"></i>
+                                    </button>
+                                </span>
+                            </p>
+                            <span class="error" ng-show="oportunidadDetailsForm.fecha.$invalid && oportunidadDetailsForm.$submitted">
+                                Debes ingresar la fecha
+                            </span>
+                        </div>
+
+                        <div class="ln_solid"></div>
+                        <div class="form-group" ng-show="estadoactual ===1 || estadoactual === 2">
+                            <div class="col-md-8 col-sm-8 col-xs-12">
+                                <div class="">
+                                    <button type="submit" class="btn btn-warning" title="Modificar el estado de la oportunidad de negocio" ng-click="cambiarestado()">
+                                        <i class="glyphicon glyphicon-saved"></i> Modificar estado
+                                    </button>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+
+            <div ng-show="oportunidad.comentariosAdministrador != null && idRol==15">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Comentarios del administrador</h2>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content sin-desborde">
+                        <span>{{oportunidad.comentariosAdministrador}}</span>
+                    </div>
+                </div>
+            </div>
+            <div ng-show="oportunidad.comentariosEspecialista != null">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Comentarios del especialista</h2>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content sin-desborde">
+                        <span>{{oportunidad.comentariosEspecialista}}</span>
+                    </div>
+                </div>
+            </div>
+            <div ng-show="oportunidad.comentariosResponsable != null">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Comentarios del responsable</h2>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content sin-desborde">
+                        <span>{{oportunidad.comentariosResponsable}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 col-sm-4 col-xs-12">
+            <div class="x_panel sin-desborde">
+                <div class="x_title">
+                    <h2>Detalles del contacto</h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content sin-desborde">
+                    <div class="col-md-12 col-sm-3 col-xs-12">
+                        <div class="foto" style="position: relative; left: 40px;">
+                            <div class="profile_img">
+                                <div id="crop-avatar">
+                                    <img class="img-thumbnail" ng-show="oportunidad.contacto.adjunto64 === null" src="images/incognito.png" width="180" height="180"
+                                    />
+                                    <img class="img-thumbnail" ng-show="oportunidad.contacto.adjunto64 != null" ng-src="data:image/png;base64,{{oportunidad.contacto.adjunto64}}"
+                                        width="180" height="180" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <br />
+                        <ul class="list-unstyled user_data">
+                            <li>
+                                <i class="fa fa fa-building"></i> {{oportunidad.empresa.nombreEmpresa}}
+                            </li>
+                            <li>
+                                <i class="fa fa-briefcase user-profile-icon"></i> {{oportunidad.contacto.puesto}}
+                            </li>
+                            <li class="m-top-xs">
+                                <i class="fa fa fa-envelope"></i> {{oportunidad.contacto.correo}}
+                            </li>
+                            <li class="m-top-xs">
+                                <i class="fa fa fa-phone"></i> {{oportunidad.contacto.telefono}} | {{oportunidad.contacto.extension}}
+                            </li>
+                            <li class="m-top-xs">
+                                <i class="fa fa fa-mobile-phone"></i> {{oportunidad.contacto.celular}}
+                            </li>
+                        </ul>
+                        <div class="x_title">
+                            <h2>Domicilio </h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <ul class="list-unstyled user_data">
+                            <li class="m-top-xs">
+                                <i class="fa fa"></i>Calle {{contacto.calle}},
+                            </li>
+                            <li class="m-top-xs">
+                                <i class="fa fa"></i>Colonia {{contacto.colonia}},
+                            </li>
+                            <li class="m-top-xs">
+                                <i class="fa fa"></i>Localidad {{contacto.localidad}},
+                            </li>
+                            <li class="m-top-xs" ng-show="contacto.paises.paisId ==16">
+                                <i class="fa fa"></i>{{contacto.estados.nombreEstado}} {{contacto.municipios.nombreMunicipio}}, {{contacto.paises.nombrePais}}
+                            </li>
+                            <li class="m-top-xs" ng-show="contacto.paises.paisId !=16">
+                                <i class="fa fa"></i>{{contacto.edo}} {{contacto.munipio}}, {{contacto.paises.nombrePais}}
+                            </li>
+                            <li class="m-top-xs">
+                                <i class="fa fa"></i>CP {{contacto.cp}}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div ng-hide="oportunidad.adjuntoPorOportunidad.length == 0">
+                <div class="x_panel sin-desborde">
+                    <div class="x_title">
+                        <h2>Documentaci&oacute;n</h2>
+                        <div class="clearfix"></div>
+                        <ul ng-repeat="task in oportunidad.adjuntoPorOportunidad track by $index">
+                            <li>
+                                <span class="sg sg-software-des icono"></span>
+                                <a class="alinea" href="/Descargas.html#/q/{{task.adjunto.adjuntoId | encriptar}}" target="_blank" title="{{task.adjunto.nombre}}">
+                                {{task.adjunto.nombre}} </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+                    <div class="x_title">
+                        <h2>
+                            <i class="glyphicon glyphicon-calendar"></i> Historial de la oportunidad </h2>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div ng-hide="oportunidadesHistoricos.length === 0">
+                        <table id="CRhistorialOportunidadDetails" dt-instance="dtInstance" class="table table-hover table-striped table-condensed dt-responsive"
+                            cellspacing="0" datatable="ng" width="100%" dt-options="dtOptions">
+                            <thead>
+                                <tr>
+                                    <th style="width:100px">Estado Flujo</th>
+                                    <th style="width:100px">Fecha</th>
+                                    <th style="width:100px">Comentarios</th>
+                                    <th>Especialista</th>
+                                    <th>Unidad organizacional</th>
+                                    <th>Investigador que atender&aacute;</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="o in oportunidadesHistoricos">
+                                    <td>{{o.estadoFlujoON.nombre}}</td>
+                                    <td>{{o.fechaRegistro | date:'dd-MM-yyyy'}}</td>
+                                    <td>{{o.comentarios}}</td>
+                                    <td>
+                                        <label>
+                                            <a ng-click="openProfile(o.especialista.substring(0,5))" title="Detalle de empleado"
+                                                class="linkTabla">{{o.especialista.substring(0,5)}}</a>
+                                            <span class="cont">{{o.especialista.substring(5)}}</span>
+                                        </label>
+                                    </td>
+                                    <!--<td>{{o.especialista}}</td>-->
+                                    <td>{{o.unidadOrganizacional.nombreUnidad}}</td>
+                                    <td>
+                                        <label>
+                                            <a ng-click="openProfile(o.investigador.substring(0,5))" title="Detalle de empleado"
+                                                class="linkTabla">{{o.investigador.substring(0,5)}}</a>
+                                            <span class="cont">{{o.investigador.substring(5)}} </span>
+                                        </label>
+                                    </td>
+                                    <!--<td>{{o.investigador}}</td>-->
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <button type="button" confirma-regresar="globalRegresar()" state-form="formcambioestado" class="btn btn-primary">
+                <span class="fa fa-arrow-left"></span> Regresar
+            </button>
+        </div>
+    </div>
+
+</div>

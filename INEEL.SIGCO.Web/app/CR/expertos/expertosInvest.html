@@ -1,0 +1,35 @@
+<div id="page-wrapper">
+	<div class="row">
+		<div class="col-lg-12">
+			<h1 class="page-header">Expertos </h1>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-12">
+			<table id="CRexpertosInvest" datatable="ng" class="table table-hover table-striped table-condensed wrap" ng-show="tablavisible">
+				<thead>
+					<th>Nombre del experto</th>
+					<th>L&iacute;nea <br> de investigaci&oacute;n</th>
+					<th>Especialidad</th>
+					<th>Interact&uacute;a<br> con</th>
+					<th>Comunidad<br> de practica</th>
+					<th></th>
+				</thead>
+				<tbody>
+					<tr ng-repeat="experto in expertos">
+						<td>{{experto.contacto.nombreCompleto}}</td>
+						<td>{{experto.lineaDesarrolloTecnologico.nomLinDesTec}}</td>
+						<td>{{experto.especialidad}}</td>
+						<td>{{experto.investigador.nombreCompleto}}</td>
+						<td>{{experto.comunidadId == null ? 'Ninguna' : experto.comunidadId}}</td>
+						<td nowrap>
+							<a class="btn btn-default" ui-sref="expertosdetails({ id:experto.expertoId })" title="Mostrar detalle">
+								<i class="glyphicon glyphicon-align-justify"></i>
+							</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>

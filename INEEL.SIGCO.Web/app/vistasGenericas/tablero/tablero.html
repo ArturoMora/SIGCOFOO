@@ -1,0 +1,251 @@
+﻿<div data-ng-show="authentication.isAuth">
+    <!--<div ng-hide="registros.length >= 0">
+        <img src="images/cargando.gif" />
+    </div>-->
+    <div class="title_full">
+        <ol class="breadcrumb miga">
+            <li> <span class="fa fa-bar-chart"></span> Indicadores </li>
+        </ol>
+    </div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <form name="ValidForm" id="form">
+                    <table>
+                        <tr>
+                            <td>
+                                <label style="margin-bottom:0px;">Año:&nbsp;&nbsp;&nbsp;</label>
+                            </td>
+                            <td>                              
+                                <select ng-model="periodoSel" ng-options="anio.id as anio.descripcion for anio in anios" ng-init="actual"  class="form-control"></select>
+                            </td>
+                            <td>
+                                <label style="margin-bottom:0px;">&nbsp;&nbsp;&nbsp;Trimestre:&nbsp;&nbsp;&nbsp;</label>
+                            </td>
+                            <td>
+                              
+                                <select ng-model="trimestreSel" ng-options="tr.id as tr.descripcion for tr in trimestres" class="form-control"></select>
+                            </td>
+                            <td>
+                               
+                                <a class="btn btn-success" ng-click="muestradatos();" style="margin:0px;">
+                                    <i class="glyphicon glyphicon-search"></i> Consultar
+                                </a>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Capital humano (CH)</h2>
+                    <div class="clearfix"></div>
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Indicador</th>
+                                <th>Período</th>
+                                <th>Valor</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    Fichas curriculares actualizadas
+                                    en el periodo entre total de fichas
+                                </td>
+                                <td>{{seleccionado}}</td>
+                                <td>{{ficha | number : 2}}%</td>
+                            </tr>
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Capital relacional (CR)</h2>
+                    <div class="clearfix"></div>
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Indicador</th>
+                                <th>Periodo</th>
+                                <th>Valor</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    Oportunidades de negocio
+                                    concretadas entre total de
+                                    oportunidades de negocio
+                                </td>
+                                <td>{{seleccionadocontrimestre}}</td>
+                                <td>{{oportunidad | number : 2}}%</td>
+                            </tr>
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Propiedad intelectual (PI)</h2>
+                    <div class="clearfix"></div>
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Indicador</th>
+                                <th>Período</th>
+                                <th>Valor</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    PI Licenciada entre total de PI
+                                </td>
+                                <td>{{seleccionado}}</td>
+                                <td>{{plicenciada | number : 2}}%</td>
+                                
+                            </tr>
+                            <tr>
+                                <td>
+                                    Ingresos por PI entre total de PI
+                                    solicitada y otorgada
+                                </td>
+                                <td>{{seleccionado}}</td>
+                                <td>$ </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Total de PI entre total investiga-
+                                    dores
+                                </td>
+                                <td>{{seleccionado}}</td>
+                                <td>{{plicenciadaxinv | number : 2}}%</td>
+                            </tr>
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Memoria tecnológica (MT)</h2>
+                    <div class="clearfix"></div>
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Indicador</th>
+                                <th>Periodo</th>
+                                <th>Valor</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    Numero de visualizaciones
+                                    entre accesos
+                                </td>
+                                <td>{{seleccionadocontrimestre}}</td>
+                                <td>{{mtAccesos | number : 2}}%</td>
+                            </tr>
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Comunidades de práctica (CP)</h2>
+                    <div class="clearfix"></div>
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Indicador</th>
+                                <th>Periodo</th>
+                                <th>Valor</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    Total de participantes de CP
+                                    entre total empleados
+                                </td>
+                                <td>{{seleccionadocontrimestre}}</td>
+                                <td>{{cParticipantes | number : 2}}%</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Estudios especializados y temas
+                                    innovadores entre total partipantes
+                                    de CP
+                                </td>
+                                <td>{{seleccionadocontrimestre}}</td>
+                                <td>{{cEstudios | number : 2}}%</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Estados del arte y mapas de ruta
+                                    entre total partipantes de CP
+                                </td>
+                                <td>{{seleccionadocontrimestre}}</td>
+                                <td>{{cMapas | number : 2}}%</td>
+                            </tr>
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Gestión de la innovación (GI)</h2>
+                    <div class="clearfix"></div>
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Indicador</th>
+                                <th>Período</th>
+                                <th>Valor</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    Propuestas aprobadas entre
+                                    ideas aprobadas.
+                                </td>
+                                <td>{{seleccionado}}</td>
+                                <td>{{giPropuestas| number : 2}}%</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Ideas aprobadas entre total
+                                    de ideas
+                                </td>
+                                <td>{{seleccionado}}</td>
+                                <td>{{giIdeas| number : 2}}%</td>
+                            </tr>
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+        <button type="submit" ng-click="globalRegresar()" class="btn btn-primary">
+            <span class="fa fa-arrow-left"></span> Regresar
+        </button>
+
+
+    <!--</div>-->
+</div>

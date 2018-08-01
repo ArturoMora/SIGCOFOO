@@ -1,0 +1,33 @@
+﻿<div class="modal-content">
+    <div class="modal-header">
+        Agregar especialista
+        <button type="button" class="close" ng-click="cancel()" data-dissmiss="modal">x</button>
+    </div>
+    <form role="form" ng-submit="ok()" novalidate name="contactoAddForm">
+        <div class="modal-body">
+            <div class="panel">
+                <div class="panel-body">
+                    <div ng-hide="personas.length === 0">
+                        <table  dt-instance="dtInstance" class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" datatable="ng" width="100%" dt-options="dtOptions">
+                            <thead>
+                                <tr>
+                                    <th style="width:20px" data-priority="1">No. Empleado</th>
+                                    <th style="width:300px">Nombre</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="p in personas">
+                                    <td>{{p.clavePersona}}</td>
+                                    <td class="link" style="cursor:pointer" ng-click="personaSeleccionada(p)">{{p.nombreCompleto}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-primary" ng-click="cancel()">Cerrar</button>
+        </div>
+    </form>
+</div>

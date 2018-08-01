@@ -1,0 +1,29 @@
+﻿<div class="modal-content">
+    <div class="modal-header">
+        Agregar empresa
+        <button type="button" class="close" ng-click="cancel()" data-dissmiss="modal">x</button>
+    </div>
+    <form role="form" ng-submit="AddEmpresa()" novalidate name="empresaAddForm">
+        <div class="modal-body">
+            <div class="modal-body">
+                <div class="panel">
+                    <div class="panel-body">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label>Nombre <a>*</a></label>
+                                <input required type="text" name="nombreEmpresa" ng-model="empresa.nombreEmpresa" ng-minlength="2" ng-maxlength="250" class="form-control" />
+                                <span class="error" ng-show="empresaAddForm.nombreEmpresa.$dirty && !empresaAddForm.nombreEmpresa.$valid">
+                                    El rango de caracteres debe ser m&iacute;nimo 15 y m&aacute;ximo 250
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-success" ><i class="glyphicon glyphicon-plus"></i> Agregar</button>
+            <button type="button" class="btn btn-primary" ng-click="cancel()">Cancelar</button>
+        </div>
+     </form>
+</div>

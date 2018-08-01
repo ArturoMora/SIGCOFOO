@@ -1,0 +1,93 @@
+﻿<div class="modal-content">
+    <div class="modal-header">
+        Agregar contacto
+        <button type="button" class="close" ng-click="cancel()" data-dissmiss="modal">x</button>
+    </div>
+    <form role="form" ng-submit="AddContacto()" novalidate name="contactoAddForm">
+        <div class="modal-body">
+            <div class="panel">
+                <div class="panel-body">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label>Nombre <a>*</a></label>
+                            <input required type="text" name="nombreC" ng-model="contacto.nombreContacto" class="form-control" ng-maxlength="200" />
+                            <span class="error" ng-show="contactoAddForm.nombreC.$error.maxlength">
+                                El m&aacute;ximo n&uacute;mero de caracteres permitidos es 200
+                            </span>
+                            <!--<span class="error" ng-show="contactoAddForm.nombreC.$invalid && contactoAddForm.nombreC.$dirty || contactoAddForm.$submitted && contactoAddForm.nombreC.$invalid">
+                                Debes ingresar el nombre del contacto
+                            </span>-->
+                        </div>
+                        <div class="form-group">
+                            <label>Apellido Paterno <a>*</a></label>
+                            <input required type="text" name="paterno" ng-model="contacto.apellidoPaterno" class="form-control" />
+                            <span class="error" ng-show="contactoAddForm.paterno.$error.maxlength">
+                                El m&aacute;ximo n&uacute;mero de caracteres permitidos es 200
+                            </span>
+                            <!--<span class="error" ng-show="contactoAddForm.paterno.$invalid && contactoAddForm.paterno.$dirty || contactoAddForm.$submitted && contactoAddForm.paterno.$invalid">
+                                Debes ingresar el Apellido Paterno
+                            </span>-->
+                        </div>
+                        <div class="form-group">
+                            <label>Apellido Materno <a>*</a></label>
+                            <input required type="text" name="materno" ng-model="contacto.apellidoMaterno" class="form-control" />
+                            <span class="error" ng-show="contactoAddForm.materno.$error.maxlength">
+                                El m&aacute;ximo n&uacute;mero de caracteres permitidos es 200
+                            </span>
+                            <!--<span class="error" ng-show="contactoAddForm.materno.$invalid && contactoAddForm.materno.$dirty || contactoAddForm.$submitted && contactoAddForm.materno.$invalid">
+                                Debes ingresar el Apellido Materno
+                            </span>-->
+                        </div>
+                        <div class="form-group">
+                            <label for="usr">Empresa <a>*</a></label>
+                            <div class="row">
+                                <div class="col-xs-10">
+                                    <input required type="text" class="form-control" id="usr" name="empresa" ng-model="contacto.nombreEmpresa" disabled ng-required="true">
+                                    <input type="hidden" ng-model="contacto.empresaId" class="form-control" value="contactoId" />
+                                    <!--<span class="error" ng-show="contactoAddForm.empresa.$invalid && contactoAddForm.empresa.$dirty || contactoAddForm.$submitted && contactoAddForm.empresa.$invalid">
+                                        Debes de agregar una empresa.
+                                    </span>-->
+                                </div>
+                                <div class="col-xs-2">
+                                    <a ng-click="openEmpresa()" class="btn btn-success" title="Buscar contacto" ng-disabled="desabilitarBuscarContacto">
+                                        <i class="glyphicon glyphicon-search"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label>Tel&eacute;fono </label>
+                            <input type="text" name="tele" ng-model="contacto.telefono" class="form-control" />
+                        </div>
+                        <div class="form-group">
+                            <label>Extensi&oacute;n</label>
+                            <input type="text" name="ext" ng-model="contacto.extension" placeholder="3456" ng-maxlength="6" numbers-only class="form-control" />
+                            <span class="error" ng-show="contactoAddForm.ext.$error.maxlength">
+                                El m&aacute;ximo n&uacute;mero de caracteres permitidos es 6
+                            </span>
+                        </div>
+                        <div class="form-group">
+                            <label>Celular  </label>
+                            <input type="text" name="celular" ng-model="contacto.celular" ng-maxlength="100" class="form-control" />
+                        </div>
+                        <div class="form-group">
+                            <label>Correo <a>*</a></label>
+                            <input type="email" name="email" required="" ng-model="contacto.correo" pattern="^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$" class="form-control" />
+                            <div role="alert">
+                                <span class="text-danger" ng-show="contactoAddForm.email.$error.email">
+                                    Correo no valido, ejemplo: correo@empresa.com
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-success" ><i class="glyphicon glyphicon-plus"></i>Agregar</button>
+            <button type="button" class="btn btn-primary" ng-click="cancel()">Cancelar</button>
+        </div>
+    </form>
+</div>

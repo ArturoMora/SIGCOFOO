@@ -1,0 +1,444 @@
+﻿<div class="vista">
+    <div class="page-title">
+        <div class="title_full">
+            <ol class="breadcrumb miga">
+                <li>
+                    <i class="glyphicon glyphicon-file"></i>
+                    <a ui-sref="carteraPropuestas">Propuestas de innovaci&oacute;n/ Mis propuestas de innovaci&oacute;n</a>
+                </li>
+                <li class="active">Detalles</li>
+            </ol>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <form name="form">
+        <div ng-class="expression">
+            <!--PROPUESTA DE INNOVACION-->
+            <div class="x_panel">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="x_panel">
+                            <div class="x_title">
+                                <h2>Informaci&oacute;n de la propuesta</h2>
+                                <div class="clearfix"></div>
+
+                            </div>
+                            <div class="x_content sin-desborde">
+                                <div class="row col-md-12 col-sm-12 col-lg-12 col-xs-12">
+                                    <label class="detalle col-xs-12 " title="titulo">
+                                        {{registroPropuesta.nombreTecnico}} ( {{registroPropuesta.propuestaId}} )
+                                    </label>
+                                    <label class="cont emc col-xs-12 colorTit">
+                                        {{registroPropuesta.productoServicio}}
+                                    </label>
+                                </div>
+                                <div class="clearfix">
+                                    <br/>
+                                    <br/>
+                                </div>
+
+                                <!--Cuando se rechaza una propuesta sin tocar el plan-->
+                                <div class="alert advertencia" ng-if="(registroPropuesta.estadoFlujoId==15 || registroPropuesta.estadoFlujoId==2) && bitacoraPropuesta.length==0">
+                                    <i class="glyphicon glyphicon-info-sign"></i>
+                                    <label>
+                                        Motivo de rechazo:
+                                    </label>&nbsp; {{evaluacionPropuesta.justificacion==null? 'Sin justificación' : evaluacionPropuesta.justificacion}}
+                                </div>
+                                <!--Cuando se acepta una propuesta pero se rechaza el plan-->
+                                <div class="alert informacion" ng-if="registroPropuesta.estadoFlujoId==15 && bitacoraPropuesta.length==1">
+                                    <i class="glyphicon glyphicon-info-sign"></i>
+                                    <label>
+                                        Motivo de aceptaci&oacute;n:
+                                    </label>&nbsp; {{evaluacionPropuesta.justificacion==null? 'Sin justificación' : evaluacionPropuesta.justificacion}}
+                                </div>
+                                <!--Cuando se acepta una propuesta (con o sin plan)-->
+                                <div class="alert informacion" ng-if="registroPropuesta.estadoFlujoId==10">
+                                    <i class="glyphicon glyphicon-info-sign"></i>
+                                    <label>
+                                        Motivo de aceptaci&oacute;n:
+                                    </label>&nbsp; {{evaluacionPropuesta.justificacion ==null? 'Sin justificación' : evaluacionPropuesta.justificacion}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="x_panel">
+                            <div class="x_content sin-desborde">
+                                <div class="x_title">
+                                    <h2>Proponente principal</h2>
+                                    <div class="clearfix"></div>
+
+                                </div>
+                                <div class="form-group">
+                                    <table class="table table-hover" ng-show="registroPropuesta.claveProponentePrincipal!=null">
+                                        <thead>
+                                            <tr>
+                                                <th class="thAjuste ">N&uacute;m empleado</th>
+                                                <th class="thAjuste ">Nombre de empleado</th>
+                                                <th class="thAjusteColaboracion text-center">Contribuci&oacute;n</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td ng-click="openProfile(registroPropuesta.claveProponentePrincipal)" title="Detalle de empleado" class="linkTabla">{{registroPropuesta.claveProponentePrincipal}}</td>
+                                                <td>{{registroPropuesta.nombreProponentePrincipal}}</td>
+                                                <td class="text-center">Principal</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="x_panel">
+                            <div class="x_content sin-desborde">
+                                <div class="x_title">
+                                    <h2>Informaci&oacute;n general</h2>
+                                    <div class="clearfix"></div>
+                                    <label class="tit col-xs-12">
+                                        Tipo de propuesta
+                                    </label>
+                                    <label ng-if="registroPropuesta.propuestaInterna==true" class="cont col-xs-12">
+                                        Interna
+                                    </label>
+                                    <label ng-if="registroPropuesta.propuestaInterna==false" class="cont col-xs-12">
+                                        Externa
+                                    </label>
+                                    <label class="tit col-xs-12">
+                                        Fondo
+                                    </label>
+                                    <label ng-if="registroPropuesta.fondo==0" class="cont col-xs-12">
+                                        Otro
+                                    </label>
+                                    <label ng-if="registroPropuesta.fondo==1" class="cont col-xs-12">
+                                        FICYDET
+                                    </label>
+                                    <label class="tit col-xs-12">
+                                        Gerencia que lidera la propuesta
+                                    </label>
+                                    <label class="cont col-xs-12">
+                                        {{registroPropuesta.nombreUnidadOrganizacional}}
+                                    </label>
+                                    <label class="tit col-xs-12">
+                                        Empresa que promueve la propuesta (Instituto/Cliente)
+                                    </label>
+                                    <label class="cont col-xs-12">
+                                        {{registroPropuesta.empresaPromotorNombre}}
+                                    </label>
+                                    <label ng-if="registroPropuesta.fondo==1" class="tit col-xs-12">
+                                        Idea innovadora relacionada
+                                    </label>
+                                    <label ng-if="registroPropuesta.fondo==1" class="cont col-xs-12">
+                                        {{registroPropuesta.ideaInnovadora.nombreIdea}}
+                                    </label>
+                                    <label class="tit col-xs-12">
+                                        Segmento de mercado al que va dirigido
+                                    </label>
+                                    <label class="cont col-xs-12">
+                                        {{registroPropuesta.segmentoMercadoNombre}}
+                                    </label>
+                                    <label class="tit col-xs-12">
+                                        Tipo de acceso
+                                    </label>
+                                    <label class="cont col-xs-12">
+                                        {{registroPropuesta.tipoAccesoGI.nombre}}
+                                    </label>
+                                </div>
+                            </div>
+                            <!--<div class="x_content sin-desborde">
+                                        <div class="x_title">
+                                            <h2>Informaci&oacute;n general</h2>
+                                            <div class="clearfix"></div>
+                                            <div class="form-group" ng-show="registroPropuesta.adjunto!=null">
+                                                <span class="fa fa-download"></span>&nbsp;&nbsp;<a href="/Descargas.html#/q/{{registroPropuesta.adjunto.adjuntoId | encriptar}}" class="linkTabla" target="_blank">Descargar Archivo </a>
+                                            </div>
+                                            <div class="form-group" ng-show="registroPropuesta.adjunto==null">
+                                                <div class="alert advertencia  col-xs-12">
+                                                    <span class="glyphicon glyphicon-info-sign"></span> No hay evidencia
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>-->
+                        </div>
+                        <div class="x_panel">
+                            <div class="x_content sin-desborde">
+                                <div class="x_title">
+                                    <h2>Evidencia</h2>
+                                    <div class="clearfix"></div>
+                                    <label class="tit col-xs-12" ng-show="registroPropuesta.adjunto!=null">
+
+                                    </label>
+                                    <label class="cont col-xs-12" ng-show="registroPropuesta.adjunto!=null">
+                                        <span class="fa fa-download"></span>&nbsp;&nbsp;
+                                        <a href="/Descargas.html#/q/{{registroPropuesta.adjunto.adjuntoId | encriptar}}" class="linkTabla" target="_blank">Descargar Archivo </a>
+                                    </label>
+                                    <label class="tit col-xs-12" ng-show="registroPropuesta.adjunto==null">
+
+                                    </label>
+                                    <label class="cont col-xs-12" ng-show="registroPropuesta.adjunto==null">
+                                        <div class="alert advertencia  col-xs-12">
+                                            <span class="glyphicon glyphicon-info-sign"></span> No hay evidencia
+                                        </div>
+                                    </label>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="x_panel" ng-show="((rolId==1028 && registroPropuesta.estadoFlujoId==14) && (bitacoraPropuesta.length==0)) || ((rolId==4 && registroPropuesta.estadoFlujoId==8) && (bitacoraPropuesta.length==0))">
+                            <div class="x_content sin-desborde" ng-show="rolId==1028 || rolId==4">
+                                <div class="x_title">
+                                    <h2>Justificaci&oacute;n</h2>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <label class="tit">
+                                    <button ng-show="registroPropuesta.propuestaInterna=='false' || registroPropuesta.propuestaInterna==false" type="button"
+                                        class="btn btn-success" ng-really-message="¿Está seguro de notificar al grupo evaluador?"
+                                        ng-really-click="NotificarGrupo(1)">
+                                        <i class="glyphicon glyphicon-saved"></i> Notificar al grupo evaluador
+                                    </button>
+                                    <!--<button ng-show="(registroPropuesta.propuestaInterna=='true' || registroPropuesta.propuestaInterna==true) && registroPropuesta.fondo==0" type="button" class="btn btn-success" ng-really-message="¿Está seguro de notificar al grupo evaluador?" ng-really-click="NotificarGrupo(2)">
+                                                <i class="glyphicon glyphicon-saved"></i> Notificar al grupo evaluador
+                                            </button>-->
+                                    <button ng-show="(registroPropuesta.propuestaInterna=='true' || registroPropuesta.propuestaInterna==true) && registroPropuesta.fondo==1"
+                                        type="button" class="btn btn-success" ng-really-message="¿Está seguro de notificar al grupo evaluador?"
+                                        ng-really-click="NotificarGrupo(3)">
+                                        <i class="glyphicon glyphicon-saved"></i> Notificar al grupo evaluador
+                                    </button>
+                                </label>
+                                <label class="tit col-xs-12">
+                                    Justificaci&oacute;n
+                                    <span class="required">*</span>
+                                </label>
+                                <label class="cont col-xs-12">
+                                    <textarea class="form-control" placeholder="Escriba una justificaci&oacute;n" ng-model="justificacion" maxlength="500"></textarea>
+                                </label>
+                                <br />
+                                <div class="col-md-12 col-sm-6 col-xs-12 col-md-offset-1">
+                                    <br />
+                                    <button type="button" class="btn btn-warning" ng-really-message="¿Está seguro de <b>rechazar</b> la propuesta de innovación?"
+                                        ng-really-click="Acciones(1,'')">
+                                        <i class="fa fa-close"></i> Rechazar
+                                    </button>
+                                    <button type="button" class="btn btn-info" ng-really-message="¿Está seguro de registrar <b>sugerencia de modificación</b> de la propuesta de innovación?"
+                                        ng-really-click="Acciones(2,'')">
+                                        <i class="fa fa-reply"></i> Modificar
+                                    </button>
+
+                                    <button type="button" ng-show="rolId==1028 || rolId==4" class="btn btn-success" ng-really-message="¿Está seguro de <b>aprobar</b> la propuesta de innovación?"
+                                        ng-really-click="Acciones(3,'')">
+                                        <i class="glyphicon glyphicon-saved"></i> Aprobar
+                                    </button>
+                                </div>
+                                <br />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--PLAN DE NEGOCIO EVOLUTIVO-->
+
+        <div class="col-md-6 col-sm-6 col-xs-6" ng-show="registroPropuesta.propuestaInterna=='true' || registroPropuesta.propuestaInterna==true">
+            <div class="x_panel">
+                <div class="row">
+                    <!--PLAN DE NEGOCIO EVOLUTIVO-->
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="x_panel">
+                            <div class="x_title">
+                                <h2>Informaci&oacute;n del plan de negocio evolutivo</h2>
+                                <div class="clearfix"></div>
+
+                            </div>
+                            <div class="x_content sin-desborde">
+                                <label class="detalle col-xs-12 " title="titulo">
+                                    {{registroPlan.titulo}}
+                                </label>
+
+                                <label class="cont emc col-xs-12 colorTit">
+                                    {{registroPlan.tema}}
+                                </label>
+                            </div>
+                            <div class="clearfix">
+                                <br/>
+                                <br/>
+                            </div>
+
+                            <div class="alert advertencia" ng-if="registroPlan.estadoFlujoId==15">
+                                <i class="glyphicon glyphicon-info-sign"></i>
+                                <label>
+                                    Motivo de rechazo:
+                                </label>&nbsp; {{evaluacionPlan.justificacion ==null? 'Sin justificación' : evaluacionPlan.justificacion}}
+                            </div>
+                            <div class="alert informacion" ng-if="registroPlan.estadoFlujoId==10">
+                                <i class="glyphicon glyphicon-info-sign"></i>
+                                <label>
+                                    Motivo de aceptación:
+                                </label>&nbsp; {{evaluacionPlan.justificacion ==null? 'Sin justificación' : evaluacionPlan.justificacion}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="x_panel">
+                            <div class="x_content sin-desborde">
+                                <div class="x_title">
+                                    <h2>Informaci&oacute;n general</h2>
+                                    <div class="clearfix"></div>
+                                    <label class="tit col-xs-12">
+                                        Oferta de valor
+                                    </label>
+                                    <label class="cont col-xs-12">
+                                        {{registroPlan.ofertaDeValor}}
+                                    </label>
+                                    <label class="tit col-xs-12">
+                                        Tipo de acceso
+                                    </label>
+                                    <label class="cont col-xs-12">
+                                        {{registroPlan.tipoAccesoGI.nombre}}
+                                    </label>
+                                    <label ng-if="registroPlan.proyecto!=null && registroPlan.proyecto!=undefined" class="tit col-xs-12">
+                                        Proyecto
+                                    </label>
+                                    <label ng-if="registroPlan.proyecto!=null && registroPlan.proyecto!=undefined" class="cont col-xs-12">
+                                        <a href="" load-proyectos idproyecto="{{registroPlan.proyectoId}}" title="Detalle de proyecto">{{registroPlan.proyectoId}}</a>-{{registroPlan.proyecto.nombre}} {{registroPlan.proyecto.nombre}}
+                                    </label>
+                                    <label class="tit col-xs-12">
+                                        Propuesta
+                                    </label>
+                                    <label class="cont col-xs-12">
+                                        {{registroPlan.propuesta.nombreTecnico}}
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="x_panel">
+                            <div class="x_content sin-desborde">
+                                <div class="x_title">
+                                    <h2>Autores</h2>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="form-group">
+                                    <table id="CHPonenciaAdd" class="table table-hover" cellspacing="0" dt-options="dtOptions">
+                                        <thead>
+                                            <tr>
+                                                <th data-priority="1">N&uacute;m empleado</th>
+                                                <th data-priority="1">Nombre de empleado</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="autor in registroPlan.planNegocioEvolAutores">
+                                                <td ng-click="openProfile(autor.clavePersona)" title="Detalle de empleado" class="linkTabla">{{autor.clavePersona}}</td>
+                                                <td>{{autor.nombre}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="x_panel">
+                            <div class="x_content sin-desborde">
+                                <div class="x_title">
+                                    <h2>Gerencias</h2>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="form-group">
+                                    <table id="CHPonenciaAdd" class="table table-hover" cellspacing="0" dt-options="dtOptions">
+                                        <thead>
+                                            <tr>
+                                                <th data-priority="1">Nombre</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="reg in registroPlan.planNegocioEvolGerencias">
+                                                <td>{{reg.nombreUnidad}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="x_panel">
+                            <div class="x_content sin-desborde">
+                                <div class="x_title">
+                                    <h2>Evidencia</h2>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="form-group">
+                                    <table id="CHPonenciaAdd" class="table table-hover" cellspacing="0" dt-options="dtOptions" datatable="ng">
+                                        <thead>
+                                            <tr>
+                                                <th data-priority="1">Fecha</th>
+                                                <th data-priority="1">Nombre</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="arc in registroPlan.planNegocioEvolArchivos">
+                                                <!--<td>{{arc.adjunto.nombre}}</td>-->
+                                                <td>{{arc.fecha | date: "yyyy/MM/dd"}}</td>
+                                                <td>
+                                                    <span class="fa fa-download"></span>&nbsp;&nbsp;
+                                                    <a href="/Descargas.html#/q/{{arc.adjunto.adjuntoId | encriptar}}" class="linkTabla" target="_blank">{{arc.adjunto.nombre}}</a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div ng-show="((registroPropuesta.fondo==1) && (bitacoraPropuesta.length==1)) && registroPlan.estadoFlujoId!=15 &&  registroPlan.estadoFlujoId!=10">
+                            <div class="x_content sin-desborde" ng-show="rolId==1028 || rolId==4">
+                                <div class="x_title">
+                                    <h2>Justificaci&oacute;n</h2>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <label class="tit col-xs-12">
+                                    <button type="button" class="btn btn-success" ng-really-message="¿Está seguro de notificar al grupo evaluador?" ng-really-click="NotificarGrupo(4)">
+                                        <i class="glyphicon glyphicon-saved"></i> Notificar al grupo evaluador
+                                    </button>
+
+                                </label>
+                                <label class="tit col-xs-12">
+                                    Justificaci&oacute;n
+                                    <span class="required">*</span>
+                                </label>
+                                <label class="cont col-xs-12">
+                                    <textarea class="form-control" placeholder="Escriba una justificaci&oacute;n" ng-model="justificacionPlan" maxlength="500"></textarea>
+                                </label>
+                                <br />
+                                <div class="col-md-12 col-sm-6 col-xs-12 col-md-offset-1">
+                                    <br />
+                                    <button type="button" class="btn btn-warning" ng-really-message="¿Está seguro de <b>rechazar</b> el plan de negocio evolutivo?"
+                                        ng-really-click="Acciones(1,'plan')">
+                                        <i class="fa fa-close"></i> Rechazar
+                                    </button>
+                                    <button type="button" class="btn btn-info" ng-really-message="¿Está seguro de registrar <b>sugerencia de modificación</b> del plan de negocio evolutivo?"
+                                        ng-really-click="Acciones(2,'plan')">
+                                        <i class="fa fa-reply"></i> Modificar
+                                    </button>
+
+                                    <button type="button" ng-show="rolId==1028 || rolId==4" class="btn btn-success" ng-really-message="¿Está seguro de <b>aprobar</b> el plan de negocio evolutivo?"
+                                        ng-really-click="Acciones(3,'plan')">
+                                        <i class="glyphicon glyphicon-saved"></i> Aprobar
+                                    </button>
+                                </div>
+                                <br />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+</div>
+
+<div>
+    <div class="row">
+        <div class="col-xs-12">
+            <button type="button" confirma-regresar="globalRegresar()" state-form="form" class="btn btn-primary">
+                <span class="fa fa-arrow-left"></span> Regresar
+            </button>
+        </div>
+    </div>
+</div>
+</div>

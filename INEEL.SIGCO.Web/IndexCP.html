@@ -1,0 +1,579 @@
+﻿<!DOCTYPE html>
+<html lang="es-mx" ng-app="ineelCP">
+
+<head>
+    <title>Comunidades de pr&aacute;ctica</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta http-equiv="Expires" content="-1">
+    <meta http-equiv="Last-Modified" content="0">
+    <meta http-equiv="Cache-Control" content="no-cache, mustrevalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+
+    <title>Comunidades de pr&aacute;ctica</title>
+    <!-- build:css Content/stylesCH.min.css -->
+    <!-- inject:css -->
+    <!-- Bootstrap -->
+    <link href="vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="vendors/nprogress/nprogress.css" rel="stylesheet">
+    <!-- iCheck -->
+    <link href="vendors/iCheck/skins/flat/green.css" rel="stylesheet">
+    <!-- bootstrap-progressbar -->
+    <link href="vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
+    <!-- JQVMap -->
+    <link href="vendors/jqvmap/dist/jqvmap.min.css" rel="stylesheet" />
+    <!-- bootstrap-daterangepicker -->
+    <link href="vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+    <!-- Custom Theme Style -->
+    <link href="Content/custom.css" rel="stylesheet">
+
+
+    <!--Mensajes Toastr-->
+    <link href="Content/toastr.css" rel="stylesheet" />
+
+    <!--Tablas responsivas-->
+    <link href="Content/EstilosPropios/jquery.dataTablesINEEL.css" rel="stylesheet" />
+    <link href="Content/DataTables/css/dataTables.responsive.css" rel="stylesheet" />
+    <!--Estilos propios-->
+    <!--<link href="Content/EstilosPropios/StyleAuthorize.css" rel="stylesheet" />-->
+    <link href="Content/EstilosPropios/StyleModulos.css" rel="stylesheet" />
+    <link href="Content/EstilosPropios/datatable.tamaños.css" rel="stylesheet" />
+
+    <link href="Content/EstilosPropios/fabForm.css" rel="stylesheet" />
+    <link href="Content/Curriculum/curriculum.css" rel="stylesheet" />
+    <link href="Content/EstilosPropios/CPDesign.css" rel="stylesheet" />
+
+
+    <link href="Content/select2/select.min.css" rel="stylesheet" />
+    <link href="Content/select2/select2.css" rel="stylesheet" />
+    <link href="Content/select2/selectize.default.css" rel="stylesheet" />
+    <link href="Content/angucomplete-alt.css" rel="stylesheet" />
+    <link href="Content/multiple-select.min.css" rel="stylesheet" />
+
+
+    <!--stilos reportes-->
+
+    <link href="Content/DataTables/css/buttons.dataTables.css" rel="stylesheet" />
+    <link href="Content/angular-ui-tree/angular-ui-tree.css" rel="stylesheet" />
+    <link href="Content/angular-block-ui.min.css" rel="stylesheet" />
+    <link href="Scripts/knob/jquery.circliful.css" rel="stylesheet" />
+    <link href="Scripts/getorgchart-1.1/getorgchart.css" rel="stylesheet" />
+    <link href="Content/switch/angular-ui-switch.css" rel="stylesheet" />
+    <link href="Content/angucomplete-alt.css" rel="stylesheet" />
+    <link href="Content/ng-tags-input.css" rel="stylesheet" />
+    <link href="Content/ng-tags-input-personal.css" rel="stylesheet" />
+    <link href="vendors/animate.css/animate.css" rel="stylesheet" />
+    <!-- endinject -->
+    <!-- endbuild -->
+    <!--
+       IE8 support, see AngularJS Internet Explorer Compatibility http://docs.angularjs.org/guide/ie
+       For Firefox 3.6, you will also need to include jQuery and ECMAScript 5 shim
+     -->
+    <!--[if lt IE 9]>
+      <script src="Scripts/jquery1.11.0.js"></script>
+      <script src="Scripts/es5-shim.min.js"></script>
+      <script>
+        document.createElement('ui-select');
+        document.createElement('ui-select-match');
+        document.createElement('ui-select-choices');
+      </script>
+    <![endif]-->
+    <!--<link href="Content/dx.common.css" rel="stylesheet" />-->
+    <!-- build:js Scripts/scriptsCH.min.js -->
+    <!-- inject:js -->
+    <script src="Scripts/jquery-2.1.0.min.js"></script>
+    <script src="Scripts/jquery-ui-1.11.3.min.js"></script>
+
+    <!-- <script src="Scripts/jquery-1.9.1.js"></script>-->
+    <script src="Scripts/bootstrap.js"></script>
+
+    <!-- plantilla -->
+    <!-- FastClick -->
+    <script src="vendors/fastclick/lib/fastclick.js"></script>
+    <!-- NProgress -->
+    <script src="vendors/nprogress/nprogress.js"></script>
+    <!-- Chart.js -->
+    <script src="vendors/echarts/dist/echarts.min.js"></script>
+    <script src="vendors/Chart.js/dist/Chart.min.js"></script>
+    <!-- gauge.js -->
+    <script src="vendors/gauge.js/dist/gauge.min.js"></script>
+    <!-- bootstrap-progressbar -->
+    <script src="vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+    <!-- iCheck -->
+    <script src="vendors/iCheck/icheck.min.js"></script>
+    <!-- Skycons -->
+    <script src="vendors/skycons/skycons.js"></script>
+    <!-- Flot -->
+    <script src="vendors/Flot/jquery.flot.js"></script>
+    <script src="vendors/Flot/jquery.flot.pie.js"></script>
+    <script src="vendors/Flot/jquery.flot.time.js"></script>
+    <script src="vendors/Flot/jquery.flot.stack.js"></script>
+    <script src="vendors/Flot/jquery.flot.resize.js"></script>
+    <!-- Flot plugins -->
+    <script src="vendors/flot.orderbars/js/jquery.flot.orderBars.js"></script>
+    <script src="vendors/flot-spline/js/jquery.flot.spline.min.js"></script>
+    <script src="vendors/flot.curvedlines/curvedLines.js"></script>
+    <!-- DateJS -->
+    <script src="vendors/DateJS/build/date.js"></script>
+    <!-- JQVMap -->
+    <script src="vendors/jqvmap/dist/jquery.vmap.js"></script>
+    <script src="vendors/jqvmap/dist/maps/jquery.vmap.world.js"></script>
+    <script src="vendors/jqvmap/examples/js/jquery.vmap.sampledata.js"></script>
+
+
+    <script src="Scripts/toastr.js"></script>
+    <script src="Scripts/getorgchart-1.1/getorgchart.js"></script>
+
+
+
+
+
+    <script src="Scripts/angular.js"></script>
+    <script src="Scripts/angular-ui-router.js"></script>
+
+    <script src="Scripts/angular-animate.min.js"></script>
+    <script src="Scripts/i18n/angular-locale_es-mx.js"></script>
+    <script src="Scripts/angular-ui/ui-bootstrap-tpls.js"></script>
+    <script src="Scripts/angular-local-storage.min.js"></script>
+    <script src="Scripts/angular-block-ui.min.js"></script>
+    <script src="Scripts/angular-resource.js"></script>
+
+
+
+
+    <!--InfiniteScroll-->
+    <script src="Scripts/angular-infinite-scroll/ng-infinite-scroll.min.js"></script>
+
+
+
+
+    <!--stilos reportes-->
+    <script src="Scripts/html2canvas.js"></script>
+    <script src="Scripts/jquery.canvasjs.min.js"></script>
+    <script src="Scripts/canvasjs.min.js"></script>
+    <!-- chart JS -->
+    <!--<script src="Scripts/node_modules/angular-chart.js/node_modules/chart.js/dist/Chart.min.js"></script>-->
+    <script src="Scripts/node_modules/angular-chart.js/dist/angular-chart.min.js"></script>
+    <!--Tablas-->
+    <script src="Scripts/DataTables/jquery.dataTables.js"></script>
+
+    <script src="Scripts/angular-datatables/angular-datatables.js"></script>
+    <script src="Scripts/DataTables/dataTables.bootstrap.js"></script>
+    <script src="Scripts/DataTables/dataTables.responsive.min.js"></script>
+    <script src="Scripts/angular-datatables/angular-datatables.js"></script>
+    <script src="Scripts/angular-datatables/angular-datatables.util.js"></script>
+    <script src="Scripts/angular-datatables/angular-datatables.options.js"></script>
+    <script src="Scripts/angular-datatables/angular-datatables.instances.js"></script>
+    <script src="Scripts/angular-datatables/angular-datatables.factory.js"></script>
+    <script src="Scripts/angular-datatables/angular-datatables.renderer.js"></script>
+    <script src="Scripts/angular-datatables/angular-datatables.directive.js"></script>
+    <script src="Scripts/DataTables/dataTables.columnFilter.js"></script>
+    <script src="Scripts/angular-datatables/plugins/columnfilter/angular-datatables.columnfilter.js"></script>
+    <script src="Scripts/angular-datatables/plugins/fixedcolumns/angular-datatables.fixedcolumns.js"></script>
+
+
+    <script src="Scripts/select2/select.js"></script>
+    <script src="Scripts/angular-sanitize.js"></script>
+    <script src="Scripts/bootstrap-filestyle.min.js"></script>
+    <script src="Scripts/jquery.highlight.js"></script>
+    <script src="Scripts/dataTables.searchHighlight.min.js"></script>
+    <script src="Scripts/multiple-select.min.js"></script>
+    <!-- modulo CH -->
+    <script src="Content/switch/angular-ui-switch.js"></script>
+    <script src="Scripts/angular-ui-tree/angular-ui-tree.js"></script>
+
+    <script src="Scripts/angular-sanitize.js"></script>
+    <script src="Scripts/angular-datatables/accent-neutralise.js"></script>
+
+    <script src="Scripts/angular-messages.min.js"></script>
+    <script src="Scripts/ng-fab-form.js"></script>
+    <script src="app/_services/ineel.services.js"></script>
+
+    <script src="app/_services/factories/ComunDetails.js"></script>
+    <script src="Scripts/ng-tags-input.js"></script>
+    <script src="app/vistasGenericas/directivas/directivasSIGCO.js"></script>
+    <script src="app/_services/ineel.controllers.js"></script>
+
+    <script src="Scripts/bootstrap-filestyle.js"></script>
+    <script src="app/vistasGenericas/SolicitudAcceso/controllers/SolicitudesAcceso.ctrl.js"></script>
+
+    <script src="app/vistasGenericas/_details/personal/controllers/PersonaProfileComun.ctrl.js"></script>
+    <script src="app/vistasGenericas/controllers/ConfirmacionContinue.js"></script>
+    <script src="app/vistasGenericas/directivas/buscarPersonasActivasDirective/buscarPersonasActivasDirectivaGet.js"></script>
+
+    <script src="Scripts/globalINEEL.js"></script>
+    <script src="app/_services/factories/Comun.service.js"></script>
+    <script src="app/_services/factories/ComunCount.service.js"></script>
+    <script src="app/vistasGenericas/controllers/NotificationCtrl.js"></script>
+
+    <script src="app/vistasGenericas/buscarProyectosGEN/comunServiceProyectos.service.js"></script>
+    <script src="app/vistasGenericas/detallesProyectosGEN/controllers/proyectoDetails.GEN.ctrl.js"></script>
+    <script src="app/vistasGenericas/controllers/EstructuraOrganizacionalEmpresasFilterGet.ctrlCR.js"></script>
+
+    <script src="Scripts/aes.js"></script>
+    <script src="Scripts/mdo-angular-cryptography.js"></script>
+    <!--<script src="Scripts/angular-google-chart.js"></script>-->
+    <script src="app/_services/factories/Descargas.js"></script>
+    <script src="app/CH/_services/ineel.CH.services.js"></script>
+
+    <script src="app/_services/factories/authService.js"></script>
+    <script src="app/_services/factories/menu.service.js"></script>
+    <script src="app/_services/factories/permisos.service.js"></script>
+    <script src="app/_services/factories/personas.service.js"></script>
+    <script src="app/auth/controllers/changepassword.ctrl.js"></script>
+
+    <script src="app/_services/factories/authInterceptorService.js"></script>
+    <script src="app/_services/factories/NuevoOC.js"></script>
+
+    <!--para los adjuntos-->
+    <script src="Scripts/angular-file-upload.js"></script>
+
+    <!-- Plugin para el autocompletado-->
+    <script src="Scripts/angucomplete-alt.js"></script>
+
+    <!-- Modal de personas-->
+    <script src="app/GEN/_services/ineel.GEN.services.js"></script>
+    <script src="app/vistasGenericas/controllers/PersonasFilterGet.ctrlGEN.js"></script>
+    <script src="app/vistasGenericas/_services/buscarPersonas.GEN.service.js"></script>
+
+    <!-- TextAgular-->
+    <link href="Scripts/textAngular-1.5.16/textAngular-1.5.16/dist/textAngular.css" rel="stylesheet" />
+    <script src="Scripts/textAngular-1.5.16/textAngular-1.5.16/dist/textAngular-rangy.min.js"></script>
+    <script src="Scripts/textAngular-1.5.16/textAngular-1.5.16/dist/textAngular-sanitize.min.js"></script>
+    <script src="Scripts/textAngular-1.5.16/textAngular-1.5.16/dist/textAngular.min.js"></script>
+
+    <!-- STATES DE CP ------------------------------------------------------------->
+    <script src="app/GEN/_services/catalogos/notificacion.GEN.service.js"></script>
+    <script src="app/CP/appCP.js"></script>
+    <script src="app/CP/_services/ineel.CP.services.js"></script>
+    <script src="app/CP/_services/factories/RolesUsuarios.CP.Service.js"></script>
+    <script src="app/CP/home/controllers/CargaControllerCP.ctrl.js"></script>
+    <script src="app/CP/home/controllers/HomeCP.ctrl.js"></script>
+    <script src="app/CP/modalesCP/AdministracionComunidad/controllers/administracionComunidad.ctrl.js"></script>
+    <script src="app/_services/factories/AdjuntarArchivo.js"></script>
+
+    <!-- Cat Categorias de CP-->
+    <script src="app/CP/_services/factories/categoriaCP.CP.Service.js"></script>
+    <script src="app/CP/categoriaCP/controllers/categoriaCPAdd.ctrl.js"></script>
+    <script src="app/CP/categoriaCP/controllers/categoriaCPEdit.ctrl.js"></script>
+    <script src="app/CP/categoriaCP/controllers/categoriaCPGet.ctrl.js"></script>
+
+    <!-- Cat Categorias de Sitio-->
+    <script src="app/CP/_services/factories/categoriaSitio.CP.Service.js"></script>
+    <script src="app/CP/categoriaSitio/controllers/categoriaSitioAdd.ctrl.js"></script>
+    <script src="app/CP/categoriaSitio/controllers/categoriaSitioEdit.ctrl.js"></script>
+    <script src="app/CP/categoriaSitio/controllers/categoriaSitioGet.ctrl.js"></script>
+
+    <!-- Cat ListaOC-->
+    <script src="app/CP/_services/factories/listaOc.CP.Service.js"></script>
+    <script src="app/CP/ListaOC/controllers/listaOcAdd.ctrl.js"></script>
+    <script src="app/CP/ListaOC/controllers/listaOcEdit.ctrl.js"></script>
+    <script src="app/CP/ListaOC/controllers/listaOcGet.ctrl.js"></script>
+
+    <!-- Cat RolesCP-->
+    <script src="app/CP/_services/factories/rolesComunidad.CP.Service.js"></script>
+    <script src="app/CP/rolesCP/controllers/rolesComunidadAdd.ctrl.js"></script>
+    <script src="app/CP/rolesCP/controllers/rolesComunidadEdit.ctrl.js"></script>
+    <script src="app/CP/rolesCP/controllers/rolesComunidadGet.ctrl.js"></script>
+
+    <!-- Cat TipoDocumento-->
+    <script src="app/CP/_services/factories/tipoDocumento.CP.Service.js"></script>
+    <script src="app/CP/tipoDocumento/controllers/tipoDocumentoAdd.ctrl.js"></script>
+    <script src="app/CP/tipoDocumento/controllers/tipoDocumentoEdit.ctrl.js"></script>
+    <script src="app/CP/tipoDocumento/controllers/tipoDocumentoGet.ctrl.js"></script>
+
+    <!-- Cat TipoLineamiento-->
+    <script src="app/CP/_services/factories/tipoLineamiento.CP.Service.js"></script>
+    <script src="app/CP/tipoLineamiento/controllers/tipoLineamientoAdd.ctrl.js"></script>
+    <script src="app/CP/tipoLineamiento/controllers/tipoLineamientoEdit.ctrl.js"></script>
+    <script src="app/CP/tipoLineamiento/controllers/tipoLineamientoGet.ctrl.js"></script>
+
+    <!-- Autores service-->
+    <script src="app/CP/_services/factories/autores.CP.Service.js"></script>
+
+    <!-- Comunidades-->
+    <script src="app/CP/_services/factories/comunidades.CP.Service.js"></script>
+    <script src="app/CP/Comunidades/Controllers/comunidadesCPAdd.ctrl.js"></script>
+    <script src="app/CP/Comunidades/Controllers/comunidadesCPEdit.ctrl.js"></script>
+    <script src="app/CP/Comunidades/Controllers/comunidadesCPGet.ctrl.js"></script>
+    <script src="app/CP/Comunidades/Controllers/otrascomunidadesCPGet.ctrl.js"></script>
+
+    <!-- Miembros-->
+    <script src="app/CP/_services/factories/miembros.CP.Service.js"></script>
+
+    <!-- OCs Etapa 3-->
+    <!-- OC Mapas de ruta-->
+    <script src="app/CP/_services/factories/mapasRuta.CP.Service.js"></script>
+    <script src="app/CP/mapasRuta/controllers/mapasRutaAdd.ctrl.js"></script>
+    <script src="app/CP/mapasRuta/controllers/mapasRutaDetails.ctrl.js"></script>
+    <script src="app/CP/mapasRuta/controllers/mapasRutaEdit.ctrl.js"></script>
+    <script src="app/CP/mapasRuta/controllers/mapasRutaGet.ctrl.js"></script>
+
+    <!-- OC Estado del arte-->
+    <script src="app/CP/_services/factories/estadoArte.CP.Service.js"></script>
+    <script src="app/CP/estadoArte/controllers/estadoArteAdd.ctrl.js"></script>
+    <script src="app/CP/estadoArte/controllers/estadoArteDetails.ctrl.js"></script>
+    <script src="app/CP/estadoArte/controllers/estadoArteEdit.ctrl.js"></script>
+    <script src="app/CP/estadoArte/controllers/estadoArteGet.ctrl.js"></script>
+
+    <!-- OC Estudios especializados-->
+    <script src="app/CP/_services/factories/estudiosEspecializados.CP.Service.js"></script>
+    <script src="app/CP/estudiosEspecializados/controllers/estudiosEspAdd.ctrl.js"></script>
+    <script src="app/CP/estudiosEspecializados/controllers/estudiosEspDetails.ctrl.js"></script>
+    <script src="app/CP/estudiosEspecializados/controllers/estudiosEspEdit.ctrl.js"></script>
+    <script src="app/CP/estudiosEspecializados/controllers/estudiosEspGet.ctrl.js"></script>
+
+    <!-- OC Temas innovacion-->
+    <script src="app/CP/_services/factories/temasInnovacion.CP.Service.js"></script>
+    <script src="app/CP/temasInnovacion/controllers/temasInnovacionAdd.ctrl.js"></script>
+    <script src="app/CP/temasInnovacion/controllers/temasInnovacionDetails.ctrl.js"></script>
+    <script src="app/CP/temasInnovacion/controllers/temasInnovacionEdit.ctrl.js"></script>
+    <script src="app/CP/temasInnovacion/controllers/temasInnovacionGet.ctrl.js"></script>
+
+    <!-- OC Informes anuales-->
+    <script src="app/CP/_services/factories/informeAnual.CP.Service.js"></script>
+    <script src="app/CP/informeAnual/controllers/informeAnualAdd.ctrl.js"></script>
+    <script src="app/CP/informeAnual/controllers/informeAnualDetails.ctrl.js"></script>
+    <script src="app/CP/informeAnual/controllers/informeAnualEdit.ctrl.js"></script>
+    <script src="app/CP/informeAnual/controllers/informeAnualGet.ctrl.js"></script>
+
+    <!-- OC Planes anuales-->
+    <script src="app/CP/_services/factories/planAnual.CP.Service.js"></script>
+    <script src="app/CP/planAnual/controllers/planAnualAdd.ctrl.js"></script>
+    <script src="app/CP/planAnual/controllers/planAnualDetails.ctrl.js"></script>
+    <script src="app/CP/planAnual/controllers/planAnualEdit.ctrl.js"></script>
+    <script src="app/CP/planAnual/controllers/planAnualGet.ctrl.js"></script>
+
+    <!-- OC Lineamientos Comunidad-->
+    <script src="app/CP/consultaLineamientos/controllers/agregacomentariosLineamientos.ctrl.js"></script>
+    <script src="app/CP/consultaLineamientos/controllers/comentariosComunidad.ctrl.js"></script>
+    <script src="app/CP/consultaLineamientos/controllers/consultaLineamientosComunidad.ctrl.js"></script>
+
+    <!-- End OCs Etapa 3-->
+    <!--   Seccion de consultas Ocs etapa 3  ------->
+    <!--   mapas de ruta  -->
+    <script src="app/CP/consultasOCs/mapasRuta/controllers/mapasRutaGet.ctrl.js"></script>
+    <!--  estado del arte -->
+    <script src="app/CP/consultasOCs/estadoArte/controllers/estadoArteGetConsulta.ctrl.js"></script>
+    <!--  estudios especializados -->
+    <script src="app/CP/consultasOCs/estudiosEspecializados/controllers/estudiosEspGetConsulta.ctrl.js"></script>
+    <!--  informe anual -->
+    <script src="app/CP/consultasOCs/informesAnuales/controllers/informeAnualGetConsulta.ctrl.js"></script>
+    <!--  plan anual -->
+    <script src="app/CP/consultasOCs/planAnual/controllers/planAnualGetConsulta.ctrl.js"></script>
+    <!--  temas innovacion -->
+    <script src="app/CP/consultasOCs/temasInnovacion/controllers/temasInnovacionGetConsulta.ctrl.js"></script>
+
+    <!--   End Seccion de consultas      ------------------------------------------------------>
+    <!-- Home de comunidad-->
+    <script src="app/CP/homeComunidad/controllers/DocumentosComunidad.ctrl.js"></script>
+    <script src="app/CP/homeComunidad/controllers/homeComunidad.ctrl.js"></script>
+    <script src="app/CP/homeComunidad/controllers/InicioComunidad.ctrl.js"></script>
+    <script src="app/CP/homeComunidad/controllers/resultadosComunidad.ctrl.js"></script>
+    <!--<script src="app/CP/homeComunidad/controllers/eventosComunidad.ctrl.js"></script>-->
+    <script src="app/CP/homeComunidad/controllers/expertosComunidad.ctrl.js"></script>
+    <script src="app/CP/homeComunidad/controllers/miembrosComunidad.ctrl.js"></script>
+    <script src="app/CP/homeComunidad/controllers/objetosComunidad.ctrl.js"></script>
+    <script src="app/CP/homeComunidad/controllers/sitiosComunidad.ctrl.js"></script>
+    <script src="app/CP/homeComunidad/controllers/preguntasComunidad.ctrl.js"></script>
+
+    <!-- lineamientos comunidad-->
+    <script src="app/CP/_services/factories/Lineamientos.CP.Service.js"></script>
+    <script src="app/CP/gestionLineamientosComunidad/controllers/agregarLineamientoComunidad.ctrl.js"></script>
+    <script src="app/CP/gestionLineamientosComunidad/controllers/editarLineamientoComunidad.ctrl.js"></script>
+    <script src="app/CP/gestionLineamientosComunidad/controllers/lineamientosComunidad.ctrl.js"></script>
+    <script src="app/CP/modalesCP/LineamientosComunidad/controllers/confirmacionLineamientosComunidad.ctrl.js"></script>
+
+    <!-- modales comunidad----------------------------------------------------->
+    <!-- noticias comunidad-->
+    <script src="app/CP/_services/factories/Noticias.CP.Service.js"></script>
+    <script src="app/CP/modalesCP/Noticias/controllers/agregarNoticiaComunidad.ctrl.js"></script>
+    <script src="app/CP/modalesCP/Noticias/controllers/editarNoticiaComunidad.ctrl.js"></script>
+
+    <!-- metas comunidad-->
+    <script src="app/CP/_services/factories/metasComunidades.CP.Service.js"></script>
+    <script src="app/CP/modalesCP/AdministracionComunidad/controllers/EditarCompromisoComunidad.ctrl.js"></script>
+    <script src="app/CP/modalesCP/AdministracionComunidad/controllers/agregarCompromisoComunidad.ctrl.js"></script>
+
+    <!-- resultados comunidad-->
+    <script src="app/CP/_services/factories/ResultadosEsperadosComunidad.CP.Service.js"></script>
+    <script src="app/CP/modalesCP/AdministracionComunidad/controllers/agregarResultadoComunidad.ctrl.js"></script>
+    <script src="app/CP/modalesCP/AdministracionComunidad/controllers/EditarResultadoComunidad.ctrl.js"></script>
+
+    <!-- avance esultados comunidad-->
+    <script src="app/CP/_services/factories/AvanceResultados.CP.Service.js"></script>
+    <script src="app/CP/modalesCP/AvanceResultados/controllers/agregarAvanceResultados.ctrl.js"></script>
+    <script src="app/CP/modalesCP/AvanceResultados/controllers/editarAvanceResultados.ctrl.js"></script>
+    <script src="app/CP/modalesCP/MiembrosComunidad/controllers/miembrosComunidad.ctrl.js"></script>
+
+    <!-- Preguntas Comunidad -->
+    <script src="app/CP/_services/factories/preguntasFrecuentes.CP.Service.js"></script>
+    <script src="app/CP/modalesCP/preguntas/controllers/agregarPreguntaComunidad.ctrl.js"></script>
+    <script src="app/CP/modalesCP/preguntas/controllers/editarPreguntaComunidad.ctrl.js"></script>
+
+    <!--   Sitios interes Comunidad      -->
+    <script src="app/CP/_services/factories/sitiosInteres.CP.Service.js"></script>
+    <script src="app/CP/modalesCP/sitiosInteres/controllers/agregarSitioComunidad.ctrl.js"></script>
+    <script src="app/CP/modalesCP/sitiosInteres/controllers/editarSitioComunidad.ctrl.js"></script>
+
+    <!-- vistas genericas-->
+    <script src="app/vistasGenericas/controllers/contactoModalCPAdd.ctrl.js"></script>
+    <script src="app/vistasGenericas/controllers/EmpresasCPGetGral.ctrl.js"></script>
+    <script src="app/vistasGenericas/controllers/empresaCPModalAdd.ctrl.js"></script>
+
+    <!--   MODAL EVENTOS      -->
+    <script src="app/CP/_services/factories/AgendaCP.Service.js"></script>
+    <script src="app/CP/homeComunidad/controllers/eventosComunidad.ctrl.js"></script>
+    <script src="app/CP/homeComunidad/eventosModal/controllers/eventosCPAdd.ctrl.js"></script>
+    <script src="app/CP/homeComunidad/eventosModal/controllers/eventosCPEdit.ctrl.js"></script>
+
+    <!--   MODAL DOCUMENTOS      -->
+    <script src="app/CP/_services/factories/DocumentoCP.Service.js"></script>
+    <script src="app/CP/homeComunidad/documentosModal/controllers/documentoCPAdd.ctrl.js"></script>
+    <script src="app/CP/homeComunidad/documentosModal/controllers/documentoCPEdit.ctrl.js"></script>
+    <!-- End modales------------------------------------------------>
+    <!--   CONSULTAS      -->
+    <!--   Posts Comunidad      -->
+    <script src="app/CP/_services/factories/PostComunidad.CP.Service.js"></script>
+
+    <!--   Comentarios Posts Comunidad      -->
+    <script src="app/CP/_services/factories/ComentariosPostComunidad.CP.Service.js"></script>
+
+    <!-- otros-->
+    <script src="app/CP/Consultas/controllers/consultaCPGet.ctrl.js"></script>
+    <script src="app/CP/homeComunidad/expertosModal/controllers/expertoCPEdit.ctrl.js"></script>
+
+
+    <script src="app/CP/homeComunidad/eliminacionModal/controllers/eliminarMiembroCP.ctrl.js"></script>
+    <script src="app/CP/homeComunidad/controllers/miembrosInactivosComunidad.ctrl.js"></script>
+    <script src="app/CP/homeComunidad/controllers/expertosInactivosComunidad.ctrl.js"></script>
+
+    <script src="Scripts/dom-to-image.js"></script>
+    <script src="Scripts/Canvas2Image.js"></script>
+    <script src="Scripts/jspdf.min.js"></script>
+    <script src="Scripts/jspdf.plugin.autotable.src.js"></script>
+
+    <!--<script src="Scripts/angular.easypiechart.min.js"></script>-->
+    <!--<script src="app/vistasGenericas/directivas/echartGraph.js"></script>-->
+    <script src="app/_services/factories/ExportJsPDF.js"></script>
+</head>
+
+<body class="nav-md" data-ng-controller="indexControllerCP">
+    <div class="info-servidor-desplegado">{{'' | getInfoServidorDesplegado}}</div>
+    <div class="container body">
+        <div class="main_container">
+            <div class="col-md-3 left_col">
+                <div class="left_col scroll-view bg-gradient-menuv">
+                    <div class="navbar nav_title bg-gradient-menuv" style="border: 0;">
+                        <a href="sigco.html" class="site_title">
+                            <img src="images/logo_sigco.png" />
+                            <span class="titLogo">&nbsp;SIGCO</span>
+                        </a>
+                    </div>
+                    <div class="clearfix"></div>
+
+                    <br />
+
+
+                    <!-- sidebar menu -->
+                    <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+                        <div class="menu_section">
+                            <h3>&nbsp;</h3>
+                            <ul class="nav side-menu">
+                                <li ng-repeat="opcion in funciones" ng-if="opcion.funcion.nivel==0" ng-show="opcion.funcion.idModulo==modulo">
+                                    <a ng-if="opcion.funcion.children.length ==0" ng-href="{{opcion.funcion.url}}">
+                                        <i class="{{opcion.funcion.claseIcono}}"> </i>&nbsp;{{opcion.funcion.nombre}}
+                                    </a>
+
+                                    <a ng-if="opcion.funcion.children.length > 0">
+                                        <i class="{{opcion.funcion.claseIcono}}"></i> &nbsp;{{opcion.funcion.nombre}}
+                                        <span class="fa fa-chevron-down"></span>
+                                    </a>
+                                    <ul ng-if="opcion.funcion.children.length > 0 " class="nav child_menu">
+                                        <li ng-repeat="opc in funciones" ng-if="opc.funcion.nivel==1 && opc.funcion.idPadre == opcion.funcion.funcionesId">
+                                            <a ng-if="opc.funcion.children.length ==0" ui-sref="{{opc.funcion.state}}"> &nbsp;{{opc.funcion.nombre}} </a>
+
+                                            <a ng-if="opc.funcion.children.length > 0">
+                                                &nbsp;{{opc.funcion.nombre}}<span class="fa fa-chevron-down"></span>
+                                            </a>
+                                            <ul class="nav child_menu" ng-if="opc.funcion.children.length > 0 ">
+                                                <li ng-repeat="opc3 in funciones" ng-if="opc3.funcion.nivel==2 && opc3.funcion.idPadre == opc.funcion.funcionesId">
+
+                                                    <a href="{{opc3.funcion.url}}" ng-show="opc3.funcion.idModulo ==modulo"> &nbsp;{{opc3.funcion.nombre}}</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+
+                            </ul>
+                            <!--funciones : {{funciones | json}}-->
+                        </div>
+
+
+
+                    </div>
+                    <!-- /sidebar menu -->
+
+                </div>
+            </div>
+            <!-- top navigation -->
+            <div class="top_nav ">
+                <div class="nav_menu">
+                    <nav class="" role="navigation">
+                        <div class="nav toggle">
+                            <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+                        </div>
+                        <div ng-include="'app/vistasGenericas/header/profileNotification.html'">
+                        </div>
+                    </nav>
+                </div>
+                <div class="toolbar-top visible-xs">
+                    <div ng-include="'app/vistasGenericas/header/navegacionpormodulo.html'">
+                    </div>
+                </div>
+            </div>
+            <!-- /top navigation -->
+            <!-- page content -->
+            <div role="main" class="right_col">
+                <!-- top tiles -->
+                <div ui-view>
+
+                </div>
+            </div>
+            <!-- /page content -->
+            <!-- footer content -->
+            <footer>
+                <div class="pull-right">
+                    SIGCO3
+                </div>
+                <div class="clearfix"></div>
+            </footer>
+            <!-- /footer content -->
+        </div>
+    </div>
+
+    <!-- Custom Theme Scripts -->
+    <script src="Scripts/custom.js"></script>
+    <!--scripts para reportes-->
+    <script src="Scripts/DataTables/dataTables.buttons.js"></script>
+    <script src="Scripts/DataTables/buttons.bootstrap.js"></script>
+    <script src="Scripts/angular-datatables/plugins/buttons/angular-datatables.buttons.js"></script>
+    <script src="Scripts/DataTables/buttons.html5.js"></script>
+    <script src="Scripts/jszip.min.js"></script>
+    <script src="vendors/pdfmake/build/pdfmake.min.js"></script>
+    <script src="vendors/pdfmake/build/vfs_fonts.js"></script>
+    <script src="Scripts/DataTables/buttons.print.js"></script>
+    <script src="Scripts/DataTables/buttons.flash.js"></script>
+    <script src="Scripts/DataTables/buttons.colVis.js"></script>
+
+
+</body>
+
+</html>

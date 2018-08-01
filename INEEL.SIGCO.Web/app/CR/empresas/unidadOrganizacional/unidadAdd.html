@@ -1,0 +1,211 @@
+﻿<SCRIPT language=Javascript>
+    function isNumberKey(evt) {
+        var charCode = (evt.which) ? evt.which : event.keyCode
+        if (charCode > 31 && (charCode < 48 || charCode > 57))
+            return false;
+
+        return true;
+    }
+</SCRIPT>
+<div class="modal-content">
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+                    <div class="modal-header">
+                        Agregar unidad
+                        <button type="button" class="close" ng-click="cancel()" data-dissmiss="modal">x</button>
+                    </div>
+                    <form role="form" novalidate name="empresaUnidadAddForm" class="form-horizontal">
+                        <div class="x_title">
+                            <h2>Informaci&oacute;n general</h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="alert resaltar ">
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                    ¿Campo agrupador?
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input type="checkbox" class="btn btn-info btn-circle" ng-model="empresaUnidadAdd.campoAgrupador">
+                                </div>
+
+                            </div>
+                            <!-- <div class="form-group" ng-show="listaUnidades.length==0">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Clave unidad
+                                    <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input ng-required="listaUnidades.length==0" text-only name="claveUnidad" placeholder="Ej. CFE, PEMEX, CENACE" type="text" ng-model="empresaUnidadAdd.claveUnidad"
+                                        class="form-control" maxlength="20" />
+                                    <span class="error" ng-show="empresaUnidadAddForm.claveUnidad.$invalid && empresaUnidadAddForm.claveUnidad.$dirty || empresaUnidadAddForm.$submitted && empresaUnidadAddForm.claveUnidad.$invalid">
+                                        Debe ingresar la Clave Unidad
+                                    </span>
+                                    <div class="alert advertencia">
+                                        La clave de la empresa debe de contener solo letras, y solo se pedir&aacute; una vez
+                                    </div>
+                                </div>
+
+                            </div> -->
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Nombre de la unidad
+                                <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input required name="nombreUnidad" placeholder="Ej. Transmisi&oacute;n y generaci&oacute;n" type="text" ng-model="empresaUnidadAdd.nombreUnidad"
+                                    class="form-control" maxlength="50" />
+                            </div>
+                            <span class="error" ng-show="empresaUnidadAddForm.nombreUnidad.$invalid && empresaUnidadAddForm.nombreUnidad.$dirty || empresaUnidadAddForm.$submitted && empresaUnidadAddForm.nombreUnidad.$invalid">
+                                Debe ingresar el nombre de la unidad
+                            </span>
+                        </div>
+                        <div ng-show="!empresaUnidadAdd.campoAgrupador">
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Nombre del titular </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <div class="row">
+                                        <div class="col-xs-10">
+                                            <input required type="text" class="form-control" id="usr" name="contacto" ng-model="contacto.nombreCompleto" disabled >
+                                        </div>
+                                        <div class="col-xs-2">
+                                            <a ng-click="openContacto()" class="btn btn-success" title="Buscar contacto" >
+                                                <i class="glyphicon glyphicon-search"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- <div class="form-group">
+                                
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input name="nombreTitular" type="text" ng-model="empresaUnidadAdd.nombreTitular" class="form-control" maxlength="50" />
+                                </div>
+                            </div> -->
+                            <!-- <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Puesto </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input name="puesto" type="text" ng-model="empresaUnidadAdd.puesto" class="form-control" maxlength="100" />
+                                </div>
+                            </div> -->
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Correo</label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input maxlength="120" placeholder="xxxx@correo.com" required type="email" name="email" ng-model="empresaUnidadAdd.correo"
+                                        pattern="^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$" class="form-control"
+                                    />
+                                    <div role="alert">
+                                        <span class="text-danger" ng-show="empresaUnidadAddForm.email.$error.email">
+                                            Correo no valido, ejemplo: correo@empresa.com
+                                        </span>
+                                    </div>
+                                    <span class="error" ng-show="empresaUnidadAddForm.email.$invalid && empresaUnidadAddForm.$submitted">
+                                        Debes ingresar un correo electr&oacute;nico.
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Celular </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input name="celular" placeholder="0447773456789" type="text" ng-model="empresaUnidadAdd.celular" class="form-control" maxlength="30"
+                                    />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">T&eacute;lefono </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input name="telefono" type="text" ng-model="empresaUnidadAdd.telefono" class="form-control" maxlength="30" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Extensi&oacute;n </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input type="text" onkeypress='return isNumberKey(event)' name="ext" ng-model="empresaUnidadAdd.ext" placeholder="23456"
+                                        maxlength="10" numbers-only class="form-control" />
+                                </div>
+                            </div>
+                            <div class="x_title">
+                                <h2>Direcci&oacute;n</h2>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Pa&iacute;s </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <select name="pais" class="form-control" ng-model="empresaUnidadAdd.paisId" ng-change="cargaEstado()" ng-options="pais.paisId as pais.nombrePais for pais in paises">
+                                        <option value="">--- Selecciona pais ---</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group" ng-hide="estados.length > 1">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Estado </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input type="text" name="estado" ng-model="empresaUnidadAdd.edo" ng-minlength="2" ng-maxlength="50" class="form-control"
+                                    />
+                                </div>
+                            </div>
+                            <div class="form-group" ng-show="estados.length > 1">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Estado </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <select name="estado" class="form-control" ng-model="empresaUnidadAdd.estadoId" ng-change="cargaMunicipio()" ng-options="estado.estadoId as estado.nombreEstado for estado in estados">
+                                        <option value="">- Seleccione estado-</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group" ng-hide="estados.length > 1">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Municipio </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input type="text" name="municipio" ng-model="empresaUnidadAdd.munipio" ng-minlength="2" ng-maxlength="50" class="form-control"
+                                    />
+                                </div>
+                            </div>
+                            <div class="form-group" ng-show="estados.length > 1">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Municipio </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <select name="municipio" class="form-control" ng-model="empresaUnidadAdd.municipioId" ng-options="municipio.municipioId as municipio.nombreMunicipio for municipio in municipios">
+                                        <option value="">- Seleccione municipio-</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Colonia </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input type="text" name="colonia" ng-model="empresaUnidadAdd.colonia" ng-minlength="2" maxlength="50" class="form-control"
+                                    />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Calle </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input type="text" name="calle" ng-model="empresaUnidadAdd.calle" ng-minlength="2" maxlength="50" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">CP </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input type="text" name="cp" ng-model="empresaUnidadAdd.cp" ng-minlength="2" maxlength="10" class="form-control" />
+                                </div>
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="ln_solid"></div>
+                        <div class="form-group">
+                            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                <div>
+                                    <button type="button" class="btn btn-success" ng-click="ok()">
+                                        <i class="glyphicon glyphicon-saved"></i> Guardar
+                                    </button>
+                                    <button type="button" class="btn btn-primary" ng-click="cancel()">Cancelar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

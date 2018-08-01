@@ -1,0 +1,292 @@
+﻿<div ng-include="'app/vistasGenericas/header/registroNombrePersonaAdmin.html'"> </div>
+<div class="vista">
+
+    <div class="page-title">
+        <div class="title_left">
+            <ol ng-if="editAdmin!='1'" class="breadcrumb miga">
+                <li><i class="fa fa-cogs"></i> <a ui-sref="solicitudesrh">Solicitudes</a></li>
+                <li><a ui-sref="solicitudesrh">Becario Externo</a></li>
+                <li class="active">Detalles</li>
+            </ol>
+            <ol ng-if="editAdmin=='1'" class="breadcrumb miga">
+                <li><i class="fa fa-cogs"></i><a ui-sref="solicitudesrh">Becario Externo</a></li>
+                <li class="active">Editar</li>
+            </ol>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+                    <form name="fromBecario" id="form" class="form-horizontal">
+                        <div class="x_title">
+                            <h2>Informaci&oacute;n general</h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                T&iacute;tulo <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    <textarea class="form-control" id="titulo" name="titulo" auto-focus-campo
+                                              ng-model="becario.titulo" ng-maxlength="250" maxlength="250"
+                                              ng-minlength="3" required></textarea>
+                                    <span class="error" ng-show="fromBecario.titulo.$dirty && !fromBecario.titulo.$valid">Dato requerido, con longitud m&iacute;nimo de 3 y m&aacute;xima de 250</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Descripci&oacute;n <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    <textarea class="form-control" id="descripcion" name="descripcion"
+                                              ng-model="becario.descripcion" ng-maxlength="300" maxlength="300"
+                                              ng-minlength="3" required></textarea>
+                                    <span class="error" ng-show="fromBecario.descripcion.$dirty && !fromBecario.descripcion.$valid">Dato requerido, con longitud m&iacute;nimo de 3 y m&aacute;xima de 300</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Asesor <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="row">
+                                    <div class="col-xs-10">
+                                        <input type="text" class="form-control" id="usr" name="asesor" ng-model="becario.asesor_Nombre" disabled required>
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <button class="btn btn-success" ng-click="openBecario()" title="Buscar persona" ng-disabled="desabilitarBuscarAsesor">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Instituci&oacute;n de procedencia <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="row">
+                                    <div class="col-xs-10">
+                                        <input type="text" class="form-control" id="usr" name="selectedinstitucion" ng-model="selectedinstitucion.descripcion" disabled required placeholder="Buscar Instituci&oacute;n...">
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <a class="btn btn-success" ng-click="openInstituciones()" title="Buscar persona">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                        </a>
+                                    </div>
+                                    <span ng-show="fromBecario.selectedinstitucion.$dirty &&  fromBecario.selectedinstitucion.$invalid" class="error">La instituci&oacute;n no se encuentra registrada en el cat&aacute;logo.</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Tipo de beca <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <select name="tipoBeca" ng-options="beca.tipoBecaId as beca.descripcion for beca in tipoBeca " ng-model="becario.tipoBecaId" class="form-control"></select>
+                                <span class="error" ng-show="fromBecario.selecttipobeca.$valid && selectTipobeca <= 0">---Seleccione una Beca---</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Proyecto 
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="row">
+                                    <div class="col-xs-10">
+                                        <input type="text" class="form-control" id="usr" name="proyecto" ng-model="proyecto" disabled >
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <button class="btn btn-success" ng-click="openProyecto()" title="Buscar proyecto" ng-disabled="desabilitarBuscarProyecto">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="x_title">
+                            <h2>Per&iacute;odo de becario externo</h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Inicio <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="row">
+                                    <div class="col-xs-10">
+                                        <input placeholder="dd/mm/yyyy" ng-minlength="8" name="fechaInicio" maxlength="10" ng-init="open=false" type="text" show-button-bar="false" popup-placement="bottom"
+                                               class="form-control" uib-datepicker-popup="dd/MM/yyyy" ng-model="becario.fechaInicio" value="{{ date | date: 'dd/MM/yyyy' }}"
+                                               is-open="open" ng-required="true" close-text="Close" ng-change="validarFechasInicio()" />
+                                        <span ng-show="fromBecario.fechaInicio.$dirty &&  fromBecario.fechaInicio.$invalid" class="error">Formato inválido 'dd/MM/yyyy'</span>
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <button type="button" class="btn btn-success" ng-click="open=true"><i class="glyphicon glyphicon-calendar"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                T&eacute;rmino <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="row">
+                                    <div class="col-xs-10">
+                                        <input placeholder="dd/mm/yyyy" name="fechaTermino" ng-minlength="8" maxlength="10" ng-init="open2=false" type="text" show-button-bar="false"
+                                               popup-placement="bottom" class="form-control" uib-datepicker-popup="dd/MM/yyyy"
+                                               ng-model="becario.fechaTermino" value="{{ date | date: 'dd/MM/yyyy' }}" is-open="open2" ng-required="true" close-text="Close" ng-change="validarFechas()" />
+                                        <span ng-show="fromBecario.fechaTermino.$dirty &&  fromBecario.fechaTermino.$invalid" class="error">Formato inválido 'dd/MM/yyyy'</span>
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <button type="button" class="btn btn-success" ng-click="open2=true"><i class="glyphicon glyphicon-calendar"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="x_title">
+                            <h2>Evidencia <small>Tama&ntilde;o m&aacute;ximo por archivo de 8 MB</small></h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Documento(s) adjunto(s)
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="row">
+                                    <!--<label class="col-md-4 control-label" for="usr;filesGral">Documento adjunto:</label>-->
+                                    <div class="col-md-12">
+                                        <input class="input-file" type="file" name="filesGral" id="filesGral"
+                                               ng-click="saveIG();" ng-model="filesGral" data-buttonName="btn-success"
+                                               onchange="angular.element(this).scope().getFileDetails(this);" />
+                                        <span class="error" ng-show="fromBecario.filesGral.$dirty && !fromBecario.filesGral.$valid">Seleccione un documento</span>
+                                    </div>
+                                </div><br />
+                                <!--<div class="form-group">
+                                    <div for="usr">
+                                        <button ng-show="(becario.adjuntoBecarioExterno.length > 0)" type="submit" ng-click="validar()" class="btn btn-success" ng-disabled="desabilitar">
+                                            <i class="glyphicon glyphicon-saved"></i> Enviar Solicitud al Administrador
+                                        </button>
+                                    </div>
+                                </div>-->
+                                <div ng-show="(becario.adjuntoBecarioExterno.length > 0)||(tasklist.length>0)">
+                                    <table id="CHbecario" class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" width="100%" dt-options="dtOptions">
+                                        <thead>
+                                            <tr>
+                                                <th data-priority="1">Archivo</th>
+                                                <th data-priority="1" class="thAjuste text-center">Opciones</th>
+                                            </tr>
+                                        </thead>
+                                        <tr ng-repeat="rowAdjuntoBecarioExterno in becario.adjuntoBecarioExterno">
+                                            <td ng-if="rowAdjuntoBecarioExterno.adjuntoId== null || rowAdjuntoBecarioExterno.adjuntoId== undefined" style="max-width:200px" class="sin-desborde">{{rowAdjuntoBecarioExterno.adjunto.nombre}}</td>
+                                            <td ng-if="rowAdjuntoBecarioExterno.adjuntoId!= null || rowAdjuntoBecarioExterno.adjuntoId!= undefined" style="max-width:200px" class="sin-desborde"><a href="/Descargas.html#/q/{{rowAdjuntoBecarioExterno.adjunto.adjuntoId| encriptar}}"><u><b>{{rowAdjuntoBecarioExterno.adjunto.nombre}}</b></u></a></td>
+
+                                            <td>
+                                                <button type="button" ng-click="OpenDelete(rowAdjuntoBecarioExterno)" class="btn btn-danger">
+                                                    <i class="glyphicon glyphicon-trash"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr ng-repeat="task in tasklist track by $index">
+                                            <td style="max-width:200px" class="sin-desborde">{{task.nameFile}}</td>
+                                            <td>
+                                                <button type="button" ng-click="deleteTask(tasklist.indexOf(task))" class="btn btn-danger">
+                                                    <i class="glyphicon glyphicon-trash"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <br ng-repeat-end>
+                                </div>
+                                <div class="form-group">
+                                    <div class="alert informacion col-xs-12">
+                                        <span class="glyphicon glyphicon-info-sign"></span> Nota: Es necesario incluir el informe de becario como evidencia.
+                                    </div>
+                                </div>
+                                <!--<label ng-disabled>Nota: Para enviar la solicitud es necesario incluir el documento adjunto de evidencia.</label>-->
+                            </div>
+                        </div>
+                        <div class="jumbotron-fondo">
+                            <div class="x_title">
+                                <h2>Validación de información</h2>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                    Fecha
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <div class="row">
+                                        <div class="col-xs-10">
+                                            <input datepicker-options="datePicker.FechaOptions"
+                                                   placeholder="dd/mm/yyyy" ng-minlength="8" name="FechaValidacion" maxlength="10" ng-init="open3=false" type="text" show-button-bar="false" popup-placement="bottom" class="form-control" uib-datepicker-popup="dd/MM/yyyy" ng-model="FechaValidacionAux" value="{{ FechaValidacionAux | date: 'dd/MM/yyyy' }}" is-open="open3" close-text="Close" />
+                                            <span ng-show="fromBecario.FechaValidacion.$dirty &&  fromBecario.FechaValidacion.$invalid" class="error">Formato inválido 'dd/MM/yyyy'</span>
+                                        </div>
+                                        <div class="col-xs-2">
+                                            <button type="button" class="btn btn-success" ng-click="open3=true"><i class="glyphicon glyphicon-calendar"></i></button>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                    Justificaci&oacute;n
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <textarea class="form-control" ng-model="justificacion" maxlength="500"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">
+
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <button type="submit" class="btn btn-success"  ng-really-click="save(2)" ng-show="!regFile || editAdmin=='1'" ng-really-message="{{aprobacionQ}}"
+                                            ng-disabled="desabilitar || !fromBecario.asesor.$valid
+                                ||!fromBecario.proyecto.$valid||!(selectedinstitucion!=null)
+                                ||!fromBecario.fechaInicio.$valid||!fromBecario.fechaTermino.$valid ||!fromBecario.tipoBeca.$valid
+                                ||!fromBecario.descripcion.$valid||!fromBecario.titulo.$valid ||!fromBecario.FechaValidacion.$valid || FechaValidacionAux==null">
+                                        <i class="glyphicon glyphicon-saved"></i> Aprobar Solicitud
+                                    </button>
+                                    <button type="submit" class="btn btn-warning"  ng-really-click="save(3)" ng-if="editAdmin!='1'"  ng-really-message="{{rechazoQ}}"
+                                            ng-disabled="desabilitar || !fromBecario.asesor.$valid
+                                ||!fromBecario.proyecto.$valid||!(selectedinstitucion!=null)
+                                ||!fromBecario.fechaInicio.$valid||!fromBecario.fechaTermino.$valid ||!fromBecario.tipoBeca.$valid
+                                ||!fromBecario.descripcion.$valid||!fromBecario.titulo.$valid ||!fromBecario.FechaValidacion.$valid || FechaValidacionAux==null">
+                                        <i class="fa fa-reply"></i> Regresar Solicitud
+                                    </button>
+                                </div>
+                            </div>
+                            </div>
+                            <div class="ln_solid"></div>
+                            <div class="form-group">
+                                <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                    <div class="">
+                                        <button type="submit" class="btn btn-success" ng-click="save(1)"
+                                                ng-disabled="desabilitar || !fromBecario.asesor.$valid
+                                ||!fromBecario.proyecto.$valid||!(selectedinstitucion!=null)
+                                ||!fromBecario.fechaInicio.$valid||!fromBecario.fechaTermino.$valid ||!fromBecario.tipoBeca.$valid
+                                ||!fromBecario.descripcion.$valid||!fromBecario.titulo.$valid">
+                                            <i class="glyphicon glyphicon-saved"></i> Actualizar
+                                        </button>
+                                        <button type="button" confirma-regresar="globalRegresar()" state-form="fromBecario"  class="btn btn-primary" ng-disabled="desabilitar">
+                                            <span class="fa fa-arrow-left"></span> Regresar
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+</form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--becario:{{becario | json}}-->

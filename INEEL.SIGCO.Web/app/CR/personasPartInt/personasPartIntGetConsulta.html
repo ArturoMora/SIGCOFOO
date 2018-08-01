@@ -1,0 +1,62 @@
+
+<div class="vista">
+    <div class="page-title">
+        <div class="title_left">
+            <ol class="breadcrumb miga">
+                <li><i class="sg sg-partes-interesadas "></i> <a ui-sref="grupoColegiadoInicio">Partes Interesadas / Persona</a></li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+                    <!-- se oculta, si usuario está logeado-->
+                    <div data-ng-hide="authentication.isAuth">
+                        No tiene permisos para ingresar a esta secci&oacute;n.<br /> Usuario no autentificado
+                    </div>
+                    <div data-ng-show="authentication.isAuth">
+                        <div ng-hide="personasPartInt.length >= 0">
+                            <img src="images/cargando.gif" />
+                        </div>
+                        <div ng-show="personasPartInt.length === 0" class="alert advertencia">
+                            No existen personas interesadas registradas
+                        </div>
+                        <div ng-show="personasPartInt.length > 0">
+                            <table id="CRpersonasPartIntGetConsulta" class="table table-hover table-striped table-condensed dt-responsive sin-desborde" cellspacing="0" datatable="ng" >
+                                <thead>
+                                    <tr>
+                                        <th data-priority="1">Nombre</th>
+                                        <th>Tipo de interacci&oacute;n</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="e in personasPartInt">
+                                        <td><a class="link" ui-sref="personaPartIntDetailsC({ id: e.personaPartIntId })" title="Detalles">{{e.nombre}}</a></td>
+                                        <td>{{e.naturalezaInteraccion.nombre}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                          
+                        </div>
+
+
+
+                    </div>
+                </div>
+                <div class="form-group">
+                            <button type="button" ui-sref="grupoColegiadoInicio" class="btn btn-primary">
+                                <span class="fa fa-arrow-left"></span>
+                                Regresar
+                            </button> 
+                   
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+

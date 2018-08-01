@@ -1,0 +1,9 @@
+<ul class="nav navbar-nav navbar-left top-moduls" data-ng-hide="!authentication.isAuth || !isModulo">
+
+    <li class="toolbar-elements" ng-repeat="mod in modulos">
+        <a href="{{mod.url}}" title="{{mod.descripcion}}" class="btn-moduls {{modulo==mod.moduloId?'colorActivo':''}}">
+            <font class="whiteM">{{mod.moduloId}}</font>
+        </a>
+    </li>
+    
+</ul>

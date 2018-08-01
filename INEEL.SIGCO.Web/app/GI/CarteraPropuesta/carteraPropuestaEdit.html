@@ -1,0 +1,447 @@
+﻿<div class="vista">
+    <div class="page-title">
+        <div class="title_left">
+            <ol class="breadcrumb miga">
+                <li>
+                    <i class="glyphicon glyphicon-file"></i>
+                    <a ui-sref="carteraPropuestas">Propuestas de innovaci&oacute;n/ Mis propuestas de innovaci&oacute;n</a>
+                </li>
+                <li class="active">Editar</li>
+            </ol>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <form name="ValidForm1" id="form1" ng-submit="submitForm(optFrm)" class="form-horizontal">
+            <!--PANEL DE PROPUESTAS-->
+            <div ng-class="expression">
+                <div class="x_panel">
+                    <div class="x_content sin-desborde">
+                        <!--<form name="ValidForm" id="form" ng-submit="submitForm(optFrm)" class="form-horizontal">-->
+                        <div class="x_title">
+                            <h2>Informaci&oacute;n general de la propuesta</h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Propuesta *
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <a class="btn btn-success" ng-click="buscarPropuesta()">
+                                    <span class="glyphicon glyphicon-search"> Seleccione...</span>
+                                </a>
+                                <!--<label class="control-label linkTabla" ng-click="buscarPropuesta()">seleccione...</label>-->
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Tipo de propuesta *
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <select ng-disabled="!mostrar" ng-model="registroPropuesta.propuestaInterna" class="form-control" ng-required="true" required
+                                    ng-change="propuestainternafunction()">
+                                    <option value="true">Interna</option>
+                                    <option value="false">Externa</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div ng-if="registroPropuesta.propuestaInterna=='true'">
+                            <div class="x_title">
+                                <h2>Fondo</h2>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                    Tipo de fondo *
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <!--<select ng-init="registroPropuesta.fondo" ng-model="registroPropuesta.fondo" id="fondo" name="fondo" class="form-control"
+                                            ng-required="true" required>
+                                        <option value="0">Otro</option>
+                                        <option value="1">FICYDET</option>
+                                    </select>-->
+                                    <select ng-disabled="!mostrar" ng-model="registroPropuesta.fondo" class="form-control" ng-options="fondo.valor as fondo.descripcion for fondo in fondos "
+                                        ng-required="true"></select>
+                                </div>
+                            </div>
+                        </div>
+                        <div ng-if="registroPropuesta.propuestaInterna=='true' && registroPropuesta.fondo==1">
+                            <div class="x_title">
+                                <h2>Idea innovadora</h2>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                    Idea innovadora *
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <a class="btn btn-success" ng-click="buscarIdea()">
+                                        <span class="glyphicon glyphicon-search"> Seleccione...</span>
+                                    </a>
+                                    <!--<label class="control-label linkTabla" ng-click="buscarIdea()">seleccione...</label>-->
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">
+
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <!--<label class="cont">{{itemIdea.nombreIdea}}</label>-->
+                                    <textarea type="text" ng-disabled="true" class="form-control" ng-model="itemIdea.nombreIdea" ng-required="true"></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="x_title">
+                            <h2>Datos de propuesta</h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Nombre T&eacute;cnico
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <textarea type="text" ng-maxlength="300" ng-disabled="true" class="form-control" ng-model="registroPropuesta.nombreTecnico"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Producto &oacute; servicio *
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <textarea ng-disabled="!mostrar" type="text" ng-maxlength="300" name="" placeholder="Ingresa el producto o servicio..." class="form-control"
+                                    ng-required="true" required ng-model="registroPropuesta.productoServicio"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Proponente
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <label ng-click="openProfile(registroPropuesta.claveProponentePrincipal)" title="Detalle de empleado" class="linkTabla">{{registroPropuesta.claveProponentePrincipal}} - {{registroPropuesta.nombrePersona}}</label>
+                                <!--<input type="text" maxlength="100" ng-disabled="true" class="form-control" name="especialidad" ng-model="registroPropuesta.claveProponentePrincipal">-->
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Empresa Promotor
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" maxlength="100" ng-disabled="true" class="form-control" name="especialidad" ng-model="registroPropuesta.empresaPromotorNombre">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Unidad organizacional
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" maxlength="100" ng-disabled="true" class="form-control" name="especialidad" ng-model="registroPropuesta.nombreUnidadOrganizacional">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Segmento *
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <select ng-disabled="!mostrar" ng-model="registroPropuesta.segmentoMercadoId" ng-required="true" ng-options="SegmentoMercado.segmentoMercadoId as SegmentoMercado.nomSegMerc for SegmentoMercado in SegmentosMercado "
+                                    required class="form-control"></select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Tipo de Acceso *
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <select ng-disabled="!mostrar" ng-model="registroPropuesta.tipoAcceso" ng-required="true" ng-options="tipoAcceso.id as tipoAcceso.nombre for tipoAcceso in tiposAccesos "
+                                    required class="form-control"></select>
+                            </div>
+                        </div>
+
+
+                        <div class="x_title">
+                            <h2>Evidencia
+                                <small>Tama&ntilde;o m&aacute;ximo por archivo de 8 MB</small>
+                            </h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Documento adjunto*
+                            </label>
+
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div ng-if="!regFile">
+                                    <span class="fa fa-download"></span>&nbsp;&nbsp;
+                                    <a href="/Descargas.html#/q/{{registroPropuesta.adjuntoId | encriptar}}" class="linkTabla" target="_blank">Descargar Archivo</a>
+                                    &nbsp;&nbsp;
+                                    <a class="btn btn-danger" ng-show="mostrar" title="Eliminar Archivo" ng-click="deleteFile()">
+                                        <i class="glyphicon glyphicon-trash"></i>
+                                    </a>
+                                </div>
+                                <div class="form-group" ng-show="regFile">
+                                    <input class="input-file form-control" type="file" name="filesGral" id="filesGral" data-buttonName="btn-success" ng-required="true"
+                                        ng-model="registroPropuesta.adjuntoId" onchange="angular.element(this).scope().getFileDetails(this);"
+                                    />
+                                </div>
+                                <div class="form-group" ng-show="bitacoraPropuesta.length==0">
+                                    <div class="alert informacion col-xs-12">
+                                        <span class="glyphicon glyphicon-info-sign"></span> Nota: Para enviar la solicitud es necesario incluir el documento adjunto
+                                        de evidencia.
+                                    </div>
+                                </div>
+                                <div class="form-group" ng-if="registroPropuesta.estadoFlujoId==1 && evaluacionPropuesta!=null">
+                                    <!-- <div class="alert advertencia"> -->
+                                    <div class="alert {{tipoMensaje}}">
+                                        <i class="glyphicon glyphicon-info-sign"></i>
+                                        <label>
+                                            Motivo de {{bitacoraPropuesta.length==0? 'rechazo' : 'aprobación'}} :
+                                        </label>&nbsp; {{evaluacionPropuesta.justificacion==null? 'Sin justificación' : evaluacionPropuesta.justificacion}}
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ln_solid"></div>
+                        <div class="form-group">
+                            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                <div class="">
+                                    <button type="submit" class="btn btn-success" ng-click="optFrm='actualizar'">
+                                        <i class="glyphicon glyphicon-saved"></i> Actualizar
+                                    </button>
+                                    <button type="button" confirma-regresar="globalRegresar()" state-form="ValidForm1" class="btn btn-primary">
+                                        <span class="fa fa-arrow-left"></span> Regresar
+                                    </button>
+                                    <!--Fondo 1 = fycidet(admin), fondo 2 = otro (gerente)-->
+                                    <button ng-show="((registroPropuesta.propuestaInterna=='true' && registroPropuesta.fondo==1 && planCompleto) || registroPropuesta.propuestaInterna=='false') "
+                                        type="submit" class="btn btn-warning" ng-click="optFrm='validarAdmin'">
+                                        <i class="glyphicon glyphicon-saved"></i> Enviar solicitud al Administrador de GI
+                                    </button>
+                                    <button ng-show="registroPropuesta.propuestaInterna=='true' && registroPropuesta.fondo==0 && planCompleto" type="submit"
+                                        class="btn btn-warning" ng-click="optFrm='validarAdmin'">
+                                        <i class="glyphicon glyphicon-saved"></i> Enviar solicitud al Gerente
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <!--</form>-->
+                    </div>
+                </div>
+            </div>
+
+            <!--PANEL DE PLAN DE NEGOCIO-->
+            <div class="col-md-6 col-sm-6 col-xs-6" ng-show="registroPropuesta.propuestaInterna=='true'">
+                <div class="x_panel">
+                    <div class="x_content sin-desborde">
+                        <!--<form name="ValidForm" id="form" ng-submit="actualizar()" class="form-horizontal">-->
+                        <div class="x_title">
+                            <h2>Informaci&oacute;n general del plan de negocio evolutivo</h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                T&iacute;tulo del plan de negocio evolutivo
+                                <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <textarea type="text" ng-maxlength="300" placeholder="Ingresa el título del plan de negocio evolutivo..." class="form-control"
+                                    ng-model="registroPlan.titulo" ng-required="requeridoPNE"></textarea>
+                            </div>
+                        </div>
+
+                        <!-- <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Proyecto
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="row">
+                                    <div class="col-xs-9">
+                                        <input type="text" class="form-control" id="usr" name="proyecto" ng-model="registroPlan.proyectoNombre" disabled>
+                                    </div>
+                                    <div class="col-xs-3">
+                                        <a class="btn btn-success" ng-click="openProyecto()" title="Buscar proyecto">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                        </a>
+                                        <a class="btn btn-danger" ng-hide="registroPlan.proyectoNombre=='' || registroPlan.proyectoNombre==null" ng-click="eliminar()" title="borrar">
+                                            <span class="glyphicon glyphicon-remove"></span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> -->
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Autores
+                                <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <!--<div personas-select ng-model="registroPlan.planNegocioEvolAutores" enarreglo="true"></div>-->
+                                <a ng-click="openUser()" class="btn btn-success">
+                                    <span class="fa fa-user-plus"></span> Buscar
+                                </a>
+                                <!--{{registroPlan.planNegocioEvolAutores | json}}-->
+                            </div>
+                        </div>
+                        <div class="form-group" ng-if="registroPlan.planNegocioEvolAutores.length>0">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+
+
+
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <table id="CHPonenciaAdd" class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" width="100%"
+                                    dt-options="dtOptions">
+                                    <thead>
+                                        <tr>
+                                            <th data-priority="1">Clave</th>
+                                            <th data-priority="1">Nombre</th>
+                                            <th data-priority="1" class="thAjuste text-center">Opciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="autor in registroPlan.planNegocioEvolAutores">
+                                            <td ng-if="autor.nombre!='eliminar'">{{autor.clavePersona}}</td>
+                                            <td ng-if="autor.nombre!='eliminar'">{{autor.nombre}}</td>
+                                            <td class="text-center" ng-if="autor.nombre!='eliminar'">
+                                                <div>
+                                                    <a title="Eliminar" ng-really-click="eliminarautor(autor)" class="btn btn-danger">
+                                                        <i class="glyphicon glyphicon-trash"></i>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Unidad Organizacional
+                                <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div uo-modal ng-model="auxUO" state-form="ValidForm1" template-url="app/vistasGenericas/uomodalSeleccione.html"></div>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-if="registroPlan.planNegocioEvolGerencias.length>0">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <table id="CHPonenciaAdd" class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" width="100%"
+                                    dt-options="dtOptions">
+                                    <thead>
+                                        <tr>
+                                            <th data-priority="1">Nombre</th>
+                                            <th data-priority="1" class="thAjuste text-center">Opciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="area in registroPlan.planNegocioEvolGerencias">
+                                            <td>{{area.nombreUnidad}}</td>
+                                            <td class="text-center">
+                                                <div>
+                                                    <a title="Eliminar" ng-really-click="eliminararea(area)" class="btn btn-danger">
+                                                        <i class="glyphicon glyphicon-trash"></i>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Tema espec&iacute;fico
+                                <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <textarea type="text" ng-maxlength="300" ng-required="requeridoPNE" placeholder="Ingresa el tema del plan de negocio evolutivo..."
+                                    class="form-control" ng-model="registroPlan.tema"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Oferta de valor
+                                <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <textarea type="text" ng-maxlength="300" ng-required="requeridoPNE" placeholder="Ingresa la oferta de valor del plan de negocio evolutivo..."
+                                    class="form-control" ng-model="registroPlan.ofertaDeValor"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Tipo de acceso
+                                <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <select ng-model="registroPlan.tipoAcceso" ng-required="requeridoPNE" ng-options="tipoAcceso.id as tipoAcceso.nombre for tipoAcceso in tiposAccesos "
+                                    class="form-control"></select>
+                            </div>
+                        </div>
+                        <div class="x_title">
+                            <h2>Evidencia
+                                <small>Tama&ntilde;o m&aacute;ximo por archivo de 8 MB</small>
+                            </h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Documento adjunto
+                                <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input class="input-file form-control col-md-7 col-xs-12" type="file" name="filesGralD" id="filesGralD" data-buttonName="btn-success"
+                                    ng-model="filesGral" onchange="angular.element(this).scope().getFileDetailsD(this);" />
+                            </div>
+                        </div>
+                        <!--{{registroPlan.planNegocioEvolArchivos}}-->
+                        <div class="form-group" ng-if="registroPlan.planNegocioEvolArchivos.length>0">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <table id="CHPonenciaAdd" class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" width="100%"
+                                    dt-options="dtOptions">
+                                    <thead>
+                                        <tr>
+
+                                            <th data-priority="1">Nombre</th>
+                                            <th data-priority="1" class="thAjuste text-center">Opciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="adjunto in registroPlan.planNegocioEvolArchivos">
+                                            <td>{{adjunto.adjunto.nombre}}</td>
+                                            <td class="text-center">
+                                                <div>
+                                                    <a title="Eliminar" ng-really-click="eliminaradjunto(adjunto)" class="btn btn-danger">
+                                                        <i class="glyphicon glyphicon-trash"></i>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="form-group" ng-if="bitacoraPropuesta.length==1 && evaluacionPlan!=null">
+                            <!-- <div class="alert advertencia"> -->
+                            <div class="alert advertencia">
+                                <i class="glyphicon glyphicon-info-sign"></i>
+                                <label>
+                                    Motivo de {{bitacoraPropuesta.length==1? 'rechazo' : 'aprobación'}} :
+                                </label>&nbsp; {{evaluacionPlan.justificacion==null? 'Sin justificación' : evaluacionPlan.justificacion}}
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

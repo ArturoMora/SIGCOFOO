@@ -1,0 +1,117 @@
+﻿<div id="page-wrapper">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">Detalles</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                </div>
+                <!-- /.panel-heading -->
+                <div class="panel-body">
+                    <div class="row">
+                        <form role="form">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label>T&iacute;tulo del Libro:</label>
+                                    <span class="text">{{registro.tituloLibro}}</span>
+                                </div>
+                                <div class="form-group">
+                                    <label>T&iacute;tulo del Cap&iacute;tulo:</label>
+                                    <span class="text">{{registro.tituloCapitulo}}</span>
+                                </div>
+                                <div class="form-group">
+                                    <label>Editorial:</label>
+                                    <span class="text">{{registro.editorial}}</span>
+                                </div>
+                                <div class="form-group">
+                                    <label>Pa&iacute;s:</label>
+                                    <span class="text">{{pais.descripcion}}</span>
+                                </div>
+                                <div class="form-group">
+                                    <label>A&ntilde;o:</label>
+                                    <span class="text">{{registro.year  |date: 'yyyy'}}</span>
+                                </div>
+                                <div class="form-group">
+                                    <label>ISBN:</label>
+                                    <span class="text">{{registro.isbn}}</span>
+                                </div>
+                                <label class="tit col-xs-12" ng-show="registro.abstract.length > 0">
+                                    <label>Resumen:</label>                                               
+                                    <span class="text">{{registro.abstract}}</span>
+                                </label>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group" ng-show="registro.autorInternoCapitulo.length>0">
+                                    <label>Autores Internos:</label><br />
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th class="thAjuste">Clave</th>
+                                                <th>Nombre</th>
+                                                <th class="thAjusteColaboracion text-center">Orden de Autor</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="registro in registro.autorInternoCapitulo">
+                                                <td>{{registro.clavePersona}}</td>
+                                                <td>{{registro.nombreCompleto}}</td>
+                                                <td class="text-center">{{registro.contribucion}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="form-group" ng-show="registro.autorExternoCapitulo.length>0">
+                                    <label>Autores Externos:</label><br />
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Nombre</th>
+                                                <th>Instituci&oacute;n</th>
+                                                <th class="text-center">Orden de Autor</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="registro in registro.autorExternoCapitulo">
+                                                <td>{{registro.nombre}}</td>
+                                                <td>{{registro.institucion}}</td>
+                                                <td class="text-center thAjusteColaboracion">{{registro.contribucion}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="form-group" ng-show="registro.editoresCapitulo.length>0">
+                                    <label>Editores:</label><br />
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Nombre</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="registro in registro.editoresCapitulo">
+                                                <td>{{registro.editor_Nombre}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <div class="form-group" ng-show="registro.adjunto!=null">
+                                    <label>Archivo Adjunto:</label>
+                                    <a href="/Descargas.html#/q/{{registro.adjunto.adjuntoId | encriptar}}" class="btn btn-default btn-sm" target="_blank"> Descargar Archivo </a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-Modificado">
+                <button type="button" ui-sref="solicitudesrh" class="btn btn-primary">
+                    <span class="fa fa-arrow-left"></span> Regresar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

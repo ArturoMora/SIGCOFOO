@@ -1,0 +1,177 @@
+﻿<div ng-include="'app/vistasGenericas/header/registroNombrePersonaAdmin.html'"> </div>
+<div class="vista">
+
+    <div class="page-title">
+        <div class="title_left">
+            <ol ng-if="editAdmin!='1'" class="breadcrumb miga">
+                <li><i class="fa fa-cogs"></i> <a ui-sref="#">Solicitudes</a></li>
+                <li><a ui-sref="#">Asociaci&oacute;n</a></li>
+                <li class="active">Detalles</li>
+            </ol>
+            <ol ng-if="editAdmin=='1'" class="breadcrumb miga">
+                <li><i class="fa fa-cogs"></i> <a ui-sref="#">Asociaci&oacute;n</a></li>
+                <li class="active">Editar</li>
+            </ol>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+                    <form name="validacionForm" id="form" class="form-horizontal">
+                        <div class="x_title">
+                            <h2>Informaci&oacute;n general</h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Asociaci&oacute;n <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="row">
+                                    <div class="col-xs-10">
+                                        <input type="text" required placeholder="Selecciona una Asociaci&oacute;n" class="form-control" id="usr" name="asociacion"
+                                            ng-model="asociacion.asociacion.descripcion" disabled>
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <a class="btn btn-success" ng-click="openAsociaciones()" title="Buscar asociación">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Participaci&oacute;n <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <textarea ng-model="asociacion.participacion" auto-focus-campo name="participacion" maxlength="250" required class="form-control" placeholder="Agrega la(s) participacion(es)..."></textarea>
+                            </div>
+                        </div>
+                        <div class="x_title">
+                            <h2>Per&iacute;odo de participaci&oacute;n</h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Inicio <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="col-xs-10">
+                                    <input datepicker-options="datePicker.FechaOptions" 
+                                           placeholder="dd/mm/yyyy" ng-minlength="8" name="fechaInicio" maxlength="10" ng-init="open=false" type="text" show-button-bar="false" popup-placement="bottom" class="form-control" uib-datepicker-popup="dd/MM/yyyy" ng-model="asociacion.fechaInicio" value="{{ date | date: 'dd/MM/yyyy' }}" is-open="open" ng-required="true" close-text="Close" />
+                                    <span ng-show="validacionForm.fechaInicio.$dirty &&  validacionForm.fechaInicio.$invalid" class="error">Formato inválido 'dd/MM/yyyy'</span>
+                                </div>
+                                <div class="col-xs-2">
+                                    <button type="button" class="btn btn-success" ng-click="open=true"><i class="glyphicon glyphicon-calendar"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                T&eacute;rmino <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="col-xs-10">
+                                    <input placeholder="dd/mm/yyyy" name="fechaTermino" ng-minlength="8" maxlength="10" ng-init="open2=false" type="text" show-button-bar="false" popup-placement="bottom" class="form-control" uib-datepicker-popup="dd/MM/yyyy" ng-model="asociacion.fechaTermino" value="{{ date | date: 'dd/MM/yyyy' }}" is-open="open2" ng-required="true" close-text="Close" />
+                                    <span ng-show="validacionForm.fechaTermino.$dirty &&  validacionForm.fechaTermino.$invalid" class="error">Formato inválido 'dd/MM/yyyy'</span>
+                                </div>
+                                <div class="col-xs-2">
+                                    <button type="button" class="btn btn-success" ng-click="open2=true"><i class="glyphicon glyphicon-calendar"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="x_title">
+                            <h2>Evidencia <small>Tama&ntilde;o m&aacute;ximo por archivo de 8 MB</small></h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Documento adjunto
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div ng-show="!regFile">
+                                    <!--<a href="/Descargas.html#/q/{{asociacion.adjunto.adjuntoId | encriptar}}" class="btn btn-default btn-sm" target="_blank"> Descargar Archivo </a>-->
+                                    <span class="fa fa-download"></span>&nbsp;&nbsp;<a href="/Descargas.html#/q/{{asociacion.adjunto.adjuntoId | encriptar}}" class="linkTabla" target="_blank">Descargar Archivo</a>
+                                    &nbsp;&nbsp;
+                                    <a class="btn btn-danger" title="Eliminar Archivo" ng-click="deleteFile()">
+                                        <i class="glyphicon glyphicon-trash"></i>
+                                    </a>
+                                </div>
+                                <div class="form-group" ng-show="regFile">
+                                    <input class="input-file form-control col-md-7 col-xs-12" type="file" name="filesGral" id="filesGral" data-buttonName="btn-success"
+                                           ng-click="saveIG();" ng-model="filesGral"
+                                           onchange="angular.element(this).scope().getFileDetails(this);" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="jumbotron-fondo">
+                        <div class="x_title">
+                            <h2>Validaci&oacute;n de informaci&oacute;n</h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Fecha
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="row">
+                                    <div class="col-xs-10">
+                                        <input placeholder="dd/mm/yyyy" ng-minlength="8" name="FechaValidacion" maxlength="10" ng-init="open3=false" type="text" show-button-bar="false" popup-placement="bottom" class="form-control" uib-datepicker-popup="dd/MM/yyyy" ng-model="FechaValidacionAux" value="{{ FechaValidacionAux | date: 'dd/MM/yyyy' }}" is-open="open3" close-text="Close" />
+                                        <span ng-show="validacionForm.FechaValidacion.$dirty &&  validacionForm.FechaValidacion.$invalid" class="error">Formato inválido 'dd/MM/yyyy'</span>
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <button type="button" class="btn btn-success" ng-click="open3=true"><i class="glyphicon glyphicon-calendar"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Justificaci&oacute;n
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <textarea class="form-control" ng-model="justificacion" maxlength="500" ></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <button type="submit" class="btn btn-success" ng-really-click="save(2)" ng-show="regFile || !regFile || editAdmin=='1'" ng-really-message="{{aprobacionQ}}"
+                                        ng-disabled="desactivar || !validacionForm.asociacion.$valid ||!validacionForm.participacion.$valid
+                                            ||!validacionForm.fechaInicio.$valid ||!validacionForm.fechaTermino.$valid ||!validacionForm.FechaValidacion.$valid || FechaValidacionAux==null">
+                                    <i class="glyphicon glyphicon-saved"></i> Aprobar Solicitud
+                                </button>
+                                <button type="submit" class="btn btn-warning" ng-really-click="save(3)" ng-if="editAdmin!='1'" ng-really-message="{{rechazoQ}}"
+                                        ng-disabled="desactivar || !validacionForm.asociacion.$valid ||!validacionForm.participacion.$valid
+                                            ||!validacionForm.fechaInicio.$valid ||!validacionForm.fechaTermino.$valid ||!validacionForm.FechaValidacion.$valid || FechaValidacionAux==null">
+                                    <i class="fa fa-reply"></i> Regresar Solicitud
+                                </button>
+                            </div>
+                        </div>
+                        </div>
+                        <div class="ln_solid"></div>
+                        <div class="form-group">
+                            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                <div class="">
+                                    <button type="submit" class="btn btn-success" ng-click="save(1)"
+                                            ng-disabled="desactivar || !validacionForm.asociacion.$valid ||!validacionForm.participacion.$valid
+                                            ||!validacionForm.fechaInicio.$valid ||!validacionForm.fechaTermino.$valid">
+                                        <i class="glyphicon glyphicon-saved"></i> Actualizar
+                                    </button>
+                                    <button type="button" confirma-regresar="globalRegresar()" state-form="validacionForm" class="btn btn-primary">
+                                        <span class="fa fa-arrow-left"></span> Regresar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,155 @@
+﻿<div class="vista">
+    <div class="page-title">
+        <div class="title_left">
+            <ol class="breadcrumb miga">
+                <li><i class="glyphicon glyphicon-file"></i> <a ui-sref="buscarIdeaInnovadora">Ideas innovadoras/ Buscar ideas innovadoras</a></li>
+            </ol>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Criterios de b&uacute;squeda</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li>
+                            <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <form name="Search" id="Search" class="form-horizontal">
+                        <div class="col-xs-12">
+                            <div class="col-xs-12 col-md-6">
+                                <div class="form-group ">
+                                    <label class="col-md-12 col-sm-12 col-xs-12">
+                                        Nombre de la idea innovadora
+                                    </label>
+                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                        <input type="text" class="frmSearch form-control" placeholder="Nombre de la idea innovadora" ng-model="idea.nombreIdea" />
+                                    </div>
+                                </div><!--Form-G-->
+                                <div class="form-group ">
+                                    <label class="col-md-12 col-sm-12 col-xs-12">
+                                        Palabra clave
+                                    </label>
+                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                        <input type="text" class="frmSearch form-control" placeholder="Palabra(s) clave" ng-model="idea.palabrasClave" />
+                                    </div>
+                                </div><!--Form-G-->
+                                <div class="form-group ">
+                                    <label class="col-md-12 col-sm-12 col-xs-12">
+                                        Principal proponente
+                                    </label>
+                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                        <input type="text" class="frmSearch form-control" placeholder="Principal proponente" ng-model="idea.proponenteNombre" />
+                                    </div>
+                                </div><!--Form-G-->
+                            </div>
+                            <div class="col-xs-12 col-md-6">
+                                <label class="col-xs-12">Ideas con fecha de registro entre el siguiente rango de fechas: </label>
+                                <div class="form-group">
+                                    <label class="col-md-12 col-sm-12 col-xs-12">Inicio </label>
+                                    <div class="col-xs-12">
+                                        <div class="row">
+                                            <div class="col-xs-10">
+                                                <!--<p class="input-group">-->
+                                                <input placeholder="dd/mm/yyyy" show-button-bar="false" uib-datepicker-popup='dd/MM/yyyy' ng-minlength="8" maxlength="10" datepicker-options="datePicker.FechaOptions" popup-placement="bottom" type="text" class="form-control fechaOnly"
+                                                       ng-model="idea.fechaInicioComparacion" is-open="open" close-text="Close" />
+                                                <!--</p>-->
+                                            </div>
+                                            <div class="col-xs-2">
+                                                <span class="input-group-btn">
+                                                    <button type="button" class="btn btn-success" ng-click="open=true; idea.busquedaFecha='ok'"><i class="glyphicon glyphicon-calendar"></i></button>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-12 col-sm-12 col-xs-12">T&eacute;rmino </label>
+                                    <div class="col-xs-12">
+                                        <div class="row">
+                                            <div class="col-xs-10">
+                                                <input placeholder="dd/mm/yyyy" show-button-bar="false" uib-datepicker-popup='dd/MM/yyyy' ng-minlength="8" maxlength="10" datepicker-options="datePicker.FechaOptions" popup-placement="bottom" type="text" class="form-control fechaOnly"
+                                                       ng-model="idea.fechaFinalComparacion" is-open="open2" close-text="Close" />
+                                            </div>
+                                            <div class="col-xs-2">
+                                                <span class="input-group-btn">
+                                                    <button type="button" class="btn btn-success" ng-click="open2=true; idea.busquedaFecha='ok'"><i class="glyphicon glyphicon-calendar"></i></button>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="col-xs-12 col-md-6">
+                                <div class="form-group ">
+                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                        <a class="btn btn-success" ng-click="buscar()" title="buscar">
+                                            <span class="glyphicon glyphicon-search"></span> Buscar
+                                        </a>
+                                        <button type="button" ng-click="reset()" class="btn btn-primary">
+                                             Limpiar
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12">
+            <div class="x_panel" ng-show="busqueda">
+                <div class="x_content sin-desborde">
+                    <form name="ValidForm" id="form" class="form-horizontal">
+                        <div class="col-xs-12">
+                            <!--<div ng-show="registros.length === 0 || registros==null" class="alert advertencia">
+                                No hay registros de idea innovadora.
+                            </div>-->
+                            <div >
+                                <table id="GIbuscarIdeaInnovadora" class="table table-hover table-striped table-condensed dt-responsive" dt-column-defs="dtColumnDefs"  cellspacing="0" datatable="ng" width="100%"
+                                       dt-options="dtOptions">
+                                    <thead>
+                                        <tr>
+                                            <th data-priority="1">Idea<br />innovadora</th>
+                                            <th>Palabra<br />clave</th>
+                                            <th>Principal<br />proponente</th>
+                                            <th>Estado<br />registro</th>
+                                            <th>Fecha<br />registro</th>
+                                            <th>Fecha<br />validaci&oacute;n</th>
+                                            <th ng-if="rolId==1028">¿Idea liberada?</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="registro in registros">
+                                            <td style="max-width:300px" class="sin-desborde"><a ng-click="setVariable('busquedaIdeasInnovadorasGI', idea);setGlobalID(registro.ideaInnovadoraId)" ui-sref="buscarIdeaInnovadoraDetalles" title="Detalle">{{registro.nombreIdea}}</a></td>
+                                            <td>{{registro.palabrasClave}}</td>
+                                            <td>
+                                                <a ng-if="registro.proponenteNombre===null">Dato no disponible  </a>
+                                                <a ng-if="registro.proponenteNombre!=null" ng-click="openProfile(registro.claveProponentePrincipal)" title="Detalle de empleado" class="linkTabla">{{registro.claveProponentePrincipal}}</a>-{{registro.proponenteNombre}}
+                                            </td>
+                                            <td>{{registro.estadoFlujo.descripcion}}</td>
+                                            <td>{{registro.fechaRegistro | date:"dd/MM/yyyy"}}</td>
+                                            <td ng-init="setDatatable($last)">{{registro.fechaValidacion === null ? 'Dato no disponible' : registro.fechaValidacion | date:"dd/MM/yyyy"}}</td>
+                                            <td ng-if="rolId==1028" class="text-center text-hide">
+                                                {{registro.accesoPublico}}
+                                                <input type="checkbox" class="btn btn-info btn-circle" ng-model="registro.accesoPublico" ng-really-click="cambiar(registro)" ng-really-cancel="regresar(registro)" ng-really-message="¿Está seguro de cambiar el tipo de acceso?"/>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--<button ng-confirma-load-click ></button>-->

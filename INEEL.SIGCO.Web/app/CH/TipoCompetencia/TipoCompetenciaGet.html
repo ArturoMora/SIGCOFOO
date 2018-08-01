@@ -1,0 +1,60 @@
+﻿<div class="vista">
+
+    <div class="page-title">
+        <div class="title_left">
+
+            <ol class="breadcrumb miga">
+                <li><i class="disabled fa fa-cogs"></i><a> Administración/Catálogos competencias/Tipo de competencias</a></li>
+            </ol>
+
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+
+                    <table id="CHTipoCompetenciaGet" dt-instance="dtInstance" class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" datatable="ng" width="100%" dt-options="dtOptions">
+                        <thead>
+                            <tr>
+                                <th data-priority="1">Tipo de competencia</th>
+                                <th data-priority="1">Descripción</th>
+                                <th class="thAjuste text-center" data-priority="2">¿Está activo? </th>
+                                <th class="thAjuste text-center" data-priority="3">Opciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="obj in registro">
+                                <td>{{obj.nombreCompetencia}}</td>
+                                <td>{{obj.descripcion}}</td>
+                                <td class="text-center text-hide">
+                                    {{obj.estado}}
+                                    <input type="checkbox" class="btn btn-info btn-circle" ng-model="obj.estado" ng-click="saveEstado(obj.tipoCompetenciaId,obj.estado)" />
+                                </td>
+                                <td class="text-center">
+                                    <a class="btn btn-warning" ui-sref="tipocompetenciaEdit({id:obj.tipoCompetenciaId})" title="Editar">
+                                        <i class="glyphicon glyphicon-pencil"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                 
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <button type="button" ui-sref="tipocompetenciaAdd" class="btn btn-success">
+                <span class="glyphicon glyphicon-plus"></span> Agregar
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,157 @@
+<div class="vista">
+    <div class="page-title">
+        <div class="title_left">
+
+            <ol class="breadcrumb miga">
+                <li><i class="sg sg-aliados"></i> <a  class="cursorPointer" ng-click="globalRegresar();">Aliados/Actividad Adicional</a></li>
+                <li class="active">Editar</li>
+            </ol>
+
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_content">
+                    <form name="form" id="form" class="form-horizontal">
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Descripci&oacute;n <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <textarea rows="4" required type="text" name="descripcionActividad" ng-model="actividadesAdicional.descripcion" ng-minlength="2"  maxlength="300" ng-maxlength="300" class="form-control" />
+                                <span class="error" ng-show="form.descripcionActividad.$dirty && !form.descripcionActividad.$valid">
+                                    El rango de caracteres debe ser m&iacute;nimo 2 y m&aacute;ximo 300.
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Fecha <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="row">
+                                    <div class="col-xs-10">
+                                       <input type="text" name="fecha" class="form-control fechaOnly" placeholder="dd/mm/yyyy" show-button-bar="false" popup-placement="bottom" datepicker-options="datePicker50.FechaOptions" uib-datepicker-popup="dd/MM/yyyy" ng-model="actividadesAdicional.fechaActividad" value="{{ date | date: 'dd/MM/yyyy' }}" ng-init="openDate=false" is-open="openDate" ng-required="true" close-text="Close" />
+                                        <span ng-show="form.fecha.$dirty &&  form.fecha.$invalid" class="error">Formato inv&aacute;lido 'dd/MM/yyyy'</span> 
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <button type="button" class="btn btn-success" ng-click="openDate=true"><i class="glyphicon glyphicon-calendar"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                    <div class="form-horizontal">
+
+                        <div class="x_title">
+                            <h2>&Aacute;reas involucradas<small></small></h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Unidad organizacional <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div uo-modal2  ng-model="uoselecionada" enarreglo="false"></div>
+                            </div>
+
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <table id="CRactividadAdicionalEdit" class="table table-hover table-striped table-condensed" cellspacing="0"  width="100%" >
+                                    <thead>
+                                        <tr>
+                                            <th class="col-xs-9" data-priority="1">Unidad organizacional</th>
+                                            <th class="col-xs-3">Eliminar</th>
+                                        </tr>
+                                    </thead>
+                                    <tr ng-repeat="unidadesMList in actividadesAdicional.areaActividadAdicional track by $index">
+                                        <td>{{unidadesMList.unidadOrganizacional.nombreUnidad}}</td>
+                                        <td>
+                                            <button type="button" ng-click="deleteArea(unidadesMList)" class="btn btn-danger">
+                                                <i class="glyphicon glyphicon-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+
+                                </table>
+                            </div>
+                        </div>
+                        <div class="x_title">
+                            <h2>Personal involucrado<small></small></h2>
+                            <div class="clearfix"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Investigador <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="row">
+                                    <div class="col-xs-10">
+                                        <input type="text" class="form-control" id="usr" name="asesor" disabled>
+                                    </div>
+
+                                    <div class="col-xs-2">
+                                        <button class="btn btn-success" ng-click="openPersona()" title="Buscar Persona">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <table id="CRactividadAdicionalEditpersonas" class="table table-hover table-striped table-condensed" cellspacing="0" width="100%" >
+                                    <thead>
+                                        <tr>
+                                            <th class="col-xs-9" data-priority="1">Nombre</th>
+                                            <th class="col-xs-3">Eliminar</th>
+                                        </tr>
+                                    </thead>
+                                    <tr ng-repeat="personas in  actividadesAdicional.personalActividadAdicional track by $index">
+                                        <td>{{personas.personas.nombreCompleto}}</td>
+                                        <td>
+                                            <button type="button" ng-click="deletePersona(personas)" class="btn btn-danger">
+                                                <i class="glyphicon glyphicon-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+
+                                </table>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+
+
+
+                    <div class="ln_solid"></div>
+                    <div class="form-group">
+                        <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                            <div class="">
+
+                                <button type="submit" class="btn btn-success" ng-click="saveActividadAdicional()" ng-disabled="form.$invalid || actividadesAdicional.personalActividadAdicional.length ==0  || actividadesAdicional.areaActividadAdicional.length==0">
+                                    <i class="glyphicon glyphicon-saved"></i> Actualizar
+                                </button>
+                                <button type="button" confirma-regresar="globalRegresar()" state-form="form" class="btn btn-primary">
+                                    <span class="fa fa-arrow-left"></span> Regresar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

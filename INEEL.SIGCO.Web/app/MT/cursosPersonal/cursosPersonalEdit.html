@@ -1,0 +1,423 @@
+﻿<div class="vista">
+
+    <div class="page-title">
+        <div class="title_left">
+
+            <ol class="breadcrumb miga">
+                <li><i class="sg sg-cursos-cap"></i> <a ui-sref="CursoEdit">Cursos impartidos/Mis cursos</a></li>
+                <li class="active">Editar</li>
+            </ol>
+
+        </div>
+    </div>
+
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+
+                    <form name="ValidForm" id="form" class="form-horizontal">
+
+                        <div class="x_title">
+                            <h2>Informaci&oacute;n general <small>&iquest;De qu&eacute; se trata el curso?</small></h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Nombre del curso <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input auto-focus-campo type="text" class="form-control" maxlength="300" id="usr" required ng-model="registro.titulo" name="titulo">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Tipo de curso <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <select ng-model="registro.tipoCursoId" name="tipoCursoId" ng-options="curso.tipoCursoId as curso.descripcion for curso in cursos "
+                                        required class="form-control"></select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Registrado por
+                            </label>
+                            <label class="span-label  col-md-6 col-sm-6 col-xs-12">
+                                {{registro.nombrePersona}}
+                            </label>
+                        </div>
+
+
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Descripci&oacute;n <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <textarea type="text" rows="3" maxlength="600" class="form-control" id="usr" required ng-model="registro.descripcion" name="descripcion"></textarea>
+                            </div>
+                        </div>
+                        <div class="x_title">
+                            <h2>Per&iacute;odo del curso</h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Inicio <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="row">
+                                    <div class="col-xs-10">
+                                        <input placeholder="dd/mm/yyyy" ng-minlength="8" name="fechaInicio" maxlength="10" ng-init="open=false" type="text" show-button-bar="false"
+                                        popup-placement="bottom" class="form-control" datepicker-options="datePicker.FechaOptions" required uib-datepicker-popup="dd/MM/yyyy"
+                                               ng-model="registro.fechaCurso" value="{{ date | date: 'dd/MM/yyyy' }}" is-open="open"
+                                               ng-required="true" close-text="Close" />
+                                        <span ng-show="ValidForm.fechaInicio.$dirty &&  ValidForm.fechaInicio.$invalid" class="error">Formato inválido 'dd/MM/yyyy'</span>
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <button type="button" class="btn btn-success" ng-click="open=true"><i class="glyphicon glyphicon-calendar"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                T&eacute;rmino <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="row">
+                                    <div class="col-xs-10">
+                                        <input placeholder="dd/mm/yyyy" name="fechaTermino" ng-minlength="8" maxlength="10" ng-init="open2=false" type="text" show-button-bar="false"
+                                        popup-placement="bottom" ng-required="true" class="form-control" datepicker-options="datePicker.FechaOptions" uib-datepicker-popup="dd/MM/yyyy"
+                                               ng-model="registro.fechaTermino" value="{{ date | date: 'dd/MM/yyyy' }}" is-open="open2"
+                                               close-text="Close" />
+                                        <span ng-show="ValidForm.fechaTermino.$dirty &&  ValidForm.fechaTermino.$invalid" class="error">Formato inválido 'dd/MM/yyyy'</span>
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <button type="button" class="btn btn-success" ng-click="open2=true"><i class="glyphicon glyphicon-calendar"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--Titulo Separador-->
+                        <div class="x_title">
+                            <h2>Lugar del curso</h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Lugar
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <textarea type="text" rows="3" maxlength="300" class="form-control" id="usr" ng-model="registro.lugar"></textarea>
+                            </div>
+                        </div>
+                        <div class="x_title">
+                            <h2>Origen del curso</h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <!--FIN Titulo Separador-->
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Proyecto del que se origin&oacute;
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div ng-class="registro.proyectoId == null  ? 'col-xs-10' : (registro.proyectoId != null ? 'col-xs-9' : 'col-xs-9')">
+                                    <input type="text" class="form-control" id="usr" name="proyecto" ng-model="registro.proyectoNombre" disabled>
+                                </div>
+                                <div ng-class="registro.proyectoId == null  ? 'col-xs-2' : (registro.proyectoId != null ? 'col-xs-3' : 'col-xs-3')">
+                                    <button class="btn btn-success" ng-click="openProyecto();ValidForm.$setDirty();" title="Buscar proyecto" ng-disabled="desabilitar">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                    <button type="button" ng-if="registro.proyectoId!=null" class="btn btn-danger" ng-click="clean();ValidForm.$setDirty();"><i class="glyphicon glyphicon-remove" title="borrar"></i></button>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                <span>&iquest;Pertenece al Centro de Posgrado?</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" class="flat" name="optionsRadios" ng-change="ValidForm.$setDirty();" ng-model="registro.perteneceCP" value="1">Si
+                                    </label>
+                                    <label>
+                                        <input type="radio" name="optionsRadios" ng-checked="true" ng-model="registro.perteneceCP" value="0">No
+                                    </label>
+                                </div>
+
+                            </div>
+                        </div>
+
+
+                        <!--Titulo Separador-->
+                        <div class="x_title">
+                            <h2>Seguridad</h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <!--FIN Titulo Separador-->
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                <span>Tipo de acceso</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" ng-checked="true" ng-change="ValidForm.$setDirty();" ng-model="registro.privadoPublico" value="1">Privado
+                                    </label>
+                                    <label>
+                                        <input type="radio" ng-model="registro.privadoPublico" value="0">P&uacute;blico
+                                    </label>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="x_title">
+                            <h2>Autores del curso</h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Autores internos  <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <a ng-click="openUser() ;ValidForm.$setDirty();" class="btn btn-success">
+                                    <span class="fa fa-user-plus"></span> Buscar
+                                </a>
+
+                                <div ng-show="AutoresIIE.length > 0">
+                                    <table id="MTcursosPersonalEdit" class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" datatable="ng" width="100%"
+                                           dt-options="dtOptions">
+                                        <thead>
+                                            <tr>
+                                                <th>Clave</th>
+                                                <th data-priority="1">Nombre</th>
+                                                <th data-priority="3" class="thAjuste text-center">Opciones</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="autor in AutoresIIE">
+                                                <td>{{autor.clavePersona}}</td>
+                                                <td>{{autor.nombreCompleto}}</td>
+                                                <td class="text-center">
+                                                    <div>
+                                                        <a title="Eliminar" ng-hide="autor.clavePersona==clavePersona"  class="btn btn-danger" ng-really-click="delete(autor);ValidForm.$setDirty();"  ng-really-message="¿Está seguro de eliminar el autor interno?">
+                                                            <i class="glyphicon glyphicon-trash"></i>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Autores externos
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <a class="btn btn-success" ng-click="addExt=true">
+                                    <span class="fa fa-user-plus"></span> Agregar
+                                </a>
+                                <div ng-hide="!addExt">
+                                    <div class="col-md-12">
+                                        <div class="col-xs-5" style="padding-left:0;padding-right:0">
+                                            <input class="form-control" placeholder="Nombre" maxlength="150" ng-model="autorExt.nombreCompleto" />
+                                        </div>
+                                        <div class="col-sm-6" style="padding-left:0;padding-right:0">
+                                            <input class="form-control" placeholder="Organización" maxlength="150" ng-model="autorExt.institucion" />
+                                        </div>
+                                        <div class="col-sm-1" style="padding-left:0;padding-right:0">
+                                            <a title="Agregar" ng-click="add_userExt();ValidForm.$setDirty();" class="btn btn-success">
+                                                <i class="glyphicon glyphicon-ok"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div ng-show="AutoresExt.length > 0">
+                                    <table id="MTcursosPersonalEditAutoresExt" class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" datatable="ng" width="100%"
+                                           dt-options="dtOptions">
+                                        <thead>
+                                            <tr>
+                                                <th data-priority="1">Nombre</th>
+                                                <th>Organización</th>
+                                                <th data-priority="3" class="thAjuste text-center">Opciones</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="autor in AutoresExt">
+                                                <td>{{autor.nombreCompleto}}</td>
+                                                <td>{{autor.institucion}}</td>
+                                                <td class="text-center">
+                                                    <div>
+                                                        <a title="Eliminar" class="btn btn-danger" ng-really-click="deleteExt(autor);ValidForm.$setDirty();"  ng-really-message="¿Está seguro de eliminar el autor externo?">
+                                                            <i class="glyphicon glyphicon-trash"></i>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="x_title">
+                            <h2>Ligas de acceso</h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12 sin-desborde">
+                                <div class="row">
+                                    <div class="col-xs-10">
+                                        <input type="url" maxlength="100" ng-model="registro.descripcionLiga" class="form-control" name="descripcionLiga" />
+                                        <span class="error" ng-show="ValidForm.descripcionLiga.$dirty &&  !ValidForm.descripcionLiga.$valid || ValidForm.$submitted && ValidForm.descripcionLiga.$invalid ">Se requiere un sitio Web ejemplo: http://www.dominio.com</span>
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <a class="btn btn-success btn-sm" ng-click="addLiga();ValidForm.$setDirty();" ng-disabled="!ValidForm.descripcionLiga.$valid ">
+                                            <i class="glyphicon glyphicon-plus"></i>
+                                        </a><br />
+                                    </div>
+                                </div>
+                                <table id="MTcursosPersonalEditregistro" class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" datatable="ng" width="100%"
+                                       dt-options="dtOptions" ng-if="registro.sitioWebCurso.length>0 ||sitiosWebNuevos.length>0">
+                                    <thead>
+                                        <tr>
+                                            <th class="col-xs-9" data-priority="1">Ligas de Acceso</th>
+                                            <th class="col-xs-3">Eliminar</th>
+                                        </tr>
+                                    </thead>
+                                    <tr ng-repeat="task in registro.sitioWebCurso">
+                                        <td style="max-width:200px" class="sin-desborde">
+                                            <a href="{{task.url}}" ta target="_blank" title="{{task.url}}">
+                                                {{task.url}}
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="btn btn-danger" ng-really-click="eliminarUrl(task);ValidForm.$setDirty();"  ng-really-message="¿Está seguro de eliminar la liga?">
+                                                <i class="glyphicon glyphicon-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <!-- <tr ng-repeat="task in sitiosWebNuevos track by $index">
+                                        <td style="max-width:200px" class="sin-desborde">
+                                            <a href="{{task}}" ta target="_blank" title="{{task}}">
+                                                {{task}}
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <button type="button" ng-click="deleteTaskNew(sitiosWebNuevos.indexOf(task))" class="btn btn-danger">
+                                                <i class="glyphicon glyphicon-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr> -->
+                                </table>
+                            </div>
+                        </div>
+                        <div class="x_title">
+                            <h2>Evidencia <small>Tama&ntilde;o m&aacute;ximo por archivo de 8 MB, el formato de los archivos puede ser: PDF, DOC, DOCX</small></h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Documento(s) adjunto(s)
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+
+                                <div class="form-group">
+                                    <input class="input-file" type="file" name="filesGral" id="filesGral" ng-click="saveIG(); ValidForm.$setDirty();" ng-model="filesGral" data-buttonName="btn-success"
+                                           onchange="angular.element(this).scope().getFileDetails(this);" />
+                                </div>
+                                <div ng-show="archivosAdjuntos.length > 0|| tasklist.length>0">
+                                    <table class="table table-hover table-striped table-condensed dt-responsive">
+                                        <thead>
+                                            <tr>
+                                                <th data-priority="1">Archivo</th>
+                                                <th class="text-center">Opciones</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="archivo in archivosAdjuntos" ng-hide="archivosAdjuntos.length === 0">
+                                                <td style="max-width:200px" class="sin-desborde">{{archivo.nombre}}</td>
+                                                <td class="text-center">
+                                                    <div>
+                                                        <a ng-if="archivo.adjuntoCursosId!=undefined" title="Descargar" href="/Descargas.html#/cursos/{{archivo.adjuntoCursosId| encriptar}}" class="btn btn-success">
+                                                            <i class="glyphicon glyphicon-download-alt"></i>
+                                                        </a>
+                                                        <a title="Eliminar" class="btn btn-danger" ng-really-click="eliminarFile(archivo);ValidForm.$setDirty();"  ng-really-message="¿Está seguro de eliminar el documento adjunto">
+                                                            <i class="glyphicon glyphicon-trash"></i>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="form-group">
+                                    <div class="alert informacion col-xs-12">
+                                        <span class="glyphicon glyphicon-info-sign"></span> Nota: Para enviar la solicitud
+                                        es necesario incluir el documento adjunto de evidencia.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ln_solid"></div>
+                        <div class="form-group">
+                            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                <div class="">
+                                    <button  class="btn btn-success" ng-click="update(false)" ng-disabled="desactivar || !ValidForm.titulo.$valid
+                                             ||!ValidForm.tipoCursoId.$valid ||!ValidForm.descripcion.$valid
+                                           
+                                            ||!ValidForm.fechaInicio.$valid ||!ValidForm.fechaTermino.$valid">
+                                        <i class="glyphicon glyphicon-saved"></i> Actualizar
+                                    </button>
+                                    <button type="button" confirma-regresar="globalRegresar()" state-form="ValidForm" class="btn btn-primary">
+                                        <span class="fa fa-arrow-left"></span> Regresar
+                                    </button>
+                                    <button ng-show="archivosAdjuntos.length > 0 && registro.perteneceCP==1 && editarGestion==0 && registro.estadoFlujoId===1"
+                                            ng-hide="registro.perteneceCP==0 || editarGestion==1 || registro.estadoFlujoId!=1 || regFile"
+                                            ng-click="update(true)" class="btn btn-warning" ng-disabled="desactivar || !ValidForm.titulo.$valid
+                                             ||!ValidForm.tipoCursoId.$valid ||!ValidForm.descripcion.$valid
+                                            || (archivosAdjuntos.length==0 && tasklist.length==0)
+                                             || AutoresIIE.length==0
+                                            ||!ValidForm.fechaInicio.$valid ||!ValidForm.fechaTermino.$valid">
+                                        <i class="glyphicon glyphicon-saved"></i> Enviar solicitud al Centro de Posgrado
+                                    </button>
+                                    <button ng-show="archivosAdjuntos.length > 0 && registro.perteneceCP==0 && editarGestion==0 && registro.estadoFlujoId===1"
+                                            ng-hide="registro.perteneceCP==1 || editarGestion==1 || registro.estadoFlujoId!=1 || regFile"
+                                            ng-click="update(true)" class="btn btn-warning" ng-disabled="desactivar || !ValidForm.titulo.$valid
+                                             ||!ValidForm.tipoCursoId.$valid ||!ValidForm.descripcion.$valid
+                                            || (archivosAdjuntos.length==0 && tasklist.length==0)
+                                             || AutoresIIE.length==0
+                                            ||!ValidForm.fechaInicio.$valid ||!ValidForm.fechaTermino.$valid">
+                                        <i class="glyphicon glyphicon-saved"></i> Enviar solicitud al Administrador de CH
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,98 @@
+﻿<div class="modal-header">
+    <button type="button" class="close" ng-click="cancel()" data-dissmiss="modal">
+        <i class="glyphicon glyphicon-remove"></i>
+    </button>
+    <div class="col-xs-1"></div>
+    <div>
+        <h3>
+            {{datosDeModal.titulo}}
+        </h3>
+    </div>
+
+
+</div>
+<div class="modal-body">
+   
+    <form name="frm">
+        
+        <div class="row">
+            <div class="col-lg-10 col-md-11 col-sm-12">
+                <label class="col-xs-12 " for="clasificacionSignatura">*Justificaci&oacute;n</label>
+                <div class="col-xs-12">
+                    <textarea style="resize:vertical;" class="form-control" placeholder="Justificaci&oacute;n..."
+                              rows="6" name="justificacion" ng-model="datosDeModal.justificacion"
+                              ng-required="true" ng-minlength="10" ng-maxlength="499"></textarea>
+                    <span class="error" ng-show="frm.justificacion.$dirty && !frm.justificacion.$valid">
+                        Se requiere una Justificaci&oacute;n con longitud m&iacute;nima de 10 y m&aacute;xima de 500
+                    </span>
+                </div>
+                </div>
+            <div class="col-lg-10 col-md-11 col-sm-12">
+                
+                <label class="col-xs-12 " for="clasificacionSignatura">**Clasificaci&oacute;n</label>
+                <div class="col-xs-12">
+                    <input id="clasificacionSignatura" name="clasificacionSignatura" type="text" placeholder="INEEL/04/15/12791/I001/F/DC/A1/V1"
+                           title="Asignada en cada informe por la gerencia, consta de las iniciales de la instituci&oacute;n, el n&uacute;mero de la divisi&oacute;n, el n&uacute;mero de departamento, el n&uacute;mero de proyecto, el consecutivo del informe, el tipo de informe, anexos, volumen etc. "
+                           class="form-control input-md"
+                           ng-model="datosDeModal.clasificacionSignatura"
+                           ng-pattern="/^(IIE\/|INEEL\/){1}[\w\d\/-]{15,100}$/" />
+                    <span class="error" ng-show="frm.clasificacionSignatura.$dirty && !frm.clasificacionSignatura.$valid">
+                        Se espera el prefijo IIE/  o  INEEL/, en general considerar:<br />
+                        Consta de las iniciales de la instituci&oacute;n, el n&uacute;mero de la divisi&oacute;n, el n&uacute;mero de departamento, el n&uacute;mero de proyecto, el consecutivo del informe, el tipo de informe, anexos, volumen etc.
+                    </span>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12" for="numInforme">**N&uacute;mero de informe</label>
+                    <div class="col-xs-12">
+                        <input id="signatura" name="numInforme" type="text" placeholder="I001, I002, etc"
+                               title="consecutivo asignado por cada gerencia de acuerdo con los informes desarrollados en un proyecto. Ejemplo I001, I002, etc."
+                               class="form-control input-md"
+                               ng-model="datosDeModal.numInforme"
+                               ng-required="true"
+                               ng-maxlength="40"
+                               ng-minlength="3" />
+                        <span class="error" ng-show="frm.numInforme.$dirty && !frm.numInforme.$valid">
+                            Longitud m&iacute;nima de 3 y m&aacute;xima de 40
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12" for="numInventario">**N&uacute;mero de inventario</label>
+                    <div class="col-xs-12">
+                        <input id="signatura" name="numInventario" type="text" placeholder="P12-0487"
+                               class="form-control input-md"
+                               ng-model="datosDeModal.numInventario"
+                               ng-required="true"
+                               ng-maxlength="20"
+                               ng-minlength="7" />
+                        <span class="error" ng-show="frm.numInventario.$dirty && !frm.numInventario.$valid">
+                            Longitud m&iacute;nima de 7 y m&aacute;xima de 20
+                        </span>
+                    </div>
+                </div>
+
+                
+                </div>
+            </div>
+    </form>
+    <div class="alert informacion col-xs-12">
+        <span class="glyphicon glyphicon-info-sign"></span> Todos los campos son requeridos para <strong>{{datosDeModal.msg1}}</strong>.<br />
+        <span class="glyphicon glyphicon-info-sign"></span> La justificaci&oacute;n es requerida para <strong>{{datosDeModal.msg2}}</strong>.<br/>
+        
+    </div>
+    <br/>
+    <!--itf.informeTecnicoFinalId:{{itf.informeTecnicoFinalId}}<br/>-->
+    <!--menu:{{menu | json}}-->
+    
+</div> 
+<div class="modal-footer">
+    <!--frm.numInventario: {{frm.numInventario |json}}-->
+    <button type="button" class="btn btn-success" ng-click="ok1()"
+            ng-disabled="frm.justificacion.$invalid || frm.clasificacionSignatura.$invalid  || frm.numInventario.$invalid"
+            ng-show="mostrarB1==true">{{datosDeModal.msg1}}</button>
+
+    <button type="button" class="btn btn-warning" ng-click="ok2()" 
+            ng-disabled="frm.justificacion.$invalid"
+            ng-show="mostrarB2==true">{{datosDeModal.msg2}}</button>
+    <button type="button" class="btn btn-info" ng-click="cancel()">Cancelar</button>
+</div>

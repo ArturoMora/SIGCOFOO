@@ -1,0 +1,194 @@
+﻿<div class="vista">
+    <div class="page-title">
+        <div class="title_left">
+            <ol class="breadcrumb miga">
+                <li><i class="disabled sg sg-estudios-mercado"></i> <a ui-sref="estudiosmercado">Estudios de mercado</a></li>
+            </ol>
+        </div>
+    </div>
+    <div class="clearfix">
+
+    </div>
+
+    <div class="row">
+        <div class="x_content sin-desborde">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Estudios de mercado</h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content sin-desborde">
+                    
+                    <div echart-graph-barr ng-model="expProf" idgraph="GraphExperienciaProf" stilo="{'height':'350px', 'width':'98%'}" titulo="Por unidad organizacional"
+                         labels="expProf.labels" datos="expProf.datos">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Panel de busquedas-->
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Criterios de b&uacute;squeda</h2>
+                <ul class="nav navbar-right panel_toolbox">
+                    <!-- <li>
+                        <button ng-show="idRol==15" type="button"  ui-sref="estudiomercadoAdd" class="btn btn-success">
+                            <span class="glyphicon glyphicon-plus"></span> Agregar
+                        </button>
+                    </li> -->
+                    <li>
+                        <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <form role="form" class="form-label-left">
+                    <div class="col-xs-6 col-md-6">
+                        <div class="form-group">
+                            <label class="col-xs-12" style="height:30px; line-height:30px; text-align:left; ">Nombre del estudio</label>
+                            <div class="col-xs-10">
+                                <input class="form-control frmSearch" type="text" id="s1" maxlength="50" placeholder="Nombre del estudio" ng-model="est.tema" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-xs-12" style="height:30px; line-height:30px; text-align:left; ">Autores del estudio</label>
+                            <div class="col-xs-10">
+                                <input class="form-control frmSearch" type="text" id="s1" maxlength="50" placeholder="Autores del estudio" ng-model="est.autores" />
+                            </div>
+
+                        </div>
+                        <div class="form-group">
+                            <label class="col-xs-12" style="height:30px; line-height:30px; text-align:left; ">Prop&oacute;sito del estudio</label>
+                            <div class="col-xs-10">
+                                <input class="form-control frmSearch" type="text" id="s1" maxlength="50" placeholder="Prop&oacute;sito del estudio" ng-model="est.proposito" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-xs-12">
+                                Proyecto
+                            </label>
+                            <div class="col-xs-10">
+                                <input type="text" class="form-control" placeholder="Buscar por proyecto" id="usr" name="proyecto" ng-model="est.proyectoNombre" disabled>
+                            </div>
+                            <div class="col-xs-2">
+                                <a class="btn btn-success" ng-click="openProyecto()" title="Buscar por proyecto">
+                                    <span class="glyphicon glyphicon-search"></span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-6 col-md-6">
+                        <div class="form-group">
+                            <label class="col-xs-12">
+                                Unidad organizacional
+                            </label>
+                            <div class="col-xs-12">
+                                <div uo-modal2 ng-model="unidadOselect" ng-change="{{est.claveUnidad = unidadOselect.claveUnidad}}" requerido="false" fecha=""></div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div><br />
+                        <label class="col-xs-12">Estudios con fecha de elaboraci&oacute;n entre el siguiente rango: </label>
+                        <div class="clearfix"></div>
+                        <div class="form-group">
+                            <label class="control-label col-md-12 col-sm-12 col-xs-12">Inicio </label>
+                            <div class="col-md-10 col-sm-10 col-xs-10">
+                                <input placeholder="dd/mm/yyyy" show-button-bar="false" uib-datepicker-popup='dd/MM/yyyy' ng-minlength="8" maxlength="10" datepicker-options="datePicker.FechaOptions" popup-placement="bottom" type="text" class="form-control fechaOnly"
+                                       ng-model="est.fechaInicioComparacion" is-open="open" close-text="Close" />
+                            </div>
+                            <div class="col-xs-2">
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-success" ng-click="open=true; est.busquedaFecha='ok'"><i class="glyphicon glyphicon-calendar"></i></button>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-12 col-sm-12 col-xs-12">T&eacute;rmino </label>
+                            <div class="col-md-10 col-sm-10 col-xs-10">
+                                <input placeholder="dd/mm/yyyy" show-button-bar="false" uib-datepicker-popup='dd/MM/yyyy' ng-minlength="8" maxlength="10" datepicker-options="datePicker.FechaOptions" popup-placement="bottom" type="text" class="form-control fechaOnly"
+                                       ng-model="est.fechaFinalComparacion" is-open="open2" close-text="Close" />
+                            </div>
+                            <div class="col-xs-2">
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-success" ng-click="open2=true; est.busquedaFecha='ok'"><i class="glyphicon glyphicon-calendar"></i></button>
+                                </span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12">
+                        <div class="col-xs-12 col-md-6">
+                            <div class="form-group ">
+                                <br>
+                                <a class="btn btn-success" ng-click="buscar()" title="buscar">
+                                    <span class="glyphicon glyphicon-search"></span> Buscar
+                                </a>
+                                <a class="btn btn-primary" ng-click="reset()" title="Limpiar campos">
+                                    Limpiar
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="x_panel" ng-show="busqueda">
+            <div class="x_content sin-desborde">
+                <div class="x_content sin-desborde">
+                    <!--<div ng-show="registros.length === 0" class="alert advertencia">
+                        No hay registros de Estudios de Mercado.
+                    </div>-->
+                    <div>
+                        <table  id="tableEstudiosMercadoConsulta" dt-column-defs="dtColumnDefs" dt-options="dtOptions" class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" datatable="ng" width="100%">
+                            <thead>
+                                <tr>
+                                    <th class="hidden">Titulo del estudio</th>
+                                    <th data-priority="1">T&iacute;tulo del estudio</th>
+                                    <th>Prop&oacute;sito</th>
+                                    <th>Autores</th>
+                                    <th>Proyecto</th>
+                                    <th>Unidad organizacional</th>
+                                    <th>Fecha de estudio</th>
+                                    <th ng-if="idRol==15" data-priority="2" class="thAjuste text-center">Opciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="registro in estudios | orderBy: 'tema'">
+                                    <td class="hidden">{{registro.tema}}</td>
+                                    <td>
+                                        <a class="link" style="cursor:pointer" ng-click="detalleRegistro(registro.estudiosMercadoId)" title="Mostrar detalle">{{registro.tema | limitTo:100}}</a>
+                                    </td>
+                                    <td>{{registro.proposito | limitTo:120 }}</td>
+                                    <td>                       
+                                        <div ng-repeat="x in registro.listaDeInfo">
+                                            <span class="thCeldaB text-left link cursorPointer" ng-click="openProfile(x.claveUnidad)" style="font-weight:bold;" title="Detalle de empleado">  {{x.claveUnidad}} </span>  {{x.nombreContacto}}<br />
+                                        </div>
+                                    </td>
+                                    <td><a href="" load-proyectos idproyecto="{{registro.proyectoId}}" title="Detalle de proyecto">{{registro.proyectoId}}</a>- {{registro.nombreProyecto | limitTo:75}}</td>
+                                    <td>{{registro.nombreUnidad}}</td>
+                                    <td><a class="hidden">{{registro.fecha | date:"yyyy/MM/dd"}}</a>{{registro.fecha | date:"dd/MM/yyyy"}}</td>
+                                    <td class="text-center" style="width:100px;min-width:100px" ng-if="idRol==15">
+                                        <div>
+                                            <a ng-show="idRol==15" ng-click="editarRegistro(registro.estudiosMercadoId)"
+                                               title="Editar" class="btn btn-warning">
+                                                <i class="glyphicon glyphicon-pencil"></i>
+                                            </a>
+                                            <a ng-show="idRol==15" title="Eliminar" ng-click="eliminaRegistro(registro)" class="btn btn-danger">
+                                                <i class="glyphicon glyphicon-trash"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button ng-show="idRol==15" type="button"  ui-sref="estudiomercadoAdd" class="btn btn-success">
+            <span class="glyphicon glyphicon-plus"></span> Agregar
+        </button>
+    </div>
+</div>

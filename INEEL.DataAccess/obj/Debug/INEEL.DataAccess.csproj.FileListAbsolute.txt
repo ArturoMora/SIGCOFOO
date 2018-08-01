@@ -1,0 +1,16 @@
+C:\SIGCO3\INEEL.DataAccess\bin\Debug\INEEL.DataAccess.dll.config
+C:\SIGCO3\INEEL.DataAccess\bin\Debug\INEEL.DataAccess.dll
+C:\SIGCO3\INEEL.DataAccess\bin\Debug\INEEL.DataAccess.pdb
+C:\SIGCO3\INEEL.DataAccess\bin\Debug\EntityFramework.dll
+C:\SIGCO3\INEEL.DataAccess\bin\Debug\EntityFramework.SqlServer.dll
+C:\SIGCO3\INEEL.DataAccess\bin\Debug\Microsoft.AspNet.Identity.Core.dll
+C:\SIGCO3\INEEL.DataAccess\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.dll
+C:\SIGCO3\INEEL.DataAccess\bin\Debug\EntityFramework.xml
+C:\SIGCO3\INEEL.DataAccess\bin\Debug\EntityFramework.SqlServer.xml
+C:\SIGCO3\INEEL.DataAccess\bin\Debug\Microsoft.AspNet.Identity.Core.xml
+C:\SIGCO3\INEEL.DataAccess\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.xml
+C:\SIGCO3\INEEL.DataAccess\obj\Debug\INEEL.DataAccess.csprojAssemblyReference.cache
+C:\SIGCO3\INEEL.DataAccess\obj\Debug\INEEL.DataAccess.csproj.CoreCompileInputs.cache
+C:\SIGCO3\INEEL.DataAccess\obj\Debug\INEEL.DataAccess.csproj.CopyComplete
+C:\SIGCO3\INEEL.DataAccess\obj\Debug\INEEL.DataAccess.dll
+C:\SIGCO3\INEEL.DataAccess\obj\Debug\INEEL.DataAccess.pdb

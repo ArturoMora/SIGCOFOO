@@ -1,0 +1,51 @@
+﻿<div id="page-wrapper">
+    <br />
+    <div class="row">
+        <div class="col-lg-12">
+            <h2 class="page-header">
+                Activar período de evaluación
+            </h2>
+        </div>
+    </div>
+    <br />
+
+    <div class="row">
+        <div class="col-lg-12" style="vertical-align:top">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+
+                    <label for="periodo">Seleccione un período de evaluación:</label>
+                    <select id="periodoId" name="periodoev" class="form-control"       
+                            ng-options="e.periodo as e.periodo  for e in periodosEV"
+                            ng-model="periodo"
+                            ng-required="true">
+                        <option value="">Seleccione un período de evaluación </option>
+                    </select>
+
+                </div>
+
+                <div class="panel-body" style="vertical-align:top">
+                                    
+                    <div class="form-group">
+                       
+
+                        <button type="submit" ng-click="cargarEmpleados()" class="btn btn-success" style="padding-right:15px">
+                            <i class="glyphicon glyphicon-saved"></i> Actualizar personal para el presente período de evaluación
+                        </button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+

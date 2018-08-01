@@ -1,0 +1,323 @@
+<SCRIPT language=Javascript>
+    function isNumberKey(evt) {
+        var charCode = (evt.which) ? evt.which : event.keyCode
+        if (charCode > 31 && (charCode < 48 || charCode > 57))
+            return false;
+
+        return true;
+    }
+
+</SCRIPT>
+<div class="vista">
+    <div class="page-title">
+        <div class="title_left">
+            <ol class="breadcrumb miga">
+                <li><i class="disabled fa fa-cogs"></i> <a ui-sref="contactosGet">Administraci&oacute;n/Cat&aacute;logos/Contactos</a></li>
+                <li class="active">Agregar</li>
+            </ol>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Informaci&oacute;n general </h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content sin-desborde">
+                    <form name="contactoAddForm" id="form" class="form-horizontal">
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                T&iacute;tulo de la persona
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <select required class="form-control" ng-required="false" name="tituloPersona" ng-model="contacto.tituloId" ng-change="limpiar()"
+                                    ng-options="titulo.tituloId as titulo.nombre for titulo in titulos">
+                                    <option value="">--- Selecciona un opci&oacute;n  ---</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">
+                                Nombre <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input required type="text" name="nombreContacto" ng-model="contacto.nombreContacto" class="form-control" maxlength="200"
+                                />
+                                <span class="error" ng-show="contactoAddForm.nombreContacto.$invalid && contactoAddForm.nombreContacto.$dirty || contactoAddForm.$submitted && contactoAddForm.nombreContacto.$invalid">
+                                    Debes ingresar el nombre del contacto
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">
+                                Apellido Paterno <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input  required type="text" name="paterno" ng-model="contacto.apellidoPaterno" class="form-control" maxlength="200"
+                                />
+                                <span class="error" ng-show="contactoAddForm.paterno.$invalid && contactoAddForm.paterno.$dirty || contactoAddForm.$submitted && contactoAddForm.paterno.$invalid">
+                                    Debes ingresar el Apellido Paterno
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Apellido Materno 
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" name="materno" ng-model="contacto.apellidoMaterno" class="form-control" maxlength="200" />
+                                <span class="error" ng-show="contactoAddForm.materno.$invalid && contactoAddForm.materno.$dirty || contactoAddForm.$submitted && contactoAddForm.materno.$invalid">
+                                    Debes ingresar el Apellido Materno
+                                </span>
+                            </div>
+                        </div>
+                        <!-- <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Pa&iacute;s de origen 
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <select  class="form-control" name="pais" ng-model="contacto.paisOrigenId" ng-change="limpiar()" ng-options="pais.paisId as pais.nombrePais for pais in paises">
+                                    <option value="">--- Selecciona un pa&iacute;s  ---</option>
+                                </select>
+                            </div>
+                        </div> -->
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                            Adjuntar Fotograf&iacute;a
+                        </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input class="input-file form-control col-md-7 col-xs-12" type="file" name="filesGral" id="filesGral" data-buttonName="btn-success"
+                                    ng-click="saveIG();" ng-model="filesGral" onchange="angular.element(this).scope().getFileDetails(this);"
+                                />
+                            </div>
+                        </div>
+
+                        <div class="x_title">
+                            <h2>Informaci&oacute;n laboral</h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Empresa <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <select required class="form-control" name="empresa" ng-model="contacto.empresaId" ng-change="limpiar()" ng-options="empresa.empresaId as empresa.nombreEmpresa for empresa in empresas">
+                                    <option value="">--- Selecciona una Empresa ---</option>
+                                </select>
+                                <span style="font-weight:bold;">
+                                    Si no existe la empresa agregala
+                                </span>
+                                <a style="cursor:pointer; font-weight:bold;" ng-click="gotoagregarempresa()" title="Agregar Empresa">
+                                    <u>
+                                        aqu&iacute
+                                    </u>
+                                </a>
+                                <span class="error" ng-show="contactoAddForm.empresa.$invalid && contactoAddForm.$submitted">
+                                    Debes seleccionar una Empresa
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Unidad Organizacional 
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="row">
+                                    <div class="col-xs-10">
+                                        <input type="text" class="form-control" id="usr" name="unidad" ng-model="ElementoSeleccionado.nombreUnidad" disabled="disabled"
+                                        />
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <button class="btn btn-success" ng-click="openEstructuraOrg(contacto.empresaId)" title="Buscar Unidad Organizacional" ng-disabled="desabilitar">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Puesto 
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" name="puestoC" ng-model="contacto.puesto" class="form-control" maxlength="200" />
+                            </div>
+                        </div>
+                        <div class="x_title">
+                            <h2>Medios de contacto</h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Tel&eacute;fono
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input placeholder="(+52)" onkeypress='return isNumberKey(event)' type="text" name="telefono" ng-model="contacto.telefono"
+                                    class="form-control" maxlength="30" />
+                                <span class="error" ng-show="contactoAddForm.$submitted && contactoAddForm.telefono.$invalid">
+                                    Debes ingresar un n&uacute;mero telef&oacute;nico.
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Extensi&oacute;n
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" onkeypress='return isNumberKey(event)' name="ext" ng-model="contacto.extension" placeholder="23456" maxlength="10"
+                                     class="form-control" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Celular
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input placeholder="045777322450000" onkeypress='return isNumberKey(event)' type="text" name="celular" ng-model="contacto.celular"
+                                    maxlength="30" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Correo 
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input placeholder="correo@empresa.com" maxlength="120" type="email" name="email" ng-model="contacto.correo" pattern="^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,3})+$"
+                                    class="form-control" />
+                                <div role="alert">
+                                    <span class="text-danger" ng-show="contactoAddForm.email.$invalid">
+                                        Correo no valido, ejemplo: correo@empresa.com
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="x_title">
+                            <h2>Direcci&oacute;n</h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Pa&iacute;s <span></span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <select name="pais" class="form-control" ng-model="contacto.paisId" ng-change="cargaEstado()" ng-options="pais.paisId as pais.nombrePais for pais in paises">
+                                    <option value="">--- Selecciona pais ---</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div ng-hide="estados.length > 1">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Estado </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input type="text" name="estadoText" ng-model="contacto.edo" maxlength="150" class="form-control" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div ng-show="estados.length > 1">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Estado</label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <select name="estado" class="form-control" ng-model="contacto.estadoId" ng-change="cargaMunicipio()" ng-options="estado.estadoId as estado.nombreEstado for estado in estados">
+                                        <option value="">- Seleccione estado-</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div ng-hide="estados.length > 1">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Municipio</label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input type="text" name="municipioText" ng-model="contacto.munipio" maxlength="150" class="form-control" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div ng-show="municipios.length > 1">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Municipio</label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <select name="municipio" class="form-control" ng-model="contacto.municipioId" ng-options="municipio.municipioId as municipio.nombreMunicipio for municipio in municipios">
+                                        <option value="">- Seleccione municipio-</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Localidad </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" name="localidad" ng-model="contacto.localidad" maxlength="200" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Colonia </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" name="colonia" ng-model="contacto.colonia" maxlength="150" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Calle </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" name="calle" ng-model="contacto.calle" maxlength="200" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">CP </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" onkeypress='return isNumberKey(event)' name="cp" ng-model="contacto.cp" maxlength="10" class="form-control"
+                                />
+                            </div>
+                        </div>
+                        <div class="x_title">
+                            <h2>Red Social</h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12"><i class="fa fa-facebook"></i></label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" ng-model="contacto.redFacebook" class="form-control" maxlength="100" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12"><i class="fa fa-twitter"></i></label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" ng-model="contacto.redTwitter" class="form-control" maxlength="100" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12"><i class="fa fa-linkedin"></i></label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" ng-model="contacto.redLinkedin" class="form-control" maxlength="100" />
+                            </div>
+                        </div>
+                        <div class="x_title">
+                            <h2>Estado del contacto</h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12"><i class="fa fa fa-user"></i> * </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <select required class="form-control" ng-model='contacto.estadoContacto' ng-options='option.value as option.nombre for option in estadoContactos'>
+                                    <option value="">-   Selecciona estado del contacto   -</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="ln_solid"></div>
+                        <div class="form-group">
+                            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                <div class="">
+                                    <button type="submit" ng-disabled="contactoAddForm.$invalid" class="btn btn-success"  ng-click="AddContacto()">
+                                        <i class="glyphicon glyphicon-saved"></i> Guardar
+                                    </button>
+                                    <button type="submit" class="btn btn-primary" ng-click="validaruta()">
+                                        <span class="fa fa-arrow-left"></span> Regresar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

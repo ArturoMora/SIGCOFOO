@@ -1,0 +1,46 @@
+﻿<div id="page-wrapper">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">Editar Tipo de Convenio</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <form role="form" ng-submit="saveTipoConvenio()" novalidate name="tipoConvenioForm">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                    </div>
+                    <!-- /.panel-heading -->
+                    <div class="panel-body">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label>Nombre:</label>
+                                <input required type="text" ng-model="tipoConvenio.nomTipConv " class="form-control" />
+                            </div>
+                            <div class="form-group">
+                                <label>Descripci&oacute;n:</label>
+                                <input required type="text" ng-model="tipoConvenio.descTipConv " class="form-control" />
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label>Fecha Efectiva:</label>
+                                <input required type="date" ng-model="tipoConvenio.fechaEfectiva" value="{{tipoConvenio.fechaEfectiva | date:'yyyy-MM-dd'}}" class="form-control" />
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-Modificado">
+                    <button type="submit" class="btn btn-success">
+                        <i class="glyphicon glyphicon-saved"></i> Actualizar
+                    </button>
+                    <button type="button" ui-sref="tipoConvenioGet" class="btn btn-primary">
+                        <span class="fa fa-arrow-left"></span> Regresar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,115 @@
+﻿<div class="modal-content">
+    <div class="modal-header">
+        Editar Puesto
+        <button type="button" class="close" ng-click="cancel()" data-dissmiss="modal">x</button>
+    </div>
+    <form role="form" novalidate name="contactoPuestoEditForm">
+        <div class="modal-body">
+            <div class="panel">
+                <!-- /.panel-heading -->
+                <div class="panel-body">
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <label>Instituci&oacute;n o Empresa
+                                <a> *</a>
+                            </label>
+                            <select required class="form-control" name="empresaContacto" ng-model="contactosEditPuesto.empresaId" ng-options="empresa.empresaId as empresa.nombreEmpresa for empresa in empresas">
+                                <option value="">--- Selecciona una Empresa ---</option>
+                            </select>
+                            <span class="error" ng-show="contactoPuestoEditForm.empresaContacto.$invalid && contactoPuestoEditForm.empresaContacto.$dirty || contactoPuestoEditForm.$submitted && contactoPuestoEditForm.empresaContacto.$invalid">
+                                Debes de seleccionar una opci&oacute;n
+                            </span>
+                        </div>
+                        <div class="form-group">
+                            <label>
+                                Unidad organizacional
+                            </label>
+                            <div class="row col-md-12 col-sm-12 col-xs-12">
+                                <div class="row">
+                                    <div ng-class="{'col-xs-11' : contactosEditPuesto.claveUnidad==null, 'col-xs-9': contactosEditPuesto.claveUnidad!=null}">
+                                        <input type="text" class="form-control" name="unidad" ng-model="contactosEditPuesto.unidad.nombreUnidad" disabled="disabled"
+                                        />
+                                    </div>
+                                    <div ng-class="{'col-xs-1' : contactosEditPuesto.claveUnidad==null, 'col-xs-3': contactosEditPuesto.claveUnidad!=null}">
+                                        <button class="btn btn-success" ng-click="openUnidades(contactosEditPuesto.empresaId)" title="Buscar unidad organizacional">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                        </button>
+                                        <button ng-show="contactosEditPuesto.claveUnidad!=null" ng-click="contactosEditPuesto.unidad=null; contactosEditPuesto.claveUnidad=null"
+                                            class="btn btn-danger" title="Eliminar unidad">
+                                            <i class="glyphicon glyphicon-trash"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Puesto
+                                <a> *</a>
+                            </label>
+                            <input type="text" required name="puestoContacto" maxlength="150" ng-model="contactosEditPuesto.puesto" class="form-control"
+                            />
+                            <span class="error" ng-show="contactoPuestoEditForm.puestoContacto.$invalid && contactoPuestoEditForm.puestoContacto.$dirty || contactoPuestoEditForm.$submitted && contactoPuestoEditForm.puestoContacto.$invalid">
+                                Debes ingresar el puesto
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <label>Per&iacute;odo </label>
+                        </div>
+                        <div class="form-group">
+                            <div class="row col-md-6">
+                                <label>Fecha inicio <a> *</a></label>
+                                <p class="input-group">
+                                    <input placeholder="dd/mm/yyyy" show-button-bar="false" uib-datepicker-popup='dd/MM/yyyy' popup-placement="bottom" ng-minlength="8"
+                                        maxlength="10" datepicker-options="datePicker.FechaOptions" type="text" class="form-control"
+                                        ng-model="contactosEditPuesto.fechaInicio" value="{{contactosEditPuesto.fechaInicio | date:'dd-MM-yyyy'}}"
+                                        is-open="open" ng-required="true" close-text="Close" />
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-success" ng-click="open=true">
+                                            <i class="glyphicon glyphicon-calendar"></i>
+                                        </button>
+                                    </span>
+                                </p>
+                                <span class="error" ng-show="contactoPuestoEditForm.fecha.$invalid && contactoPuestoEditForm.$submitted">
+                                    Debes ingresar la fecha
+                                </span>
+                            </div>
+                            <div class="col-md-6" ng-show="!contactosEditPuesto.trabajoActualModal">
+                                <label>Fecha t&eacute;rmino <a> *</a></label>
+                                <p class="input-group">
+                                    <input placeholder="dd/mm/yyyy" show-button-bar="false" uib-datepicker-popup='dd/MM/yyyy' ng-minlength="8" maxlength="10"
+                                        datepicker-options="datePicker.FechaOptions" popup-placement="bottom" type="text" class="form-control"
+                                        ng-model="contactosEditPuesto.fechaFinal" value="{{contactosEditPuesto.fechaFinal | date:'dd-MM-yyyy'}}"
+                                        is-open="open2" ng-required="!contactosEditPuesto.trabajoActualModal" close-text="Close" />
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-success" ng-click="open2=true">
+                                            <i class="glyphicon glyphicon-calendar"></i>
+                                        </button>
+                                    </span>
+                                </p>
+                            </div>
+                            <!-- <span class="error" ng-show="contactosEditPuesto.fechaInicio > contactosEditPuesto.fechaFinal && !contactosEditPuesto.trabajoActualModal && contactosEditPuesto.fechaFinal!=null">
+                                La fecha inicio no debe ser mayor a la fecha final
+                            </span> -->
+                        </div>
+                        
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 col-sm-3 col-xs-12">Trabaja aqu&iacute; actualmente &nbsp;</label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input type="checkbox" class="btn btn-info btn-circle" title="&iquest;Agregar fecha de término al puesto?" ng-model="contactosEditPuesto.trabajoActualModal"
+                            />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-success" ng-click="ok()" ng-disabled="contactoPuestoEditForm.$invalid">
+                <i class="glyphicon glyphicon-saved"></i> Actualizar</button>
+            <button type="button" class="btn btn-primary" ng-click="cancel()">
+                <span class="fa fa-arrow-left"></span> Regresar</button>
+        </div>
+    </form>
+</div>

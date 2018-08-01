@@ -1,0 +1,279 @@
+﻿<div class="vista">
+    <div class="page-title">
+        <div class="title_left">
+            <ol class="breadcrumb miga">
+                <li>
+                    <i class="disabled sg sg-inventario-rh"></i>
+                    <a ui-sref="perfilcurricularcolectivo">Inventario RH/Perfil curricular colectivo</a>
+                </li>
+            </ol>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="x_panel">
+                <form name="ValidForm" id="form" class="form-horizontal">
+                    <div class="x_content sin-desborde">
+
+                        <div class="row hidden-print">
+                            <div class="col-md-12">
+                                <div class="col-lg-12">
+                                    <label>Fecha:</label>
+                                </div>
+                                <div class="col-md-3 col-sm-4 col-xs-6">
+                                    <input show-button-bar="false" ng-minlength="8" maxlength="10" uib-datepicker-popup='dd/MM/yyyy' datepicker-options="datePicker06.FechaOptions"
+                                        popup-placement="bottom" type="text" class="form-control" ng-change="cambiafecha()" name="fechach"
+                                        ng-model="fechach" is-open="open" ng-required="true" close-text="Close" />
+                                </div>
+                                <div class="col-lg-9 col-md-8 col-xs-6">
+                                    <span>
+                                        <button type="button" class="btn btn-success" ng-click="open=true">
+                                            <i class="glyphicon glyphicon-calendar"></i>
+                                        </button>
+                                        <!--<button type="button" class="btn btn-success" ng-click="exportGrafica()" ng-disabled="error">PDF</button>-->
+                                    </span>
+                                    <span>
+                                        <a class="btn btn-success" title="Descargar" ng-click="error || exportGrafica()" ng-disabled="error">
+                                            <i class="fa fa-download"></i> Descargar PDF
+                                        </a>
+                                        <a class="btn btn-success" title="Imprimir" onclick="window.print()">
+                                            <i class="fa fa-print"></i>
+                                        </a>
+                                    </span>
+                                    <span ng-show="ValidForm.fechach.$dirty &&  ValidForm.fechach.$invalid" class="error">Formato inválido 'dd/MM/yyyy'</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 col-lg-12 col-xs-12 sin-desborde">
+
+                                <div class="form-group col-xs-12">
+                                    <div class="form-group col-xs-4">
+                                    </div>
+                                    <div class="form-group col-xs-4">
+                                        <table class="table table-hover table-condensed dt-responsive" cellspacing="0" id="tablaPadre">
+                                            <!--<tr>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>-->
+                                            <tr>
+                                                <td>{{resultados.investigadores}}</td>
+                                                <td>Investigadores vigentes</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{resultados.becariointerno}}</td>
+                                                <td>Becarios internos</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{resultados.experienciaprom}}</td>
+                                                <td>Experiencia promedio</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{resultados.edadprom}}</td>
+                                                <td>A&ntilde;os de edad (promedio)</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <div class="form-group col-xs-4">
+                                        <font class="visible-print">{{fechach | date: 'dd/MM/yyyy'}}</font>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                </div>
+                                <div class="col-md-1 hidden-xs"> </div>
+                                <div class="col-md-5 col-sm-11 col-xs-11">
+                                    <div class="x_panel">
+                                        <div class="x_content">
+                                            <div id="nv1" echart-graph ng-model="expProf" idgraph="GraphExperienciaProf" stilo="{'height':'350px', 'width':'98%'}" titulo="Experiencia profesional"
+                                                labels="expProf.labels" datos="expProf.datos"></div>
+                                            <!--<div id="GraphExperienciaProf" style="height:350px;width:98%;"></div>-->
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-5 col-sm-11 col-xs-11">
+                                    <div class="x_panel">
+                                        <div class="x_content">
+                                            <div id="nv2" echart-graph ng-model="edades" idgraph="Edades" stilo="{'height':'350px', 'width':'98%'}" titulo="Edades" labels="edades.labels"
+                                                datos="edades.datos"></div>
+                                            <!--<div id="GraphEdad" style="height:350px;width:98%;"></div>-->
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-xs-12">
+                                    <div class="form-group col-xs-4" ng-show="false">
+                                        <table class="table table-hover table-condensed dt-responsive" cellspacing="0" id="hijo1-1">
+                                            <thead>
+                                                <tr>
+                                                    <th>Experiencia profesional</th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+
+                                                <tr>
+                                                    <td>M&aacute;s de 40 años</td>
+                                                    <td>{{resultados.masde40Experiencia}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>De 30.1 a 40 años</td>
+                                                    <td>{{resultados.de30A40AniosExperiencia}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>De 20.1 a 30 años</td>
+                                                    <td>{{resultados.de20A30AniosExperiencia}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>De 10.1 a 20 años</td>
+                                                    <td>{{resultados.de10A20AniosExperiencia}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Menor de 10 años</td>
+                                                    <td>{{resultados.menorde10AniosExperiencia}}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="form-group col-xs-4">
+                                    </div>
+                                    <div class="form-group col-xs-4" ng-show="false">
+                                        <table class="table table-hover table-condensed dt-responsive" cellspacing="0" id="hijo1-2">
+                                            <thead>
+                                                <tr>
+                                                    <th>Edad</th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>M&aacute;s de 50 años</td>
+                                                    <td>{{resultados.edadmasde50}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>De 41 a 50 años</td>
+                                                    <td>{{resultados.edad41A50}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>De 31 a 40 años</td>
+                                                    <td>{{resultados.edad31A40}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>De 21 a 30 años</td>
+                                                    <td>{{resultados.edad21A30}}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                </div>
+                                <div class="form-group col-xs-12">
+                                    <div class="form-group col-xs-4">
+                                        <table class="table table-hover table-condensed dt-responsive" cellspacing="0" id="hijo2-1">
+                                            <thead>
+                                                <tr>
+                                                    <th>Idiomas acreditados</th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-repeat="Obj in resultados.idiomas.result">
+                                                    <td>{{Obj.idioma}}</td>
+                                                    <td>{{Obj.cantidad}}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="form-group col-xs-4">
+                                        <table class="table table-hover table-condensed dt-responsive" cellspacing="0" id="hijo2-2">
+                                            <thead>
+                                                <tr>
+                                                    <th>Distribución por plaza</th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-repeat="Obj in resultados.plazas">
+                                                    <td ng-if="Obj.plaza == 'PALMIRA   '">Cuernavaca</td>
+                                                    <td ng-if="Obj.plaza != 'PALMIRA   ' && Obj.plaza!=null" class="text-capitalize"> {{Obj.plaza}} </td>
+                                                    <td ng-if="Obj.plaza == null">No Asignado</td>
+                                                    <td>{{Obj.cantidad}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Veracruz</td>
+                                                    <td>0</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Tabasco</td>
+                                                    <td>0</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Monterrey</td>
+                                                    <td>0</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="form-group col-xs-4">
+                                        <table class="table table-hover table-condensed dt-responsive" cellspacing="0" id="hijo2-3">
+                                            <thead>
+                                                <tr>
+                                                    <th>Nivel</th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-repeat="Obj in resultados.niveles">
+                                                    <td ng-if="Obj.nivel != null">{{Obj.nivel}}</td>
+                                                    <td ng-if="Obj.nivel != null">{{Obj.cantidad}}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 col-lg-12 col-xs-12 sin-desborde">
+                                    <table id="hijo3-1" class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" width="100%">
+                                        <thead>
+                                            <tr>
+                                                <th></th>
+                                                <th style="font-weight:bold">Nivel académico</th>
+                                                <th class="text-center" style="font-weight:bold">N&uacute;mero</th>
+                                                <th class="text-center" style="font-weight:bold">Porcentaje</th>
+                                                <th class="text-center" style="font-weight:bold;width:60px">Sexo (M)</th>
+                                                <th class="text-center" style="font-weight:bold;width:60px">Sexo (F)</th>
+                                                <th class="text-center" style="font-weight:bold">Edad promedio</th>
+                                                <th style="font-weight:bold; width:150px">Experiencia promedio (a&ntilde;os)</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="Obj in resultados.nivelAcademico">
+                                                <td></td>
+                                                <td>{{Obj.formacion}}</td>
+                                                <td class="text-center">{{Obj.cantidad}}</td>
+                                                <td class="text-center">{{Obj.porcentaje}}</td>
+                                                <td class="text-center">
+                                                    {{Obj.sexom}}
+                                                </td>
+                                                <td class="text-center">
+                                                    {{Obj.sexof}}
+                                                </td>
+                                                <td class="text-center">{{Obj.edad}}</td>
+                                                <td class="text-center">{{Obj.experiencia}}</td>
+
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+
+                            </div>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

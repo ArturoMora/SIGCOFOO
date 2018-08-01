@@ -1,0 +1,77 @@
+﻿<!DOCTYPE html>
+<html lang="es-mx" ng-app="ineel">
+<head>
+    <title>SIGCO</title>
+    <meta charset="utf-8">
+
+    <link rel="stylesheet" href="Content/stylesIndex.min.css">
+
+	    <!--[if lt IE 9]>
+      <script src="Scripts/jquery1.11.0.js"></script>
+      <script src="Scripts/es5-shim.min.js"></script>
+      <script>
+        document.createElement('ui-select');
+        document.createElement('ui-select-match');
+        document.createElement('ui-select-choices');
+      </script>
+    <![endif]-->
+	
+    <script src="Scripts/scriptsIndex.min.js"></script>
+    <style>
+        .nav.navbar-nav > li > a {
+            color: white !important;
+        }
+
+        body {
+            background-color: lightgrey;
+        }
+    </style>
+</head>
+<body data-ng-controller="indexController">
+
+        <div class="headerFull">
+
+        </div>
+        <header class="clase-general">
+            <div class="navbar2">
+                <div class="floatLeft logo">
+                    <a class="navbar-brand" href="#"><img style="max-height:180%" class="img-responsive" src="images/logo_sigco.png" /></a>
+                </div>
+                <div class="navbar-brand sistema">
+                    <a href="#">
+                        <span class="titulos">Gesti&oacute;n del conocimiento (SIGCO)</span></a>
+                </div>
+                <div class="derecha" data-ng-show="!authentication.isAuth">
+                        <a class="" ui-sref="login" style="cursor:pointer">
+                            <span class="titulos">
+                                Autentif&iacute;cate</span>
+                                <span class="glyphicon glyphicon-user"></span>
+</a>
+                </div>
+            </div>
+            <!--<nav class="navbar navbar-fixed-top navbar-inverse">
+                <div style="min-width:944px;">
+
+                </div>
+            </nav>-->
+        </header>
+
+        <div class="clase-general vistaPrincipal">
+            <div ui-view>
+
+            </div>
+        </div>
+
+        <footer class="contentFooter">
+            <div class="clase-general">
+                <div class="fondoFooter">
+                    <div ng-include="'app/vistasGenericas/footer.html'">
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+
+
+</body>
+</html>

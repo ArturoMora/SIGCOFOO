@@ -1,0 +1,146 @@
+﻿<div class="vista">
+    <div class="page-title">
+        <div class="title_full">
+            <ol class="breadcrumb miga">
+                <li><i class="glyphicon glyphicon-file"></i> <a ui-sref="fichapersonal.daexterno({seccion:'daexterno'})">Derecho de autor</a></li>
+                <li class="active">Detalles</li>
+            </ol>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-8 col-sm-8 col-xs-12">
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+                    <label class="detalle col-xs-12 " title="Nombre">
+                        {{derechoautor.titulo}}
+                    </label>
+                    <label class="tit col-xs-12">
+                        Registro indautor
+                    </label>
+                    <label class="cont col-xs-12 colorTit">
+                        {{derechoautor.certificado}}
+                    </label>
+                    <label class="tit col-xs-12">
+                        Fecha de expedici&oacute;n
+                    </label>
+                    <label class="cont col-xs-12" title="Tipo de software">
+                        {{derechoautor.fechaExpedicion | date: 'dd/MM/yyyy'}}
+                    </label>
+                    <label class="tit col-xs-12">
+                        Rama
+                    </label>
+                    <label class="cont col-xs-12">
+                        {{derechoautor.rama.descripcion}}
+                    </label>
+                    <label class="tit col-xs-12">
+                        S&iacute;ntesis
+                    </label>
+                    <label class="cont col-xs-12">
+                        {{derechoautor.sintesis}}
+                    </label>
+                    <label ng-if="derechoautor.proyecto!=null" class="tit col-xs-12">
+                        Proyecto relacionado
+                    </label>
+                    <label ng-if="derechoautor.proyecto!=null" class="cont col-xs-12">
+                        <a href="" load-proyectos idproyecto="{{derechoautor.proyecto.proyectoId }}" title="Detalle de proyecto">{{derechoautor.proyecto.proyectoId }}</a>- {{derechoautor.proyecto.nombre}}
+                    </label>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-4 col-sm-4 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Evidencia</h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content sin-desborde">
+                    <form name="fromfa" id="form" class="form-horizontal">
+                        <div class="form-group">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Archivo(s) adjunto(s):</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-hide="regFile">
+                                        <td>
+
+                                            <!--  <div class="form-group" ng-hide="regFile"> -->
+                                            <span class="fa fa-download"></span>&nbsp;&nbsp;<a href="/Descargas.html#/q/{{derechoautor.adjuntoId | encriptar}}"
+                                                                                               class="linkTabla" target="_blank">Descargar Archivo</a>
+                                            <!--   </div>  -->
+
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="alert advertencia col-xs-12" ng-if="derechoautor.estadoFlujoId==2">
+                                <span class="glyphicon glyphicon-info-sign"></span> El registro se encuentra en <strong> Revisi&oacute;n </strong>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="alert aprobado col-xs-12" ng-if="derechoautor.estadoFlujoId==3">
+                                <span class="glyphicon glyphicon-info-sign"></span> El registro est&aacute; <strong> Aprobado </strong>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8 col-sm-8 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Autores del derecho de autor</h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content sin-desborde">
+                    <label>Autores internos</label><br />
+                    <table class="table table-hover table-striped table-condensed dt-responsive" width="100%">
+                        <thead>
+                            <tr>
+                                <th>N&uacute;m empleado</th>
+                                <th data-priority="1">Nombre de empleado</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="autor in derechoautor.autores | filter : {esExterno : false}" ng-click="openProfile(autor.clavePersona)" title="Detalle de empleado">
+                                <td><a class="linkTabla"> {{autor.clavePersona}} </a> </td>
+                                <td>{{autor.nombre}}</td>
+                            </tr>
+                        </tbody>
+                    </table><br />
+                    <label>Autores externos</label><br />
+                    <table class="table table-hover table-striped table-condensed dt-responsive" width="100%">
+                        <thead>
+                            <tr>
+                                <th data-priority="1">Nombre</th>
+                                <th>Organización</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="autor in derechoautor.autores | filter : {esExterno: true }">
+                                <td>{{autor.nombre}}</td>
+                                <td>{{autor.institucion}}</td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <button type="submit" ng-click="volver()" class="btn btn-primary">
+                <span class="fa fa-arrow-left"></span> Regresar
+            </button>
+        </div>
+    </div>
+</div>

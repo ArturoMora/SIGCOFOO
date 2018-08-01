@@ -1,0 +1,272 @@
+<div class="vista">
+	<div class="page-title">
+		<div class="title_left">
+			<ol class="breadcrumb miga">
+				<li><i class="sg sg-clientes"></i> <a ui-sref="propuestasiniciativason"> Clientes potenciales</a></li>
+			</ol>
+
+		</div>
+	</div>
+	<div class="clearfix"></div>
+	<div class="row">
+		<div  class="col-xs-12">
+			<ul class="nav nav-tabs">
+				<li class="active">
+					<a ng-click="obtenerinformacion(1)" data-toggle="tab" style="cursor:pointer">Propuestas</a>
+				</li>
+				<li>
+					<a ng-click="obtenerinformacion(2)" data-toggle="tab" style="cursor:pointer">Iniciativas</a>
+				</li>
+				<li>
+					<a ng-click="obtenerinformacion(3)" data-toggle="tab" style="cursor:pointer">Oportunidades de Negocio</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div class="clearfix"></div>
+	<div class="row">
+		<div class="col-md-12 col-sm-12 col-xs-12">
+			<div class="x_panel">
+				
+				<div class="x_content sin-desborde">
+					<!-- Tab panels -->
+					<div class="tab-content">
+						<!--PROPUESTAS-->
+						<div ng-show="opcion == 1" class="tab-pane fade in active">
+						    <div class="row">
+						        
+						        <div class="col-xs-2 col-md-2 col-lg-2">
+						            <h2>Seleccione año</h2>
+						        </div>
+						        <div class="col-xs-6 col-md-6 col-lg-6">
+						            <select ng-change="obtenerinformacion(opcion)" class="form-control" name="anios" ng-model="anioselected" ng-options="anio for anio in anios">
+						                
+						            </select>
+						        </div>
+						        <br>
+						    </div>
+							<div class="row">
+								<div class="panel">
+									<div class="panel-body">
+										<div ng-show="propuestas.length>0" class="col-xs-12">
+											<table id="CRpropuestasiniciativason" datatable="ng" class="display" width="100%" dt-options="dtOptions">
+												<thead>
+                                                    <tr>
+                                                        <th data-priority="1">N&uacute;mero de propuesta</th>
+                                                        <th>Nombre de propuesta</th>
+                                                        <th>Monto estimado</th>
+														<th>Fecha de registro</th>
+														<th>Cliente</th>
+                                                        <th>Unidad organizacional</th>
+                                                    </tr>
+												</thead>
+												<tbody>
+													<tr ng-repeat="propuesta in propuestas">
+														<td>{{propuesta.propuestaId}}</td>
+														<td>{{propuesta.titulo}}</td>
+														<td style="text-align:right">{{propuesta.costos | currency}}</td>
+														<td><a class="hidden">{{propuesta.fecha | date: 'yyyy/MM/dd'}}</a>{{propuesta.fecha | date :'dd/MM/yyyy'}}</td>
+														<td>{{propuesta.empresa.nombreEmpresa}}</td>
+														<td>{{propuesta.unidadOrganizacional.nombreUnidad}}</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+									    <div ng-show="propuestas.length>0" class="col-xs-12">
+									        <a class="btn btn-success" ng-click="generarpdfpropuestas()">
+									            <span class="fa fa-download"></span> Descargar PDF
+									        </a>
+									    </div>
+                                        <div class="alert advertencia" ng-show="propuestas.length<=0">
+                                            No hay informaci&oacute;n registrada
+                                        </div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!--INICIATIVAS-->
+						<div ng-show="opcion == 2" class="tab-pane fade in active">
+                            <div class="row">
+                                <div class="col-xs-2 col-md-2 col-lg-2">
+                                    <h2>Seleccione año</h2>
+                                </div>
+						        <div class="col-xs-6 col-md-6 col-lg-6">
+						            <select ng-change="obtenerinformacion(opcion)" class="form-control" name="anios" ng-model="aniosiniciativasselected" ng-options="anio for anio in aniosiniciativas">
+						                
+						            </select>
+						        </div>
+						        <br>
+						    </div>
+							<div class="row">
+								<div class="panel">
+									<div class="panel-body">
+										<div ng-show="iniciativas.length>0" class="col-xs-12">
+											<table id="CRpropuestasiniciativasoniniciativas" datatable="ng" class="display" width="100%" dt-options="dtOptions">
+												<thead>
+                                                    <tr>
+                                                        <th data-priority="1">Cliente</th>
+                                                        <th>N&uacute;mero</th>
+														<th>T&iacute;tulo</th>
+														<th>Monto<br> estimado</th>
+														<th>Fecha</th>
+                                                        <th>Unidad organizacional</th>
+                                                    </tr>
+												</thead>
+												<tbody>
+													<tr ng-repeat="iniciativa in iniciativas">
+														<td>{{iniciativa.empresa.nombreEmpresa}}</td>
+														<td>{{iniciativa.claveEmpIniciativa}}</td>
+														<td>{{iniciativa.titulo}}</td>
+														<td style="text-align:right">{{iniciativa.costos| currency}}</td>
+														<td><a class="hidden">{{iniciativa.fecha | date: 'yyyy/MM/dd'}}</a>{{iniciativa.fecha | date:'dd/MM/yyyy'}}</td>
+														<td>{{iniciativa.unidadOrganizacional.nombreUnidad}}</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+									    <div ng-show="iniciativas.length>0" class="col-xs-12">
+									        <a class="btn btn-success" ng-click="generarpdfiniciativas()">
+									            <span class="fa fa-download"></span> Descargar PDF
+									        </a>
+									    </div>
+                                        <div class="alert advertencia" ng-show="iniciativas.length<=0">
+                                            No hay informaci&oacute;n registrada
+                                        </div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!--OPORTUNIDADES DE NEGOCIO-->
+						<div ng-show="opcion == 3" class="tab-pane fade in active">
+						    <div class="row">
+                                <div class="col-xs-2 col-md-2 col-lg-2">
+                                    <h2>Seleccione año</h2>
+                                </div>
+						        <div class="col-xs-6 col-md-6 col-lg-6">
+						            <select ng-change="obtenerinformacion(opcion)" class="form-control" name="anios" ng-model="aniosonselected" ng-options="anio for anio in anioson">
+						                
+						            </select>
+						        </div>
+								<br>
+						    </div>
+							<div class="row">
+								<div class="panel">
+									<div class="panel-body">
+										<div ng-show="oportunidades.length>0"  class="col-xs-12">
+                                            <table id="CRpropuestasiniciativasoportunidades" datatable="ng" class="display" width="100%" dt-options="dtOptions">
+                                                <thead>
+                                                    <tr>
+                                                        <th data-priority="1">Contacto</th>
+                                                        <th>N&uacute;mero</th>
+														<th>Descripci&oacute;n</th>
+														<th>Fecha</th>
+                                                        <th>Unidad organizacional</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr ng-repeat="oportunidad in oportunidades">
+                                                        <td>{{oportunidad.empresa.nombreEmpresa}}</td>
+                                                        <td>{{oportunidad.oportunidadNegocioId}}</td>
+														<td >{{oportunidad.nombreOportunidad}}</td>
+														<td>{{oportunidad.fechaRegistro | date:'dd/MM/yyyy'}}</td>
+                                                        <td>{{oportunidad.nombreUnidad}}
+                                                            <!-- <label ng-click="openProfile(oportunidad.claveEmpleado)" title="Detalle de empleado" class="link" style="cursor:pointer">{{oportunidad.claveEmpleado}}</label>
+                                                            - {{oportunidad.autor}} -->
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+										</div>
+										<div ng-show="oportunidades.length>0" class="col-xs-12">
+											<a  class="btn btn-success" ng-click="generarpdfon()">
+												<span class="fa fa-download"></span> Descargar PDF
+											</a>
+										</div>
+									    <div class="alert advertencia" ng-show="oportunidades.length<=0">
+									        No hay informaci&oacute;n registrada
+									    </div>
+                                    </div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+	<div class="row">
+		<div class="col-xs-12" style="visibility: hidden;">
+			<table id="propuestas" class="table table-hover table-striped table-condensed wrap" ng-show="propuestaspdf">
+				<thead>
+                    <tr>
+                        <th>N&uacute;mero</th>
+                        <th>Nombre del propuesta</th>
+                        <th>Monto estimado</th>
+                        <th>Fecha</th>
+                        <th>Gerencia</th>
+                    </tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="propuesta in propuestaspdf">
+						<td>{{propuesta.propuestaId}}</td>
+						<td>{{propuesta.titulo}}</td>
+						<td style="text-align:right">{{propuesta.costos | currency}}</td>
+						<td>{{propuesta.fecha | date :'dd/MM/yyyy'}}</td>
+						<td>{{propuesta.unidadOrganizacional.nombreUnidad}}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-12" style="visibility: hidden;">
+			<table id="iniciativas" class="table table-hover table-striped table-condensed wrap" ng-show="iniciativaspdf">
+				<thead>
+                    <tr>
+                        <th>Cliente</th>
+                        <th>N&uacute;mero</th>
+                        <th>T&iacute;tulo</th>
+                        <th style="text-align:right">Monto<br> estimado</th>
+                        <th>Fecha</th>
+                        <th>Gerencia</th>
+                    </tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="iniciativa in iniciativaspdf">
+						<td>{{iniciativa.empresa.nombreEmpresa}}</td>
+						<td>{{iniciativa.claveEmpIniciativa}}</td>
+						<td>{{iniciativa.titulo}}</td>
+						<td>{{iniciativa.costos| currency}}</td>
+						<td>{{iniciativa.fecha | date:'dd/MM/yyyy'}}</td>
+						<td>{{iniciativa.unidadOrganizacional.nombreUnidad}}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-12" style="visibility: hidden;">
+			<table id="oportunidades" class="table table-hover table-striped table-condensed wrap" ng-show="oportunidadespdf">
+				<thead>
+                    <tr>
+                        <th>Contacto</th>
+                        <th>N&uacute;mero</th>
+                        <th>Fecha</th>
+                        <th>Descripci&oacute;n</th>
+                        <th>Empleado</th>
+                    </tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="oportunidad in oportunidadespdf">
+						<td>{{oportunidad.empresa.nombreEmpresa}}</td>
+						<td>{{oportunidad.oportunidadNegocioId}}</td>
+						<td>{{oportunidad.fechaRegistro | date:'dd/MM/yyyy'}}</td>
+						<td>{{oportunidad.nombreOportunidad}}</td>
+						<td>{{oportunidad.nombreInvestigador}}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>

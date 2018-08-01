@@ -1,0 +1,80 @@
+﻿<!-- page content -->
+<div class="vista">
+
+    <div class="page-title">
+        <div class="title_left">
+            <ol class="breadcrumb miga">
+                <li><i class="glyphicon glyphicon-file"></i> <a ui-sref="carteraPropuestas">Propuestas de innovaci&oacute;n/ Mis propuestas</a></li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="clearfix"></div>
+    <div class="row">
+   
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="x_panel">
+                <div class="x_content">
+                    <div ng-if="busqueda">
+                        <table id="GITablaGetcarteraPropuestas" class="display responsive" dt-column-defs="dtColumnDefs" dt-options="dtOptions"  cellspacing="0" datatable="ng" style="width: 100%;" >
+                            <thead>
+                                <tr>
+                                    <th>Clave propuesta</th>
+                                    <th>Fecha registro</th>
+                                    <!--<th class="ng-hide">Fecha aprobaci&oacute;n </th>-->
+                                    <th>Tipo propuesta</th>
+                                    <!--<th class="ng-hide">Nombre técnico</th>-->
+                                    <th>Producto/Servicio propuesto</th>
+                                    <th >Estado registro</th>
+                                    <th>Proponente</th>
+                                    <!--<th>Nombre proponente</th>-->
+                                    <th>Empresa</th>
+                                    <!--<th class="ng-hide" >Segmento mercado</th>
+                                    <th class="ng-hide">Gerencia</th>-->
+                                    <th data-priority="1" class="thAjuste text-center">Opciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="registro in registros">
+                                    <td  class="sin-desborde"><a class="linkTabla" ng-click="setVariable('busquedaMisPropuestas', propuesta);setGlobalID(registro.id)" ui-sref="carteraPropuestasDetails" title="Detalle">{{registro.propuestaId}}</a></td>
+                                    <td  class="sin-desborde">{{registro.fechaRegistro=== null ? 'Dato no disponible' : registro.fechaRegistro | date:"dd/MM/yyyy"}}</td>
+                                    <!--<td  class="sin-desborde ng-hide">{{registro.fechaValidacion=== null ? 'Dato no disponible' : registro.fechaValidacion | date:"dd/MM/yyyy"}}</tdclass="sin-desborde">-->
+                                    <td class="sin-desborde">{{registro.propuestaInterna==true? 'Interna' : 'Externa'}}</td>
+                                    <!--<td  class="sin-desborde ng-hide">{{registro.nombreTecnico}}</td>-->
+                                    <td  class="sin-desborde">{{registro.productoServicio}}</td>
+                                    <td  class="sin-desborde">{{registro.estadoFlujoNombre}}</td>
+                                    <td class="sin-desborde"><a ng-click="openProfile(registro.claveProponentePrincipal)" title="Detalle de empleado" class="linkTabla">{{registro.claveProponentePrincipal}}</a>- {{registro.proponente}}</td>
+                                    <!--<td style="max-width:50px"class="sin-desborde" ng-click="openProfile(registro.claveProponentePrincipal)" title="Detalle de empleado" class="">{{registro.proponente}}</td>-->
+                                    <td class="sin-desborde">{{registro.empresaPromotorNombre}}</td>
+                                    <!--<td class="sin-desborde ng-hide">{{registro.segmentoMercadoNombre}}</td>
+                                    <td class="sin-desborde ng-hide">{{registro.nombreUnidadOrganizacional}}</td>-->
+                                    <td class="text-center sin-desborde">
+                                        <div ng-show="registro.estadoFlujoId==1">
+                                            <a ng-click="setVariable('busquedaMisPropuestas', propuesta);setGlobalID(registro.id)" ui-sref="carteraPropuestaEdit" title="Editar" class="btn btn-warning">
+                                                <i class="glyphicon glyphicon-pencil"></i>
+                                            </a>
+                                            <a title="Eliminar" ng-if="registro.estadoFlujoId==1" ng-really-click="delete(registro,registro.id)" class="btn btn-danger">
+                                                <i class="glyphicon glyphicon-trash"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        </div>
+                    <button ng-show="registros.length >= 0 || registros==null" type="button" ui-sref="carteraPropuestaAdd" class="btn btn-success">
+                        <span class="glyphicon glyphicon-plus"></span> Agregar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+
+</script>
+<!-- end page content -->
+<!--registros: {{registros | filter: obj | json}}-->

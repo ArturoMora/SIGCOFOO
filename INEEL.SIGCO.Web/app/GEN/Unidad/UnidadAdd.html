@@ -1,0 +1,68 @@
+﻿<div>
+   
+    <div >
+        <div id="page-wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h2 class="page-header">Agregar una nueva unidad organizacional</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                        </div>
+                        <div class="panel-body">
+                            <form role="form" name="UnidadForm">
+                           
+                                <div class="form-group">
+                                    <label for="usr">Clave unidad:<a style="color:red;font-weight:bold">*</a></label>
+                                    <input type="text" class="form-control" id="claveunidad" ng-model="registro.claveunidad" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="usr">Unidad:<a style="color:red;font-weight:bold">*</a></label>
+                                    <input type="text" class="form-control" id="nombreunidad" ng-model="registro.nombreunidad" required>
+                                </div>                             
+
+                                <div class="form-group">
+                                    <label for="tipounidad">Tipo de unidad organizacional: <a style="color:red;font-weight:bold">*</a></label>
+                                    <select id="tipounidad" name="tipounidad"  class="form-control" ng-model="registro.tipounidadselect" ng-options="e.tipoUnidadID as e.descripcion  for e in tipounidad" ng-required="true">
+                                            <option value="">Seleccione el tipo de la unidad a registrar</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="ubicacion">Seleccione le lugar donde se localizará el área: <a style="color:red;font-weight:bold">*</a></label>                                 
+                                    <select id="ubicacion" name="ubicacion" class="form-control" ng-model="registro.ubicacionselect"  ng-options="e.ubicacionAreaID as e.noEdificio  for e in ubicacion" ng-required="true">
+                                            <option value="">Seleccione la ubicación del área</option>
+                                    </select>                                   
+                                </div>
+                               
+                                <div class="form-group">
+                                   <label for="usr">Responsable:<a style="color:red;font-weight:bold">*</a></label>
+                                   <input type="text" class="form-control" id="claveresponsable" ng-model="registro.claveresponsable" required>
+                                </div>
+                               
+                                <div class="form-group">
+                                    <label for="usr">Está área depende de:<a style="color:red;font-weight:bold">*</a></label>
+                                    <input type="text" class="form-control" id="padre" ng-model="registro.padre" required>
+                                </div>      
+                                
+                                                        
+                            </form>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" ng-click="save()" class="btn btn-success" style="padding-right:15px">
+                            <i class="glyphicon glyphicon-saved"></i> Guardar
+                        </button>
+                        <button type="button" ui-sref="unidad" class="btn btn-default" style="padding-right:15px">
+                            <span class="fa fa-arrow-left"></span> Regresar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

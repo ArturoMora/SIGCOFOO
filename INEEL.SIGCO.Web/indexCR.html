@@ -1,0 +1,720 @@
+﻿<!DOCTYPE html>
+<html lang="es-mx" ng-app="ineelCR">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta http-equiv="Expires" content="-1">
+    <meta http-equiv="Last-Modified" content="0">
+    <meta http-equiv="Cache-Control" content="no-cache, mustrevalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+
+    <title>Capital relacional</title>
+    <!-- build:css Content/stylesCR.min.css -->
+    <!-- inject:css -->
+    <!-- Bootstrap -->
+    <link href="vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="vendors/nprogress/nprogress.css" rel="stylesheet">
+    <!-- iCheck -->
+    <link href="vendors/iCheck/skins/flat/green.css" rel="stylesheet">
+    <!-- bootstrap-progressbar -->
+    <link href="vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
+    <!-- JQVMap -->
+    <link href="vendors/jqvmap/dist/jqvmap.min.css" rel="stylesheet" />
+    <!-- bootstrap-daterangepicker -->
+    <link href="vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+    <!-- Custom Theme Style -->
+    <link href="Content/custom.css" rel="stylesheet">
+
+
+    <!--Mensajes Toastr-->
+    <link href="Content/toastr.css" rel="stylesheet" />
+    <!--Tablas responsivas-->
+    <link href="Content/EstilosPropios/jquery.dataTablesINEEL.css" rel="stylesheet" />
+    <link href="Content/DataTables/css/dataTables.responsive.css" rel="stylesheet" />
+    <!--Estilos propios-->
+    <link href="Content/EstilosPropios/StyleAuthorize.css" rel="stylesheet" />
+    <link href="Content/EstilosPropios/StyleModulos.css" rel="stylesheet" />
+    <!--Estilos propios del modulo-->
+    <link href="Content/angular-ui-tree/angular-ui-tree.css" rel="stylesheet" />
+    <link href="Content/EstilosPropios/ControlesEspeciales.css" rel="stylesheet" />
+    <link href="Content/EstilosPropios/fabForm.css" rel="stylesheet" />
+    <link href="Content/angular-block-ui.min.css" rel="stylesheet" />
+
+    <link href="Content/select2/select.min.css" rel="stylesheet" />
+    <link href="Content/select2/select2.css" rel="stylesheet" />
+    <link href="Content/select2/selectize.default.css" rel="stylesheet" />
+    <link href="Content/EstilosPropios/columnaTamaño.css" rel="stylesheet" />
+    <link href="Content/EstilosPropios/fotografiasContacto.css" rel="stylesheet" />
+    <link href="Content/EstilosPropios/navbarON.css" rel="stylesheet" />
+    <link href="Content/angucomplete-alt.css" rel="stylesheet" />
+    <link href="Content/multiple-select.min.css" rel="stylesheet" />
+    <link href="Content/ng-tags-input.css" rel="stylesheet" />
+    <link href="Content/ng-tags-input-personal.css" rel="stylesheet" />
+    <link href="Content/EstilosPropios/CPDesign.css" rel="stylesheet" />
+
+    <!-- endinject -->
+    <!-- endbuild -->
+    <!--
+      IE8 support, see AngularJS Internet Explorer Compatibility http://docs.angularjs.org/guide/ie
+      For Firefox 3.6, you will also need to include jQuery and ECMAScript 5 shim
+    -->
+    <!--[if lt IE 9]>
+      <script src="Scripts/jquery1.11.0.js"></script>
+      <script src="Scripts/es5-shim.min.js"></script>
+      <script>
+        document.createElement('ui-select');
+        document.createElement('ui-select-match');
+        document.createElement('ui-select-choices');
+      </script>
+    <![endif]-->
+    <!--<link href="Content/dx.common.css" rel="stylesheet" />-->
+    <!-- build:js Scripts/scriptsCR.min.js -->
+    <!-- inject:js -->
+    <script src="Scripts/jquery-2.1.0.min.js"></script>
+    <script src="Scripts/jquery-ui-1.11.3.min.js"></script>
+
+    <!-- <script src="Scripts/jquery-1.9.1.js"></script>-->
+    <script src="Scripts/bootstrap.js"></script>
+
+    <!-- plantilla -->
+    <!-- FastClick -->
+    <script src="vendors/fastclick/lib/fastclick.js"></script>
+    <!-- NProgress -->
+    <script src="vendors/nprogress/nprogress.js"></script>
+    <!-- Chart.js -->
+    <script src="vendors/Chart.js/dist/Chart.min.js"></script>
+    <!-- gauge.js -->
+    <script src="vendors/gauge.js/dist/gauge.min.js"></script>
+    <!-- bootstrap-progressbar -->
+    <script src="vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+    <!-- iCheck -->
+    <script src="vendors/iCheck/icheck.min.js"></script>
+    <!-- Skycons -->
+    <script src="vendors/skycons/skycons.js"></script>
+    <!-- Flot -->
+    <script src="vendors/Flot/jquery.flot.js"></script>
+    <script src="vendors/Flot/jquery.flot.pie.js"></script>
+    <script src="vendors/Flot/jquery.flot.time.js"></script>
+    <script src="vendors/Flot/jquery.flot.stack.js"></script>
+    <script src="vendors/Flot/jquery.flot.resize.js"></script>
+    <!-- Flot plugins -->
+    <script src="vendors/flot.orderbars/js/jquery.flot.orderBars.js"></script>
+    <script src="vendors/flot-spline/js/jquery.flot.spline.min.js"></script>
+    <script src="vendors/flot.curvedlines/curvedLines.js"></script>
+    <!-- DateJS -->
+    <script src="vendors/DateJS/build/date.js"></script>
+    <!-- JQVMap -->
+    <script src="vendors/jqvmap/dist/jquery.vmap.js"></script>
+    <script src="vendors/jqvmap/dist/maps/jquery.vmap.world.js"></script>
+    <script src="vendors/jqvmap/examples/js/jquery.vmap.sampledata.js"></script>
+
+
+    <script src="Scripts/toastr.js"></script>
+
+    <script src="Scripts/angular.js"></script>
+    <script src="Scripts/angular-ui-router.js"></script>
+    <script src="Scripts/i18n/angular-locale_es-mx.js"></script>
+
+    <script src="Scripts/angular-block-ui.min.js"></script>
+
+    <script src="Scripts/angular-animate.min.js"></script>
+    <script src="Scripts/angular-resource.js"></script>
+
+
+    <script src="Scripts/angular-ui/ui-bootstrap-tpls.js"></script>
+    <script src="Scripts/angular-local-storage.min.js"></script>
+
+    <!--Tablas-->
+    <script src="Scripts/DataTables/jquery.dataTables.js"></script>
+    <script src="Scripts/angular-datatables/angular-datatables.js"></script>
+    <script src="Scripts/DataTables/dataTables.bootstrap.js"></script>
+
+    <script src="Scripts/aes.js"></script>
+    <script src="Scripts/mdo-angular-cryptography.js"></script>
+
+
+    <script src="Scripts/DataTables/dataTables.responsive.min.js"></script>
+
+    <script src="Scripts/angular-datatables/angular-datatables.js"></script>
+    <script src="Scripts/angular-datatables/angular-datatables.util.js"></script>
+    <script src="Scripts/angular-datatables/angular-datatables.options.js"></script>
+    <script src="Scripts/angular-datatables/angular-datatables.instances.js"></script>
+    <script src="Scripts/angular-datatables/angular-datatables.factory.js"></script>
+    <script src="Scripts/angular-datatables/angular-datatables.renderer.js"></script>
+    <script src="Scripts/angular-datatables/angular-datatables.directive.js"></script>
+
+    <script src="Scripts/DataTables/dataTables.columnFilter.js"></script>
+    <script src="Scripts/angular-datatables/plugins/columnfilter/angular-datatables.columnfilter.js"></script>
+
+
+
+
+    <script src="Scripts/angular-ui-tree/angular-ui-tree.js"></script>
+    <script src="Scripts/angular-datatables/plugins/fixedcolumns/angular-datatables.fixedcolumns.js"></script>
+
+    <script src="Scripts/select2/select.min.js"></script>
+    <script src="Scripts/angular-sanitize.js"></script>
+    <script src="Scripts/bootstrap-filestyle.min.js"></script>
+    <script src="Scripts/jquery.highlight.js"></script>
+    <script src="Scripts/dataTables.searchHighlight.min.js"></script>
+    <script src="Scripts/multiple-select.min.js"></script>
+
+    <script src="Scripts/angular-messages.min.js"></script>
+    <script src="Scripts/ng-fab-form.js"></script>
+    <script src="app/_services/ineel.services.js"></script>
+    <script src="app/_services/factories/ComunDetails.js"></script>
+    <script src="Scripts/ng-tags-input.js"></script>
+    <script src="app/_services/ineel.controllers.js"></script>
+    <script src="app/vistasGenericas/directivas/directivasSIGCO.js"></script>
+    <script src="app/vistasGenericas/directivas/echartGraphBarr.js"></script>
+    <script src="Scripts/angular-datatables/accent-neutralise.js"></script>
+    <script src="app/vistasGenericas/_details/personal/controllers/PersonaProfileComun.ctrl.js"></script>
+
+    <script src="Scripts/globalINEEL.js"></script>
+    <script src="app/_services/factories/Comun.service.js"></script>
+    <script src="app/_services/factories/ComunCount.service.js"></script>
+    <script src="app/vistasGenericas/buscarProyectosGEN/comunServiceProyectos.service.js"></script>
+    <script src="app/vistasGenericas/controllers/NotificationCtrl.js"></script>
+    <script src="app/vistasGenericas/buscarProyectosGEN/proyectosFilterSubprograma.ctrl.js"></script>
+    <script src="app/vistasGenericas/buscarProyectosGEN/buscarProyectosPorSubprograma.service.js"></script>
+    <script src="app/vistasGenericas/detallesBusquedaPersonal/services/comunServiceDetallesPersonal.service.js"></script>
+    <script src="app/vistasGenericas/detallesBusquedaPersonal/controllers/detallesBusquedaPersonal.GEN.ctrl.js"></script>
+
+    <!-- TextAgular-->
+    <link href="Scripts/textAngular-1.5.16/textAngular-1.5.16/dist/textAngular.css" rel="stylesheet" />
+    <script src="Scripts/textAngular-1.5.16/textAngular-1.5.16/dist/textAngular-rangy.min.js"></script>
+    <script src="Scripts/textAngular-1.5.16/textAngular-1.5.16/dist/textAngular-sanitize.min.js"></script>
+    <script src="Scripts/textAngular-1.5.16/textAngular-1.5.16/dist/textAngular.min.js"></script>
+
+    <script src="app/CR/appCR.js"></script>
+    <script src="app/CR/_services/ineel.CR.Services.js"></script>
+    <!--<script src="app/_services/factories/menu.service.js"></script>-->
+
+    <script src="app/_services/factories/authService.js"></script>
+    <script src="app/_services/factories/menu.service.js"></script>
+    <script src="app/_services/factories/permisos.service.js"></script>
+    <script src="app/_services/factories/personas.service.js"></script>
+    <script src="app/_services/factories/authInterceptorService.js"></script>
+    <script src="app/_services/factories/NuevoOC.js"></script>
+    <script src="app/vistasGenericas/detallesProyectosGEN/controllers/proyectoDetails.GEN.ctrl.js"></script>
+    <script src="app/vistasGenericas/_services/buscarProyectos.GEN.service.js"></script>
+
+    <!--<script src="app/CR/_services/factories/authinterceptor.CR.service.js"></script>-->
+    <script src="app/CR/home/controllers/homeCR.ctrl.js"></script>
+    <script src="app/auth/controllers/changepassword.ctrl.js"></script>
+    <script src="app/CR/clientes/controllers/inicioclientes.ctrl.js"></script>
+    <script src="app/vistasGenericas/controllers/EmpresasCompetidoresFilterGet.ctrl.js"></script>
+
+    <!--Historial de unidades organizacionales-->
+    <script src="app/CR/_services/factories/historialUnidades.CR.Service.js"></script>
+    <script src="app/CR/empresas/historialUnidadesOrganizacionales/controllers/historialUnidadesOrganizacionalesEmpresaGet.ctrl.js"></script>
+    <script src="app/CR/empresas/historialUnidadesOrganizacionales/controllers/historialUnidadesOrganizacionalesEmpresaEdit.ctrl.js"></script>
+
+
+    <!--Oportunidad de Negocios-->
+    <script src="app/CR/_services/factories/oportunidadNegocio.CR.Service.js"></script>
+    <script src="app/CR/homeOportunidadNegocio/controllers/homeONCR.ctrl.js"></script>
+    <script src="app/CR/oportunidadNegocio/OportunidadNegocio/Registrar/Controllers/oportunidadNegocioAdd.ctrl.js"></script>
+    <script src="app/CR/oportunidadNegocio/OportunidadNegocio/Registrar/Controllers/oportunidadNegocioDetails.ctrl.js"></script>
+    <script src="app/CR/oportunidadNegocio/OportunidadNegocio/Registrar/Controllers/oportunidadNegocioEdit.ctrl.js"></script>
+    <script src="app/CR/oportunidadNegocio/OportunidadNegocio/Registrar/Controllers/oportunidadNegociosGet.ctrl.js"></script>
+    <script src="app/CR/oportunidadNegocio/OportunidadNegocio/MisOportunidadesRegistradas/controllers/misOportunidadesGet.ctrl.js"></script>
+    <script src="app/CR/oportunidadNegocio/OportunidadNegocio/MisOportunidadesAsignadas/controllers/misOportunidadesAsignadasGet.ctrl.js"></script>
+    <script src="app/CR/oportunidadNegocio/OportunidadNegocio/Historial/controllers/historialOportunidadesGet.ctrl.js"></script>
+    <script src="app/CR/oportunidadNegocio/OportunidadNegocio/Historial/controllers/historialOportunidadDetails.ctrl.js"></script>
+    <script src="app/CR/contactos/contactoModal/controllers/ContactoModalONEdit.ctrl.js"></script>
+    <script src="app/vistasGenericas/controllers/ContactosGetGral.ctrl.js"></script>
+    <script src="app/vistasGenericas/controllers/EmpresasGetGral.ctrl.js"></script>
+    <script src="app/CR/contactos/contactoModal/controllers/contactoModalAdd.ctrl.js"></script>
+    <script src="app/CR/empresas/empresaModal/controllers/empresaModalAdd.ctrl.js"></script>
+    <script src="app/CR/oportunidadNegocio/Especialistas/controllers/especialistaGet.ctrl.js"></script>
+    <script src="app/CR/oportunidadNegocio/Especialistas/controllers/especialistaEdit.ctrl.js"></script>
+    <script src="app/CR/oportunidadNegocio/Especialistas/controllers/especialistaAdd.ctrl.js"></script>
+    <script src="app/CR/oportunidadNegocio/Especialistas/controllers/especialistaDelete.ctrl.js"></script>
+    <script src="app/CR/oportunidadNegocio/OportunidadNegocio/AsignarEspecialista/controllers/asignarEspecialista.ctrl.js"></script>
+    <script src="app/CR/oportunidadNegocio/OportunidadNegocio/AsignarAUnidad/controllers/asignarAUnidad.ctrl.js"></script>
+    <script src="app/CR/oportunidadNegocio/OportunidadNegocio/AsignarAUnidad/controllers/oportunidadEspecialistaEdit.ctrl.js"></script>
+    <script src="app/CR/oportunidadNegocio/OportunidadNegocio/AsignarAInvestigador/controllers/OportunidadesPorAsignarGet.ctrl.js"></script>
+    <script src="app/CR/oportunidadNegocio/OportunidadNegocio/RechazarOportunidad/controllers/rechazarOportunidad.ctrl.js"></script>
+    <script src="app/CR/oportunidadNegocio/OportunidadNegocio/AceptarOportunidad/controllers/aceptarOportunidad.ctrl.js"></script>
+    <script src="app/CR/oportunidadNegocio/OportunidadNegocio/AsignarAInvestigador/controllers/asignarOportunidadInvestigador.ctrl.js"></script>
+    <script src="app/vistasGenericas/controllers/PersonasEspecialistasGet.ctrl.js"></script>
+    <!--Seguimiento a mi oportunidad-->
+    <script src="app/CR/oportunidadNegocio/OportunidadNegocio/SeguimientoOportunidad/controllers/seguimientoOportunidadGet.ctrl.js"></script>
+    <script src="app/CR/oportunidadNegocio/OportunidadNegocio/SeguimientoOportunidad/controllers/seguimientoOportunidadDetails.ctrl.js"></script>
+    <script src="app/CR/oportunidadNegocio/OportunidadNegocio/SeguimientoOportunidad/controllers/seguimientoOportunidadAdd.ctrl.js"></script>
+    <script src="app/CR/oportunidadNegocio/OportunidadNegocio/SeguimientoOportunidad/controllers/seguimientoOportunidadEdit.ctrl.js"></script>
+    <script src="app/CR/oportunidadNegocio/OportunidadNegocio/SeguimientoOportunidad/controllers/seguimientoOportunidadDelete.ctrl.js"></script>
+    <script src="app/CR/oportunidadNegocio/OportunidadNegocio/SeguimientoOportunidad/controllers/confirmacion.ctrl.js"></script>
+    <script src="app/CR/oportunidadNegocio/OportunidadNegocio/SeguimientoOportunidad/controllers/confirmacionSeguimiento.ctrl.js"></script>
+    <script src="app/CR/oportunidadNegocio/OportunidadNegocio/Registrar/Controllers/confirmacionAdmonEspecialista.js"></script>
+    <script src="app/CR/oportunidadNegocio/OportunidadNegocio/SeguimientoOportunidad/controllers/cambioestado.ctrl.js"></script>
+
+    <!--tipo Evento-->
+    <script src="app/CR/oportunidadNegocio/Catalogos/TipoEventos/Controllers/tipoEventosGet.ctrl.js"></script>
+    <script src="app/CR/oportunidadNegocio/Catalogos/TipoEventos/Controllers/tipoEventoEdit.ctrl.js"></script>
+    <script src="app/CR/oportunidadNegocio/Catalogos/TipoEventos/Controllers/tipoEventoAdd.ctrl.js"></script>
+    <!--eventos-->
+    <script src="app/CR/oportunidadNegocio/Catalogos/Eventos/controllers/eventoAdd.ctrl.js"></script>
+    <script src="app/CR/oportunidadNegocio/Catalogos/Eventos/controllers/eventoEdit.ctrl.js"></script>
+    <script src="app/CR/oportunidadNegocio/Catalogos/Eventos/controllers/eventoGet.ctrl.js"></script>
+    <script src="app/CR/oportunidadNegocio/Catalogos/Eventos/controllers/eventoDetails.ctrl.js"></script>
+    <script src="app/CR/oportunidadNegocio/Catalogos/Eventos/controllers/eventoGetModal.ctrl.js"></script>
+    <!--FileUpload-->
+
+    <script src="Scripts/angular-file-upload.js"></script>
+    <script src="app/CR/home/controllers/CargaControllerCR.ctrl.js"></script>
+
+    <!--Para adjuntos-->
+    <script src="Scripts/aes.js"></script>
+    <script src="Scripts/mdo-angular-cryptography.js"></script>
+    <script src="app/_services/factories/Descargas.js"></script>
+    <script src="app/GEN/_services/catalogos/notificacion.GEN.service.js"></script>
+    <!--script's contactos CRUD-->
+    <script src="app/CR/_services/factories/contactos.CR.service.js"></script>
+    <script src="app/CR/contactos/contacto/controllers/contactosGet.ctrl.js"></script>
+    <script src="app/CR/contactos/contacto/controllers/contactoEdit.ctrl.js"></script>
+    <script src="app/CR/contactos/contacto/controllers/contactoDetails.ctrl.js"></script>
+    <script src="app/CR/contactos/contacto/controllers/contactoAdd.ctrl.js"></script>
+    <script src="app/CR/contactos/perfil/controllers/perfilAdd.ctrl.js"></script>
+    <script src="app/CR/contactos/puestos/controllers/historiaPuestoAdd.ctrl.js"></script>
+    <!--script's empresas CRUD-->
+    <script src="app/_services/factories/paises.service.js"></script>
+    <script src="app/CR/_services/factories/empresas.CR.service.js"></script>
+    <script src="app/CR/empresas/empresa/controllers/empresaDetails.ctrl.js"></script>
+    <script src="app/CR/empresas/empresa/controllers/empresasGet.ctrl.js"></script>
+    <script src="app/CR/empresas/empresa/controllers/empresaEdit.ctrl.js"></script>
+    <script src="app/CR/empresas/empresa/controllers/empresaAdd.ctrl.js"></script>
+    <script src="app/CR/empresas/contactosEmpresa/controllers/contactosEmpresaAdd.ctrl.js"></script>
+
+    <!--crud clave empresas-->
+    <script src="app/CR/empresas/claveEmpresas/controllers/claveEmpresaGet.ctrl.js"></script>
+    <script src="app/CR/empresas/claveEmpresas/controllers/claveEmpresaEdit.ctrl.js"></script>
+    <script src="app/CR/empresas/claveEmpresas/controllers/claveEmpresaAdd.ctrl.js"></script>
+    <!--script's redes de expertos -->
+    <script src="app/CR/_services/factories/expertos.CR.service.js"></script>
+    <script src="app/CR/expertos/controllers/expertosGet.ctrl.js"></script>
+    <script src="app/CR/expertos/controllers/expertosAdd.ctrl.js"></script>
+    <script src="app/CR/expertos/controllers/expertosEdit.ctrl.js"></script>
+    <script src="app/CR/expertos/controllers/expertosDetails.ctrl.js"></script>
+
+    <!--script's  clientes -->
+    <script src="app/CR/_services/factories/clientes.CR.service.js"></script>
+    <script src="app/CR/clientes/controllers/proyectosvigentesGet.ctrl.js"></script>
+    <script src="app/CR/clientes/controllers/propuestasiniciativasonGet.ctrl.js"></script>
+    <script src="app/CR/clientes/controllers/prospectosGet.ctrl.js"></script>
+    <script src="app/CR/clientes/controllers/proyectosGetTotal.ctrl.js"></script>
+
+
+    <!--script's consultas-->
+    <script src="app/CR/consultas/clientes/controllers/clienteGet.ctrl.js"></script>
+    <script src="app/CR/consultas/clientes/controllers/clienteGetConsulta.ctrl.js"></script>
+    <script src="app/CR/consultas/clientes/controllers/unidadClienteGetConsulta.ctrl.js"></script>
+    <script src="app/CR/clientes/controllers/clientesProyectosVigentes.js"></script>
+    <script src="app/CR/clientes/controllers/clientesProyectosHistoricos.js"></script>
+
+    <!--script's proyectosEmpresa CRUD-->
+    <script src="app/CR/_services/factories/proyectosEmpresa.CR.service.js"></script>
+    <script src="app/CR/proyectosEmpresa/controllers/proyectosEmpresaGet.ctrl.js"></script>
+    <script src="app/CR/proyectosEmpresa/controllers/proyectosEmpresaAdd.ctrl.js"></script>
+    <script src="app/CR/empresas/proyectos/controllers/proyectosAsignadosGet.js"></script>
+    <script src="app/CR/empresas/proyectos/controllers/proyectoAsginadoEdit.ctrl.js"></script>
+    <script src="app/CR/empresas/proyectos/controllers/proyectoAsignadoDetails.ctrl.js"></script>
+    <script src="app/vistasGenericas/controllers/contactosUnidadGet.ctrl.js"></script>
+    <!--script's propuestasEmpresa CRUD-->
+    <script src="app/CR/_services/factories/propuestasEmpresa.CR.service.js"></script>
+    <script src="app/CR/propuestasEmpresa/controller/propuestasEmpresaGet.ctrl.js"></script>
+    <script src="app/CR/propuestasEmpresa/controller/propuestasEmpresaAdd.ctrl.js"></script>
+    <script src="app/CR/empresas/propuestas/controllers/propuestasAsignadasGet.ctrl.js"></script>
+    <script src="app/CR/empresas/propuestas/controllers/propuestaAsignadaEdit.ctrl.js"></script>
+    <script src="app/CR/empresas/propuestas/controllers/propuestaAsignadaDetail.ctrl.js"></script>
+    <script src="app/CR/empresas/propuestas/controllers/propuestasAsignadasUnidadesEmpresasDetails.ctrl.js"></script>
+    <!--script's iniciativasEmpresa CRUD-->
+    <script src="app/CR/_services/factories/iniciativasEmpresa.CR.ctrl.js"></script>
+    <script src="app/CR/iniciativasEmpresa/controller/iniciativasEmpresaGet.ctrl.js"></script>
+    <script src="app/CR/iniciativasEmpresa/controller/iniciativasEmpresaAdd.ctrl.js"></script>
+    <script src="app/CR/empresas/iniciativas/controllers/iniciativasAsignadasGet.ctrl.js"></script>
+    <script src="app/CR/empresas/iniciativas/controllers/iniciativaAsignadaEdit.ctrl.js"></script>
+    <script src="app/CR/empresas/iniciativas/controllers/iniciativaAsignadaDetail.ctrl.js"></script>
+    <script src="app/CR/empresas/iniciativas/controllers/iniciativasAsignadasUnidadesEmpresasDetails.ctrl.js"></script>
+    <!--script's unidad organizacional CRUD-->
+    <script src="app/CR/_services/factories/unidades.CR.Service.js"></script>
+    <script src="app/CR/empresas/unidadOrganizacional/controllers/unidadAdd.ctrl.js"></script>
+    <script src="app/vistasGenericas/detalleunidadOrganizacionalEmpresas/controllers/detalleUnidadOrganizacionalEmpresasCtrl.js"></script>
+    <!--script's areasInvestigacion CRUD-->
+    <script src="app/CR/_services/factories/areasInvestigacion.CR.service.js"></script>
+    <script src="app/CR/areasInvestigacion/controllers/areasInvestigacionGet.ctrl.js"></script>
+    <script src="app/CR/areasInvestigacion/controllers/areaInvestigacionEdit.ctrl.js"></script>
+    <script src="app/CR/areasInvestigacion/controllers/areaInvestigacionDetails.ctrl.js"></script>
+    <script src="app/CR/areasInvestigacion/controllers/areaInvestigacionAdd.ctrl.js"></script>
+    <!--script's lineasDesarrolloTecnologico CRUD-->
+    <script src="app/CR/_services/factories/lineasDesarrolloTecnologico.CR.service.js"></script>
+    <script src="app/CR/lineasDesarrolloTecnologico/controllers/lineasDesarrolloTecnologicoGet.ctrl.js"></script>
+    <script src="app/CR/lineasDesarrolloTecnologico/controllers/lineaDesarrolloTecnologicoEdit.ctrl.js"></script>
+    <script src="app/CR/lineasDesarrolloTecnologico/controllers/lineaDesarrolloTecnologicoDetails.ctrl.js"></script>
+    <script src="app/CR/lineasDesarrolloTecnologico/controllers/lineaDesarrolloTecnologicoAdd.ctrl.js"></script>
+    <!--script's naturalezasInteraccion CRUD-->
+    <script src="app/CR/_services/factories/naturalezasInteraccion.CR.service.js"></script>
+    <script src="app/CR/naturalezasInteraccion/controllers/naturalezasInteraccionGet.ctrl.js"></script>
+    <script src="app/CR/naturalezasInteraccion/controllers/naturalezaInteraccionEdit.ctrl.js"></script>
+    <script src="app/CR/naturalezasInteraccion/controllers/naturalezaInteraccionDetails.ctrl.js"></script>
+    <script src="app/CR/naturalezasInteraccion/controllers/naturalezaInteraccionAdd.ctrl.js"></script>
+    <!--script's productos CRUD-->
+    <script src="app/CR/_services/factories/productos.CR.service.js"></script>
+    <script src="app/CR/productos/controllers/productosGet.ctrl.js"></script>
+    <script src="app/CR/productos/controllers/productoEdit.ctrl.js"></script>
+    <script src="app/CR/productos/controllers/productoDetails.ctrl.js"></script>
+    <script src="app/CR/productos/controllers/productoAdd.ctrl.js"></script>
+    <script src="app/vistasGenericas/controllers/ProductosCompetidoresFilterGet.ctrl.js"></script>
+    <!--script's segmentosMercado CRUD-->
+    <script src="app/CR/_services/factories/segmentosMercado.CR.service.js"></script>
+    <script src="app/CR/segmentosMercado/controllers/segmentosMercadoGet.ctrl.js"></script>
+    <script src="app/CR/segmentosMercado/controllers/segmentoMercadoEdit.ctrl.js"></script>
+    <script src="app/CR/segmentosMercado/controllers/segmentoMercadoDetails.ctrl.js"></script>
+    <script src="app/CR/segmentosMercado/controllers/segmentoMercadoAdd.ctrl.js"></script>
+    <!--script's servicios CRUD-->
+    <script src="app/CR/_services/factories/servicios.CR.service.js"></script>
+    <script src="app/CR/servicios/controllers/serviciosGet.ctrl.js"></script>
+    <script src="app/CR/servicios/controllers/servicioEdit.ctrl.js"></script>
+    <script src="app/CR/servicios/controllers/servicioDetails.ctrl.js"></script>
+    <script src="app/CR/servicios/controllers/servicioAdd.ctrl.js"></script>
+    <script src="app/vistasGenericas/controllers/ServiciosCompetidoresFilterGet.ctrl.js"></script>
+    <!--script's tipoRelacion CRUD-->
+    <script src="app/CR/_services/factories/tipoRelacion.CR.service.js"></script>
+    <script src="app/CR/tipoRelacion/controllers/tipoRelacionGet.ctrl.js"></script>
+    <script src="app/CR/tipoRelacion/controllers/tipoRelacionEdit.ctrl.js"></script>
+    <script src="app/CR/tipoRelacion/controllers/tipoRelacionDetails.ctrl.js"></script>
+    <script src="app/CR/tipoRelacion/controllers/tipoRelacionAdd.ctrl.js"></script>
+    <!--script's tipoProductoServicio CRUD-->
+    <script src="app/CR/_services/factories/tipoProductoServicio.CR.service.js"></script>
+    <script src="app/CR/tipoProductoServicio/controllers/tipoProductoServicioGet.ctrl.js"></script>
+    <script src="app/CR/tipoProductoServicio/controllers/tipoProductoServicioEdit.ctrl.js"></script>
+    <script src="app/CR/tipoProductoServicio/controllers/tipoProductoServicioDetails.ctrl.js"></script>
+    <script src="app/CR/tipoProductoServicio/controllers/tipoProductoServicioAdd.ctrl.js"></script>
+    <!--script's tipoFuenteFinanciamiento CRUD-->
+    <script src="app/CR/_services/factories/tipoFuenteFinanciamiento.CR.service.js"></script>
+    <script src="app/CR/tipoFuenteFinanciamiento/controllers/tipoFuenteFinanciamientoGet.ctrl.js"></script>
+    <script src="app/CR/tipoFuenteFinanciamiento/controllers/tipoFuenteFinanciamientoEdit.ctrl.js"></script>
+    <script src="app/CR/tipoFuenteFinanciamiento/controllers/tipoFuenteFinanciamientoDetails.ctrl.js"></script>
+    <script src="app/CR/tipoFuenteFinanciamiento/controllers/tipoFuenteFinanciamientoAdd.ctrl.js"></script>
+    <!--script's tipoConvenio CRUD-->
+    <script src="app/CR/_services/factories/tipoConvenio.CR.service.js"></script>
+    <script src="app/CR/tipoConvenio/controllers/tipoConvenioGet.ctrl.js"></script>
+    <script src="app/CR/tipoConvenio/controllers/tipoConvenioEdit.ctrl.js"></script>
+    <script src="app/CR/tipoConvenio/controllers/tipoConvenioDetails.ctrl.js"></script>
+    <script src="app/CR/tipoConvenio/controllers/tipoConvenioAdd.ctrl.js"></script>
+    <!--script's tematica CRUD-->
+    <script src="app/CR/_services/factories/tematica.CR.service.js"></script>
+    <script src="app/CR/tematica/controllers/tematicaGet.ctrl.js"></script>
+    <script src="app/CR/tematica/controllers/tematicaEdit.ctrl.js"></script>
+    <script src="app/CR/tematica/controllers/tematicaDetails.ctrl.js"></script>
+    <script src="app/CR/tematica/controllers/tematicaAdd.ctrl.js"></script>
+    <!--script's tamanoEmpresa CRUD-->
+    <script src="app/CR/_services/factories/tamanoEmpresa.CR.service.js"></script>
+    <script src="app/CR/tamanoEmpresa/controllers/tamanoEmpresaGet.ctrl.js"></script>
+    <script src="app/CR/tamanoEmpresa/controllers/tamanoEmpresaEdit.ctrl.js"></script>
+    <script src="app/CR/tamanoEmpresa/controllers/tamanoEmpresaDetails.ctrl.js"></script>
+    <script src="app/CR/tamanoEmpresa/controllers/tamanoEmpresaAdd.ctrl.js"></script>
+    <!--script's sitioWebFondoPrograma CRUD-->
+    <script src="app/CR/_services/factories/sitioWebFondoPrograma.CR.service.js"></script>
+    <script src="app/CR/sitioWebFondoPrograma/controllers/sitioWebFondoProgramaGet.ctrl.js"></script>
+    <script src="app/CR/sitioWebFondoPrograma/controllers/sitioWebFondoProgramaEdit.ctrl.js"></script>
+    <script src="app/CR/sitioWebFondoPrograma/controllers/sitioWebFondoProgramaDetails.ctrl.js"></script>
+    <script src="app/CR/sitioWebFondoPrograma/controllers/sitioWebFondoProgramaAdd.ctrl.js"></script>
+    <!--script's fuentesFinanciamiento CRUD-->
+    <script src="app/CR/_services/factories/fuentesFinanciamiento.CR.Service.js"></script>
+    <!-- <script src="app/CR/_services/factories/fuentesFinanciamiento.CR.service.js"></script>-->
+    <script src="app/CR/fuentesFinanciamiento/controllers/fuentesFinanciamientoGet.ctrl.js"></script>
+    <script src="app/CR/fuentesFinanciamiento/controllers/fuenteFinanciamientoEdit.ctrl.js"></script>
+    <script src="app/CR/fuentesFinanciamiento/controllers/fuenteFinanciamientoDetails.ctrl.js"></script>
+    <script src="app/CR/fuentesFinanciamiento/controllers/fondoProgramaDetailsByFF.ctrl.js"></script>
+    <script src="app/CR/fuentesFinanciamiento/controllers/fondoProgramaDetailsByC.ctrl.js"></script>
+    <script src="app/CR/fuentesFinanciamiento/controllers/fuenteFinanciamientoAdd.ctrl.js"></script>
+    <!--script's fondoPrograma CRUD-->
+    <script src="app/CR/_services/factories/fondosPrograma.CR.Service.js"></script>
+    <script src="app/CR/fondosPrograma/controllers/fondosProgramaGet.ctrl.js"></script>
+    <script src="app/CR/fondosPrograma/controllers/fondoProgramaEdit.ctrl.js"></script>
+    <script src="app/CR/fondosPrograma/controllers/fondoProgramaDetails.ctrl.js"></script>
+    <script src="app/CR/fondosPrograma/controllers/fondoProgramaAdd.ctrl.js"></script>
+    <script src="app/CR/fondosPrograma/controllers/convocatoriaDetailsByFP.ctrl.js"></script>
+    <!--script's alumno CRUD-->
+    <script src="app/CR/_services/factories/alumno.CR.service.js"></script>
+    <script src="app/CR/alumno/controllers/alumnoGet.ctrl.js"></script>
+    <script src="app/CR/alumno/controllers/alumnoAdd.ctrl.js"></script>
+    <script src="app/CR/alumno/controllers/alumnoEdit.ctrl.js"></script>
+    <script src="app/CR/alumno/controllers/alumnoDetails.ctrl.js"></script>
+    <!--script's inicio convocatorias -->
+    <script src="app/CR/convocatorias/controllers/inicioconvocatorias.ctrl.js"></script>
+    <!--script's convocatorias CRUD-->
+    <script src="app/CR/_services/factories/convocatorias.CR.service.js"></script>
+    <script src="app/CR/convocatorias/controllers/convocatoriasGet.ctrl.js"></script>
+    <script src="app/CR/convocatorias/controllers/convocatoriaEdit.ctrl.js"></script>
+    <script src="app/CR/convocatorias/controllers/convocatoriaDetails.ctrl.js"></script>
+    <script src="app/CR/convocatorias/controllers/convocatoriaAdd.ctrl.js"></script>
+    <!--script's Partes interesadas persona CRUD-->
+    <script src="app/CR/_services/factories/personasPartInt.CR.Service.js"></script>
+    <script src="app/CR/personasPartInt/controllers/personasPartIntGet.ctrl.js"></script>
+    <script src="app/CR/personasPartInt/controllers/personaPartIntEdit.ctrl.js"></script>
+    <script src="app/CR/personasPartInt/controllers/personaPartIntDetails.ctrl.js"></script>
+    <script src="app/CR/personasPartInt/controllers/personaPartIntAdd.ctrl.js"></script>
+
+    <!--script's Partes interesadas grupo colegiado CRUD-->
+    <script src="app/CR/_services/factories/gruposColegiadoPartInt.CR.Service.js"></script>
+    <script src="app/CR/gruposColegiadoPartInt/controllers/gruposColegiadoPartIntGet.ctrl.js"></script>
+    <script src="app/CR/gruposColegiadoPartInt/controllers/grupoColegiadoPartIntEdit.ctrl.js"></script>
+    <script src="app/CR/gruposColegiadoPartInt/controllers/grupoColegiadoPartIntDetails.ctrl.js"></script>
+    <script src="app/CR/gruposColegiadoPartInt/controllers/grupoColegiadoPartIntAdd.ctrl.js"></script>
+    <script src="app/CR/gruposColegiadoPartInt/controllers/IntGrupoColegiadoPartIntDetails.ctrl.js"></script>
+    <script src="app/CR/gruposColegiadoPartInt/controllers/grupoColegiadosInicio.ctrl.js"></script>
+    <script src="app/CR/gruposColegiadoPartInt/controllers/grupoColegiadosInicioAdm.ctrl.js"></script>
+    <!--script's Competidores CRUD-->
+    <script src="app/CR/_services/factories/competidores.CR.Service.js"></script>
+    <script src="app/CR/competidores/controllers/competidoresGet.ctrl.js"></script>
+    <script src="app/CR/competidores/controllers/competidorEdit.ctrl.js"></script>
+    <script src="app/CR/competidores/controllers/competidorDetails.ctrl.js"></script>
+    <script src="app/CR/competidores/controllers/competidorAdd.ctrl.js"></script>
+    <!--script's Proveedores CRUD-->
+    <script src="app/CR/_services/factories/proveedores.CR.Service.js"></script>
+    <script src="app/CR/proveedores/controllers/proveedoresGet.ctrl.js"></script>
+    <script src="app/CR/proveedores/controllers/proveedorEdit.ctrl.js"></script>
+    <script src="app/CR/proveedores/controllers/proveedorDetails.ctrl.js"></script>
+    <script src="app/CR/proveedores/controllers/proveedorAdd.ctrl.js"></script>
+    <!--script's Asociar convocatoria a propuesta o proyecto CRUD-->
+    <script src="app/CR/_services/factories/ppsconvocatoria.CR.Service.js"></script>
+    <script src="app/CR/ppsConvocatoria/controllers/ppsConvocatoriaGet.ctrl.js"></script>
+    <script src="app/CR/ppsConvocatoria/controllers/ppConvocatoriaEdit.ctrl.js"></script>
+    <script src="app/CR/ppsConvocatoria/controllers/ppConvocatoriaDetails.ctrl.js"></script>
+    <script src="app/CR/ppsConvocatoria/controllers/ppConvocatoriaAdd.ctrl.js"></script>
+    <!--script's Aliados CRUD-->
+    <script src="app/CR/_services/factories/aliados.CR.Service.js"></script>
+    <script src="app/CR/aliados/aliado/modalAliados/controllers/empresasForAliadosGet.ctrl.js"></script>
+    <script src="app/CR/aliados/aliado/controllers/aliadosGet.ctrl.js"></script>
+    <script src="app/CR/aliados/aliado/controllers/aliadosVigentesGet.ctrl.js"></script>
+    <script src="app/CR/aliados/aliado/controllers/aliadoEdit.ctrl.js"></script>
+    <script src="app/CR/aliados/aliado/controllers/aliadoDetails.ctrl.js"></script>
+    <script src="app/CR/aliados/aliado/controllers/aliadoAdd.ctrl.js"></script>
+    <script src="app/CR/aliados/aliado/controllers/inicioaliados.ctrl.js"></script>
+    <!--script's Convenios CRUD-->
+    <script src="app/CR/aliados/convenios/controllers/conveniosGet.ctrl.js"></script>
+    <script src="app/CR/aliados/convenios/controllers/convenioEdit.ctrl.js"></script>
+    <script src="app/CR/aliados/convenios/controllers/convenioDetails.ctrl.js"></script>
+    <script src="app/CR/aliados/convenios/controllers/convenioAdd.ctrl.js"></script>
+    <script src="app/CR/aliados/convenios/controllers/consultaConvenios.ctrl.js"></script>
+
+    <!--script's Actividad Adicional CRUD-->
+    <script src="app/CR/aliados/actividadesAdicionales/controllers/actividadesAdicionalesGet.ctrl.js"></script>
+    <script src="app/CR/aliados/actividadesAdicionales/controllers/actividadAdicionalEdit.ctrl.js"></script>
+    <script src="app/CR/aliados/actividadesAdicionales/controllers/actividadAdicionalDetails.ctrl.js"></script>
+    <script src="app/CR/aliados/actividadesAdicionales/controllers/actividadAdicionalAdd.ctrl.js"></script>
+    <!--Ambitos-->
+    <script src="app/CR/_services/factories/ambitoConv.CR.Service.js"></script>
+    <script src="app/CR/ambitosConv/controllers/ambitosConvGet.ctrl.js"></script>
+    <script src="app/CR/ambitosConv/controllers/ambitoConvEdit.ctrl.js"></script>
+    <script src="app/CR/ambitosConv/controllers/ambitoConvDetails.ctrl.js"></script>
+    <script src="app/CR/ambitosConv/controllers/ambitoConvAdd.ctrl.js"></script>
+    <!--Tipos de organizacion-->
+    <script src="app/CR/_services/factories/tipoOrganizacion.CR.Service.js"></script>
+    <script src="app/CR/tiposOrganizacion/controllers/tiposOrganizacionGet.ctrl.js"></script>
+    <script src="app/CR/tiposOrganizacion/controllers/tipoOrganizacionEdit.ctrl.js"></script>
+    <script src="app/CR/tiposOrganizacion/controllers/tipoOrganizacionDetails.ctrl.js"></script>
+    <script src="app/CR/tiposOrganizacion/controllers/tipoOrganizacionAdd.ctrl.js"></script>
+
+    <!--Titulos de personas-->
+    <script src="app/CR/_services/factories/tituloPersona.CR.service.js"></script>
+    <script src="app/CR/tituloPersona/controllers/tituloPersonaGet.ctrl.js"></script>
+    <script src="app/CR/tituloPersona/controllers/tituloPersonaAdd.ctrl.js"></script>
+    <script src="app/CR/tituloPersona/controllers/tituloPersonaEdit.ctrl.js"></script>
+
+    <!--script's MenuItem List-->
+    <script src="app/CR/_services/factories/menuItem.CR.service.js"></script>
+    <script src="app/CR/menuItem/controllers/menuItemGet.ctrl.js"></script>
+
+
+
+    <!-- Plugin para el autocompletado-->
+    <script src="Scripts/angucomplete-alt.js"></script>
+    <!-- Busquedas genericas-->
+    <script src="app/vistasGenericas/_services/buscarPersonas.CR.service.js"></script>
+    <script src="app/vistasGenericas/controllers/PersonasFilterGet.ctrlGEN.js"></script>
+    <script src="app/vistasGenericas/controllers/ProyectosFilterGet.ctrlGEN.js"></script>
+    <script src="app/vistasGenericas/_services/buscarEmpresas.CR.service.js"></script>
+    <script src="app/vistasGenericas/controllers/EmpresasFilterGet.ctrlCR.js"></script>
+    <script src="app/vistasGenericas/_services/buscarClientes.GEN.service.js"></script>
+    <script src="app/vistasGenericas/buscarEmpresasGEN/comunServiceEmpresas.service.js"></script>
+    <script src="app/vistasGenericas/buscarClientesGEN/buscarClientesGEN.ctrl.js"></script>
+    <script src="app/vistasGenericas/_services/buscarContactos.CR.service.js"></script>
+    <script src="app/vistasGenericas/controllers/ContactosFilterGet.ctrlCR.js"></script>
+    <script src="app/vistasGenericas/_services/buscarConvocatorias.CR.service.js"></script>
+    <script src="app/vistasGenericas/controllers/ConvocatoriasFilterGet.ctrlCR.js"></script>
+    <script src="app/vistasGenericas/_services/buscarPropuestas.CR.service.js"></script>
+    <script src="app/vistasGenericas/controllers/PropuestasFilterGet.ctrlCR.js"></script>
+    <script src="app/vistasGenericas/controllers/EstructuraOrganizacionalFilterGet.ctrl.js"></script>
+    <!-- <script src="app/vistasGenericas/controllers/EstructuraOrganizacionalFilterGet.ctrlCR.js"></script>-->
+    <!--<script src="app/vistasGenericas/controllers/PersonasFilterGet.ctrlCR.js"></script>-->
+    <script src="app/vistasGenericas/_services/buscarProductos.CR.service.js"></script>
+    <script src="app/vistasGenericas/controllers/ProductosFilterGet.ctrlCR.js"></script>
+    <script src="app/vistasGenericas/_services/buscarServicios.CR.service.js"></script>
+    <script src="app/vistasGenericas/controllers/ServiciosFilterGet.ctrlCR.js"></script>
+    <script src="app/vistasGenericas/detallesEmpresaGEN/controllers/empresaDetails.GEN.ctrl.js"></script>
+
+    <!-- Scripts Estudios de Mercado -->
+    <script src="app/CR/estudiosMercado/controllers/estudiosmercadoGet.ctrl.js"></script>
+    <script src="app/CR/_services/factories/estudiosMercado.CR.Service.js"></script>
+    <script src="app/CR/estudiosMercado/controllers/estudiosmercadoAdd.ctrl.js"></script>
+    <script src="app/CR/estudiosMercado/controllers/estudiomercadoEdit.ctrl.js"></script>
+    <script src="app/CR/estudiosMercado/controllers/estudiomercadoDetalles.ctrl.js"></script>
+
+
+    <!--scripts para reportes-->
+    <script src="Scripts/DataTables/dataTables.buttons.js"></script>
+    <script src="Scripts/DataTables/buttons.bootstrap.js"></script>
+    <script src="Scripts/angular-datatables/plugins/buttons/angular-datatables.buttons.js"></script>
+    <script src="Scripts/DataTables/buttons.print.js"></script>
+    <script src="Scripts/DataTables/buttons.html5.js"></script>
+    <script src="Scripts/DataTables/buttons.flash.js"></script>
+    <script src="Scripts/DataTables/buttons.colVis.js"></script>
+
+    <script src="Scripts/jspdf.min.js"></script>
+    <script src="Scripts/jspdf.plugin.autotable.src.js"></script>
+
+    <!--Reportes-->
+    <script src="app/CR/reportes/controllers/reporteAliados.ctrl.js"></script>
+    <script src="app/CR/reportes/controllers/reporteProyectosFF.ctrl.js"></script>
+    <script src="app/CR/reportes/controllers/reportePropuestasFF.ctrl.js"></script>
+    <script src="app/CR/_services/factories/reporteFF.CR.Service.js"></script>
+    <script src="app/CR/reportes/controllers/reporteResultadosAliados.ctrl.js"></script>
+    <script src="app/CR/reportes/controllers/reporteResultadosAliadosDetalle.ctrl.js"></script>
+
+    <!--Reporte Aliados-->
+    <script src="app/CR/_services/factories/listasAlianza.CR.Service.js"></script>
+
+    <!-- FIN de Busquedas genericas-->
+    <!--<script src="app/vistasGenericas/controllers/EstructuraOrganizacionalEmpresasFilterGet.ctrlCR.js"></script>-->
+    <script src="app/vistasGenericas/controllers/EstructuraOrganizacionalEmpresasFilterGet.ctrl.js"></script>
+
+    <script src="app/vistasGenericas/_details/empresa/controllers/EmpresaDetailsComunCtrl.js"></script>
+
+    <!-- chart JS -->
+
+    <script src="Scripts/node_modules/angular-chart.js/node_modules/chart.js/dist/Chart.min.js"></script>
+    <script src="Scripts/node_modules/angular-chart.js/dist/angular-chart.min.js"></script>
+    <script src="vendors/echarts/dist/echarts.min.js"></script>
+    <script src="app/vistasGenericas/directivas/echartGraph.js"></script>
+
+
+    <!-- endinject -->
+    <!-- endbuild -->
+</head>
+
+<body class="nav-md" data-ng-controller="indexControllerCR">
+    <div class="info-servidor-desplegado">{{'' | getInfoServidorDesplegado}}</div>
+    <div class="container body">
+        <div class="main_container">
+            <div class="col-md-3 left_col">
+                <div class="left_col scroll-view bg-gradient-menuv">
+                    <div class="navbar nav_title bg-gradient-menuv" style="border: 0;">
+                        <a href="sigco.html" class="site_title">
+                            <img src="images/logo_sigco.png" />
+                            <span class="titLogo">&nbsp;SIGCO</span>
+                        </a>
+                    </div>
+                    <div class="clearfix"></div>
+
+                    <br />
+
+
+                    <!-- sidebar menu -->
+                    <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+                        <div class="menu_section">
+                            <h3>&nbsp;</h3>
+                            <ul class="nav side-menu">
+                                <li ng-repeat="opcion in funciones" ng-if="opcion.funcion.nivel==0" ng-show="opcion.funcion.idModulo==modulo">
+                                    <a ng-if="opcion.funcion.children.length ==0" ui-sref="{{opcion.funcion.state}}">
+                                        <i class="{{opcion.funcion.claseIcono}}"> </i>&nbsp;{{opcion.funcion.nombre}}
+                                    </a>
+
+                                    <a ng-if="opcion.funcion.children.length > 0">
+                                        <i class="{{opcion.funcion.claseIcono}}"></i> &nbsp;{{opcion.funcion.nombre}}
+                                        <span class="fa fa-chevron-down"></span>
+                                    </a>
+                                    <ul ng-if="opcion.funcion.children.length > 0 " class="nav child_menu">
+                                        <li ng-repeat="opc in funciones" ng-if="opc.funcion.nivel==1 && opc.funcion.idPadre == opcion.funcion.funcionesId">
+                                            <a ng-if="opc.funcion.children.length ==0" ui-sref="{{opc.funcion.state}}"> &nbsp;{{opc.funcion.nombre}} </a>
+
+                                            <a ng-if="opc.funcion.children.length > 0">
+                                                &nbsp;{{opc.funcion.nombre}}
+                                                <span class="fa fa-chevron-down"></span>
+                                            </a>
+                                            <ul class="nav child_menu" ng-if="opc.funcion.children.length > 0 ">
+                                                <li ng-repeat="opc3 in funciones" ng-if="opc3.funcion.nivel==2 && opc3.funcion.idPadre == opc.funcion.funcionesId">
+
+                                                    <a ui-sref="{{opc3.funcion.state}}" ng-show="opc3.funcion.idModulo ==modulo"> &nbsp;{{opc3.funcion.nombre}}</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+
+                            </ul>
+                            <!--funciones : {{funciones | json}}-->
+                        </div>
+
+
+
+                    </div>
+                    <!-- /sidebar menu -->
+
+                </div>
+            </div>
+            <!-- top navigation -->
+            <div class="top_nav ">
+                <div class="nav_menu">
+                    <nav class="" role="navigation">
+                        <div class="nav toggle">
+                            <a id="menu_toggle">
+                                <i class="fa fa-bars"></i>
+                            </a>
+                        </div>
+                        <div ng-include="'app/vistasGenericas/header/profileNotification.html'">
+                        </div>
+                    </nav>
+                </div>
+                <div class="toolbar-top visible-xs">
+                    <div ng-include="'app/vistasGenericas/header/navegacionpormodulo.html'">
+                    </div>
+                </div>
+            </div>
+            <!-- /top navigation -->
+            <!-- page content -->
+            <div role="main" class="right_col">
+                <!-- top tiles -->
+                <div ui-view>
+
+                </div>
+            </div>
+            <!-- /page content -->
+            <!-- footer content -->
+            <footer>
+                <div class="pull-right">
+                    SIGCO3
+                </div>
+                <div class="clearfix"></div>
+            </footer>
+            <!-- /footer content -->
+        </div>
+    </div>
+
+    <!-- Custom Theme Scripts -->
+    <script src="Scripts/custom.js"></script>
+    <!-- endPlantilla-->
+
+</body>
+
+</html>

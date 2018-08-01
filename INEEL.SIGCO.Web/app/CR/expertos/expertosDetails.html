@@ -1,0 +1,133 @@
+<div class="vista">
+    <div class="page-title">
+        <div class="title_left">
+            <ol class="breadcrumb miga">
+                <li><i class="sg sg-red-expertos"></i> <a ui-sref="expertosget">Redes de expertos</a></li>
+                <li class="active">Detalles</li>
+            </ol>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
+            <div class="col-lg-6">
+                <div class="x_panel">
+                    <div class="x_content sin-desborde">
+                        <div class="x_title">
+                            <h2>Contacto</h2>
+                            <div class="clearfix"></div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <label>Nombe del experto</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                                <span style="color:black" class="text">{{experto.contacto.nombreCompleto}}</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <label>L&iacute;nea de investigaci&oacute;n</label>&nbsp;&nbsp;&nbsp;&nbsp;
+
+                                <span style="color:black" class="text">{{experto.lineaDesarrolloTecnologico.nomLinDesTec}}</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <label>Especialidad</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                                <span style="color: black" class="text">{{experto.especialidad}}</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <label>Tel&eacute;fono</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                                <span style="color:black" class="text">{{experto.contacto.telefono}}</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="x_panel">
+                    <div class="x_content sin-desborde">
+                        <div class="x_title">
+                            <h2>Informaci&oacute;n laboral</h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <label>Instituci&oacute;n o empresa </label>&nbsp;&nbsp;&nbsp;&nbsp;
+                                <span style="color:black" class="text">{{experto.contacto.empresa.nombreEmpresa}}</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <label>Puesto</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                                <span style="color:black" class="text">{{experto.contacto.puesto}}</span>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <label>Correo</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                                <span style="color:black" class="text">{{experto.contacto.correo}}</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <label>Pa&iacute;s de origen</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                                <span style="color:black" class="text">{{experto.contacto.paisOrigen.nombrePais}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+                    <div class="x_title">
+                        <h2>Contacto con investigadores</h2>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="row">
+                        <div ng-show="autores.length>0" class="col-xs-12">
+                            <table class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" datatable="ng" width="100%"
+                                   dt-options="dtOptions">
+                                <thead>
+                                    <tr>
+                                        <th>N&uacute;m empleado</th>
+                                        <th data-priority="1">Nombre de empleado</th>
+                                        <th>Antig&uuml;edad en el instituto</th>
+                                        <th>Correo</th>
+                                        <th>Comunidad de pr&aacute;ctica</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="autor in autores">
+                                        <td ng-click="openProfile(autor.clavePersona)" title="Detalle de empleado" class="linkTabla">{{autor.clavePersona}}</td>
+                                        <!--<td>{{autor.clavePersona}}</td>-->
+                                        <td>{{autor.nombreCompleto}}</td>
+                                        <td>{{autor.antiguedad}} a&ntilde;os</td>
+                                        <td>{{autor.correo}}</td>
+                                        <td>{{experto.comunidad.descripcion}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <button type="button" ng-click="globalRegresar()" class="btn btn-primary">
+                <span class="fa fa-arrow-left"></span> Regresar
+            </button>
+        </div>
+    </div>
+</div>

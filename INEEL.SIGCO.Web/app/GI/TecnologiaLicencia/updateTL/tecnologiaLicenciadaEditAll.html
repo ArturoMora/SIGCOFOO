@@ -1,0 +1,25 @@
+﻿
+<!--{{authentication.userprofile | json}}-->
+<div class="form-group">
+    <label class="tit col-xs-12">
+        Modo de edici&oacute;n
+    </label>
+    <div class="cont col-xs-4">
+        <select ng-model="tipo" ng-options="gerencia as gerencia.name for gerencia in modo"
+                ng-change="redirect(tipo)"
+                class="form-control">
+            <option value="">--- Seleccione ---</option>
+        </select>
+    </div>
+    <div class="cont col-xs-8">
+    </div>
+</div>
+
+<div class="col-xs-12">
+    <br/>
+    <div class="">
+        <a ui-sref="tecnologiaLicenciada" class="btn btn-primary">
+            <span class="fa fa-arrow-left"></span> Regresar
+        </a>
+    </div>
+</div>

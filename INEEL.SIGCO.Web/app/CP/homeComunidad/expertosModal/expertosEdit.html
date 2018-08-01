@@ -1,0 +1,42 @@
+﻿<div class="modal-content">
+    <div class="modal-header">
+        Editar experto
+        <button type="button" class="close" ng-click="cancel()" data-dissmiss="modal">x</button>
+    </div>
+    <div class="modal-body">
+        <div class="panel">
+            <div class="panel-body">
+                <form ng-submit="modifica()" novalidate name="expertoEditForm" class="form-horizontal">
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                            Tecnolog&iacute;a o area tem&aacute;tica<span class="required"> *</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <div class="row">
+                                <select required ng-required="true" class="form-control"  ng-model="registro.lineaDesarrolloTecnologicoId" ng-options="linea.lineaDesarrolloTecnologicoId as linea.nomLinDesTec for linea in lineas">
+                                    <option value="">--- Selecciona l&iacute;nea de investigaci&oacute;n ---</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                            Reseña<span class="required"> *</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <div class="row">
+                                <textarea rows="3" required ng-required="true" class="form-control" maxlength="500" placeholder="Breve reseña del experto" ng-model="registro.especialidad" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success"><i class="glyphicon glyphicon-saved"></i> Actualizar</button>
+                        <button type="button" class="btn btn-primary" ng-click="cancel();">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+
+</div>

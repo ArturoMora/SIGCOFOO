@@ -1,0 +1,155 @@
+<div class="vista" ng-controller="PonenciasFilterGetCtrl as showCase">
+
+    <div class="page-title">
+        <div class="title_left">
+
+            <ol class="breadcrumb miga">
+                <li><i class="sg sg-articulos-ponencia-cap2"></i> <a ui-sref="BuscarPonencias">Ponencias/Buscar ponencias</a></li>
+            </ol>
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Criterios de b&uacute;squeda</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li>
+                            <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <form role="form" name="formulario">
+
+              
+                        <div class="col-xs-12 col-sm-6">
+
+                            <div class="form-group">
+                                <label class="col-xs-12">Autor interno</label>
+                                <div class="col-xs-10">
+                                    <input type="text" ng-model="Palabra.Autor" id="searchTextAutor" disabled
+                                           name="searchTextAutor" class="form-control" placeholder="Buscar por autor interno">
+                                </div>
+                                <div class="col-xs-2">
+                                    <button class="btn btn-success" ng-click="openAutor();" title="Nombre persona interna" ng-disabled="BuscarAutor">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-xs-12">T&iacute;tulo de la ponencia</label>
+                                <div class="col-xs-10">
+                                    <input type="text" ng-model="Palabra.Titulo" id="searchTextTitulo" maxlength="50"
+                                           name="searchTextTitulo" class="form-control" placeholder="Buscar por t&iacute;tulo de la ponencia"
+                                           ng-minlength="3" />
+                                    <span class="error" ng-show="formulario.searchTextTitulo.$dirty && !formulario.searchTextTitulo.$valid">
+                                        Longitud m&iacute;nima de 3
+                                    </span>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+
+                            <div class="form-group">
+                               
+                                    <label  class="col-xs-12">Lugar del congreso</label>
+                                <div class="col-xs-10">
+                                    <select name="pais" class="form-control" ng-model="Palabra.paisID"  ng-options="pais.paisID as pais.descripcion for pais in paises">
+                                        <option value="">--- Seleccione un pa&iacute;s ---</option>
+                                    </select>
+
+                                </div>
+                                    <div class="clearfix"></div>
+
+                                </div>
+                        </div>  
+                        <div class="col-xs-6" >
+                            <div class="form-group ">
+                                <label class="col-xs-12">
+                                    B&uacute;squeda de ponencias registradas durante el siguiente rango de fechas
+                                </label>
+
+                            </div>
+                            <div class="form-group">
+                                <label class="col-xs-12">Inicio</label>
+                                <div class="col-xs-10">
+                                    <input placeholder="dd/mm/yyyy" ng-minlength="8" name="fechaInicio" maxlength="10" ng-init="open=false" type="text" show-button-bar="false" popup-placement="bottom"
+                                           class="form-control" uib-datepicker-popup="dd/MM/yyyy" ng-model="Palabra.FechaInicio" value="{{ date | date: 'dd/MM/yyyy' }}"
+                                           is-open="open"  close-text="Close" ng-change="desabilitar=false;validarFechasInicio()">
+                                </div>
+                                <div class="col-xs-2">
+                                    <button type="button" class="btn btn-success" ng-click="open=true;"><i class="glyphicon glyphicon-calendar"></i></button>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-xs-12">T&eacute;rmino</label>
+                                <div class="col-xs-10">
+                                    <input placeholder="dd/mm/yyyy" name="fechaTermino" ng-minlength="8" maxlength="10" ng-init="open2=false" type="text" show-button-bar="false" popup-placement="bottom"
+                                           class="form-control" uib-datepicker-popup="dd/MM/yyyy" ng-model="Palabra.FechaTermino" value="{{ date | date: 'dd/MM/yyyy' }}"
+                                           is-open="open2"  close-text="Close" ng-change="desabilitar=false;validarFechas()">
+                                </div>
+                                <div class="col-xs-2">
+                                    <button type="button" class="btn btn-success" ng-click="open2=true;"><i class="glyphicon glyphicon-calendar"></i></button>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-xs-12">Autor externo</label>
+                                <div class="col-xs-10">
+                                    <input type="text" ng-model="Palabra.Externo" id="searchTextExterno" maxlength="50"
+                                           name="searchTextExterno" class="form-control" placeholder="Buscar por nombre de autor externo"
+                                           ng-minlength="3" />
+                                    <span class="error" ng-show="formulario.searchTextExterno.$dirty && !formulario.searchTextExterno.$valid">
+                                        Longitud m&iacute;nima de 3
+                                    </span>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+
+
+                        <br />
+
+                        <div class="col-xs-12 col-sm-12">
+
+                            <div style="margin-left:10px">
+                                <div class="form-group">
+                                    <a class="btn btn-success" ng-click="buscar();">
+                                        <i class="glyphicon glyphicon-search"></i> Buscar
+                                    </a>
+                                    <a class="btn btn-primary" ng-click="LimpiarCampos();">
+                                        Limpiar
+                                    </a>
+
+                                </div>
+
+                            </div>
+
+                        </div>  
+
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="row" ng-show="botonBusqueda">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <!-- especificar las columnas para las diferentes pantallas -->
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+                    <table datatable="" id="MTBuscarPonenciasA1" dt-options="showCase.dtOptions" dt-columns="showCase.dtColumns"
+                           dt-instance="showCase.dtInstance"
+                           class="display dt-responsive"
+                           cellspacing="0" width="100%"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

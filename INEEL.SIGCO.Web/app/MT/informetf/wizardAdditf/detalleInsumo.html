@@ -1,0 +1,137 @@
+﻿<!-- page content -->
+<div class="vista">
+
+    <div class="page-title">
+        <div class="title_full">
+
+            <ol class="breadcrumb miga">
+                <li><i class="sg sg-informes-tecnico"></i> <a ui-sref="ListaItf">Informe T&eacute;cnico Final</a></li>
+                <li> <a ui-sref="BuscarInsumos">Insumos</a></li>
+                <li class="active">Detalles</li>
+            </ol>
+
+        </div>
+    </div>
+
+
+    <div class="clearfix"></div>
+    <!--registro:{{registro | json}}-->
+    <div class="row">
+        <div class="col-md-8 col-sm-8 col-xs-12">
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+                    <label class="detalle col-xs-12 " title="Nombre">
+                        {{registro.nombreIns}}
+                    </label>
+                    <label class="cont emc col-xs-12 colorTit">
+                        {{registro.tipoInsumo.descripcionInsumo}}
+                    </label>
+
+                    <label class="cont col-xs-12">
+                        Responsable: {{registro.responsableIns}}
+                    </label>
+
+                    <label class="tit col-xs-12">
+                        Ubicaci&oacute;n del insumo
+                    </label>
+                    <label class="cont col-xs-12">
+                        {{registro.ubicacionResIns}}
+                    </label>
+
+
+                    <label class="tit col-xs-12">
+                        Descripci&oacute;n
+                    </label>
+                    <label class="cont col-xs-12">
+                        {{registro.descripcionIns}}
+                    </label>
+
+
+
+                </div>
+            </div>
+
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+                    <div class="x_title">
+                        <h2>Proyecto asociado</h2>
+                        <div class="clearfix"></div>
+                    </div>
+                    <label class="titFirst col-xs-12">
+                        Proyecto
+                    </label>
+                    <label class="cont col-xs-12">
+                        {{registro.informeTecnicoFinal.proyecto.proyectoId}}-{{registro.informeTecnicoFinal.proyecto.nombre}}
+                    </label>
+
+                    <label class="tit col-xs-12">
+                        Jefe de proyecto
+                    </label>
+                    <label class="cont col-xs-12">
+                        {{registro.informeTecnicoFinal.proyecto.nombreJefeProyecto}}
+                    </label>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 col-sm-4 col-xs-12">
+
+
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Documentaci&oacute;n</h2>
+                    <div class="clearfix"></div>
+                </div>
+
+
+                <div ng-repeat="adjunto in registro.adjuntoITFInsumo" class="sin-desborde">
+                    <span class="text fa fa-lock" ng-if="!publico"> {{adjunto.adjunto.nombre | underscoreless}}</span>
+                    <u><a href="/Descargas.html#/q/{{adjunto.adjunto.adjuntoId | encriptar}}" ng-if="publico" 
+                          class="linkArchivo text" target="_blank"><span class="fa fa-unlock"></span>{{ adjunto.adjunto.nombre | underscoreless }}</a>  </u>
+                </div>
+
+                <div class="x_title">
+                    &nbsp;
+                </div>
+                <div class="alert informacion col-xs-12">                    
+                    <span class="glyphicon glyphicon-info-sign"></span> El acceso a la documentación es de tipo
+                    <strong>
+                        {{controlAcceso}}
+                    </strong>
+                </div>
+
+                <div class="col-xs-12">
+
+                    <button ng-hide="publico || solicitudExistente" type="button"
+                            ng-click="solicitarAcceso()" class="btn btn-warning">
+                        <font class="fa fa-lock"></font> Solicitar Acceso
+                    </button>
+                </div>
+                <div class="col-xs-12" ng-hide="true"><!--by Alan-->
+                    
+                    <a ng-show="jefeHiperonimo" ng-click="setGlobalID(registro.insumosId)"
+                            ui-sref="editarInsumoITF" class="btn btn-warning">
+                        <span class="glyphicon glyphicon-pencil"></span> Editar
+                    </a>
+                    <button ng-show="jefeHiperonimo" type="button" ng-click="setGlobalID(registro.insumosId); eliminar(registro)"
+                            class="btn btn-danger">
+                        <span class="glyphicon glyphicon-trash"></span> Eliminar
+                    </button>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+    <!--<div class="row">registro: {{registro | json}}</div>-->
+    <div class="row">
+        <div class="col-xs-12">
+            <button type="button" ng-click="globalRegresar()" class="btn btn-primary">
+                <span class="fa fa-arrow-left"></span> Regresar
+            </button>
+        </div>
+    </div>
+
+
+</div>

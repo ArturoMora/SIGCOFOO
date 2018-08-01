@@ -1,0 +1,54 @@
+﻿<div data-ng-show="authentication.isAuth">
+    <div ng-hide="idiomas.length >= 0">
+        <img src="images/cargando.gif" />
+    </div>
+    <div class="row">
+        <div class="col-md-12 col-lg-12 col-xs-12 sin-desborde">
+            <div ng-show="idiomas.length === 0" class="alert advertencia">
+                No hay registros de idiomas.
+            </div>
+            <div ng-show="idiomas.length > 0">
+                <table id="CHIdiomasGet" class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" datatable="ng" width="100%"
+                       dt-options="dtOptions">
+                    <thead>
+                        <tr>
+                            <th data-priority="1">Idioma</th>
+                            <th>Fecha validaci&oacute;n</th>
+                            <th>Estado del registro</th>
+                            <th data-priority="1">Opciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="idioma in idiomas">
+                            <td ng-click="$event.stopPropagation();" ui-sref="idiomadetails({id: idioma.idiomasId})" title="Detalle"> <a>{{idioma.idioma.descripcion}}</a></td>
+                            <td>{{idioma.fechaValidacion === null ? 'Dato no disponible' : idioma.fechaValidacion | date: "dd/MM/yyyy"}}</td>
+                            <td>{{idioma.estadoFlujo.descripcion}}</td>
+                            <td class="text-center">
+                                <a ng-if="idRol==1" ng-click="setGlobalID(idioma.idiomasId);$event.stopPropagation();"
+                                   ui-sref="IdiomaDetailsAdmin({id:idioma.idiomasId, id2: 1})" title="Aprobar registro" class="btn btn-warning">
+                                    <i class="glyphicon glyphicon-pencil"></i>
+                                </a>
+                                <div ng-if="idioma.estadoFlujoId==1 || editarGestion==1">
+                                    <a ng-if="idRol!=1" ui-sref="idiomasedit" ng-click="setGlobalID(idioma.idiomasId); $event.stopPropagation();" class="btn btn-warning">
+                                        <i class="glyphicon glyphicon-pencil"></i>
+                                    </a>
+                                    <button type="button" ng-if="idioma.fechaValidacion === null && idioma.estadoFlujoId!=3" ng-click="$event.stopPropagation();open(idioma)" class="btn btn-danger">
+                                        <i class="glyphicon glyphicon-trash"></i>
+                                    </button>
+                                </div>
+                                <div ng-if="idioma.estadoFlujoId==3">
+                                    <a ng-if="idRol!=1" ng-really-message="Está a punto de acceder a un registro 'Aceptado', si modifica algún atributo deberá ser validado nuevamente. ¿Desea continuar?" ng-really-click="setGlobalID(idioma.idiomasId);$event.stopPropagation();navegador();" title="Editar" class="btn btn-warning">
+                                        <i class="glyphicon glyphicon-pencil"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <a ng-show="idiomas.length >= 0" type="button" ng-click="$event.stopPropagation();" ui-sref="idiomasadd" class="btn btn-success">
+                <i class="glyphicon glyphicon-plus"></i> Agregar
+            </a>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,109 @@
+<div class="vista">
+	<div class="page-title">
+		<div class="title_left">
+			<ol class="breadcrumb miga">
+				<li><i class="sg sg-inventario-rh"></i> <a ui-sref="evolucionplantilla">Inventario RH/Evoluci&oacute;n de la plantilla del personal de investigaci&oacute;n</a></li>
+			</ol>
+
+		</div>
+	</div>
+	<div class="clearfix"></div>
+	<div class="row">
+        <form name="ValidForm" id="form" class="form-horizontal">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Criterios de b&uacute;squeda</h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li>
+                                <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <div class="col-xs-12">
+                            <div class="col-lg-3 col-md-4 col-xs-6">
+                                <div>
+                                    <label class="col-md-12 col-sm-12 col-xs-12">Fecha:</label>
+                                    <div class="col-xs-10">
+                                        <input show-button-bar="false" ng-minlength="8" maxlength="10" datepicker-options="datePicker.FechaOptions" uib-datepicker-popup='dd/MM/yyyy' popup-placement="bottom"
+                                               type="text" class="form-control" ng-model="fechach" ng-change="cambiafecha()" is-open="open" ng-required="true"
+                                               close-text="Close" name="fecha" />
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-success" ng-click="open=true"><i class="glyphicon glyphicon-calendar"></i></button>
+                                        </span>
+                                        <span ng-show="ValidForm.fecha.$dirty &&  ValidForm.fecha.$invalid" class="error">Formato inválido 'dd/MM/yyyy'</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-9 col-md-8 col-xs-6">
+                                <div>
+                                    <label class="col-md-12 col-sm-12 col-xs-12">&nbsp;</label>
+                                    <div class="col-xs-12" ng-show="datosgrafica">
+                                        <span>
+                                            <a class="btn btn-success" title="Descargar" ng-click="exportpdf()">
+                                                <i class="fa fa-download"></i> Descargar PDF
+                                            </a>
+                                        </span>
+                                        <span>
+                                            <a class="btn btn-success" title="Descargar" onclick="downloadExcelTableById('datosgrafica', 'evolucionplantilla'); privateResetDatatable('datosgrafica');">
+                                                <i class="fa fa-download"></i> Descargar Excel
+                                            </a>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+	</div>
+	<div class="row">
+		<div class="col-md-12 col-sm-12 col-xs-12">
+			<div class="x_panel">
+				<div class="x_title">
+					<h2>Resultados</h2>
+					<div class="clearfix"></div>
+				</div>
+				<div class="x_content">
+					<div class="row" ng-show="datosgrafica">
+						<div class="col-lg-12 col-md-12 col-xs-12">
+							<div class="table-responsive">
+								<table id="datosgrafica" class="table table-striped table-hover table-responsive table-bordered">
+									<thead class="bg-primary">
+										<tr>
+											<th>Año</th>
+											<th ng-repeat="anio in datosgrafica.etiquetas">{{anio}}</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr ng-repeat=" serie in datosgrafica.series">
+											<td class="bg-primary">{{serie}}</td>
+											<td ng-repeat="dato in datosgrafica.datos[$index] track by $index" ng-model="anios">{{dato}}</td>
+										</tr>
+										<tr>
+											<td>% de Posgrado</td>
+											<td ng-repeat="promedio in promedios track by $index" nowrap>{{promedio | number:0 }} %</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-lg-12 col-md-12 col-xs-12">
+							<canvas id="myChart" class="chart chart-bar" chart-data="datosgrafica.datos" chart-labels="datosgrafica.etiquetas" chart-series="datosgrafica.series"
+							 chart-options="options" chart-colors="colors"></canvas>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+</div>

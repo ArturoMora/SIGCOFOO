@@ -1,0 +1,62 @@
+﻿<!-- page content -->
+<div class="vista">
+
+    <div class="page-title">
+        <div class="title_left">
+
+            <ol class="breadcrumb miga">
+                <li> <a ui-sref="">Bit&aacute;cora</a></li>
+            </ol>
+
+        </div>
+    </div>
+    
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+                    <div class="row">
+                        <form role="form">
+                            <div ng-if="registros.length>0">
+                                <div class="form-group">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th class="thAjusteColaboracion">Fecha</th>
+                                                <th style="width:40%">Empleado</th>
+                                                <th class="thAjuste">Estado</th>
+                                                <th>Descripci&oacute;n</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="registro in registros">
+                                                <td>{{registro.fechaMovimiento | date:"dd/MM/yyyy h:mm:ss a"}}</td>
+                                                <td>{{registro.nombreCompleto}}</td>
+                                                <td>{{registro.estadoFlujo.descripcion}}</td>
+                                                <td>{{registro.descripcion}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="col-xs-12">
+                                <div ng-hide="registros.length>0" class="alert informacion">
+                                    Sin registros
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    
+                </div>
+            </div>
+
+            <button type="submit" ng-click="globalRegresar();" class="btn btn-primary" style="padding-right:15px">
+                <span class="fa fa-arrow-left"></span> Regresar
+            </button>
+        </div>
+        <!--registros: {{registros | json}}-->
+
+    </div>
+</div>
+<!-- end page content -->

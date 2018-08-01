@@ -1,0 +1,40 @@
+﻿<div class="modal-header">
+    <button type="button" class="close" ng-click="cancel()" data-dissmiss="modal">
+        <i class="glyphicon glyphicon-remove"></i>
+    </button>
+    <div class="col-xs-1"></div>
+    <div>
+        <h3>
+            Personas
+        </h3>
+    </div>
+</div>
+<div class="modal-body">
+   
+    <div class="row">
+        <div class="col-sm-12">
+            <table  class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" datatable="ng" width="100%" dt-options="dtOptions">
+                <thead>
+                    <tr>
+                        <th>Número de empleado</th>
+                        <th>Nombre de empleado</th>
+                        <th>Clave unidad organizacional</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="e in data" style="cursor: pointer;text-decoration: underline;"
+                        ng-click="ok(e)">
+                        <td>{{e.clavePersona}}</td>
+                        <td>{{e.nombreCompleto}}</td>
+                        <td>{{e.claveUnidad}}</td>
+                    </tr>
+                </tbody>
+            </table>            
+
+        </div>
+    </div>
+</div>  <!-- final modal body-->
+<div class="modal-footer">
+    <!--<button type="button" class="btn btn-success animate-if" ng-click="ok()" ng-if="empleadoSelect.emp != null">Aceptar</button>-->
+    <button type="button" class="btn btn-cancel" ng-click="cancel()">Cancelar</button>
+</div>

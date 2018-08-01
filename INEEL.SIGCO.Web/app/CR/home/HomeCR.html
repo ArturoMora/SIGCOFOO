@@ -1,0 +1,164 @@
+﻿﻿<!-- page content -->
+<div class="vista">
+
+    <div class="page-title">
+        <div class="title_left">
+            <div class="col-xs-12">
+                <h3 class="titColor"><img src="/Resources/icono_home_cr_verde.png" /> Capital relacional (CR)</h3>
+            </div>
+            <div class="row">&nbsp;</div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-sm-7 col-xs-12">
+            <div class="col-sm-6 col-xs-12">
+
+                <div class="row top_tiles">
+                    <a ui-sref="inicioclientes">
+                        <div class="animated flipInY col-xs-12">
+
+                            <div class="tile-stats">
+                                <div class="icon2"><i class="sg sg-clientes"></i></div>
+                                <div class="count">{{model.clientes}}</div>
+                                <h3>Clientes</h3>
+                            </div>
+
+                        </div>
+                    </a>
+                    <a>
+                        <!--<div class="animated flipInY col-xs-12">
+                            <div class="tile-stats">
+                                <div class="icon2"><i class="sg sg-proveedores"></i></div>
+                                <div class="count">{{model.proveedores}}&nbsp;</div>
+                                <h3>Proveedores</h3>
+                            </div>
+                        </div>-->
+                    </a><a ui-sref="expertosget">
+                        <div class="animated flipInY col-xs-12">
+                            <div class="tile-stats">
+                                <div class="icon2"><i class="sg sg-red-expertos"></i></div>
+                                <div class="count">{{model.redExpertos}}</div>
+                                <h3>Redes de expertos </h3>
+                            </div>
+                        </div>
+                    </a><a ui-sref="estudiosmercado">
+                        <div class="animated flipInY col-xs-12">
+                            <div class="tile-stats">
+                                <div class="icon2"><i class="sg sg-estudios-mercado"></i></div>
+                                <div class="count">{{model.estudiosMercado}}</div>
+                                <h3>Estudios de mercado</h3>
+                            </div>
+                        </div>
+                    </a>
+                    <a ui-sref="grupoColegiadoInicio" ng-show="rolId === 15 || rolId === 16 || rolId === 4 || rolId === 5">
+                        <div class="animated flipInY col-xs-12">
+                            <div class="tile-stats">
+                                <div class="icon2"><i class="sg sg-partes-interesadas"></i></div>
+                                <div class="count">{{model.partesInteresadas}}</div>
+                                <h3>Partes interesadas</h3>
+                            </div>
+                        </div>
+                    </a>
+                    <a ui-sref="partesInteresadasAdmInicio" ng-show="rolId === 1024">
+                        <div class="animated flipInY col-xs-12">
+                            <div class="tile-stats">
+                                <div class="icon2"><i class="sg sg-partes-interesadas"></i></div>
+                                <div class="count">{{model.partesInteresadas}}</div>
+                                <h3>Partes interesadas</h3>
+                            </div>
+                        </div>
+                    </a>
+
+
+
+                </div>
+            </div>
+
+            <div class="col-sm-6 col-xs-12">
+                <div class="row top_tiles">
+                    <a ui-sref="competidorGet">
+                        <div class="animated flipInY col-xs-12">
+                            <div class="tile-stats">
+                                <div class="icon2"><i class="sg sg-competidores"></i></div>
+                                <div class="count">{{model.competidores}}</div>
+                                <h3>Competidores</h3>
+                            </div>
+                        </div>
+                    </a><a ui-sref="inicioaliados">
+                        <div class="animated flipInY col-xs-12">
+                            <div class="tile-stats">
+                                <div class="icon2"><i class="sg sg-aliados"></i></div>
+                                <div class="count">{{model.aliados}}</div>
+                                <h3>Aliados</h3>
+                            </div>
+                        </div>
+                    </a>
+                    <a ui-sref="dashboard">
+                        <div class="animated flipInY col-xs-12">
+                            <div class="tile-stats">
+                                <div class="icon2"><i class="sg sg-oportunidades-neg"></i></div>
+                                <div class="count">{{model.oportunidadNegocio}}</div>
+                                <h3>Oportunidades de negocio</h3>
+                            </div>
+                        </div>
+                    </a>
+                    <a ui-sref="inicioconvocatorias">
+                        <div class="animated flipInY col-xs-12">
+                            <div class="tile-stats">
+                                <div class="icon2"><i class="sg sg-fuentes-financiamiento"></i></div>
+                                <div class="count">{{model.fuentesFinan}}</div>
+                                <h3>Fuentes de financiamiento</h3>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-md-5 col-sm-5 col-xs-12">
+            <div class="row">
+                <div class="x_panel">
+                    <div class="x_content sin-desborde">
+                        <div class="text-center">
+                            <a class="btn btn-app" ng-click="setGlobalGo('buscarEmpresas')">
+                                <!--<span class="badge bg-green">&nbsp;</span>-->
+                                <i class="fa fa-institution"></i> Buscar empresas
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2 class="titColor">Última informaci&oacute;n agregada </h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li>
+                                <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+
+                    <div class="x_content sin-desborde">
+                        <article class="media event" ng-repeat="n in nuevosOCs | limitTo: 30">
+                            <a class="pull-left date">
+                                <p class="month">{{n.fechaRegistro | date:'MMM'}}</p>
+                                <p class="day">{{n.fechaRegistro | date:'dd'}}</p>
+                            </a>
+                            <div class="media-body">
+                                <a class="title" href="{{n.liga}}">{{n.ocs.nombre}} </a>
+                                <p>{{n.descripcion}} </p>
+                            </div>
+                        </article>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- end page content -->

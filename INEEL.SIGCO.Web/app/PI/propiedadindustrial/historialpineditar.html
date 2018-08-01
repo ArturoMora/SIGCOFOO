@@ -1,0 +1,79 @@
+<div class="vista">
+    <div class="page-title">
+        <div class="title_left">
+            <ol class="breadcrumb miga">
+                <li><i class="glyphicon glyphicon-file"></i> <a ui-sref="propiedadindustrialget">Propiedad industrial</a></li>
+                <li class="">Historial</li>
+                <li class="">Editar</li>
+            </ol>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+                    <form name="formhistoria" ng-submit="actualizarregistro()" id="form" class="form-horizontal">
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Acci&oacute;n <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input ng-model="historia.accion" maxlength="200" required class="form-control" placeholder="Agrega una descripción..."></input>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Fecha en que ocurri&oacute; <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="row">
+                                    <div class="col-xs-10">
+                                        <input placeholder="dd/mm/yyyy" ng-minlength="8" name="fechaaccion" maxlength="10" ng-init="open=false" type="text" show-button-bar="false"
+                                            popup-placement="bottom" class="form-control" uib-datepicker-popup="dd/MM/yyyy" ng-model="historia.fechaAccion"
+                                            value="{{ date | date: 'dd/MM/yyyy' }}" is-open="open" close-text="Close" required/>
+                                        <span ng-show="forformhistoriamda.fechaaccion.$dirty &&  formhistoria.fechaaccion.$invalid" class="error">Formato inválido 'dd/MM/yyyy'</span>
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <button type="button" class="btn btn-success" ng-click="open=true"><i class="glyphicon glyphicon-calendar"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Documento adjunto 
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div ng-if="historia.adjuntoId !== null">
+                                    <span class="fa fa-download"></span>&nbsp;&nbsp;<a href="/Descargas.html#/q/{{historia.adjuntoId | encriptar}}"
+                                        class="linkTabla" target="_blank">Descargar Archivo</a> &nbsp;&nbsp;
+                                    <a class="btn btn-danger" title="Eliminar Archivo" ng-click="deleteFile()">
+                                        <i class="glyphicon glyphicon-trash"></i>
+                                    </a>
+                                </div>
+                                <div class="form-group" ng-show="historia.adjuntoId === null">
+                                    <input class="input-file form-control" type="file" name="filesGral" id="filesGral" data-buttonName="btn-success" ng-model="historia.adjunto.nombre"
+                                        onchange="angular.element(this).scope().getFileDetails(this);" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ln_solid"></div>
+                        <div class="form-group">
+                            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                <div class="">
+                                    <button type="submit" ng-click="save()" class="btn btn-success" style="padding-right:15px" ng-disabled="desactivar">
+                                        <i class="glyphicon glyphicon-saved"></i> Actualizar
+                                    </button>
+                                    <button type="button" ng-click="globalRegresar()" class="btn btn-primary" style="padding-right:15px">
+                                        <span class="fa fa-arrow-left"></span> Regresar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

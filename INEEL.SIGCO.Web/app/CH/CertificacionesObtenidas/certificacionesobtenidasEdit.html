@@ -1,0 +1,161 @@
+﻿<div ng-include="'app/vistasGenericas/header/registroNombrePersona.html'"> </div>
+<div class="vista">
+
+    <div class="page-title">
+        <div class="title_left">
+            <ol class="breadcrumb miga">
+                <li><i class="glyphicon glyphicon-file"></i> <a ui-sref="fichapersonal.certificacionesobtenidas({seccion:'certificacionesobtenidas'})">Certificaciones obtenidas</a></li>
+                <li class="active">Editar</li>
+            </ol>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+                    <form name="ValidForm" id="form" class="form-horizontal">
+
+                        <div class="x_title">
+                            <h2>Informaci&oacute;n general</h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Nombre de la certificaci&oacute;n <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input auto-focus-campo type="text" maxlength="300" placeholder="Nombre de la certificación obtenida..." class="form-control" name="nombreCertificacion" ng-model="registro.nombreCertificacion" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Autoridad emisora de la certificaci&oacute;n <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" maxlength="300" placeholder="Nombre de la autoridad emisora de la certificación..." class="form-control" ng-model="registro.autoridadEmisora" name="autoridadEmisora" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                N&uacute;mero de la licencia <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" maxlength="20" class="form-control" placeholder="Número de la licencia..." numbers-only ng-model="registro.numeroLicencia" name="numeroLicencia"  ng-pattern="/[1-9]/" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                URL de la certificaci&oacute;n <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="url" name="descripcionLiga" class="form-control" maxlength="200"
+                                       ng-model="registro.url" ng-minlength="8" placeholder="http://www.dominio.com" required />
+                                <span class="error" ng-show="ValidForm.descripcionLiga.$dirty &&  !ValidForm.descripcionLiga.$valid || (ValidForm.$submitted && ValidForm.descripcionLiga.$invalid) ">Se requiere un sitio Web ejemplo: http://www.dominio.com</span>
+                            </div>
+                        </div>
+                        <div class="x_title">
+                            <h2>Per&iacute;odo</h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Inicio <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="row">
+                                    <div class="col-xs-10">
+                                        <input placeholder="dd/mm/yyyy" ng-minlength="8" name="fechaInicio" maxlength="10" ng-init="open=false" type="text" show-button-bar="false" popup-placement="bottom" class="form-control" uib-datepicker-popup="dd/MM/yyyy" ng-model="registro.fechaInicio" value="{{ registro.fechaInicio | date: 'dd/MM/yyyy' }}" is-open="open" ng-required="true" close-text="Close" />
+                                        <span ng-show="ValidForm.fechaInicio.$dirty &&  ValidForm.fechaInicio.$invalid" class="error">Formato inválido 'dd/MM/yyyy'</span>
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <button type="button" class="btn btn-success" ng-click="open=true"><i class="glyphicon glyphicon-calendar"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                T&eacute;rmino <span class="required" ng-if="!vence">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="row">
+                                    <div class="col-xs-10">
+                                        <input ng-disabled="disable" ng-minlength="8" name="fechaTermino" maxlength="10" placeholder="dd/mm/yyyy" ng-init="open2=false" type="text" show-button-bar="false" popup-placement="bottom" class="form-control" uib-datepicker-popup="dd/MM/yyyy" ng-model="registro.fechaTermino" value="{{ date | date: 'dd/MM/yyyy' }}" is-open="open2" close-text="Close" ng-required="!vence" />
+                                        <span ng-show="ValidForm.fechaTermino.$dirty &&  ValidForm.fechaTermino.$invalid" class="error">Formato inválido 'dd/MM/yyyy'</span>
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <button ng-disabled="disable" type="button" class="btn btn-success" ng-click="open2=true"><i class="glyphicon glyphicon-calendar"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Esta certificaci&oacute;n no vence
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12" style="margin-top:6px;">
+                                <switch name="enabled" ng-model="vence" ng-change="changeCallback();ValidForm.$setDirty()"></switch>
+                            </div>
+                        </div>
+                        <div class="x_title">
+                            <h2>Evidencia <small>Tama&ntilde;o m&aacute;ximo por archivo de 8 MB, el formato de los archivos puede ser: PDF, DOC, DOCX</small></h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Documento adjunto
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div ng-show="!regFile">
+                                    <span class="fa fa-download"></span>&nbsp;&nbsp;<a href="/Descargas.html#/q/{{registro.adjunto.adjuntoId | encriptar}}" class="linkTabla" target="_blank">Descargar Archivo</a>
+                                    &nbsp;&nbsp;
+                                    <a class="btn btn-danger" title="Eliminar Archivo" ng-really-click="deleteFile();"  ng-really-message="¿Está seguro de eliminar el documento adjunto?">
+                                        <i class="glyphicon glyphicon-trash"></i>
+                                    </a>
+                                </div>
+                                <div class="form-group" ng-show="regFile">
+                                    <input class="input-file form-control col-md-7 col-xs-12" type="file" name="filesGral" id="filesGral" data-buttonName="btn-success"
+                                           ng-click="saveIG();" ng-model="filesGral"
+                                           onchange="angular.element(this).scope().getFileDetails(this);" />
+                                </div>
+                                <div class="form-group">
+                                    <div class="alert informacion col-xs-12">
+                                        <span class="glyphicon glyphicon-info-sign"></span> Nota: Para enviar la solicitud es necesario incluir el documento adjunto de evidencia.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ln_solid"></div>
+                        <div class="form-group">
+                            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                <div class="">
+                                    <div class="panel-Modificado">
+                                        <button type="submit" class="btn btn-success"  ng-click="update()"
+                                                 ng-disabled="desactivar || !ValidForm.nombreCertificacion.$valid
+                                             ||!ValidForm.autoridadEmisora.$valid ||!ValidForm.numeroLicencia.$valid ||!ValidForm.descripcionLiga.$valid
+                                            ||!ValidForm.fechaInicio.$valid ||!ValidForm.fechaTermino.$valid">
+                                            <i class="glyphicon glyphicon-saved"></i> Actualizar
+                                        </button>
+                                        <!-- <button type="button" ui-sref="fichapersonal.certificacionesobtenidas({seccion:'certificacionesobtenidas'})" class="btn btn-primary">
+                                            <span class="fa fa-arrow-left"></span> Regresar
+                                        </button> -->
+                                        <button type="button" confirma-regresar="regresar()" state-form="ValidForm" class="btn btn-primary">
+                                            <span class="fa fa-arrow-left"></span> Regresar
+                                        </button>
+                                        <button ng-show="((!regFile) && (editarGestion==0)) && (registro.estadoFlujoId==1)" ng-hide="editarGestion==1 || registro.estadoFlujoId!=1 || regFile" type="submit" ng-click="validar()" class="btn btn-warning" 
+                                                 ng-disabled="desactivar || !ValidForm.nombreCertificacion.$valid
+                                             ||!ValidForm.autoridadEmisora.$valid ||!ValidForm.numeroLicencia.$valid ||!ValidForm.descripcionLiga.$valid
+                                            ||!ValidForm.fechaInicio.$valid ||!ValidForm.fechaTermino.$valid">
+                                            <i class="glyphicon glyphicon-saved"></i> Enviar solicitud al Administrador de CH
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

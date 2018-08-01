@@ -1,0 +1,472 @@
+﻿<!DOCTYPE html>
+<html lang="es-mx" ng-app="ineelGI">
+
+<head>
+    <title>Gesti&oacute;n de la Innovaci&oacute;n</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta http-equiv="Expires" content="-1">
+    <meta http-equiv="Last-Modified" content="0">
+    <meta http-equiv="Cache-Control" content="no-cache, mustrevalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+
+
+
+    <!-- build:css Content/stylesCH.min.css -->
+    <!-- inject:css -->
+    <!-- Bootstrap -->
+    <link href="vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="vendors/nprogress/nprogress.css" rel="stylesheet">
+    <!-- iCheck -->
+    <link href="vendors/iCheck/skins/flat/green.css" rel="stylesheet">
+    <!-- bootstrap-progressbar -->
+    <link href="vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
+    <!-- JQVMap -->
+    <link href="vendors/jqvmap/dist/jqvmap.min.css" rel="stylesheet" />
+    <!-- bootstrap-daterangepicker -->
+    <link href="vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+    <!-- Custom Theme Style -->
+    <link href="Content/custom.css" rel="stylesheet">
+
+
+    <!--Mensajes Toastr-->
+    <link href="Content/toastr.css" rel="stylesheet" />
+
+    <!--Tablas responsivas-->
+    <link href="Content/EstilosPropios/jquery.dataTablesINEEL.css" rel="stylesheet" />
+    <link href="Content/DataTables/css/dataTables.responsive.css" rel="stylesheet" />
+    <!--Estilos propios-->
+    <!--<link href="Content/EstilosPropios/StyleAuthorize.css" rel="stylesheet" />-->
+    <link href="Content/EstilosPropios/StyleModulos.css" rel="stylesheet" />
+    <link href="Content/EstilosPropios/datatable.tamaños.css" rel="stylesheet" />
+    <link href="Content/EstilosPropios/fabForm.css" rel="stylesheet" />
+    <link href="Content/Curriculum/curriculum.css" rel="stylesheet" />
+    <!--stilos reportes-->
+
+    <link href="Content/DataTables/css/buttons.dataTables.css" rel="stylesheet" />
+    <link href="Content/angular-ui-tree/angular-ui-tree.css" rel="stylesheet" />
+    <link href="Content/angular-block-ui.min.css" rel="stylesheet" />
+    <link href="Scripts/knob/jquery.circliful.css" rel="stylesheet" />
+    <link href="Scripts/getorgchart-1.1/getorgchart.css" rel="stylesheet" />
+
+    <link href="Content/angucomplete-alt.css" rel="stylesheet" />
+    <link href="Content/ng-tags-input.css" rel="stylesheet" />
+    <link href="Content/ng-tags-input-personal.css" rel="stylesheet" />
+    <link href="Content/EstilosPropios/dropdownlist.css" rel="stylesheet" />
+    <!-- endinject -->
+    <!-- endbuild -->
+    <!--
+       IE8 support, see AngularJS Internet Explorer Compatibility http://docs.angularjs.org/guide/ie
+       For Firefox 3.6, you will also need to include jQuery and ECMAScript 5 shim
+     -->
+    <!--[if lt IE 9]>
+      <script src="Scripts/jquery1.11.0.js"></script>
+      <script src="Scripts/es5-shim.min.js"></script>
+      <script>
+        document.createElement('ui-select');
+        document.createElement('ui-select-match');
+        document.createElement('ui-select-choices');
+      </script>
+    <![endif]-->
+    <!--<link href="Content/dx.common.css" rel="stylesheet" />-->
+    <!-- build:js Scripts/scriptsCH.min.js -->
+    <!-- inject:js -->
+    <script src="Scripts/jquery-2.1.0.min.js"></script>
+    <script src="Scripts/jquery-ui-1.11.3.min.js"></script>
+
+    <!-- <script src="Scripts/jquery-1.9.1.js"></script>-->
+    <script src="Scripts/bootstrap.js"></script>
+
+    <!-- plantilla -->
+    <!-- FastClick -->
+    <script src="vendors/fastclick/lib/fastclick.js"></script>
+    <!-- NProgress -->
+    <script src="vendors/nprogress/nprogress.js"></script>
+    <!-- Chart.js -->
+    <script src="vendors/echarts/dist/echarts.min.js"></script>
+    <script src="vendors/Chart.js/dist/Chart.min.js"></script>
+    <!-- gauge.js -->
+    <script src="vendors/gauge.js/dist/gauge.min.js"></script>
+    <!-- bootstrap-progressbar -->
+    <script src="vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+    <!-- iCheck -->
+    <script src="vendors/iCheck/icheck.min.js"></script>
+    <!-- Skycons -->
+    <script src="vendors/skycons/skycons.js"></script>
+    <!-- Flot -->
+    <script src="vendors/Flot/jquery.flot.js"></script>
+    <script src="vendors/Flot/jquery.flot.pie.js"></script>
+    <script src="vendors/Flot/jquery.flot.time.js"></script>
+    <script src="vendors/Flot/jquery.flot.stack.js"></script>
+    <script src="vendors/Flot/jquery.flot.resize.js"></script>
+    <!-- Flot plugins -->
+    <script src="vendors/flot.orderbars/js/jquery.flot.orderBars.js"></script>
+    <script src="vendors/flot-spline/js/jquery.flot.spline.min.js"></script>
+    <script src="vendors/flot.curvedlines/curvedLines.js"></script>
+    <!-- DateJS -->
+    <script src="vendors/DateJS/build/date.js"></script>
+    <!-- JQVMap -->
+    <script src="vendors/jqvmap/dist/jquery.vmap.js"></script>
+    <script src="vendors/jqvmap/dist/maps/jquery.vmap.world.js"></script>
+    <script src="vendors/jqvmap/examples/js/jquery.vmap.sampledata.js"></script>
+
+
+    <script src="Scripts/toastr.js"></script>
+    <script src="Scripts/getorgchart-1.1/getorgchart.js"></script>
+
+
+
+
+
+    <script src="Scripts/angular.js"></script>
+    <script src="Scripts/angular-ui-router.js"></script>
+
+    <script src="Scripts/angular-animate.min.js"></script>
+    <script src="Scripts/i18n/angular-locale_es-mx.js"></script>
+    <script src="Scripts/angular-ui/ui-bootstrap-tpls.js"></script>
+    <script src="Scripts/angular-local-storage.min.js"></script>
+    <script src="Scripts/angular-block-ui.min.js"></script>
+    <script src="Scripts/angular-resource.js"></script>
+
+    <!--stilos reportes-->
+    <scrip src="Scripts/html2canvas.js"></scrip>
+    <script src="Scripts/jquery.canvasjs.min.js"></script>
+    <script src="Scripts/canvasjs.min.js"></script>
+    <!-- chart JS -->
+    <!--<script src="Scripts/node_modules/angular-chart.js/node_modules/chart.js/dist/Chart.min.js"></script>-->
+    <script src="Scripts/node_modules/angular-chart.js/dist/angular-chart.min.js"></script>
+    <!--Tablas-->
+    <script src="Scripts/DataTables/jquery.dataTables.js"></script>
+
+    <script src="Scripts/angular-datatables/angular-datatables.js"></script>
+    <script src="Scripts/DataTables/dataTables.bootstrap.js"></script>
+    <script src="Scripts/DataTables/dataTables.responsive.min.js"></script>
+    <script src="Scripts/angular-datatables/angular-datatables.js"></script>
+    <script src="Scripts/angular-datatables/angular-datatables.util.js"></script>
+    <script src="Scripts/angular-datatables/angular-datatables.options.js"></script>
+    <script src="Scripts/angular-datatables/angular-datatables.instances.js"></script>
+    <script src="Scripts/angular-datatables/angular-datatables.factory.js"></script>
+    <script src="Scripts/angular-datatables/angular-datatables.renderer.js"></script>
+    <script src="Scripts/angular-datatables/angular-datatables.directive.js"></script>
+    <script src="Scripts/DataTables/dataTables.columnFilter.js"></script>
+    <script src="Scripts/angular-datatables/plugins/columnfilter/angular-datatables.columnfilter.js"></script>
+
+    <script src="Scripts/jquery.highlight.js"></script>
+    <script src="Scripts/dataTables.searchHighlight.min.js"></script>
+
+
+
+    <!-- modulo CH -->
+
+    <script src="Scripts/angular-ui-tree/angular-ui-tree.js"></script>
+
+    <script src="Scripts/angular-sanitize.js"></script>
+    <script src="Scripts/angular-datatables/accent-neutralise.js"></script>
+    <script src="Scripts/globalINEEL.js"></script>
+    <script src="app/_services/ineel.services.js"></script>
+    <script src="app/_services/factories/buscarPropuesta.js"></script>
+    <script src="app/_services/factories/buscarIdea.js"></script>
+
+
+    <script src="app/_services/factories/adjuntarArchivo.js"></script>
+    <script src="app/_services/factories/ComunDetails.js"></script>
+    <script src="Scripts/ng-tags-input.js"></script>
+    <script src="app/vistasGenericas/directivas/directivasSIGCO.js"></script>
+    <script src="app/vistasGenericas/directivas/informacionModal.js"></script>
+
+    <script src="app/_services/ineel.controllers.js"></script>
+    <script src="app/vistasGenericas/directivas/buscarConveniosByAliadoDirective/buscarConveniosByAliadoDirective.js"></script>
+    <script src="app/vistasGenericas/directivas/buscarProductosGIDirective/buscarProductosGIDirective.js"></script>
+    <script src="app/vistasGenericas/directivas/buscarComunidadPractica.js"></script>
+    <script src="app/vistasGenericas/directivas/buscarPropuestaGI.js"></script>
+    <script src="app/vistasGenericas/directivas/buscarPropiedadIndustrialDirective/buscarPropiedadIndustrialDirective.js"></script>
+    <script src="app/vistasGenericas/directivas/buscarDerechosAutorDirective/buscarDerechosAutorDirective.js"></script>
+    <script src="app/vistasGenericas/directivas/buscarPersonasDirective/buscarPersonasDirective.js"></script>
+    <script src="app/vistasGenericas/directivas/buscarPersonasDirective/buscarPersonasActivasDirectiva.js"></script>
+    <script src="app/vistasGenericas/directivas/buscarAliadosDirective/buscarAliadosDirective.js"></script>
+    <script src="app/vistasGenericas/directivas/confirmacionLoadModal.js"></script>
+    <script src="Scripts/bootstrap-filestyle.js"></script>
+    <script src="app/vistasGenericas/SolicitudAcceso/controllers/SolicitudesAcceso.ctrl.js"></script>
+    <script src="app/vistasGenericas/controllers/EstructuraOrganizacionalFilterGet.ctrl.js"></script>
+
+    <script src="app/vistasGenericas/_details/personal/controllers/PersonaProfileComun.ctrl.js"></script>
+    <script src="app/vistasGenericas/controllers/ConfirmacionContinue.js"></script>
+    <script src="app/vistasGenericas/buscarProyectosGEN/comunServiceProyectos.service.js"></script>
+    <script src="app/vistasGenericas/detallesProyectosGEN/controllers/proyectoDetails.GEN.ctrl.js"></script>
+
+    <script src="app/_services/factories/Comun.service.js"></script>
+    <script src="app/_services/factories/ComunCount.service.js"></script>
+    <script src="app/vistasGenericas/controllers/NotificationCtrl.js"></script>
+
+
+    <script src="Scripts/aes.js"></script>
+    <script src="Scripts/mdo-angular-cryptography.js"></script>
+    <!--<script src="Scripts/angular-google-chart.js"></script>-->
+    <script src="app/_services/factories/Descargas.js"></script>
+
+    <script src="app/_services/factories/authService.js"></script>
+    <script src="app/_services/factories/menu.service.js"></script>
+    <script src="app/_services/factories/permisos.service.js"></script>
+    <script src="app/_services/factories/personas.service.js"></script>
+    <script src="app/auth/controllers/changepassword.ctrl.js"></script>
+
+    <script src="app/_services/factories/authInterceptorService.js"></script>
+    <script src="app/_services/factories/NuevoOC.js"></script>
+
+    <!-- Plugin para el autocompletado-->
+    <script src="Scripts/angucomplete-alt.js"></script>
+
+    <!-- Modal de personas-->
+    <script src="app/GEN/_services/ineel.GEN.services.js"></script>
+
+    <script src="app/vistasGenericas/controllers/PersonasFilterGet.ctrlGEN.js"></script>
+    <script src="app/vistasGenericas/_services/buscarPersonas.GEN.service.js"></script>
+    <script src="app/vistasGenericas/_services/buscarProyectos.GEN.service.js"></script>
+    <script src="app/vistasGenericas/controllers/ProyectosFilterGet.ctrlGEN.js"></script>
+    <script src="app/vistasGenericas/buscarProyectosGEN/buscarProyectosPorSubprograma.service.js"></script>
+    <script src="app/vistasGenericas/buscarProyectosGEN/proyectosFilterSubprograma.ctrl.js"></script>
+    <script src="app/vistasGenericas/buscarEmpresasGEN/buscarEmpresasGEN.ctrl.js"></script>
+    <!-- <script src="app/vistasGenericas/controllers/EstructuraOrganizacionalEmpresasFilterGet.ctrlCR.js"></script> -->
+
+
+    <script src="Scripts/angular-messages.min.js"></script>
+    <script src="Scripts/ng-fab-form.js"></script>
+
+    <script src="app/GEN/_services/catalogos/notificacion.GEN.service.js"></script>
+    <script src="app/GI/appGI.js"></script>
+    <script src="app/GI/_services/ineel.GI.services.js"></script>
+
+    <script src="app/GI/_services/carteraPropuesta.GI.service.js"></script>
+    <script src="app/GI/_services/correoNotificaciones.GI.service.js"></script>
+    <script src="app/GI/_services/solicitudes.GI.services.js"></script>
+    <script src="app/GI/_services/evaluadorIdea.GI.service.js"></script>
+
+    <script src="app/GI/home/controllers/indexControllerGI.js"></script>
+    <script src="app/GI/home/controllers/homeCtrlGI.js"></script>
+
+    <script src="app/GI/_services/Solicitudes.GI.services.js"></script>
+    <script src="app/GI/solicitudesGI/controllers/solicitudesGI.js"></script>
+
+
+    <script src="app/GI/ideaInnovadora/controllers/ideaInnovadoraAdd.js"></script>
+    <script src="app/GI/ideaInnovadora/controllers/ideaInnovadoraGet.js"></script>
+    <script src="app/GI/ideaInnovadora/controllers/ideaInnovadoraEdit.js"></script>
+    <script src="app/GI/ideaInnovadora/controllers/ideaInnovadoraDetails.js"></script>
+    <script src="app/GI/IdeaInnovadora/controllers/IdeaInnovadoraDetailsPersona.js"></script>
+    <script src="app/GI/IdeaInnovadora/buscarIdea/controllers/buscarIdeaInnovadoraGet.js"></script>
+    <script src="app/GI/IdeaInnovadora/buscarIdea/controllers/buscarIdeaInnovadoraDetails.js"></script>
+    <script src="app/GI/_services/IdeaInnovadora.GI.services.js"></script>
+
+    <script src="app/GI/_services/bitacoraSolicitudes.GI.services.js"></script>
+    <script src="app/GI/bitacoraSolicitudes/controllers/bitacorasolicitudes.js"></script>
+    <script src="app/GI/_services/tipoAcceso.GI.service.js"></script>
+
+    <script src="app/GI/_services/comiteEvaluador.GI.service.js"></script>
+    <script src="app/GI/_services/miembrosGE.GI.services.js"></script>
+    <script src="app/GI/CarteraPropuesta/controllers/carteraPropuestaDetails.js"></script>
+    <script src="app/GI/CarteraPropuesta/controllers/carteraPropuestaGet.js"></script>
+    <script src="app/GI/CarteraPropuesta/controllers/carteraPropuestaAdd.js"></script>
+    <script src="app/GI/CarteraPropuesta/controllers/carteraPropuestaEdit.js"></script>
+    <script src="app/GI/CarteraPropuesta/buscarPropuesta/controllers/buscarPropuestaGet.js"></script>
+    <script src="app/GI/CarteraPropuesta/buscarPropuesta/controllers/buscarPropuestaDetail.js"></script>
+
+    <script src="app/GI/_services/planNegocio.GI.service.js"></script>
+    <script src="app/GI/planNegocioEvolutivo/controllers/planNegocioAdd.js"></script>
+    <script src="app/GI/planNegocioEvolutivo/controllers/planNegocioGet.js"></script>
+    <script src="app/GI/planNegocioEvolutivo/controllers/planNegocioEdit.js"></script>
+    <script src="app/GI/planNegocioEvolutivo/controllers/planNegocioDetails.js"></script>
+    <script src="app/GI/planNegocioEvolutivo/buscarPlanNegocio/controllers/buscarPlanNegocio.js"></script>
+    <script src="app/GI/planNegocioEvolutivo/buscarPlanNegocio/controllers/buscarPlanNegocioDetalles.js"></script>
+
+    <script src="app/GI/bitacoraMovimientos/controllers/bitacoraMovimientos.js"></script>
+    <script src="app/GI/_services/bitacoraMovimientoService.js"></script>
+
+    <script src="app/GI/productosInnovadores/controllers/productoInnovadorGet.js"></script>
+    <script src="app/GI/productosInnovadores/controllers/productoInnovadorAdd.js"></script>
+    <script src="app/GI/productosInnovadores/controllers/productoInnovadorDetails.js"></script>
+    <script src="app/GI/productosInnovadores/controllers/productoInnovadorEdit.js"></script>
+    <script src="app/GI/productosInnovadores/buscarProductoInnovador/controllers/buscarProductoInnovador.js"></script>
+    <script src="app/GI/productosInnovadores/buscarProductoInnovador/controllers/buscarProductoInnovadorDetails.js"></script>
+    <script src="app/GI/productosInnovadores/detallesGerente/controllers/productoInnovadorDetailsGerente.js"></script>
+    <script src="app/GI/_services/productoInnovadorService.js"></script>
+    <script src="app/GI/productosInnovadores/productoFI/controllers/productoFIGet.js"></script>
+    <script src="app/GI/productosInnovadores/productoFI/controllers/productoFIAdd.js"></script>
+    <script src="app/GI/productosInnovadores/productoFI/controllers/productoFIDetails.js"></script>
+    <script src="app/GI/productosInnovadores/detallesEvaluador/controllers/productoInnovadorDetailsEvaluador.js"></script>
+    <script src="app/GI/productosInnovadores/aprobarDetalles/controllers/productoRegistroDetalles.js"></script>
+    <script src="app/GI/productosInnovadores/productoFI/controllers/productoFIEditar.js"></script>
+
+    <script src="app/GI/TecnologiaLicencia/updateTL/controllers/tecnologiaLicenciadaEditAll.js"></script>
+    <script src="app/GI/TecnologiaLicencia/controller/tecnologiaLicenciadaAdd.js"></script>
+    <script src="app/GI/TecnologiaLicencia/controller/tecnologiaLicenciadaGet.js"></script>
+    <script src="app/GI/TecnologiaLicencia/controller/tecnologiaLicenciadaDetails.js"></script>
+    <script src="app/GI/TecnologiaLicencia/controller/tecnologiaLicenciadaEdit.js"></script>
+    <script src="app/GI/TecnologiaLicencia/buscarTecnologiaLicenciada/controllers/buscarTecnologiaLicenciadaGet.js"></script>
+    <script src="app/GI/TecnologiaLicencia/updateTL/controllers/tecnologiaLicenciadaEditConstant.js"></script>
+    <script src="app/GI/TecnologiaLicencia/controller/tecnologiaLicenciadaDetailsGAJ.js"></script>
+    <script src="app/GI/_services/tecnologiaLicenciada.GI.services.js"></script>
+
+    <script src="app/GI/_services/configuracionPeriodo.Sesrvice.js"></script>
+    <script src="app/GI/configuracionPeriodo/controllers/configuracionPeriodoGet.js"></script>
+    <script src="app/GI/configuracionPeriodo/controllers/configuracionPeriodoAdd.js"></script>
+    <script src="app/GI/configuracionPeriodo/controllers/configuracionPeriodoEdit.js"></script>
+
+    <script src="app/GI/CREAFIN/controllers/creafin.js"></script>
+    <script src="app/GI/_services/creafin.Service.js"></script>
+
+    <script src="app/GI/_services/catalogos/miembrosGIService.js"></script>
+    <script src="app/GI/Catalogos/MiembrosGI/controllers/MiembrosGIGet.js"></script>
+    <script src="app/GI/Catalogos/MiembrosGI/controllers/MiembrosGIAdd.js"></script>
+    <script src="app/GI/Catalogos/MiembrosGI/controllers/MiembrosInactivosGIGet.js"></script>
+
+    <!--<a href="app/GI/CarteraPropuesta/carteraPropuestaDetails.html">app/GI/CarteraPropuesta/carteraPropuestaDetails.html</a>-->
+
+    <script src="app/GI/Catalogos/TipoPagos/controllers/TipoPagosGet.js"></script>
+    <script src="app/GI/_services/catalogos/tipoPagosService.js"></script>
+    <script src="app/GI/Catalogos/TipoPagos/controllers/TipoPagosEdit.js"></script>
+    <script src="app/GI/Catalogos/TipoPagos/controllers/TipoPagosAdd.js"></script>
+
+    <script src="app/GI/Catalogos/TipoAcceso/controllers/TipoAccesoEdit.js"></script>
+    <script src="app/GI/Catalogos/TipoAcceso/controllers/TipoAccesoGet.js"></script>
+    <script src="app/GI/_services/catalogos/tipoAccesoService.js"></script>
+
+    <script src="app/GI/Catalogos/FactorInnovacion/controller/FactorInnovacionEdit.js"></script>
+    <script src="app/GI/Catalogos/FactorInnovacion/controller/FactorInnovacionGet.js"></script>
+    <script src="app/GI/_services/catalogos/factorInnovacionService.js"></script>
+
+    <script src="app/GI/_services/catalogos/estadoLicenciamientoService.js"></script>
+    <script src="app/GI/Catalogos/EstadoLicenciamiento/controllers/EstadoLicenciamientoEdit.js"></script>
+    <script src="app/GI/Catalogos/EstadoLicenciamiento/controllers/EstadoLicenciamientoGet.js"></script>
+
+    <script src="app/GI/Catalogos/Comite/controller/ComiteEdit.js"></script>
+    <script src="app/GI/Catalogos/Comite/controller/ComiteGet.js"></script>
+    <script src="app/GI/Catalogos/Comite/controller/ComiteAdd.js"></script>
+    <script src="app/GI/_services/catalogos/comiteService.js"></script>
+    <script src="app/GI/_services/productoHistorialFI.GI.service.js"></script>
+
+
+    <!--<a href="app/GI/CarteraPropuesta/carteraPropuestaDetails.html">app/GI/CarteraPropuesta/carteraPropuestaDetails.html</a>-->
+    <!-- End OCs Etapa 3-->
+    <script src="app/GI/ejemploValidacion/ejemploValidacionCtrlGI.js"></script>
+
+</head>
+
+<body class="nav-md" data-ng-controller="indexControllerGI">
+    <div class="info-servidor-desplegado">{{'' | getInfoServidorDesplegado}}</div>
+    <div class="container body">
+        <div class="main_container">
+            <div class="col-md-3 left_col">
+                <div class="left_col scroll-view bg-gradient-menuv">
+                    <div class="navbar nav_title bg-gradient-menuv" style="border: 0;">
+                        <a href="sigco.html" class="site_title">
+                            <img src="images/logo_sigco.png" />
+                            <span class="titLogo">&nbsp;SIGCO</span>
+                        </a>
+                    </div>
+                    <div class="clearfix"></div>
+
+                    <br />
+
+
+                    <!-- sidebar menu -->
+                    <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+                        <div class="menu_section">
+                            <h3>&nbsp;</h3>
+                            <ul class="nav side-menu">
+                                <li ng-repeat="opcion in funciones" ng-if="opcion.funcion.nivel==0" ng-show="opcion.funcion.idModulo==modulo">
+                                    <a ng-if="opcion.funcion.children.length ==0" ng-href="{{opcion.funcion.url}}">
+                                        <i class="{{opcion.funcion.claseIcono}}"> </i>&nbsp;{{opcion.funcion.nombre}}
+                                    </a>
+
+                                    <a ng-if="opcion.funcion.children.length > 0">
+                                        <i class="{{opcion.funcion.claseIcono}}"></i> &nbsp;{{opcion.funcion.nombre}}
+                                        <span class="fa fa-chevron-down"></span>
+                                    </a>
+                                    <ul ng-if="opcion.funcion.children.length > 0 " class="nav child_menu">
+                                        <li ng-repeat="opc in funciones" ng-if="opc.funcion.nivel==1 && opc.funcion.idPadre == opcion.funcion.funcionesId">
+                                            <a ng-if="opc.funcion.children.length ==0" ui-sref="{{opc.funcion.state}}"> &nbsp;{{opc.funcion.nombre}} </a>
+
+                                            <a ng-if="opc.funcion.children.length > 0">
+                                                &nbsp;{{opc.funcion.nombre}}<span class="fa fa-chevron-down"></span>
+                                            </a>
+                                            <ul class="nav child_menu" ng-if="opc.funcion.children.length > 0 ">
+                                                <li ng-repeat="opc3 in funciones" ng-if="opc3.funcion.nivel==2 && opc3.funcion.idPadre == opc.funcion.funcionesId">
+
+                                                    <a ui-sref="{{opc3.funcion.state}}" ng-show="opc3.funcion.idModulo ==modulo"> &nbsp;{{opc3.funcion.nombre}}</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+
+                            </ul>
+                            <!--funciones : {{funciones | json}}-->
+                        </div>
+
+
+
+                    </div>
+                    <!-- /sidebar menu -->
+
+                </div>
+            </div>
+            <!-- top navigation -->
+            <div class="top_nav ">
+                <div class="nav_menu">
+                    <nav class="" role="navigation">
+                        <div class="nav toggle">
+                            <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+                        </div>
+                        <div ng-include="'app/vistasGenericas/header/profileNotification.html'">
+                        </div>
+                    </nav>
+                </div>
+                <div class="toolbar-top visible-xs">
+                    <div ng-include="'app/vistasGenericas/header/navegacionpormodulo.html'">
+                    </div>
+                </div>
+            </div>
+            <!-- /top navigation -->
+            <!-- page content -->
+            <div role="main" class="right_col">
+                <!-- top tiles -->
+                <div ui-view>
+
+                </div>
+            </div>
+            <!-- /page content -->
+            <!-- footer content -->
+            <footer>
+                <div class="pull-right">
+                    SIGCO3
+                </div>
+                <div class="clearfix"></div>
+            </footer>
+            <!-- /footer content -->
+        </div>
+    </div>
+
+    <!-- Custom Theme Scripts -->
+    <script src="Scripts/custom.js"></script>
+    <!--scripts para reportes-->
+    <script src="Scripts/DataTables/dataTables.buttons.js"></script>
+    <script src="Scripts/DataTables/buttons.bootstrap.js"></script>
+    <script src="Scripts/angular-datatables/plugins/buttons/angular-datatables.buttons.js"></script>
+    <script src="Scripts/DataTables/buttons.html5.js"></script>
+    <script src="Scripts/jszip.min.js"></script>
+    <script src="vendors/pdfmake/build/pdfmake.min.js"></script>
+    <script src="vendors/pdfmake/build/vfs_fonts.js"></script>
+    <script src="Scripts/DataTables/buttons.print.js"></script>
+    <script src="Scripts/DataTables/buttons.flash.js"></script>
+    <script src="Scripts/DataTables/buttons.colVis.js"></script>
+
+
+</body>
+
+</html>

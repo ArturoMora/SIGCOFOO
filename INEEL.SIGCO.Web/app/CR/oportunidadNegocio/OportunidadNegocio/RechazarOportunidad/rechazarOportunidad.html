@@ -1,0 +1,32 @@
+﻿<div class="modal-content">
+    <div class="modal-header">
+       
+        <div ng-show="idRol === 4 || idRol === 5  ">
+            La oportunidad de negocio se regresar&aacute; al especialista 
+        </div>
+        <div ng-show="idRol === 8  ">
+            La oportunidad de negocio se regresar&aacute; al jefe del &aacute;rea
+        </div>
+      
+        <button type="button" class="close" ng-click="cancel()" data-dissmiss="modal">x</button>
+    </div>
+    <form role="form" ng-submit="ok()"  name="rechazaroportunidadform">
+        <div class="modal-body">
+            <div class="panel">
+                <!-- /.panel-heading -->
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label>Comentarios <span class="required">*</span></label>
+                        <textarea required name="comentarios" class="form-control" ng-model="comentariosResponsable" rows="3"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+             <button ng-show="idRol === 4 || idRol === 5  " ng-disabled="rechazaroportunidadform.$invalid" type="button" class="btn btn-success" ng-click="rechazar()">Rechazar oportunidad</button>
+             <button ng-show="idRol != 4 && idRol!=5" type="button" class="btn btn-success" ng-click="rechazarInvestigador()">Rechazar oportunidad</button>
+            <!-- <button type="button" class="btn btn-success" ng-click="rechazarInvestigador()">Rechazar oportunidad</button>-->
+            <button type="button" class="btn btn-primary" ng-click="cancel()">Cancelar</button>
+        </div>
+    </form>
+</div>

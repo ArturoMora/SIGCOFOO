@@ -1,0 +1,69 @@
+﻿<div data-ng-show="authentication.isAuth">
+    <div ng-hide="registros.length >= 0">
+        <img src="images/cargando.gif" />
+    </div>
+    <div class="row">
+        <div class="col-md-12 col-lg-12 col-xs-12 sin-desborde">
+            <div ng-show="registros.length === 0" class="alert advertencia">
+                No hay registros de propiedad industrial.
+            </div>
+            <div ng-show="registros.length > 0">
+                <table id="CHPIExternoGet" class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" datatable="ng"
+                    width="100%" dt-options="dtOptions">
+                    <thead>
+                        <tr>
+                            <th data-priority="1">T&iacute;tulo</th>
+                            <th>Tipo PI</th>
+                            <th data-priority="2" class="thAjuste text-center">Estado</th>
+                            <th>Fecha validación</th>
+                            <th data-priority="1" class="thAjuste text-center">Opciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="registro in registros">
+
+                            <td style="max-width:300px" class="sin-desborde linkTabla" ng-if="registro.numSolicitudTitulo != 'Patrimonial'" ng-click="$event.stopPropagation();" ui-sref="piexternoDetails({id:registro.propiedadIndustrialId})"
+                                        title="Detalle">{{registro.titulo}}
+                            </td>
+                            <td style="max-width:300px" class="sin-desborde" ng-if="registro.numSolicitudTitulo == 'Patrimonial'">
+                                <u><a ng-click="$event.stopPropagation();" ui-sref="piinternoPatrimonialDetails({id:registro.propiedadIndustrialId})"
+                                        title="Detalle">{{registro.titulo}}</a></u>
+                            </td>
+
+                            <td>{{registro.tipoPropiedadIndustrial.descripcion}}</td>
+                            <td>{{registro.estadoFlujo.descripcion}}</td>
+                            <td>{{registro.fechaValidacion === null ? 'Dato no disponible' : registro.fechaValidacion | date:"dd/MM/yyyy"}}</td>
+                            <td class="text-center">
+                                <div ng-if="registro.esPropiedadInstituto==0">
+                                    <a ng-if="idRol==1" ng-click="setGlobalID(registro.propiedadIndustrialId);$event.stopPropagation();" ui-sref="piexternoDetailsAdmin({id:registro.propiedadIndustrialId, id2: 1})"
+                                        title="Aprobar registro" class="btn btn-warning">
+                                    <i class="glyphicon glyphicon-pencil"></i>
+                                </a>
+                                    <div ng-if="registro.estadoFlujo.estadoFlujoId==1 || editarGestion==1">
+                                        <a ng-if="idRol!=1 && registro.clavePersona == EmpleadoQueConsulta " ng-click="setGlobalID(registro.propiedadIndustrialId);$event.stopPropagation();" ui-sref="piexternoEdit"
+                                            title="Editar" class="btn btn-warning">
+                                        <i class="glyphicon glyphicon-pencil"></i>
+                                    </a>
+                                        <a title="Eliminar" ng-if="registro.fechaValidacion === null && registro.estadoFlujo.estadoFlujoId!=3 && registro.clavePersona == EmpleadoQueConsulta " ng-really-click="delete(registro)"
+                                            ng-really-message="¿Desea eliminar el registro?" class="btn btn-danger">
+                                        <i class="glyphicon glyphicon-trash"></i>
+                                    </a>
+                                    </div>
+                                    <div ng-if="registro.estadoFlujo.estadoFlujoId==3 && registro.clavePersona == EmpleadoQueConsulta  ">
+                                        <a ng-if="idRol!=1" ng-really-message="Está a punto de acceder a un registro 'Aceptado', si modifica algún atributo deberá ser validado nuevamente. ¿Desea continuar?" ng-really-click="setGlobalID(registro.propiedadIndustrialId);$event.stopPropagation();navegador();" title="Editar" class="btn btn-warning">
+                                            <i class="glyphicon glyphicon-pencil"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <button ng-show="registros.length >= 0" type="button" ng-click="$event.stopPropagation();" ui-sref="piexternoAdd" class="btn btn-success">
+                <span class="glyphicon glyphicon-plus"></span> Agregar
+            </button>
+        </div>
+
+    </div>
+</div>

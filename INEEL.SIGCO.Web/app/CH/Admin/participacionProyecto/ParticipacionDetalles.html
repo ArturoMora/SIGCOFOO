@@ -1,0 +1,357 @@
+﻿<div class="vista">
+
+    <div class="page-title">
+        <div class="title_left">
+            <ol class="breadcrumb miga">
+                <li><i class="fa fa-cogs"></i> <a ui-sref="#">Solicitudes</a></li>
+                <li><a ui-sref="#">Participaci&oacute;n en Proyecto</a></li>
+                <li class="active">Detalles</li>
+            </ol>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <!--<div class="x_title">
+                    <h2>Informaci&oacute;n de usuario</h2>
+
+                    <div class="clearfix"></div>
+                </div>-->
+                <div class="x_content sin-desborde">
+
+                    <form name="ValidForm" id="form" class="form-horizontal">
+                        <!--<div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                N&uacute;mero de empleado:
+                            </label>
+                            <label class="span-label  col-md-6 col-sm-6 col-xs-12">
+                                {{registrofa.clavePersona}}
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Nombre de empleado:
+                            </label>
+                            <label class="span-label  col-md-6 col-sm-6 col-xs-12">
+                                {{registrofa.nombreCompleto}}
+                            </label>
+                        </div>-->
+                        <div class="x_title">
+                            <h2>Informaci&oacute;n general</h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Proyecto <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="row">
+                                    <div class="col-xs-10">
+                                        <input type="text" class="form-control" id="usr" required name="proyecto" ng-model="registro.proyectoId" disabled>
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <button class="btn btn-success" ng-click="openProyecto()" title="Buscar proyecto" ng-disabled="desabilitar">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Nombre proyecto
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" class="form-control" id="usr" disabled ng-model="registro.proyecto.nombre">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Participaci&oacute;n <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <select class="form-control" ng-model="registro.participacion" required>
+                                    <option selected value="Jefe de Proyecto">Jefe de proyecto</option>
+                                    <option selected value="Investigador">Participante</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Descripci&oacute;n de actividades <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <textarea class="form-control" maxlength="500" ng-model="registro.descripcionActividades" required></textarea>
+                            </div>
+                        </div>
+                        <div class="x_title">
+                            <h2>Per&iacute;odo de participaci&oacute;n</h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Inicio <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="row">
+                                    <div class="col-xs-10">
+                                        <input ng-minlength="8" name="fechaInicio" maxlength="10" placeholder="dd/mm/yyyy" ng-init="open=false" type="text" show-button-bar="false" popup-placement="bottom" class="form-control" uib-datepicker-popup="dd/MM/yyyy" ng-model="registro.fechaInicio" value="{{ registro.fechaInicio | date: 'dd/MM/yyyy' }}" is-open="open" ng-required="true" close-text="Close" />
+                                        <span ng-show="ValidForm.fechaInicio.$dirty &&  ValidForm.fechaInicio.$invalid" class="error">Formato inválido 'dd/MM/yyyy'</span>
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <button type="button" class="btn btn-success" ng-click="open=true"><i class="glyphicon glyphicon-calendar"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                T&eacute;rmino <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="row">
+                                    <div class="col-xs-10">
+                                        <input name="fechaTermino" ng-minlength="8" maxlength="10"  placeholder="dd/mm/yyyy" ng-init="open2=false" type="text" show-button-bar="false" popup-placement="bottom" class="form-control" uib-datepicker-popup="dd/MM/yyyy" ng-model="registro.fechaTermino" value="{{ registro.fechaTermino | date: 'dd/MM/yyyy' }}" is-open="open2" ng-required="true" close-text="Close" />
+                                        <span ng-show="ValidForm.fechaTermino.$dirty &&  ValidForm.fechaTermino.$invalid" class="error">Formato inválido 'dd/MM/yyyy'</span>
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <button type="button" class="btn btn-success" ng-click="open2=true"><i class="glyphicon glyphicon-calendar"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="x_title">
+                            <h2>Evidencia <small>Tama&ntilde;o m&aacute;ximo por archivo de 8 MB</small></h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Documento adjunto
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div ng-show="!regFile">
+                                    <span class="fa fa-download"></span>&nbsp;&nbsp;<a href="/Descargas.html#/q/{{registro.adjunto.adjuntoId | encriptar}}" class="linkTabla" target="_blank">Descargar Archivo</a>
+                                    &nbsp;&nbsp;
+                                    <a class="btn btn-danger" title="Eliminar Archivo" ng-click="deleteFile()">
+                                        <i class="glyphicon glyphicon-trash"></i>
+                                    </a>
+                                </div>
+                                <div class="form-group" ng-show="regFile">
+                                    <input class="input-file form-control col-md-7 col-xs-12" type="file" name="filesGral" id="filesGral" data-buttonName="btn-success"
+                                           ng-click="saveIG();" ng-model="filesGral"
+                                           onchange="angular.element(this).scope().getFileDetails(this);" />
+                                </div>
+
+                                <!--<label ng-disabled>Nota: Para enviar la solicitud es necesario incluir el documento adjunto de evidencia.</label>-->
+                            </div>
+                        </div>
+                        <div class="x_title">
+                            <h2>Validación de información</h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Fecha
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="row">
+                                    <div class="col-xs-10">
+                                        <input placeholder="dd/mm/yyyy" ng-minlength="8" name="FechaValidacion" maxlength="10" ng-init="open3=false" type="text" show-button-bar="false" popup-placement="bottom" class="form-control" uib-datepicker-popup="dd/MM/yyyy" ng-model="FechaValidacionAux" value="{{ FechaValidacionAux | date: 'dd/MM/yyyy' }}" is-open="open3" close-text="Close" />
+                                        <span ng-show="ValidForm.FechaValidacion.$dirty &&  ValidForm.FechaValidacion.$invalid" class="error">Formato inválido 'dd/MM/yyyy'</span>
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <button type="button" class="btn btn-success" ng-click="open3=true"><i class="glyphicon glyphicon-calendar"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Justificaci&oacute;n
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <textarea class="form-control" ng-model="justificacion" maxlength="500" placeholder="Escriba una justificaci&oacute;n"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <button type="submit" class="btn btn-success" ng-click="save(2)" ng-disabled="desactivar" ng-show="regFile || !regFile">
+                                    <i class="glyphicon glyphicon-saved"></i> Aprobar Solicitud
+                                </button>
+                                <button type="submit" class="btn btn-warning" ng-click="save(3)">
+                                    <i class="fa fa-reply"></i> Regresar Solicitud
+                                </button>
+                            </div>
+                        </div>
+                        <div class="ln_solid"></div>
+                        <div class="form-group">
+                            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                <div class="">
+                                    <button type="submit" class="btn btn-success" ng-click="save(1)" ng-disabled="desactivar">
+                                        <i class="glyphicon glyphicon-saved"></i> Actualizar
+                                    </button>
+                                    <button type="button" ui-sref="solicitudesrh" class="btn btn-primary">
+                                        <span class="fa fa-arrow-left"></span> Regresar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--<div>
+    <div data-ng-hide="authentication.isAuth">
+        No tiene permisos para ingresar a esta sección.<br /> Usuario no autentificado
+    </div>
+    <div data-ng-show="authentication.isAuth">
+        <div id="page-wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h2 class="page-header">Participación en Proyecto</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <form role="form" name="ValidForm">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                            </div>
+                            <div class="panel-body">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="usr">N&uacute;mero de empleado:</label>
+                                        <input type="text" class="form-control" id="usr" ng-model="registro.clavePersona" disabled>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="usr">Nombre de empleado:</label>
+                                        <input type="text" class="form-control" id="usr" disabled ng-model="registro.nombrePersona">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="usr">Proyecto:<span class="error">*</span></label>
+                                        <div class="row">
+                                            <div class="col-xs-10">
+                                                <input type="text" class="form-control" id="usr" required name="proyecto" ng-model="registro.proyectoId" disabled >
+                                            </div>
+                                            <div class="col-xs-2">
+                                                <button class="btn btn-default" ng-click="openProyecto()" title="Buscar proyecto" ng-disabled="desabilitar">
+                                                    <span class="glyphicon glyphicon-search"></span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="usr">Nombre proyecto:</label>
+                                        <input type="text" class="form-control" id="usr" disabled ng-model="registro.proyecto.nombre">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="usr">Periodo de inicio:<a class="error">*</a></label>
+                                        <div class="row">
+                                            <div class="col-xs-10">
+                                                <input readonly placeholder="dd/mm/yyyy" ng-init="open=false" type="text" show-button-bar="false" popup-placement="bottom" class="form-control" uib-datepicker-popup="dd/MM/yyyy" ng-model="registro.fechaInicio" value="{{ registro.fechaInicio | date: 'dd/MM/yyyy' }}" is-open="open" ng-required="true" close-text="Close" />
+                                            </div>
+                                            <div class="col-xs-2">
+                                                <button type="button" class="btn btn-default" ng-click="open=true"><i class="glyphicon glyphicon-calendar"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="usr">Periodo de t&eacute;rmino:</label>
+                                        <div class="row">
+                                            <div class="col-xs-10">
+                                                <input readonly placeholder="dd/mm/yyyy" ng-init="open2=false" type="text" show-button-bar="false" popup-placement="bottom" class="form-control" uib-datepicker-popup="dd/MM/yyyy" ng-model="registro.fechaTermino" value="{{ registro.fechaTermino | date: 'dd/MM/yyyy' }}" is-open="open2" close-text="Close" />
+                                            </div>
+                                            <div class="col-xs-2">
+                                                <button type="button" class="btn btn-default" ng-click="open2=true"><i class="glyphicon glyphicon-calendar"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="usr">Participación:<span class="error">*</span></label>
+                                        <select class="form-control" ng-model="registro.participacion" required>
+                                            <option selected value="Jefe de Proyecto">Jefe de Proyecto</option>
+                                            <option selected value="Investigador">Investigador</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="usr">Descripción de actividades: <span class="error">*</span></label>
+                                        <textarea class="form-control" ng-model="registro.descripcionActividades" required></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <div ng-show="!regFile">
+                                            <a href="/Descargas.html#/q/{{registro.adjunto.adjuntoId | encriptar}}" class="btn btn-default btn-sm" target="_blank"> Descargar Archivo </a>
+                                            <a class="btn"><i class="fa fa-trash-o fa-lg error" title="Eliminar Archivo" ng-click="deleteFile()"></i></a>
+                                        </div>
+                                        <div class="" style="margin-bottom: 40px" ng-show="regFile">
+                                            <table class="table">
+                                                <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            <div class="form-group">
+                                                                <label class="col-md-4 control-label" for="filesGral">Documento adjunto:</label>
+                                                                <div class="col-md-8">
+                                                                    <input class="input-file" type="file" name="filesGral" id="filesGral"
+                                                                           ng-click="saveIG();" ng-model="filesGral"
+                                                                           onchange="angular.element(this).scope().getFileDetails(this);" />
+                                                                    <span class="error" ng-show="fromfa.filesGral.$dirty && !fromfa.filesGral.$valid">Seleccione un documento y de clic en confirmar</span>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div><br />
+                                    </div>
+                                    <input type="hidden" name="archivos" ng-model="archivos" />
+                                    <div class="form-group">
+                                        <div class="form-group" ng-show="!regFile">
+                                            <label for="usr">Fecha de validación:<span class="error">*</span></label>
+                                            <div class="row">
+                                                <div class="col-xs-10">
+                                                    <input placeholder="dd/mm/yyyy" readonly ng-init="open3=false" type="text" show-button-bar="false" popup-placement="bottom" class="form-control" uib-datepicker-popup="dd/MM/yyyy" ng-model="FechaValidacionAux" value="{{ FechaValidacionAux | date: 'dd/MM/yyyy' }}" is-open="open3" close-text="Close" />
+                                                </div>
+                                                <div class="col-xs-2">
+                                                    <button type="button" class="btn btn-default" ng-click="open3=true"><i class="glyphicon glyphicon-calendar"></i></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <br />
+                                        <div class="form-group">
+                                            <label>Justificaci&oacute;n:</label>
+                                            <textarea class="form-control" ng-model="justificacion" maxlength="500"></textarea>
+                                        </div>
+                                        <br />
+                                        <button type="submit" class="btn btn-success" ng-click="save(2)" ng-disabled="desactivar" ng-show="!regFile">
+                                            <i class="glyphicon glyphicon-saved"></i> Aprobar Solicitud
+                                        </button>
+                                        <button type="submit" class="btn btn-warning" ng-click="save(3)">
+                                            <i class="fa fa-reply"></i> Regresar Solicitud
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-Modificado">
+                            <button type="submit" class="btn btn-success" ng-click="save(1)" ng-disabled="desactivar">
+                                <i class="glyphicon glyphicon-saved"></i> Actualizar
+                            </button>
+                            <button type="button" ui-sref="solicitudesrh" class="btn btn-primary">
+                                <span class="fa fa-arrow-left"></span> Regresar
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>-->

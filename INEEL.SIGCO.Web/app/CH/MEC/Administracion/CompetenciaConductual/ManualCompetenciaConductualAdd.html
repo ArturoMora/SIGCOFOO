@@ -1,0 +1,166 @@
+﻿<div class="vista">
+    <div class="page-title">
+        <div class="title_left">
+
+            <ol class="breadcrumb miga">
+                <li><i class="sg sg-metodo-evaluacion-compet"></i> <a ui-sref="mecadministracion">Método de evaluación de competencias/Administración de métodos de evaluación de competencias</a></li>
+                <li class="active">Agregar</li>
+            </ol>
+
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+                    <form name="ValidForm" id="form" class="form-horizontal">
+                        <div class="x_title">
+                            <h2>Informaci&oacute;n general</h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Período <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <select ng-model="registro.periodoEvaluaionId" ng-options="obj.periodoEvaluaionId as obj.periodo for obj in periodos " required class="form-control">
+                                    <option value="">--- Selecciona un Período ---</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Acceso p&uacute;blico <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <select ng-model="registro.accesoPublico" required class="form-control">
+                                    <option value="0">No</option>
+                                    <option value="1">Si</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Versi&oacute;n <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input class="form-control" valid-number ng-model="registro.version" placeholder="0.0" allow-decimal="true" allow-negative="false" required type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Comentario 
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <textarea type="text" class="form-control" ng-model="registro.comentario"></textarea>
+                            </div>
+                        </div>
+                        <div class="x_title">
+                            <h2>Evidencia <small>Tama&ntilde;o m&aacute;ximo por archivo de 8 MB</small></h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Documento adjunto <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input class="input-file form-control col-md-7 col-xs-12" type="file" name="filesGral" id="filesGral" data-buttonName="btn-success"
+                                       ng-click="saveIG();" ng-model="filesGral"  
+                                       onchange="angular.element(this).scope().getFileDetails(this);" />
+                            </div>
+                        </div>
+                        <div class="ln_solid"></div>
+                        <div class="form-group">
+                            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                <div class="">
+                                    <button type="submit" class="btn btn-success"  ng-disabled="desabilitar" ng-click="add()">
+                                        <i class="glyphicon glyphicon-saved"></i> Guardar
+                                    </button>
+                                    <button type="button" ui-sref="mecadministracion" ng-disabled="desabilitar" class="btn btn-primary">
+                                        <span class="fa fa-arrow-left"></span> Regresar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<!--<div data-ng-show="authentication.isAuth">
+    <div id="page-wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <h2 class="page-header">Método de evaluación de competencia conductual</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <form role="form" name="ValidForm">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                        </div>
+                        <div class="panel-body">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label for="usr">Periodo:<a class="error">*</a></label>
+                                    <select ng-model="registro.periodoEvaluaionId" ng-options="obj.periodoEvaluaionId as obj.periodo for obj in periodos " required class="form-control">
+                                        <option value="">--- Selecciona un Periodo ---</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="usr">Acceso p&uacute;blico:<a class="error">*</a></label>
+                                    <select ng-model="registro.accesoPublico" required class="form-control">
+                                        <option value="0">No</option>
+                                        <option value="1">Si</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="usr">Versi&oacute;n:<span class="error">*</span></label>
+                                    <input class="form-control" valid-number ng-model="registro.version" placeholder="0.0" allow-decimal="true" allow-negative="false" required type="text">
+                                </div>
+                                <div class="form-group">
+                                    <label for="usr">Comentario:</label>
+                                    <textarea type="text" class="form-control" ng-model="registro.comentario"></textarea>
+                                </div>
+                                <div class="form-group" style="margin-bottom: 40px">
+                                    <table class="table">
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <div class="form-group">
+                                                        <label class="col-md-4 control-label" for="filesGral">Documento adjunto:<a class="error">*</a></label>
+                                                        <div class="col-md-8">
+                                                            <input class="input-file" type="file" name="filesGral" id="filesGral"
+                                                                   ng-click="saveIG();" ng-model="filesGral"
+                                                                   onchange="angular.element(this).scope().getFileDetails(this);"/>
+                                                        </div>
+                                                        <input type="hidden" name="archivos" ng-model="itf.archivos" />
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-Modificado">
+                        <button type="submit" class="btn btn-success" ng-disabled="desabilitar" ng-click="add()">
+                            <i class="glyphicon glyphicon-saved"></i> Guardar
+                        </button>
+                        <button type="button" ui-sref="mecadministracion" ng-disabled="desabilitar" class="btn btn-primary">
+                            <span class="fa fa-arrow-left"></span> Regresar
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>-->

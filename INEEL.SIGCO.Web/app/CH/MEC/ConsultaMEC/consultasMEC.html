@@ -1,0 +1,260 @@
+﻿<div class="vista">
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="page-title">
+                <div class="title_left">
+
+                    <ol class="breadcrumb miga">
+                        <li><i class="sg sg-metodo-evaluacion-compet"></i> <a>Método de evaluación de competencias/Consulta de métodos de evaluación de competencias</a></li>
+                       
+                    </ol>
+
+
+                    
+                </div>
+            </div>
+             <div class="clearfix"></div>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_content sin-desborde">
+                        <form name="ValidForm" id="form" class="form-horizontal">
+                            <div>
+                                <div class="x_title">
+                                    <h2>  Competencias t&eacute;cnicas</h2>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <!--<div class="form-group">
+                                    Competencias T&eacute;cnicas
+                                    <button type="button" style="float:right" ng-click="$event.stopPropagation();" ui-sref="manualCompetenciaTecnicasAdd" class="btn btn-success">
+                                        <span class="glyphicon glyphicon-plus"></span> Agregar
+                                    </button>
+                                </div>-->
+                                <div ng-show="registrosTecnicos.length === 0" class="alert advertencia">
+                                    No hay registros de competencias t&eacute;cnicas.
+                                </div>
+                                <div ng-show="registrosTecnicos.length > 0">
+                                    <table class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" ng-show="registrosTecnicos.length > 0">
+                                        <thead>
+                                            <tr>
+                                                <th data-priority="1">Período</th>
+                                                <th data-priority="1">Versi&oacute;n</th>
+                                                <th data-priority="1">Comentario</th>
+                                                <th data-priority="1" class="thAjuste text-center">Descargar documento</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="registro in registrosTecnicos">
+                                                <td>{{registro.periodoEvaluacion.periodo}}</td>
+                                                <td>{{registro.version}}</td>
+                                                <td>{{registro.comentario}}</td>
+                                                <td class="text-center">
+                                                    <a href="/Descargas.html#/q/{{registro.adjuntoId | encriptar}}" class="btn btn-success btn-sm" target="_blank" title="Descargar Archivo"><i class="fa fa-download"></i> </a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_content sin-desborde">
+                        <form name="ValidForm" id="form" class="form-horizontal">
+                            <div class="x_title">
+                                <h2>  Competencias conductuales</h2>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div ng-show="registrosConductual.length === 0" class="alert advertencia">
+                                No hay registros de competencias conductuales.
+                            </div>
+                            <div ng-show="registrosConductual.length > 0">
+                                <table class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" ng-show="registrosConductual.length > 0">
+                                    <thead>
+                                        <tr>
+                                            <th data-priority="1">Período</th>
+                                            <th data-priority="1">Versi&oacute;n</th>
+                                            <th data-priority="1">Comentario</th>
+                                            <th data-priority="1" class="thAjuste text-center">Descargar documento</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="registro in registrosConductual">
+                                            <td>{{registro.periodoEvaluacion.periodo}}</td>
+                                            <td>{{registro.version}}</td>
+                                            <td>{{registro.comentario}}</td>
+                                            <td class="text-center">
+                                                <a href="/Descargas.html#/q/{{registro.adjuntoId | encriptar}}" class="btn btn-success btn-sm" target="_blank" title="Descargar Archivo"><i class="fa fa-download"></i> </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+<!--<div class="vista">
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+                    <form name="ValidForm" id="form" class="form-horizontal">
+                        <div>
+                            <fieldset class="scheduler-border">
+                                
+                                <legend>
+                                    <div class="page-title">
+                                        <div class="title_left">
+                                            <ol class="breadcrumb miga">
+                                                <li><i class="sg sg-metodo-evaluacion-compet"></i> <a ui-sref="mecconsulta">M&eacute;todo de evaluaci&oacute;n de competencias</a></li>
+                                            </ol>
+                                        </div>
+                                    </div>
+                                </legend>
+                                <div class="form-group">
+                                    Competencias T&eacute;cnicas
+                                </div>
+                                <div ng-show="registrosTecnicos.length === 0" class="alert advertencia">
+                                    No hay registros de competencias t&eacute;cnicas.
+                                </div>
+                                <div ng-show="registrosTecnicos.length > 0">
+                                    <table class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" ng-show="registrosTecnicos.length > 0">
+                                        <thead>
+                                            <tr>
+                                                <th data-priority="1">Periodo</th>
+                                                <th data-priority="1">Versi&oacute;n</th>
+                                                <th data-priority="1">Comentario</th>
+                                                <th data-priority="1" class="thAjuste text-center">Descargar Documento</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="registro in registrosTecnicos">
+                                                <td>{{registro.periodoEvaluacion.periodo}}</td>
+                                                <td>{{registro.version}}</td>
+                                                <td>{{registro.comentario}}</td>
+                                                <td class="text-center">
+                                                    <a href="/Descargas.html#/q/{{registro.adjuntoId | encriptar}}" class="btn btn-success btn-sm" target="_blank" title="Descargar Archivo"><i class="fa fa-download"></i> </a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                             
+                                <br /><br /><br /><br />
+                                <div class="form-group">
+                                    Competencias Conductuales
+                                </div>
+                                <div ng-show="registrosConductual.length === 0" class="alert advertencia">
+                                    No hay registros de competencias conductuales.
+                                </div>
+                                <div ng-show="registrosConductual.length > 0">
+                                    <table class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" ng-show="registrosConductual.length > 0">
+                                        <thead>
+                                            <tr>
+                                                <th data-priority="1">Periodo</th>
+                                                <th data-priority="1">Versi&oacute;n</th>
+                                                <th data-priority="1">Comentario</th>
+                                                <th data-priority="1" class="thAjuste text-center">Descargar Documento</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="registro in registrosConductual">
+                                                <td>{{registro.periodoEvaluacion.periodo}}</td>
+                                                <td>{{registro.version}}</td>
+                                                <td>{{registro.comentario}}</td>
+                                                <td class="text-center">
+                                                    <a href="/Descargas.html#/q/{{registro.adjuntoId | encriptar}}" class="btn btn-success btn-sm" target="_blank" title="Descargar Archivo"><i class="fa fa-download"></i> </a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>-->
+
+
+<!--<div id="page-wrapper">
+    <div class="row">
+        <div class="col-lg-12">
+            <br /><br />
+            <div>
+                <fieldset class="scheduler-border">
+                    <legend>M&eacute;todo de evaluaci&oacute;n de competencias</legend>
+                    <div class="form-group">
+                        Competencias T&eacute;cnicas
+                    </div>
+                    <div ng-show="registrosTecnicos.length === 0" class="alert alert-danger">
+                        No hay registros de competencias t&eacute;cnicas.
+                    </div>
+                    <table class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" ng-show="registrosTecnicos.length > 0">
+                        <thead>
+                            <tr>
+                                <th data-priority="1" >Periodo</th>
+                                <th data-priority="1">Versi&oacute;n</th>
+                                <th data-priority="1">Comentario</th>
+                                <th data-priority="1" class="thAjuste text-center">Descargar Documento</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="registro in registrosTecnicos">
+                                <td>{{registro.periodoEvaluacion.periodo}}</td>
+                                <td>{{registro.version}}</td>
+                                <td>{{registro.comentario}}</td>
+                                <td class="text-center">
+                                    <a href="/Descargas.html#/q/{{registro.adjuntoId | encriptar}}" class="btn btn-default btn-sm" target="_blank" title="Descargar Archivo"><i class="fa fa-download"></i> </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <br />
+                    <div class="form-group">
+                        Competencias Conductuales
+                    </div>
+                    <div ng-show="registrosConductual.length === 0" class="alert alert-danger">
+                        No hay registros de competencias conductuales.
+                    </div>
+                    <table class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" ng-show="registrosConductual.length > 0">
+                        <thead>
+                            <tr>
+                                <th data-priority="1" >Periodo</th>
+                                <th data-priority="1" >Versi&oacute;n</th>
+                                <th data-priority="1">Comentario</th>
+                                <th data-priority="1" class="thAjuste text-center">Descargar Documento</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="registro in registrosConductual">
+                                <td>{{registro.periodoEvaluacion.periodo}}</td>
+                                <td>{{registro.version}}</td>
+                                <td>{{registro.comentario}}</td>
+                                <td class="text-center">
+                                    <a href="/Descargas.html#/q/{{registro.adjuntoId | encriptar}}" class="btn btn-default btn-sm" target="_blank" title="Descargar Archivo"><i class="fa fa-download"></i> </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </fieldset>
+            </div>
+        </div>
+    </div>
+</div>-->

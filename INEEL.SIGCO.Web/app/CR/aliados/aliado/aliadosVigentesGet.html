@@ -1,0 +1,87 @@
+<div class="vista">
+    <div class="page-title">
+        <div class="title_left">
+            <ol class="breadcrumb miga">
+                <li><i class="sg sg-aliados"></i> <a ui-sref="inicioaliados" title="Regresar al inicio de aliados">Aliados convenios vigentes</a></li>
+            </ol>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+                    <!--<form name="ValidForm" id="form" class="form-horizontal">-->
+                    <div data-ng-hide="authentication.isAuth">
+                        No tiene permisos para ingresar a esta secci&oacute;n.<br /> Usuario no autentificado
+                    </div>
+                    <div data-ng-show="authentication.isAuth">
+                        <div ng-hide="aliados.length >= 0">
+                            <img src="images/cargando.gif" />
+                        </div>
+                        <div ng-show="aliados.length === 0" class="alert advertencia">
+                            No hay registros
+                        </div>
+                        <!--<div class="row" ng-show="!loading">-->
+                        <div class="col-xs-12 col-md-12 col-sm-12" ng-show="aliados.length > 0">
+                            <table id="CRaliadosGet" class="display dt-responsive" cellspacing="0" datatable="ng" width="100%">
+                                <thead>
+                                    <tr>
+                                        <!--<th  style="max-width:80px"></th>-->
+                                        <th data-priority="1">Aliado</th>
+                                        <th class="text-center" data-priority="2">Contacto</th>
+                                        <th class="text-center">Tipo</th>
+                                        <th data-priority="1" class="text-center" ng-if="rolId === 15 || rolId==1031|| rolId==1032">&iquest;Est&aacute; activo?</th>
+                                        <th ng-if="rolId === 15 || rolId==1031|| rolId==1032">Opciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="e in aliados">
+                                        <!--<td style="max-width:80px" ng-click="detalleAliados(e.aliadoId )">
+                                            <img class="img-thumbnail" src="images/empresa.png" alt="Base64 encoded image" width="50" height="50" />
+                                        </td>-->
+                                        <td style="max-width:350px">
+                                            <span class="linkTabla sin-desborde" ng-click="detalleAliados(e.aliadoId )">{{e.empresaNombre}}</span><br />
+                                            {{e.empresaDescripcion}}<br />{{e.empresSitio}}
+                                        </td>
+                                        <td style="max-width:100px" class="sin-desborde">
+                                            {{e.contacto}}<br />
+                                            {{e.empresaCorreo}}<br />{{e.empresaTelefono}}<br />{{e.empresaCelular}}
+                                        </td>
+                                        <td class="text-center sin-desborde">{{e.tipoOrganizacion}}</td>
+                                        <td class="text-center" ng-if="rolId === 15|| rolId==1031|| rolId==1032">
+                                            <div class="text-hide">
+                                                {{e.estado}}
+                                                <input type="checkbox" class="btn btn-info btn-circle" title="&iquest;Est&aacute; activo?" ng-model="e.estado" value="{{e.estado}}"
+                                                       ng-change="saveEstado(e.aliadoId,e.estado,e.nombre)" />
+                                            </div>
+                                        </td>
+                                        <td ng-if="rolId === 15|| rolId==1031|| rolId==1032">
+                                            <a class="btn btn-warning" ui-sref="aliadoEdit({ id: e.aliadoId })" title="Editar">
+                                                <i class="glyphicon glyphicon-pencil"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <!--</div>-->
+                            <br /><br />
+                        </div>
+                        <!--</div>-->
+                        <!--</form>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <button type="button" ui-sref="aliadoAdd" class="btn btn-success" ng-show="rolId ===15|| rolId==1031||rolId==1032">
+                <span class="glyphicon glyphicon-plus"></span> Agregar
+            </button>
+            <button type="button" ui-sref="inicioaliados"  class="btn btn-primary">
+                <span class="fa fa-arrow-left"></span> Regresar
+            </button>
+        </div>
+    </div>
+</div>

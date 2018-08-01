@@ -1,0 +1,79 @@
+<!--Vista generica de busque da de proyectos-->
+<!--Vista generica de busque da de proyectos-->
+<!--Vista generica de busque da de proyectos-->
+
+<div class="modal-header">
+    <button type="button" class="close" ng-click="cancel()" data-dissmiss="modal">
+        <i class="glyphicon glyphicon-remove"></i>
+    </button>
+    <div class="col-xs-1"></div>
+    <div>
+        <h3>
+            Proyectos
+        </h3>
+    </div>
+
+
+</div>
+<div class="modal-body">
+    <div class="row">
+        <div class="col-xs-12" ng-show="nueva">
+            <form class="form-horizontal" name="frmBuscar">
+
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="searchTextClave">N&uacute;mero:</label>
+                    <div class="col-md-8">
+                        <input type="text" ng-model="proyectoInput.ProyectoId" id="searchTextClave"
+                               name="searchTextClave" ng-change="proyectoInput.Nombre=null"
+                               class="form-control" placeholder="N&uacute;mero de proyecto (alfanum&eacute;rico)"
+                               ng-minlength="4" />
+                        <span class="error" ng-show="frmBuscar.searchTextClave.$dirty && !frmBuscar.searchTextClave.$valid">
+                            Longitud m&iacute;nima de 4
+                        </span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="searchTextNombre">T&iacute;tulo:</label>
+                    <div class="col-md-8">
+                        <input type="text" ng-model="proyectoInput.Nombre" id="searchTextNombre"
+                               name="searchTextNombre" ng-change="proyectoInput.ProyectoId=null"
+                               class="form-control" placeholder="Nombre de proyecto"
+                               ng-minlength="3" />
+                        <span class="error" ng-show="frmBuscar.searchTextNombre.$dirty && !frmBuscar.searchTextNombre.$valid">
+                            Longitud m&iacute;nima de 3
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-4"></div>
+                    <div class="col-md-8">
+                        <button class="btn btn-info btn-flat" ng-click="nueva=false;verTable=true;buscar(proyectoInput)"
+                                ng-disabled="(frmBuscar.searchTextNombre.$invalid || frmBuscar.searchTextClave.$invalid)">
+                            Buscar <i class="glyphicon glyphicon-search"></i>
+                        </button>
+                    </div>
+                </div>
+
+
+            </form>
+        </div>
+        <div class="col-xs-1"></div>
+        <div ng-show="nueva==false">
+            <button class="btn btn-info btn-flat" ng-click="nueva=true;proyectos=[];">
+                Realizar nueva b&uacute;squeda <i class="glyphicon glyphicon-search"></i>
+            </button>
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-sm-12" ng-show="nueva==false">
+            <table datatable="" name="tablaBusquedaProyectos" dt-options="showCase.dtOptions" dt-columns="showCase.dtColumns"
+                   
+                   class="display dt-responsive"
+                   cellspacing="0" width="100%"></table>
+
+
+        </div>
+    </div>
+</div>  <!-- final modal body-->

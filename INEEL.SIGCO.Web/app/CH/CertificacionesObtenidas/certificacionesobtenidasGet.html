@@ -1,0 +1,57 @@
+﻿<div data-ng-show="authentication.isAuth">
+    <div ng-hide="registros.length >= 0">
+        <img src="images/cargando.gif" />
+    </div>
+    <div class="row">
+        <div class="col-md-12 col-xs-12">
+            <div ng-show="registros.length === 0" class="alert advertencia">
+                No hay registros de certificaciones obtenidas
+            </div>
+            <div ng-show="registros.length > 0">
+                <table id="CHcertificacionesobtenidasGet" class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" datatable="ng" width="100%"
+                       dt-options="dtOptions">
+                    <thead>
+                        <tr>
+                            <th data-priority="1">Certificaci&oacute;n</th>
+                            <th>Fecha<br />inicio</th>
+                            <th>Estado<br />registro </th>
+                            <th>Fecha<br />validación</th>
+                            <th data-priority="1" class="thAjuste text-center">Opciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="registro in registros">
+                            <td style="max-width:300px" class="sin-desborde linkTabla" ng-click="$event.stopPropagation();" ui-sref="certificacionesobtenidasDetails({id:registro.certificacionesObtenidasId})" title="Detalle">{{registro.nombreCertificacion}}</td>
+                            <td>{{registro.fechaInicio | date:"dd/MM/yyyy"}}</td>
+                            <td>{{registro.estadoFlujo.descripcion}}</td>
+                            <td>{{registro.fechaValidacion === null ? 'Dato no disponible' : registro.fechaValidacion | date:"dd/MM/yyyy"}}</td>
+                            <td class="text-center">
+                                <a ng-if="idRol==1" ng-click="setGlobalID(registro.certificacionesObtenidasId);$event.stopPropagation();"
+                                   ui-sref="certificacionesobtenidasDetailsAdmin({id:registro.certificacionesObtenidasId, id2: 1})" title="Aprobar registro" class="btn btn-warning">
+                                    <i class="glyphicon glyphicon-pencil"></i>
+                                </a>
+                                <div ng-if="registro.estadoFlujoId==1 || editarGestion==1">
+                                    <a ng-if="idRol!=1" ng-click="setGlobalID(registro.certificacionesObtenidasId);$event.stopPropagation();" ui-sref="certificacionesobtenidasEdit" title="Editar" class="btn btn-warning">
+                                        <i class="glyphicon glyphicon-pencil"></i>
+                                    </a>
+                                    <a title="Eliminar" ng-if="registro.fechaValidacion === null && registro.estadoFlujoId!=3" ng-click="open(registro)" class="btn btn-danger">
+                                        <i class="glyphicon glyphicon-trash"></i>
+                                    </a>
+                                </div>
+                                <div ng-if="registro.estadoFlujoId==3">
+                                    <a ng-if="idRol!=1" ng-really-message="Está a punto de acceder a un registro 'Aceptado', si modifica algún atributo deberá ser validado nuevamente. ¿Desea continuar?" ng-really-click="setGlobalID(registro.certificacionesObtenidasId);$event.stopPropagation();navegador();" title="Editar" class="btn btn-warning">
+                                        <i class="glyphicon glyphicon-pencil"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <button ng-show="registros.length >= 0" type="button" ng-click="$event.stopPropagation();" ui-sref="certificacionesobtenidasAdd" class="btn btn-success">
+                <span class="glyphicon glyphicon-plus"></span> Agregar
+            </button>
+        </div>
+
+    </div>
+</div>

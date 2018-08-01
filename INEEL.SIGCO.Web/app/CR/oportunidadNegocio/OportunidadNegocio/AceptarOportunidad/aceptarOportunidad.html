@@ -1,0 +1,23 @@
+﻿<div class="modal-content">
+    <div class="modal-header">
+        Aceptar Oportunidad
+        <button type="button" class="close" ng-click="cancel()" data-dissmiss="modal">x</button>
+    </div>
+    <form role="form" ng-submit="ok()" name="aceptarONForm">
+        <div class="modal-body">
+            <div class="panel">
+                <!-- /.panel-heading -->
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label>Comentarios <span class="required">*</span></label>
+                        <textarea required name="comentarios" class="form-control" ng-model="comentariosInvestigador" rows="3"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-success" ng-disabled="aceptarONForm.$invalid" ng-click="aceptar()">Aceptar oportunidad</button>
+            <button type="button" class="btn btn-primary" ng-click="cancel()">Cancelar</button>
+        </div>
+    </form>
+</div>

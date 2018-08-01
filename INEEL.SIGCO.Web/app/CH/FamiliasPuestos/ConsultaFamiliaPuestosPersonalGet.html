@@ -1,0 +1,280 @@
+﻿<div class="vista">
+
+    <div class="page-title">
+        <div class="title_left">
+
+            <ol class="breadcrumb miga">
+                <li><i class="sg sg-familia-puestos"></i> <a>Familia de puestos/Personal por familia de puestos</a></li>
+            </ol>
+
+        </div>
+    </div>
+   
+
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Criterios de búsqueda</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li>
+                            <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content sin-desborde">
+
+                    <div class="form-horizontal form-label-center">
+
+
+                        <div class="form-group ">
+                            <label class="control-label col-md-4 col-sm-4 col-xs-12">
+                                Tipo de personal
+                            </label>
+                            <div class="col-md-4 col-sm-8 col-xs-12">
+                                <select ng-model="NivelPersonalSel" name="NivelPersona" ng-change="FiltrarCatalogos()" class="form-control">
+                                    <option ng-repeat="x in nivelPersonal" value="{{x.valor}}">{{x.descripcion}}</option>
+                                    <option value="0" ng-selected="0">Seleccione el tipo de personal</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div ng-show="FiltraCatalogoPorPersonal == '1' ">
+                            <div class="form-group ">
+                                <label class="control-label col-md-4 col-sm-4 col-xs-12">
+                                    Tipo de competencia
+                                </label>
+                                <div class="col-md-4 col-sm-8 col-xs-12">
+
+                                    <select id="tipoCompetencia" name="tipocompetencia" class="form-control"
+                                            ng-change="cargarCatalogos()"
+                                            ng-model="tipoCompetenciaId"
+                                            ng-options="e.tipoCompetenciaId as e.nombreCompetencia  for e in tipocompetencia" ng-required="true">
+                                        <option value="">Seleccione un tipo de competencia </option>
+                                    </select>
+
+                                </div>
+                            </div>
+                            <div ng-show="tipoCompetenciaConsultada == 1">
+                                <div class="form-group ">
+                                    <label class="control-label col-md-4 col-sm-4 col-xs-12">
+                                        Familia de puestos
+                                    </label>
+                                    <div class="col-md-4 col-sm-8 col-xs-12">
+
+                                        <select id="familiaId" name="familias" class="form-control"
+                                                ng-change="cargarCategorias()"
+                                                ng-model="familiaId"
+                                                ng-init="familiaId"
+                                                ng-options="e.familiaId as e.nombreFamilia  for e in familiasPuestos" ng-required="true">
+                                            <option value="">Seleccione una familia de puestos </option>
+                                        </select>
+
+                                    </div>
+                                </div>
+
+                                <div class="form-group ">
+                                    <label class="control-label col-md-4 col-sm-4 col-xs-12">
+                                        Categorías
+                                    </label>
+                                    <div class="col-md-4 col-sm-8 col-xs-12">
+
+                                        <select id="categoriaId" name="categorias" class="form-control"
+                                               ng-change="recargaInv()"
+                                                ng-model="categoriaId"
+                                                ng-init="categoriaId"
+                                                ng-options="e.categoriaId as e.nombreCategoria  for e in categoriasFamilias" ng-required="true">
+                                            <option value="">Seleccione una categoría </option>
+                                        </select>
+
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group ">
+                                    <label class="control-label col-md-4 col-sm-4 col-xs-12">
+                                        Período de evaluación
+                                    </label>
+                                    <div class="col-md-4 col-sm-8 col-xs-12">
+                                        <select ng-model="AINV" name="NivelPersona" ng-change="personalEvaluado()" class="form-control">
+                                            <option ng-repeat="x in PeriodosInv" value="{{x.valor}}">{{x.descripcion}}</option>
+                                            <option value="0" ng-selected="0">Seleccione un período de evaluación</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div ng-show="tipoCompetenciaConsultada == 2">
+
+
+
+                                <div class="form-group ">
+                                    <label class="control-label col-md-4 col-sm-4 col-xs-12">
+                                        Tipo de área
+                                    </label>
+                                    <div class="col-md-4 col-sm-8 col-xs-12">
+
+                                        <select id="areaev" name="areaev" class="form-control"
+                                                ng-change="cargarNivelesPorArea()"
+                                                ng-model="tipoAreaId"
+                                                ng-options="e.tipoAreaId as e.area  for e in tipoarea" ng-required="true">
+                                            <option value="">Seleccione un tipo de área </option>
+                                        </select>
+
+                                    </div>
+                                </div>
+
+                                <div class="form-group ">
+                                    <label class="control-label col-md-4 col-sm-4 col-xs-12">
+                                        Nivel de competencia
+                                    </label>
+                                    <div class="col-md-4 col-sm-8 col-xs-12">
+
+                                        <select id="nvtec" name="NivelesTecnicas" class="form-control"
+                                               ng-change="recargaTec()"
+                                                ng-model="nivelId"
+                                                ng-options="e.nivelCompetenciaId as e.descripcion  for e in niveles" ng-required="true">
+                                            <option value="">Seleccione un nivel de competencia</option>
+                                        </select>
+
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group ">
+                                    <label class="control-label col-md-4 col-sm-4 col-xs-12">
+                                        Período de evaluación
+                                    </label>
+                                    <div class="col-md-4 col-sm-8 col-xs-12">
+                                        <select ng-model="ATEC" name="NivelPersona" ng-change="personalTecnicas()" class="form-control">
+                                            <option ng-repeat="x in PeriodosTec" value="{{x.valor}}">{{x.descripcion}}</option>
+                                            <option value="0" ng-selected="0">Seleccione un período de evaluación</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div ng-show="FiltraCatalogoPorPersonal == '2' ">
+
+                           
+                            <div class="form-group ">
+
+
+
+                                <label class="control-label col-md-4 col-sm-4 col-xs-12">
+                                    Familia de puestos
+                                </label>
+                                <div class="col-md-4 col-sm-8 col-xs-12">
+
+                                    <select id="familiaIdSind" name="familiasSind" class="form-control"
+                                            ng-change="cargarCategoriasSind()"
+                                            ng-model="familiaId"
+                                            ng-init="familiaId"
+                                            ng-options="e.familiaId as e.nombreFamilia  for e in familiasPuestosSind" ng-required="true">
+                                        <option value="">Seleccione una familia de puestos </option>
+                                    </select>
+
+                                </div>
+                            </div>
+
+                            <div class="form-group ">
+                                <label class="control-label col-md-4 col-sm-4 col-xs-12">
+                                    Categorías
+                                </label>
+                                <div class="col-md-4 col-sm-8 col-xs-12">
+
+                                    <select id="categoriaId" name="categorias" class="form-control"
+                                            ng-change="recargaSind()"
+                                            ng-model="categoriaId"
+                                            ng-init="categoriaId"
+                                            ng-options="e.categoriaId as e.nombreCategoria  for e in categoriasFamiliasSind" ng-required="true">
+                                        <option value="">Seleccione una categoría </option>
+                                    </select>
+
+                                </div>
+                            </div>
+
+
+                            <div class="form-group ">
+                                <label class="control-label col-md-4 col-sm-4 col-xs-12">
+                                    Período de evaluación
+                                </label>
+                                <div class="col-md-4 col-sm-8 col-xs-12">
+                                    <select id="periodoId" name="periodoev" class="form-control"
+                                            ng-change="personalEvaluadoSind()"
+                                            ng-model="periodoId"
+                                            ng-init="periodoId"
+                                            ng-options="e.periodoEvaluaionId as e.periodo  for e in periodosEv" ng-required="true">
+                                        <option value="">Seleccione un período de evaluación </option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>  
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div ng-show="muestraListado === 1">
+
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="x_panel">
+                    <div class="x_content sin-desborde">
+
+                        <div ng-show="FiltraCatalogoPorPersonal == '1' ">
+
+                            <table id="CHConsultaFamiliaPuestosPersonalGet2"  dt-column-defs="dtColumnDefs" class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" datatable="ng" width="100%" dt-options="dtOptions">
+                                <thead>
+                                    <tr>
+                                        <th data-priority="1">Número de empleado</th>
+                                        <th>Nombre de empleado</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="obj in personal">
+                                        <td ng-click="openProfile(obj.claveEmpleado)" title="Detalle de empleado" class="linkTabla">{{obj.claveEmpleado}}</td>
+                                      
+                                        <td>{{obj.nombreEmpleado}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+                        <div ng-show="FiltraCatalogoPorPersonal == '2' ">
+                            <table id="CHConsultaFamiliaPuestosPersonalGet2" class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" datatable="ng" width="100%"  dt-column-defs="dtColumnDefs" dt-options="dtOptions">
+                                <thead>
+                                    <tr>
+                                        <th data-priority="1">Número de empleado</th>
+                                        <th>Nombre de empleado</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="obj in personal">
+                                        <td ng-click="openProfile(obj.noEmpleado)" title="Detalle de empleado" class="linkTabla">{{obj.noEmpleado}}</td>
+                                        <td>{{obj.nombreEmpleado}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+

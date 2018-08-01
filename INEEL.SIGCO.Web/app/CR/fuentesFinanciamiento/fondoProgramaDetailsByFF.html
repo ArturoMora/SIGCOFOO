@@ -1,0 +1,96 @@
+﻿
+<div class="vista">
+    <div class="page-title">
+        <div class="title_left">
+            <ol class="breadcrumb miga">
+                <li><i class="sg sg-fuentes-financiamiento"></i> <a ui-sref="fuentesFinanciamientoGet">Fuentes de Financiamiento</a></li>
+                <li class="active">Fondos de {{fuentesFinanciamiento.nombreFF}} </li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+                    <!-- se oculta, si usuario está logeado-->
+                    <div data-ng-hide="authentication.isAuth">
+                        No tiene permisos para ingresar a esta secci&oacute;n.<br /> Usuario no autentificado
+                    </div>
+                    <div data-ng-show="authentication.isAuth">
+                        <div ng-hide="programasDeFuente.fondoPrograma.length >= 0">
+                            <img src="images/cargando.gif" />
+                        </div>
+                        <div ng-show="programasDeFuente.fondoPrograma.length === 0" class="alert advertencia">
+                            No hay registros
+                        </div>
+                        <div ng-show="programasDeFuente.fondoPrograma.length > 0">
+                            <table id="CRfondoProgramaDetailsByFF" dt-instance="dtInstance" class="table table-hover table-striped table-condensed" cellspacing="0" datatable="ng" width="100%" dt-options="dtOptions">
+                                <thead>
+                                    <tr>
+                                        <th data-priority="1">Nombre</th>
+                                        <th class="thCeldaB text-center">&Aacute;rea tem&aacute;tica</th>
+                                        <th data-priority="3">Patrocinador</th>
+                                        <th>Contacto</th>
+                                        <th >Convocatorias</th>
+                                        <th data-priority="1" class="thCeldaB text-center" ng-if="idRol==15|| idRol==1031 || idRol==1032">Opciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="e in programasDeFuente.fondoPrograma">
+                                        <td class="linktabla">
+                                            <a class="link" ui-sref="fondoProgramaDetails({ id: e.fondoProgramaId })" title="Detalles">
+                                                {{e.nombreFP}}
+                                            </a>
+                                        </td>
+                                        <td class="thCeldaB ">
+                                            <ul li ng-repeat="x in e.tematicaPorFondoPrograma">
+                                                <li>
+                                                    {{x.tematica.nombre}}
+                                                </li>
+                                            </ul>
+                                        </td>
+                                        <td class="thCeldaB">{{e.empresa.nombreEmpresa}}</td>
+                                        <td class="thCeldaB">{{e.contacto.nombreContacto +' '+e.contacto.apellidoPaterno+' '+e.contacto.apellidoMaterno}}</td>
+                                        <!--<td><span class="text" ng-bind="consultaEstado(e.estado)"></span></td>-->
+                                        <td class="text-center">
+                                            <div ng-if="e.convocatoria.length === 0">
+                                                {{e.convocatoria.length}}
+                                            </div>
+                                            <div ng-if="e.convocatoria.length > 0">
+                                                <a class="link" ui-sref="convocatoriaDetailsByFP({ id: e.fondoProgramaId })" title="Detalles Convocatoria">{{e.convocatoria.length}} </a>
+                                            </div>
+                                        </td>
+                                        <td class="thCeldaB text-center" ng-if="idRol==15 || idRol==1031 || idRol==1032">
+                                            
+                                            <div ng-show="e.convocatoria.length === 0">
+                                                <a class="btn btn-danger" ng-really-click="eliminarRegistro(e.fondoProgramaId)" ng-really-message="¿Desea eliminar el registro?" title="Eliminar">
+                                                    <i class="glyphicon glyphicon-trash"></i>
+                                                </a>
+                                            </div>
+                                            <div ng-if="e.convocatoria.length > 0">
+                                                <a class="btn btn-danger" ng-click="mostrarAlerta()" title="Eliminar">
+                                                    <i class="glyphicon glyphicon-trash"></i>
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <br /><br />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <button type="button" ng-click="globalRegresar();" class="btn btn-primary">
+                <span class="fa fa-arrow-left"></span> Regresar
+            </button>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,158 @@
+﻿<div class="vista">
+    <div class="page-title">
+        <div class="title_left">
+
+            <ol class="breadcrumb miga">
+                <li><i class="disabled fa fa-users"></i> <a ng-click="globalRegresar();" href="">Comunidades de pr&aacute;ctica</a></li>
+                <li class="active">Agregar</li>
+            </ol>
+
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+                    <form ng-submit="save()" name="form" id="form" class="form-horizontal">
+
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">
+                                Nombre de la comunidad <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" ng-model="comunidad.descripcion" required placeholder="Nombre de la comunidad" class="form-control col-md-7 col-xs-12"  name="comunidad"  minlength="2" maxlength="70"  />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">
+                                Misi&oacute;n de la comunidad
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <textarea rows="3" type="text" placeholder="Objetivo/Misi&oacute;n de la comunidad" ng-model="comunidad.mision" class="form-control col-md-7 col-xs-12"  name="mision" maxlength="500" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">
+                                Tipo de acceso a las publicaciones de la comunidad <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <select required name="tipoAccesoComunidad" class="form-control" ng-model="comunidad.tipoAcceso" scrolly style="overflow: scroll">
+                                    <option value="" selected>--- Seleccione un tipo de acceso ---</option>
+                                    <option value="1">P&uacute;blico</option>
+                                    <option value="0">Restringido</option>
+                                </select>
+                                <!--<span class="error" ng-show="form.tipoAccesoComunidad.$invalid && form.tipoAccesoComunidad.$dirty || form.$submitted && form.tipoAccesoComunidad.$invalid">
+                                    Debes de seleccionar una opci&oacute;n
+                                </span>-->
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label  class="control-label col-md-3 col-sm-3 col-xs-12">Programa de investigaci&oacute;n <span class="required">*</span></label>
+                            <div  class="col-md-6 col-sm-6 col-xs-12">
+                                <select required class="form-control" name="categriaComunidad" ng-model="comunidad.idCategoria" ng-options="obj.catCPId as obj.nombre for obj in categorias">
+                                    <option value="">--- Seleccione una categor&iacute;a ---</option>
+                                </select>
+                                <!--<span class="error" ng-show="form.categriaComunidad.$invalid && form.$submitted">
+                                    Debes seleccionar una de las opciones listadas
+                                </span>-->
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Fecha de alta<span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="row">
+                                    <div class="col-xs-10">
+                                        <input required type="text" name="fechaAlta" placeholder="dd/mm/yyyy" show-button-bar="false" popup-placement="bottom" class="form-control fechaOnly" datepicker-options="datePicker50.FechaOptions" uib-datepicker-popup="dd/MM/yyyy" ng-model="comunidad.fechaAlta" value="{{ date | date: 'dd/MM/yyyy' }}" ng-init="openDate=false" is-open="openDate" close-text="Close" />
+                                        <span ng-show="form.fechaAlta.$dirty &&  form.fechaAlta.$invalid" class="error">Formato inv&aacute;lido 'dd/MM/yyyy'</span>
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <button type="button" class="btn btn-success" ng-click="openDate=true"><i class="glyphicon glyphicon-calendar"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="x_title">
+                            <h2>Personal participante<small></small></h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Lider <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="row">
+                                    <div class="col-xs-10">
+                                        <input type="text" placeholder="Seleccione un investigador" class="form-control" id="usr" name="lider" ng-model="nombreLider" required disabled>
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <a class="btn btn-success" ng-click="openLider()" title="Buscar Persona">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Secretario <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="row">
+                                    <div class="col-xs-10">
+                                        <input type="text" placeholder="Seleccione un investigador" class="form-control" id="usr" name="secretario" ng-model="nombreSecretario" required disabled>
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <a class="btn btn-success" ng-click="openSecretario()" title="Buscar Persona">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="x_title">
+                            <h2>Adjunto <small>Tama&ntilde;o m&aacute;ximo por archivo de 8 MB</small></h2>
+                            <div class="clearfix"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Imagen de la comunidad
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input class="input-file form-control col-md-7 col-xs-12" type="file" name="filesGral" id="filesGral" data-buttonName="btn-success" ng-click="saveIG();" ng-model="filesGral" onchange="angular.element(this).scope().getFileDetails(this);" />
+                            </div>
+                        </div>
+
+                        <div class="ln_solid"></div>
+                        <div class="form-group">
+                            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                <div class="">
+
+                                    <button type="submit" class="btn btn-success">
+                                        <i class="glyphicon glyphicon-saved"></i> Guardar
+                                    </button>
+                                    <button type="button" confirma-regresar="regresar()" state-form="form" class="btn btn-primary">
+                                        <span class="fa fa-arrow-left"></span> Regresar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

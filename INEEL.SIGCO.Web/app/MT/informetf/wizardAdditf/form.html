@@ -1,0 +1,272 @@
+<!-- page content -->
+<div class="vista">
+
+    <div class="page-title">
+        <div class="title_left">
+
+            <ol class="breadcrumb miga">
+                <li><i class="sg sg-informes-tecnico"></i> <a ui-sref="AddITF">Informes t&eacute;cnicos finales/Mis informes t&eacute;cnicos finales</a></li>
+                <li class="active">Editar</li>
+            </ol>
+
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+
+
+                    <div class="row">
+
+                       
+
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+
+
+                            <div class="col-xs-8 col-md-8 col-sm-8">
+                                <div class="form-group">
+                                    <div class="row">
+                                        <label class="detalle2"> No. Proyecto : </label> <a href="" load-proyectos idproyecto="{{proyecto.proyectoId}}" title="Detalle de proyecto">{{proyecto.proyectoId}}</a> - {{proyecto.nombre}}
+                                    </div>
+                                    <div class="row">
+                                        <label class="detalle2"> Cliente: </label><span class="cont emc colorTit"> {{cliente}} </span>
+                                    </div>
+                                    <div class="row" ng-show="sefacturo == true ">
+                                        <label class="detalle2"> Ingresos:</label><span class="cont emc colorTit"> {{ proyecto.facturacionReal  | currency:"$"}} </span>
+                                    </div>
+                                    <div class="row" ng-show="sefacturo == false ">
+                                        <label class="detalle2"> Ingresos:</label><span class="cont emc colorTit"> NO DISPONIBLE </span>
+                                    </div>
+                                    <div class="row">
+                                        <label class="detalle2"> Desarrollado por:</label><span class="cont emc colorTit"> {{nombreUnidad}} </span>
+                                    </div>
+
+                                    <div class="row">
+                                        <label class="detalle2"> Jefe de proyecto:</label><span class="cont emc colorTit"> {{proyecto.nombreJefeProyecto}} </span>
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+                            <div class="col-xs-4 col-sm-4 col-md-4 contenedor_gris cropper-container">
+                                <div class="form-group">
+                                    <div class="row" style="text-align:center">   <label>Fecha de inicio</label> </div>
+                                    <div class="row">
+                                        <div class="col-md-6 col-lg-6 col-sm-6">
+                                            <label> Programada:</label>
+                                            <span class="text">{{proyecto.fechaInicio | date: 'dd-MM-yyyy'}}</span>
+                                        </div>
+                                        <div class="col-md-6 col-lg-6 col-sm-6">
+                                            <label> Real: </label>
+                                            <span class="text">{{proyecto.fechaInicio | date: 'dd-MM-yyyy'}}</span>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="form-group">
+
+
+                                    <div class="row" style="text-align:center">   <label>Fecha de t&eacute;rmino</label> </div>
+                                    <div class="row">
+                                        <div class="col-md-6 col-lg-6 col-sm-6">
+                                            <label> Programada:</label>
+                                            <span class="text">{{proyecto.fechaFin | date: 'dd-MM-yyyy'}}</span>
+                                        </div>
+                                        <div class="col-md-6 col-lg-6 col-sm-6">
+                                            <label> Real: </label>
+                                            <span class="text">{{proyecto.fechaFin | date: 'dd-MM-yyyy'}}</span>
+                                        </div>
+                                    </div>
+
+
+
+                                </div>
+                            </div>
+
+
+                        </div>
+
+
+
+                    </div>
+
+
+
+
+
+                    <div class="row">
+
+                        <div class="col-xs-8 col-sm=8 col-md-8 col-lg-8">
+
+                        </div>
+
+                        <div class="col-xs-4 col-sm=4 col-md-4 col-lg-4" style="text-align:center">
+
+
+                            <button ng-click="aprobacion1()"
+                                    ng-disabled="itf.adjuntoId==null"
+                                    class="btn btn-block btn-success" title="{{itf.adjuntoId==null?'Se requiere el documento ITF en informaci&oacute;n general':'Autorizar ITF'}}"
+                                    ng-show="itf.estadoITFFlujoId==1 && (idRol==4 || idRol==5 || idRol==16 )">
+                                    Responder solicitud (Aprobar / Regresar)
+                            </button>
+                            
+                        </div>
+
+                    </div>
+
+                    
+
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <!-- especificar las columnas para las diferentes pantallas -->
+                    <div class="x_panel">
+                        <div class="x_content sin-desborde">
+                            <div class="row">
+                                <div class="pull-right">
+                                    <button ng-click="revision()"
+                                            class="btn btn-block btn-success" title="{{itf.adjuntoId==null?'Se requiere el documento ITF en informaci&oacute;n general':'Enviar ITF a revisi&oacute;n'}}"
+                                            ng-disabled="itf.itFgeneralId==null
+                                || itf.resultadosEId==null
+                                || itf.satisCteId==null
+                                || itf.resultadosId==null
+                                || itf.proyFuturoId==null
+                                || itf.evaluaciones ==null
+                                || itf.evaluaciones.length===0
+                                
+                                || itf.lActeId===null
+                                || itf.lAproyId===null
+                                || itf.insumos===null
+                                || itf.insumos==={}
+                                || itf.listaInsumos===null
+                                || itf.listaInsumos.length===0
+                                || itf.adjuntoId==null
+                                "
+                                            ng-show="!detalles && itf.estadoITFFlujoId==0">
+                                        Enviar a revisi&oacute;n
+                                    </button>
+                                </div>
+                                <div id="wizard" class="form_wizard wizard_horizontal">
+                                    <ul class="wizard_steps">
+                                        <li class="active">
+                                            <a ui-sref=".infoGral" ng-click="tab = 1;newTAB()">
+                                                <span class="step_no {{itf.itFgeneralId!=null ? 'step_ok': ''}} {{active1}}">1</span>
+                                                <span class="step_descr step{{active1}}">
+                                                    Informaci&oacute;n general
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a ui-sref=".resultadosP" ng-click="tab = 2;newTAB()">
+                                                <span class="step_no {{itf.resultadosEId!=null && itf.resultadosId!=null && itf.proyFuturoId!=null ? 'step_ok': ''}} {{active2}}">2</span>
+                                                <span class="step_descr step{{active2}}">
+                                                    Resultados
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a ui-sref=".satisfCliente" ng-click="tab = 3;newTAB()">
+                                                <span class="step_no {{itf.satisCteId!=null ? 'step_ok': ''}} {{active3}}">3</span>
+                                                <span class="step_descr step{{active3}}">
+                                                    Satisfacci&oacute;n del cliente
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a ui-sref=".evaluaciones" ng-click="tab = 4;newTAB()">
+                                                <span class="step_no {{itf.evaluaciones!=null && itf.evaluaciones.length > 0 ? 'step_ok': ''}} {{active4}}">4</span>
+                                                <span class="step_descr step{{active4}}">
+                                                    Evaluaciones
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a ui-sref=".leccionesAprend" ng-click="tab = 5;newTAB()">
+
+                                                <span class="step_no {{itf.lAproyId!=null && itf.lActeId!=null ? 'step_ok': ''}} {{active5}}">5</span>
+                                                <span class="step_descr step{{active5}}">
+                                                    Lecciones Aprendidas
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a ui-sref=".insumos" ng-click="tab = 6;newTAB()">
+                                                <span class="step_no {{itf.listaInsumos!=null && itf.listaInsumos.length>0 ? 'step_ok': ''}} {{active6}}">6</span>
+                                                <span class="step_descr step{{active6}}">
+                                                    Insumos
+                                                </span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- End SmartWizard Content -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+                        <form ng-submit="processForm()" name="formITF" class="form-horizontal">
+                            <div class="col-xs-12" ng-if="(itf.estadoITFFlujoId==1 && (isGerente || adminMT)) || editable">
+                                <br/>
+                                <div ui-view>
+
+                                </div>
+                            </div>
+                        </form>
+                </div>
+            </div>
+            <div class="col-lg-12" ng-hide="(itf.estadoITFFlujoId==1 && (isGerente || adminMT)) || editable">
+                <!--itf.estadoITFFlujoId:{{itf.estadoITFFlujoId}}<br/>
+                isGerente: {{isGerente }}<br/>
+                adminMT: {{adminMT}}<br/>
+                editable: {{editable}}<br/>
+                ocultarGuardar:{{ocultarGuardar}}<br/>
+                itf.proyecto.numjefeProyecto: {{itf.proyecto.numjefeProyecto}}  authentication.userprofile.clavePersona:{{authentication.userprofile.clavePersona}}-->
+                <div class="alert advertencia" role="alert">
+                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                    No tiene permisos para editar este ITF
+                </div>
+            </div>
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+                    <div class="row col-xs-12">
+                        <div class="alert informacion" role="alert">
+                            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                            Estado del ITF: {{itf.estadoITFFlujo.nombre}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <button type="button" confirma-regresar="regresoAbsoluto()" state-form="formITF" class="btn btn-primary"
+                    ng-show="true">
+                <!--!detalles-->
+                <span class="fa fa-arrow-left"></span> Regresar
+            </button>
+        </div>
+    </div>
+
+
+
+</div>
+<!-- end page content -->
+<!--1:{{active1}} 2:{{active2}} 3:{{active3}} 4:{{active4}} 5:{{active5}} 6:{{active6}} 7:{{active7}} 8:{{active8}}
+    
+itf: {{itf | json}}
+
+debugCalifPersonal: {{PersonalProyecto | json}}
+    -->
+ <!--{{itf | json}}-->
+
+<META HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE">

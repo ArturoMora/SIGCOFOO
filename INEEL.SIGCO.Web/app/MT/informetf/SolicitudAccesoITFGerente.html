@@ -1,0 +1,65 @@
+﻿<div id="page-wrapper">
+    <div data-ng-hide="authentication.isAuth">
+        No tiene permisos para ingresar a esta sección.<br /> Usuario no autentificado
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <h1>Solicitud de acceso a Informes T&eacute;cnicos Finales</h1>
+            <hr />
+        </div>
+    </div>
+    <div class="row">
+        <div ng-show="registros.length === 0" class="alert advertencia">
+            Ninguna solicitud de acceso a ITF localizada  (para la Unidad Organizacional No. {{authentication.userprofile.claveUnidad}})
+        </div>
+        <div ng-show="true">
+            <div ng-hide="registros.length === 0">
+                <table id="MTSolicitudAccesoITFGerente" class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" datatable="ng" width="100%" dt-options="dtOptions">
+                    <thead>
+                        <tr>
+                            <th data-priority="1">N&uacute;mero</th>                            
+                            <th>Proyecto</th>
+                            <th>N&uacute;m empleado</th>
+                            <th data-priority="2"> Opciones</th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="e in registros">
+                            <td>{{e.informeTecnicoFinal.informeTecnicoFinalId}}</td>
+                            <td>{{e.informeTecnicoFinal.proyecto.nombre}}</td> <!--| date : "yyyy"-->
+                            <!--<td>{{e.clavePersonaSolicitante}}</td>-->
+                            <td>
+                                <a class="linkTabla" ng-click="openProfile(solicitud.clavePersona)" style="cursor: hand;cursor: pointer;" title="Detalle de empleado">
+                                    {{solicitud.clavePersona}}
+                                </a> - {{solicitud.nombreCompleto}}
+                            </td>
+                            <td style="width:200px">
+                                <div class="row">
+                                    <a ui-sref="ITFdetalles.infoGral({id:e.informeTecnicoFinal.informeTecnicoFinalId,edit:'false',foo:99})"
+                                       class="btn btn-warning btn-sm"
+                                       title="Detalles ITF">
+                                        <i class="glyphicon glyphicon-th-list"></i>
+                                    </a>
+
+                                    <a ui-sref="#" ng-click="aprobar(e)"
+                                       class="btn btn-success btn-sm"
+                                       title="Aprobar solicitud">
+                                        <i class="glyphicon glyphicon-ok"></i>
+                                    </a>
+
+                                    <a ui-sref="#" ng-click="rechazar(e)"
+                                       class="btn btn-danger btn-sm"
+                                       title="Regresar solicitud">
+                                        <i class="glyphicon glyphicon-remove"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!--registros:{{registros | json}}-->
+    </div>
+</div>

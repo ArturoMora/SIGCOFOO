@@ -1,0 +1,83 @@
+<div class="vista">
+    <div class="page-title">
+        <div class="title_full">
+            <ol class="breadcrumb miga">
+                <li><i class="sg sg-aliados"></i> <a class="cursorPointer" ng-click="globalRegresar();">Aliados/Actividad Adicional</a></li>
+                <li class="active">Detalles</li>
+            </ol>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div  class="col-md-8 col-sm-8 col-xs-12">
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+                    <label class="detalle col-xs-12 " title="Nombre">
+                       <!--{{actividadesAdicional.aliado.empresa.nombreEmpresa}}-->
+                        {{actividadesAdicional.descripcion}}
+                    </label>
+                    <label class="cont col-xs-12 colorTit">
+                        {{actividadesAdicional.fechaActividad | date:'dd/MM/yyyy'}}
+                    </label>
+                    <!--<label class="cont col-xs-12" title="Tipo de software">
+                        {{actividadesAdicional.descripcion}}
+                    </label>-->
+                    
+
+                </div>
+               
+            </div>
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>&Aacute;reas involucradas</h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <div class="form-group">
+                        <table id="CRactividadAdicionalDetails" class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" width="100%" >
+                            <thead>
+                                <tr>
+                                    <th class="col-xs-9" data-priority="1">Areas involucradas</th>
+                                </tr>
+                            </thead>
+                            <tr ng-repeat="unidadesOList in areasM track by $index">
+                                <td>{{unidadesOList.unidadOrganizacional.nombreUnidad}}</td>
+
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-sm-4 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Personal involucrado</h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <div class="form-group">
+                        <table id="CRactividadAdicionalDetailspersonas" class="table table-hover table-striped table-condensed dt-responsive " cellspacing="0"  width="100%">
+                            <thead>
+                                <tr>
+                                    <th class="col-xs-9" data-priority="1">Personal involucrado</th>
+                                </tr>
+                            </thead>
+                            <tr ng-repeat="personasOList in personas track by $index">
+                                <td>{{personasOList.personas.nombreCompleto}}</td>
+
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <button type="button" ng-click="globalRegresar();" class="btn btn-primary">
+                <span class="fa fa-arrow-left"></span> Regresar
+            </button>
+        </div>
+    </div>
+</div>

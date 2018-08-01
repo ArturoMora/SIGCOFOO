@@ -1,0 +1,20 @@
+﻿<div id="page-wrapper">
+    <div data-ng-hide="authentication.isAuth">
+        No tiene permisos para ingresar a esta sección.<br />
+        Usuario no autentificado
+    </div>
+    <div data-ng-show="authentication.isAuth">
+        <br />
+        <br /><br />
+        <div class="col-xs-12 col-md-6">
+            <span class="label {{insumos>10?'label-danger':insumos>0?'label-warning':'label-success'}} label-success fa-lg">{{insumos}}</span>
+            <a href="" ng-click="loadInsumos()"> Insumos</a>
+            <br/><br/>
+        </div>
+
+        <div class="col-xs-12 col-md-6">
+            <span class="label {{itfs>10?'label-danger':itfs>0?'label-warning':'label-success'}} fa-lg">{{itfs}}</span> Aprobación de ITFs
+            <br /><br />
+        </div>
+    </div>
+</div>

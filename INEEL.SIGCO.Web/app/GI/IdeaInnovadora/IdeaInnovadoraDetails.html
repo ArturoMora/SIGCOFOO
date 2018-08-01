@@ -1,0 +1,370 @@
+﻿<div class="vista">
+    <div class="page-title">
+        <div class="title_full">
+            <ol class="breadcrumb miga">
+                <li>
+                    <i class="glyphicon glyphicon-file"></i>
+                    <a ui-sref="ideaInnovadora">Ideas innovadoras/ Mis ideas innovadoras</a>
+                </li>
+                <li class="active">Detalles</li>
+            </ol>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-8 col-sm-8 col-xs-12">
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+                    <label class="detalle col-xs-12 " title="Nombre">
+                        {{registro.nombreIdea}}
+                    </label>
+                    <label class="tit col-xs-12">
+                        Palabras clave
+                    </label>
+                    <label class="cont col-xs-12">
+                        {{registro.palabrasClave}}
+                    </label>
+                </div>
+                <div class="clearfix">
+                    <br/>
+                    <br/>
+                </div>
+                <div class="alert advertencia" ng-if="registro.estadoFlujoId==15">
+                    <i class="glyphicon glyphicon-info-sign"></i>
+                    <label>
+                        Motivo de rechazo:
+                    </label>&nbsp; {{evaluacion.justificacion==null? 'Sin justificación' : evaluacion.justificacion}}
+                </div>
+                <div class="alert informacion" ng-if="registro.estadoFlujoId==10">
+                    <i class="glyphicon glyphicon-info-sign"></i>
+                    <label>
+                        Motivo de aceptaci&oacute;n:
+                    </label>&nbsp; {{evaluacion.justificacion ==null? 'Sin justificación' : evaluacion.justificacion}}
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-sm-4 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Evidencia</h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="form-group" ng-show="registro.adjunto!=null">
+                    <span class="fa fa-download"></span>&nbsp;&nbsp;
+                    <a href="/Descargas.html#/q/{{registro.adjunto.adjuntoId | encriptar}}" class="linkTabla" target="_blank">Descargar Archivo </a>
+                </div>
+                <div class="form-group" ng-show="registro.adjunto==null">
+                    <div class="alert advertencia  col-xs-12">
+                        <span class="glyphicon glyphicon-info-sign"></span> No hay evidencia
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+                    <div class="x_title">
+                        <h2>Descripción de contexto</h2>
+                        <div class="clearfix"></div>
+                        <label class="tit col-xs-12">
+                            ¿Cu&aacute;l es el problema o necesidad que se pretende satisfacer?
+                        </label>
+                        <label class="cont col-xs-12">
+                            {{registro.problema}}
+                        </label>
+                        <label class="tit col-xs-12">
+                            ¿Si ya existen soluciones en el mercado, qu&eacute; limitaciones tienen?
+                        </label>
+                        <label class="cont col-xs-12">
+                            {{registro.limitaciones}}
+                        </label>
+                        <label class="tit col-xs-12">
+                            ¿Si no existen soluciones, cu&aacute;les son las principales razones de su inexistencia?
+                        </label>
+                        <label class="cont col-xs-12">
+                            {{registro.razonesInexistncia}}
+                        </label>
+                        <label class="tit col-xs-12">
+                            ¿Cu&aacute;l ser&iacute;a la relevancia de la nueva soluci&oacute;n a desarrollar?
+                        </label>
+                        <label class="cont col-xs-12">
+                            {{registro.relevanciaNuevaSolucion}}
+                        </label>
+                        <label class="tit col-xs-12">
+                            ¿Qu&eacute; partes interesadas se beneficiar&iacute;an?
+                        </label>
+                        <label class="cont col-xs-12">
+                            {{registro.partesInteresadasBeneficiadas}}
+                        </label>
+                        <label class="tit col-xs-12">
+                            ¿Qu&eacute; capacidades (competencias y recursos) tiene el INEEL que lo habilitan para desarrollar una nueva y mejor soluci&oacute;n?
+                        </label>
+                        <label class="cont col-xs-12">
+                            {{registro.capacidades}}
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+                    <div class="x_title">
+                        <h2>Descripci&oacute;n del desarrollo tecnol&oacute;gico</h2>
+                        <div class="clearfix"></div>
+                        <label class="tit col-xs-12">
+                            ¿En qu&eacute; consiste?
+                        </label>
+                        <label class="cont col-xs-12">
+                            {{registro.descripcionDesarrollo}}
+                        </label>
+                        <label class="tit col-xs-12">
+                            ¿Qu&eacute; barreras tecnol&oacute;gicas hay que franquear?
+                        </label>
+                        <label class="cont col-xs-12">
+                            {{registro.barrerasTecnologicas}}
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+                    <div class="x_title">
+                        <h2>Descripci&oacute;n de la oferta de valor del INEEL</h2>
+                        <div class="clearfix"></div>
+                        <label class="tit col-xs-12">
+                            ¿Se desarrollar&aacute; una nueva o mejorada capacidad de servicio, o bien un producto o productos?
+                        </label>
+                        <label class="cont col-xs-12">
+                            {{registro.capacidadServicio}}
+                        </label>
+                        <label class="tit col-xs-12">
+                            ¿Por qu&eacute; los clientes preferir&aacute;n la oferta de valor del INEEL?
+                        </label>
+                        <label class="cont col-xs-12">
+                            {{registro.ofertaValor}}
+                        </label>
+                        <label class="tit col-xs-12">
+                            ¿Cómo se proteger&aacute;n el o los desarrolladores tecnol&oacute;gicos (secreto industrial, patente, derecho de autor)?
+                        </label>
+                        <label class="cont col-xs-12">
+                            {{registro.protegerDesarrolloTecnologico}}
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+                    <div class="x_title">
+                        <h2>Identificaci&oacute;n de los clientes potenciales</h2>
+                        <div class="clearfix"></div>
+                        <label class="tit col-xs-12">
+                            ¿Qui&eacute;nes ser&iacute;an los clientes potenciales?
+                        </label>
+                        <label class="cont col-xs-12">
+                            {{registro.clietesPotenciales}}
+                        </label>
+                        <label class="tit col-xs-12">
+                            ¿A qu&eacute; se dedican?
+                        </label>
+                        <label class="cont col-xs-12">
+                            {{registro.dedicacionClientesP}}
+                        </label>
+                        <label class="tit col-xs-12">
+                            ¿C&oacute;mo se beneficiar&iacute;a el cliente con la oferta de valor del INEEL?
+                        </label>
+                        <label class="cont col-xs-12">
+                            {{registro.beneficiosCliente}}
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+                    <div class="x_title">
+                        <h2>Proponentes </h2>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="form-group">
+                        <table class="table table-hover" ng-show="proponentes.length > 0">
+                            <thead>
+                                <tr>
+                                    <th class="thAjuste ">N&uacute;m empleado</th>
+                                    <th>Nombre de empleado</th>
+                                    <th class="thAjusteColaboracion text-center">Contribuci&oacute;n</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="registro in proponentes">
+                                    <td ng-click="openProfile(registro.clavePersona)" title="Detalle de empleado" class="linkTabla">
+                                        {{registro.clavePersona}}
+                                    </td>
+                                    <td>{{registro.persona}}</td>
+                                    <td class="text-center">{{registro.contribucionProponente.contribucion}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="x_panel" ng-show="rolId==1028 && registro.estadoFlujoId==14 && comentariosIdea==null">
+                <div class="x_content sin-desborde">
+                    <div class="x_title">
+                        <h2>Asignar evaluadores</h2>
+                        <div class="clearfix"></div>
+                        <div class="cont col-xs-12" ng-show="miembros.length === 0">
+                            <div class="alert advertencia">
+                                No hay registros de este grupo evaluador
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-show="miembros.length != 0 && miembros!=null">
+                        <table class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" datatable="ng" width="100%" dt-options="dtOptions">
+                            <thead>
+                                <tr>
+                                    <th data-priority="1">Clave Persona</th>
+                                    <th data-priority="2">Nombre</th>
+                                    <th data-priority="1">Seleccionar</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="miembro in miembros">
+                                    <td>{{miembro.clavePersona}}</td>
+                                    <td>{{miembro.nombrePersona}}</td>
+                                    <td>
+                                        <input type="checkbox" class="btn btn-info btn-circle" ng-model="miembro.seleccionado" ng-click="verificarnotificar(miembro.clavePersona)"
+                                        />
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+                    <div class="form-group" ng-show="contador>0">
+                        <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-4">
+                            <div class="">
+                                <button type="button" class="btn btn-success" ng-really-click="notificar()">
+                                    <i class="glyphicon glyphicon-saved"></i> Notificar evaluadores
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="x_panel" ng-show="comentariosIdea!=null">
+                <div class="x_content sin-desborde">
+                    <div class="x_title">
+                        <h2>Comentario del evaluador:
+                            <a ng-click="openProfile(comentariosIdea.clavePersona)" class="linkTabla">{{comentariosIdea.clavePersona}} {{comentariosIdea.nombrePersona}}</a>
+                        </h2>
+                        <!-- <h2>Comentario del evaluador</h2> -->
+                        <div class="clearfix"></div>
+                    </div>
+                    <label class="tit col-xs-12">
+                        <!--Comentario <span class="required">*</span>-->
+                    </label>
+                    <label class="cont col-xs-12">
+                        <textarea class="form-control" ng-disabled="true" ng-model="comentariosIdea.comentarios" maxlength="500"></textarea>
+                    </label>
+                    <br />
+                </div>
+            </div>
+            <form name="form" id="form">
+                <div class="x_panel" ng-show="rolId==1028 && registro.estadoFlujoId==14">
+                    <div class="x_content sin-desborde">
+                        <div class="x_title">
+                            <h2>Justificaci&oacute;n del grupo evaluador</h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <label class="tit col-xs-12">
+                            Justificaci&oacute;n
+                            <span class="required">*</span>
+                        </label>
+                        <label class="cont col-xs-12">
+                            <textarea class="form-control" placeholder="Escriba una justificaci&oacute;n" ng-model="justificacion" maxlength="500"></textarea>
+                        </label>
+                        <label class="tit col-xs-12">
+                            Tipo de Acceso
+                        </label>
+                        <label class="cont col-xs-6 col-md-4 col-lg-4">
+                            <select ng-model="registro.tipoAcceso" ng-required="true" ng-options="tipoAcceso.id as tipoAcceso.nombre for tipoAcceso in tiposAccesos "
+                                required class="form-control"></select>
+                        </label>
+                        <label class="tit col-xs-12" ng-show="!showEval">
+                            Evaluaci&oacute;n final
+                            <span class="required">*</span>
+                        </label>
+                        <label class="cont col-xs-12 col-md-4 col-lg-4" ng-show="!showEval">
+                            <input type="text" ng-maxlength="2" maxlength="2" class="form-control" id="usr" ng-model="registro.calificacion">
+                        </label>
+                        <!--<div class="form-group" ng-show="!showEval">
+                                    <div class="alert informacion col-xs-12">
+                                        <span class="glyphicon glyphicon-info-sign"></span> Nota: La evaluación final no se almacena si rechaza o regresa a modificación la idea innovadora
+                                    </div>
+                                </div>-->
+                        <br />
+                        <div class="col-xs-12 col-lg-offset-4">
+                            <br />
+                            <button type="button" class="btn btn-warning" ng-really-message="¿Está seguro de <b>rechazar</b> la idea innovadora?" ng-really-click="Acciones(1)">
+                                <i class="fa fa-close"></i> Rechazar
+                            </button>
+                            <button type="button" class="btn btn-info" ng-really-message="¿Está seguro de registrar <b>sugerencia de modificación</b> de la idea innovadora?"
+                                ng-really-click="Acciones(2)">
+                                <i class="fa fa-reply"></i> Modificar
+                            </button>
+                            <!--<button type="button" ng-show="showEval && rolId==1028"  class="btn btn-success" ng-click="addEval()">
+                                        <i class="glyphicon glyphicon-saved"></i> Agregar evaluación
+                                    </button>-->
+                            <button type="button" ng-show="rolId==1028" class="btn btn-success" ng-really-message="¿Está seguro de <b>aprobar</b> el registro de idea innovadora?"
+                                ng-really-click="Acciones(3)">
+                                <i class="glyphicon glyphicon-saved"></i> Aprobación final
+                            </button>
+                            <!--<button type="button" ng-show="rolId==1029" class="btn btn-success" ng-really-message="¿Está seguro de <b>aprobar</b> la idea innovadora?" ng-really-click="aprobar()">
+                                        <i class="glyphicon glyphicon-saved"></i> Aprobar
+                                    </button>-->
+                        </div>
+                        <br />
+                    </div>
+                </div>
+                <div class="x_panel" ng-show="rolId==1029 && registro.estadoFlujoId==14 ">
+                    <div class="x_content sin-desborde">
+                        <div class="x_title">
+                            <h2>Comentario</h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <label class="tit col-xs-12">
+                            Comentario
+                            <span class="required">*</span>
+                        </label>
+                        <label class="cont col-xs-12">
+                            <textarea class="form-control" ng-model="registro.comentariosEval" maxlength="500"></textarea>
+                        </label>
+                        <div class="col-xs-12 col-md-offset-4">
+                            <br />
+                            <button type="button" class="btn btn-warning" ng-really-message="¿Está seguro de <b>rechazar</b> la idea innovadora?" ng-really-click="Acciones(1)">
+                                <i class="fa fa-close"></i> Rechazar
+                            </button>
+                            <button type="button" class="btn btn-info" ng-really-message="¿Está seguro de registrar <b>sugerencia de modificación</b> de la idea innovadora?"
+                                ng-really-click="Acciones(2)">
+                                <i class="fa fa-reply"></i> Modificar
+                            </button>
+                            <button type="button" class="btn btn-success" ng-really-message="¿Está seguro de <b>aprobar</b> la idea innovadora?<br/>Pendiente el registro de evaluación final por parte del administrador"
+                                ng-really-click="Acciones(4)">
+                                <i class="glyphicon glyphicon-saved"></i> Aprobaci&oacute;n preliminar
+                            </button>
+                        </div>
+                        <br />
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <button type="button" confirma-regresar="globalRegresar()" state-form="form" class="btn btn-primary">
+                <span class="fa fa-arrow-left"></span> Regresar
+            </button>
+        </div>
+    </div>
+</div>

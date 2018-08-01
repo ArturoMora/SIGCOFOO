@@ -1,0 +1,65 @@
+<div class="vista">
+    <div class="page-title">
+        <div class="title_left">
+
+            <ol class="breadcrumb miga">
+                <li><i class="disabled fa fa-cogs"></i> <a ui-sref="naturalezasInteraccionGet">Administraci&oacute;n/Cat&aacute;logos/Interacci&oacute;n partes interesadas</a></li>
+                <li class="active">Editar</li>
+            </ol>
+
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+                    <form name="form" id="form" class="form-horizontal">
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">
+                                Nombre <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" ng-model="naturalezasInteraccion.nombre" ng-required="true" class="form-control col-md-7 col-xs-12"
+                                       name="nombre" ng-minlength="2" ng-maxlength="250" />
+                                <span class="error" ng-show="form.nombre.$dirty && form.nombre.$invalid">
+                                    Dato incorrecto, se espera una longitud m&iacute;nima de 2 y m&aacute;ximo 250
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">
+                                Descripci&oacute;n
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <textarea rows="3" type="text" ng-model="naturalezasInteraccion.descripcion" class="form-control col-md-7 col-xs-12"
+                                          name="descrip" ng-maxlength="300" />
+                                <span class="error" ng-show="form.descrip.$dirty && form.descrip.$invalid">
+                                    Dato incorrecto, se espera una longitud m&aacute;ximo 300
+                                </span>
+                            </div>
+                        </div>
+                        <div class="ln_solid"></div>
+                        <div class="form-group">
+                            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                <div class="">
+
+                                    <button type="submit" class="btn btn-success" ng-click="saveNaturalezaInteraccion()"
+                                            ng-disabled="!form.nombre.$valid
+                                        || !form.descrip.$valid">
+                                        <i class="glyphicon glyphicon-saved"></i> Actualizar
+                                    </button>
+                                    <button type="button" ui-sref="naturalezasInteraccionGet" class="btn btn-primary">
+                                        <span class="fa fa-arrow-left"></span>
+                                        Regresar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

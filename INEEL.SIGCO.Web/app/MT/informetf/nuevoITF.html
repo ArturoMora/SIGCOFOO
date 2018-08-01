@@ -1,0 +1,156 @@
+﻿<!-- page content -->
+<div class="vista">
+
+    <div class="page-title">
+        <div class="title_left">
+
+            <ol class="breadcrumb miga">
+                <li><i class="sg sg-informes-tecnico"></i> <a ui-sref="AddITF">Informes técnicos finales/Mis informes técnicos finales</a></li>
+            </ol>
+
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12" >
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Criterios de b&uacute;squeda</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li>
+                            <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>                
+                <div class="x_content">
+
+                    <div class="" >
+                        <div class="">
+                            <div>
+                                <div ng-show="registrosProyecto.length === 1 && !loading" class="alert alert-danger">
+                                    No hay proyectos disponibles donde el usuario participa como jefe de proyecto.
+                                </div>
+                                <div class="col-xs-12">
+                                    <div class="form-group" ng-show="registrosProyecto.length>1">
+                                        <label class="col-xs-12">Seleccione proyecto</label>
+                                        <div class="col-xs-12">
+                                            <ui-select ng-model="proyecto.selected"
+                                                       theme="bootstrap"
+                                                       ng-disabled="disabled"
+                                                       on-select="onSelectedProyecto($item)"
+                                                       reset-search-input="true"
+                                                       ng-init=""
+                                                       title="Ingrese por lo menos dos caracteres">
+                                                <ui-select-match placeholder="Escriba y seleccione">{{proyecto.selected.proyectoId}} {{proyecto.selected.nombre}}</ui-select-match>
+                                                <ui-select-choices repeat="e in registrosProyecto"
+                                                                   refresh-delay="0">
+                                                    <div ng-bind-html="e.proyectoId +'-'+ e.nombre | highlight: $select.search"></div>
+                                                </ui-select-choices>
+                                            </ui-select>
+                                        </div>
+
+                                        <div class="col-xs-12" ng-show="proyecto.selected==null || proyecto.selected==''">
+                                            <div class="alert informacion">
+                                                Seleccione un proyecto y de clic en "Nuevo ITF".<br />
+                                                NOTA: <strong>Podr&aacute; agregar Nuevo ITF si fue Jefe de proyecto,</strong> si no le muestra ning&uacute;n elemento en la lista de proyecto, favor de solicitar soporte en la mesa de servicio.
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="row" ng-if="registrosProyecto.length>1">
+        <div class="col-xs-12">
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+                    <div class="col-xs-12">
+                        <div ng-if="itfs.length==0" class="alert advertencia">
+                            No hay registros de informes técnicos finales
+                        </div>
+                    </div>
+                    <div class="" ng-show="itfs.length>0">
+                        <table id="MTnuevoITF" class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" datatable="ng" width="100%" dt-options="dtOptions" dt-column-defs="dtColumnDefs">
+                            <thead>
+                                <tr>
+                                    <th data-priority="1">Proyecto</th>
+                                    <th>T&iacute;tulo de ITF</th>
+                                    <th>Resumen</th>
+                                    <th>Estado</th>
+                                    <th data-priority="2">Opciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="e in itfs">
+                                   
+                                    <td title="ITF: {{e.informeTecnicoFinalId}}" style="max-width:100px" class="sin-desborde">
+                                        <a class="linkTabla" href="" load-proyectos idproyecto="{{e.proyectoId}}" title="Detalle de proyecto"> {{e.proyectoId}} </a> - {{e.proyecto.nombre}}</td>
+                                    <td style="max-width:100px" class="sin-desborde">
+                                        <a class="linkTabla"  title="Detalles"
+                                           ui-sref="ITFdetalles.infoGral({ id: e.informeTecnicoFinalId, edit:false, foo:99 })" ng-click="paginaOrigen()">
+                                            {{e.titulo | trim}}
+                                        </a>
+                                    </td>
+                                    <td style="max-width:100px" class="sin-desborde">
+                                        {{e.itFgeneral.resumen |limitTo:275}}
+                                    </td>
+                                    <td>
+                                        {{e.estadoITFFlujo.nombre}}
+                                        
+                                    </td>
+                                    <td class="text-center">
+                                        <i style="opacity: 0.01;">{{e.estadoITFFlujoId}}</i><br/>
+                                        <a class="btn btn-warning" ng-show="e.estadoITFFlujoId==0" title="Editar"
+                                           ui-sref="ITF.infoGral({ id: e.informeTecnicoFinalId, edit:true, foo:99 })">
+                                            <i class="glyphicon glyphicon-pencil"></i>
+                                        </a>
+                                        <!--<a class="btn btn-warning" ng-show="e.estadoITFFlujoId>0" title="Detalles"
+                                           ui-sref="ITFdetalles.infoGral({ id: e.informeTecnicoFinalId, edit:true, foo:99 })">
+                                            <i class="glyphicon glyphicon-search"></i>
+                                        </a>-->
+                                        <a class="btn btn-danger" ng-show="e.estadoITFFlujoId==0" title="Eliminar"
+                                           ng-click="eliminar(e)">
+                                            <i class="glyphicon glyphicon-trash"></i>
+                                        </a>
+
+                                        
+                                    </td>
+
+                                </tr>
+                            </tbody>
+                        </table>
+                        <!--itfs:{{itfs | json}}-->
+                    </div>
+
+
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-md-6">
+                    <div class="form-group">
+                        <!--<button type="submit" ng-click="globalRegresar();" class="btn btn-primary" style="padding-right:15px">
+                            <span class="fa fa-arrow-left"></span> Regresar
+                        </button>-->
+                        <a  class="btn btn-success" ng-click="agregar(proyecto.selected.proyectoId);"
+                           ng-disabled="!proyectoSeleccionado">
+                            <i class="glyphicon glyphicon-plus"></i> Nuevo ITF <font ng-show="proyectoSeleccionado">(proyecto : {{proyecto.selected.proyectoId}})</font>
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+<!-- end page content -->

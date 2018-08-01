@@ -1,0 +1,88 @@
+﻿<div ng-include="'app/vistasGenericas/header/registroNombrePersona.html'"> </div>
+<div class="vista">
+    <div class="page-title">
+        <div class="title_left">
+            <ol class="breadcrumb miga">
+                <li><i class="glyphicon glyphicon-file"></i> <a ui-sref="fichapersonal.distincion({seccion:'distincion'})">Reconocimientos</a></li>
+                <li class="active">Agregar</li>
+            </ol>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+                    <form name="distincionform" id="form" ng-submit="distincionadd()" class="form-horizontal">
+                        <div class="x_title">
+                            <h2>Informaci&oacute;n general</h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Reconocimiento <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <textarea placeholder="Reconocimiento..." maxlength="300" ng-model="distincion.reconocimiento" ng-required="true" name="reconocimiento" required class="form-control"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Otorgado por <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" ng-required="true" name="aprobado" maxlength="300" placeholder="Aprobado por..." class="form-control" ng-model="distincion.aprobado" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Fecha de otorgamiento <span class="required">*</span>
+                            </label>
+                           <div class="col-md-6 col-sm-6 col-xs-12">
+                               <div class="row">
+                                   <div class="col-xs-10">
+                                       <input placeholder="dd/mm/yyyy" ng-minlength="8" maxlength="10" name="fechaotorgamiento" ng-init="open=false" type="text" show-button-bar="false" popup-placement="bottom" class="form-control" uib-datepicker-popup="dd/MM/yyyy" ng-model="distincion.fechaDistincion" value="{{ date | date: 'dd/MM/yyyy' }}" is-open="open" ng-required="true" close-text="Close" />
+                                       <span ng-show="distincionform.fechaotorgamiento.$dirty &&  distincionform.fechaotorgamiento.$invalid" class="error">Formato inválido 'dd/MM/yyyy'</span>
+                                   </div>
+                                   <div class="col-xs-2">
+                                       <button type="button" class="btn btn-success" ng-click="open=true"><i class="glyphicon glyphicon-calendar"></i></button>
+                                   </div>
+                               </div>
+                            </div>
+                        </div>
+                        <div class="x_title">
+                            <h2>Evidencia <small>Tama&ntilde;o m&aacute;ximo por archivo de 8 MB</small></h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Documento adjunto
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input class="input-file form-control col-md-7 col-xs-12" type="file" name="filesGral" id="filesGral" data-buttonName="btn-success"
+                                       ng-click="saveIG();" ng-model="filesGral"
+                                       onchange="angular.element(this).scope().getFileDetails(this);" />
+                            </div>
+                        </div>
+                        <div class="ln_solid"></div>
+                        <div class="form-group">
+                            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                <div class="">
+                                    <button type="submit" class="btn btn-success">
+                                        <i class="glyphicon glyphicon-saved"></i> Guardar
+                                    </button>
+                                    <!-- <button type="button" ui-sref="fichapersonal.distincion({seccion:'distincion'})" class="btn btn-primary">
+                                        <span class="fa fa-arrow-left"></span> Regresar
+                                    </button> -->
+                                    <button type="button" confirma-regresar="regresar()" state-form="distincionform" class="btn btn-primary">
+                                        <span class="fa fa-arrow-left"></span> Regresar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

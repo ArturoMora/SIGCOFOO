@@ -1,0 +1,51 @@
+﻿<div class="vista">
+    <div class="page-title">
+        <div class="title_left">
+            <ol class="breadcrumb miga">
+                <li><i class="disabled fa fa-cogs"></i><a>Administraci&oacute;n / Iniciativas no asociadas </a></li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+                    <table id="CRiniciativasEmpresasGet" dt-instance="dtInstance" class="table table-hover table-striped table-condensed" cellspacing="0" datatable="ng" width="100%" dt-options="dtOptions">
+                        <thead>
+                            <tr>
+                                <th data-priority="1">ID</th>
+                                <th>Nombre</th>
+                                <th>Clave</th>
+                                <th>Costo</th>
+                                <th>Fecha</th>
+                               
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="p in iniciativasEmpresa">
+
+
+                                <td>
+                                    <a ui-sref="iniciativasEmpresaAdd({ id: p.folioId })" class="linkTabla">
+                                       {{p.folioId}}
+                                    </a>
+                                
+                                </td>
+                                <td>{{p.titulo}}</td>
+                                <td>{{p.claveEmpIniciativa}}</td>
+                                <td>{{p.costos}}</td>
+                                <td>{{p.fecha | date:'yyyy-MM-dd'}}</td>
+                                
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <button type="button" ng-click="globalRegresar();" class="btn btn-primary">
+        <span class="fa fa-arrow-left"></span> Regresar
+    </button>
+</div>

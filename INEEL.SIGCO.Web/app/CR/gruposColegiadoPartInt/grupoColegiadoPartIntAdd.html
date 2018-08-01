@@ -1,0 +1,351 @@
+<div class="vista">
+    <div class="page-title">
+        <div class="title_left">
+
+            <ol class="breadcrumb miga">
+                <li>
+                    <i class="sg sg-partes-interesadas"></i>
+                    <a class="cursorPointer" ng-click="globalRegresar()">Partes Interesadas /Grupo colegiado</a>
+                </li>
+                <li class="active">Agregar</li>
+            </ol>
+
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Datos del grupo
+                    </h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content sin-desborde">
+                    <form name="form" id="form" class="form-horizontal">
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Nombre del grupo colegiado
+                                <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input required placeholder="Ingrese el nombre del grupo colegiado" type="text" ng-model="grupoColegiadoPartInt.nombre" ng-required="true"
+                                    class="form-control col-md-7 col-xs-12" name="nombre" maxlength="250" ng-minlength="2" ng-maxlength="250"
+                                />
+                                <span class="error" ng-show="form.nombre.$dirty && form.nombre.$invalid">
+                                    Dato incorrecto, se espera una longitud m&iacute;nima de 2 y m&aacute;ximo 250
+                                </span>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Descripci&oacute;n
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <textarea placeholder="Ingrese una descripci&oacute;n de las tareas o actividades del grupo" rows="3" type="text" ng-model="grupoColegiadoPartInt.descripcion"
+                                    class="form-control col-md-7 col-xs-12" name="descrip" maxlength="300" ng-maxlength="300"
+                                />
+                                <span class="error" ng-show="form.descrip.$dirty && form.descrip.$invalid">
+                                    Dato incorrecto, se espera una longitud m&aacute;ximo 300
+                                </span>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Naturaleza de su interacci&oacute;n
+                                <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <select required name="nat" class="form-control col-md-7 col-xs-12" ng-model="grupoColegiadoPartInt.naturalezaInteraccionId"
+                                    scrolly style="overflow: scroll" ng-options="naturalezaInteraccion.naturalezaInteraccionId as naturalezaInteraccion.nombre for naturalezaInteraccion in naturalezasInteraccion ">
+                                    <option value="" selected>--- Seleccione una opci&oacute;n ---</option>
+                                </select>
+                                <span class="error" ng-show="form.nat.$dirty && form.nat.$invalid">
+                                    Debe de seleccionar una opci&oacute;n de la lista
+                                </span>
+                            </div>
+                        </div>
+
+
+                        <div class="x_title">
+                            <h2>Domicilio
+                                
+                            </h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Calle
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input placeholder="Calle " type="text" ng-model="grupoColegiadoPartInt.calle" class="form-control col-md-7 col-xs-12" name="calle"
+                                    maxlength="150" ng-maxlength="250" />
+                                <span class="error" ng-show="form.calle.$dirty && ! form.calle.$valid">
+                                    El nombre de la calle no debe de tener mas de 250 caracteres
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Colonia
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input placeholder="Colonia" type="text" ng-model="grupoColegiadoPartInt.colonia" class="form-control col-md-7 col-xs-12"
+                                    name="colonia" maxlength="150" ng-maxlength="150" />
+                                <span class="error" ng-show="form.colonia.$dirty && ! form.colonia.$valid">
+                                    El nombre de la colonia no debe de tener mas de 250 caracteres
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Estado
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <select name="estado" class="form-control col-md-7 col-xs-12" ng-model="grupoColegiadoPartInt.estadoId" ng-change="cargaMunicipio()"
+                                    ng-options="estado.estadoId as estado.nombreEstado for estado in estados">
+                                    <option value="">-- Seleccione un estado --</option>
+                                </select>
+                                <span class="error" ng-show="form.estado.$dirty && form.estado.$invalid">
+                                    Debe seleccionar un estado
+                                </span>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group" ng-show="municipios.length > 1">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Municipio
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <select name="municipio" class="form-control col-md-7 col-xs-12" ng-model="grupoColegiadoPartInt.municipioId" ng-options="municipio.municipioId as municipio.nombreMunicipio for municipio in municipios">
+                                    <option value="">-- Seleccione un municipio --</option>
+                                </select>
+                                <span class="error" ng-show="form.municipio.$dirty && form.municipio.$invalid">
+                                    Debe seleccionar un municipio
+                                </span>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                C&oacute;digo postal
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input placeholder="C&oacute;digo postal" type="text" ng-model="grupoColegiadoPartInt.cP" class="form-control col-md-7 col-xs-12"
+                                    name="cp" maxlength="5" ng-maxlength="5" size="5" />
+                                <span class="error" ng-show="form.cp.$dirty && ! form.cp.$valid">
+                                    El C&oacute;digo postal no debe de tener mas de 5 caracteres
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="x_title">
+                            <h2>Titular </h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Titular del grupo
+                                <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="row">
+                                    <div class="col-xs-10">
+                                        <input placeholder="Nombre del titular del grupo" required type="text" class="form-control col-md-7 col-xs-12" id="usr" name="contacto"
+                                            ng-model="contacto" disabled>
+                                        <span class="error" ng-show="form.contacto.$invalid && form.contacto.$dirty || form.$submitted && form.contacto.$invalid">
+                                            Debes de agregar un contacto.
+                                        </span>
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <a ng-click="openContacto()" class="btn btn-success" title="Buscar contacto" ng-disabled="desabilitarBuscarContacto">
+                                            <i class="glyphicon glyphicon-search"></i>
+                                        </a>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="x_title">
+                            <h2>Integrantes externos</h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Nombre
+                                <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="row">
+                                    <div class="col-xs-10">
+                                        <input type="text" placeholder="Nombre del integrante del grupo" class="form-control col-md-7 col-xs-12" id="usr" name="integrante"
+                                            ng-model="integrante" disabled>
+
+                                        <span class="error" ng-show="form.integrante.$invalid && form.integrante.$dirty || form.$submitted && form.integrante.$invalid">
+                                            Debes de agregar un contacto.
+                                        </span>
+
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <a ng-click="openIntegrante()" class="btn btn-success" title="Buscar contacto" ng-disabled="desabilitarBuscarIntegrante">
+                                            <i class="glyphicon glyphicon-search"></i>
+                                        </a>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group" ng-if="grupoColegiadoPartInt.cargo!=null">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Cargo
+                            </label>
+                            <div class="col-lg-9 col-md-9 col-xs-9">
+                                <div class="row col-xs-7 col-lg-7 col-md-7">
+                                    <input type="text" ng-model="grupoColegiadoPartInt.cargox" class="form-control" ng-maxlength="50" maxlength="50" name="cargo"
+                                    />
+                                    <span class="error" ng-show="form.cargo.$invalid && form.cargo.$dirty || form.$submitted && form.contacto.$invalid">
+                                        Debes de agregar un contacto.
+                                    </span>
+                                </div>
+                                <div class="col-xs-2 col-lg-2 col-md-2">
+                                    <a title="Agregar" ng-click="add_integrante()" class="btn btn-success">
+                                        <i class="glyphicon glyphicon-plus"></i>
+                                    </a>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="form-group" ng-show="integrantesM.length > 0">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12"> </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <table class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" width="100%">
+                                    <thead>
+                                        <tr>
+                                            <th data-priority="1">Nombre</th>
+                                            <th>Cargo</th>
+                                            <th>Empresa</th>
+                                            <th class="center">Opciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tr ng-repeat="integrantesGC in integrantesM track by $index">
+                                        <td>{{integrantesGC.nombre}}</td>
+                                        <td>{{integrantesGC.cargo}}</td>
+                                        <td>{{integrantesGC.nombreEmpresa}}</td>
+                                        <td class="center">
+                                            <button type="button" ng-click="deleteIntegrante(integrantesM.indexOf(integrantesGC))" class="btn btn-danger">
+                                                <i class="glyphicon glyphicon-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+
+
+                        <div class="x_title">
+                            <h2>Integrantes internos</h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Nombre
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="row">
+                                    <div class="col-xs-10">
+                                        <input type="text" placeholder="Nombre del integrante del grupo" class="form-control col-md-7 col-xs-12" id="usr" name="integranteInterno"
+                                            ng-model="integranteIIE" disabled>
+
+                                        <span class="error" ng-show="form.integranteInterno.$invalid && form.integranteInterno.$dirty || form.$submitted && form.integranteInterno.$invalid">
+                                            Debes de agregar un empleado.
+                                        </span>
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <a ng-click="openUser()" class="btn btn-success" title="Buscar contacto">
+                                            <i class="glyphicon glyphicon-search"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group" ng-if="grupoColegiadoPartIIE.cargo!=null">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Cargo
+                            </label>
+                            <div class="col-lg-9 col-md-9 col-xs-9">
+                                <div class="row col-xs-7 col-lg-7 col-md-7">
+                                    <input type="text" name="cargoEmpleado" ng-model="grupoColegiadoPartIIE.cargoy" class="form-control" maxlength="50" ng-maxlength="50"
+                                    />
+                                    <span class="error" ng-show="form.CargoEmpleado.$invalid && form.CargoEmpleado.$dirty || form.$submitted && form.CargoEmpleado.$invalid">
+                                        Debes de agregar un contacto.
+                                    </span>
+                                </div>
+                                <div class="col-xs-2 col-lg-2 col-md-2">
+                                    <a title="Agregar" ng-click="add_integrante_IIE()" class="btn btn-success">
+                                        <i class="glyphicon glyphicon-plus"></i>
+                                    </a>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="form-group" ng-show="integrantesIIEM.length > 0">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <table class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" width="100%">
+                                    <thead>
+                                        <tr>
+                                            <th data-priority="1">Nombre</th>
+                                            <th data-priority="1">Cargo</th>
+                                            <th class="center">Opciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tr ng-repeat="integrantesIIE in integrantesIIEM track by $index">
+                                        <td>{{integrantesIIE.nombre}}</td>
+                                        <td>{{integrantesIIE.cargo}}</td>
+                                        <td class="center">
+                                            <button type="button" ng-click="deleteIntegranteIIE(integrantesIIEM.indexOf(integrantesIIE))" class="btn btn-danger">
+                                                <i class="glyphicon glyphicon-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+
+
+
+                        <div class="ln_solid"></div>
+                        <div class="form-group">
+                            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                <div class="">
+
+                                    <button type="submit" class="btn btn-success" ng-click="AddGrupoColegiadoPartInt()" ng-disabled="form.$invalid || integrantesM.length == 0">
+                                        <i class="glyphicon glyphicon-saved"></i> Guardar
+                                    </button>
+                                    <button type="button" confirma-regresar="globalRegresar()" state-form="form" class="btn btn-primary">
+                                        <span class="fa fa-arrow-left"></span>
+                                        Regresar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

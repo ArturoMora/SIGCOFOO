@@ -1,0 +1,174 @@
+﻿<div class="vista">
+    <div class="page-title">
+        <div class="title_left">
+
+            <ol class="breadcrumb miga">
+                <li>
+                    <i class="sg sg-fuentes-financiamiento"></i>
+                    <a ui-sref="fondosProgramaGet">Fuentes de financiamiento/Fondos</a>
+                </li>
+                <li class="active">Detalles</li>
+            </ol>
+
+        </div>
+    </div>
+    <div data-ng-hide="authentication.isAuth">
+        No tiene permisos para ingresar a esta secci&oacute;n..
+        <br /> Usuario no autentificado
+    </div>
+    <div data-ng-show="authentication.isAuth">
+        <div class="clearfix"></div>
+        <div class="row">
+            <div class="col-md-8 col-sm-8 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_content sin-desborde">
+                        <label class="detalle col-xs-12 " title="Nombre">
+                            {{fondosPrograma.nombreFP}}
+                        </label>
+                        <label class="cont col-xs-12">
+                            {{fondosPrograma.descripcion}}
+                        </label>
+                        <label class="tit col-xs-12">
+                            Fuente de financiamiento del fondo o programa
+                        </label>
+                        <label class="cont col-xs-12">
+                            {{fondosPrograma.fuenteFinanciamiento.nombreFF}}
+                        </label>
+                        <label class="tit col-xs-12">
+                            Fecha registro
+                        </label>
+                        <label class="cont col-xs-12">
+                            {{fondosPrograma.fechaRegistro | date:"dd/MM/yyyy"}}
+                        </label>
+                        <!--<label class="tit col-xs-12">
+                            Estado
+                        </label>
+                        <label class="cont col-xs-12">
+                            {{consultaEstado(fondosPrograma.estado)}}
+                        </label>-->
+                    </div>
+                </div>
+                <div class="x_panel">
+                    <div class="x_content sin-desborde">
+                        <div class="x_title">
+                            <h2>Institución u organismo patrocinador
+                                
+                            </h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <label class="titFirst col-xs-12 " title="Nombre">
+                            {{fondosPrograma.empresa.nombreEmpresa}}
+                        </label>
+                        <label class="tit col-xs-12">
+                            Titular
+                        </label>
+                        <label class="cont col-xs-12">
+                            {{fondosPrograma.empresa.nombreTitular}}
+                        </label>
+                        <label class="tit col-xs-12">
+                            Sitio web
+                        </label>
+                        <label class="cont col-xs-12">
+                            <a href="{{fondosPrograma.empresa.sitioWeb}}" target="_blank" title="{{fondosPrograma.empresa.sitioWeb}}">{{fondosPrograma.empresa.sitioWeb}} </a>
+                        </label>
+                    </div>
+                </div>
+                <div class="x_panel" ng-show="proyectos!=null">
+                    <div class="x_content sin-desborde">
+                        <div class="x_title">
+                            <h2>Proyectos beneficiados con el fondo
+                                
+                            </h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <table id="proyectosFondo" class="table display responsive"  dt-options="dtOptions" cellspacing="0"datatable="ng" width="100%">
+                            <thead>
+                                <tr>
+                                    <th data-priority="1" class="thCeldaB text-center">N&uacute;mero de proyecto</th>
+                                    <th>Nombre del proyecto</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="e in proyectos">
+                                    <td class="linktabla">
+                                        <a class="link" load-proyectos idproyecto="{{e.proyectoId}}" style="cursor:pointer" title="Detalles">{{e.proyectoId}}</a>
+                                    </td>
+                                    <td>
+                                        {{e.nombre}}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-4 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_content sin-desborde">
+                        <div class="x_title">
+                            <h2>Datos del contacto
+                                
+                            </h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <label class="titFirst col-xs-12 " title="Nombre">
+                            {{fondosPrograma.contacto.nombreCompleto}}
+                        </label>
+                        <label class="cont col-xs-12">
+                            {{fondosPrograma.contacto.puesto}}
+                        </label>
+                        <label class="cont col-xs-12">
+                            {{fondosPrograma.contacto.telefono}}
+                        </label>
+                        <label class="cont col-xs-12">
+                            {{fondosPrograma.contacto.correo}}
+                        </label>
+                    </div>
+                </div>
+                <div class="x_panel ">
+                    <div class="x_content sin-desborde">
+                        <div class="x_title">
+                            <h2>Ligas de acceso
+                                
+                            </h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div ng-repeat="e in fondosPrograma.sitioWebFondoPrograma">
+
+                            <p>
+                                <a href="{{e.url}}" target="_blank" title="{{e.url}}">{{e.url}}
+                                </a>
+
+                            </p>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="x_panel" ng-hide="fondosPrograma.tematicaPorFondoPrograma.length ==0">
+                    <div class="x_content sin-desborde">
+                        <div class="x_title">
+                            <h2>&Aacute;reas tem&aacute;ticas
+                            </h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div ng-repeat="e in fondosPrograma.tematicaPorFondoPrograma">
+                            <ul>
+                                <li>
+                                    {{e.tematica.descripcion}}
+
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <button type="button" ng-click="globalRegresar()" class="btn btn-primary">
+                    <span class="fa fa-arrow-left"></span> Regresar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

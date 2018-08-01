@@ -1,0 +1,38 @@
+<div class="modal-header">
+    <button type="button" class="close" ng-click="cancel()" data-dissmiss="modal">
+        <i class="glyphicon glyphicon-remove"></i>
+    </button>
+    <div class="col-xs-1"></div>
+    <div>
+        <h3>
+            Revistas
+        </h3>
+    </div>
+
+
+</div>
+<div class="modal-body">
+    <div class="row" >
+        <div class="col-sm-12">
+            <table  class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" datatable="ng" width="100%">
+                <thead>
+                    <tr>
+                        <th>N&uacute;mero de revista</th>
+                        <th>Nombre de la revista</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="revista in revistas" style="cursor: pointer;text-decoration: underline;"
+                        ng-click="ok(revista)" id="{{revista.revistaId}}">
+                        <td>{{revista.revistaId}}</td>
+                        <td>{{revista.revistaNombre}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+
+
+</div> 

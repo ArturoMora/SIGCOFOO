@@ -1,0 +1,288 @@
+﻿<div class="modal-content sin-desborde">
+    <div class="modal-header">
+        <button type="button" class="close" confirma-regresar="cancel()" state-form="adminForm" data-dissmiss="modal">
+            <i class="glyphicon glyphicon-remove"></i>
+        </button>
+        <div class="col-xs-1"></div>
+        <div>
+            <h3>
+                Administraci&oacute;n comunidad
+            </h3>
+        </div>
+
+
+    </div>
+    <div class="modal-body">
+        <div class="tabbable">
+            <!-- Only required for left/right tabs -->
+            <ul class="nav nav-tabs">
+                <li class="active"><a href="" ng-click="tab = 1;switchTab()" data-toggle="tab">Datos generales</a></li>
+                <li><a href="" ng-click="tab = 2;switchTab()" data-toggle="tab">Compromisos de la comunidad</a></li>
+                <li><a href="" ng-click="tab = 3;switchTab()" data-toggle="tab">Resultados esperados</a></li>
+            </ul>
+            <div ng-show="active1" class="tab-content">
+                <div class="tab-pane active" id="tab1">
+                    <div class="clearfix"><br/>
+                    </div>
+                    <div class="row">
+                        <form ng-submit="actualizarComunidad()" name="adminForm" id="adminForm" class="form-horizontal">
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                    Nombre de la comunidad<span class="required"> *</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input required class="form-control" minlength="2" maxlength="70" ng-model="comunidad.descripcion"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                    Misi&oacute;n de la comunidad
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <textarea class="form-control" maxlength="500" rows="4" ng-model="comunidad.mision"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                    Programa de investigaci&oacute;n <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <select required class="form-control" ng-model="comunidad.idCategoria" ng-options="obj.catCPId as obj.nombre for obj in categorias">
+                                        <!--<option value="">--- Selecciona l&iacute;nea de investigaci&oacute;n ---</option>-->
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="clearfix"><br/></div>
+                            <div class="x_title">
+                                <h2>Adjunto <small>Tama&ntilde;o m&aacute;ximo por archivo de 8 MB</small></h2>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                    Imagen de la comunidad
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <div ng-show="!regFile">
+                                        <span class="fa fa-download"></span>&nbsp;&nbsp;<a href="/Descargas.html#/q/{{idAjunto | encriptar}}" class="linkTabla" target="_blank">Descargar Archivo</a>
+                                        &nbsp;&nbsp;
+                                        <a class="btn btn-danger" title="Eliminar Archivo" ng-click="deleteFile()">
+                                            <i class="glyphicon glyphicon-trash"></i>
+                                        </a>
+                                    </div>
+                                    <div  ng-show="regFile">
+                                        <input class="input-file col-md-7 col-xs-12" type="file" name="filesGral" id="filesGral" data-buttonName="btn-success"
+                                               ng-click="saveIG();" ng-model="filesGral"
+                                               onchange="angular.element(this).scope().getFileDetails(this);"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                    Fecha de alta <span class="required">*</span>
+                                </label>
+                                <div class="span-label  col-md-6 col-sm-6 col-xs-12">
+                                    <div class="row">
+                                        <div class="col-xs-10">
+                                            <input placeholder="dd/mm/yyyy" ng-minlength="8" name="fechaRegistro" maxlength="10" ng-init="open=false" type="text" show-button-bar="false" popup-placement="bottom"
+                                                   datepicker-options="datePicker.FechaOptions"
+                                                   class="form-control" required uib-datepicker-popup="dd/MM/yyyy" ng-model="comunidad.fechaAlta"
+                                                   value="{{ date | date: 'dd/MM/yyyy' }}" is-open="open" ng-required="true" close-text="Close"/>
+                                            <span ng-show="ValidForm.fechaRegistro.$dirty &&  ValidForm.fechaRegistro.$invalid" class="error">Formato inválido 'dd/MM/yyyy'</span>
+                                        </div>
+                                        <div class="col-xs-2">
+                                            <button type="button" class="btn btn-success" ng-click="open=true"><i class="glyphicon glyphicon-calendar"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="clearfix"><br/></div>
+                            <div class="x_title">
+                                <h2>Personal participante</h2>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                    L&iacute;der <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <div class="row">
+                                        <div class="col-xs-10">
+                                            <input type="text" placeholder="Seleccione un investigador" class="form-control" id="usr" name="lider" ng-model="nombreLider" required disabled>
+                                        </div>
+                                        <div class="col-xs-2">
+                                            <a class="btn btn-success" ng-really-click="openLider()"
+                                               ng-really-message="&iquest;Seguro de querer <b>cambiar al lider</b>&#63;"
+                                               title="Buscar Persona">
+                                                <span class="glyphicon glyphicon-search"></span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                    Secretario <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <div class="row">
+                                        <div class="col-xs-10">
+                                            <input type="text" placeholder="Seleccione un investigador" class="form-control" id="usr" name="secretario" ng-model="nombreSecretario" required disabled>
+                                        </div>
+                                        <div class="col-xs-2">
+                                            <a class="btn btn-success" ng-really-click="openSecretario()"
+                                               ng-really-message="&iquest;Seguro de querer <b>cambiar al secretario</b>&#63;"
+                                               title="Buscar Persona">
+                                                <span class="glyphicon glyphicon-search"></span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                    Tipo de acceso a las publicaciones de la comunidad <span class="required">*</span>
+                                </label>
+                                <div class="span-label  col-md-6 col-sm-6 col-xs-12">
+                                    <select required class="form-control" ng-model="comunidad.tipoAcceso" ng-options="acc.valor as acc.atributo for acc in acceso | orderBy:'atributo' ">
+                                        <option value="">--- Seleccione una opci&oacute;n ---</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button ng-show="active1" type="submit" class="btn btn-success" >
+                                    <i class="glyphicon glyphicon-saved"></i> Actualizar
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!--Compromisos de la comunidad-->
+            <div ng-if="active2" class="tab-content">
+                <div  class="tab-pane" id="tab2">
+                    <div class="clearfix">
+                        <br />
+                    </div>
+                </div>
+                <div class="clearfix"><br/>
+                </div>
+                <div class="row">
+                    <form class="form-horizontal">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div ng-show="compromisos.length>0">
+                                <table class="table table-hover table-striped table-condensed dt-responsive" dt-options="dtOptions" cellspacing="0" datatable="ng" width="100%">
+                                    <thead>
+                                    <tr>
+                                        <th class="thCeldaB sin-desborde">Descripci&oacute;n</th>
+                                        <th class="thCeldaB">Estado</th>
+                                        <th data-priority="1" class="thCeldaB text-center">Opciones</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="e in compromisos">
+
+                                        <td>{{e.meta}}</td>
+                                        <td>{{e.estadoMeta}}</td>
+                                        <td class="thCeldaB text-center">
+
+                                            <a class="btn btn-warning" ng-click="editaMeta(e)" title="Editar">
+                                                <i class="glyphicon glyphicon-pencil"></i>
+                                            </a>
+                                            <a class="btn btn-danger" ng-really-click="eliminaMeta(e.metaid)" ng-really-message="¿Seguro que desea eliminar el compromiso asociado a la comunidad?" title="Eliminar">
+                                                <i class="glyphicon glyphicon-trash"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div ng-show="compromisos.length==0" class="alert advertencia">
+                                No hay registros
+                            </div>
+                        </div>
+                        <!--<div class="modal-footer">
+                            <button ng-show="active2" type="submit" class="btn btn-success" ng-click="agregaMeta()">
+                                <i class="glyphicon glyphicon-plus"></i> Agregar
+                            </button>    
+                        </div>-->
+                    </form>
+
+                </div>
+                
+            </div>
+           
+             <div ng-if="active3" class="tab-content">
+                 <div class="tab-pane" id="tab3">
+                     <div class="clearfix">
+                         <br/>
+                     </div>
+                 </div>
+                 <div class="clearfix">
+                     <br />
+                 </div>
+                <div class="row">
+                    <form class="form-horizontal">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div ng-show="resultadosComunidad.length>0">
+                                <table class="table table-hover table-striped table-condensed dt-responsive" dt-options="dtOptions" cellspacing="0" datatable="ng" width="100%">
+                                    <thead>
+                                    <tr>
+                                        <th>Compromiso</th>
+                                        <th class="sin-desborde">Resultado esperado</th>
+                                        <th>Fecha esperada</th>
+                                        <th data-priority="3" class="thCeldaB text-center">Opciones</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="e in resultadosComunidad">
+
+                                        <td>{{e.meta}}</td>
+                                        <td >{{e.resultadoEsperado}}</td>
+                                        <td>{{e.fechaEsperada | date}}</td>
+                                        <td class="thCeldaB text-center">
+
+                                            <a class="btn btn-warning" ng-click="editaResultado(e)" title="Editar">
+                                                <i class="glyphicon glyphicon-pencil"></i>
+                                            </a>
+                                            <a class="btn btn-danger" ng-really-click="eliminaResultado(e.resultadoId)" ng-really-message="¿Seguro que desea eliminar el resultado esperado asociado a la meta <b>{{e.meta}}</b>?" title="Eliminar">
+                                                <i class="glyphicon glyphicon-trash"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div ng-show="resultadosComunidad==0"class="alert advertencia">
+                                No hay registros
+                            </div>
+                        </div>
+                        <!--<div class="modal-footer">
+                            <button ng-show="active3" type="submit" class="btn btn-success" ng-click="agregaResultado()">
+                                <i class="glyphicon glyphicon-plus"></i> Agregar
+                            </button>    
+                        </div>-->
+                        
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    
+    <div class="modal-footer" ng-show="active2 || active3">
+        <button ng-show="active2" type="submit" class="btn btn-success" ng-click="agregaMeta()">
+            <i class="glyphicon glyphicon-plus"></i> Agregar
+        </button>
+        <button ng-show="active3" type="submit" class="btn btn-success" ng-click="agregaResultado()">
+            <i class="glyphicon glyphicon-plus"></i> Agregar
+        </button>
+    </div>
+    
+</div>

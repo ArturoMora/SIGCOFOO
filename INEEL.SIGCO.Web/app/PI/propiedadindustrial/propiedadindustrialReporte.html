@@ -1,0 +1,237 @@
+<div class="vista">
+    <div class="page-title">
+        <div class="title_left">
+            <ol class="breadcrumb miga">
+                <li>
+                    <i class="glyphicon glyphicon-file"></i>
+                    <a ui-sref="reportepi">Reporte propiedad industrial</a>
+                </li>
+            </ol>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Criterios de b&uacute;squeda</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li>
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+
+                    <form role="form" class="form-label-left">
+                        <div class="col-xs-6 col-md-6">
+                            <div class="form-group">
+                                <label class="col-xs-12" for="palabras">T&iacute;tulo</label>
+                                <div class="col-xs-10">
+                                    <input class="form-control frmSearch" type="text" id="s1" maxlength="50" placeholder="T&iacute;tulo" ng-model="pi.titulo" />
+                                </div>
+                            </div>
+                            <br />
+                            <div class="clearfix"></div>
+                            <div class="form-group">
+                                <label class="col-xs-12" for="palabras">N&uacute;mero de proyecto </label>
+                                <div class="col-xs-10">
+                                    <input class="form-control frmSearch" type="text" id="s2" maxlength="50" placeholder="N&uacute;mero de proyecto" ng-model="pi.numeroProyecto" />
+                                </div>
+                            </div>
+                            <br />
+                            <div class="clearfix"></div>
+                            <div class="form-group">
+                                <label class="col-xs-12" for="palabras">Inventores</label>
+                                <div class="col-xs-10">
+                                    <input class="form-control frmSearch" type="text" id="s3" maxlength="50" placeholder="Inventores" ng-model="pi.nombrePersona" />
+                                </div>
+                            </div>
+                            <br />
+                            <div class="clearfix"></div>
+                            <div class="form-group">
+                                <label class="col-xs-12">
+                                    Unidad organizacional
+                                </label>
+                                <div class="col-xs-12">
+                                    <div uo-modal2 ng-model="unidadOselect" ng-change="{{pi.claveUnidad = unidadOselect.claveUnidad}}" requerido="false" fecha=""></div>
+                                </div>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="clearfix"></div>
+                        <div class="col-xs-6 col-md-6">
+
+                            <div class="clearfix"></div>
+                            <br />
+                            <label class="col-xs-12">Propiedad industrial con fecha de expedici&oacute;n entre el siguiente rango de fechas: </label>
+                            <div class="form-group">
+                                <label class="col-xs-12">
+                                    Inicio
+                                </label>
+                                <div class="col-xs-12">
+                                    <div class="row">
+                                        <div class="col-xs-10">
+                                            <input placeholder="dd/mm/yyyy" ng-minlength="8" name="fechaRegistro" maxlength="10" ng-init="open=false" type="text" show-button-bar="false"
+                                                   popup-placement="bottom" datepicker-options="datePicker.FechaOptions" class="form-control"
+                                                   uib-datepicker-popup="dd/MM/yyyy" ng-model="pi.fechaInicioComparacion" value="{{ date | date: 'dd/MM/yyyy' }}"
+                                                   is-open="open" close-text="Close" />
+                                            <span ng-show="ValidForm.fechaRegistro.$dirty &&  ValidForm.fechaRegistro.$invalid" class="error">Formato inv�lido 'dd/MM/yyyy'</span>
+                                        </div>
+                                        <div class="col-xs-2">
+                                            <button type="button" class="btn btn-success" ng-click="open=true;pi.busquedaFecha='ok'">
+                                                <i class="glyphicon glyphicon-calendar"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br />
+                            <div class="clearfix"></div>
+                            <div class="form-group">
+                                <label class="col-xs-12">
+                                    T&eacute;rmino
+                                </label>
+                                <div class="col-xs-12">
+                                    <div class="row">
+                                        <div class="col-xs-10">
+                                            <input placeholder="dd/mm/yyyy" ng-minlength="8" name="fechaRegistro" maxlength="10" ng-init="openTwo=false" type="text"
+                                                   show-button-bar="false" popup-placement="bottom" datepicker-options="datePicker.FechaOptions"
+                                                   class="form-control" uib-datepicker-popup="dd/MM/yyyy" ng-model="pi.fechaFinalComparacion"
+                                                   value="{{ date | date: 'dd/MM/yyyy' }}" is-open="openTwo" close-text="Close" />
+                                            <span ng-show="ValidForm.fechaRegistro.$dirty &&  ValidForm.fechaRegistro.$invalid" class="error">Formato inv�lido 'dd/MM/yyyy'</span>
+                                        </div>
+                                        <div class="col-xs-2">
+                                            <button type="button" class="btn btn-success" ng-click="openTwo=true;pi.busquedaFecha='ok'">
+                                                <i class="glyphicon glyphicon-calendar"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br />
+                            <div class="clearfix"></div>
+                            <div class="form-group">
+                                <label class="col-xs-12" for="palabras">Tipo</label>
+                                <div class="col-xs-10">
+                                    <select id="s4" ng-model="pi.tipoPropiedadIndustrialId" name="tipoPropiedadIndustrial" ng-options="tipo.tipoPropiedadIndustrialId as tipo.descripcion for tipo in tipos | orderBy:'descripcion'"
+                                            class="form-control">
+                                        <option value="">---Seleccione un tipo---</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <br />
+                            <div class="clearfix"></div>
+                            <div class="form-group">
+                                <label class="col-xs-12" for="palabras">Estado</label>
+                                <div class="col-xs-10">
+                                    <select id="s6" ng-model="pi.estadoDelProcesoId" name="estadoDelProceso" ng-options="estado.estadoDelProcesoId as estado.descripcion for estado in estados"
+                                            class="form-control">
+                                        <option value="">---Seleccione un estado---</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="col-xs-12">
+                        <div class="col-xs-12 col-md-6">
+                            <div class="form-group ">
+                                <br>
+                                <a class="btn btn-success" ng-click="buscar()" title="buscar">
+                                    <span class="glyphicon glyphicon-search"></span> Buscar
+                                </a>
+                                <a class="btn btn-primary" ng-click="reset()" title="Limpiar campos">
+                                    Limpiar
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div ng-show="busqueda" class="x_panel">
+                <div class="x_content sin-desborde">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <!--<div ng-show="false" class="alert advertencia">
+                                No hay registros de propiedad industrial
+                            </div>-->
+                            <div>
+                                <table dt-options="dtOptions" class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" datatable="ng"
+                                    width="100%">
+                                    <thead>
+                                        <tr>
+                                            <th>CI</th>
+                                            <th data-priority="1">T&iacute;tulo</th>
+                                            <th>Proyecto</th>
+                                            <th>Inventores</th>
+                                            <th>Tipo</th>
+                                            <th>Fecha de expedici&oacute;n</th>
+                                            <th>Gerencia</th>
+                                            <th>Estado </th>
+                                            <th ng-show="false">Expediente</th>
+                                            <th ng-show="false">Fecha de presentaci&oacute;n</th>
+                                            <th ng-show="false">Fecha de vencimiento</th>
+                                            <th ng-show="false">Fecha de pr&oacute;ximo pago</th>
+                                            <th ng-show="false">N&uacute;mero de t&iacute;tulo</th>
+                                            <th ng-show="false">Fecha de inicio de tr&aacute;mite</th>
+                                            <th ng-show="false">&iquest;Licenciada?</th>
+
+                                            <th ng-show="false">Observaciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="e in datos">
+                                            <td>{{::e.consecutivoInterno}}</td>
+                                            <td ng-click="detalleRegistro(e.propiedadIndustrialId)" class="link" style="cursor:pointer">{{::e.titulo}}</td>
+                                            <!--<th>{{::e.titulo}}</th>-->
+                                            <td>
+                                                <div ng-if="e.numeroProyecto!=null">
+                                                    <a href="" load-proyectos idproyecto="{{e.numeroProyecto}}" title="Detalle de proyecto">{{::e.numeroProyecto}}</a> - {{::e.proyecto}}
+                                                </div>
+
+                                            </td>
+                                            <!--<th><a ng-if="e.numeroProyecto!=null">{{::e.numeroProyecto}} - {{::e.proyecto.nombre}}</a></th>-->
+                                            <td>
+                                                <ul ng-repeat="aut in e.inventores" style="margin-left:0; padding-left:0;">
+                                                    <li ng-if="aut.clavePersona!='Externo'">
+                                                        <a ng-click="openProfile(aut.clavePersona)" tittle="Detalle de empleado" class="linkTabla">
+                                                            {{aut.clavePersona}}
+                                                        </a>- {{::aut.nombre}}
+                                                    </li>
+                                                    <li ng-if="aut.clavePersona=='Externo'">
+                                                        {{::aut.nombre}}
+                                                    </li>
+                                                </ul>
+                                            </td>
+                                            <td>{{::e.tipoPropiedadIndustrial}}</td>
+                                            <td>{{::e.fechaExpedicion2 | date: 'dd/MM/yyyy'}}</td>
+                                            <td>{{::e.unidadOrganizacional.nombreUnidad}}</td>
+                                            <td>{{::e.estadoDelProceso}}</td>
+                                            <td ng-show="false">{{::e.expediente}}</td>
+                                            <td ng-show="false">{{::e.fechaPresentacion}}</td>
+                                            <td ng-show="false">{{::e.fechaVencimiento}}</td>
+                                            <td ng-show="false">{{::e.fechaProximoPago}}</td>
+                                            <td ng-show="false">{{::e.numeroTitulo}}</td>
+                                            <td ng-show="false">{{::e.fechaInicioTramite}}</td>
+                                            <td ng-show="false">
+                                                <a ng-if="e.licenciado=false">No</a>
+                                                <a ng-if="e.licenciado=true">Si</a>
+                                            </td>
+                                            <td ng-show="false">{{::e.observaciones}}</td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,392 @@
+<div class="vista">
+
+    <div class="page-title">
+        <div class="title_left">
+            <ol class="breadcrumb miga">
+                <li><i class="sg sg-aliados"></i> <a ui-sref="aliadosGet">Aliados</a></li>
+                <li class="active">Editar</li>
+            </ol>
+        </div>
+    </div>
+  
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+                    <form name="aliadoForm" id="form" class="form-horizontal">
+                        <div class="x_title">
+                            <h2>Informaci&oacute;n general</h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Aliado <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <textarea rows="3" type="text" class="form-control" id="usr" name="empresa" ng-model="aliados.empresa.nombreEmpresa" disabled
+                                            ng-required="true" maxlength="300" />
+                                        <input type="hidden" ng-model="aliados.empresaId" class="form-control" value="empresa.empresaId" />
+                                        <span class="error" ng-show="aliadoForm.empresa.$invalid && aliadoForm.empresa.$dirty || aliadoForm.$submitted && aliadoForm.empresa.$invalid">
+                                            Debes de agregar una instituci&oacute;n
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Tipo de organizaci&oacute;n
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" placeholder="Tipo de organización" class="form-control" id="tipoOrg" name="tipoOrg" ng-model="tipoOrganizacion" disabled>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Direcci&oacute;n 
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <textarea rows="3" type="text" name="direccion" ng-model="direccion" class="form-control" readonly />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Contacto <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="row">
+                                    <div class="col-xs-10">
+                                        <input type="text" class="form-control" id="usr" name="contacto" ng-model="aliados.contacto.nombre" disabled>
+                                        <input type="hidden" ng-model="aliados.contactoId" class="form-control" value="contacto.contactoId" />
+                                        <!--<input type="hidden" ng-model="aliados.nombre" class="form-control" value="aliados.nombre" />-->
+                                        <!--<br /><input type="text" ng-model="aliados.contacto.correo" class="form-control"  value="aliados.correo" readonly />-->
+                                        
+                                        <span class="error" ng-show="aliadoForm.contacto.$invalid && aliadoForm.contacto.$dirty || aliadoForm.$submitted && aliadoForm.contacto.$invalid">
+                                            Debes de agregar un contacto.
+                                        </span>
+                                    </div>
+                                    <div class="col-xs-2">
+                                       
+                                        <a ng-click="openContacto()" class="btn btn-success" title="Buscar contacto" ng-disabled="desabilitarBuscarContacto">
+                                            <i class="glyphicon glyphicon-search"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div ng-show="listaContactos.length>0">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">
+
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <table class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" width="100%" dt-options="dtOptions">
+                                        <thead>
+                                            <tr>
+                                                <th data-priority="1">Nombre</th>
+                                                <th data-priority="1" class="thAjuste text-center">Eliminar</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="contacto in listaContactos">
+                                                <td>{{contacto.nombreCompleto}}</td>
+                                                <td class="text-center">
+                                                    <div>
+                                                        <a title="Eliminar" ng-click="eliminaContacto(listaContactos.indexOf(contacto))" class="btn btn-danger">
+                                                            <i class="glyphicon glyphicon-trash"></i>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Descripci&oacute;n 
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <textarea rows="3" placeholder="Datos generales acerca del aliado" maxlength="300" type="text" name="descripcion" ng-model="aliados.descripcion" class="form-control" />
+                                <span class="error" ng-show="aliadoForm.descripcion.$invalid">
+                                            La longitud máxima es de 300 caracteres. 
+                                        </span>
+                            </div>
+                        </div>
+                        <br/>
+                        <div class="x_title">
+                            <h2>Convenios</h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Convenios
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <div ng-show="conveniosM.length === 0" class="alert advertencia">No existen convenios con la organizaci&oacute;n {{aliados.empresa.nombreEmpresa}}</div>
+                                    </div>
+                                </div>
+                                <div class="row" ng-show="!loading">
+                                    <div class="col-xs-12">
+                                        <div ng-hide="conveniosM.length === 0">
+                                            <div class="form-group">
+                                                <table id="aliadoEdit" class="table table-hover table-striped table-condensed dt-responsive sin-desborde" cellspacing="0" datatable="ng" width="100%"
+                                                    dt-options="dtOptions">
+                                                    <thead>
+                                                        <tr>
+                                                            <th data-priority="1">N&uacute;m convenio</th>
+                                                           
+                                                            <th class="center">Fecha de t&eacute;rmino</th>
+                                                            <th class="center">Opciones</th>
+                                                        </tr>
+                                                    </thead>
+
+                                                    <tr ng-repeat="conveniosA in conveniosM track by $index">
+                                                        <td style="max-width:200px" class="sin-desborde"><a ui-sref="convenioDetails({ id: conveniosA.convenioId  })" title="Detalles">{{conveniosA.noConvenio}}</a></td>
+                                                        <!--<td class="col-xs-5">{{conveniosA.objetoConvenio}}</td>-->
+                                                        <!--<td>{{conveniosA.tipoConvenio.nomTipConv}}</td>-->
+                                                        <td class="center"> <span ng-show="conveniosA.indefinido"> Por tiempo indefinido</span>  <span ng-show="!conveniosA.indefinido">   {{conveniosA.fechaTermino  | date:'dd/MM/yyyy'}}</span> </td>
+                                                        <td class="center">
+                                                           
+                                                            <a class="btn btn-warning" ui-sref="convenioEdit({ id: conveniosA.convenioId })" title="Editar">
+                                                                <i class="glyphicon glyphicon-pencil"></i>
+                                                            </a>
+                                                            <button type="button" ng-click="preguntaEliminar(conveniosA)" class="btn btn-danger">
+                                                                <i class="glyphicon glyphicon-trash"></i>
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <a class="btn btn-success" ui-sref="convenioAdd({ id: aliados.aliadoId })" ng-click="nose();aliadoForm.$setDirty()" title="Agregar">
+                                    <i class="glyphicon glyphicon-plus"></i> Agregar Convenio
+                                </a>
+                            </div>
+                        </div>
+                        <br/>
+                        <div class="x_title">
+                            <h2>Actividades adicionales</h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                               Actividades
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <div ng-show="actividadesM.length === 0" class="alert advertencia">No existen actividades adicionales con la organizaci&oacute;n {{aliados.empresa.nombreEmpresa}}</div>
+                                    </div>
+                                </div>
+                                <div class="row" ng-show="!loading">
+                                    <div class="col-xs-12">
+                                        <div ng-hide="actividadesM.length === 0">
+                                            <div class="form-group">
+                                                <table id="aliadoEditactividadesM" class="table table-hover table-striped table-condensed dt-responsive  sin-desborde" cellspacing="0"  width="100%">
+                                                    <thead>
+                                                        <tr>
+                                                            <th data-priority="1">Descripci&oacute;n</th>
+                                                            <th  class="center">Fecha</th>
+                                                            <th class="center">Opciones</th>
+                                                        </tr>
+                                                    </thead>
+
+                                                    <tr ng-repeat="actividadesA in actividadesM track by $index">
+                                                        <td style="max-width:200px" class="link sin-desborde"  ><a ui-sref="actividadAdicionalDetails({ id: actividadesA.actividadAdicionalId  })"
+                                                                title="Detalles">{{actividadesA.descripcion}}</a></td>
+                                                        <td class="center">
+                                                            <span ng-bind="actividadesA.fechaActividad | date:'dd/MM/yyyy'"></span>
+                                                        </td>
+                                                        <td class="center">
+                                                            <!--<a class="btn btn-default" ui-sref="actividadAdicionalDetails({ id: actividadesA.actividadAdicionalId  })" title="Detalles">
+                                                                <i class="glyphicon glyphicon-align-justify"></i>
+                                                            </a>-->
+                                                            <a class="btn btn-warning" ui-sref="actividadAdicionalEdit({ id: actividadesA.actividadAdicionalId })" ng-click="nose()" title="Editar">
+                                                                <i class="glyphicon glyphicon-pencil"></i>
+                                                            </a>
+                                                            <button type="button" ng-click="preguntaEliminarAct(actividadesA)" class="btn btn-danger">
+                                                                <i class="glyphicon glyphicon-trash"></i>
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <a class="btn btn-success" ui-sref="actividadAdicionalAdd({ id: aliados.aliadoId })" ng-click="nose()" title="Agregar">
+                                    <i class="glyphicon glyphicon-plus"></i> Agregar Actividad
+                                </a>
+                            </div>
+                        </div>
+                        <br/>
+                        <div class="x_title">
+                            <h2>Proyectos</h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group sin-desborde">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                               Proyectos
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="row">
+                                    <div class="col-xs-12 sin-desborde">
+                                        <div ng-show="proyectosAsignadosEmpresa.length === 0" class="alert advertencia sin-desborde">No existen proyectos con la organizaci&oacute;n {{aliados.empresa.nombreEmpresa}}</div>
+                                    </div>
+                                </div>
+                                <div class="row" ng-show="!loading">
+                                    <div class="col-xs-12">
+                                        <div ng-hide="proyectosAsignadosEmpresa.length === 0">
+                                            <div class="form-group">
+                                                <table id="aliadoEditproyectosAsignadosEmpresa" class="table table-hover table-striped table-condensed dt-responsive " cellspacing="0" datatable="ng" width="100%"
+                                                    dt-options="dtOptions">
+                                                    <thead>
+                                                        <tr>
+                                                            <th data-priority="1">N&uacute;m. de proyecto</th>
+                                                            <th>Nombre</th>
+                                                            <th>A&ntilde;o inicio</th>
+                                                            <th>Jefe proyecto</th>
+                                                        </tr>
+                                                    </thead>
+
+                                                    <tr ng-repeat="proyectos in proyectosAsignadosEmpresa track by $index">
+                                                        <td>{{proyectos.proyectoId}}</td>
+                                                        <td>{{proyectos.nombre}}</td>
+                                                        <td>
+                                                            <span class="text" ng-bind="proyectos.fechaInicio | date:'yyyy'"></span>
+
+                                                        </td>
+                                                        <td>{{proyectos.nombreJefeProyecto}}</td>
+                                                    </tr>
+
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br/>
+                        <div class="x_title">
+                            <h2>Propuestas</h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group sin-desborde">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                               Propuestas
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="row">
+                                    <div class="col-xs-12 sin-desborde">
+                                        <div ng-show="propuestasAsignadosEmpresa.length === 0" class="alert advertencia sin-desborde ">No existen propuestas con la organizaci&oacute;n {{aliados.empresa.nombreEmpresa}}</div>
+                                    </div>
+                                </div>
+                                <div class="row" ng-show="!loading">
+                                    <div class="col-xs-12">
+                                        <div ng-hide="propuestasAsignadosEmpresa.length === 0">
+                                            <div class="form-group">
+                                                <table id="aliadoEditpropuestasAsignadosEmpresa" class="table table-hover table-striped table-condensed dt-responsive " cellspacing="0" datatable="ng" width="100%"
+                                                    dt-options="dtOptions">
+                                                    <thead>
+                                                        <tr>
+                                                            <th data-priority="1">N&uacute;m. de propuesta</th>
+                                                            <th>Nombre</th>
+                                                            <th>A&ntilde;o inicio</th>
+
+                                                        </tr>
+                                                    </thead>
+
+                                                    <tr ng-repeat="propuestasA in propuestasAsignadosEmpresa track by $index">
+                                                        <td>{{propuestasA.propuestaId}}</td>
+                                                        <td>{{propuestasA.titulo}}</td>
+                                                        <td>
+                                                            <span class="text" ng-bind="propuestasA.fecha | date:'yyyy'"></span>
+                                                        </td>
+
+                                                    </tr>
+
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <br/>
+                        <div class="x_title">
+                            <h2>Oportunidades de negocio</h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group sin-desborde">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Oportunidades
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="row">
+                                    <div class="col-xs-12 sin-desborde">
+                                        <div ng-show="oportunidadNegocioEmpresa.length === 0" class="alert advertencia sin-desborde">No existen oportunidades de negocio con la organizaci&oacute;n {{aliados.empresa.nombreEmpresa}}</div>
+                                    </div>
+                                </div>
+                                <div class="row" ng-show="!loading">
+                                    <div class="col-xs-12">
+                                        <br />
+                                        <div ng-hide="oportunidadNegocioEmpresa.length === 0">
+                                            <div class="form-group">
+                                                <table id="aliadoEditoportunidadNegocioEmpresa" class="table table-hover table-striped table-condensed dt-responsive " cellspacing="0" datatable="ng" width="100%"
+                                                    dt-options="dtOptions">
+                                                    <thead>
+                                                        <tr>
+                                                            <th data-priority="1">Nombre</th>
+                                                            <th class="col-xs-2">Fecha registro</th>
+                                                            <th class="col-xs-2">Contacto</th>
+                                                            <th class="col-xs-2">Correo</th>
+                                                            <th class="col-xs-2">Telefono</th>
+                                                        </tr>
+                                                    </thead>
+
+                                                    <tr ng-repeat="oportunidades in oportunidadNegocioEmpresa track by $index">
+                                                        <td>{{oportunidades}}</td>
+                                                        <td>{{oportunidades.cargoGC}}</td>
+                                                        <td>{{oportunidades.contacto.empresa.nombreEmpresa}}</td>
+                                                    </tr>
+
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="ln_solid"></div>
+                        <div class="form-group">
+                            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                <div class="">
+                                    <button type="submit" class="btn btn-success" ng-disabled="desactivar" ng-click="saveAliado()">
+                                        <i class="glyphicon glyphicon-saved"></i> Actualizar
+                                    </button>
+                                    <button type="button" confirma-regresar="globalRegresar()" state-form="aliadoForm" class="btn btn-primary">
+                                        <span class="fa fa-arrow-left"></span> Regresar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,64 @@
+﻿<div class="vista">
+    <div class="page-title">
+        <div class="title_left">
+            <ol class="breadcrumb miga">
+                <li><i class="disabled fa fa-cogs"></i> <a ui-sref="tipoInsumoGet">Administraci&oacute;n/Cat&aacute;logos/Tipo de insumo</a></li>
+            </ol>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+
+                    <div data-ng-hide="authentication.isAuth">
+                        No tiene permisos para ingresar a esta sección.<br />
+                        Usuario no autentificado
+                    </div>
+                    <div data-ng-show="authentication.isAuth">
+                        <div ng-show="tipoInsumo.length == 0" class="alert advertencia">
+                            No hay registros
+                        </div>
+                        <div ng-show="loading">
+                            <img src="images/cargando.gif" />
+                        </div>
+                        <div ng-show="!loading && tipoInsumo.length >0">
+                            <table id="MTTipoInsumoGet" class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" datatable="ng" width="100%" dt-options="dtOptions">
+                                <thead>
+                                    <tr>
+                                        <th data-priority="1">Nombre insumo</th>
+                                        <th class="thAjuste text-center">&iquest;Est&aacute; activo? </th>
+                                        <th class="thAjuste text-center">Opciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="insumo in tipoInsumo">
+                                        <td>
+                                            <!--<a class="linkTabla" ui-sref="TipoSoftwareDetails({ id: software.tipoSoftwareId })" title="Mostrar detalle">-->
+                                            {{insumo.descripcionInsumo}}
+                                            <!--</a>-->
+                                        </td>
+                                        <td class="text-center text-hide">
+                                            {{insumo.estadoDisponible}}
+                                            <input type="checkbox" class="btn btn-lg btn-info btn-circle" ng-model="insumo.estadoDisponible" value="{{insumo.estadoDisponible}}" ng-click="saveEstado(insumo.tipoInsumoId,insumo.estadoDisponible,insumo.descripcionInsumo)" />
+                                        </td>
+                                        <td class="text-center">
+
+                                            <a class="btn btn-warning" ui-sref="tipoInsumoEdit({ id: insumo.tipoInsumoId })" title="Editar">
+                                                <i class="glyphicon glyphicon-pencil"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <button type="button" ui-sref="tipoInsumoAdd" class="btn btn-success">
+                            <span class="glyphicon glyphicon-plus"></span> Agregar
+                        </button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

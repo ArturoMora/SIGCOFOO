@@ -1,0 +1,84 @@
+﻿<!-- page content -->
+<div class="vista">
+
+    <div class="page-title">
+        <div class="title_left">
+
+            <ol class="breadcrumb miga">
+                <li><i class="sg sg-articulos-ponencia-cap1"></i> <a ui-sref="Capitulos">Cap&iacute;tulos/Mis cap&iacute;tulos</a></li>
+            </ol>
+
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+                    <!-- se oculta, si usuario está logeado-->
+                    <div data-ng-hide="authentication.isAuth">
+                        No tiene permisos para ingresar a esta secci&oacute;n.<br /> Usuario no autentificado
+                    </div>
+                    <div data-ng-show="authentication.isAuth" class="sin-desborde">
+
+                        <div ng-show="registros.length == 0" class="alert advertencia">
+                            No hay registros
+                        </div>
+                        <div ng-show="loading">
+                            <img src="images/cargando.gif" />
+                        </div>
+                        <div class="sin-desborde" ng-show="!loading && registros.length > 0">
+                            <table id="MTCapitulosGet" class="display dt-responsive" cellspacing="0" datatable="ng" width="100%"
+                                   dt-options="dtOptions">
+                                <thead>
+                                    <tr>
+                                        <th data-priority="1">Cap&iacute;tulo</th>  
+                                        <th>Libro</th>
+                                                                            
+                                        <th data-priority="2">Estado</th>
+                                        <th>Fecha de validaci&oacute;n</th>
+                                        <th data-priority="1" class="thAjuste text-center">Opciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="registro in registros">
+                                        <td style="max-width:100px" class="linkTabla sin-desborde"
+                                            title="responsable del registro: {{registro.clavePersona}}"
+                                            ng-click="detalleCapitulos(registro.capitulosId)">
+                                            {{registro.tituloCapitulo}}
+                                        </td>
+                                        
+                                        <td style="max-width:100px" class="sin-desborde">{{registro.tituloLibro}}</td>
+
+                                        
+                                        <td>{{registro.estadoFlujo.descripcion}}</td>
+                                        <td>{{registro.fechaValidacion === null ? 'Dato no disponible' : registro.fechaValidacion | date:"dd/MM/yyyy"}}</td>
+                                        <td class="text-center">
+                                            
+                                            <div ng-if="registro.clavePersona ==numEmp && (registro.estadoFlujoId==1 || registro.estadoFlujoId==3)" >
+                                                <a ng-click="setGlobalID(registro.capitulosId)" ui-sref="CapituloEdit" title="Editar" class="btn btn-warning">
+                                                    <i class="glyphicon glyphicon-pencil"></i>
+                                                </a>
+                                                <a title="Eliminar" ng-if="registro.fechaValidacion === null && registro.estadoFlujoId!=3" ng-click="open(registro)" class="btn btn-danger">
+                                                    <i class="glyphicon glyphicon-trash"></i>
+                                                </a>
+                                            </div>
+                                            <!--{{registro | json}}-->
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <button ng-show="registros.length >= 0" type="button"  ui-sref="CapituloAdd" class="btn btn-success">
+                            <span class="glyphicon glyphicon-plus"></span> Agregar
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--registrosJuli2:{{registros | json}}-->

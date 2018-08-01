@@ -1,0 +1,99 @@
+﻿<div class="vista">
+    <div class="page-title">
+        <div class="title_left">
+            <ol class="breadcrumb miga">
+                <li><i class="fa fa-cogs"></i> <a ui-sref="catalogosrh.EventoGet">Administraci&oacute;n/Cat&aacute;logos/Eventos</a></li>
+                <li class="active">Agregar</li>
+            </ol>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+                    <form name="ValidacionForm" id="form" class="form-horizontal">
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Nombre <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <textarea ng-model="evento.descripcion" maxlength="200" required class="form-control" placeholder="Agrega una descripción..."></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Descripci&oacute;n  <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" class="form-control" id="usr" maxlength="50" ng-model="evento.descripcionCorta" required placeholder="Agrega una descripción corta...">
+                            </div>
+                        </div>
+                        <div class="ln_solid"></div>
+                        <div class="form-group">
+                            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                <div class="">
+                                    <button type="submit" ng-click="save()" class="btn btn-success" style="padding-right:15px" ng-disabled="desactivar">
+                                        <i class="glyphicon glyphicon-saved"></i> Guardar
+                                    </button>
+                                    <button type="button" ui-sref="catalogosrh.EventoGet" class="btn btn-primary" style="padding-right:15px">
+                                        <span class="fa fa-arrow-left"></span> Regresar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--<div>
+    <div data-ng-hide="authentication.isAuth">
+        No tiene permisos para ingresar a esta sección.<br />
+        Usuario no autentificado
+    </div>
+    <div data-ng-show="authentication.isAuth">
+        <div id="page-wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h2 class="page-header">Agregar Evento</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                        </div>
+                        <div class="panel-body">
+                            <form role="form" name="ValidacionForm">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="usr">Descripción:<a style="color:red;font-weight:bold">*</a></label>
+                                        <textarea ng-model="evento.descripcion" required class="form-control" placeholder="Agrega una descripción..."></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="usr">Descripción Corta:<a style="color:red;font-weight:bold">*</a></label>
+                                        <input type="text" class="form-control" id="usr" ng-model="evento.descripcionCorta" required placeholder="Agrega una descripción corta...">
+                                    </div>
+
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" ng-click="save()" class="btn btn-success" style="padding-right:15px" ng-disabled="desactivar">
+                            <i class="glyphicon glyphicon-saved"></i> Guardar
+                        </button>
+                        <button type="button" ui-sref="catalogosrh.EventoGet" class="btn btn-primary" style="padding-right:15px">
+                            <span class="fa fa-arrow-left"></span> Regresar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>-->

@@ -1,0 +1,132 @@
+<div class="vista">
+    <div class="page-title">
+        <div class="title_left">
+
+            <ol class="breadcrumb miga">
+                <li><i class="sg sg-partes-interesadas"></i> <a class=" cursorPointer" ng-click="globalRegresar()">Partes Interesadas /Persona</a></li>
+                <li class="active">Detalles</li>
+            </ol>
+
+        </div>
+    </div>
+    <div data-ng-hide="authentication.isAuth">
+        No tiene permisos para ingresar a esta secci&oacute;n..<br /> Usuario no autentificado
+    </div>
+    <div data-ng-show="authentication.isAuth">
+        <div class="clearfix"></div>
+        <div class="row">
+            <div class="col-md-8 col-sm-8 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_content sin-desborde">
+                        <label class="detalle col-xs-12 " title="Nombre">
+                            {{personasPartInt.contacto.nombreCompleto}}
+                        </label>
+                        <label class="cont col-xs-12">
+                            {{personasPartInt.descripcion}}
+                        </label>
+                        <label class="tit col-xs-12">
+                            Instituci&oacute;n a la que representa
+                        </label>
+                        <label class="cont col-xs-12">
+                            {{personasPartInt.contacto.empresa.nombreEmpresa}}
+                        </label>
+                        <label class="tit col-xs-12">
+                            Puesto
+                        </label>
+                        <label class="cont col-xs-12">
+                            {{personasPartInt.contacto.puesto}}
+                        </label>
+                        <label class="tit col-xs-12">
+                            Naturaleza de su interacci&oacute;n
+                        </label>
+                        <label class="cont col-xs-12">
+                            {{personasPartInt.naturalezaInteraccion.nombre}}
+                        </label>
+                    </div>
+                </div>
+              
+            </div>
+            <div class="col-md-4 col-sm-4 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_content sin-desborde">
+                        <div class="x_title">
+                            <h2>Datos de Contacto</h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <label class="titFirst col-xs-12">
+                            Tel&eacute;fono
+                        </label>
+                        <label class="cont col-xs-12">
+                            {{personasPartInt.contacto.telefono}}
+                        </label>
+                        <label class="tit col-xs-12">
+                            Correo
+                        </label>
+                        <label class="cont col-xs-12">
+                            {{personasPartInt.contacto.correo}}
+                        </label>
+                        <label class="tit col-xs-12">
+                            Domicilio
+                        </label>
+                        <div ng-show="personasPartInt.contacto.calle.length > 0">
+                            <div ng-if="personasPartInt.contacto.colonia.length > 0">
+                                <label class="cont col-xs-12">
+                                    {{personasPartInt.contacto.calle}},
+                                </label>
+                            </div>
+                            <div ng-if="!personasPartInt.contacto.colonia.length > 0">
+                                <label class="cont col-xs-12">
+                                    {{personasPartInt.contacto.calle}}
+                                </label>
+                            </div>
+                        </div>
+                        <div ng-show="personasPartInt.contacto.colonia.length > 0">
+                            <div ng-if="personasPartInt.contacto.municipios">
+                                <label class="cont col-xs-12">
+                                    Colonia {{personasPartInt.contacto.colonia}},
+                                </label>
+                            </div>
+                            <div ng-if="!personasPartInt.contacto.municipios">
+                                <label class="cont col-xs-12">
+                                    Colonia {{personasPartInt.contacto.colonia}}
+                                </label>
+                            </div>
+                        </div>
+                        <div ng-show="personasPartInt.contacto.municipios">
+                            <div ng-if="personasPartInt.contacto.estados">
+                                <label class="cont col-xs-12">
+                                    {{personasPartInt.contacto.municipios.nombreMunicipio}}, {{personasPartInt.contacto.estados.nombreEstado}}
+                                </label>
+                            </div>
+                            <div ng-if="!personasPartInt.contacto.estados">
+                                <label class="cont col-xs-12">
+                                    {{personasPartInt.contacto.municipios.nombreMunicipio}}
+                                </label>
+                            </div>
+                        </div>
+                        <div ng-show="!personasPartInt.contacto.municipios">
+                            <div ng-if="personasPartInt.contacto.estados">
+                                <label class="cont col-xs-12">
+                                    {{personasPartInt.contacto.estados.nombreEstado}}
+                                </label>
+                            </div>
+                        </div>
+                        <div ng-show="personasPartInt.contacto.cp.length > 0">
+                            <label class="cont col-xs-12">
+                                C.P. {{personasPartInt.contacto.cp}}
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <button type="button" ng-click="globalRegresar()" class="btn btn-primary">
+                    <span class="fa fa-arrow-left"></span> Regresar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,208 @@
+<div class="vista">
+    <div class="page-title">
+        <div class="title_left">
+            <ol class="breadcrumb miga">
+                <li><i class="glyphicon glyphicon-file"></i> <a ui-sref="derechosautorget">Reporte derechos de autor</a></li>
+            </ol>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Criterios de b&uacute;squeda </h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li>
+                            <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    
+
+                    <form role="form" class="form-label-left">
+                        <div class="col-xs-6 col-md-6">
+                            <div class="form-group">
+                                <label class="col-xs-12" style="height:30px; line-height:30px; text-align:left; ">T&iacute;tulo</label>
+                                <div class="col-xs-10">
+                                    <input class="form-control frmSearch" type="text" id="s1" maxlength="50" placeholder="T&iacute;tulo" ng-model="da.titulo" />
+                                </div>
+                            </div>
+                            <br />
+                            <div class="form-group">
+                                <label class="col-xs-12" for="palabras" style="height:30px; line-height:30px; text-align:left; ">Rama</label>
+                                <div class="col-xs-10">
+                                    <select id="s2" ng-model="da.ramaId" name="ramaId" ng-options="rama.ramaId as rama.descripcion for rama in ramas | orderBy:'descripcion'"
+                                            class="form-control">
+                                        <option value="">---Seleccione una Rama---</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <br />
+                            <div class="form-group">
+                                <label class="col-xs-12" for="palabras" style="height:30px; line-height:30px; text-align:left; ">Autores</label>
+                                <div class="col-xs-10">
+                                    <input class="form-control frmSearch" type="text" id="s3" maxlength="50" placeholder="Autores" ng-model="da.nombrePersona" />
+                                </div>
+                            </div>
+                            <br />
+                            <div class="form-group">
+                                <label class="col-xs-12" for="palabras" style="height:30px; line-height:30px; text-align:left; ">Certificado Indautor</label>
+                                <div class="col-xs-10">
+                                    <input class="form-control frmSearch" type="text" id="s6" maxlength="50" placeholder="Certificado Indautor" ng-model="da.certificado" />
+                                </div>
+                            </div>
+                            <br />
+                            <div class="form-group">
+                                <label class="col-xs-12" for="sintesis" style="height:30px; line-height:30px; text-align:left; ">S&iacute;ntesis</label>
+                                <div class="col-xs-10">
+                                    <input class="form-control frmSearch" type="text" id="s7" maxlength="200" placeholder="S&iacute;ntesis" ng-model="da.sintesis" />
+                                </div>
+                            </div>
+                            <br />
+                            <br />
+                        </div>
+
+                        <div class="col-xs-6 col-md-6">
+
+                            <div class="form-group">
+                                <label class="col-xs-12" style="height:30px; line-height:30px; text-align:left; ">
+                                    Unidad organizacional
+                                </label>
+                                <div class="col-xs-12">
+                                    <div uo-modal2 ng-model="unidadOselect" ng-change="{{da.claveUnidad = unidadOselect.claveUnidad}}" requerido="false" fecha=""></div>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div><br />
+                            <label class="col-xs-12">Derechos de autor con fecha de expedici&oacute;n entre el siguiente rango de fechas: </label>
+                            <div class="form-group">
+                                <label class="col-xs-12" style="height:30px; line-height:30px; text-align:left; ">
+                                    Inicio
+                                </label>
+                                <div class="col-xs-12">
+                                    <div class="row">
+                                        <div class="col-xs-10">
+                                            <input placeholder="dd/mm/yyyy" ng-minlength="8" name="fechaRegistro" maxlength="10" ng-init="open=false" type="text" show-button-bar="false" popup-placement="bottom"
+                                               datepicker-options="datePicker.FechaOptions"
+                                                   class="form-control" uib-datepicker-popup="dd/MM/yyyy" ng-model="da.fechaInicioComparacion"
+                                                   value="{{ date | date: 'dd/MM/yyyy' }}" is-open="open" close-text="Close" />
+                                            <span ng-show="ValidForm.fechaRegistro.$dirty &&  ValidForm.fechaRegistro.$invalid" class="error">Formato inválido 'dd/MM/yyyy'</span>
+                                        </div>
+                                        <div class="col-xs-2">
+                                            <button type="button" class="btn btn-success" ng-click="open=true; da.busquedaFecha='ok'"><i class="glyphicon glyphicon-calendar"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-xs-12" style="height:30px; line-height:30px; text-align:left; ">
+                                    T&eacute;rmino 
+                                </label>
+                                <div class="col-xs-12">
+                                    <div class="row">
+                                        <div class="col-xs-10">
+                                            <input placeholder="dd/mm/yyyy" ng-minlength="8" name="fechaRegistro" maxlength="10" ng-init="openTwo=false" type="text" show-button-bar="false" popup-placement="bottom"
+                                               datepicker-options="datePicker.FechaOptions"
+                                                   class="form-control" uib-datepicker-popup="dd/MM/yyyy" ng-model="da.fechaFinalComparacion"
+                                                   value="{{ date | date: 'dd/MM/yyyy' }}" is-open="openTwo" close-text="Close" />
+                                            <span ng-show="ValidForm.fechaRegistro.$dirty &&  ValidForm.fechaRegistro.$invalid" class="error">Formato inválido 'dd/MM/yyyy'</span>
+                                        </div>
+                                        <div class="col-xs-2">
+                                            <button type="button" class="btn btn-success" ng-click="openTwo=true; da.busquedaFecha='ok'"><i class="glyphicon glyphicon-calendar"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="col-xs-12">
+                        <div class="col-xs-12 col-md-6">
+                            <div class="form-group ">
+                                <br>
+                                <a class="btn btn-success" ng-click="buscar()" title="buscar">
+                                    <span class="glyphicon glyphicon-search"></span> Buscar
+                                </a>
+                                <a class="btn btn-primary" ng-click="reset()" title="Limpiar campos">
+                                    Limpiar
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div ng-show="busqueda" class="x_panel">
+                <div class="x_content sin-desborde">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div>
+                                <table  id="tableDerechosAutorReporte" dt-column-defs="dtColumnDefs" dt-options="dtOptions" class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" datatable="ng" width="100%">
+                                    <thead>
+                                        <tr>
+                                            <th>CI</th>
+                                            <th data-priority="1">T&iacute;tulo</th>
+                                            <th>Rama</th>
+                                            <th class="thAjusteExtra">Certificado </th>
+                                            <th>Autores</th>
+                                            <th ng-show="false">Divisi&oacute;n</th>
+                                            <th class="thAjusteExtra">Gerencia</th>
+                                            <th ng-show="false">Proyecto</th>
+                                            <th>Fecha de expedici&oacute;n</th>
+                                            <th ng-show="false">Fecha de solicitud en GCDN</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="e in datos">
+                                            <td>{{::e.consecutivoInterno}}</td>
+                                            <td ng-click="detalleRegistro(e.derechosAutorId)" class="link" style="cursor:pointer">{{::e.titulo}}</td>
+                                            <td>{{::e.ramita}}</td>
+                                            <td>{{::e.certificado}}</td>
+                                            <td>
+                                                <ul ng-repeat="aut in e.autores " style="margin-left:0; padding-left:0;">
+                                                    <li ng-if="aut.clavePersona!='Externo'">
+                                                        <a ng-click="openProfile(aut.clavePersona)" tittle="Detalle de empleado" class="linkTabla">
+                                                            {{aut.clavePersona}}
+                                                        </a>-{{::aut.nombre}}
+                                                    </li>
+                                                    <li ng-if="aut.clavePersona=='Externo'">
+                                                        {{::aut.nombre}}
+                                                    </li>
+                                                </ul>
+                                            </td>                                            
+                                            <td ng-show="false">{{::e.unidadPadre}}</td>
+                                            <td>{{::e.unidadOrganizacional.nombreUnidad}}</td>
+                                            <td ng-show="false">{{::e.proyecto.proyectoId}} - {{::e.proyecto.nombre}}</td>
+                                            <td><a ng-show="false">{{::e.fechaExpedicion | date: 'yyyy/MM/dd'}}</a>{{::e.fechaExpedicion | date: 'dd/MM/yyyy'}}</td>
+                                            <td ng-show="false">{{::e.fechaSolicitud | date: 'dd/MM/yyyy'}}</td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                                <!--<table id="derechosautorinst" datatable="" dt-columns="dtColumns" dt-options="dtOptions" class="table table-hover table-striped table-condensed dt-responsive">
+                                    <thead>
+                                        <tr>
+                                            <th> CI </th>
+                                            <th> Titulo </th>
+                                            <th> Rama </th>
+                                            <th> Autores</th>
+                                            <th> Gerencia </th>
+                                            <th> Fecha de expedici&oacute;n </th>
+                                            <th> Certificado </th>
+                                            <th data-priority="2"> Opciones </th>
+                                        </tr>
+                                    </thead>
+                                </table>-->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

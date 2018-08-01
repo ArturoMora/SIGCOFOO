@@ -1,0 +1,99 @@
+﻿<div class="vista">
+
+    <div class="page-title">
+        <div class="title_left">
+
+            <ol class="breadcrumb miga">
+                <li><i class="disabled fa fa-cogs"></i> <a>Administración/Operación CC/Familia de puestos por unidad organizacional</a></li>
+            </ol>
+        </div>
+    </div>
+
+
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Criterios de búsqueda</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li>
+                            <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content sin-desborde">
+
+                    <div class="form-horizontal form-label-rigth ">
+                        <div class="col-xs-12 col-md-8">
+
+                            <div class="form-group ">
+                                <label class="control-label col-md-4 col-sm-4 col-xs-12">
+                                    Período
+                                </label>
+                                <div class="col-md-8 col-sm-8 col-xs-12">
+
+                                    <select id="periodoId" name="periodoev" class="form-control"
+                                            ng-options="e.periodo as e.periodo  for e in periodos"
+                                            ng-model="periodo"
+                                            ng-init="periodo"
+                                            ng-required="true">
+                                        <option value="">Seleccione un período de evaluación </option>
+                                    </select>
+
+                                </div>
+                            </div>
+
+                            <div class="form-group ">
+                                <label class="control-label col-md-4 col-sm-4 col-xs-12">
+                                    Unidad organizacional
+                                </label>
+                                <div class="col-md-8 col-sm-8 ">
+                                    <div uo-modal2 fecha="" ng-model="nombreUnidad" enarreglo="false"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+                    <table id="CHFamiliaUnidadAdmGet" dt-instance="dtInstance" class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" datatable="ng" width="100%" dt-options="dtOptions">
+                        <thead>
+                            <tr>
+                                <th data-priority="1">Familia</th>
+                                <th>Descripción</th>
+                                <th>Clasificar categorías de nómina con respecto a categorias en competencias conductuales</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="obj in registro">
+                                <td>
+                                    <a ui-sref="consultacategoriasadm({id:obj.familia.familiaId})" ng-click="nose()" class="linkTabla">
+                                        {{obj.familia.nombreFamilia}}
+                                    </a>
+                                </td>
+                                <td>{{obj.familia.descripcion}}</td>
+                                <td class="text-center">
+                                    <button type="button" ui-sref="familiaclasificacategoriasAdm({id:obj.familia.familiaId})" ng-click="nose()" class="btn btn-success">
+                                        <span class="glyphicon glyphicon-plus"></span> Clasificar/Consulta
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+</div>

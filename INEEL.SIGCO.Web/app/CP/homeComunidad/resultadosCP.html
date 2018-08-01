@@ -1,0 +1,79 @@
+﻿<div class="clearfix">
+    <br />
+</div>
+<div ng-controller="ResultadosComunidadGetCtrl" class="col-lg-12 col-md-12 col-xs-12">
+    <div class="col-lg-12 col-md-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Avance de resultados de la comunidad</h2>
+                <div class="clearfix"></div>
+            </div>
+            <div>
+                <form class="form-horizontal">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div ng-show="avances.length>0">
+                            <table class="table table-hover table-striped table-condensed dt-responsive" dt-options="dtOptions" cellspacing="0" datatable="ng"
+                                width="100%">
+                                <thead>
+                                    <tr>
+                                        <th data-priority="1">Compromiso</th>
+                                        <th data-priority="1">Resultado esperado</th>
+                                        <th ng-if="!rol.invitado" class="sin-desborde">Documento adjunto</th>
+                                        <th data-priority="1" style="width: 5%">% avance</th>
+                                        <th style="max-width: 5%">Fecha registro</th>
+                                        <th>Avance miembro</th>
+                                        <th class="sin-desborde">Comentarios</th>
+                                        <th data-priority="1" ng-if="rol.administrador || rol.secretario || rol.lider" class="thCeldaB text-center">Opciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="e in avances">
+
+                                        <td>{{e.resultado.meta}}</td>
+                                        <td>{{e.resultado.resultadoEsperado}}</td>
+                                        <td ng-if="!rol.invitado">
+                                            <a ng-if="e.adjuntoId!=null" href="/Descargas.html#/q/{{e.adjunto.adjuntoId | encriptar}}" class="linkTabla" target="_blank">{{e.adjunto.nombre}}</a>
+                                            <div ng-if="e.adjuntoId==null">No disponible</div>
+                                        </td>
+                                        <td style="width: 5%">{{e.descripcion}}</td>
+                                        <td>{{e.fechaRegistro | date: 'dd-MM-yyyy'}}</td>
+                                        <td>
+                                            <div ng-if="e.avanceMiembros.length>0" ng-bind-html="listaMiembros(e.avanceMiembros)">
+                                            </div>
+                                            <div ng-if="e.avanceMiembros.length==0">
+                                                No disponible
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div ng-bind-html="e.comentario.replace('/\n/g', '<br/>')"></div>
+                                        </td>
+                                        <td class="thCeldaB text-center" ng-if="rol.administrador || rol.secretario || rol.lider">
+
+                                            <a class="btn btn-warning" ng-click="editarAvance(e)" title="Editar">
+                                                <i class="glyphicon glyphicon-pencil"></i>
+                                            </a>
+                                            <a class="btn btn-danger" ng-really-click="eliminaRegistro(e.avanceId)" title="Eliminar">
+                                                <i class="glyphicon glyphicon-trash"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div ng-show="avances.length==0" class="alert advertencia">
+                            No hay registros
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div ng-if="rol.administrador || rol.secretario || rol.lider">
+            <button type="submit" class="btn btn-success" ng-click="agregaAvance()">
+                <i class="glyphicon glyphicon-plus"></i> Agregar
+            </button>
+        </div>
+    </div>
+
+
+</div>

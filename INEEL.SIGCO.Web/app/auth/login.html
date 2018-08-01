@@ -1,0 +1,115 @@
+﻿<div class="vista">
+    <div class="col-xs-12">
+        <div class="login_wrapper">
+            <div class="animate form login_form">
+                <div class="x_panel">
+                    <div class="x_content">
+                        <section class="login_content">
+
+                            <form id="mc-form" name="form" ng-submit="login()">
+                                <h1 class="panel-title detalle">Iniciar sesi&oacute;n</h1>
+
+                                <div class="inputContainer">
+                                    <label><span><i class="sg-1x5 glyphicon glyphicon-user"></i></span></label>
+                                    <div>
+                                        <input type="text" id="usuario" name="usuario" title="Usuario" ng-minlength="6" ng-maxlength="6"
+                                               class="form-control" placeholder="Usuario" ng-required="true" data-ng-model="loginData.userName" />
+                                    </div>
+                                </div>
+                                <br/>
+                                <div class="inputContainer">
+                                    <label><span><i class="sg-1x5 glyphicon glyphicon-lock"></i></span></label>
+                                    <div><input type="password" class="form-control" placeholder="Contraseña" title="Contrase&ntilde;a"
+                                                name="contrasenia" required="" id="inputPassword" data-ng-model="loginData.password" /></div>
+                                </div>
+
+                                <div class="clearfix"></div>
+
+
+
+
+                                <div class="separator">
+                                    <button type="submit" id="entrar" class="btn btn-lg btn-success btn-block"
+                                             ng-disabled="btnClick">
+                                        Entrar
+                                    </button>
+                                    <!-- <a class="reset_pass title linkTabla ng-binding" id="olvido"
+                                       ui-sref="recupearapassword">Olvidaste tu contrase&ntilde;a&quest; </a> -->
+                                    <!--<a class="title linkTabla ng-binding" ui-sref="recupearapassword">Olvid&eacute; mi contraseña</a>-->
+                                    <!--<div ng-hide="message == ''" class="alert alert-danger">
+                                        {{message}}
+                                    </div>-->
+                                    <div>
+                                        <div class="clearfix"></div>
+                                        <br />
+                                        <p>
+                                            Soporte informático en mesa de servicios de TICs ext. 5010
+                                        </p>
+                                        <p>
+                                            Está versión es compatible con Google chrome e Internet explorer 11 o superior
+                                        </p>
+                                    </div>
+                                </div>
+                            </form>
+
+                        </section>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <br />
+
+
+    </div>
+
+</div>
+
+<!--<script>
+    var tour = null;
+    $(document).ready(function () {
+        tour = new Tour({
+            template: plantillaTour(),
+            steps: [
+                {
+                    element: "#usuario",
+                    title: "Iniciar sesi&oacute;n",
+                    content: "Usuario de la BDI (este usuario se utiliza en diversos sistemas como: SIGAF, SIGRE, SIPAVE, etc... )"
+                },
+                {
+                    element: "#inputPassword",
+                    title: "Iniciar sesi&oacute;n",
+                    content: "Contrase&ntilde;a, por defecto es la misma que BDI a menos que Ud. la cambie en el sistema"
+                },
+                {
+                    element: "#entrar",
+                    title: "Iniciar sesi&oacute;n",
+                    content: "Debe dar clic al bot&oacute;n para ingresar al sistema"
+                },
+                {
+                    element: "#olvido",
+                    title: "Olvido de datos de acceso",
+                    content: "Puede ingresar a este enlace si no recuerda sus credenciales de acceso"
+                }
+
+            ]
+        });
+        tour.init();
+        tour.start();
+    });
+    function healpTour() {
+        tour.restart();
+    }
+    function endTour() {
+        tour.end();
+    }
+    //http://bootstraptour.com/api/
+</script>
+<div id="absoluteRigth">
+    <div id="fixed-layer">
+        <i class="fa fa-question-circle sg-3x linkTabla"
+           onclick="healpTour()"></i>
+    </div>
+</div>-->

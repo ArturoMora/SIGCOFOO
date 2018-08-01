@@ -1,0 +1,60 @@
+﻿<div class="clearfix"><br/></div>
+<div class="container" ng-if="comunidad!=null"> <!--no muestra nada si no se cargan los datos de la comunidad-->
+    <div style="position: relative;" class="col-lg-12 col-xs-12 col-md-12">
+        <img  ng-show="comunidad.adjunto64 === null" class="timeline-cover" src="images/cabeceraOficialComunidad.jpg" alt="Base64 encoded image"
+             class="img-responsive" />
+        <img ng-show="comunidad.adjunto64 != null" class="timeline-cover" ng-src="data:image/png;base64,{{comunidad.adjunto64}}"
+             alt="Base64 encoded image" width="70" height="70" />
+
+        <div class="pruebaDatosCP">
+            <h2>&nbsp;&nbsp;&nbsp;{{comunidad.descripcion | limitTo:50}}</h2>
+            <div class="misionCP">
+                <h5>&nbsp;&nbsp;&nbsp;&nbsp;Misi&oacute;n: {{comunidad.mision}}</h5>    
+            </div>
+            <div ng-if="rol.administrador || rol.secretario || rol.lider" class="btnAdminCP">
+                <button class="btn btn-success" ng-click="configuracionComunidad()"><i class="fa fa-cogs"></i> Administrar</button>
+            </div>
+        </div>
+        <!--<div class="nombreCP">
+            <h3>&nbsp;{{comunidad.descripcion | limitTo:50}}</h3>
+            <div ng-if="rol.administrador || rol.secretario || rol.lider" class="btnAdminCP">
+                <button class="btn btn-success" ng-click="configuracionComunidad()"><i class="fa fa-cogs"></i> Administrar</button>
+            </div>
+        </div>-->
+    </div>
+
+
+    <!--Menu bar-->
+    <div class="col-xs-12 col-md-12">
+
+        <div class="col-xs-12 col-sm-12 col-md-12" data-ng-init="html='app/CP/homeComunidad/inicio.html'">
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    
+                    <ul class="nav navbar-nav">
+                        <li><a href="" ng-click="html='app/CP/homeComunidad/inicio.html'">Inicio</a></li>
+                        <li><a href="" ng-click="html='app/CP/homeComunidad/documentos.html'">Documentos</a></li>
+                        <li><a href="" ng-click="html='app/CP/homeComunidad/resultadosCP.html'">Avance resultados</a></li>
+                        <li><a href="" ng-click="html='app/CP/homeComunidad/expertosCP.html'">Expertos</a></li>
+                        <li><a href="" ng-click="html='app/CP/homeComunidad/miembrosCP.html'">Miembros</a></li>
+                        <li><a href="" ng-click="html='app/CP/homeComunidad/eventosCP.html'">Eventos</a></li>
+                        <!--<li><a href="" ng-click="html='app/CP/homeComunidad/objetosConocimiento.html'">Objetos del conocimiento</a></li>-->
+                        <li><a href="" ng-click="html='app/CP/homeComunidad/sitiosInteres.html'">Sitios de inter&eacute;s</a></li>
+                        <li><a href="" ng-click="html='app/CP/homeComunidad/preguntasFrecuentes.html'">Preguntas frecuentes</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </div>
+    <div class="clearfix">
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+
+      
+    </div>
+    <div ng-include="html+'?date='+now"></div>
+
+    <!--<div ui-view></div>-->
+</div>

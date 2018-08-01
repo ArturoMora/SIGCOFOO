@@ -1,0 +1,171 @@
+﻿<div id="page-wrapper">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">Detalles</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                </div>
+                <!-- /.panel-heading -->
+                <div class="panel-body">
+                    <div class="row">
+                        <form role="form">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label>N&uacute;mero de empleado:</label>
+                                    <span class="text">{{registro.clavePersona}}</span>
+                                </div>
+                                <div class="form-group">
+                                    <label>Nombre de empleado:</label>
+                                    <span class="text">{{registro.nombrePersona}}</span>
+                                </div>
+                                <div class="form-group">
+                                    <label>Fecha validaci&oacute;n:</label>
+                                    <span class="text">{{registro.fecha === null ? 'Dato no disponible' : registro.fecha | date:"dd/MM/yyyy"}}</span>
+                                </div>
+                                <div class="form-group">
+                                    <label>T&iacute;tulo de obra:</label>
+                                    <span class="text">{{registro.tituloObra}}</span>
+                                </div>
+                                <div class="form-group">
+                                    <label>S&iacute;ntesis:</label>
+                                    <span class="text">{{registro.sintesisObra}}</span>
+                                </div>
+                                <div class="form-group">
+                                    <label>Rama:</label>
+                                    <span class="text">{{registro.ramaDA.descripcion}}</span>
+                                </div>
+                                <div class="form-group">
+                                    <label>Dado a conocer:</label>
+                                    <span class="text">{{registro.dadoConocer == 0 ? 'No': 'Si'}}</span>
+                                </div>
+                                <div class="form-group">
+                                    <label>Fecha dado a conocer:</label>
+                                    <span class="text">{{registro.fechaConocer === null ? 'Dato no disponible' : registro.fechaConocer | date:"dd/MM/yyyy"}}</span>
+                                </div>
+                                <div class="form-group">
+                                    <label>Primigenia:</label>
+                                    <span class="text">{{registro.primigenia == 0 ? 'No': 'Si'}}</span>
+                                </div>
+                                <div class="form-group">
+                                    <label>Derivada:</label>
+                                    <span class="text">{{registro.derivada == 0 ? 'No': 'Si'}}</span>
+                                </div>
+                                <div ng-if="registro.derivada==1" class="form-group">
+                                    <label>Tipo derivada:</label>
+                                    <span class="text">{{registro.tipoDerivadaDA.descripcion}}</span>
+                                </div>
+                                <div class="form-group">
+                                    <label>T&iacute;tulo primigenia:</label>
+                                    <span class="text">{{registro.tituloPrimigenia}}</span>
+                                </div>
+                                <div class="form-group">
+                                    <label>Comentarios t&iacute;tulo primigenia:</label>
+                                    <span class="text">{{registro.comentarios}}</span>
+                                </div>
+                                <div class="form-group">
+                                    <label>Fecha registro:</label>
+                                    <span class="text">{{registro.fechaRegistro | date: 'dd/MM/yyyy'}}</span>
+                                </div>
+                                <div class="form-group">
+                                    <label>Registro p&uacute;blico:</label>
+                                    <span class="text">{{registro.registroPublico}}</span>
+                                </div>
+                                <div class="form-group">
+                                    <label>Comentarios registro:</label>
+                                    <span class="text">{{registro.comentarioRegistro}}</span>
+                                </div>
+                                <div class="form-group">
+                                    <label>Monto:</label>
+                                    <span class="text">{{registro.monto}}</span>
+                                </div>
+                                <div class="form-group">
+                                    <label>Fecha certificaci&oacute;n:</label>
+                                    <span class="text">{{registro.fechaCertificacion | date: 'dd/MM/yyyy'}}</span>
+                                </div>
+                                <div class="form-group">
+                                    <label>Comentarios certificaci&oacute;n:</label>
+                                    <span class="text">{{registro.comentarioCertificacion}}</span>
+                                </div>
+                                <div class="form-group">
+                                    <label>Legajo:</label>
+                                    <span class="text">{{registro.legajo}}</span>
+                                </div>
+                                <div class="form-group">
+                                    <label>Anaquel:</label>
+                                    <span class="text">{{registro.anaquel}}</span>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label>Secci&oacute;n:</label>
+                                    <span class="text">{{registro.seccion}}</span>
+                                </div>
+                                <div class="form-group">
+                                    <label>Fecha ubicaci&oacute;n:</label>
+                                    <span class="text">{{registro.fechaUbicacion | date: 'dd/MM/yyyy'}}</span>
+                                </div>
+                                <div class="form-group">
+                                    <label>Comentarios ubicaci&oacute;n:</label>
+                                    <span class="text">{{registro.comentarioUbicacion}}</span>
+                                </div>
+                                <div class="form-group">
+                                    <label>Autores internos:</label><br />
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th class="thAjuste">Clave</th>
+                                                <th>Nombre</th>
+                                                <th class="thAjusteColaboracion text-center">Contribuci&oacute;n (%)</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="registro in autoriie">
+                                                <td>{{registro.autoresIntDAPatrimonio.clavePersona}}</td>
+                                                <td>{{registro.autoresIntDAPatrimonio.nombre}} {{registro.autoresIntDAPatrimonio.apellidoPaterno}} {{registro.autoresIntDAPatrimonio.apellidoMaterno}}</td>
+                                                <td class="text-center">{{registro.porcentaje}}%</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!--<div class="form-group">
+                                    <label>Autores Externos:</label><br />
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Nombre</th>
+                                                <th>Instituci&oacute;n</th>
+                                                <th class="text-center">Contribuci&oacute;n (%)</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="registro in autorexterno">
+                                                <td>{{registro.nombre}}</td>
+                                                <td>{{registro.institucion}}</td>
+                                                <td class="text-center thAjusteColaboracion">{{registro.contribucion}}%</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>-->
+                                <!--<div class="form-group">
+                                    <label>Archivo Adjunto:</label>
+                                    <button type="button" class="btn btn-default btn-sm">
+                                        <a href="{{urlDescarga}}/{{registro.adjunto.adjuntoId}}" ta target="_blank">Descargar Archivo</a>
+                                    </button>
+                                </div>-->
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-Modificado">
+                <button type="button" ui-sref="fichapersonal.daexterno({seccion:'daexterno'})" class="btn btn-primary">
+                    <span class="fa fa-arrow-left"></span> Regresar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

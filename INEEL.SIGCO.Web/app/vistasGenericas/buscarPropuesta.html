@@ -1,0 +1,93 @@
+<div class="modal-header">
+    <button type="button" class="close" ng-click="cancel()" data-dissmiss="modal">
+        <i class="glyphicon glyphicon-remove"></i>
+    </button>
+    <div class="col-xs-1"></div>
+    <div>
+        <h3>
+            Propuestas
+        </h3>
+    </div>
+</div>
+<div class="modal-body">
+    <div class="row">
+        <div class="col-xs-12" ng-show="propuestas.length==0 || nueva===true">
+            <form class="form-horizontal" name="frmBuscar">
+
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="searchTextClave">N&uacute;mero:</label>
+                    <div class="col-md-8">
+                        <input type="text" ng-model="propuestaInput.propuestaId" id="searchTextClave"
+                               name="searchTextClave" ng-change="propuestaInput.titulo=null"
+                               class="form-control" placeholder="N&uacute;mero de propuesta (alfanum&eacute;rico)"
+                               ng-minlength="2" />
+                        <span class="error" ng-show="frmBuscar.searchTextClave.$dirty && !frmBuscar.searchTextClave.$valid">
+                            Longitud m&iacute;nima de 2
+                        </span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="searchTextNombre">Nombre:</label>
+                    <div class="col-md-8">
+                        <input type="text" ng-model="propuestaInput.titulo" id="searchTextNombre"
+                               name="searchTextNombre" ng-change="propuestaInput.propuestaId=null"
+                               class="form-control" placeholder="Nombre de propuesta"
+                               ng-minlength="2" />
+                        <span class="error" ng-show="frmBuscar.searchTextNombre.$dirty && !frmBuscar.searchTextNombre.$valid">
+                            Longitud m&iacute;nima de 2
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-4"></div>
+                    <div class="col-md-8">
+                        <button class="btn btn-info btn-flat" ng-click="nueva=false;buscar(propuestaInput)"
+                                ng-disabled="(frmBuscar.searchTextNombre.$invalid
+                                || frmBuscar.searchTextClave.$invalid)
+                                || click">
+                            Buscar <i class="glyphicon glyphicon-search"></i>
+                        </button>
+                    </div>
+                </div>
+
+
+            </form>
+        </div>
+        <div class="col-xs-1"></div>
+        <div ng-hide="propuestas.length==0 || nueva">
+            <button class="btn btn-info btn-flat" ng-click="nueva=true;propuestas=[];">
+                Realizar nueva b&uacute;squeda <i class="glyphicon glyphicon-search"></i>
+            </button>
+        </div>
+
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col-sm-12" ng-hide="propuestas.length==0">
+            <table  class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" datatable="ng" width="100%" dt-options="dtOptions">
+                <thead>
+                    <tr>
+                        <th>N&uacute;mero de propuesta</th>
+                        <th>Nombre</th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                    <tr ng-repeat="e in propuestas" style="cursor: pointer;text-decoration: underline;"
+                        ng-click="ok(e)" id="{{e.propuestaId}}">
+                        <td>{{e.propuestaId}}</td>
+                        <td>{{e.titulo}}</td>
+                       
+                    </tr>
+                </tbody>
+            </table>
+            
+        </div>
+    </div>
+</div>  <!-- final modal body-->
+<!--<div class="modal-footer">
+    <button type="button" class="btn btn-success animate-if" ng-click="ok()" ng-if="proyectoSelect.emp != null">Aceptar</button>
+    <button type="button" class="btn btn-cancel" ng-click="cancel()">Cancelar</button>
+</div>-->

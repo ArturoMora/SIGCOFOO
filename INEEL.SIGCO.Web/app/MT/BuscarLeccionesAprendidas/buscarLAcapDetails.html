@@ -1,0 +1,156 @@
+<!-- page content -->
+<div class="vista">
+
+    <div class="page-title">
+        <div class="title_full">
+
+            <ol class="breadcrumb miga">
+                <li><i class="sg sg-lecciones-aprend"></i> <a class="cursorPointer" ng-click="globalRegresar()">Lecciones aprendidas</a></li>
+                <li class="active">Detalles</li>
+            </ol>
+
+        </div>
+    </div>             
+
+    <div class="clearfix"></div>
+
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+                    <label class="detalle col-xs-12 " title="Nombre">
+                        <a href="" load-proyectos idproyecto="{{registro.proyecto.proyectoId}}" title="Detalle de proyecto">{{registro.proyecto.proyectoId}}</a> -
+                        <!--{{registro.proyecto.proyectoId}}-{{registro.proyecto.nombre}}-->
+                        <font class="detalle"> {{registro.proyecto.nombre}}</font>
+                    </label>
+                    <label class="tit col-xs-12">
+                        Jefe de proyecto
+                    </label>
+                    <!--<label class="cont col-xs-12">
+                        {{registro.proyecto.nombreJefeProyecto}}
+                    </label>-->
+                    <div class="col-xs-12" style="cursor: hand;cursor: pointer;">
+                        <label class="cont linkTabla" ng-click="openProfile(registro.proyecto.numjefeProyecto)" title="Detalle de empleado">
+                            {{registro.proyecto.numjefeProyecto}}
+                        </label>
+                        <label class="cont ">
+                            -{{registro.proyecto.nombreJefeProyecto}}
+                        </label>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 col-sm-4 col-xs-4">
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+                    <div class="x_title">
+                        <h2>Desarrollo del proyecto</h2>
+                        <div class="clearfix"></div>
+                    </div>
+                    <label class="titFirst col-xs-12">
+                        En sus insumos tecnol&oacute;gicos
+                    </label>
+                    <label class="cont col-xs-12 sin-desborde">
+                        <span ng-bind-html="registro.lAproy.insumos| highlight:palabra || jefe ||proyecto"></span>
+                    </label>
+                    <br />
+                    <label class="tit col-xs-12">
+                        Equipo de trabajo
+                    </label>
+                    <label class="cont col-xs-12 sin-desborde">
+                        <span ng-bind-html="registro.lAproy.equipo| highlight:palabra  || jefe ||proyecto"></span>
+                    </label>
+                    <br />
+                    <label class="tit col-xs-12">
+                        Gesti&oacute;n del proyecto
+                    </label>
+                    <label class="cont col-xs-12 sin-desborde">
+                        <span ng-bind-html="registro.lAproy.gestion| highlight:palabra  || jefe ||proyecto"></span>
+                    </label>
+                    <br />
+                    <label class="tit col-xs-12">
+                        Cumplimiento del tiempo, costo y alcance original
+                    </label>
+                    <label class="cont col-xs-12 sin-desborde">
+                        <span ng-bind-html="registro.lAproy.cumplimiento| highlight:palabra  || jefe ||proyecto"></span>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 col-sm-4 col-xs-4">
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+                    <div class="x_title">
+                        <h2>Relaci&oacute;n con el cliente</h2>
+                        <div class="clearfix"></div>
+                    </div>
+                    <label class="titFirst col-xs-12">
+                        En sus negociaci&oacute;n
+                    </label>
+                    <label class="cont col-xs-12 sin-desborde">
+                        <span ng-bind-html="registro.lActe.negociacion| highlight:palabra || jefe ||proyecto"></span>
+                    </label>
+
+                    <label class="tit col-xs-12">
+                        En el desarrollo
+                    </label>
+                    <label class="cont col-xs-12 sin-desborde">
+                        <span ng-bind-html="registro.lActe.desarrollo| highlight:palabra || jefe ||proyecto"></span>
+                    </label>
+
+                    <label class="tit col-xs-12">
+                        En el cierre
+                    </label>
+                    <label class="cont col-xs-12 sin-desborde">
+                        <span ng-bind-html="registro.lActe.cierre| highlight:palabra || jefe ||proyecto"></span>
+                    </label>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 col-sm-4 col-xs-4">
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+                    <div class="x_title">
+                        <h2>Capacidad del instituto</h2>
+                        <div class="clearfix"></div>
+                    </div>
+                    <label class="titFirst col-xs-12">
+                        En sus instalaciones
+                    </label>
+                    <label class="cont col-xs-12 sin-desborde">
+                        <span ng-bind-html="registro.lAcap.instalaciones| highlight:palabra || jefe ||proyecto "></span>
+                    </label>
+
+                    <label class="tit col-xs-12">
+                        Servicios y apoyos administrativos
+                    </label>
+                    <label class="cont col-xs-12 sin-desborde">
+                        <span ng-bind-html="registro.lAcap.servicios| highlight:palabra || jefe ||proyecto"></span>
+                    </label>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <button type="button" ng-click="globalRegresar()" class="btn btn-primary">
+                <span class="fa fa-arrow-left"></span> Regresar
+            </button>
+        </div>
+    </div>
+
+
+</div>
+
+<!--<div class="panel-Modificado">
+    <button type="button" ui-sref="BuscarLeccionesAprendidas" class="btn btn-primary">
+        <span class="fa fa-arrow-left"></span> Regresar
+    </button>
+</div>-->

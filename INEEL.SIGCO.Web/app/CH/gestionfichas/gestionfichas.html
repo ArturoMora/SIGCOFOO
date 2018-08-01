@@ -1,0 +1,150 @@
+﻿<div class="vista">
+    <div class="page-title">
+        <div class="title_left">
+            <ol class="breadcrumb miga">
+                <li><i class="fa fa-cogs"></i> <a ui-sref="gestionfichas">Administraci&oacute;n/Gesti&oacute;n de fichas</a></li>
+            </ol>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+                    <form name="ValidForm" id="form" class="form-horizontal">
+                        <div class="col-xs-12">
+                            <div class="form-group col-md-6">
+                                <label for="usr">N&uacute;mero de empleado:</label>
+                                <input type="text" numbers-only maxlength="5" name="numeroEmpleado" class="form-control" id="usr" ng-model="registro.numeroEmpleado" ng-disabled="numero" ng-change="escribeNum()">
+                                <span class="error" ng-show="mensaje">
+                                        Longitud m&iacute;nima de 4
+                                    </span>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="usr">Nombre de empleado:</label>
+                                <input type="text" maxlength="50" name="nombreEmpleado" class="form-control" id="usr" ng-model="registro.nombreEmpleado" ng-disabled="nombre" ng-change="escribeNom()">
+                                <span class="error" ng-show="mensaje2">
+                                    Longitud m&iacute;nima de 3
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="form-group col-md-4">
+                                <button type="submit" ng-click="buscar()" class="btn btn-success"
+                                        ng-disabled="(registro.numeroEmpleado==null && (registro.nombreEmpleado==null || registro.nombreEmpleado=='' )) || (registro.numeroEmpleado.length <4 || registro.nombreEmpleado.length <3)">
+                                    <span class="fa fa-search"></span> Buscar
+                                </button>
+                                <a class="btn btn-primary" ng-click="reset()" title="Limpiar campos">
+                                    Limpiar
+                                </a>
+                            </div>
+                            <br />
+                            <div ng-show="verTabla">
+                                <table id="tablaGestionFichaPersonal" class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" datatable="ng" width="100%"
+                                       dt-options="dtOptions">
+                                    <thead>
+                                        <tr>
+                                            <th data-priority="1">N&uacute;m.<br /> empleado</th>
+                                            <th data-priority="1">Nombre</th>
+                                            <th>Categor&iacute;a</th>
+                                            <th>Unidad<br />organizacional</th>
+                                            <th>Fecha<br />ingreso</th>
+                                            <th width="90px">Antig&uuml;edad</th>
+                                            <th>Edad</th>
+                                            <th>Edo.<br />laboral</th>
+                                            <th>Fecha<br />salida</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="reg in registrosUsuario">
+                                            <td><a ng-click="guardarclave(reg.persona.clavePersona,reg.persona.nombreCompleto)" ui-sref="fichapersonal">{{reg.persona.clavePersona}}</td>
+                                            <td>{{reg.persona.nombreCompleto}}</td>
+                                            <td>{{reg.persona.categoria.descripcion}}</td>
+                                            <td>{{reg.persona.unidadOrganizacional.nombreUnidad}}</td>
+                                            <td>{{reg.persona.fechaIngreso | date:"dd/MM/yyyy"}}</td>
+                                            <td>{{reg.antiguedad}}</td>
+                                            <td>{{reg.edad}}</td>
+                                            <td ng-if="reg.persona.estado==0">Inactivo</td>
+                                            <td ng-if="reg.persona.estado==1">Activo</td>
+                                            <td ng-if="reg.persona.estado==0">{{reg.persona.fechaEfectiva | date:"dd/MM/yyyy"}}</td>
+                                            <td ng-if="reg.persona.estado==1"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<!--<div id="page-wrapper">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">Gesti&oacute;n de datos de personal</h1>
+        </div>
+    </div>
+    <div class="row" ng-show="!loading">
+        <div class="col-lg-12">
+            <div class="panel-body">
+                <div class="col-xs-12">
+                    <div class="form-group col-md-6">
+                        <label for="usr">N&uacute;mero de empleado:</label>
+                        <input type="text" class="form-control" id="usr" ng-model="registro.numeroEmpleado" ng-disabled="numero" ng-change="escribeNum()">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="usr">Nombre de empleado:</label>
+                        <input type="text" class="form-control" id="usr" ng-model="registro.nombreEmpleado" ng-disabled="nombre" ng-change="escribeNom()" >
+                    </div>
+                </div>
+                <div class="col-xs-12">
+                    <div class="form-group col-md-2">
+                        <button type="submit" ng-click="buscar()" class="btn btn-primary">
+                            <span class="fa fa-search"></span> Buscar
+                        </button>
+                    </div>
+                    <div ng-show="registrosUsuario.length>0">
+                        <table class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" datatable="ng" width="100%"
+                               dt-options="dtOptions">
+                            <thead>
+                                <tr>
+                                    <th data-priority="1">N&uacute;m.<br /> Empleado</th>
+                                    <th data-priority="1">Nombre</th>
+                                    <th>Categor&iacute;a</th>
+                                    <th >Unidad<br />Organizacional</th>
+                                    <th>Fecha<br />Ingreso</th>
+                                    <th width="90px">Antig&uuml;edad</th>
+                                    <th>Edad</th>
+                                    <th>Edo.<br />laboral</th>
+                                    <th>Fecha<br />Salida</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="reg in registrosUsuario">
+                                    <td><a ng-click="guardarclave(reg.persona.clavePersona,reg.persona.nombreCompleto)">{{reg.persona.clavePersona}}</a></td>
+                                    <td><a ng-click="guardarclave(reg.persona.clavePersona,reg.persona.nombreCompleto)">{{reg.persona.nombreCompleto}}</a></td>
+                                    <td><a ng-click="guardarclave(reg.persona.clavePersona,reg.persona.nombreCompleto)">{{reg.persona.categoria.descripcion}}</a></td>
+                                    <td><a ng-click="guardarclave(reg.persona.clavePersona,reg.persona.nombreCompleto)">{{reg.persona.unidadOrganizacional.nombreUnidad}}</a></td>
+                                    <td><a ng-click="guardarclave(reg.persona.clavePersona,reg.persona.nombreCompleto)">{{reg.persona.fechaIngreso | date:"dd/MM/yyyy"}}</a></td>
+                                    <td><a ng-click="guardarclave(reg.persona.clavePersona,reg.persona.nombreCompleto)">{{reg.antiguedad}}</a></td>
+                                    <td><a ng-click="guardarclave(reg.persona.clavePersona,reg.persona.nombreCompleto)">{{reg.edad}}</a></td>
+                                    <td ng-if="reg.persona.estado==0"><a ng-click="guardarclave(reg.persona.clavePersona,reg.persona.nombreCompleto)">Inactivo</a></td>
+                                    <td ng-if="reg.persona.estado==1"><a ng-click="guardarclave(reg.persona.clavePersona,reg.persona.nombreCompleto)">Activo</a></td>
+                                    <td ng-if="reg.persona.estado==0"><a ng-click="guardarclave(reg.persona.clavePersona,reg.persona.nombreCompleto)">{{reg.persona.fechaEfectiva | date:"dd/MM/yyyy"}}</a></td>
+                                    <td ng-if="reg.persona.estado==1"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>-->

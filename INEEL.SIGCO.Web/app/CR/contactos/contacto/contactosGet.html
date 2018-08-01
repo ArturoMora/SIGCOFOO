@@ -1,0 +1,42 @@
+<div class="vista" ng-controller="ContactosGetCtrl as showCase">
+    <div class="page-title">
+        <div class="title_left">
+            <ol class="breadcrumb miga">
+                <!--<li><i class="fa fa fa-user"></i> <a ui-sref="contactosGet">Contactos</a></li>-->
+                <li><i class="disabled fa fa-cogs"></i> <a ui-sref="contactosGet">Administraci&oacute;n/Cat&aacute;logos/Contactos</a></li>
+            </ol>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12 col-lg-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div ng-show="contactos.length === 0" class="alert advertencia">
+                                No hay contactos registrados
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-xs-12">
+                            <div ng-hide="empresas.length === 0">
+                                <table datatable="" id="contactosget" dt-options="showCase.dtOptions" dt-columns="showCase.dtColumns" dt-instance="showCase.dtInstance"
+                                    class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" width="100%"></table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <button type="button" ui-sref="contactoAdd" class="btn btn-success">
+        <span class="glyphicon glyphicon-plus"></span> Agregar
+    </button>
+</div>

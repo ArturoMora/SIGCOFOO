@@ -1,0 +1,103 @@
+﻿<div>
+   
+    <div >
+        <div id="page-wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h2 class="page-header">Registro de personal</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                        </div>
+                        <div class="panel-body">
+                            <form role="form" name="PersonasForm">
+                              
+                                    <div class="form-group">
+                                        <label for="usr">Clave personal:<a style="color:red;font-weight:bold">*</a></label>
+                                        <input type="text" class="form-control" id="clavepersona" ng-model="registro.clavepersona" required>
+                                     </div>
+                              
+                                    <div class="form-group">
+                                        <label for="usr">Nombre:<a style="color:red;font-weight:bold">*</a></label>
+                                        <input type="text" class="form-control" id="nombre" ng-model="registro.nombre" required>                                 
+                                    </div>
+                                                           
+                                    <div class="form-group">
+                                        <label for="usr">Apellido paterno:<a style="color:red;font-weight:bold">*</a></label>
+                                        <input type="text" class="form-control" id="apellidopaterno" ng-model="registro.apellidopaterno" required> 
+                                    </div>                              
+                               
+                                    <div class="form-group">
+                                        <label for="usr">Apellido materno:<a style="color:red;font-weight:bold">*</a></label>
+                                        <input type="text" class="form-control" id="apellidomaterno" ng-model="registro.apellidomaterno" required>                                     
+                                    </div>
+                                                             
+                                    <div class="form-group">
+                                        <label for="usr">Años de experiencia:<a style="color:red;font-weight:bold">*</a></label>
+                                        <input type="text" class="form-control" id="experiencia" ng-model="registro.experienciaprevia" required>
+                                    </div>
+
+                                    <div class="form-group">
+                                       <label for="usr">Clave única de identificación:<a style="color:red;font-weight:bold">*</a></label>
+                                       <input type="text" class="form-control" id="curp" ng-model="registro.claveunica" required>
+                                    </div>                              
+
+                                    <div class="form-group">
+                                        <label for="usr">Correo electrónico:<a style="color:red;font-weight:bold">*</a></label>
+                                        <input type="text" class="form-control" id="correo" ng-model="registro.correo" required>
+                                    </div>
+                                               
+                                    <div class="form-group">
+                                      <label for="nomina">Clave de nomina: <a style="color:red;font-weight:bold">*</a></label>
+                                      <select id="categoria" name="categoria" class="form-control" ng-model="registro.categoriaselect" ng-options="e.categoriaId as e.descripcion  for e in categorias" ng-required="true">
+                                        <option value="">Seleccione la clave que corresponda</option>
+                                      </select>
+                                    </div>
+                                         
+                                    <div class="form-group">
+                                       <label for="contrato">Tipo de contrato: <a style="color:red;font-weight:bold">*</a></label>
+                                       <select id="contrato" name="contrato" class="form-control" ng-model="registro.contratoselect" ng-options="e.tipoPersonaId as e.descripcion  for e in tpersona" ng-required="true">
+                                          <option value="">Seleccione el tipo de contrato que corresponda</option>
+                                       </select>
+                                    </div>
+                                            
+                                    <div class="form-group">
+                                      <label for="plaza">Plaza: <a style="color:red;font-weight:bold">*</a></label>
+                                      <select id="plaza" name="plaza" class="form-control" ng-model="registro.plazaselect" ng-options="e.plazaId as e.descripcion  for e in plaza" ng-required="true">
+                                          <option value="">Seleccione la plaza del contrato</option>
+                                      </select>
+                                    </div>
+                                               
+                                    <div class="form-group">
+                                       <label for="oficina">Oficina localizada en: <a style="color:red;font-weight:bold">*</a></label>
+                                       <select id="oficina" name="oficina" class="form-control" ng-model="registro.ubicacionselect" ng-options="e.ubicacionAreaID as e.noEdificio  for e in ubicacion" ng-required="true">
+                                         <option value="">Seleccione la localizacion de la oficina</option>
+                                       </select>
+                                    </div>
+                                           
+                                    <div class="form-group">
+                                      <label for="unidad">Área de trabajo: <a style="color:red;font-weight:bold">*</a></label>
+                                      <select id="unidad" name="unidad" class="form-control" ng-model="registro.unidadselect" ng-options="e.claveUnidad as e.nombreUnidad  for e in unidad" ng-required="true">
+                                        <option value="">Seleccione el área de trabajo</option>
+                                      </select>
+                                    </div>
+                               
+                            </form>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" ng-click="save()" class="btn btn-success" style="padding-right:15px">
+                            <i class="glyphicon glyphicon-saved"></i> Guardar
+                        </button>
+                        <button type="button" ui-sref="personas" class="btn btn-default" style="padding-right:15px">
+                            <span class="fa fa-arrow-left"></span> Regresar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

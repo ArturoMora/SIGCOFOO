@@ -1,0 +1,144 @@
+﻿<div class="vista">
+
+    <div class="page-title">
+        <div class="title_left">
+
+            <ol class="breadcrumb miga">
+                <li><i class="disabled fa fa-cogs"></i> <a>Administración/Operación CC/Competencias por categoría</a></li>
+            </ol>
+
+        </div>
+    </div>
+
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Criterios de búsqueda</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li>
+                            <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content sin-desborde">
+
+                    <div class="form-horizontal form-label-rigth ">
+                        <div class="col-xs-12 col-md-8">
+
+                            <div class="form-group ">
+                                <label class="control-label col-md-4 col-sm-4 col-xs-12">
+                                    Período
+                                </label>
+                                <div class="col-md-8 col-sm-8 col-xs-12">
+                                    <select id="periodoId" name="periodoev" class="form-control"
+                                            ng-change="cargarFamilias()"
+                                            ng-model="periodoId"
+                                            ng-init="periodoId"
+                                            ng-options="e.periodoEvaluaionId as e.periodo  for e in periodosEv" ng-required="true">
+                                        <option value="">Seleccione un período de evaluación </option>
+                                    </select>
+                                </div>
+                            </div>
+
+
+                            <div class="form-group ">
+                                <label class="control-label col-md-4 col-sm-4 col-xs-12">
+                                    Familia de puestos
+                                </label>
+                                <div class="col-md-8 col-sm-8 col-xs-12">
+
+                                    <select id="familiaId" name="familias" class="form-control"
+                                            ng-change="cargarCategorias()"
+                                            ng-model="familiaId"
+                                            ng-init="familiaId"
+                                            ng-options="e.familiaId as e.nombreFamilia  for e in familiasPuestos" ng-required="true">
+                                        <option value="">Seleccione una familia de puestos </option>
+                                    </select>
+
+                                </div>
+                            </div>
+
+
+                            <div class="form-group ">
+                                <label class="control-label col-md-4 col-sm-4 col-xs-12">
+                                   Categorías de puestos
+                                </label>
+                                <div class="col-md-8 col-sm-8 col-xs-12">
+                                    <select id="categoriaId" name="categorias" class="form-control"
+                                            ng-change="cargarMatriz()"
+                                            ng-model="categoriaId"
+                                            ng-init="categoriaId"
+                                            ng-options="e.categoriaId as e.nombreCategoria  for e in categoriasFamilias" ng-required="true">
+                                        <option value="">Seleccione una categoría </option>
+                                    </select>
+
+                                </div>
+                            </div>
+
+
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+                    <table id="CHCategoriaCompetenciaGet" dt-instance="dtInstance" class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" datatable="ng" width="100%" dt-options="dtOptions">
+                        <thead>
+                            <tr>
+                                <th data-priority="1">Competencia</th>
+                                <th>Nivel</th>
+                                <th>Comportamiento</th>
+                                <th class="thAjuste text-center">¿Está activo? </th>
+                                <th class="thAjuste text-center" data-priority="4">¿Desea eliminar? </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="obj in matriz">
+                                <td>{{obj.competencia.competencia}}</td>
+                                <td>{{obj.descnivel.nivel.descripcion}}</td>
+
+                                <td>
+                                   {{obj.descnivel.comportamiento}}
+                                </td>
+                                <td class="text-center text-hide">
+                                    {{obj.estado}}
+                                    <input type="checkbox" class="btn btn-info btn-circle" ng-model="obj.estado" ng-click="saveEstado(obj.matrizId,obj.estado)" />
+                                </td>
+                                <td class="text-center">
+                                    <a class="btn btn-danger" ng-model="obj.matrizId" ng-click="eliminaNivel(obj.matrizId)" title="Eliminar">
+                                        <i class="glyphicon glyphicon-trash"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" ng-show="HaSeleccionadoPeriodo === 1">
+        <div class="col-xs-12">
+            <button type="button"  ui-sref="categoriacompetenciaAdd({id:categoriaId})" ng-click="nose()" class="btn btn-success">
+                <span class="glyphicon glyphicon-plus"></span> Agregar
+            </button>
+        </div>
+    </div>
+</div>
+
+
+

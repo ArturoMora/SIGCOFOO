@@ -1,0 +1,58 @@
+﻿<div id="page-wrapper">
+    <br />
+    <div class="row">
+        <div class="col-lg-12">
+            <h2 class="page-header">Listado del personal del área</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-3">
+            <label for="usr">Unidad organizacional:</label>
+        </div>
+        <div class="col-lg-9">
+            <div uo-modal fecha="" ng-model="nombreUnidad" enarreglo="false"></div>
+        </div>
+    </div>
+    <br />
+    
+    <div class="row">
+        <div class="col-lg-6">
+            <label for="periodo">Seleccione un período de evaluación:</label>
+            <select id="periodoId" name="periodoev" class="form-control"
+                    ng-change="obtenerInformacion()"
+                    ng-options="e.periodoEvaluaionId as e.periodo  for e in periodos"
+                    ng-model="periodoId"
+                    ng-required="true">
+                <option value="">Seleccione un período de evaluación </option>
+            </select>
+        </div>
+    </div>
+    <br>
+    <div class="row" ng-show="investigadores.length > 0">
+        <div class="col-lg-12">
+            <div>
+                <table id="tablaexport" datatable="ng" dt-options="dtOptions" class="table table-hover table-striped table-condensed dt-responsive nowrap" width="100%">
+                    <thead>
+                        <tr>
+                            <th>N&uacute;mero de empleado</th>
+                            <th>Nombre de empleado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="investigador in investigadores">
+                            <td ng-click="openProfile(investigador.persona.clavePersona)" title="Detalle de empleado" class="linkTabla">{{investigador.persona.clavePersona}}</td>
+                            <!--<td>{{investigador.persona.clavePersona}}</td>-->
+                            <td>{{investigador.persona.nombreCompleto}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+

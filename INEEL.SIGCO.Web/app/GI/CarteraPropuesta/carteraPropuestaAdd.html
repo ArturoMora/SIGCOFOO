@@ -1,0 +1,379 @@
+﻿<div class="vista">
+    <div class="page-title">
+        <div class="title_left">
+            <ol class="breadcrumb miga">
+                <li><i class="glyphicon glyphicon-file"></i> <a ui-sref="carteraPropuestas">Propuestas de innovaci&oacute;n/ Mis propuestas de innovaci&oacute;n</a></li>
+                <li class="active">Agregar</li>
+            </ol>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <form name="ValidForm1" id="form1" ng-submit="agregar()" class="form-horizontal">
+            <!--PANEL DE PROPUESTAS-->
+            <div ng-class="expression">
+                <div class="x_panel">
+                    <div class="x_content sin-desborde">
+                        <!--<form name="ValidForm1" id="form1" ng-submit="agregar()" class="form-horizontal">-->
+                        <div class="x_title">
+                            <h2>Informaci&oacute;n general de la propuesta</h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Propuesta *
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <a class="btn btn-success" ng-click="buscarPropuesta()">
+                                    <span class="glyphicon glyphicon-search"> Seleccione...</span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Nombre t&eacute;cnico
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <textarea type="text" ng-maxlength="300" ng-disabled="true" class="form-control" ng-model="registroPropuesta.nombreTecnico"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Proponente
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12" ng-show="registroPropuesta.claveProponentePrincipal!=null">
+                                <label ng-click="openProfile(registroPropuesta.claveProponentePrincipal)" title="Detalle de empleado" class="linkTabla">{{registroPropuesta.claveProponentePrincipal}} - {{registroPropuesta.nombrePersona}}</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Empresa promotor
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" maxlength="100" ng-disabled="true" class="form-control" name="especialidad" ng-model="registroPropuesta.empresaPromotorNombre">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Unidad organizacional
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" maxlength="100" ng-disabled="true" class="form-control" name="especialidad" ng-model="registroPropuesta.nombreUnidadOrganizacional">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Tipo de propuesta *
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <select ng-model="registroPropuesta.propuestaInterna" class="form-control"
+                                        ng-required="true" required ng-change="propuestainternafunction()">
+                                    <option value="">--- Seleccione un tipo de propuesta ---</option>
+                                    <option value="true">Interna</option>
+                                    <option value="false">Externa</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div ng-if="registroPropuesta.propuestaInterna=='true'">
+                            <div class="x_title">
+                                <h2>Fondo</h2>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                    Tipo de fondo*
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <select ng-model="registroPropuesta.fondo" id="fondo" name="fondo" class="form-control"
+                                            ng-required="true" required>
+                                        <option value="">--- Seleccione un tipo de fondo ---</option>
+                                        <option value="0">Otro</option>
+                                        <option value="1">FICYDET</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div ng-if="registroPropuesta.propuestaInterna=='true' && registroPropuesta.fondo==1">
+                            <div class="x_title">
+                                <h2>Idea innovadora</h2>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                    Idea innovadora *
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <a class="btn btn-success" ng-click="buscarIdea()">
+                                        <span class="glyphicon glyphicon-search"> Seleccione...</span>
+                                    </a>
+                                    <!--<label class="control-label linkTabla" ng-click="buscarIdea()">seleccione...</label>-->
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">
+
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <!--<label class="cont">{{itemIdea.nombreIdea}}</label>-->
+                                    <textarea type="text" ng-disabled="true" class="form-control" ng-model="itemIdea.nombreIdea" ng-required="true"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div ng-if="propuesta">
+                            <div class="x_title">
+                                <h2>Datos de producto ó servicio</h2>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                    Producto &oacute; servicio *
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <textarea type="text" ng-maxlength="300" name="" placeholder="Ingresa el producto o servicio..." class="form-control" ng-required="true" required ng-model="registroPropuesta.productoServicio"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                    Segmento *
+                                </label>
+
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <select ng-model="registroPropuesta.segmentoMercadoId" ng-required="true" ng-options="SegmentoMercado.segmentoMercadoId as SegmentoMercado.nomSegMerc for SegmentoMercado in SegmentosMercado " required class="form-control">
+                                        <option value="">--- Seleccione un segmento ---</option>
+                                    </select>
+                                </div>
+                                <!--<div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" maxlength="100" placeholder="Ingresa el segmento..." class="form-control" name="especialidad" ng-required="true" ng-model="registroPropuesta.segmentoMercadoId">
+                            </div>-->
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                    Tipo de Acceso *
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <select ng-model="registroPropuesta.tipoAcceso" ng-required="true" ng-options="tipoAcceso.id as tipoAcceso.nombre for tipoAcceso in tiposAccesos " required class="form-control">
+                                        <option value="">--- Seleccione un tipo de acceso ---</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        <div ng-show="propuesta">
+                            <div class="x_title">
+                                <h2>Evidencia</h2>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                    Documento adjunto
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input class="input-file form-control col-md-7 col-xs-12" type="file" name="filesGral" id="filesGral" data-buttonName="btn-success"
+                                           ng-model="filesGral"
+                                           onchange="angular.element(this).scope().getFileDetails(this);" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ln_solid"></div>
+                        <div class="form-group">
+                            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                <div class="">
+                                    <button type="submit" class="btn btn-success">
+                                        <i class="glyphicon glyphicon-saved"></i> Guardar
+                                    </button>
+                                    <button type="button" confirma-regresar="globalRegresar()" state-form="ValidForm1" class="btn btn-primary">
+                                        <span class="fa fa-arrow-left"></span> Regresar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <!--</form>-->
+                    </div>
+                </div>
+            </div>
+            <!--PANEL DE PLAN DE NEGOCIO-->
+            <div class="col-md-6 col-sm-6 col-xs-6" ng-show="registroPropuesta.propuestaInterna=='true'">
+                <div class="x_panel">
+                    <div class="x_content sin-desborde">
+                        <!--<form name="ValidForm2" id="form2" ng-submit="agregar()" class="form-horizontal">-->
+                        <div class="x_title">
+                            <h2>Informaci&oacute;n general del plan de negocio evolutivo</h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                T&iacute;tulo del plan de negocio evolutivo <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <textarea type="text" ng-maxlength="300" placeholder="Ingresa el título del plan de negocio evolutivo..." class="form-control" ng-model="registroPlan.titulo" ng-required="requeridoPNE"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Autores 
+                                <!-- Autores <span class="required">*</span> -->
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <a ng-click="openUser()" class="btn btn-success">
+                                        <span class="glyphicon glyphicon-search"> Seleccione...</span>
+                                </a>
+                            </div>
+                            
+                        </div>
+                        <div class="form-group" ng-if="autoresPNE.length>0">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <table id="CHPonenciaAdd" class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" width="100%"
+                                       dt-options="dtOptions">
+                                    <thead>
+                                        <tr>
+                                            <th data-priority="1">Clave</th>
+                                            <th data-priority="1">Nombre</th>
+                                            <th data-priority="1" class="thAjuste text-center">Opciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="autor in autoresPNE">
+                                            <td>{{autor.clavePersona}}</td>
+                                            <td>{{autor.nombreCompleto}}</td>
+                                            <td class="text-center">
+                                                <div>
+                                                    <a title="Eliminar" ng-really-click="eliminarautor(autor)" class="btn btn-danger">
+                                                        <i class="glyphicon glyphicon-trash"></i>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                <!-- Unidad Organizacional <span class="required">*</span> -->
+                                Unidad Organizacional
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div uo-modal ng-model="registroPlan.planNegocioEvolGerencias" template-url="app/vistasGenericas/uomodalSeleccione.html" enarreglo="true"></div>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-if="registroPlan.planNegocioEvolGerencias.length>0">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <table id="CHPonenciaAdd" class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" width="100%"
+                                       dt-options="dtOptions">
+                                    <thead>
+                                        <tr>
+                                            <th data-priority="1">Nombre</th>
+                                            <th data-priority="1" class="thAjuste text-center">Opciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="area in registroPlan.planNegocioEvolGerencias">
+                                            <td>{{area.nombreUnidad}}</td>
+                                            <td class="text-center">
+                                                <div>
+                                                    <a title="Eliminar" ng-really-click="eliminararea(area)" class="btn btn-danger">
+                                                        <i class="glyphicon glyphicon-trash"></i>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                <!-- Tema especifico <span class="required">*</span> -->
+                                Tema especifico
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <textarea type="text" ng-maxlength="300"  placeholder="Ingresa el tema del plan de negocio evolutivo..." class="form-control" ng-model="registroPlan.tema"></textarea>
+                                <!-- <textarea type="text" ng-maxlength="300" ng-required="requeridoPNE" placeholder="Ingresa el tema del plan de negocio evolutivo..." class="form-control" ng-model="registroPlan.tema"></textarea> -->
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                <!-- Oferta de valor <span class="required">*</span> -->
+                                Oferta de valor
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <!-- <textarea type="text" ng-maxlength="300" ng-required="requeridoPNE" placeholder="Ingresa la oferta de valor del plan de negocio evolutivo..." class="form-control" ng-model="registroPlan.ofertaDeValor"></textarea> -->
+                                <textarea type="text" ng-maxlength="300" placeholder="Ingresa la oferta de valor del plan de negocio evolutivo..." class="form-control" ng-model="registroPlan.ofertaDeValor"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                <!-- Tipo de acceso <span class="required">*</span> -->
+                                Tipo de acceso 
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <!-- <select ng-model="registroPlan.tipoAcceso" ng-required="requeridoPNE" ng-options="tipoAcceso.id as tipoAcceso.nombre for tipoAcceso in tiposAccesos " class="form-control">
+                                    <option value="">--- Selecciona tipo de acceso ---</option>
+                                </select> -->
+                                <select ng-model="registroPlan.tipoAcceso" disabled ng-options="tipoAcceso.id as tipoAcceso.nombre for tipoAcceso in tiposAccesos" class="form-control">
+                                        <option value="">--- Selecciona tipo de acceso ---</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="x_title">
+                            <h2>Evidencia <small>Tama&ntilde;o m&aacute;ximo por archivo de 8 MB</small></h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                <!-- Documento adjunto <span class="required">*</span> -->
+                                Documento adjunto 
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input class="input-file form-control col-md-7 col-xs-12" type="file" name="filesGralD" id="filesGralD" data-buttonName="btn-success"
+                                       ng-model="filesGralD"
+                                       onchange="angular.element(this).scope().getFileDetailsD(this);" />
+                            </div>
+                        </div>
+                        <div class="form-group" ng-if="registroPlan.planNegocioEvolArchivos.length>0">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <table id="CHPonenciaAdd" class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" width="100%"
+                                       dt-options="dtOptions">
+                                    <thead>
+                                        <tr>
+                                            <th data-priority="1">Nombre</th>
+                                            <th data-priority="1" class="thAjuste text-center">Opciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="adjunto in registroPlan.planNegocioEvolArchivos">
+                                            <td>{{adjunto.adjunto.nombre}}</td>
+                                            <td class="text-center">
+                                                <div>
+                                                    <a title="Eliminar" ng-really-click="eliminaradjunto(adjunto)" class="btn btn-danger">
+                                                        <i class="glyphicon glyphicon-trash"></i>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="ln_solid"></div>
+                        
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+

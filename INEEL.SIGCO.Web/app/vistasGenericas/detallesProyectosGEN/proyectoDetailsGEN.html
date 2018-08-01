@@ -1,0 +1,72 @@
+﻿<div class="modal-content sin-desborde">
+    <div class="modal-header">
+        <button type="button" class="close" ng-click="cancel()" data-dissmiss="modal">x</button>
+    </div>
+    <div class="modal-body">
+
+
+        <div class="row">
+            <div class="col-xs-12 visible-print">
+                <img data-ng-src="images/cabeceraFichaPersonal.png" />
+            </div>
+            <div class="col-xs-12 visible-print">
+                <br />
+            </div>
+            <div class="col-xs-12">
+
+                <div class="col-xs-12">
+                    <div class="x_panel">
+                        
+                        <div class="x_content sin-desborde">
+                            
+                            <div class="col-sm-12 col-xs-7">
+                                <div class="col-xs-12 col-sm-7">
+                                    <div class="form-group">
+                                        <label class="detalle">{{proyecto.nombre}} ({{proyecto.proyectoId}})</label>
+                                        <br/>
+                                        <label class="detalle_subtitulo">{{proyecto.unidadOrganizacional.claveUnidadPadre.nombreUnidad}}</label>
+                                        <br/>
+                                        <label class="cont">{{proyecto.unidadOrganizacional.nombreUnidad}}</label>
+                                        <br/><br />
+                                        <ul class="list-unstyled">
+                                            <li ng-if="proyecto.nombreJefeProyecto!=null">
+                                                <i class="fa fa-user"></i>&nbsp;<b>Jefe de proyecto:</b>&nbsp; {{proyecto.nombreJefeProyecto}}
+                                            </li>
+                                            <li><b>Facturaci&oacute;n planeada:</b>&nbsp;{{proyecto.facturacionPlaneada | currency}}</li>
+                                            <li><b>Facturaci&oacute;n real:</b>&nbsp;{{proyecto.facturacionReal | currency}}</li>
+                                            <li><b>Tipo de proyecto:</b>&nbsp;{{proyecto.tipoProyecto}}</li>
+                                        </ul>
+                                        <label class="cont">{{proyecto.empresa.nombreEmpresa}}</label>
+                                        <br />
+                                        <label ng-if="proyecto.empresa.descripcion!=null">{{proyecto.empresa.descripcion}}</label>
+                                        
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-5">
+                                    <div class="contenedor_gris">
+                                        <label class="titFirst">Fecha inicio:</label>
+                                        <label class="cont">{{proyecto.fechaInicio | date:"dd/MM/yyyy"}}</label>
+                                        <br/>
+                                        <label class="titFirst">Fecha t&eacute;rmino:</label>
+                                        <label ng-show="id==null" class="cont">{{proyecto.fechaFin | date:"dd/MM/yyyy"}}</label>
+                                    </div><br/>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+
+            <div class="clearfix"></div>
+
+        </div>
+    </div>
+    <div class="modal-footer">
+        <a class="btn btn-success" target="_blank" href="/indexMT.html#/detalleProyecto/{{proyecto.proyectoId}}" title="Detalles">
+            Detalles
+        </a>
+        <button type="button" class="btn btn-primary" ng-click="cancel()">Cerrar</button>
+    </div>
+</div>

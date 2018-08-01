@@ -1,0 +1,253 @@
+<div class="vista">
+    <div class="page-title">
+        <div class="title_left">
+            <ol class="breadcrumb miga">
+                <li><i class="sg sg-aliados"></i> <a ui-sref="#">Aliados / Reportes / Listado de alianzas</a></li>
+            </ol>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+
+    <form name="ValidForm" id="ValidForm">
+
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Criterios de b&uacute;squeda</h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li>
+                                <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="x_content sin-desborde">
+                        <!--<form name="ValidForm" id="form" class="form-horizontal">-->
+                        <div class="row">
+                            <div class="col-lg-8">
+                                <div class="form-group">
+                                    <br /><label>Tipo de organizaci&oacute;n:</label>
+                                    <select ng-required="true" name="tipoOrganizacionId" class="form-control" ng-model="tipoOrganizacionId" scrolly style="overflow: scroll"
+                                            ng-options="tipoOrganizacion.tipoOrganizacionId as tipoOrganizacion.nombre for tipoOrganizacion in tiposOrganizacion">
+                                        <option value="" selected>Todos</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <br /><label>Estado del convenio:</label>
+                                    <select ng-required="true" name="estadoConvenio" class="form-control" ng-model="estadoConvenio" scrolly style="overflow: scroll">
+                                        <option value="" selected>Todos</option>
+                                        <option>Vigente</option>
+                                        <option>Vencido</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <label>Fecha de inicio:</label>
+                                <div class="form-group">
+                                    <p class="input-group">
+                                        <input name="fechaInicio" placeholder="dd/mm/yyyy" show-button-bar="false" uib-datepicker-popup='dd/MM/yyyy' popup-placement="bottom" type="text" class="form-control fechaOnly"
+                                               ng-model="fechaInicio" datepicker-options="datePicker.FechaOptions" value="{{ date | date: 'dd/MM/yyyy' }}" is-open="open" ng-required="true" close-text="Close" ng-change="validarFechasInicio()" />
+                                        <span ng-show="ValidForm.fechaInicio.$dirty &&  ValidForm.fechaInicio.$invalid" class="error">Formato inv&aacute;lido 'dd/MM/yyyy'</span>
+
+                                              <span class="input-group-btn">
+                                            <button type="button" class="btn btn-success" ng-click="open=true"><i class="glyphicon glyphicon-calendar"></i></button>
+                                        </span>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label>Fecha de t&eacute;rmino:</label>
+                                    <p class="input-group">
+                                        <input name="fechaTermino" placeholder="dd/mm/yyyy" required ng-init="open2=false" type="text" show-button-bar="false" popup-placement="bottom"
+                                               class="form-control fechaOnly" uib-datepicker-popup="dd/MM/yyyy" datepicker-options="datePicker.FechaOptions" ng-model="fechaTermino" ng-change="validarFechas()"
+                                               value="{{ date | date: 'dd/MM/yyyy' }}" is-open="open2" ng-required="true" close-text="Close" />
+                                        <span ng-show="ValidForm.fechaTermino.$dirty &&  ValidForm.fechaTermino.$invalid" class="error">Formato  inv&aacute;lido 'dd/MM/yyyy'</span>
+
+                                            <span class="input-group-btn">
+                                            <button type="button" class="btn btn-success" ng-click="open2=true"><i class="glyphicon glyphicon-calendar"></i></button>
+                                        </span>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label>Ambito:</label>
+                                    <select ng-required="true" name="ambitoConvId" class="form-control" ng-model="ambitoConvId" scrolly style="overflow: scroll"
+                                            ng-options="ambitoConv.ambitoConvId as ambitoConv.nombre for ambitoConv in ambitosConv">
+                                        <option value="" selected>Todos</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+
+                            <!--<div class="row">-->
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <br /><label>Tipo de convenio:</label>
+                                    <div class="check-box-panel">
+                                        <div ng-repeat="e in tiposConvenio">
+                                            <div class="action-checkbox">
+                                                <input id="{{e.convenioId}}" type="checkbox" value="{{e.convenioId}}" ng-checked="selection.indexOf(e.convenioId) > -1" ng-click="toggleSelection(e.convenioId)" />
+                                                <label for="{{e.convenioId}}"></label>
+                                                {{e.nomTipConv}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="selected-items-panel">
+                                        <div ng-repeat="convenioId in selection" class="selected-item">
+                                            {{convenioId}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--</div>-->
+                            <div class="col-lg-5"></div>
+                            <div class="col-lg-3">
+                                <br>
+                                <button type="button" ng-click="obtenerInformacion();buscar=true;"  class="btn btn-success">
+                                    <i class="glyphicon glyphicon-search"></i> Buscar
+                                </button>
+                                <a ng-click="limpiar(); buscar=false;" class="btn btn-primary"
+                                   title="Limpiar" ng-disabled="desabilitarLimpiar">
+                                    Limpiar
+                                </a>
+                            </div>
+                        </div>
+
+                        <!--</form>-->
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <!-- especificar las columnas para las diferentes pantallas -->
+                <div class="x_panel" ng-show="buscar">
+                    <div class="x_title">
+                        <h2>Listado de Alianzas</h2>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content sin-desborde">
+
+                        <div ng-show="aliados.length > 0">
+                            <!--<div class="col-lg-12">-->
+                            <!--<div class="table-responsive" id="tablaexport">-->
+                            <table id="CRreporteAliados" datatable="ng" dt-options="dtOptions" class="table table-hover table-striped table-condensed"
+                                   cellspacing="0" width="100%">
+                                <thead>
+                                    <tr>
+                                        <th data-priority="1">Aliado</th>
+                                        <th>Tipo Org</th>
+                                        <th>N&uacute;m.</th>
+                                        <th>Objeto convenio</th>
+                                        <th>TipoConvenio</th>
+                                        <th>Ambito</th>
+                                        <th>FInicio</th>
+                                        <th>FTermino</th>
+                                        <th>Tipo Acceso</th>
+                                        <th>Areas involucradas</th>
+                                        <th>Firmado Por</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="aliado in aliados">
+                                        <td>{{aliado.nombreAliado}}</td>
+                                        <td>{{aliado.tipoOrganizacion}}</td>
+                                        <td>{{aliado.convenioId}}</td>
+                                        <td>{{aliado.objetoConv}}</td>
+                                        <td>{{aliado.tipoConv}}</td>
+                                        <td>{{aliado.ambito}}</td>
+                                        <td>
+                                            <span class="text" ng-bind="aliado.fInicioConc | date:'dd/MM/yyyy'"></span>
+                                        </td>
+                                        <td>
+                                            <span class="text" ng-bind="aliado.fTerminoConv | date:'dd/MM/yyyy'"></span>
+                                        </td>
+                                        <td>{{aliado.tipoAccesoConv}}</td>
+                                        <td>
+                                            <ul>
+                                                <li ng-repeat="x in aliado.areaConvenio">
+                                                    {{x.unidadOrganizacional.nombreUnidad}}
+                                                </li>
+                                            </ul>
+                                        </td>
+                                        <td>{{aliado.firmaConv}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <!--</div>-->
+                            <!--</div>-->
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div id="aliados" style="display: none;">
+                                    <table id="tab_aliados">
+                                        <thead>
+                                            <tr>
+                                                <th>Aliado</th>
+                                                <th>Tipo Org</th>
+                                                <th>N&uacute;m.</th>
+                                                <th>Objeto convenio</th>
+                                                <th>TipoConvenio</th>
+                                                <th>Ambito</th>
+                                                <th>FInicio</th>
+                                                <th>FTermino</th>
+                                                <th>Tipo Acceso</th>
+                                                <th>Areas involucradas</th>
+                                                <th>Firmado Por</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="aliado in aliados">
+                                                <td>{{aliado.nombreAliado}}</td>
+                                                <td>{{aliado.tipoOrganizacion}}</td>
+                                                <td>{{aliado.convenioId}}</td>
+                                                <td>{{aliado.objetoConv}}</td>
+                                                <td>{{aliado.tipoConv}}</td>
+                                                <td>{{aliado.ambito}}</td>
+                                                <td>
+                                                    <span class="text" ng-bind="aliado.fInicioConc | date:'dd/MM/yyyy'"></span>
+                                                </td>
+                                                <td>
+                                                    <span class="text" ng-bind="aliado.fTerminoConv | date:'dd/MM/yyyy'"></span>
+                                                </td>
+                                                <td>{{aliado.tipoAccesoConv}}</td>
+                                                <td>
+                                                    <ul>
+                                                        <li ng-repeat="x in aliado.areaConvenio">
+                                                            {{x.unidadOrganizacional.nombreUnidad}}
+                                                        </li>
+                                                    </ul>
+                                                </td>
+                                                <td>{{aliado.firmaConv}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <footer>
+                                        <div style='text-align:center;'>P&aacute;gina <span class="pageCounter"></span>/<span class="totalPages"></span></div>
+                                    </footer>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </form>
+    <!--<button type="button" ng-click="globalRegresar();" class="btn btn-primary">
+        <span class="fa fa-arrow-left"></span> Regresar
+    </button>-->
+</div>
+
+

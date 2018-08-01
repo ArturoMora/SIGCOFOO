@@ -1,0 +1,158 @@
+<div class="vista">
+    <div class="page-title">
+        <div class="title_left">
+            <ol class="breadcrumb miga">
+                <li><i class="sg sg-inventario-rh"></i> <a ui-sref="institucioneseducativas">Inventario RH/Consulta de instituciones educativas del personal vigente</a></li>
+            </ol>
+
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Criterios de b&uacute;squeda</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li>
+                            <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="btn-group" ng-init="gradoacademico=0">
+                                <label class="btn btn-outline btn-warning" ng-class="gradoacademico == 0  ? 'btn btn-outline btn-warning' : 'btn btn-outline btn-success'" ng-model="gradoacademico" uib-btn-radio="0" ng-click="consultarinvestigadores()">Todos</label>
+                                <label class="btn btn-outline btn-success" ng-class="gradoacademico == 1  ? 'btn btn-outline btn-warning' : 'btn btn-outline btn-success'" ng-model="gradoacademico" uib-btn-radio="1" ng-click="consultarinvestigadores()">Licenciatura</label>
+                                <label class="btn btn-outline btn-success" ng-class="gradoacademico == 2  ? 'btn btn-outline btn-warning' : 'btn btn-outline btn-success'" ng-model="gradoacademico" uib-btn-radio="2" ng-click="consultarinvestigadores()">Maestria</label>
+                                <label class="btn btn-outline btn-success" ng-class="gradoacademico == 3  ? 'btn btn-outline btn-warning' : 'btn btn-outline btn-success'" ng-model="gradoacademico" uib-btn-radio="3" ng-click="consultarinvestigadores()">Doctorado</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <br>
+
+                        <div class="col-lg-10 col-md-10 col-xs-12">
+                            <label>Instituci&oacute;n a filtrar:</label>
+                            <!--<input class="form-control" ng-model="carrera" placeholder="Introduzca el término a buscar p.e. UNAM, UAEM, CENIDET"></input>-->
+                            <div angucomplete-alt id="selectinstituciones" placeholder="Introduzca el término a buscar p.e. UNAM, UAEM, CENIDET" maxlength="50" pause="100" selected-object="selectedinstitucion"
+                                 local-data="instituciones" textNoResults="No se encontrar&oacute;n resultados"
+                                 search-fields="descripcion" title-field="descripcion" minlength="1"
+                                 input-class="form-control col-md-7 col-xs-12 required" input-name="datalisttestinputinstitucion">
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <br>
+
+                    <div class="row ">
+                        <label class="col-md-12 col-sm-12 col-xs-12">Fecha:</label>
+                        <div class="col-xs-10">
+                            <input show-button-bar="false" ng-minlength="8" maxlength="10" datepicker-options="datePicker06.FechaOptions" uib-datepicker-popup='dd/MM/yyyy'
+                                   popup-placement="bottom" type="text" class="form-control" ng-model="fecha"
+                                   ng-change="cambiafecha()" is-open="open" name="fecha" ng-required="true"
+                                   close-text="Close" />
+                        </div>
+                        <div class="col-xs-2">
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-success" ng-click="open=true"><i class="glyphicon glyphicon-calendar"></i></button>
+                            </span>
+                            <span ng-show="ValidForm.fecha.$dirty &&  ValidForm.fecha.$invalid" class="error">Formato inválido 'dd/MM/yyyy'</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-10 col-md-10 col-xs-12">
+                            <br>
+                            <a class="btn btn-success" ng-click="consultarinvestigadores();">
+                                <i class="glyphicon glyphicon-search"></i> Buscar
+                            </a>
+                            <a class="btn btn-primary" ng-click="reset()" title="Limpiar campos">
+                                Limpiar
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row" ng-show="investigadores.length > 0 ">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Resultados ({{investigadores.length }} coincidencia(s))</h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content sin-desborde">
+                    <div class="row">
+                        <div class="col-md-12 col-lg-12 col-xs-12 sin-desborde">
+                            <table id="CHinstitucioneseducativas" class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" datatable="ng" width="100%"
+                                dt-options="dtOptions">
+                                <thead>
+                                    <tr class="bg-primary">
+                                        <th>N&uacute;m emp</th>
+                                        <th>Nombre de empleado</th>
+                                        <th ng-show="licvisible">Licenciatura / <br ng-if="gradoacademico==0"> Instituci&oacute;n</th>
+                                        <th ng-show="maevisible">Maestria /<br ng-if="gradoacademico==0"> Instituci&oacute;n</th>
+                                        <th ng-show="docvisible">Doctorado /<br ng-if="gradoacademico==0"> Instituci&oacute;n</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="investigador  in investigadores">
+                                        <td ng-click="openProfile(investigador.persona.clavePersona)" title="Detalle de empleado" class="linkTabla">{{investigador.persona.clavePersona}}</td>
+                                        <!--<td>{{investigador.persona.clavePersona}}</td>-->
+                                        <!--<td ng-click="openProfile(investigador.persona.clavePersona)" class="linkTabla">{{investigador.persona.nombreCompleto}}</td>-->
+                                        <td>{{investigador.persona.nombreCompleto}}</td>
+                                        <td ng-show="licvisible">
+                                            <p ng-bind-html="investigador.formacion | grado : 1 :gradoacademico"></p>
+                                        </td>
+                                        <td ng-show="maevisible">
+                                            <p ng-bind-html="investigador.formacion | grado : 2 :gradoacademico"></p>
+                                        </td>
+                                        <td ng-show="docvisible">
+                                            <p ng-bind-html="investigador.formacion | grado : 3 :gradoacademico"></p>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<table id="estadistico" ng-show="mostrar">
+    <thead>
+        <tr class="bg-primary">
+            <th>N&uacute;mero</th>
+            <th>Nombre</th>
+            <th ng-show="licvisible">Licenciatura / <br ng-if="gradoacademico==0"> Instituci&oacute;n</th>
+            <th ng-show="maevisible">Maestria /<br ng-if="gradoacademico==0"> Instituci&oacute;n</th>
+            <th ng-show="docvisible">Doctorado /<br ng-if="gradoacademico==0"> Instituci&oacute;n</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="investigador  in investigadores">
+            <td>{{investigador.persona.clavePersona}}</td>
+            <td>{{investigador.persona.nombreCompleto}}</td>
+            <td ng-show="licvisible">
+                <p ng-bind-html="investigador.formacion | grado : 1 :gradoacademico"></p>
+            </td>
+            <td ng-show="maevisible">
+                <p ng-bind-html="investigador.formacion | grado : 2 :gradoacademico"></p>
+            </td>
+            <td ng-show="docvisible">
+                <p ng-bind-html="investigador.formacion | grado : 3 :gradoacademico"></p>
+            </td>
+        </tr>
+    </tbody>
+</table>

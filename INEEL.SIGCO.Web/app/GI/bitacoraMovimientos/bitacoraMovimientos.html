@@ -1,0 +1,52 @@
+﻿<div class="vista">
+    <div class="page-title">
+        <div class="title_left">
+            <ol class="breadcrumb miga">
+                <li><i class="disabled fa fa-cogs"></i> <a ui-sref="#">Bit&aacute;cora</a></li>
+            </ol>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+                    <form name="ValidacionForm" id="form" class="form-horizontal" ng-show="registros.length>0">
+                        <div class="row">
+                            <div class="form-group">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th class="thAjusteColaboracion">Fecha</th>
+                                            <th style="width:40%">Empleado</th>
+                                            <th>Movimiento</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="registro in registros">
+                                            <td>{{registro.fecha | date:"dd/MM/yyyy h:mm:ss a"}}</td>
+                                            <td><a ng-click="openProfile(registro.clavePersona)" title="Detalle de empleado" class="linkTabla">{{registro.clavePersona}}</a>-{{registro.nombrePersona}}</td>
+                                            <td>{{registro.movimiento}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                    </form>
+                    <div class="alert advertencia" ng-hide="registros.length>0">
+                        No fue posible recuperar bit&aacute;cora para el registro <strong>{{idRegistro}}</strong>
+                    </div>
+                    <div>
+                        <button type="button" ng-click="globalRegresar();" class="btn btn-primary" style="padding-right:15px">
+                            <span class="fa fa-arrow-left"></span> Regresar
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!--registros: {{registros | json}}-->

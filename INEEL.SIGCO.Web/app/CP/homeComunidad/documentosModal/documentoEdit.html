@@ -1,0 +1,103 @@
+﻿<div class="modal-content">
+    <div class="modal-header">
+        Modificar documentos
+        <button type="button" class="close" ng-click="cancel()" data-dissmiss="modal">x</button>
+    </div>
+   
+        <div class="modal-body">
+          
+                <div class="panel">
+                    <div class="panel-body">
+                        <form  ng-submit="save()" novalidate name="documentoEditForm" class="form-horizontal">
+
+                          
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Tipo de documento <span class="required">*</span></label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <select required class="form-control" name="tipodocumento" ng-model="documento.idTipoDocumento" ng-options="obj.tipoDocumentoId as obj.nombre for obj in tipodocumento">
+                                        <option value="">--- Seleccione un tipo de documento ---</option>
+                                    </select>
+                                    <span class="error" ng-show="documentoEditForm.tipodocumento.$invalid && documentoEditForm.$submitted">
+                                        Debes seleccionar una de las opciones listadas
+                                    </span>
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">
+                                    Palabras clave 
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input type="text" ng-model="documento.palabraClave" placeholder="Palabras clave" class="form-control col-md-7 col-xs-12" name="palabraclave" minlength="2" maxlength="150" />
+                                </div>
+                            </div>                                                   
+
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                    Tipo de acceso  <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <select ng-model="documento.tipoAcceso" class="form-control">
+                                        <option ng-repeat="obj in tiposAccesos" ng-selected="seleccionado == obj.valor" value="{{obj.valor}}">{{obj.descripcion}}</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                    Estatus del documento <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <select required ng-model="documento.estado" class="form-control">
+                                        <option ng-repeat="obj in tiposEstatus" ng-selected="estatusseleccionado == obj.valor" value="{{obj.valor}}">{{obj.descripcion}}</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="x_title">
+                                <h2>Documento <small>Tama&ntilde;o m&aacute;ximo por archivo de 8 MB</small></h2>
+                                <div class="clearfix"></div>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                    Archivo  <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <div ng-show="!regFile">
+                                        <span class="fa fa-download"></span>&nbsp;&nbsp;<a href="/Descargas.html#/q/{{documento.adjunto.adjuntoId | encriptar}}" class="linkTabla" target="_blank">Descargar Archivo</a>
+                                        &nbsp;&nbsp;
+                                        <a class="btn btn-danger" title="Eliminar Archivo" ng-click="deleteFile()">
+                                            <i class="glyphicon glyphicon-trash"></i>
+                                        </a>
+                                    </div>
+                                    <div  ng-show="regFile">
+                                        <input class="input-file form-control col-md-7 col-xs-12" type="file" name="filesGral" id="filesGral" data-buttonName="btn-success"
+                                               ng-click="saveIG();" ng-model="filesGral"
+                                               onchange="angular.element(this).scope().getFileDetails(this);" />
+                                    </div>
+                                
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">
+                                    Nombre para el documento <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input type="text" ng-model="documento.nombreDocumento" placeholder="Nombre del documento" class="form-control col-md-7 col-xs-12" minlength="2" maxlength="150" />
+                                </div>
+                            </div>    
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-success"><i class="glyphicon glyphicon-saved"></i>Actualizar</button>
+                                <button type="button" class="btn btn-primary" ng-click="cancel()">Cancelar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>       
+        </div>
+       
+    
+</div>

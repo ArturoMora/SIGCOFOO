@@ -1,0 +1,52 @@
+﻿<div class="vista">
+
+    <div class="page-title">
+        <div class="title_left">
+
+            <ol class="breadcrumb miga">
+                <li><i class="sg sg-software-des"></i> <a >Suscripci&oacute;n</a></li>
+            </ol>
+
+        </div>
+    </div>
+    <div class="clearfix"></div>
+
+    <br />
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+                    <table id="suscripcion" dt-instance="dtInstance" class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" datatable="ng" width="100%" dt-options="dtOptions">
+                        <thead>
+                            <tr>
+                                <th data-priority="1">Descripción</th>
+                                <th>Módulo</th>
+                                <th data-priority="1" style="max-width:20%">Suscrito</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="e in registros">
+                                <td>{{e.nombre}}</td>
+                                <td>{{e.modulo.descripcion}}</td>
+                                <td class="text-center">
+                                    <div class="text-hide">
+                                        {{e.isSuscrito}}
+                                    </div>
+                                    <input type="checkbox" class="btn btn-info btn-circle"
+                                           ng-model="e.isSuscrito" value="{{e.isSuscrito}}" ng-click="saveEstado(e)" />
+
+                                </td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                    <!--registros:{{registros | json}}-->
+                    
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+<!-- end page content -->

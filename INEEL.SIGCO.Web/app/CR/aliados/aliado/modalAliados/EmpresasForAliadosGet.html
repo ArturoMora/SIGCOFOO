@@ -1,0 +1,48 @@
+﻿<div class="modal-content">
+    <div class="modal-header">
+        Agregar aliado
+        <button type="button" class="close" ng-click="cancel()" data-dissmiss="modal">x</button>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-lg-12">
+                <div ng-show="data.length === 0" class="alert alert-danger">
+                    No hay empresas registradas
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div ng-hide="empresas.length === 0">
+                    <div>
+                        <table datatable="ng" class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" width="100%">
+                            <thead>
+                            <tr>
+                                <th>Empresa</th>
+                                <th>Titular</th>
+                                <th>Descripci&oacute;n</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="e in empresas">
+                                <td class="link" style="cursor:pointer" ng-click="EmpresaSeleccionada(e)">
+                                    {{e.nombreEmpresa}}
+                                </td>
+                                <td>
+                                    {{e.nombreTitular}}
+                                </td>
+                                <td>
+                                    {{e.descripcion}}
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <br />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <!--<button type="button" class="btn btn-success" ng-show="cantidad==0" ng-click="crearEmpresa()">Crear empresa</button>-->
+        <button type="button" class="btn btn-cancel" ng-click="cancel()">Cancelar</button>
+    </div>
+</div>

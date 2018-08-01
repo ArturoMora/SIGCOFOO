@@ -1,0 +1,411 @@
+﻿<div class="vista">
+    <div class="page-title">
+        <div class="title_left">
+            <ol class="breadcrumb miga">
+                <li>
+                    <i class="sg sg-clientes"></i>
+                    <a ui-sref="inicioclientes">Clientes</a>
+                </li>
+                <li class="active">Detalle unidad</li>
+            </ol>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="col-md-6">
+                <div ng-show="empresa!=null || full" class="x_panel">
+                    <div class="x_title">
+                        <h2>Empresa</h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li>
+                                <a class="collapse-link">
+                                    <i class="fa fa-chevron-up"></i>
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="clearfix">
+                            <br/>
+                        </div>
+                    </div>
+                    <div ng-if="empresa!=null" class="x_content sin-desborde">
+                        <!--panel izquierdo empresa-->
+                        <div class="col-md-6 col-xs-12 profile_left" >
+                            <div class="profile_img">
+                                <div id="crop-avatar">
+                                    <!-- {{empresa.adjunto64}} -->
+                                    <img ng-if="empresa.adjunto64!=null" class="img-thumbnail" ng-src="data:image/png;base64,{{empresa.adjunto64}}" width="180"
+                                        height="180" title={{empresa.nombreEmpresa}}>
+                                    <img ng-if="empresa.adjunto64==null" src="images/empresa.png" class="img-thumbnail" width="180" height="180" title={{empresa.nombreEmpresa}}>
+                                </div>
+                            </div>
+                            <br/>
+                            <ul class="list-unstyled user_data">
+                                <li>
+                                    <i class="fa fa fa-institution"></i> {{empresa.tipoOrganizacion.nombre}}
+                                </li>
+                                <li ng-if="empresa.nombreTitular">
+                                    <i class="fa fa fa-user"></i> {{empresa.nombreTitular}}
+                                </li>
+                                <li lass="m-top-xs" ng-if="empresa.puesto">
+                                    <i class="fa fa-briefcase user-profile-icon"></i> {{empresa.puesto}}
+                                </li>
+                                <li lass="m-top-xs" ng-if="empresa.correo">
+                                    <i class="fa fa fa-envelope"></i> {{empresa.correo}}
+                                </li>
+                                <li lass="m-top-xs" ng-if="empresa.telefono">
+                                    <i class="fa fa fa-phone" title="Tel"></i> {{empresa.telefono}} | {{empresa.ext}}
+                                </li>
+                                <li lass="m-top-xs" ng-if="empresa.celular">
+                                    <i class="fa fa fa-mobile-phone" title="celular"></i> {{empresa.celular}}
+                                </li>
+                                <li lass="m-top-xs" ng-if="empresa.sitioWeb">
+                                    <i class="fa fa-briefcase user-profile-icon"></i> {{empresa.sitioWeb}}
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- panel derecho empresa-->
+                        <div class="col-md-6 col-xs-12">
+                            <h2 class="detalle">{{empresa.nombreEmpresa}}</h2>
+                            <br/>
+
+                            <div ng-if="empresa.descripcion != null">
+                                <div class="x_title">
+                                    <h2>Descripci&oacute;n </h2>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <ul class="list-unstyled user_data">
+                                    <li class="m-top-xs">
+                                        <i class="fa fa"></i> {{empresa.descripcion}}
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="x_title">
+                                <h2>Domicilio </h2>
+                                <div class="clearfix"></div>
+                            </div>
+                            <ul class="list-unstyled user_data">
+                                <li class="m-top-xs">
+                                    <i class="fa fa"></i>
+                                    <b>Pa&iacute;s</b> {{empresa.paises.nombrePais}}
+                                </li>
+                                <li class="m-top-xs">
+                                    <i class="fa fa"></i>
+                                    <b>Estado</b> {{empresa.estados.nombreEstado}}
+                                </li>
+                                <li class="m-top-xs">
+                                    <i class="fa fa"></i>
+                                    <b>Municipio</b> {{empresa.municipios.nombreMunicipio}}
+                                </li>
+                                <li class="m-top-xs">
+                                    <i class="fa fa"></i>
+                                    <b>Calle</b> {{empresa.calle}}
+                                </li>
+                                <li ng-if="empresa.colonia!=null" class="m-top-xs">
+                                    <i class="fa fa"></i>
+                                    <b>Colonia</b> {{empresa.colonia}}
+                                </li>
+                                <li ng-if="empresa.localidad!=null" class="m-top-xs">
+                                    <i class="fa fa"></i>
+                                    <b>Localidad</b> {{empresa.localidad}}
+                                </li>
+                                <li class="m-top-xs">
+                                    <i class="fa fa"></i>
+                                    <b>CP</b> {{empresa.cp}}
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div ng-if="empresa==null" class="col-xs-12">
+                        <div class="alert advertencia">
+                            No hay informaci&oacute;n sobre alguna empresa relacionada
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="col-md-6">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Datos de la unidad</h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li>
+                                <a class="collapse-link">
+                                    <i class="fa fa-chevron-up"></i>
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <div class="col-xs-12">
+                            <label class="detalle sin-desborde">{{unidadEmpresa.nombreUnidad}}</label><br>
+                            
+                            <div class="detalle_subtitulo" ng-if="unidadEmpresa.contacto!=null">
+                                <i class="fa fa fa-user"></i>
+                                <load-contacto registroid="{{unidadEmpresa.contacto.contactoId}}" descripcion="{{unidadEmpresa.contacto.nombreCompleto}}"/> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="x_panel" ng-show="iniciativasAsignadasEmpresa.length >= 1 || propuestasAsignadosEmpresa.length >=1 || proyectosAsignadosEmpresa.length >=1 || oportunidadNegocioEmpresa.length >=1 || proyectosVigentesEmpresa.length>=1">
+                <div class="x_title">
+                    <h2>Proyectos vigentes</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li>
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content sin-desborde">
+                    <form name="ValidForm" id="form" class="form-horizontal">
+
+                        <div class="clearfix"></div>
+                        <div class="col-lg-12">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <br />
+                                    <div ng-show="proyectosVigentesEmpresa.length === 0" class="alert advertencia">No existen proyectos vigentes asociados a la empresa {{empresa.nombreEmpresa}}</div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div ng-hide="proyectosVigentesEmpresa.length === 0">
+                                        <table id="CRclienteGetConsulta" dt-instance="dtInstance" class="table table-hover table-striped table-condensed dt-responsive"
+                                            cellspacing="0" datatable="ng" width="100%" dt-options="dtOptions">
+                                            <thead>
+                                                <tr>
+                                                    <th style="width:70px" data-priority="1">N&uacute;mero de proyecto</th>
+                                                    <th style="width:210px">Nombre de proyecto</th>
+                                                    <th>Contacto</th>
+                                                    <th>Jefe de proyecto</th>
+                                                    <th>Facturaci&oacute;n</th>
+                                                    <th>Fecha de inicio</th>
+                                                    <th>Fecha de t&eacute;rmino</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-repeat="p in proyectosVigentesEmpresa">
+                                                    <td>
+                                                        <a href="" load-proyectos idproyecto="{{p.proyectoId}}" title="Detalle de proyecto">{{p.proyectoId}}</a>
+                                                    </td>
+                                                    <td>{{p.nombre}}</td>
+                                                    <td>{{p.contacto==null? '' : p.contacto.nombreContacto}}</td>
+                                                    <td>
+                                                        <div ng-if="p.numjefeProyecto!=null">
+                                                            <a style="cursor: pointer;" ng-click="openProfile(p.numjefeProyecto)" title="Detalle de empleado" href="" >{{p.numjefeProyecto}}</a> -
+                                                            {{p.nombreJefeProyecto}}
+                                                        </div>
+                                                    </td>
+                                                    <!-- <td>{{p.costo==null? 'No disponible' : p.costo}}</td> -->
+                                                    <td>Planeada: {{p.facturacionPlaneada | currency : $}}
+                                                        <br/> Real: {{p.facturacionReal | currency : $}}</td>
+                                                    <td>
+                                                        <a class="hidden">{{p.fechaInicio | date:'yyyy-MM-dd'}}</a> {{p.fechaInicio | date:'dd-MM-yyyy'}}</td>
+                                                    <td>{{p.fechaFin | date:'dd-MM-yyyy'}}</td>
+
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+
+            <div class="x_panel" ng-show="iniciativasAsignadasEmpresa.length >= 1 || propuestasAsignadosEmpresa.length >=1 || proyectosAsignadosEmpresa.length >=1 || oportunidadNegocioEmpresa.length >=1 || proyectosVigentesEmpresa.length>=1">
+                <div class="x_title">
+                    <h2>Proyectos hist&oacute;ricos</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li>
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content sin-desborde">
+                    <form name="ValidForm" id="form" class="form-horizontal">
+
+                        <div class="clearfix"></div>
+                        <div class="col-lg-12">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <br />
+                                    <div ng-show="proyectosAsignadosEmpresa.length === 0" class="alert advertencia">No existen proyectos asociados a la empresa {{empresa.nombreEmpresa}}</div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div ng-hide="proyectosAsignadosEmpresa.length === 0">
+                                        <table id="CRclienteGetConsultaproyectosAsignadosEmpresa" dt-instance="dtInstance" class="table table-hover table-striped table-condensed dt-responsive"
+                                            cellspacing="0" datatable="ng" width="100%" dt-options="dtOptions">
+                                            <thead>
+                                                <tr>
+                                                    <th style="width:70px" data-priority="1">N&uacute;mero de proyecto</th>
+                                                    <th style="width:210px">Nombre de proyecto</th>
+                                                    <th>Contacto</th>
+                                                    <th>Jefe de proyecto</th>
+                                                    <th>Monto</th>
+                                                    <th>Fecha de inicio</th>
+                                                    <th>Fecha de t&eacute;rmino</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-repeat="p in proyectosAsignadosEmpresa ">
+                                                    <td>
+                                                        <a href="" load-proyectos idproyecto="{{p.proyectoId}}" title="Detalle de proyecto">{{p.proyectoId}}</a>
+                                                    </td>
+                                                    <td>{{p.nombre}}</td>
+                                                    <td>{{p.contacto.nombreContacto}} {{p.contacto.apellidoPaterno}} {{p.contacto.apellidoMaterno}}</td>
+                                                    <td>
+                                                            <div ng-if="p.numjefeProyecto!=null">
+                                                                    <a style="cursor: pointer;" ng-click="openProfile(p.numjefeProyecto)" title="Detalle de empleado" href="" >{{p.numjefeProyecto}}</a> -
+                                                                    {{p.nombreJefeProyecto}}
+                                                            </div>
+                                                    </td>
+                                                    <td>Planeada: {{p.facturacionPlaneada | currency : $}}
+                                                        <br/> Real: {{p.facturacionReal | currency : $}}</td>
+                                                    <td>
+                                                        <a class="hidden">{{p.fechaInicio | date:'yyyy-MM-dd'}}</a> {{p.fechaInicio | date:'dd-MM-yyyy'}}</td>
+                                                    <td>{{p.fechaFin | date:'dd-MM-yyyy'}}</td>
+
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+            <div class="x_panel" ng-show="iniciativasAsignadasEmpresa.length >= 1 || propuestasAsignadosEmpresa.length >=1 || proyectosAsignadosEmpresa.length >=1 || oportunidadNegocioEmpresa.length >=1 || proyectosVigentesEmpresa.length>=1">
+                <div class="x_title">
+                    <h2>Propuestas</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li>
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content sin-desborde">
+                    <form name="ValidForm" id="form" class="form-horizontal">
+
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div ng-show="propuestasAsignadosEmpresa.length === 0" class="alert advertencia">No existen propuestas asociadas a la empresa {{empresa.nombreEmpresa}}</div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div ng-hide="propuestasAsignadosEmpresa.length === 0">
+                                    <table id="CRclienteGetConsultapropuestasAsignadosEmpresa" dt-instance="dtInstance" class="table table-hover table-striped table-condensed dt-responsive"
+                                        cellspacing="0" datatable="ng" width="100%" dt-options="dtOptions">
+                                        <thead>
+                                            <tr>
+                                                <th style="width:70px" data-priority="1">N&uacute;mero de propuesta</th>
+                                                <th style="width:210px">Nombre de propuesta</th>
+                                                <th>Contacto</th>
+                                                <th>Monto</th>
+                                                <th>Fecha</th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="p in propuestasAsignadosEmpresa">
+                                                <td>
+                                                    <a href="" ng-click="detallePropuestaAsignado(p.propuestaId)" title="Detalles">{{p.propuestaId}}</a>
+                                                </td>
+                                                <td>{{p.titulo}}</td>
+                                                <td>{{p.contacto.nombreContacto}}</td>
+                                                <td>{{p.costos | currency : $}}</td>
+                                                <td>
+                                                    <a class="hidden">{{p.fecha | date:'yyyy-MM-dd'}}</a> {{p.fecha | date:'dd-MM-yyyy'}}</td>
+
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="x_panel" ng-show="iniciativasAsignadasEmpresa.length >= 1 || propuestasAsignadosEmpresa.length >=1 || proyectosAsignadosEmpresa.length >=1 || oportunidadNegocioEmpresa.length >=1 || proyectosVigentesEmpresa.length>=1">
+                <div class="x_title">
+                    <h2>Iniciativas</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li>
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content sin-desborde">
+                    <form name="ValidForm" id="form" class="form-horizontal">
+
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div ng-show="iniciativasAsignadasEmpresa.length === 0" class="alert advertencia">No existen iniciativas asociadas a la empresa {{empresa.nombreEmpresa}}</div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div ng-hide="iniciativasAsignadasEmpresa.length === 0">
+                                    <table id="CRclienteGetConsultainiciativasAsignadasEmpresa" dt-instance="dtInstance" class="table table-hover table-striped table-condensed dt-responsive"
+                                        cellspacing="0" datatable="ng" width="100%" dt-options="dtOptions">
+                                        <thead>
+                                            <tr>
+                                                <th style="width:70px" data-priority="1">N&uacute;mero de iniciativa</th>
+                                                <th style="width:210px">Nombre de iniciativa</th>
+                                                <th>Contacto</th>
+                                                <th>Monto</th>
+                                                <th>Fecha</th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="i in iniciativasAsignadasEmpresa">
+                                                <td>
+                                                    <a href="" ng-click="detalleIniciativaAsignada(i.folioId)" title="Detalles">{{i.folioId}}</a>
+                                                </td>
+                                                <td>{{i.titulo}}</td>
+                                                <td>{{i.contacto.nombreContacto}}</td>
+                                                <td>{{i.costos | currency : $}}</td>
+                                                <td>
+                                                    <a class="hidden">{{p.fecha | date:'yyyy-MM-dd'}}</a>{{i.fecha | date:'dd-MM-yyyy'}}</td>
+
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <button type="button" ng-click="globalRegresar();" class="btn btn-primary">
+        <span class="fa fa-arrow-left"></span> Regresar
+    </button>
+</div>

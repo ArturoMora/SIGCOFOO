@@ -1,0 +1,176 @@
+﻿<div class="vista">
+    <div class="page-title">
+        <div class="title_left">
+            <ol class="breadcrumb miga">
+                <li>
+                    <i class="glyphicon glyphicon-file"></i>
+                    <a ui-sref="creafin">Compendio del factor de innovaci&oacute;n</a>
+                </li>
+            </ol>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Criterios de b&uacute;squeda</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li>
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <form name="Search" id="Search" class="form-horizontal">
+                        <div class="col-xs-12">
+                            <div class="col-xs-12 col-md-6">
+                                <div class="form-group ">
+                                    <label class="col-md-10 col-sm-10 col-xs-10">
+                                        Jefe de proyecto
+                                    </label>
+                                    <div class="col-md-10 col-sm-10 col-xs-10">
+                                        <input type="text" id="s4" class="frmSearch form-control" ng-model="compendio.jefeProyecto" placeholder="Jefe de proyecto"
+                                        />
+                                    </div>
+                                </div>
+                                <!--Form-G-->
+                                <div class="form-group ">
+                                    <label class="col-md-10 col-sm-10 col-xs-10">
+                                        Factor de innovaci&oacute;n
+                                    </label>
+                                    <div class="col-md-10 col-sm-10 col-xs-10">
+                                        <select ng-model="compendio.claveFactorInnovacion" ng-options="factor.id as factor.nombre for factor in factores | orderBy:'nombre'"
+                                            class="form-control">
+                                            <option value="">---Seleccione un factor---</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <!--Form-G-->
+                                <div class="form-group ">
+                                    <label class="col-md-10 col-sm-10 col-xs-10">
+                                        Año de registro
+                                    </label>
+                                    <div class="col-md-10 col-sm-10 col-xs-10">
+                                        <input id="periodo" name="periodo" maxlength="4" ng-maxlength="25" type="text" placeholder="2017" class="frmSearch form-control"
+                                            ng-model="compendio.periodo" ng-pattern="/^[1234567890]{4}$/" />
+                                        <span class="error" ng-show="Search.periodo.$dirty && Search.periodo.$invalid">
+                                            A&ntilde;o a cuatro d&iacute;gitos
+                                        </span>
+                                    </div>
+                                </div>
+                                <!--Form-G-->
+                            </div>
+                            <div class="col-xs-12 col-md-6">
+                                <div class="form-group ">
+                                    <label class="col-xs-12">
+                                        Proyecto
+                                    </label>
+                                    <div class="col-xs-10">
+                                        <input type="text" class="form-control" placeholder="Buscar por proyecto" id="usr" name="proyecto" ng-model="compendio.proyectoNombre"
+                                            disabled>
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <a class="btn btn-success" ng-click="openProyecto()" title="Buscar por proyecto">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                        </a>
+                                    </div>
+                                </div>
+                                <!--Form-G-->
+                                <div class="form-group ">
+                                    <label class="col-md-12 col-sm-12 col-xs-12">
+                                        Gerencia
+                                    </label>
+                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                        <div uo-modal2 ng-model="compendio.unidadOselect" ng-change="{{compendio.unidadOrganizacionalId = compendio.unidadOselect.claveUnidad}}"
+                                            requerido="false" fecha=""></div>
+                                    </div>
+                                </div>
+                                <!--Form-G-->
+
+                            </div>
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="col-xs-12 col-md-6">
+                                <div class="form-group ">
+                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                        <button type="button" class="btn btn-success" ng-disabled="Search.periodo.$dirty && Search.periodo.$invalid" ng-click="buscar()"
+                                            title="buscar">
+                                            <span class="glyphicon glyphicon-search"></span> Buscar
+                                        </button>
+                                        <button type="button" ng-click="reset()" class="btn btn-primary">
+                                            Limpiar
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12">
+            <div class="x_panel" ng-show="busqueda">
+                <div class="x_content sin-desborde">
+                    <form name="ValidForm" id="form" class="form-horizontal">
+                        <div class="col-xs-12">
+                            <!--<div ng-show="registros.length === 0 " class="alert advertencia">
+                                No hay registros de CREAFIN.
+                            </div>-->
+                            <div>
+                                <table id="GIcreafin" class="table table-hover table-striped table-condensed dt-responsive" dt-column-defs="dtColumnDefs"
+                                    cellspacing="0" dt-options="dtOptions" datatable="ng">
+                                    <thead>
+                                        <tr>
+                                            <th data-priority="1">N&uacute;m proyecto</th>
+                                            <!-- <th>Nombre de<br />proyecto</th> -->
+                                            <th>Producto / Servicio
+                                                <br /> innovador</th>
+                                            <th>Gerencia</th>
+                                            <th>Jefe de proyecto</th>
+                                            <th>Año de registro</th>
+                                            <th>Factor
+                                                <br />innovaci&oacute;n final</th>
+                                            <th ng-if="idRol==1028 || idRol==4 || idRol==5 || idRol==16">
+                                                Detalles de la solicitud
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="registro in registros" id="{{registro.ideaInnovadoraId}}">
+                                            <td href="" load-proyectos idproyecto="{{registro.proyectoId}}" title="Detalle de proyecto">{{registro.proyectoId}}</td>
+                                            <!--<td >{{registro.proyectoId}}</td>-->
+                                            <!-- <td>{{registro.proyecto}}</td> -->
+                                            <td>
+                                                <a ng-click="setVariable('busquedaCompendio',compendio);setGlobalID(registro.productoId)" ui-sref="buscarproductoInnovadorDetails"
+                                                    title="Detalle" class="linkTabla">{{registro.nombreTecnico}}</a>
+                                            </td>
+                                            <td>{{registro.unidadOrganizacional}}</td>
+                                            <td>
+                                                <a ng-click="openProfile(registro.cveJefeProyecto)" title="Detalle de empleado" class="linkTabla">{{registro.cveJefeProyecto}}</a>-{{registro.jefeProyecto}}
+                                            </td>
+                                            <td>{{registro.fechaRegistro| date:"yyyy"}}</td>
+                                            <td>{{registro.factorInnovacion}}</td>
+                                            <td class="text-center" style="max-width:100px" ng-if="idRol==1028 || idRol==4 || idRol==5 || idRol==16">
+                                                <a ng-click="setVariable('busquedaCompendio', compendio);setGlobalID(registro.productoId)" style="background-color: #286090 !important;"
+                                                    ui-sref="solicitudFIDetalles" title="Ver detalles de la solicitud" class="btn btn-success"
+                                                    href="#/detallesSolicitudFI/">
+                                                    <i class="fa fa-search-plus"></i>
+                                                </a>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--{{registros | json}}-->

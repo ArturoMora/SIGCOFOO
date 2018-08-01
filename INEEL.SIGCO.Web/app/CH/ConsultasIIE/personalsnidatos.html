@@ -1,0 +1,161 @@
+<div class="vista">
+    <div class="page-title">
+        <div class="title_left">
+            <ol class="breadcrumb miga">
+                <li>
+                    <i class="sg sg-inventario-rh"></i>
+                    <a ui-sref="personalsnidatos">Inventario RH/Consulta de datos de personal de investigaci&oacute;n en SNI</a>
+                </li>
+            </ol>
+
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Criterios de b&uacute;squeda</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li>
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <form name="ValidForm" id="form" class="form-horizontal">
+                        <div class="col-xs-12">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <label>Fecha:</label>
+                                    <div class="col-xs-12">
+                                        <div class="row">
+                                            <div class="col-xs-10">
+                                                <input show-button-bar="false" ng-minlength="8" maxlength="10" datepicker-options="datePicker06.FechaOptions" uib-datepicker-popup='dd/MM/yyyy'
+                                                    popup-placement="bottom" type="text" class="form-control" ng-model="fecha"
+                                                    ng-change="cambiafecha()" is-open="open" name="fecha" ng-required="true"
+                                                    close-text="Close" />
+                                            </div>
+                                            <div class="col-xs-2">
+                                                <span class="input-group-btn">
+                                                    <button type="button" class="btn btn-success" ng-click="open=true">
+                                                        <i class="glyphicon glyphicon-calendar"></i>
+                                                    </button>
+                                                </span>
+                                                <span ng-show="ValidForm.fecha.$dirty &&  ValidForm.fecha.$invalid" class="error">Formato inválido 'dd/MM/yyyy'</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <label>Nivel organizacional:</label>
+                                    <select class="form-control" ng-model="divisionselected" ng-disabled="checkboxModel.value" onchange="privateResetDatatable('estadistico')"
+                                        ng-options="division.nombreUnidad for division in divisiones">
+                                        <option></option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="col-xs-12 col-md-6">
+                                <div class="form-group ">
+                                    <a class="btn btn-success" ng-click="consultarpersonalsni();">
+                                        <i class="glyphicon glyphicon-search"></i> Buscar
+                                    </a>
+                                    <a class="btn btn-primary" ng-click="reset()" title="Limpiar campos">
+                                        Limpiar
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" ng-show="investigadores.length > 0 ">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Resultados</h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content sin-desborde">
+                    <div class="row">
+                        <!--TABLA QUE VE EL USUARIO-->
+                        <div class="col-xs-12">
+                            <div>
+                                <table id="tablaSoloLectura" datatable="ng" dt-options="dtOptions" class="table table-hover table-striped table-condensed dt-responsive nowrap">
+                                    <thead>
+                                        <tr class="bg-primary">
+                                            <th>N&uacute;mero</th>
+                                            <th>Nombre</th>
+                                            <th>Unidad</th>
+                                            <th>Nombramiento</th>
+                                            <th>Inicio</th>
+                                            <th>Fin</th>
+                                            <th>CVU</th>
+                                            <th>&Aacute;rea de conocimiento</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="investigador in investigadores">
+                                            <td>{{investigador.persona.clavePersona}}</td>
+                                            <td nowrap ng-click="openProfile(investigador.persona.clavePersona)" title="Detalle de empleado" class="linkTabla">{{investigador.persona.nombreCompleto}}</td>
+                                            <td>{{investigador.persona.unidadOrganizacional.nombreUnidad}}</td>
+                                            <td>{{investigador.sni.nivelSNI.descripcion}}</td>
+                                            <td>{{investigador.sni.fechaInicioNombramiento | date : "dd/MM/y" }}</td>
+                                            <td>{{investigador.sni.fechaTerminoNombramiento | date : "dd/MM/y" }}</td>
+                                            <td>{{investigador.sni.numeroCVU}}</td>
+                                            <td>{{investigador.sni.areaSNI.descripcion}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--TABLA QUE SE IMPRIME-->
+                    <div class="row" style="visibility: hidden;">
+                        <div class="col-xs-12">
+                            <div>
+                                <table id="estadistico" class="table table-hover table-striped table-condensed dt-responsive nowrap">
+                                    <thead>
+                                        <tr class="bg-primary">
+                                            <th>N&uacute;mero</th>
+                                            <th>Nombre</th>
+                                            <th>Unidad</th>
+                                            <th>Nombramiento</th>
+                                            <th>Inicio</th>
+                                            <th>Fin</th>
+                                            <th>CVU</th>
+                                            <th>&Aacute;rea de conocimiento</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="investigador in investigadores">
+                                            <td>{{investigador.persona.clavePersona}}</td>
+                                            <td nowrap ng-click="openProfile(investigador.persona.clavePersona)" title="Detalle de empleado" class="linkTabla">{{investigador.persona.nombreCompleto}}</td>
+                                            <td>{{investigador.persona.unidadOrganizacional.nombreUnidad}}</td>
+                                            <td>{{investigador.sni.nivelSNI.descripcion}}</td>
+                                            <td>{{investigador.sni.fechaInicioNombramiento | date : "dd/MM/y" }}</td>
+                                            <td>{{investigador.sni.fechaTerminoNombramiento | date : "dd/MM/y" }}</td>
+                                            <td>{{investigador.sni.numeroCVU}}</td>
+                                            <td>{{investigador.sni.areaSNI.descripcion}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>

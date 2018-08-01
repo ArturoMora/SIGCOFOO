@@ -1,0 +1,52 @@
+﻿<div class="modal-content sin-desborde">
+    <div class="modal-header">
+        <button type="button" class="close"  confirma-regresar="cancel()" state-form="formEditCompromiso" data-dissmiss="modal">
+            <i class="glyphicon glyphicon-remove"></i>
+        </button>
+        <div class="col-xs-1"></div>
+        <div>
+            <h3>
+                Editar compromiso
+            </h3>
+        </div>
+
+
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <form ng-submit="actualizarRegistro()" name="formEditCompromiso" id="formEditCompromiso" class="form-horizontal">
+                <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                        Descripci&oacute;n del compromiso<span class="required"> *</span>
+                    </label>
+                    <div class="col-md-6 col-sm-6 col-lg-6">
+                        <textarea required class="form-control" ng-model="meta" maxlength="500"></textarea>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                        Estado<span class="required"> *</span>
+                    </label>
+                    <div class="span-label  col-md-6 col-sm-6 col-xs-12">
+                        <select required class="form-control" ng-model="estadoMeta">
+                            <option>Vigente</option>
+                            <option>Terminado</option>
+                            <option>Suspendido</option>
+                            <option>Cancelado</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">
+                        <i class="glyphicon glyphicon-saved"></i> Actualizar
+                    </button>
+                </div>
+            </form>
+        </div>
+
+
+    </div>
+    
+
+</div>

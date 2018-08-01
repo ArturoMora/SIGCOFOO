@@ -1,0 +1,86 @@
+.angular-ui-tree {
+}
+
+.angular-ui-tree-empty {
+    border: 1px dashed #bbb;
+    min-height: 100px;
+    background-color: #e5e5e5;
+    background-image: -webkit-linear-gradient(45deg, #fff 25%, transparent 25%, transparent 75%, #fff 75%, #fff), -webkit-linear-gradient(45deg, #fff 25%, transparent 25%, transparent 75%, #fff 75%, #fff);
+    background-image: -moz-linear-gradient(45deg, #fff 25%, transparent 25%, transparent 75%, #fff 75%, #fff), -moz-linear-gradient(45deg, #fff 25%, transparent 25%, transparent 75%, #fff 75%, #fff);
+    background-image: linear-gradient(45deg, #fff 25%, transparent 25%, transparent 75%, #fff 75%, #fff), linear-gradient(45deg, #fff 25%, transparent 25%, transparent 75%, #fff 75%, #fff);
+    background-size: 60px 60px;
+    background-position: 0 0, 30px 30px;
+    pointer-events: none;
+}
+
+/*Fondo del arbol en general*/
+.angular-ui-tree-nodes {
+    position: relative;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.tree-node {
+    border: 1px solid #dae2ea;
+    border-radius: 7px 7px 7px 7px;
+    background: #f8faff;
+    color: #7c9eb2;
+}
+
+  .treeHover:hover {
+    color: #2d80ae;
+    background: #f4f6f7;
+    border-color: #dce2e8;
+  }
+  
+
+/*Color de fondo de la tupla de los nodos hijos*/
+.angular-ui-tree-nodes .angular-ui-tree-nodes {
+    padding-left: 20px;
+}
+
+/*Elementos en general del arbol*/
+.angular-ui-tree-node, .angular-ui-tree-placeholder {
+    position: relative;
+    margin: 0;
+    padding: 0;
+    min-height: 20px;
+    line-height: 20px;
+}
+
+/*Cuando no hay ningun nodo**/
+.angular-ui-tree-hidden {
+    display: none;
+}
+
+/*Muestra las lineas punteadas de un nodo*/
+.angular-ui-tree-placeholder {
+    background: #ecf6fc;
+    border: 2px dashed #bed2db;
+    margin: 5px 0;
+    padding: 0;
+    min-height: 30px;
+}
+
+/*interaccion con los nodos*/
+.angular-ui-tree-handle {
+    cursor: move;
+    text-decoration: none;
+    font-weight: bold;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    min-height: 20px;
+    line-height: 20px;
+}
+
+/*Cuando el usuario interactua con un nodo para moverlo de lugar**/
+.angular-ui-tree-drag {
+    position: absolute;
+    pointer-events: none;
+    z-index: 999;
+    opacity: .8;
+    
+}
+

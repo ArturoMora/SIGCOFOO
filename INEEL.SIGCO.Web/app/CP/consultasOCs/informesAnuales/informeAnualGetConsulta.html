@@ -1,0 +1,198 @@
+﻿<div class="vista">
+    <div class="page-title">
+        <div class="title_left">
+            <ol class="breadcrumb miga">
+                <li><i class="fa fa-file-text-o"></i> <a ui-sref="ConsultaInformeAnual">Consulta/Informes anuales</a></li>
+            </ol>
+        </div>
+    </div>
+    <!-- form search-->
+    <div class="x_panel">
+        <div class="x_title">
+            <h2>Criterios de b&uacute;squeda</h2>
+            <ul class="nav navbar-right panel_toolbox">
+                <li>
+                    <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                </li>
+            </ul>
+            <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+            <form name="Search" id="Search" class="form-horizontal">
+                <div class="col-xs-12">
+                    <div class="col-xs-12 col-md-6">
+                        <div class="form-group ">
+                            <label class="col-md-12 col-sm-12 col-xs-12">
+                                Nombre de la comunidad
+                            </label>
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <input type="text" id="s0" class="frmSearch form-control"
+                                       ng-model="busq.nombreComunidad" placeholder="Nombre de la comunidad" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-12 col-sm-12 col-xs-12">
+                                L&iacute;nea de investigaci&oacute;n
+                            </label>
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <select class="form-control" name="medioComunicacion" ng-model="busq.idLineaInv" ng-options="linea.lineaDesarrolloTecnologicoId as linea.nomLinDesTec for linea in lineas">
+                                    <option value="">--- Selecciona l&iacute;nea de investigaci&oacute;n ---</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            <label class="col-md-12 col-sm-12 col-xs-12">
+                                Autores
+                            </label>
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <input type="text" id="s5" class="frmSearch form-control"
+                                       ng-model="busq.nombrePersona" placeholder="Autores" />
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                                <label class="col-md-10 col-sm-10 col-xs-10">
+                                    Palabras clave
+                                </label>
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <input type="text" id="s4" class="frmSearch form-control"
+                                           ng-model="busq.palabrasClave" placeholder="Palabras clave" />
+                                </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-md-6">
+                        <div class="clearfix"></div><br />
+                        <label class="col-xs-12">Informes con fecha de registro entre el siguiente rango de fechas: </label>
+
+                        <div class="form-group">
+                            <label class="col-md-12 col-sm-12 col-xs-12">Inicio </label>
+                            <div class="col-xs-12">
+                                <div class="row">
+                                    <div class="col-xs-10">
+                                        <!--<p class="input-group">-->
+                                        <input placeholder="dd/mm/yyyy" show-button-bar="false" uib-datepicker-popup='dd/MM/yyyy' ng-minlength="8" maxlength="10" datepicker-options="datePicker.FechaOptions" popup-placement="bottom" type="text" class="form-control fechaOnly"
+                                               ng-model="busq.fechaInicioComparacion" is-open="open" close-text="Close" />
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-success" ng-click="open=true; "><i class="glyphicon glyphicon-calendar"></i></button>
+                                        </span>
+                                        <!--</p>-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-12 col-sm-12 col-xs-12">T&eacute;rmino </label>
+                            <div class="col-xs-12">
+                                <div class="row">
+                                    <div class="col-xs-10">
+                                        <input placeholder="dd/mm/yyyy" show-button-bar="false" uib-datepicker-popup='dd/MM/yyyy' ng-minlength="8" maxlength="10" datepicker-options="datePicker.FechaOptions" popup-placement="bottom" type="text" class="form-control fechaOnly"
+                                               ng-model="busq.fechaFinalComparacion" is-open="open2" close-text="Close" />
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-success" ng-click="open2=true"><i class="glyphicon glyphicon-calendar"></i></button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-12">
+                        <div class="col-xs-12 col-md-6">
+                            <div class="form-group ">
+                                <a class="btn btn-success" ng-click="buscar()" title="Buscar">
+                                    <span class="glyphicon glyphicon-search"></span> Buscar
+                                </a>
+                                <a class="btn btn-primary" ng-click="reset()" title="Limpiar campos">
+                                    Limpiar
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- nuevos casos-->
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="x_panel" ng-show="busqueda">
+                <div class="x_content sin-desborde">
+                    <div data-ng-hide="authentication.isAuth">
+                        No tiene permisos para ingresar a esta secci&oacute;n.<br /> Usuario no autentificado
+                    </div>
+                    <div data-ng-show="authentication.isAuth">
+                        <!--<div ng-show="informes.length === 0" class="alert advertencia">
+                            No hay registros
+                        </div>-->
+                        <div>
+                            <table datatable="ng" id="TablaInformeAnual"  class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" width="100%">
+                                <thead>
+                                    <tr>
+                                        <th>Comunidad</th>
+                                        <th data-priority="1">Nombre</th>
+                                        <th>A&ntilde;o correspondiente</th>
+                                        <th>L&iacute;nea de investigaci&oacute;n</th>
+                                        <th>Palabras clave</th>
+                                        <th>Autores</th>
+                                        <th>Fecha elaboraci&oacute;n</th>
+                                        <th data-priority="3" class="thCeldaB text-center">Documento adjunto</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="e in informes" id="{{e.informeId}}">
+                                    <td>{{::e.comunidad.descripcion}}</td>
+                                    <td>{{::e.nombre}}</td>
+                                    <td>{{::e.anioCorrespondiente}}</td>
+                                    <td>{{::e.lineaDesarrolloTecnologico.nomLinDesTec}}</td>
+                                    <td>{{::e.palabrasClave==null? 'Sin palabras clave':e.palabrasClave}}</td>
+                                    <td>
+                                        <ul ng-if="e.personas.length>0" ng-repeat="f in e.personas" style="margin-left:0; padding-left:0;">
+                                            <li>
+                                                <a class="thCeldaB text-left link" style="cursor: hand;cursor: pointer;" ng-click="openProfile(f.clavePersona)" title="Detalle de empleado"> {{f.clavePersona}}</a>
+                                                - {{f.nombreCompleto}}
+                                            </li>
+                                        </ul>
+                                        <!--<span ng-if="e.personas.length>0" ng-repeat="f in e.personas">
+                                            {{::f.nombreCompleto}}<br />
+                                        </span>-->
+                                        <span ng-if="e.personas.length==0">
+                                            Sin autores
+                                        </span>
+                                    </td>
+                                    <td>{{e.fechaRegistro | date:"dd/MM/yyyy"}}</td>
+                                    <td class="thCeldaB text-center">
+                                        <div ng-if="e.adjuntoId!=null && e.tipoAcceso">
+                                            <a title="Descargar" href="/Descargas.html#/q/{{e.adjuntoId| encriptar}}" target="_blank" class="btn btn-success">
+                                                <i class="glyphicon glyphicon-download-alt"></i>
+                                            </a>
+
+                                        </div>
+                                        <div ng-if="e.adjuntoId==null">
+                                            Sin adjunto
+                                        </div>
+                                        <div ng-if="e.adjuntoId!=null && e.tipoAcceso==false">
+                                            Acceso restringido
+                                        </div>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <br /><br />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+
+        </div>
+    </div>
+   
+</div>

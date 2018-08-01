@@ -1,0 +1,159 @@
+﻿<div class="vista">
+    <div class="page-title">
+        <div class="title_left">
+            <ol class="breadcrumb miga">
+                <li>
+                    <i class="disabled fa fa-users"></i>
+                    <a ui-sref="comunidadesGet">Comunidades de pr&aacute;ctica</a>
+                </li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="clearfix"></div>
+    <br />
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="x_panel">
+                <nav class="navbar pestanias_cp">
+                    <div class="container-fluid">
+                        <ul class="nav navbar-nav" style="text-align: center;">
+                            <li class="pestania_inactiva">
+                                <a ui-sref="comunidadesGet">Mis comunidades de pr&aacute;ctica
+                                    <span class="badge bg-green">{{numeroComunidades}}</span>
+                                </a>
+                            </li>
+                            <li class="pestania_activa">
+                                <a ui-sref="otrascomunidades" style="color:#ffffff !important">Comunidades INEEL
+                                    <span class="badge bg-green">{{comunidades.length}}</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+
+                <br />
+                <!--Menu para filtrar y agregar comunidades-->
+                <div class="col-xs-12 col-md-12 col-lg-12" ng-show="comunidades.length > 0">
+                    <div class="col-md-2 col-lg-2 col-sm-2">
+
+                    </div>
+                    <div class="col-md-6 col-lg-6 col-sm-6">
+                        <div class="col-md-4 col-lg-4 col-xs-4 text-right">
+                            <label class="control-label">
+                                Filtrar
+                            </label>
+                        </div>
+                        <div class="col-md-8 col-lg-8 col-xs-8">
+                            <input type="text" class="form-control " ng-model="search">
+                        </div>
+
+                    </div>
+                    <div class="col-md-4 col-lg-4 col-sm-4 col-xs-4 ">
+                        <!-- <div class="col-lg-8"></div> -->
+                        <div ng-if="rol.administrador" class="text-right">
+                            <button type="button" ui-sref="comunidadesAdd" class="btn btn-success">
+                                <span class="glyphicon glyphicon-plus"></span> Agregar comunidad
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!--End menu para filtrar y agregar comunidades-->
+
+                <div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content sin-desborde">
+                    <div data-ng-hide="authentication.isAuth">
+                        No tiene permisos para ingresar a esta secci&oacute;n.
+                        <br /> Usuario no autentificado
+                    </div>
+                    <div data-ng-show="authentication.isAuth">
+                        <div ng-show="comunidades.length === 0" class="alert advertencia">
+                            No hay registros
+                        </div>
+
+                        <div ng-show="comunidades.length > 0">
+                            <div ng-repeat="obj in comunidades | filter :ignoreAccents: search" class="col-sm-3 col-md-4 col-lg-3">
+
+
+                                <div class="row x_panel">
+                                    <!--<div class="">-->
+                                    <div ng-if="rol.administrador" class="x_title">
+                                        <div class="pull-right">
+                                            <input type="checkbox" class="btn btn-info btn-circle" title="&iquest;Est&aacute activo?" ng-model="obj.comunidad.estado"
+                                                value="{{obj.comunidad.estado}}" ng-change="saveEstado(obj.comunidad)" />
+                                            <a class="btn btn-warning" ui-sref="comunidadesEdit({ id: obj.comunidad.comunidadId })" title="Editar">
+                                                <i class="glyphicon glyphicon-pencil"></i>
+                                            </a>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </div>
+
+
+                                    <div class="row" ui-sref="homeComunidad({ id: obj.comunidad.comunidadId })" style="cursor:pointer">
+                                        <!--<div class="contenedorFotoChicaCP">-->
+                                        <img width="100%" height="180" ng-show="obj.comunidad.adjunto64 === null" src="images/logoComunidad.png" alt="Base64 encoded image"
+                                            class="centered-and-cropped" />
+                                        <img width="100%" height="180" style="background-color: #f2e8e8" ng-show="obj.comunidad.adjunto64 != null" ng-src="data:image/png;base64,{{obj.comunidad.adjunto64}}"
+                                            title="" class="centered-and-cropped">
+                                        <!--</div>-->
+
+
+
+
+                                        <div class="row">
+                                            <ul class="nav navbar-nav navbar-collapse">
+                                                <li role="presentation">
+                                                    <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false" title="Número de miembros de la comunidad">
+                                                        <i class="fa fa-user" style="font-size:18px;color:black"></i>
+                                                        <span class="badge bg-green">{{obj.noMiembros}}</span>
+                                                    </a>
+                                                </li>
+                                                <li role="presentation">
+                                                    <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false" title="Número de expertos con los que cuenta la comunidad">
+                                                        <i class="fa fa-users" style="font-size:18px;color:black"></i>
+                                                        <span class="badge bg-green">{{obj.noExpertos}}</span>
+                                                    </a>
+                                                </li>
+                                                <li role="presentation">
+                                                    <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false" title="Número de documentos que la comunidad ha publicado">
+                                                        <i class="fa fa-file" style="font-size:18px;color:black"></i>
+                                                        <span class="badge bg-green">{{obj.noDocumentos}}</span>
+                                                    </a>
+                                                </li>
+                                                <li role="presentation">
+                                                    <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false" title="Número de sitios de interes que la comunidad ha publicado">
+                                                        <i class="fa fa-external-link" style="font-size:18px;color:black"></i>
+                                                        <span class="badge bg-green">{{obj.noSitios}}</span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+
+                                        <div>
+                                            <div style="height: 50px;word-wrap: break-word;">
+                                                <h4 style="color: #1ABB9C;" title="{{obj.comunidad.descripcion}}"> {{obj.comunidad.descripcion | limitTo:"30"}}...</h4>
+                                            </div>
+                                            <div title="{{obj.comunidad.mision}}">
+                                                {{obj.comunidad.mision | limitTo:"30" }}...
+                                            </div>
+                                            <div>
+                                                <!--{{obj.fechaRegistro}}-->
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+
+
+                                    <!--</div>-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

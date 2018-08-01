@@ -1,0 +1,273 @@
+﻿<!-- page content -->
+<div class="vista">
+
+    <div class="page-title">
+        <div class="title_full">
+
+            <ol class="breadcrumb miga">
+                <li>
+                    <i class="sg sg-articulos-ponencia-cap3"></i>
+                    <a ui-sref="Publicaciones">Art&iacute;culos/Mis art&iacute;culos</a>
+                </li>
+                <li class="active">Detalles</li>
+            </ol>
+
+        </div>
+    </div>
+
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-8 col-sm-8 col-xs-12">
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+                    <label class="detalle col-xs-12 " title="Nombre">
+                        {{registro.tituloPublicacion}}
+                    </label>
+                    <label class="cont emc col-xs-12 colorTit">
+                        {{registro.ambito.descripcion}} / {{registro.nivelPublicacion.descripcion}}
+                    </label>
+                    <label class="cont col-xs-12">
+                        <strong>Registrado por</strong> {{registro.nombrePersona}}
+                    </label>
+
+                    <label class="tit col-xs-12">
+                        Estado del art&iacute;culo
+                    </label>
+                    <label class="cont col-xs-12">
+                        {{registro.estadoPublicacion.descripcion}}
+                    </label>
+
+                    <label class="tit col-xs-12">
+                        Fecha de aceptaci&oacute;n
+                    </label>
+                    <label class="cont col-xs-12">
+                        {{registro.fechaPublicacion | date: 'dd/MM/yyyy'}}
+                    </label>
+
+
+
+
+                    <label class="tit col-xs-12">
+                        P&aacute;ginas
+                    </label>
+                    <label class="cont col-xs-12">
+                        <span class="text">{{registro.paginasde}}</span>-<span class="text">{{registro.paginashasta}}</span>
+                    </label>
+
+                    <label class="tit col-xs-12">
+                        Palabras clave
+                    </label>
+                    <label class="cont col-xs-12">
+                        {{registro.palabrasClave}}
+                    </label>
+                    <label class="tit col-xs-12">
+                        Proyecto
+                    </label>
+                    <label class="cont col-xs-12" ng-if="registro.proyectoId!=null">
+                        <!--{{registro.proyectoNombre}}-->
+                        <a href="" load-proyectos idproyecto="{{registro.proyectoId}}" title="Detalle de proyecto">{{registro.proyectoId}}</a>- {{registro.proyectoNombre}}
+                    </label>
+                    <label class="cont col-xs-12" ng-if="registro.proyectoId==null">
+                        Dato no disponible
+                    </label>
+                </div>
+            </div>
+
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+                    <div class="x_title">
+                        <h2>Autores</h2>
+                        <div class="clearfix"></div>
+                    </div>
+
+                    <label>Autores internos</label><br />
+                    <div ng-show="autoriie.length === 0" class="alert advertencia">
+                        No hay registros de autores internos
+                    </div>
+
+                    <table class="table table-hover" ng-show="autoriie.length > 0">
+                        <thead>
+                            <tr>
+                                <th class="thAjuste">N&uacute;m emp</th>
+                                <th>Nombre de empleado</th>
+                                <th class="thAjusteColaboracion text-center">Orden de autor</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="registro in autoriie">
+                                <!--<td>{{registro.clavePersona}}</td>-->
+                                <td ng-click="openProfile(registro.clavePersona)" title="Detalle de empleado" class="linkTabla">{{registro.clavePersona}}</td>
+                                <td>{{registro.nombreCompleto}}</td>
+                                <td class="text-center">{{registro.contribucion}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+
+                    <label>Autores externos</label><br />
+                    <div ng-show="autorexterno.length === 0" class="alert advertencia">
+                        No hay registros de autores externos
+                    </div>
+                    <table class="table table-hover" ng-show="autorexterno.length > 0">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Organizaci&oacute;n</th>
+                                <th class="text-center">Orden de autor</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="registro in autorexterno">
+                                <td>{{registro.nombre}}</td>
+                                <td>{{registro.institucion}}</td>
+                                <td class="text-center thAjusteColaboracion">{{registro.contribucion}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+
+
+
+
+                </div>
+            </div>
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+                    <div class="x_title">
+                        <h2>Observaciones </h2>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="cont col-xs-12">
+                            {{registro.nota}}
+                        </label>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 col-sm-4 col-xs-12">
+
+
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Evidencia</h2>
+                    <div class="clearfix"></div>
+                </div>
+
+
+
+
+                <div class="form-group">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Archivo(s) adjunto(s):</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span class="fa fa-download"></span>&nbsp;&nbsp;<a href="/Descargas.html#/q/{{registro.adjunto.adjuntoId | encriptar}}" class="linkTabla" target="_blank">Descargar Archivo </a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+
+
+
+
+                <div class="form-group">
+                    <div class="alert advertencia col-xs-12" ng-if="registro.estadoFlujoId==2">
+                        <span class="glyphicon glyphicon-info-sign"></span> El registro se encuentra en <strong> Revisi&oacute;n </strong>
+                    </div>
+                </div>
+
+                <!--<div class="form-group">
+            <div class="alert aprobado col-xs-12" ng-if="registro.estadoFlujoId==3">
+                <span class="glyphicon glyphicon-info-sign"></span> El registro est&aacute;: <strong> {{registro.estadoFlujo.descripcion}} </strong>
+            </div>
+        </div>-->
+
+
+                <div class="form-group">
+                    <div class="alert aprobado col-xs-12" ng-if="registro.estadoFlujoId==3">
+                        <span class="glyphicon glyphicon-info-sign"></span><strong>
+                            Protegido por la Ley Federal del Derecho de Autor.<br />
+                            Material solo para fines de ense&ntilde;anza o investigaci&oacute;n cient&iacute;fica.
+                            INEEL
+                        </strong>
+
+                        <div class="form-group">
+                            <div class="alert advertencia" ng-if="registro.estadoFlujoId!=2 && registro.estadoFlujoId!=3 ">
+                                <span class="glyphicon glyphicon-info-sign"></span> El registro est&aacute;: <strong> {{registro.estadoFlujo.descripcion}} </strong>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+            <div class="x_panel sin-desborde">
+                <div class="x_title">
+                    <h2>Revista</h2>
+                    <div class="clearfix"></div>
+                </div>
+
+                <label class="titFirst col-xs-12 detalle_subtitulo">
+                    {{registro.revista.revistaNombre}}
+                </label>
+                <label class="cont col-xs-12">
+                    <strong>ISSN </strong> {{registro.revista.issn=='' || registro.revista.issn==NULL? 'No disponible':registro.revista.issn }}
+                </label>
+
+                <label class="tit col-xs-12">
+                    Volumen
+                </label>
+                <label class="cont col-xs-12">
+                    {{registro.volumen}}
+                </label>
+
+
+                <label class="tit col-xs-12">
+                    N&uacute;mero
+                </label>
+                <label class="cont col-xs-12">
+                    {{registro.numero}}
+                </label>
+
+
+
+                <label class="tit col-xs-12">
+                    Especialidad
+                </label>
+                <label class="cont col-xs-12">
+                    {{registro.especialidad}}
+                </label>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="row">
+        <div class="col-xs-12">
+            <!--<button type="button" ui-sref="Publicaciones" class="btn btn-primary">
+                <span class="fa fa-arrow-left"></span> Regresar
+            </button>-->
+            <button type="submit" ng-click="globalRegresar()" class="btn btn-primary">
+                <span class="fa fa-arrow-left"></span> Regresar
+            </button>
+        </div>
+    </div>
+
+
+</div>

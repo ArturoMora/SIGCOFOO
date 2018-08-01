@@ -1,0 +1,636 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{F0453AFF-4C6A-4079-96F1-E744734313ED}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>INEEL.WebAPI</RootNamespace>
+    <AssemblyName>INEEL.WebAPI</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <Use64BitIISExpress />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ExcelApi, Version=1.7.3.0, Culture=neutral, PublicKeyToken=26cf6d85ba68fa54, processorArchitecture=MSIL">
+      <HintPath>..\packages\NetOffice.Excel.Net45.1.7.3.0\lib\net45\ExcelApi.dll</HintPath>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="itextsharp, Version=5.5.9.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\iTextSharp.5.5.9\lib\itextsharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="log4net, Version=2.0.7.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.7\lib\net45-full\log4net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.Agent.Intercept, Version=1.2.0.1011, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.1.2.0\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.DependencyCollector, Version=1.2.3.246, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.DependencyCollector.1.2.3\lib\net45\Microsoft.AI.DependencyCollector.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.PerfCounterCollector, Version=1.2.3.246, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.PerfCounterCollector.1.2.3\lib\net45\Microsoft.AI.PerfCounterCollector.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.ServerTelemetryChannel, Version=1.2.3.246, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.1.2.3\lib\net45\Microsoft.AI.ServerTelemetryChannel.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.Web, Version=1.2.3.246, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Web.1.2.3\lib\net45\Microsoft.AI.Web.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.WindowsServer, Version=1.2.3.246, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.1.2.3\lib\net45\Microsoft.AI.WindowsServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.ApplicationInsights, Version=1.2.3.490, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.1.2.3\lib\net45\Microsoft.ApplicationInsights.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.0.1\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.8.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Owin, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.3.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Cors, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Cors.3.0.1\lib\net45\Microsoft.Owin.Cors.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.3.0.1\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.2.1.0\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.2.1.0\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.2.1.0\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NetOffice, Version=1.7.3.0, Culture=neutral, PublicKeyToken=acf636d62c39f8f5, processorArchitecture=MSIL">
+      <HintPath>..\packages\NetOffice.Core.Net45.1.7.3.0\lib\net45\NetOffice.dll</HintPath>
+      <Private>True</Private>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Office, Version=12.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c">
+      <HintPath>..\packages\Office.12.0.0\lib\net40\Office.dll</HintPath>
+      <Private>True</Private>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="OfficeApi, Version=1.7.3.0, Culture=neutral, PublicKeyToken=7c1c3e9d16cace88, processorArchitecture=MSIL">
+      <HintPath>..\packages\NetOffice.Core.Net45.1.7.3.0\lib\net45\OfficeApi.dll</HintPath>
+      <Private>True</Private>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Renci.SshNet.Async, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Renci.SshNet.Async.1.0.0\lib\net40\Renci.SshNet.Async.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Configuration.Abstractions, Version=2.0.2.26, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Configuration.Abstractions.2.0.2.26\lib\net45\System.Configuration.Abstractions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Cors, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Cors.5.2.3\lib\net45\System.Web.Cors.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Http.Cors, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Cors.5.2.3\lib\net45\System.Web.Http.Cors.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Http.Owin, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Owin.5.2.3\lib\net45\System.Web.Http.Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="VBIDEApi, Version=1.7.3.0, Culture=neutral, PublicKeyToken=a3637beacf571e8a, processorArchitecture=MSIL">
+      <HintPath>..\packages\NetOffice.Core.Net45.1.7.3.0\lib\net45\VBIDEApi.dll</HintPath>
+      <Private>True</Private>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="WordApi, Version=1.7.3.0, Culture=neutral, PublicKeyToken=dd9255e6bcd130c8, processorArchitecture=MSIL">
+      <HintPath>..\packages\NetOffice.Word.Net45.1.7.3.0\lib\net45\WordApi.dll</HintPath>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="log4net.config" />
+    <None Include="Properties\PublishProfiles\Adrian.pubxml" />
+    <None Include="Properties\PublishProfiles\sigco3.pubxml" />
+    <None Include="Scripts\jquery-1.9.1.intellisense.js" />
+    <Content Include="Scripts\jquery-1.9.1.js" />
+    <Content Include="Scripts\jquery-1.9.1.min.js" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AuthController.cs" />
+    <Compile Include="Controllers\CH\BecarioExternoINEELController.cs" />
+    <Compile Include="Controllers\CH\CalificacionCompetenciasController.cs" />
+    <Compile Include="Controllers\CH\CalificacionSindController.cs" />
+    <Compile Include="Controllers\CH\CapacitacionycertificadoController.cs" />
+    <Compile Include="Controllers\CH\CapacitacionYcertificacionController.cs" />
+    <Compile Include="Controllers\CH\CategoriasCompetenciasSindController.cs" />
+    <Compile Include="Controllers\CH\CertificacionesObtenidasController.cs" />
+    <Compile Include="Controllers\CH\ClasificaAreasController.cs" />
+    <Compile Include="Controllers\CH\ClasificaCategoriasConductualesController.cs" />
+    <Compile Include="Controllers\CH\ClasificaCategoriasTecnicasController.cs" />
+    <Compile Include="Controllers\CH\CompetenciasSindController.cs" />
+    <Compile Include="Controllers\CH\DetalleEvaluacionTecnicasController.cs" />
+    <Compile Include="Controllers\CH\EstadosEvaluacionSindController.cs" />
+    <Compile Include="Controllers\CH\EvaluacionCompetenciasSindController.cs" />
+    <Compile Include="Controllers\CH\EvaluacionTecnicasController.cs" />
+    <Compile Include="Controllers\CH\ExtractoProfesionalController.cs" />
+    <Compile Include="Controllers\CH\FamiliasPuestrosSindController.cs" />
+    <Compile Include="Controllers\CH\IndicadoresCHController.cs" />
+    <Compile Include="Controllers\CH\ListaEmpleadosSindController.cs" />
+    <Compile Include="Controllers\CH\LogrosReconocimientosController.cs" />
+    <Compile Include="Controllers\CH\MatrizCompetenciasSindController.cs" />
+    <Compile Include="Controllers\CH\NivelCompetenciasSindController.cs" />
+    <Compile Include="Controllers\CH\NivelComportamientoSindController.cs" />
+    <Compile Include="Controllers\CH\ResultadosEvSindController.cs" />
+    <Compile Include="Controllers\CH\SitiosCursosController.cs" />
+    <Compile Include="Controllers\CH\AdjuntoCursosController.cs" />
+    <Compile Include="Controllers\CH\AmbitoController.cs" />
+    <Compile Include="Controllers\CH\AreaSNIController.cs" />
+    <Compile Include="Controllers\CH\AsistenteController.cs" />
+    <Compile Include="Controllers\CH\AsociacionController.cs" />
+    <Compile Include="Controllers\CH\AsociacionesController.cs" />
+    <Compile Include="Controllers\CH\AutorIIEPonenciaController.cs" />
+    <Compile Include="Controllers\CH\AutorIIEPublicacionController.cs" />
+    <Compile Include="Controllers\CH\AutorInternoCursoInternoController.cs" />
+    <Compile Include="Controllers\CH\AutorPonenciaExtController.cs" />
+    <Compile Include="Controllers\CH\AutorPublicacionExtController.cs" />
+    <Compile Include="Controllers\CH\BecaInternaController.cs" />
+    <Compile Include="Controllers\CH\BecarioDirigidoController.cs" />
+    <Compile Include="Controllers\CH\BecarioInternoController.cs" />
+    <Compile Include="Controllers\CH\CamposController.cs" />
+    <Compile Include="Controllers\CH\CarrerasController.cs" />
+    <Compile Include="Controllers\CH\CategoriasFamiliaController.cs" />
+    <Compile Include="Controllers\CH\CertificacionController.cs" />
+    <Compile Include="Controllers\CH\CompetenciasController.cs" />
+    <Compile Include="Controllers\CH\CongresoController.cs" />
+    <Compile Include="Controllers\CH\CurriculumVitaeController.cs" />
+    <Compile Include="Controllers\CH\CursoInternoController.cs" />
+    <Compile Include="Controllers\CH\DesNivelCompetenciaController.cs" />
+    <Compile Include="Controllers\CH\DesNivelComportamientoController.cs" />
+    <Compile Include="Controllers\CH\DisciplinasController.cs" />
+    <Compile Include="Controllers\CH\DistincionController.cs" />
+    <Compile Include="Controllers\CH\EncargadoDespachoController.cs" />
+    <Compile Include="Controllers\CH\EstadoAcademicoController.cs" />
+    <Compile Include="Controllers\CH\EstadoEvaluacionController.cs" />
+    <Compile Include="Controllers\CH\FamiliasPuestosController.cs" />
+    <Compile Include="Controllers\CH\UnidadFamiliaController.cs" />
+    <Compile Include="Controllers\CH\ManualCompetenciaConductualController.cs" />
+    <Compile Include="Controllers\CH\ManualCompetenciaTecnicaController.cs" />
+    <Compile Include="Controllers\CH\MatrizCompetenciasController.cs" />
+    <Compile Include="Controllers\CH\NivelCompetenciaController.cs" />
+    <Compile Include="Controllers\CH\PeriodoEvaluacionController.cs" />
+    <Compile Include="Controllers\CH\SolicitudCPController.cs" />
+    <Compile Include="Controllers\CH\TipoAreaController.cs" />
+    <Compile Include="Controllers\CH\TipoCompetenciaController.cs" />
+    <Compile Include="Controllers\CH\CompetenciaTecnicaController.cs" />
+    <Compile Include="Controllers\CP\AgendaCPController.cs" />
+    <Compile Include="Controllers\CP\AutoresCPController.cs" />
+    <Compile Include="Controllers\CP\AvanceMiembrosController.cs" />
+    <Compile Include="Controllers\CP\AvancesController.cs" />
+    <Compile Include="Controllers\CP\CategoriaCPController.cs" />
+    <Compile Include="Controllers\CP\CategoriaSitioController.cs" />
+    <Compile Include="Controllers\CP\ComentariosController.cs" />
+    <Compile Include="Controllers\CP\ComentariosLCPController.cs" />
+    <Compile Include="Controllers\CP\ComunidadesController.cs" />
+    <Compile Include="Controllers\CP\DocumentoController.cs" />
+    <Compile Include="Controllers\CP\EstadoArteController.cs" />
+    <Compile Include="Controllers\CP\EstudiosEspecializadosController.cs" />
+    <Compile Include="Controllers\CP\IndicadoresCPController.cs" />
+    <Compile Include="Controllers\CP\InformeAnualController.cs" />
+    <Compile Include="Controllers\CP\LineamientosController.cs" />
+    <Compile Include="Controllers\CP\ListaOCController.cs" />
+    <Compile Include="Controllers\CP\MapasRutaController.cs" />
+    <Compile Include="Controllers\CP\MetasController.cs" />
+    <Compile Include="Controllers\CP\MiembrosController.cs" />
+    <Compile Include="Controllers\CP\NoticiasController.cs" />
+    <Compile Include="Controllers\CP\PlanAnualController.cs" />
+    <Compile Include="Controllers\CP\PostController.cs" />
+    <Compile Include="Controllers\CP\PreguntasController.cs" />
+    <Compile Include="Controllers\CP\ResultadosMetasController.cs" />
+    <Compile Include="Controllers\CP\RolesCPController.cs" />
+    <Compile Include="Controllers\CP\SitioInteresController.cs" />
+    <Compile Include="Controllers\CP\TemasInnovacionController.cs" />
+    <Compile Include="Controllers\CP\TipoDocumentoController.cs" />
+    <Compile Include="Controllers\CP\TipoLineamientoController.cs" />
+    <Compile Include="Controllers\CR\AmbitoConvController.cs" />
+    <Compile Include="Controllers\CR\HistorialUnidadesOrganizacionalesEmpresasController.cs" />
+    <Compile Include="Controllers\CR\IndicadoresCRController.cs" />
+    <Compile Include="Controllers\CR\IntegranteGrupoColegiadoInternoController.cs" />
+    <Compile Include="Controllers\CR\InvestigadorPorExpertoController.cs" />
+    <Compile Include="Controllers\CR\PersonalActividadAdicionalController.cs" />
+    <Compile Include="Controllers\CR\AutoresEstudioMercadoController.cs" />
+    <Compile Include="Controllers\CR\BitacoraController.cs" />
+    <Compile Include="Controllers\CR\ClientesController.cs" />
+    <Compile Include="Controllers\CR\ClaveEmpresaController.cs" />
+    <Compile Include="Controllers\CR\ConvenioController.cs" />
+    <Compile Include="Controllers\CR\AreaConvenioController.cs" />
+    <Compile Include="Controllers\CR\AreaActividadAdicionalController.cs" />
+    <Compile Include="Controllers\CR\AdjuntoPorConvenioController.cs" />
+    <Compile Include="Controllers\CR\ActividadAdicionalController.cs" />
+    <Compile Include="Controllers\CR\AliadoController.cs" />
+    <Compile Include="Controllers\CR\EspecialistasController.cs" />
+    <Compile Include="Controllers\CR\EstudiosMercadoController.cs" />
+    <Compile Include="Controllers\CR\ExpertosController.cs" />
+    <Compile Include="Controllers\CR\PropuestaPorFondoController.cs" />
+    <Compile Include="Controllers\CR\PropuestasFFController.cs" />
+    <Compile Include="Controllers\CR\ListaAlianzaController.cs" />
+    <Compile Include="Controllers\CR\ProyectoPorFondoController.cs" />
+    <Compile Include="Controllers\CR\ProyectosFFController.cs" />
+    <Compile Include="Controllers\CR\EventosController.cs" />
+    <Compile Include="Controllers\CR\OportunidadNegocioController.cs" />
+    <Compile Include="Controllers\CR\ProyectosEmpresaController.cs" />
+    <Compile Include="Controllers\CR\SeguimientoOportunidadController.cs" />
+    <Compile Include="Controllers\CR\TipoOrganizacionController.cs" />
+    <Compile Include="Controllers\CR\TiposEventosController.cs" />
+    <Compile Include="Controllers\CH\DetalleEvaluacionConductualController.cs" />
+    <Compile Include="Controllers\CH\EvaluacionConductualController.cs" />
+    <Compile Include="Controllers\CR\TituloPersonaController.cs" />
+    <Compile Include="Controllers\GENERICOS\AccesoModulosController.cs" />
+    <Compile Include="Controllers\GENERICOS\AccesoModulosOCController.cs" />
+    <Compile Include="Controllers\GENERICOS\AdjuntosGeneralesController.cs" />
+    <Compile Include="Controllers\GENERICOS\AdministracionAdjuntosServidorController.cs" />
+    <Compile Include="Controllers\GENERICOS\AptitudesCatController.cs" />
+    <Compile Include="Controllers\GENERICOS\AptitudesEmpleadoController.cs" />
+    <Compile Include="Controllers\GENERICOS\BitacoraSolicitudAccesoController.cs" />
+    <Compile Include="Controllers\GENERICOS\BitacoraSolicitudesController.cs" />
+    <Compile Include="Controllers\GENERICOS\HiperJefesController.cs" />
+    <Compile Include="Controllers\GENERICOS\IniciativasController.cs" />
+    <Compile Include="Controllers\GENERICOS\LikesLinkedController.cs" />
+    <Compile Include="Controllers\GENERICOS\LikesTipoController.cs" />
+    <Compile Include="Controllers\GENERICOS\MovimientoUnidadOrgController.cs" />
+    <Compile Include="Controllers\GENERICOS\MovimientoPuestoController.cs" />
+    <Compile Include="Controllers\GENERICOS\MovimientoCategoriaController.cs" />
+    <Compile Include="Controllers\GENERICOS\NotificacionController.cs" />
+    <Compile Include="Controllers\GENERICOS\NotificationController.cs" />
+    <Compile Include="Controllers\GENERICOS\OCSuscripcionesController.cs" />
+    <Compile Include="Controllers\GENERICOS\NuevoOCController.cs" />
+    <Compile Include="Controllers\GENERICOS\PropuestasController.cs" />
+    <Compile Include="Controllers\CR\PropuestaPorConvocatoriaController.cs" />
+    <Compile Include="Controllers\CR\ProyectoPorConvocatoriaController.cs" />
+    <Compile Include="Controllers\GENERICOS\BitacoraMovimientosController.cs" />
+    <Compile Include="Controllers\GENERICOS\EstadoFlujoController.cs" />
+    <Compile Include="Controllers\CH\EstadoPonenciaController.cs" />
+    <Compile Include="Controllers\CH\EstadoPublicacionController.cs" />
+    <Compile Include="Controllers\CH\EventoController.cs" />
+    <Compile Include="Controllers\CH\ExperienciaDocenteController.cs" />
+    <Compile Include="Controllers\CH\ExperienciaExternaController.cs" />
+    <Compile Include="Controllers\CH\ExperienciaPreviaController.cs" />
+    <Compile Include="Controllers\CH\FormacionAcademicaController.cs" />
+    <Compile Include="Controllers\CH\GradoAcademicoController.cs" />
+    <Compile Include="Controllers\CH\IdiomaController.cs" />
+    <Compile Include="Controllers\CH\IdiomasController.cs" />
+    <Compile Include="Controllers\CH\BecarioExternoController.cs" />
+    <Compile Include="Controllers\CH\InstitucionController.cs" />
+    <Compile Include="Controllers\CH\NivelCursoController.cs" />
+    <Compile Include="Controllers\CH\NivelPublicacionController.cs" />
+    <Compile Include="Controllers\CH\NivelSNIController.cs" />
+    <Compile Include="Controllers\CH\PaisController.cs" />
+    <Compile Include="Controllers\CH\PonenciaController.cs" />
+    <Compile Include="Controllers\CH\ProyectosController.cs" />
+    <Compile Include="Controllers\CH\InventarioRHController.cs" />
+    <Compile Include="Controllers\CH\PublicacionController.cs" />
+    <Compile Include="Controllers\CH\RevistaController.cs" />
+    <Compile Include="Controllers\CH\SNIController.cs" />
+    <Compile Include="Controllers\CH\SolicitudController.cs" />
+    <Compile Include="Controllers\CH\TesisDirigidaController.cs" />
+    <Compile Include="Controllers\CH\TipoBecaController.cs" />
+    <Compile Include="Controllers\CH\UploadController.cs" />
+    <Compile Include="Controllers\CH\UsuarioController.cs" />
+    <Compile Include="Controllers\CR\ServicioPorProveedorController.cs" />
+    <Compile Include="Controllers\CR\ProductoPorProveedorController.cs" />
+    <Compile Include="Controllers\CR\ProveedorController.cs" />
+    <Compile Include="Controllers\CR\RelacionPorContactoController.cs" />
+    <Compile Include="Controllers\CR\IntegranteGrupoColegiadoExternoController.cs" />
+    <Compile Include="Controllers\CR\GrupoColegiadoPartIntController.cs" />
+    <Compile Include="Controllers\CR\PersonaPartIntController.cs" />
+    <Compile Include="Controllers\CR\ServicioPorCompetidorController.cs" />
+    <Compile Include="Controllers\CR\AdjuntoPorCompetidorController.cs" />
+    <Compile Include="Controllers\CR\CompetidorController.cs" />
+    <Compile Include="Controllers\CR\ProductoPorCompetidorController.cs" />
+    <Compile Include="Controllers\CR\ContactosPuestosHistoricosController.cs" />
+    <Compile Include="Controllers\CR\ContactoPorConvocatoriaController.cs" />
+    <Compile Include="Controllers\CR\ConvocatoriaController.cs" />
+    <Compile Include="Controllers\CR\MenuItemController.cs" />
+    <Compile Include="Controllers\CR\AreaInvestigacionController.cs" />
+    <Compile Include="Controllers\CR\ContactosController.cs" />
+    <Compile Include="Controllers\CR\ContactosPerfilesController.cs" />
+    <Compile Include="Controllers\CR\EmpresasController.cs" />
+    <Compile Include="Controllers\CR\FondosProgramaController.cs" />
+    <Compile Include="Controllers\CR\FuenteFinanciamientoController.cs" />
+    <Compile Include="Controllers\CR\LineaDesarrolloTecnologicoController.cs" />
+    <Compile Include="Controllers\CR\NaturalezaInteraccionController.cs" />
+    <Compile Include="Controllers\CR\ProductoController.cs" />
+    <Compile Include="Controllers\CR\SegmentoMercadoController.cs" />
+    <Compile Include="Controllers\CR\ServicioController.cs" />
+    <Compile Include="Controllers\CR\SitioWebFondoProgramaController.cs" />
+    <Compile Include="Controllers\CR\TamanoEmpresaController.cs" />
+    <Compile Include="Controllers\CR\TematicaController.cs" />
+    <Compile Include="Controllers\CR\TematicaPorFondoProgramaController.cs" />
+    <Compile Include="Controllers\CR\TipoConvenioController.cs" />
+    <Compile Include="Controllers\CR\TipoFuenteFinanciamientoController.cs" />
+    <Compile Include="Controllers\CR\TipoProductoServicioController.cs" />
+    <Compile Include="Controllers\CR\AlumnoController.cs" />
+    <Compile Include="Controllers\CR\TipoRelacionController.cs" />
+    <Compile Include="Controllers\GENERICOS\AccesoSistemaController.cs" />
+    <Compile Include="Controllers\GENERICOS\CategoriasController.cs" />
+    <Compile Include="Controllers\GENERICOS\CorreoController.cs" />
+    <Compile Include="Controllers\CR\UnidadOrganizacionalEmpresasController.cs" />
+    <Compile Include="Controllers\GENERICOS\JerarquiaController.cs" />
+    <Compile Include="Controllers\GENERICOS\RecuperaPasswordController.cs" />
+    <Compile Include="Controllers\GENERICOS\ExposedController.cs" />
+    <Compile Include="Controllers\GENERICOS\SolicitudAccesoController.cs" />
+    <Compile Include="Controllers\GENERICOS\TunelBitacoraController.cs" />
+    <Compile Include="Controllers\GENERICOS\ValidacionExistController.cs" />
+    <Compile Include="Controllers\GENERICOS\VocabularioController.cs" />
+    <Compile Include="Controllers\GENERICOS\UtilAdjuntosController.cs" />
+    <Compile Include="Controllers\GENERICOS\DescargaController.cs" />
+    <Compile Include="Controllers\GENERICOS\FuncionesController.cs" />
+    <Compile Include="Controllers\GENERICOS\FuncionesRolController.cs" />
+    <Compile Include="Controllers\GENERICOS\ModulosController.cs" />
+    <Compile Include="Controllers\GENERICOS\PaisesController.cs" />
+    <Compile Include="Controllers\GENERICOS\PersonasController.cs" />
+    <Compile Include="Controllers\GENERICOS\PlazaController.cs" />
+    <Compile Include="Controllers\GENERICOS\RolesController.cs" />
+    <Compile Include="Controllers\GENERICOS\RolesPersonaController.cs" />
+    <Compile Include="Controllers\GENERICOS\TipoPersonalController.cs" />
+    <Compile Include="Controllers\GENERICOS\TipoUnidadController.cs" />
+    <Compile Include="Controllers\GENERICOS\UbicacionAreasController.cs" />
+    <Compile Include="Controllers\GENERICOS\UnidadOrganizacionalController.cs" />
+    <Compile Include="Controllers\GENERICOS\UtileriasArchivo.cs" />
+    <Compile Include="Controllers\GI\BitacoraMovimientosGIController.cs" />
+    <Compile Include="Controllers\GI\BitacoraSolicitudesGIController.cs" />
+    <Compile Include="Controllers\GI\ComiteController.cs" />
+    <Compile Include="Controllers\GI\ContribucionAutorController.cs" />
+    <Compile Include="Controllers\GI\EstadoLicenciamientoController.cs" />
+    <Compile Include="Controllers\GI\EvaluadorIdeaController.cs" />
+    <Compile Include="Controllers\GI\FactorInnovacionController.cs" />
+    <Compile Include="Controllers\GI\IdeaInnovadoraController.cs" />
+    <Compile Include="Controllers\GI\IndicadoresGIController.cs" />
+    <Compile Include="Controllers\GI\MiembrosGEController.cs" />
+    <Compile Include="Controllers\GI\MiembrosGIController.cs" />
+    <Compile Include="Controllers\GI\PeriodoFIController.cs" />
+    <Compile Include="Controllers\GI\PeriodoRecepcionController.cs" />
+    <Compile Include="Controllers\GI\PeriodoReplicaController.cs" />
+    <Compile Include="Controllers\GI\PlanNegocioEvolArchivosController.cs" />
+    <Compile Include="Controllers\GI\PlanNegocioEvolAutoresController.cs" />
+    <Compile Include="Controllers\GI\PlanNegocioEvolGerenciasController.cs" />
+    <Compile Include="Controllers\GI\PlanNegocioEvolutivoController.cs" />
+    <Compile Include="Controllers\GI\ProductoGIController.cs" />
+    <Compile Include="Controllers\GI\ProductoGIEvaluadoresController.cs" />
+    <Compile Include="Controllers\GI\ProductoGIFactorInnovacionController.cs" />
+    <Compile Include="Controllers\GI\ProductoGISolicitudController.cs" />
+    <Compile Include="Controllers\GI\ProductoHistorialFIController.cs" />
+    <Compile Include="Controllers\GI\PropuestaController.cs" />
+    <Compile Include="Controllers\GI\SolicitudGIController.cs" />
+    <Compile Include="Controllers\GI\TecnologiaLicenciadaController.cs" />
+    <Compile Include="Controllers\GI\TecnologiaLicenciadaLeccionesController.cs" />
+    <Compile Include="Controllers\GI\TecnologiaLicenciadaPagosController.cs" />
+    <Compile Include="Controllers\GI\TecnologiaLicenciadaPIDAController.cs" />
+    <Compile Include="Controllers\GI\TecnologiaLicenciadaPIPIndustrialController.cs" />
+    <Compile Include="Controllers\GI\TipoAccesoGIController.cs" />
+    <Compile Include="Controllers\GI\TipoPagosController.cs" />
+    <Compile Include="Controllers\MT\AutorSoftwareController.cs" />
+    <Compile Include="Controllers\MT\EditorCapituloController.cs" />
+    <Compile Include="Controllers\MT\AutorInternoCapituloController.cs" />
+    <Compile Include="Controllers\MT\AutorExternoCapituloController.cs" />
+    <Compile Include="Controllers\MT\BitacoraITFConsultaController.cs" />
+    <Compile Include="Controllers\MT\BitacoraITFDescargaController.cs" />
+    <Compile Include="Controllers\MT\CountSolicitudesMTController.cs" />
+    <Compile Include="Controllers\MT\IndicadoresMTController.cs" />
+    <Compile Include="Controllers\MT\ITF\AdjuntoITFInsumoController.cs" />
+    <Compile Include="Controllers\MT\ITF\BitacoraITFSolicitudDescargaController.cs" />
+    <Compile Include="Controllers\MT\ITF\TipoInsumoController.cs" />
+    <Compile Include="Controllers\MT\LibrosController.cs" />
+    <Compile Include="Controllers\MT\SolicitudAccesoITFController.cs" />
+    <Compile Include="Controllers\MT\SolicitudInsumoController.cs" />
+    <Compile Include="Controllers\MT\EstadoSolicitudController.cs" />
+    <Compile Include="Controllers\MT\CapitulosController.cs" />
+    <Compile Include="Controllers\MT\SolicitudRevisionITFController.cs" />
+    <Compile Include="Controllers\MT\TipoCursoController.cs" />
+    <Compile Include="Controllers\MT\TipoAccesoController.cs" />
+    <Compile Include="Controllers\MT\TipoSoftwareController.cs" />
+    <Compile Include="Controllers\MT\FileUploadMTController.cs" />
+    <Compile Include="Controllers\MT\CursosPersonalController.cs" />
+    <Compile Include="Controllers\MT\SoftwarePersonalController.cs" />
+    <Compile Include="Controllers\MT\InformeTecnicoFinalController.cs" />
+    <Compile Include="Controllers\MT\ITF\CalificacionClienteController.cs" />
+    <Compile Include="Controllers\MT\ITF\CalificacionPersonalController.cs" />
+    <Compile Include="Controllers\MT\ITF\CalifResultadosFinancierosController.cs" />
+    <Compile Include="Controllers\MT\ITF\EvaluacionesController.cs" />
+    <Compile Include="Controllers\MT\ITF\InsumosController.cs" />
+    <Compile Include="Controllers\MT\ITF\LAcapController.cs" />
+    <Compile Include="Controllers\MT\ITF\LACteController.cs" />
+    <Compile Include="Controllers\MT\ITF\LAproyController.cs" />
+    <Compile Include="Controllers\MT\ITF\ProyFuturoController.cs" />
+    <Compile Include="Controllers\MT\ITF\ResultadosController.cs" />
+    <Compile Include="Controllers\MT\ITF\ResultadosEController.cs" />
+    <Compile Include="Controllers\MT\ITF\SatisCteController.cs" />
+    <Compile Include="Controllers\MT\PersonalProyectoController.cs" />
+    <Compile Include="Controllers\CH\NivelCompetenciaTecnicaController.cs" />
+    <Compile Include="Controllers\MT\TransferenciaRIIEController.cs" />
+    <Compile Include="Controllers\PI\DerechosAutorController.cs" />
+    <Compile Include="Controllers\PI\EstadosDelProcesoController.cs" />
+    <Compile Include="Controllers\PI\HistorialPIController.cs" />
+    <Compile Include="Controllers\PI\IndicadoresPIController.cs" />
+    <Compile Include="Controllers\PI\PropiedadIndustrialController.cs" />
+    <Compile Include="Controllers\PI\PropiedadIndustrialRepository.cs" />
+    <Compile Include="Controllers\PI\RamasController.cs" />
+    <Compile Include="Controllers\PI\TiposPropiedadIndustrialController.cs" />
+    <Compile Include="Helpers\AuthorizationProvider.cs" />
+    <Compile Include="Helpers\NoCacheHeaderFilter.cs" />
+    <Compile Include="Helpers\PreflightRequestsHandler.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Startup.cs" />
+    <Compile Include="Utilidades\ConfigAPI.cs" />
+    <Compile Include="Utilidades\Data\InfoException.cs" />
+    <Compile Include="Utilidades\Data\MDCSet.cs" />
+    <Compile Include="Utilidades\EstadosToInt.cs" />
+    <Compile Include="Utilidades\LogException.cs" />
+    <Compile Include="Utilidades\report\InformeTF.cs" />
+    <Compile Include="Utilidades\report\ITFCaratula.cs" />
+    <Compile Include="Utilidades\report\Reporter.cs" />
+    <Compile Include="Utilidades\ServerVariables.cs" />
+    <Compile Include="Utilidades\Texts.cs" />
+    <Compile Include="Utilidades\ToPlainText.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="ApplicationInsights.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Scripts\jquery-1.9.1.min.map" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\INEEL.DataAccess.GEN\INEEL.DataAccess.GEN.csproj">
+      <Project>{ac66a2fd-2b99-4d5b-9561-6049af0faccb}</Project>
+      <Name>INEEL.DataAccess.GEN</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\INEEL.DataAccess\INEEL.DataAccess.csproj">
+      <Project>{e5958980-03ea-44a5-9f6b-e2b12e4b53c4}</Project>
+      <Name>INEEL.DataAccess</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>49388</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:1520/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.BinFix.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.BinFix.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.BinFix.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.BinFix.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.BinFix.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.BinFix.targets" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.BinFix.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.BinFix.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

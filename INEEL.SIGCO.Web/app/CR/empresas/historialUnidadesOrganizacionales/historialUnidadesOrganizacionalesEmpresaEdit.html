@@ -1,0 +1,75 @@
+﻿<div class="modal-content">
+    <div class="modal-header">
+        Editar registro
+        <button type="button" class="close" ng-click="cancel()" data-dissmiss="modal">x</button>
+    </div>
+
+    <div class="modal-body">
+        <div class="panel">
+            <form role="form" ng-submit="actualizaRegistro()" novalidate name="historialForm" class="form-horizontal">
+                <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                        Nombre actual
+                    </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input required type="text" ng-model="registro.nombreActualUnidad" class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                        Nombre anterior
+                    </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input required type="text" ng-model="registro.nombreAnteriorUnidad" class="form-control" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Titular </label>
+                    <div class="col-md-8 col-sm-8 col-xs-12">
+                        <div class="row">
+                            <div class="col-xs-8">
+                                <input type="text" class="form-control" id="usr" name="contacto" ng-model="registro.contacto.nombreCompleto" disabled>
+                            </div>
+                            <div class="row col-xs-4">
+                                <a ng-click="openContactoForHistorial()" class="btn btn-success" title="Buscar contacto">
+                                    <i class="glyphicon glyphicon-search"></i>
+                                </a>
+                                <a ng-show="registro.contacto!=null" ng-click="registro.contacto=null; registro.contactoId=null" class="btn btn-danger" title="Eliminar contacto">
+                                    <i class="glyphicon glyphicon-trash"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                        Padre de la unidad
+                    </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input type="text" ng-model="registro.nombreAnteriorUnidadPadre" class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                        Acci&oacute;n
+                    </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input type="text" ng-model="registro.accion" class="form-control" />
+                    </div>
+                </div>
+                <div class="col-md-12 col-xs-12 col-lg-12">
+                    <div  class="alert informacion">
+                            Los datos mostrados son de caracter informativo, por lo que los cambios realizados no se ver&aacute;n reflejados en las unidades organizacionales de la empresa
+                        
+                    </div>
+                </div>
+                <br/>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">Actualizar</button>
+                    <button type="button" class="btn btn-primary" ng-click="cancel()">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,150 @@
+﻿<div class="vista">
+
+    <div class="page-title">
+        <div class="title_left">
+
+            <ol class="breadcrumb miga">
+                <li><i class="sg sg-informes-bec"></i> <a ui-sref="funciones">Funciones del sistema</a></li>
+                <li class="active">Agregar</li>
+            </ol>
+
+        </div>
+    </div>
+    <div class="clearfix"></div>
+
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Datos generales de la función</h2>
+
+                    <div class="clearfix"></div>
+                </div>
+
+                <div class="x_content sin-desborde">
+                    <form role="form" name="FuncionesForm" class="form-horizontal">
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Módulo <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <select id="funcion" name="modulo" class="form-control" ng-model="registro.moduloselect"
+                                        ng-init="registro.moduloselect=moduloPrevio"
+                                        ng-options="e.moduloId as e.descripcion  for e in modulos" required>
+                                    <option value="">Seleccione un módulo</option>
+                                </select>
+                                <span class="error" ng-show="FuncionesForm.modulo.$dirty && !FuncionesForm.modulo.$valid">Debe seleccionar un módulo</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Nombre de la función <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" class="form-control" id="funcion" ng-model="registro.funcion" required max="100" name="funcion">
+                                <span class="error" ng-show="FuncionesForm.funcion.$dirty && !FuncionesForm.funcion.$valid">Debe ingresar el nombre de la función</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Descripción <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" class="form-control" id="descripcion" name="descripcion" ng-model="registro.descripcion" required max="255">
+                                <span class="error" ng-show="FuncionesForm.descripcion.$dirty && !FuncionesForm.descripcion.$valid">Debe ingresar la descripción de la función</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                URL de la función <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" class="form-control" id="url" name="url" ng-model="registro.url" required max="255">
+                                <span class="error" ng-show="FuncionesForm.url.$dirty && !FuncionesForm.url.$valid">Debe ingresar la url de la página usada para acceder a la función que esta registrando</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Campo State
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" class="form-control" id="state" ng-model="registro.state" required max="50" name="CampoState">
+
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Nivel de anidamento <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <select ng-model="registro.selectednivel" ng-change="muestraCampo" name="nivel" class="form-control required">
+                                    <option ng-repeat="x in niveles" value="{{x.valor}}">{{x.descripcion}}</option>
+                                </select>
+                                <span class="error" ng-show="FuncionesForm.nivel.$dirty && !FuncionesForm.nivel.$valid">Debe seleccionar el nivel de jerarquia de la función que esta registrando</span>
+
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Orden en el que se mostrará <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" class="form-control" id="secuencia" name="secuencia" ng-model="registro.secuencia" required>
+                                <span class="error" ng-show="FuncionesForm.secuencia.$dirty && !FuncionesForm.secuencia.$valid">Dato requerido</span>
+
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Seleccione la función de la que depende <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <select id="dependencias" name="funcionpadre" class="form-control"
+                                        ng-model="registro.funcionpadre"
+                                        ng-options="e.funcionesId as e.descripcion  for e in funcionesbase" required>
+                                    <option value="">Ninguna</option>
+                                </select>
+                                <span class="error" ng-show="FuncionesForm.funcionpadre.$dirty && !FuncionesForm.funcionpadre.$valid"> </span>
+
+                            </div>
+                        </div>
+
+                        <div class="form-group" ng-show="f_state === 1">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Campo State <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" class="form-control" id="stateID" ng-model="registro.state" required maxlength="50" name="State">
+                                <span class="error" ng-show="FuncionesForm.funcion.$dirty && !FuncionesForm.funcion.$valid">Debe ingresar la url de referencia para el campo State</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                <div class="">
+                                    <button type="submit" class="btn btn-success" ng-click="save()" ng-disabled="!FuncionesForm.modulo.$valid || !FuncionesForm.funcion.$valid  || !FuncionesForm.descripcion.$valid || !FuncionesForm.url.$valid || !FuncionesForm.nivel.$valid || !FuncionesForm.secuencia.$valid ">
+                                        <!--pendientes: adjuntos y  proyecto.selected-->
+                                        <i class="glyphicon glyphicon-saved"></i> Guardar
+                                    </button>
+                                    <button type="button" ui-sref="funciones({id:registro.moduloselect})" class="btn btn-primary">
+                                        <span class="fa fa-arrow-left"></span> Regresar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

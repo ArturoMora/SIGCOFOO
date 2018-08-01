@@ -1,0 +1,149 @@
+﻿<div>
+    
+        <div class="x_panel">
+            <div class="x_content sin-desborde">
+                <div class="form-group row">
+                    <div class="col-xs-12 col-md-8">
+                        <label class="col-xs-12">
+                            {{proyecto.proyectoId}}  <font class="detalle"> {{proyecto.nombre}}</font>
+                        </label>
+
+                        <label class="col-xs-12">Cliente: <font class="cont">{{cliente}}</font></label>
+                        <label class="col-xs-12">
+                            Monto: <font class="cont">{{proyecto.costo==null? "NO DISPONIBLE" : proyecto.costo }}</font>
+                        </label>
+
+                        <label class="tit col-xs-12">
+                            Desarrollado por
+                        </label>
+                        <label class="cont col-xs-12">
+                            {{nombreUnidad}} / Jefe de proyecto: {{proyecto.nombreJefeProyecto}}
+                        </label>
+                    </div>
+
+                    <div class="col-xs-10 col-sm-6 col-md-4 contenedor_gris">
+                        <div class="form-group">
+                            <label>Fecha de inicio</label><br />
+                            <label> Programada:</label>
+                            <span class="text">{{proyecto.fechaInicio | date: 'dd-MM-yyyy'}}</span><br/>
+                            <label>
+                               Real:
+                            </label>
+                            <span class="text">{{proyecto.fechaInicio | date: 'dd-MM-yyyy'}}</span>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Fecha de t&eacute;rmino</label><br />
+                            <label>
+                                Programada:
+                            </label><span class="text">{{proyecto.fechaFin | date: 'dd-MM-yyyy'}}</span><br/>
+                            <label>
+                                Real:
+                            </label>
+                            <span class="text">{{proyecto.fechaFin | date: 'dd-MM-yyyy'}}</span>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-7 col-sm=4 col-md-3 col-lg-3">
+
+                        <!--<a ng-click="aprobacion1()"
+                                class="btn btn-block btn-success" title="Autorizar ITF"
+                                ng-show="itf.estadoITFFlujoId==1 && idRol==4">
+                            Responder solicitud
+                        </a>-->
+                        <a ng-click="PublicaRechazaAdminMT()" ng-show="fromAdminMT"
+                           class="btn btn-block btn-success" title="Autorizar ITF">
+                            Responder solicitud
+                        </a>
+                        <!--itf.estadoITFFlujoId: {{itf.estadoITFFlujoId}}-->
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+
+        <div class="x_panel">
+            <div class="x_content sin-desborde">
+                <form ng-submit="processForm()" class="form-horizontal">
+                    <div>
+                        <div class="x_title">
+                            <h2>Informaci&oacute;n general</h2>
+                            <div class="clearfix"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="labelDetail col-md-3 col-sm-3 col-xs-12">
+                                T&iacute;tulo
+                            </label>
+                            <div class="col-md-8 col-sm-8 col-xs-12 sin-desborde">
+                                <span class="text">{{itf.titulo}}</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="labelDetail col-md-3 col-sm-3 col-xs-12">
+                                Resumen
+                            </label>
+                            <div class="col-md-8 col-sm-8 col-xs-12 sin-desborde">
+                                <span class="text">{{itf.itFgeneral.resumen}}</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="labelDetail col-md-3 col-sm-3 col-xs-12">
+                                N&uacute;mero de informe
+                            </label>
+                            <div class="col-md-8 col-sm-8 col-xs-12 sin-desborde">
+                                <span class="text">{{itf.numInforme}}</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="labelDetail col-md-3 col-sm-3 col-xs-12">
+                                Clave &uacute;nica de identificaci&oacute;n
+                            </label>
+                            <div class="col-md-8 col-sm-8 col-xs-12 sin-desborde">
+                                <span class="text">{{itf.clasificacionSignatura}}</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="labelDetail col-md-3 col-sm-3 col-xs-12">
+                                A&ntilde;o de elaboraci&oacute;n
+                            </label>
+                            <div class="col-md-8 col-sm-8 col-xs-12 sin-desborde">
+                                <span class="text">{{itf.anioElaboracion}}</span>
+                            </div>
+                        </div>
+
+
+                        <div class="x_title">
+                            <h2>Autores</h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="labelDetail col-md-3 col-sm-3 col-xs-12">
+                                Autores
+                            </label>
+                            <div class="col-md-8 col-sm-8 col-xs-12">
+                                {{autoresITF | getAutoresPersonas}}
+                            </div>
+                        </div>
+                        <div class="x_title">
+                            <h2>Seguridad</h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="labelDetail col-md-3 col-sm-3 col-xs-12">
+                                Tipo de acceso
+                            </label>
+                            <div class="col-md-8 col-sm-8 col-xs-12">
+                                <span class="text">{{itf.itFgeneral.tipoAcceso.nombre}}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>

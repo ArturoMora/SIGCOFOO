@@ -1,0 +1,4 @@
+/Repositories (repositorios con la plantilla SG EntityRepository)
+colocarlas dentro de su modulo correspondiente
+si es necesario crear carpetas adicionales
+dejar en la raiz a los  genericos

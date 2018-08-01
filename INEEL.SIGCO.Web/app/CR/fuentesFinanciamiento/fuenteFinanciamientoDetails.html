@@ -1,0 +1,59 @@
+<div class="vista">
+    <div class="page-title">
+        <div class="title_left">
+
+            <ol class="breadcrumb miga">
+                <li><i class="sg sg-fuentes-financiamiento"></i> <a ui-sref="fuentesFinanciamientoGet">Fuentes de financiamiento</a></li>
+                <li class="active">Detalles</li>
+            </ol>
+
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+                    <label class="detalle col-xs-12 " title="Nombre">
+                            {{fuentesFinanciamiento.fuenteFinanciamientoId}}-{{fuentesFinanciamiento.nombreFF}}
+                        </label>
+                    <label class="cont col-xs-12">
+                            {{fuentesFinanciamiento.descripcion}}
+                        </label>
+                    <!--<label class="tit col-xs-12">
+                            Tipo de fuente de financiamiento
+                        </label>
+                        <label class="cont col-xs-12">
+                            {{fuentesFinanciamiento.tipoFuenteFinanciamiento.nombre}}
+                        </label>-->
+                    <label class="tit col-xs-12">
+                            Contacto
+                        </label>
+                    <label class="cont col-xs-12">
+                            {{fuentesFinanciamiento.contacto.nombreCompleto}}
+                        </label>
+                    <label class="tit col-xs-12">
+                            Sitio web
+                        </label>
+                    <span class="span-label cont col-xs-12 ">
+                            <a href="{{fuentesFinanciamiento.sitioWeb}}" target="_blank"
+                               title="{{fuentesFinanciamiento.sitioWeb}}">{{fuentesFinanciamiento.sitioWeb}}</a>
+                        </span>
+                    <label class="tit col-xs-12">
+                            Fecha registro
+                        </label>
+                    <label class="cont col-xs-12">
+                            {{fuentesFinanciamiento.fechaRegistro  | date:"dd/MM/yyyy"}}
+                        </label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <button type="button" ng-click="globalRegresar()" class="btn btn-primary">
+                    <span class="fa fa-arrow-left"></span> Regresar
+                </button>
+        </div>
+    </div>
+</div>

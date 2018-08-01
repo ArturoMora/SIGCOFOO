@@ -1,0 +1,58 @@
+﻿<div class="vista">
+    <div class="page-title">
+        <div class="title_left">
+
+            <ol class="breadcrumb miga">
+                <li><i class="fa fa-file-powerpoint-o"></i> <a ui-sref="home">Proyectos</a></li>
+                <li>Facturaci&oacute;n planeada por unidad organizacional (%)</li>
+            </ol>
+
+        </div>
+    </div>
+    <div class="clearfix"></div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+                    <div style=" width:100px; margin:auto;">
+                        
+                        <select ng-model="anio" ng-change="recargar(anio)" name="tipoBeca" 
+                                ng-options="n as n for  n  in range(2010, 2017) | orderBy:'-'"
+                                class="form-control hidden-print"></select>
+                    </div>
+                    <table class="display dt-responsive" cellspacing="0" width="100%">
+                        <thead>
+                            <tr>
+
+                                <th>Nombre</th>
+                                <th>No. de proyectos</th>
+                                <th>Facturaci&oacute;n en {{anio}}</th>
+                                <th>Porcentaje</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="r in registros | orderBy:'-total'">
+                                <td>
+                                        {{r.name}}                                  
+                                </td>
+                                <td>{{r.quantity}}</td>
+                                <td>{{r.total}}</td>
+                                <td class="project_progress">
+
+                                    <div class="progress">
+                                        <div class="progress-bar bg-green" role="progressbar" aria-valuenow="{{(r.total * 100) / max}}" aria-valuemin="0" aria-valuemax="100" style="width:{{(r.total * 100) / max}}%">
+                                            <span class="progress-label">{{(r.total * 100) / max | number :2 | suprimeSufix :'.00' }}%</span>
+                                        </div>
+                                    </div>
+                                </td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--registros: {{registros | json}}-->

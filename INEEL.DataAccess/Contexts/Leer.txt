@@ -1,0 +1,9 @@
+/Contexts 
+contextos que implementan a DbContext 
+colocarlas dentro de su modulo correspondiente
+si es necesario crear carpetas adicionales
+dejar en la raiz a los  genericos
+
+SE trabajará con codigo primero
+deben  de considerar migraciones con  multiples DbContext y varios proyectos
+http://www.dotnet-tricks.com/Tutorial/entityframework/2VOa140214-Entity-Framework-6-Code-First-Migrations-with-Multiple-Data-Contexts.html

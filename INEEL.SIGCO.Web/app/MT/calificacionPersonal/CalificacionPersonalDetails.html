@@ -1,0 +1,61 @@
+<!-- page content -->
+<div class="vista">
+
+    <div class="page-title">
+        <div class="title_full">
+
+            <ol class="breadcrumb miga">
+                <li><i class="fa fa-list-ul"></i> <a ui-sref="CalificacionPersonalDetails">Administraci&oacute;n/Cat&aacute;logos/Calificaci&oacute;n del personal</a></li>
+                <li class="active">Detalles</li>
+            </ol>
+
+        </div>
+    </div>
+    <div data-ng-hide="authentication.isAuth">
+        No tiene permisos para ingresar a esta secci&oacute;n..<br /> Usuario no autentificado
+    </div>
+    <div data-ng-show="authentication.isAuth">
+
+        <div class="clearfix"></div>
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_content sin-desborde">
+                        <label class="detalle col-xs-12 " title="Nombre">
+                            {{personal.nombre}}
+                        </label>
+                        <label class="cont emc col-xs-12 colorTit">
+                            {{personal.estado}}
+                        </label>
+                        <label class="tit col-xs-12">
+                            Descripci&oacute;n:
+                        </label>
+                        <label class="cont col-xs-12">
+                            {{personal.nombreCorto}}
+                        </label>
+                        <label class="tit col-xs-12">
+                            Fecha de registro:
+                        </label>
+                        <label class="cont col-xs-12">
+                            {{personal.fechaAlta  | date:"dd/MM/yyyy"}}
+                        </label>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <button type="button" ng-click="globalRegresar()" class="btn btn-primary">
+                    <span class="fa fa-arrow-left"></span> Regresar
+                </button>
+            </div>
+        </div>
+
+    </div>
+    <!-- se oculta, si usuario está logeado-->
+</div>
+
+
+

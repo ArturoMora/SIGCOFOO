@@ -1,0 +1,249 @@
+﻿<!DOCTYPE html>
+<html lang="es-mx" ng-app="ineel">
+<head>
+    <title>SIGCO</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- build:css Content/stylesIndex.min.css -->
+    <!-- inject:css -->
+    <!-- Bootstrap -->
+    <link href="vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="Content/index.css" rel="stylesheet" />
+    <link href="Content/angular-block-ui.min.css" rel="stylesheet" />
+    <link href="Content/toastr.min.css" rel="stylesheet" />
+    <!-- Custom Theme Style -->
+    <link href="Content/custom.css" rel="stylesheet">
+    <link href="Content/multiple-select.min.css" rel="stylesheet" />
+
+    <!-- endinject -->
+    <!-- endbuild -->
+
+	    <!--[if lt IE 9]>
+      <script src="Scripts/jquery1.11.0.js"></script>
+      <script src="Scripts/es5-shim.min.js"></script>
+      <script>
+        document.createElement('ui-select');
+        document.createElement('ui-select-match');
+        document.createElement('ui-select-choices');
+      </script>
+    <![endif]-->
+	
+    <!-- build:js Scripts/scriptsIndex.min.js -->
+    <!-- inject:js -->
+    <script src="Scripts/jquery-2.1.0.min.js"></script>
+
+    <script src="Scripts/jquery-ui-1.11.3.min.js"></script>
+
+    <!-- <script src="Scripts/jquery-1.9.1.js"></script>-->
+    <script src="Scripts/bootstrap.js"></script>
+    <script src="Scripts/toastr.js"></script>
+
+    <script src="Scripts/angular.js"></script>
+    <script src="Scripts/angular-ui-router.js"></script>
+    <script src="Scripts/i18n/angular-locale_es-mx.js"></script>
+
+    <script src="Scripts/angular-block-ui.min.js"></script>
+
+    <script src="Scripts/angular-animate.min.js"></script>
+    <script src="Scripts/angular-resource.js"></script>
+
+
+    <script src="Scripts/angular-ui/ui-bootstrap-tpls.js"></script>
+    <script src="Scripts/angular-local-storage.min.js"></script>
+
+    <!--Tablas-->
+    <script src="Scripts/DataTables/jquery.dataTables.js"></script>
+    <script src="Scripts/angular-datatables/angular-datatables.js"></script>
+    <script src="Scripts/DataTables/dataTables.bootstrap.js"></script>
+
+    <script src="Scripts/aes.js"></script>
+    <script src="Scripts/mdo-angular-cryptography.js"></script>
+
+
+    <script src="Scripts/DataTables/dataTables.responsive.min.js"></script>
+
+    <script src="Scripts/angular-datatables/angular-datatables.js"></script>
+    <script src="Scripts/angular-datatables/angular-datatables.util.js"></script>
+    <script src="Scripts/angular-datatables/angular-datatables.options.js"></script>
+    <script src="Scripts/angular-datatables/angular-datatables.instances.js"></script>
+    <script src="Scripts/angular-datatables/angular-datatables.factory.js"></script>
+    <script src="Scripts/angular-datatables/angular-datatables.renderer.js"></script>
+    <script src="Scripts/angular-datatables/angular-datatables.directive.js"></script>
+
+    <script src="Scripts/DataTables/dataTables.columnFilter.js"></script>
+    <script src="Scripts/angular-datatables/plugins/columnfilter/angular-datatables.columnfilter.js"></script>
+
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="Content/sb-admin-2/bower_components/metisMenu/dist/metisMenu.min.js"></script>
+    <!-- Custom Theme JavaScript -->
+    <script src="Content/sb-admin-2/dist/js/sb-admin-2.js"></script>
+    <script src="Scripts/jquery.motionCaptcha.0.2.js"></script>
+
+    <script src="Scripts/angular-ui-tree/angular-ui-tree.js"></script>
+    <script src="Scripts/angular-datatables/plugins/fixedcolumns/angular-datatables.fixedcolumns.js"></script>
+    <script src="scripts/globalineel.js"></script>
+    <script src="Scripts/select2/select.min.js"></script>
+    <script src="Scripts/angular-sanitize.js"></script>
+    <script src="Scripts/bootstrap-filestyle.min.js"></script>
+    <script src="Scripts/jquery.highlight.js"></script>
+    <script src="Scripts/dataTables.searchHighlight.min.js"></script>
+    <script src="Scripts/multiple-select.min.js"></script>
+
+    <script src="app/_services/ineel.services.js"></script>
+    <script src="Scripts/ng-tags-input.js"></script>
+    <script src="app/_services/ineel.controllers.js"></script>
+    <script src="app/vistasGenericas/directivas/directivasSIGCO.js"></script>
+    <script src="Scripts/angular-datatables/accent-neutralise.js"></script>
+    <script src="Scripts/globalINEEL.js"></script>
+
+    <script src="app/app.js"></script>
+
+    <script src="Scripts/switch/bsSwitch.js"></script>
+    
+    <script src="app/_services/factories/NuevoOc.js"></script>
+
+    <script src="app/_services/factories/authService.js"></script>
+    <script src="app/_services/factories/personas.service.js"></script>
+    <script src="app/_services/factories/menu.service.js"></script>
+    <script src="app/_services/factories/authInterceptorService.js"></script>
+    <!-- chart JS -->
+    <script src="Scripts/node_modules/angular-chart.js/node_modules/chart.js/dist/Chart.min.js"></script>
+    <script src="Scripts/node_modules/angular-chart.js/dist/angular-chart.min.js"></script>
+    <script src="app/home/controllers/graficach.ctrl.js"></script>
+
+    <script src="app/auth/controllers/indexController.js"></script>
+    <script src="app/auth/controllers/recuperapassword.ctrl.js"></script>
+    <script src="app/auth/controllers/newpassword.ctrl.js"></script>
+    <script src="app/auth/controllers/login.ctrl.js"></script>
+    <script src="app/auth/controllers/register.ctrl.js"></script>
+    <script src="app/home/controllers/cargardatos.ctrl.js"></script>
+    <script src="app/home/controllers/homeAuthorize.ctrl.js"></script>
+    <script src="app/home/suscripcion/controller/suscripcion.ctrl.js"></script>
+    <script src="app/vistasGenericas/SolicitudAcceso/controllers/SolicitudesAcceso.ctrl.js"></script>
+    <script src="app/_services/factories/Comun.service.js"></script>
+    <script src="app/home/controllers/cargardatosAnonimo.ctrl.js"></script>
+    <!-- endinject -->
+    <!-- endbuild -->
+    <style>
+        .row-centered {
+    text-align:center;
+}
+.col-centered {
+    display:inline-block;
+    float:none;
+    /* reset the text-align */
+    text-align:left;
+    /* inline-block space fix */
+    margin-right:-4px;
+}
+        .nav.navbar-nav > li > a {
+            color: white !important;
+        }
+
+        body {
+            background-color: lightgrey;
+        }
+        #wrap {
+	min-height:100%;
+	position:center;
+	
+	/*  TO-DO: this corner-shadow effect rapes safari in the bum:
+		-webkit-box-shadow: inset 0 0 300px rgba(0,0,0,0.5);
+		   -moz-box-shadow: inset 0 0 300px rgba(0,0,0,0.5);
+				box-shadow: inset 0 0 300px rgba(0,0,0,0.5);
+	*/
+}
+        /**
+ * jQuery MotionCAPTCHA Plugin CSS
+ * josscrowcroft.com/projects/motioncaptcha-jquery-plugin/
+ * 
+ * Only these rules are absolutely necessary for the plugin.
+ * NB. The width & height of the canvas can be flexible to fit your layout but there's a recommended min/max
+ * - if you need it much bigger/smaller, you could tweak the background-positions of the shape classes.
+ */
+
+/* The canvas: */
+#mc-canvas {
+	width:220px;  /* For best results, set width to between 210px and 240px */
+	height:154px; /* For best results, set height to between 140px and 170px */
+	background:#fff -9999px -9999px no-repeat;
+	background-image: url('images/motionCaptcha-shapes.jpg') !important;
+}
+
+/* The shapes: */
+#mc-canvas.triangle     { background-position:  10px   10px }
+#mc-canvas.x            { background-position:-200px   10px }
+#mc-canvas.rectangle    { background-position:-400px   10px }
+#mc-canvas.circle       { background-position:-600px   10px }
+#mc-canvas.check        { background-position:  10px -150px }
+#mc-canvas.caret        { background-position:-200px -150px }
+#mc-canvas.zigzag       { background-position:-400px -150px }
+#mc-canvas.arrow        { background-position:-600px -150px }
+#mc-canvas.leftbracket  { background-position:  10px -300px }
+#mc-canvas.rightbracket { background-position:-200px -300px }
+#mc-canvas.v            { background-position:-400px -300px }
+#mc-canvas.delete       { background-position:-600px -300px }
+#mc-canvas.leftbrace    { background-position:  10px -450px }
+#mc-canvas.rightbrace   { background-position:-200px -450px }
+#mc-canvas.star         { background-position:-400px -450px }
+#mc-canvas.pigtail      { background-position:-600px -450px }
+
+/* Disable mouse-selection on the page (only while user is actively drawing on the canvas): */
+.mc-noselect {
+	-webkit-user-select: none,
+	   -moz-user-select: none,
+	        user-select: none
+}
+    </style>
+</head>
+<body data-ng-controller="indexController">
+
+        <div class="headerFull">
+
+        </div>
+        <header class="clase-general">
+            <div class="navbar2">
+                <div class="floatLeft logo">
+                    <a class="navbar-brand" href="#"><img style="max-height:180%" class="img-responsive" src="images/logo_sigco.png" /></a>
+                </div>
+                <div class="navbar-brand sistema">
+                    <a href="#">
+                        <span class="titulos">Gesti&oacute;n del conocimiento (SIGCO)</span></a>
+                </div>
+                <div class="derecha" data-ng-show="!authentication.isAuth">
+                        <a class="" ui-sref="login" style="cursor:pointer">
+                            <span class="titulos">
+                                Autentif&iacute;cate</span>
+                                <span class="glyphicon glyphicon-user"></span>
+</a>
+                </div>
+            </div>
+            <!--<nav class="navbar navbar-fixed-top navbar-inverse">
+                <div style="min-width:944px;">
+
+                </div>
+            </nav>-->
+        </header>
+
+        <div class="clase-general vistaPrincipal">
+            <div ui-view>
+
+            </div>
+        </div>
+
+        <footer class="contentFooter">
+            <div class="clase-general">
+                <div class="fondoFooter">
+                    <div ng-include="'app/vistasGenericas/footer.html'">
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+
+
+</body>
+</html>

@@ -1,0 +1,106 @@
+﻿<div class="vista">
+
+    <div class="page-title">
+        <div class="title_left">
+
+            <ol class="breadcrumb miga">
+                <li><i class="disabled fa fa-cogs"></i> <a ui-sref="competenciatecnica({id:periodosev.periodoEvaluaionId})">Administración/Operación CT/Competencias técnicas</a></li>
+                <li class="active">Agregar</li>
+            </ol>
+
+        </div>
+    </div>
+    <div class="clearfix"></div>
+
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+                    <label class="detalle col-xs-12 " title="Período">
+                        Período :  {{periodosev.periodo}}
+                    </label>
+                    <br />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+
+                <div class="x_content sin-desborde">
+                    <form role="form" name="NivelCompetenciaForm" class="form-horizontal">
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Competencia <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <textarea ng-model="registro.competencia" required class="form-control" placeholder="Competencia" rows="5" cols="100"></textarea>                               
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Descripción <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <textarea ng-model="registro.descripcion" required class="form-control" placeholder="Descripción" rows="5" cols="200"></textarea>  
+                                
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Seleccione un tipo de área <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+
+                                <select id="dependencias" name="funcionpadre" class="form-control"
+                                        ng-model="registro.areaId"
+                                        ng-options="e.tipoAreaId as e.area  for e in areasev" ng-required="true">
+                                    <option value="">Ninguna</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Seleccione el nivel de competencia <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+
+                                <select id="dependencias" name="funcionpadre" class="form-control"
+                                        ng-model="registro.nivelId"
+                                        ng-options="e.nivelCompetenciaId as e.descripcion  for e in niveles" ng-required="true">
+                                    <option value="">Ninguna</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="ln_solid"></div>
+                        <div class="form-group">
+                            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                <div class="">
+                                    <button type="submit" class="btn btn-success" ng-click="save()">
+                                        <!--pendientes: adjuntos y  proyecto.selected-->
+                                        <i class="glyphicon glyphicon-saved"></i> Guardar
+                                    </button>
+                                    <button type="button" ui-sref="competenciatecnica({id:periodosev.periodoEvaluaionId})" class="btn btn-primary">
+                                        <span class="fa fa-arrow-left"></span> Regresar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+

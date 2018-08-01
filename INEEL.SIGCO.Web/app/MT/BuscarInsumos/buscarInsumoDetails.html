@@ -1,0 +1,157 @@
+<!-- page content -->
+<div class="vista">
+
+    <div class="page-title">
+        <div class="title_full">
+
+            <ol class="breadcrumb miga">
+                <li><i class="sg sg-insumos-proyect"></i> <a ui-sref="BuscarInsumos">Insumos de proyectos</a></li>
+                <li class="active">Detalles</li>
+            </ol>
+
+        </div>
+    </div>
+
+
+    <div class="clearfix"></div>
+    <!--registro:{{registro | json}}-->
+    <div class="row">
+        <div class="col-md-8 col-sm-8 col-xs-12">
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+                    <label class="detalle col-xs-12 sin-desborde" title="Nombre">
+                        {{registro.nombreIns}}
+                    </label>
+                    <label class="cont emc col-xs-12 colorTit sin-desborde">
+                        {{registro.tipoInsumo.descripcionInsumo}}
+                    </label>
+                    <label class="cont col-xs-12 sin-desborde">
+                        Responsable: {{registro.responsableIns}}
+                    </label>
+
+                    <label class="tit col-xs-12">
+                        Ubicaci&oacute;n del insumo
+                    </label>
+                    <label class="cont col-xs-12 sin-desborde">
+                        {{registro.ubicacionResIns}}
+                    </label>
+                    <label class="tit col-xs-12">
+                        Descripci&oacute;n
+                    </label>
+                    <label class="cont col-xs-12 sin-desborde">
+                        {{registro.descripcionIns}}
+                    </label>
+                </div>
+            </div>
+
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+                    <div class="x_title">
+                        <h2>Proyecto asociado</h2>
+                        <div class="clearfix"></div>
+                    </div>
+                    <label class="titFirst col-xs-12">
+                        Proyecto
+                    </label>
+                    <label class="cont col-xs-12">
+                        <a href="" load-proyectos idproyecto="{{registro.informeTecnicoFinal.proyecto.proyectoId}}" title="Detalle de proyecto">{{registro.informeTecnicoFinal.proyecto.proyectoId}}</a>- {{registro.informeTecnicoFinal.proyecto.nombre}}
+                        <!--{{registro.informeTecnicoFinal.proyecto.proyectoId}}-{{registro.informeTecnicoFinal.proyecto.nombre}}-->
+                    </label>
+                    <label class="tit col-xs-12">
+                        Jefe de proyecto
+                    </label>
+                        <div class="col-xs-12" style="cursor: hand;cursor: pointer;">
+                            <label class="cont linkTabla" ng-click="openProfile(registro.informeTecnicoFinal.proyecto.numjefeProyecto)" title="Detalle de empleado">
+                                {{registro.informeTecnicoFinal.proyecto.numjefeProyecto}}
+                            </label>
+                            <label class="cont ">
+                                -{{registro.informeTecnicoFinal.proyecto.nombreJefeProyecto}}
+                            </label>
+                        </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 col-sm-4 col-xs-12">
+
+
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Documentaci&oacute;n</h2>
+                    <div class="clearfix"></div>
+                </div>
+
+
+
+
+                <table class="table table-hover sin-desborde" ng-hide="registro.adjuntoITFInsumo.length == 0">
+                    <thead>
+                        <tr>
+                            <th>Archivo(s) adjunto(s):</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="adjunto in  registro.adjuntoITFInsumo">
+                            <td>
+                                <!--<span class="fa fa-download"></span>&nbsp;&nbsp; <a href="/Descargas.html#/q/{{adjunto.adjuntoId | encriptar}}" class="sin-desborde linkArchivo text" style="overflow-wrap:break-word; text-overflow:clip" ta target="_blank"> {{adjunto.adjunto.nombre | limitTo:40}}</a>-->
+
+                                <span class="text fa fa-lock sin-desborde" ng-if="!publico" style="max-width:200px">&nbsp;{{adjunto.adjunto.nombre | limitTo:40 }}</span>
+
+                                <span class="sin-desborde" style="max-width:200px">
+                                    <a href="/Descargas.html#/q/{{adjunto.adjunto.adjuntoId | encriptar}}" ng-if="publico" class="sin-desborde linkArchivo text" target="_blank">
+                                        <font class="linkTabla">&nbsp;{{adjunto.adjunto.nombre  | limitTo:40 }}</font>
+                                    </a>
+                                </span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+
+
+
+
+
+                <div ng-hide="registro.adjuntoITFInsumo.length == 0">
+                    <label class="tit col-xs-12">
+                        El control de acceso a los archivos es de tipo
+                    </label>
+
+                    <label class="cont col-xs-12">
+                        {{controlAcceso}}
+                    </label>
+                </div>
+
+                <div class="col-xs-12">
+                    <button ng-hide="publico || solicitudExistente || registro.adjuntoITFInsumo.length == 0" type="button"
+                            ng-click="solicitarAcceso()" class="btn btn-warning">
+                        <font class="fa fa-lock"></font> Solicitar Acceso
+                    </button>
+                </div>
+
+                <div class="col-xs-12" ng-hide="registro.adjuntoITFInsumo.length == 0">
+                    <div class="alert informacion" ng-show="solicitudExistente">
+                        <span class="glyphicon glyphicon-info-sign"></span><strong> Existe </strong> una solicitud de acceso en proceso
+                    </div>
+                    <div class="alert alert-info" ng-show="autorizado">
+                        Usuario <strong>autorizado </strong> para ver el contenido
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <button type="button" ng-click="globalRegresar()" class="btn btn-primary">
+                <span class="fa fa-arrow-left"></span> Regresar
+            </button>
+        </div>
+    </div>
+
+
+</div>

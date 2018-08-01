@@ -1,0 +1,23 @@
+<div class="modal-header">
+    <button type="button" class="close" ng-click="cancel()" data-dissmiss="modal">
+        <i class="glyphicon glyphicon-remove"></i>
+    </button>
+    <div class="col-xs-1"></div>
+    <div>
+        <h3>
+            {{tituloVideo}}
+        </h3>
+    </div>
+</div>
+<div class="modal-body">
+    <div class="row">
+        <div class="col-sm-12" style="text-align:center;">
+            <iframe title="YouTube video player" class="youtube-player" type="text/html"
+                    width="640" height="390" src="{{urlVideo}}"
+                    frameborder="0" allowFullScreen>
+            </iframe>
+
+
+        </div>
+    </div>
+</div>

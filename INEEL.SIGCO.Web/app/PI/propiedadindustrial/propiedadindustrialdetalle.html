@@ -1,0 +1,165 @@
+<div class="vista">
+    <div class="page-title">
+        <div class="title_full">
+            <ol class="breadcrumb miga">
+                <li><i class="glyphicon glyphicon-file"></i> <a ui-sref="propiedadindustrialget">Propiedad industrial</a></li>
+                <li class="active">Detalles</li>
+            </ol>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-8 col-sm-8 col-xs-12">
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+                    <label class="detalle col-xs-12 " title="Nombre">
+                        {{registro.titulo}}
+                    </label>
+                    <label ng-if="registro.unidadOrganizacional!=null" class="detalle_subtitulo col-xs-12">
+                        {{registro.unidadOrganizacional.nombreUnidad}}
+                    </label>
+                    <label class="cont col-xs-12 colorTit">
+                        {{registro.tipoPropiedadIndustrial.descripcion}}
+                    </label>
+                    <label class="cont col-xs-12" title="Tipo de software">
+                        {{registro.estado}}
+                    </label>
+                    <label ng-if="registro.proyecto!=null" class="tit col-xs-12">
+                        Proyecto
+                    </label>
+                    <label ng-if="registro.proyecto!=null" class="cont col-xs-12">
+                        <a href="" load-proyectos idproyecto="{{registro.proyecto.proyectoId}}" title="Detalle de proyecto">{{registro.proyecto.proyectoId}}</a>- {{registro.proyecto.nombre}}
+                    </label>
+                    <label class="tit col-xs-12">
+                        N&uacute;m. solicitud IMPI
+                    </label>
+                    <label class="cont col-xs-12">
+                        {{registro.expediente}}
+                    </label>
+                    <label class="tit col-xs-12">
+                        Fecha de presentaci&oacute;n
+                    </label>
+                    <label class="cont col-xs-12">
+                        {{registro.fechaPresentacion | date: 'dd/MM/yyyy'}}
+                    </label>
+                    <label class="tit col-xs-12">
+                        N&uacute;m. titulo IMPI
+                    </label>
+                    <label class="cont col-xs-12">
+                        {{registro.numeroTitulo}}
+                    </label>
+                    <label class="tit col-xs-12">
+                        Fecha expedici&oacute;n t&iacute;tulo
+                    </label>
+                    <label class="cont col-xs-12">
+                        {{registro.fechaExpedicion | date: 'dd/MM/yyyy'}}
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-sm-4 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Evidencia</h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content sin-desborde">
+                    <form name="fromfa" id="form" class="form-horizontal">
+
+
+
+                        <div class="form-group">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Archivo(s) adjunto(s):</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-hide="regFile">
+                                        <td>
+
+                                            <!--  <div class="form-group" ng-hide="regFile"> -->
+                                            <span class="fa fa-download"></span>&nbsp;&nbsp;<a href="/Descargas.html#/q/{{registro.adjunto.adjuntoId | encriptar}}"
+                                                class="linkTabla" target="_blank">Descargar Archivo </a>
+                                            <!--   </div>  -->
+
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!--
+                        <div class="form-group" ng-hide="regFile">
+                            <span class="fa fa-download"></span>&nbsp;&nbsp;<a href="/Descargas.html#/q/{{registro.adjunto.adjuntoId | encriptar}}" class="linkTabla" target="_blank">Descargar Archivo </a>
+                        </div>
+                            -->
+
+                        <div class="form-group">
+                            <div class="alert advertencia col-xs-12" ng-if="registro.estadoFlujoId==2">
+                                <span class="glyphicon glyphicon-info-sign"></span> El registro se encuentra en <strong> Revisi&oacute;n </strong>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="alert aprobado col-xs-12" ng-if="registro.estadoFlujoId==3">
+                                <span class="glyphicon glyphicon-info-sign"></span> El registro est&aacute; <strong> Aprobado </strong>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8 col-sm-8 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Autores de la propiedad industrial</h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content sin-desborde">
+                    <label>Autores internos</label><br />
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th class="thAjuste">N&uacute;m empleado</th>
+                                <th>Nombre de empleado</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="registro in registro.inventores | filter : {esExterno : false}" ng-click="openProfile(registro.clavePersona)">
+                                <td><a  title="Detalle de empleado" class="linkTabla"> {{registro.clavePersona}} </a> </td>
+                                <td>{{registro.nombre}}</td>
+                            </tr>
+                        </tbody>
+                    </table><br />
+                    <label>Autores externos</label><br />
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Organizaci&oacute;n</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="registro in registro.inventores | filter : {esExterno: true } ">
+                                <td>{{registro.nombre}}</td>
+                                <td>{{registro.institucion}}</td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <button type="submit" ng-click="volver()" class="btn btn-primary">
+                <span class="fa fa-arrow-left"></span> Regresar
+            </button>
+
+        </div>
+    </div>
+</div>

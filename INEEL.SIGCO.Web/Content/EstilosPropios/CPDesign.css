@@ -1,0 +1,118 @@
+﻿.timeline-cover{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  height: 300px;
+  width: 98%;
+  
+}
+.menuBar {
+    background: whitesmoke;
+    font-size: 140%;
+    border: 1px solid #cdcdc1;
+    width: auto;
+}
+.imageProfile {
+    position: absolute;
+    bottom: -25px;
+    left: 5.5%;
+    width: 20%;
+    height: auto;
+}
+.btnAdminCP {
+    position: absolute;
+    bottom: 8px;
+    right: 1%;
+    width: auto;
+    height: auto;
+}
+.nombreCP {
+    color: white;
+    position: absolute;
+    bottom: 5px;
+    left: 2.5%;
+    width: 95%;
+    height: auto;
+    background: rgba(0, 0, 0, .4);
+}
+.pruebaDatosCP {
+    color: white;
+    position: absolute;
+    bottom: 5px;
+    left: 2.5%;
+    width: 95%;
+    height: 30%;
+    background: rgba(0, 0, 0, .4);
+}
+.misionCP {
+    color: white;
+    position: absolute;
+    bottom: 40px;
+    width: 85%;
+    height: 25%;
+}
+.ta-editor {
+    max-height: 150px;
+    height: auto;
+    overflow: hidden;
+    font-family: inherit;
+    font-size: 100%;
+}
+.textoSIGCO {
+    color: #1ABB9C;
+}
+.fondoComentariosPost {
+    background-color: #f2f2f2;
+    margin: -15px 0 0 0;
+}
+.fotoUsuarioPost {
+    width: 50px;
+    height: 50px;
+}
+.fotoUsuarioComentario {
+    width: 30px;
+    height: 30px;
+}
+.placeHolderTextAngular {
+    color: #4c4c4c;
+    cursor: pointer;
+}
+
+.contenedorFotoChicaCP {
+    max-height:180px;
+    height:180px;
+    width:100%; 
+    overflow:hidden; 
+    vertical-align:middle;
+}
+
+
+.contenedorFotoChicaCP  img{
+    object-fit: cover;
+}
+
+.centered-and-cropped {object-fit: cover  }
+
+.pestania_inactiva {
+       color:#515356;
+       background:#e7e7e7;
+}
+
+.pestania_activa {
+       color:#FFF;
+       background:#73879C;
+}
+
+.colorFuentePestaniaActiva{
+    color: #FFFFFF !important
+}
+
+.colorFuentePestaniaInactiva{
+    color: #4c4c4c
+}
+
+.pestanias_cp{
+       color:#FFFFFF !important;
+       border-bottom: solid 3px #73879C;
+}
+

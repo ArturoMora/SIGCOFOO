@@ -1,0 +1,61 @@
+﻿<div class="modal-content">
+    <div class="modal-header">
+        Detalles iniciativa asociada
+        <button type="button" class="close" ng-click="cancel()" data-dissmiss="modal">x</button>
+    </div>
+    <div class="modal-body">
+        <div class="panel">
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label class="tit tit col-xs-12">No. Iniciativa </label>
+                            <span class="cont col-xs-12">{{iniciativaAsignadaDetail.folioId}}</span>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label class="tit tit col-xs-12">Clave </label>
+                            <span class="cont col-xs-12">{{iniciativaAsignadaDetail.claveEmpIniciativa}}</span>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <label class="tit tit col-xs-12">Nombre </label>
+                            <span class="cont col-xs-12">{{iniciativaAsignadaDetail.titulo}}</span>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <hr />
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <label class="tit tit col-xs-12">Empresa </label>
+                            <span class="cont col-xs-12"> {{iniciativaAsignadaDetail.empresa.nombreEmpresa}}</span>
+                        </div>
+                        <div class="form-group">
+                            <label class="tit tit col-xs-12" for="usr">Unidad Organizacional </label>
+                            <span class="cont col-xs-12"> {{iniciativaAsignadaDetail.unidadOrganizacionalEmpresas.nombreUnidad}}</span>
+                        </div>
+                        <div class="form-group">
+                            <label class="tit tit col-xs-12" for="usr">Contacto </label>
+                            <span class="cont col-xs-12"> {{iniciativaAsignadaDetail.contacto.nombreCompleto}}</span>
+                        </div>
+                        <div class="form-group">
+                            <label class="tit tit col-xs-12" for="usr">Monto </label>
+                            <span class="cont col-xs-12"> {{iniciativaAsignadaDetail.costo}}</span>
+                        </div>
+                        <div class="form-group">
+                            <label class="tit tit col-xs-12" for="usr">Fecha </label>
+                            <span class="cont col-xs-12">{{iniciativaAsignadaDetail.fecha | date:'dd-MM-yyyy'}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" ng-click="cancel()">Cerrar</button>
+    </div>
+</div>

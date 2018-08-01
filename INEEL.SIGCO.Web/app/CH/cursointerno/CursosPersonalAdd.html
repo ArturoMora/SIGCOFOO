@@ -1,0 +1,389 @@
+﻿<div ng-include="'app/vistasGenericas/header/registroNombrePersona.html'"> </div>
+<div class="vista">
+    <div class="page-title">
+        <div class="title_left">
+            <ol class="breadcrumb miga">
+                <li><i class="glyphicon glyphicon-file"></i> <a ui-sref="fichapersonal.cursointerno({seccion:'cursointerno'})">Cursos impartidos</a></li>
+                <li class="active">Agregar</li>
+            </ol>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+
+                    <form name="ValidForm" id="form" ng-submit="add()" class="form-horizontal">
+                        <div class="x_title">
+                            <h2>Informaci&oacute;n general <small>&iquest;De qu&eacute; se trata el curso?</small></h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Nombre del curso <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" class="form-control" id="usr" maxlength="300" required ng-model="registro.titulo" name="titulo">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Tipo de curso <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <select ng-model="registro.tipoCursoId" name="tipoCursoId" ng-options="curso.tipoCursoId as curso.descripcion for curso in cursos | orderBy:'descripcion' " required class="form-control">
+                                    <option value="">---Selecciona un Tipo de curso---</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Registrado por
+                            </label>
+                            <label class="span-label  col-md-6 col-sm-6 col-xs-12">
+                                {{registro.nombrePersona}}
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Descripci&oacute;n <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <textarea type="text" rows="3" maxlength="300" class="form-control" id="usr" required ng-model="registro.descripcion" name="descripcion"></textarea>
+                            </div>
+                        </div>
+                        <div class="x_title">
+                            <h2>Per&iacute;odo del curso</h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Inicio <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="row">
+                                    <div class="col-xs-10">
+
+
+                                     
+
+
+
+                                        <input placeholder="dd/mm/yyyy" 
+                                               ng-minlength="8" name="fechaInicio" maxlength="10" 
+                                               ng-init="open=false" type="text" show-button-bar="false" 
+                                               popup-placement="bottom"
+                                               datepicker-options="datePicker.FechaOptions" ng-change="validarFechas()"
+                                               class="form-control" required uib-datepicker-popup="dd/MM/yyyy" 
+                                               ng-model="registro.fechaCurso"
+                                               value="{{ date | date: 'dd/MM/yyyy' }}" is-open="open" ng-required="true" close-text="Close" />
+                                        <span ng-show="ValidForm.fechaInicio.$dirty &&  ValidForm.fechaInicio.$invalid" class="error">Formato inválido 'dd/MM/yyyy'</span>
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <button type="button" class="btn btn-success" ng-click="open=true"><i class="glyphicon glyphicon-calendar"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                T&eacute;rmino <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="row">
+                                    <div class="col-xs-10">
+                                        <input placeholder="dd/mm/yyyy" name="fechaTermino" ng-minlength="8" maxlength="10" ng-init="open2=false" type="text" show-button-bar="false" popup-placement="bottom"
+                                               class="form-control" datepicker-options="datePicker.FechaOptions" uib-datepicker-popup="dd/MM/yyyy" ng-model="registro.fechaTermino" value="{{ date | date: 'dd/MM/yyyy' }}"  ng-change="validarFechas2()"
+                                               is-open="open2" ng-required="true" close-text="Close" />
+                                        <span ng-show="ValidForm.fechaTermino.$dirty &&  ValidForm.fechaTermino.$invalid" class="error">Formato inválido 'dd/MM/yyyy'</span>
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <button type="button" class="btn btn-success" ng-click="open2=true"><i class="glyphicon glyphicon-calendar"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="x_title">
+                            <h2>Lugar del curso</h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Lugar
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <textarea type="text" rows="3" maxlength="300" class="form-control" id="usr" ng-model="registro.lugar"></textarea>
+                            </div>
+                        </div>
+                        <div class="x_title">
+                            <h2>Origen del curso</h2>
+                            <div class="clearfix"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Proyecto
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="row">
+                                    <div ng-class="registro.proyectoId == null  ? 'col-xs-10' : (registro.proyectoId != null ? 'col-xs-9' : 'col-xs-9')">
+                                        <input type="text" class="form-control" id="usr" name="proyecto" ng-model="registro.proyectoNombre" disabled>
+                                    </div>
+                                    <div ng-class="registro.proyectoId == null  ? 'col-xs-2' : (registro.proyectoId != null ? 'col-xs-3' : 'col-xs-3')">
+                                        <button type="button" class="btn btn-success" ng-click="openProyecto()" title="Buscar proyecto" ng-disabled="desabilitar">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                        </button>
+                                        <a  ng-if="registro.proyectoId!=null" class="btn btn-danger" ng-click="clean();ValidForm.$setDirty();"><i class="glyphicon glyphicon-remove" title="borrar"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                &iquest;Pertenece al centro de posgrado? 
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" name="optionsRadios" ng-model="registro.perteneceCP" ng-change="ValidForm.$setDirty();" value="1">Si
+                                    </label>
+                                    <label>
+                                        <input type="radio" name="optionsRadios" ng-checked="true" ng-model="registro.perteneceCP" value="0">No
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="x_title">
+                            <h2>Seguridad</h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Tipo de acceso 
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" ng-checked="true" ng-change="ValidForm.$setDirty();" ng-model="registro.privadoPublico" value="1">Privado
+                                    </label>
+                                    <label>
+                                        <input type="radio" ng-model="registro.privadoPublico" value="0">P&uacute;blico
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="x_title">
+                            <h2>Autores</h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                <span>Autores internos <span class="required">*</span></span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <a ng-click="openUser()" class="btn btn-success">
+                                    <span class="fa fa-user-plus"></span> Buscar
+                                </a>
+                                <div class="row">
+                                    <div class="col-md-12" ng-show="AutoresIIE.length > 0">
+                                        <table id="CHCursosPersonalAdd" class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" datatable="ng" width="100%" dt-options="dtOptions">
+                                            <thead>
+                                                <tr>
+                                                    <th>Clave</th>
+                                                    <th data-priority="1">Nombre</th>
+                                                    <th data-priority="3" class="thAjuste text-center">Opciones</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-repeat="autor in AutoresIIE">
+                                                    <td>{{autor.clavePersona}}</td>
+                                                    <td>{{autor.nombreCompleto}}</td>
+                                                    <td class="text-center">
+                                                        <div>
+                                                            <a title="Eliminar" ng-hide="autor.clavePersona==clavePersona" ng-click="eliminarAutor(autor);ValidForm.$setDirty();" class="btn btn-danger">
+                                                                <i class="glyphicon glyphicon-trash"></i>
+                                                            </a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Autores externos
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <a class="btn btn-success" ng-click="addExt=true">
+                                    <span class="fa fa-user-plus"></span> Agregar
+                                </a>
+                                <div ng-hide="!addExt">
+                                    <div class="col-md-12">
+                                        <div class="col-xs-5" style="padding-left:0;padding-right:0">
+                                            <input class="form-control" placeholder="Nombre" maxlength="150" ng-model="autorExt.nombre" />
+                                        </div>
+                                        <div class="col-sm-6" style="padding-left:0;padding-right:0">
+                                            <input class="form-control" placeholder="Organización" maxlength="150" ng-model="autorExt.institucion" />
+                                        </div>
+                                        <div class="col-sm-1">
+                                        </div>
+                                        <div class="col-sm-1" style="padding-left:0;padding-right:0">
+                                            <a title="Agregar" ng-click="add_userExt()" class="btn btn-success">
+                                                <i class="glyphicon glyphicon-ok"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div ng-show="AutoresExt.length > 0">
+                                    <table id="CHCursosPersonalAddAutoresExt" class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" datatable="ng" width="100%"
+                                           dt-options="dtOptions">
+                                        <thead>
+                                            <tr>
+                                                <th data-priority="1">Nombre</th>
+                                                <th>Organización</th>
+                                                <th data-priority="1" class="thAjuste text-center">Opciones</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="autor in AutoresExt">
+                                                <td>{{autor.nombre}}</td>
+                                                <td>{{autor.institucion}}</td>
+                                                <td class="text-center">
+                                                    <div>
+                                                        <a title="Eliminar" ng-click="eliminarAutorExt(autor);ValidForm.$setDirty();" class="btn btn-danger">
+                                                            <i class="glyphicon glyphicon-trash"></i>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="x_title">
+                            <h2>Ligas de acceso</h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12 sin-desborde">
+                                <div class="row">
+                                    <div class="col-xs-10">
+                                        <input type="url" name="descripcionLiga" class="form-control" maxlength="100"
+                                               ng-model="registro.descripcionLiga" ng-minlength="8" placeholder="http://www.dominio.com" />
+                                        <span class="error" ng-show="ValidForm.descripcionLiga.$dirty &&  !ValidForm.descripcionLiga.$valid || (ValidForm.$submitted && ValidForm.descripcionLiga.$invalid) ">Se requiere un sitio Web ejemplo: http://www.dominio.com</span>
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <a class="btn btn-success btn-sm"
+                                                ng-click="addLiga();ValidForm.$setDirty();">
+                                            <i class="glyphicon glyphicon-plus"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                <div class="col-md-12" ng-hide="sitiosWeb.length==0">
+                                    <table id="CHCursosPersonalAddsitiosWeb" class="table table-hover table-striped table-condensed dt-responsive " cellspacing="0" datatable="ng" width="100%" dt-options="dtOptions">
+                                        <thead>
+                                            <tr>
+                                                <th class="col-xs-9" data-priority="1">Ligas de Acceso</th>
+                                                <th class="col-xs-3">Eliminar</th>
+                                            </tr>
+                                        </thead>
+                                        <tr ng-repeat="task in sitiosWeb track by $index">
+                                            <td class="sin-desborde" style="max-width:200px">
+                                                <a href="{{task}}" ta target="_blank" title="{{task}}">
+                                                    {{task}}
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <button type="button" ng-really-click="deleteTask(sitiosWeb.indexOf(task));ValidForm.$setDirty();" class="btn btn-danger">
+                                                    <i class="glyphicon glyphicon-trash"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--Titulo Separador-->
+                        <div class="x_title">
+                            <h2>Evidencia <small>Tama&ntilde;o m&aacute;ximo por archivo de 8 MB, el formato de los archivos puede ser: PDF, DOC, DOCX</small></h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <!--FIN Titulo Separador-->
+
+
+
+                        <div class="form-group">
+
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Documento(s) adjunto(s)
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input class="input-file" type="file" name="filesGral" id="filesGral"
+                                       ng-click="saveIG();" ng-model="filesGral" data-buttonName="btn-success"
+                                       onchange="angular.element(this).scope().getFileDetails(this);" />
+                                <input type="hidden" name="archivos" ng-model="curso.archivos" />
+                                <div class="row">
+                                    <div class="col-xs-12" ng-show="archivosAdjuntos.length > 0">
+
+                                        <table id="adjuntos" class="table table-hover table-striped table-condensed dt-responsive">
+                                            <thead>
+                                                <tr>
+                                                    <th data-priority="1">Archivo</th>
+                                                    <th data-priority="1" class="thAjuste text-center">Opciones</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-repeat="archivo in archivosAdjuntos">
+                                                    <td style="max-width:200px" class="sin-desborde">{{archivo.nombre}}</td>
+                                                    <td class="text-center">
+                                                        <div>
+                                                            <a title="Eliminar" ng-really-click="eliminarFile(archivo)" class="btn btn-danger">
+                                                                <i class="glyphicon glyphicon-trash"></i>
+                                                            </a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="ln_solid"></div>
+                        <div class="form-group">
+                            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                <div class="">
+                                    <button type="submit" class="btn btn-success" >
+                                        <i class="glyphicon glyphicon-saved"></i> Guardar
+                                        <!--||archivosAdjuntos.length==0--> 
+                                    </button>
+                                    <button type="button" confirma-regresar="regresar()" state-form="ValidForm" class="btn btn-primary">
+                                        <span class="fa fa-arrow-left"></span> Regresar
+                                    </button>
+                                    <!-- <button type="button" ui-sref="fichapersonal.cursointerno({seccion:'cursointerno'})" class="btn btn-primary">
+                                        <span class="fa fa-arrow-left"></span> Regresar
+                                    </button> -->
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

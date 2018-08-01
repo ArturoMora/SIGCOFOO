@@ -1,0 +1,190 @@
+﻿<div class="vista">
+
+    <div class="page-title">
+        <div class="title_full">
+
+            <ol class="breadcrumb miga">
+                <li><i class="sg sg-articulos-ponencia-cap1"></i> <a ui-sref="CapitulosDetails">Cap&iacute;tulo de libro</a></li>
+                <li class="active">Detalles</li>
+            </ol>
+
+        </div>
+    </div>
+    <div data-ng-hide="authentication.isAuth">
+        No tiene permisos para ingresar a esta secci&oacute;n..<br /> Usuario no autentificado
+    </div>
+    <div data-ng-show="authentication.isAuth">
+
+        <div class="clearfix"></div>
+        <div class="row">
+            <div class="col-md-8 col-sm-8 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_content sin-desborde">
+                        <label class="detalle col-xs-12 sin-desborde" title="titulo">
+                            {{registro.tituloCapitulo}}
+                        </label>
+                        <label class="cont emc col-xs-12 colorTit sin-desborde">
+                            {{registro.tituloLibro}}
+                        </label>
+                        <!--</div>
+            </div>
+            <div class="x_panel">
+                <div class="x_content sin-desborde">-->
+                        <!--<div class="x_title">
+                <h2>Editorial</h2>
+                <div class="clearfix"></div>
+            </div>-->
+
+                        <label class="tit col-xs-12">
+                            Editorial
+                        </label>
+                        <label class="cont col-xs-12 sin-desborde">
+                            {{registro.editorial}}
+                        </label>
+                        <label class="tit col-xs-12">
+                            Pa&iacute;s
+                        </label>
+                        <label class="cont col-xs-12">
+                            {{pais.descripcion}}
+                        </label>
+                        <label class="tit col-xs-12">
+                            <label>A&ntilde;o</label>
+                        </label>
+                        <label class="cont col-xs-12">
+                            {{registro.year | date:'yyyy'}}
+                        </label>
+                        <label class="tit col-xs-12">
+                            ISBN
+                        </label>
+                        <label class="cont col-xs-12 sin-desborde">
+                            {{registro.isbn}}
+                        </label>
+                        <label class="tit col-xs-12">
+                            Resumen
+                        </label>
+                        <label class="cont col-xs-12 sin-desborde">
+                            {{registro.abstract}}
+                        </label>
+
+                    </div>
+                </div>
+
+                <div class="x_panel">
+                    <div class="x_content sin-desborde">
+                        <div class="x_title">
+                            <h2>Autores</h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group sin-desborde">
+                            <label>Autores Internos</label>
+                            <div ng-show="registro.autorInternoCapitulo.length ==0" class="alert advertencia">
+                                No hay registros de autores internos
+                            </div>
+                            <table class="table table-hover" ng-show="registro.autorInternoCapitulo.length>0||registro.autorExternoCapitulo.length>0">
+                                <thead>
+                                    <tr>
+                                        <th class="thAjuste">Clave</th>
+                                        <th>Nombre</th>
+                                        <th class="thAjusteColaboracion text-center">Orden de autor</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="registro in registro.autorInternoCapitulo">
+                                        <td>
+                                            <a class="linkTabla" ng-click="openProfile(registro.clavePersona)" style="cursor: hand;cursor: pointer;" title="Detalle de empleado"> {{registro.clavePersona}}</a>
+                                        </td>
+                                        <td>{{registro.nombreCompleto}}</td>
+                                        <td class="text-center">{{registro.contribucion}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="form-group">
+                            <label>Autores Externos</label><br />
+                            <div ng-show="registro.autorExternoCapitulo.length ==0" class="alert advertencia">
+                                No hay registros de autores internos
+                            </div>
+                            <table class="table table-hover" ng-show="registro.autorExternoCapitulo.length>0">
+                                <thead>
+                                    <tr>
+                                        <th>Nombre</th>
+                                        <th>Instituci&oacute;n</th>
+                                        <th class="text-center">Orden de autor</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="registro in registro.autorExternoCapitulo">
+                                        <td style="max-width:100px" class="sin-desborde">{{registro.nombre}}</td>
+                                        <td style="max-width:100px" class="sin-desborde">{{registro.institucion}}</td>
+                                        <td class="text-center thAjusteColaboracion">{{registro.contribucion}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="x_panel">
+                    <div class="x_content sin-desborde">
+                        <form name="ValidForm" id="form" class="form-horizontal">
+                            <div class="x_title">
+                                <h2>Aprobaci&oacute;n de solicitud : Alta de cap&iacute;tulo de libro </h2>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="form-group">
+                                <label>Justificaci&oacute;n</label><span class="required">*</span>
+                                <textarea id="just" name="just" class="form-control" ng-model="justificacion" placeholder="Gerente: favor de escribir una justificaci&oacute;n para activar los botones Aprobar y Regresar solicitud" maxlength="500" ng-required="true" required></textarea>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-success" ng-really-click="save(1)" ng-disabled="!ValidForm.just.$valid" ng-really-message="{{aprobacionQ}}">
+                                    <i class="glyphicon glyphicon-saved"></i> Aprobar solicitud
+                                </button>
+                                <button type="submit" class="btn btn-warning" ng-really-click="save(2)" ng-disabled="!ValidForm.just.$valid" ng-really-message="{{rechazoQ}}">
+                                    <i class="fa fa-reply"></i> Regresar solicitud
+                                </button>
+                            </div>
+                         </form>
+                    </div>
+                </div>
+                 
+            </div>
+            <div class="col-md-4 col-sm-4 col-xs-12">
+                <div class="x_panel sin-desborde" ng-show="registro.editoresCapitulo.length>0">
+                    <div class="x_title">
+                        <h2>Editores</h2>
+                        <div class="clearfix"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <dl ng-repeat="registro in registro.editoresCapitulo">
+                            <dt>                               
+                                <label class="fa fa-leanpub sin-desborde fa-font">&nbsp;{{registro.editor_Nombre}}</label>
+                            </dt>
+                        </dl>
+
+                    </div>
+                    
+                </div>
+                <div class="x_panel" ng-show="registro.adjunto!=null">
+                    <div class="x_title">
+                        <h2>Documentaci&oacute;n</h2>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="form-group" ng-hide="regFile">
+                        <span class="fa fa-download"></span>&nbsp;&nbsp;<a href="/Descargas.html#/q/{{registro.adjunto.adjuntoId | encriptar}}" class="linkTabla" target="_blank">Descargar Archivo </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <button type="submit" ng-click="globalRegresar();" class="btn btn-primary" style="padding-right:15px">
+                <span class="fa fa-arrow-left"></span> Regresar
+            </button>
+        </div>
+    </div>
+</div>

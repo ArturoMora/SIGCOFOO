@@ -1,0 +1,22 @@
+
+    <div class="modal-header">
+        Solicitar acceso a un objeto de conocimiento
+        <button type="button" class="close" ng-click="cancel()" data-dissmiss="modal">x</button>
+    </div>
+    <div class="modal-body">
+        <strong>Elemento solicitado del proyecto: </strong>{{Proyecto}}</br>
+        <strong>Justificaci&oacute;n:</strong>:<a style="color:red;font-weight:bold">*</a>
+        <div class="form-group">
+            <form class="form-horizontal" name="Buscar">
+                <textarea class="form-control" id="justificacion" name="justificacion"
+                          ng-model="justificacion" ng-maxlength="500"
+                          ng-minlength="3" required ></textarea>
+                <span class="error" ng-show="Buscar.justificacion.$dirty && !Buscar.justificacion.$valid">Dato requerido, con longitud m&iacute;nimo de 3 y m&aacute;xima de 500</span>
+            </form>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" ng-click="ok(justificacion)">Si</button>
+        <button type="button" class="btn btn-default" ng-click="cancel()">No</button>
+    </div>
+

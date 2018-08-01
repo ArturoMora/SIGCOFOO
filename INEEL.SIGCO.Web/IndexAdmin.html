@@ -1,0 +1,378 @@
+﻿<!DOCTYPE html>
+<html lang="es-mx" ng-app="ineelGEN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Administración de catálogos del sistema</title>
+    <!-- Bootstrap -->
+    <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
+    <!-- iCheck -->
+    <link href="../vendors/iCheck/skins/flat/green.css" rel="stylesheet">
+    <!-- bootstrap-progressbar -->
+    <link href="../vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
+    <!-- JQVMap -->
+    <link href="../vendors/jqvmap/dist/jqvmap.min.css" rel="stylesheet" />
+    <!-- bootstrap-daterangepicker -->
+    <link href="../vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+    <!-- Custom Theme Style -->
+    <link href="Content/custom.css" rel="stylesheet">
+
+
+    <!--Mensajes Toastr-->
+    <link href="Content/toastr.css" rel="stylesheet" />
+    <!--Tablas responsivas-->
+    <link href="Content/EstilosPropios/jquery.dataTablesINEEL.css" rel="stylesheet" />
+    <link href="Content/DataTables/css/dataTables.responsive.css" rel="stylesheet" />
+    <!--Estilos propios-->
+    <link href="Content/EstilosPropios/StyleAuthorize.css" rel="stylesheet" />
+    <link href="Content/EstilosPropios/StyleModulos.css" rel="stylesheet" />
+    <!--Estilos propios del modulo-->
+    <link href="Content/angular-ui-tree/angular-ui-tree.css" rel="stylesheet" />
+    <link href="Content/EstilosPropios/ControlesEspeciales.css" rel="stylesheet" />
+    <link href="Content/EstilosPropios/fabForm.css" rel="stylesheet" />
+    <link href="Content/angular-block-ui.min.css" rel="stylesheet" />
+
+    <link href="Content/select2/select.min.css" rel="stylesheet" />
+    <link href="Content/select2/select2.css" rel="stylesheet" />
+    <link href="Content/select2/selectize.default.css" rel="stylesheet" />
+    <link href="Content/angucomplete-alt.css" rel="stylesheet" />
+    <link href="Content/multiple-select.min.css" rel="stylesheet" />
+
+    <!--
+      IE8 support, see AngularJS Internet Explorer Compatibility http://docs.angularjs.org/guide/ie
+      For Firefox 3.6, you will also need to include jQuery and ECMAScript 5 shim
+    -->
+    <!--[if lt IE 9]>
+      <script src="Scripts/jquery1.11.0.js"></script>
+      <script src="Scripts/es5-shim.min.js"></script>
+      <script>
+        document.createElement('ui-select');
+        document.createElement('ui-select-match');
+        document.createElement('ui-select-choices');
+      </script>
+    <![endif]-->
+    <!--<link href="Content/dx.common.css" rel="stylesheet" />-->
+
+    <script src="Scripts/jquery-2.1.0.min.js"></script>
+    <script src="Scripts/jquery-ui-1.11.3.min.js"></script>
+
+    <!-- <script src="Scripts/jquery-1.9.1.js"></script>-->
+    <script src="Scripts/bootstrap.js"></script>
+
+    <!-- plantilla -->
+    <!-- FastClick -->
+    <script src="../vendors/fastclick/lib/fastclick.js"></script>
+    <!-- NProgress -->
+    <script src="../vendors/nprogress/nprogress.js"></script>
+    <!-- Chart.js -->
+    <script src="../vendors/Chart.js/dist/Chart.min.js"></script>
+    <!-- gauge.js -->
+    <script src="../vendors/gauge.js/dist/gauge.min.js"></script>
+    <!-- bootstrap-progressbar -->
+    <script src="../vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+    <!-- iCheck -->
+    <script src="../vendors/iCheck/icheck.min.js"></script>
+    <!-- Skycons -->
+    <script src="../vendors/skycons/skycons.js"></script>
+    <!-- Flot -->
+    <script src="../vendors/Flot/jquery.flot.js"></script>
+    <script src="../vendors/Flot/jquery.flot.pie.js"></script>
+    <script src="../vendors/Flot/jquery.flot.time.js"></script>
+    <script src="../vendors/Flot/jquery.flot.stack.js"></script>
+    <script src="../vendors/Flot/jquery.flot.resize.js"></script>
+    <!-- Flot plugins -->
+    <script src="../vendors/flot.orderbars/js/jquery.flot.orderBars.js"></script>
+    <script src="../vendors/flot-spline/js/jquery.flot.spline.min.js"></script>
+    <script src="../vendors/flot.curvedlines/curvedLines.js"></script>
+    <!-- DateJS -->
+    <script src="../vendors/DateJS/build/date.js"></script>
+    <!-- JQVMap -->
+    <script src="../vendors/jqvmap/dist/jquery.vmap.js"></script>
+    <script src="../vendors/jqvmap/dist/maps/jquery.vmap.world.js"></script>
+    <script src="../vendors/jqvmap/examples/js/jquery.vmap.sampledata.js"></script>
+
+
+    <script src="Scripts/toastr.js"></script>
+
+    <script src="Scripts/angular.js"></script>
+    <script src="Scripts/angular-ui-router.js"></script>
+    <script src="Scripts/i18n/angular-locale_es-mx.js"></script>
+
+    <script src="Scripts/angular-block-ui.min.js"></script>
+
+    <script src="Scripts/angular-animate.min.js"></script>
+    <script src="Scripts/angular-resource.js"></script>
+
+
+    <script src="Scripts/angular-ui/ui-bootstrap-tpls.js"></script>
+    <script src="Scripts/angular-local-storage.min.js"></script>
+
+    <!--Tablas-->
+    <script src="Scripts/DataTables/jquery.dataTables.js"></script>
+    <script src="Scripts/angular-datatables/angular-datatables.js"></script>
+    <script src="Scripts/DataTables/dataTables.bootstrap.js"></script>
+
+    <script src="Scripts/aes.js"></script>
+    <script src="Scripts/mdo-angular-cryptography.js"></script>
+
+
+    <script src="Scripts/DataTables/dataTables.responsive.min.js"></script>
+
+    <script src="Scripts/angular-datatables/angular-datatables.js"></script>
+    <script src="Scripts/angular-datatables/angular-datatables.util.js"></script>
+    <script src="Scripts/angular-datatables/angular-datatables.options.js"></script>
+    <script src="Scripts/angular-datatables/angular-datatables.instances.js"></script>
+    <script src="Scripts/angular-datatables/angular-datatables.factory.js"></script>
+    <script src="Scripts/angular-datatables/angular-datatables.renderer.js"></script>
+    <script src="Scripts/angular-datatables/angular-datatables.directive.js"></script>
+
+    <script src="Scripts/DataTables/dataTables.columnFilter.js"></script>
+    <script src="Scripts/angular-datatables/plugins/columnfilter/angular-datatables.columnfilter.js"></script>
+
+
+
+
+    <script src="Scripts/angular-ui-tree/angular-ui-tree.js"></script>
+    <script src="Scripts/angular-datatables/plugins/fixedcolumns/angular-datatables.fixedcolumns.js"></script>
+    <script src="scripts/globalineel.js"></script>
+    <script src="Scripts/select2/select.min.js"></script>
+    <script src="Scripts/angular-sanitize.js"></script>
+    <script src="Scripts/bootstrap-filestyle.min.js"></script>
+    <script src="Scripts/jquery.highlight.js"></script>
+    <script src="Scripts/dataTables.searchHighlight.min.js"></script>
+    <script src="Scripts/multiple-select.min.js"></script>
+
+    <script src="Scripts/angular-messages.min.js"></script>
+    <script src="Scripts/ng-fab-form.js"></script>
+    <script src="app/_services/ineel.services.js"></script>
+    <script src="Scripts/ng-tags-input.js"></script>
+    <script src="app/_services/ineel.controllers.js"></script>
+    <script src="app/vistasGenericas/directivas/directivasSIGCO.js"></script>
+    <script src="Scripts/angular-datatables/accent-neutralise.js"></script>
+
+
+    <script src="Scripts/globalINEEL.js"></script>
+    <script src="app/_services/ineel.services.js"></script>
+
+    <script src="app/GEN/appGEN.js"></script>
+
+    <script src="app/_services/factories/authService.js"></script>
+    <script src="app/_services/factories/menu.service.js"></script>
+    <script src="app/_services/factories/permisos.service.js"></script>
+    <script src="app/_services/factories/personas.service.js"></script>
+
+    <script src="app/_services/factories/authInterceptorService.js"></script>
+
+    <script src="app/GEN/_services/ineel.GEN.services.js"></script>
+
+    <!-- Home -->
+    <script src="app/GEN/home/controllers/homeGEN.ctrl.js"></script>
+
+    <!-- Roles de usuario -->
+    <script src="app/GEN/_services/catalogos/roles.GEN.service.js"></script>
+    <script src="app/GEN/Roles/controllers/RolesGet.ctrl.js"></script>
+    <script src="app/GEN/Roles/controllers/RolesAdd.ctrl.js"></script>
+    <script src="app/GEN/Roles/controllers/RolesEdit.ctrl.js"></script>
+
+    <!-- Modulos del sistema -->
+    <script src="app/GEN/_services/catalogos/modulos.GEN.service.js"></script>
+
+    <script src="app/GEN/Modulos/controllers/ModulosAdd.ctrl.js"></script>
+    <script src="app/GEN/Modulos/controllers/ModulosEdit.ctrl.js"></script>
+    <script src="app/GEN/Modulos/controllers/ModulosGet.ctrl.js"></script>
+
+    <script src="app/GEN/_services/catalogos/categorias.GEN.service.js"></script>
+    <script src="app/GEN/_services/catalogos/funciones.GEN.service.js"></script>
+    <script src="app/GEN/_services/catalogos/personas.GEN.service.js"></script>
+    <script src="app/GEN/_services/catalogos/tipopersonal.GEN.service.js"></script>
+    <script src="app/GEN/_services/catalogos/tipounidad.GEN.service.js"></script>
+    <script src="app/GEN/_services/catalogos/ubicacion.GEN.service.js"></script>
+    <script src="app/GEN/_services/catalogos/unidad.GEN.service.js"></script>
+    <script src="app/GEN/_services/catalogos/plaza.GEN.service.js"></script>
+    <script src="app/GEN/_services/catalogos/RolPersona.GEN.service.js"></script>
+
+    <script src="app/GEN/_services/catalogos/rolfunciones.GEN.service.js"></script>
+
+    <script src="app/GEN/Categorias/controllers/CategoriasAdd.ctrl.js"></script>
+    <script src="app/GEN/Categorias/controllers/CategoriasEdit.ctrl.js"></script>
+    <script src="app/GEN/Categorias/controllers/CategoriasGet.ctrl.js"></script>
+
+    <script src="app/GEN/Funciones/controllers/FuncionesAdd.ctrl.js"></script>
+    <script src="app/GEN/Funciones/controllers/FuncionesEdit.ctrl.js"></script>
+    <script src="app/GEN/Funciones/controllers/FuncionesGet.ctrl.js"></script>
+
+    <script src="app/GEN/Personas/controllers/PersonasAdd.ctrl.js"></script>
+    <script src="app/GEN/Personas/controllers/PersonasEdit.ctrl.js"></script>
+    <script src="app/GEN/Personas/controllers/PersonasGet.ctrl.js"></script>
+
+    <script src="app/GEN/TipoPersonal/controllers/TipoPersonalAdd.ctrl.js"></script>
+    <script src="app/GEN/TipoPersonal/controllers/TipoPersonalEdit.ctrl.js"></script>
+    <script src="app/GEN/TipoPersonal/controllers/TipoPersonalGet.ctrl.js"></script>
+
+    <script src="app/GEN/TipoUnidad/controllers/TipoUnidadAdd.ctrl.js"></script>
+    <script src="app/GEN/TipoUnidad/controllers/TipoUnidadEdit.ctrl.js"></script>
+    <script src="app/GEN/TipoUnidad/controllers/TipoUnidadGet.ctrl.js"></script>
+
+    <script src="app/GEN/UbicacionAreas/controllers/UbicacionesAdd.ctrl.js"></script>
+    <script src="app/GEN/UbicacionAreas/controllers/UbicacionesEdit.ctrl.js"></script>
+    <script src="app/GEN/UbicacionAreas/controllers/UbicacionesGet.ctrl.js"></script>
+
+    <script src="app/GEN/Unidad/controllers/UnidadAdd.ctrl.js"></script>
+    <script src="app/GEN/Unidad/controllers/UnidadEdit.ctrl.js"></script>
+    <script src="app/GEN/Unidad/controllers/UnidadGet.ctrl.js"></script>
+
+    <script src="app/GEN/Plaza/controllers/PlazaAdd.ctrl.js"></script>
+    <script src="app/GEN/Plaza/controllers/PlazaEdit.ctrl.js"></script>
+    <script src="app/GEN/Plaza/controllers/PlazaGet.ctrl.js"></script>
+
+    <script src="app/GEN/RolFunciones/controllers/RolFuncionesAdd.ctrl.js"></script>
+    <script src="app/GEN/RolFunciones/controllers/RolFuncionesEdit.ctrl.js"></script>
+    <script src="app/GEN/RolFunciones/controllers/RolFuncionesGet.ctrl.js"></script>
+
+    <script src="app/GEN/RolPersona/controllers/RolPersonaGet.ctrl.js"></script>
+    <script src="app/GEN/RolPersona/controllers/RolPersonaEdit.ctrl.js"></script>
+
+    <script src="app/GEN/Personas/controllers/PersonasFilter.ctrl.js"></script>
+    <script src="app/GEN/BuscarProyectos/controllers/ProyectosGet.ctrl.js"></script>
+
+    <!-- Busquedas genericas-->
+    <script src="app/vistasGenericas/_services/buscarPersonas.GEN.service.js"></script>
+    <script src="app/vistasGenericas/_services/buscarProyectos.GEN.service.js"></script>
+
+
+    <script src="app/vistasGenericas/controllers/PersonasFilterGet.ctrlGEN.js"></script>
+
+
+    <!-- FIN de Busquedas genericas-->
+</head>
+<body class="nav-md" data-ng-controller="homeGENCtrl">
+    <div class="info-servidor-desplegado">{{'' | getInfoServidorDesplegado}}</div>
+    <div class="container body">
+        <div class="main_container">
+            <div class="col-md-3 left_col">
+                <div class="left_col scroll-view bg-gradient-menuv">
+                    <div class="navbar nav_title bg-gradient-menuv" style="border: 0;">
+                        <a href="sigco.html" class="site_title">
+                            <img src="images/logo_sigco.png" />
+                            <span class="titLogo">&nbsp;SIGCO</span>
+                        </a>
+                    </div>
+                    <div class="clearfix"></div>
+
+                    <br />
+
+
+                    <!-- sidebar menu -->
+                    <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+                        <div class="menu_section">
+                            <h3>&nbsp;</h3>
+                            <ul class="nav side-menu">
+                                <li ng-repeat="opcion in funciones" ng-if="opcion.funcion.nivel==0" ng-show="opcion.funcion.idModulo==modulo">
+                                    <a ng-if="opcion.funcion.children.length ==0" ng-href="{{opcion.funcion.url}}">
+                                        <i class="{{opcion.funcion.claseIcono}}"> </i>&nbsp;{{opcion.funcion.nombre}}
+                                    </a>
+
+                                    <a ng-if="opcion.funcion.children.length > 0">
+                                        <i class="{{opcion.funcion.claseIcono}}"></i>
+                                        &nbsp;{{opcion.funcion.nombre}}<span class="fa fa-chevron-down"></span>
+                                    </a>
+                                    <ul ng-if="opcion.funcion.children.length > 0 " class="nav child_menu">
+                                        <li ng-repeat="opc in funciones" ng-if="opc.funcion.nivel==1 && opc.funcion.idPadre == opcion.funcion.funcionesId">
+                                            <a ng-if="opc.funcion.children.length ==0" ui-sref="{{opc.funcion.state}}"> &nbsp;{{opc.funcion.nombre}} </a>
+
+                                            <a ng-if="opc.funcion.children.length > 0">
+                                                &nbsp;{{opc.funcion.nombre}}<span class="fa fa-chevron-down"></span>
+                                            </a>
+                                            <ul class="nav child_menu" ng-if="opc.funcion.children.length > 0 ">
+                                                <li ng-repeat="opc3 in funciones" ng-if="opc3.funcion.nivel==2 && opc3.funcion.idPadre == opc.funcion.funcionesId">
+
+                                                    <a href="{{opc3.funcion.url}}" ng-show="opc3.funcion.idModulo ==modulo"> &nbsp;{{opc3.funcion.nombre}}</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+
+                            </ul>
+                            <!--funciones : {{funciones | json}}-->
+                        </div>
+
+
+
+                    </div>
+                    <!-- /sidebar menu -->
+
+                </div>
+            </div>
+            <!-- top navigation -->
+            <div class="top_nav ">
+                <div class="nav_menu">
+                    <nav class="" role="navigation">
+                        <div class="nav toggle">
+                            <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+                        </div>
+                        <ul class="hidden-xs nav navbar-nav navbar-left" data-ng-hide="!authentication.isAuth">
+
+                            <li class=""><a href="/indexCH.html" class="btn-moduls   "><font class="whiteM">CH</font></a></li>
+                            <li class=""> <a href="/indexMT.html" class="btn-moduls   "><font class="whiteM">MT</font></a></li>
+                            <li class=""> <a href="/indexCR.html" class="btn-moduls   "><font class="whiteM">CR</font></a></li>
+                            <li class=""> <a href="/indexCP.html" class="btn-moduls   "><font class="whiteM">CP</font></a></li>
+                            <!---<li class=""> <a href="/indexCR.html" class="btn-moduls   "><font class="whiteM">GI</font></a></li>
+                            <li class=""> <a href="/indexCR.html" class="btn-moduls   "><font class="whiteM">PI</font></a></li>-->
+                            <li class=""> <a href="/IndexAdmin.html" class="btn-moduls   colorActivo  "><font class="whiteM">Adm</font></a></li>
+
+                        </ul>
+
+
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="">
+                                <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                    <span class="glyphicon glyphicon-user"></span>&nbsp;{{authentication.nombreCompleto}}&nbsp;/&nbsp;{{rolDescripcion}}
+                                    <span class=" fa fa-angle-down"></span>
+                                </a>
+                                <ul class="dropdown-menu dropdown-usermenu pull-right">
+                                    <li><a ng-click="openchangepassword();"><i class="glyphicon glyphicon-lock pull-right"></i>Cambiar contraseña</a></li>
+                                    <li><a href="IndexCH.html#/fichapersonal/" ><i class="glyphicon glyphicon-user pull-right"></i>{{''|getFichaPersonal}}</a></li>
+                                    <li><a href="" data-ng-click="logOut()"><i class="fa fa-sign-out pull-right"></i>Cerrar sesi&oacute;n</a></li>
+                                </ul>
+                            </li>
+
+                        </ul>
+
+                    </nav>
+                </div>
+            </div>
+            <!-- /top navigation -->
+            <!-- page content -->
+            <div role="main" class="right_col">
+                <!-- top tiles -->
+                <div ui-view>
+
+                </div>
+            </div>
+            <!-- /page content -->
+            <!-- footer content -->
+            <footer>
+                <div class="pull-right">
+                    SIGCO3
+                </div>
+                <div class="clearfix"></div>
+            </footer>
+            <!-- /footer content -->
+        </div>
+    </div>
+
+    <!-- Custom Theme Scripts -->
+    <script src="Scripts/custom.js"></script>
+    <!-- endPlantilla-->
+
+</body>
+</html>

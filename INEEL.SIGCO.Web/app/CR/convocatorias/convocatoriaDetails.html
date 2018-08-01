@@ -1,0 +1,158 @@
+<div class="vista">
+    <div class="page-title">
+        <div class="title_left">
+
+            <ol class="breadcrumb miga">
+                <li>
+                    <i class="sg sg-fuentes-financiamiento"></i>
+                    <a ui-sref="convocatoriasGet">Fuentes de financiamiento / Convocatorias</a>
+                </li>
+                <li class="active">Detalles</li>
+            </ol>
+
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-8 col-sm-8 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Informaci&oacute;n general
+                    </h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content text-overflow">
+                    <label class="detalle col-xs-12 " title="Nombre">
+                        {{convocatorias.nombreConvocatoria}}
+                    </label>
+                    <label class="cont col-xs-12">
+                        {{convocatorias.descripcion}}
+                    </label>
+                    <div class="form-group">
+
+                        <label class="tit col-xs-12">
+                            Fecha de apertura
+                            <span class="span-label">{{convocatorias.fechaInicio | date:"dd/MM/yyyy"}}</span>
+                        </label>
+                        <label class="tit col-xs-12">
+                            Fecha de cierre
+                            <span class="span-label">{{convocatorias.fechaTermino | date:"dd/MM/yyyy"}}</span>
+                        </label>
+                    </div>
+                    <label class="tit col-xs-12">
+                        Fondo o programa
+                    </label>
+                    <label class="cont col-xs-12">
+                        {{convocatorias.fondoPrograma.nombreFP}}
+                    </label>
+                    <label class="tit col-xs-12" ng-hide="convocatorias.fondoPrograma.length ==0">
+                        Fuente de financiamiento
+                    </label>
+                    <label class="cont col-xs-12" ng-hide="convocatorias.fondoPrograma.length ==0">
+                        {{convocatorias.fondoPrograma.fuenteFinanciamiento.nombreFF}}
+                    </label>
+                    <label class="tit col-xs-12">
+                        Fecha registro
+                    </label>
+                    <label class="cont col-xs-12">
+                        {{convocatorias.fechaRegistro | date:"dd/MM/yyyy"}}
+                    </label>
+                    <label class="tit col-xs-12">
+                        Tipo de convocatoria
+                    </label>
+                    <label class="cont col-xs-12">{{convocatorias.tipoFuenteFinanciamiento.descripcion}}
+                    </label>
+                    <label class="tit col-xs-12" ng-if="convocatorias.paises.legnth >0">
+                        Paises involucrados
+                    </label>
+                    <label class="cont col-xs-12">
+                        <ul>
+                            <li ng-repeat=" pais in convocatorias.paises">
+                                {{pais.pais.descripcion}}
+                            </li>
+                        </ul>
+                    </label>
+                    <label class="tit col-xs-12">
+                        Observaciones
+                    </label>
+                    <div>
+                        <br/>
+                        <br/>
+                    </div>
+
+                    <div ta-bind ng-model="convocatorias.observaciones"></div>
+                    <br/>
+                    <!-- Para mas info:  https://github.com/textAngular/textAngular/wiki -->
+
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-4 col-sm-4 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Datos de contacto
+                    </h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content sin-desborde">
+                    <div class="alert advertencia col-xs-12" ng-show="convocatorias.contactoPorConvocatoria.length==0">
+                        No hay registros de contactos
+                    </div>
+                    <div ng-repeat="e in convocatorias.contactoPorConvocatoria">
+                        <br/>&nbsp;&nbsp;
+                        <label>Nombre </label> {{e.contacto.nombreCompleto}}
+                        <br/>&nbsp;&nbsp;
+                        <label>Telefono </label> {{e.contacto.telefono}}
+                        <br/>&nbsp;&nbsp;
+                        <label>Correo </label> {{e.contacto.correo}}
+                        <br/>
+                    </div>
+                </div>
+            </div>
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Ligas de acceso
+                    </h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="alert advertencia col-xs-12" ng-show="convocatorias.sitioWebPorConvocatoria.length==0">
+                    No hay registros
+                </div>
+                <div class="form-group sin-desborde" ng-show="convocatorias.sitioWebPorConvocatoria.length>0">
+                    <div ng-repeat="e in convocatorias.sitioWebPorConvocatoria" style="white-space: nowrap;">
+                        <i class="fa fa-link"></i>
+                        <a class="linkArchivo text" href="{{e.url}}" target="_blank" title="{{e.url}}">{{e.url}} </a>
+                        <br>
+                    </div>
+                </div>
+            </div>
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Documentaci&oacute;n
+                    </h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="alert advertencia col-xs-12" ng-show="convocatorias.adjuntoPorConvocatoria.length==0">
+                    No hay registros
+                </div>
+                <div class="x_content sin-desborde" ng-show="convocatorias.adjuntoPorConvocatoria.length>0">
+                    <div ng-repeat="e in convocatorias.adjuntoPorConvocatoria">
+                        <ul>
+                            <li>
+                                <a href="/Descargas.html#/q/{{e.adjunto.adjuntoId | encriptar}}" target="_blank" title="{{e.adjunto.nombre}}"> {{e.adjunto.nombre}} </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <button type="button" ng-click="globalRegresar()" class="btn btn-primary">
+                <span class="fa fa-arrow-left"></span> Regresar
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,167 @@
+<div class="vista">
+    <div class="page-title">
+        <div class="title_left">
+
+            <ol class="breadcrumb miga">
+                <li>
+                    <i class="fa fa-file-text-o"></i>
+                    <a ui-sref="InformeBecarioGet">Informes de becarios dirigidos</a>
+                </li>
+                <li class="active">Administraci&oacute;n</li>
+                <!--<li class="active">Obtener</li>-->
+            </ol>
+
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Criterios de b&uacute;squeda</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li>
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <form name="form" id="form" class="form-horizontal form-label-left">
+
+                        <div class="col-xs-12 col-md-12">
+                            <div class="col-xs-6 col-md-6">
+                                <div class="form-group">
+                                    <label class="col-xs-12" style="height:30px; line-height:30px; text-align:left; ">Nombre del becario</label>
+                                    <div class="col-xs-10">
+                                        <input class="form-control frmSearch" type="text" id="s1" maxlength="100" placeholder="Ingresa el nombre" ng-model="busqueda.nombreBecario"
+                                        />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-xs-12">
+                                        Asesor
+                                    </label>
+                                    <div class="col-xs-10">
+                                        <input type="text" class="form-control" placeholder="Buscar por asesor" ng-model="busqueda.nombreAsesor" disabled>
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <a class="btn btn-success" ng-click="openAsesor()" title="Buscar asesor">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-xs-12">
+                                        Instituci&oacute;n de procedencia
+                                    </label>
+                                    <div class="col-xs-10">
+                                        <input type="text" class="form-control" id="usr" name="institucionselect" ng-model="busqueda.nombreInstitucion" disabled
+                                            placeholder="Buscar Instituci&oacute;n">
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <a class="btn btn-success" ng-click="openInstituciones()" title="Buscar persona">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-6 col-md-6">
+                                <div class="form-group">
+                                    <label class="col-xs-12" style="height:30px; line-height:30px; text-align:left; ">Tipo de beca</label>
+                                    <div class="col-xs-10">
+                                        <select ng-model="busqueda.tipoBecaId" name="tipoBeca" ng-options="beca.tipoBecaId as beca.descripcion for beca in becas "
+                                            class="form-control">
+                                            <option value="">---Selecciona una tipo de beca---</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <label class="col-xs-12">Estancias con fecha de registro entre el siguiente rango de fechas: </label>
+                                <br />
+                                <div class="form-group">
+                                    <div class="col-md-12 col-lg-12">
+                                        <label class="control-label"> Inicio </label>
+                                    </div>
+                                    <div class="col-md-10 col-sm-10 col-xs-10">
+                                        <input placeholder="dd/mm/yyyy" show-button-bar="false" uib-datepicker-popup='dd/MM/yyyy' ng-minlength="8" maxlength="10"
+                                            datepicker-options="datePicker.FechaOptions" popup-placement="bottom" type="text"
+                                            class="form-control fechaOnly" ng-model="busqueda.fechaInicio" is-open="open" close-text="Close"
+                                        />
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-success" ng-click="open=true; busqueda.busquedaFecha='ok'">
+                                                <i class="glyphicon glyphicon-calendar"></i>
+                                            </button>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-12 col-lg-12">
+                                        <label class="control-label"> T&eacute;rmino </label>
+                                    </div>
+                                    <div class="col-md-10 col-sm-10 col-xs-10">
+                                        <input placeholder="dd/mm/yyyy" show-button-bar="false" uib-datepicker-popup='dd/MM/yyyy' ng-minlength="8" maxlength="10"
+                                            datepicker-options="datePicker.FechaOptions" popup-placement="bottom" type="text"
+                                            class="form-control fechaOnly" ng-model="busqueda.fechaTermino" is-open="open2" close-text="Close"
+                                        />
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-success" ng-click="open2=true; busqueda.busquedaFecha='ok'">
+                                                <i class="glyphicon glyphicon-calendar"></i>
+                                            </button>
+                                        </span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-12">
+                                <div class="col-xs-12 col-md-6">
+                                    <div class="form-group ">
+                                        <br>
+                                        <a class="btn btn-success" ng-click="buscar()" title="buscar">
+                                            <span class="glyphicon glyphicon-search"></span> Buscar
+                                        </a>
+                                        <a class="btn btn-primary" ng-click="reset()" title="Limpiar campos">
+                                            Limpiar
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="x_panel"  ng-if="mostrarTabla">
+                <div class="x_content sin-desborde">
+
+                    <div class="col-sm-12">
+                        <div>
+                            <table datatable="" id="tablaAdministracionInformesBecariosGet" dt-options="showCase.dtOptions" dt-columns="showCase.dtColumns"
+                                dt-instance="showCase.dtInstance" class="display dt-responsive" cellspacing="0" width="100%"></table>
+                        </div>
+
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        <div class="col-lg-12 col-md-12 col-xs-12">
+            <button type="button" ui-sref="InformeBecarioAdd" ng-click="setVariable('consultaInformesBecariosDirigidosGet', busqueda)" class="btn btn-success">
+                <span class="glyphicon glyphicon-plus"></span> Agregar
+            </button>
+        </div>
+        
+    </div>
+    <br />
+
+</div>

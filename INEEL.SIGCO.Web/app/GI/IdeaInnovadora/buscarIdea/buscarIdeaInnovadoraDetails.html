@@ -1,0 +1,209 @@
+﻿<div class="vista">
+    <div class="page-title">
+        <div class="title_full">
+            <ol class="breadcrumb miga">
+                <li><i class="glyphicon glyphicon-file"></i> <a ui-sref="buscarIdeaInnovadora">Ideas innovadoras/ Buscar ideas innovadoras</a></li>
+                <li class="active">Detalles</li>
+            </ol>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+                    <label class="detalle col-xs-12 " title="Nombre">
+                        {{registro.nombreIdea}}
+                    </label>
+                    <label class="tit col-xs-12">
+                        Palabras clave
+                    </label>
+                    <label class="cont col-xs-12">
+                        {{registro.palabrasClave}}
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-12 col-sm-12 col-xs-12">
+
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+                    <div class="x_title">
+                        <h2>Proponentes </h2>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="form-group">
+                        <table class="table table-hover" ng-show="proponentes.length > 0">
+                            <thead>
+                                <tr>
+                                    <th class="thAjuste ">N&uacute;m empleado</th>
+                                    <th>Nombre de empleado</th>
+                                    <th class="thAjusteColaboracion text-center">Contribuci&oacute;n</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="registro in proponentes">
+                                    <td ng-click="openProfile(registro.clavePersona)" title="Detalle de empleado" class="linkTabla">
+                                        {{registro.clavePersona}}
+                                    </td>
+                                    <td>{{registro.persona}}</td>
+                                    <td class="text-center">{{registro.contribucionProponente.contribucion}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4 col-sm-4 col-xs-12" ng-if="descargaEvidencia">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Evidencia</h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="form-group" ng-show="registro.adjunto!=null">
+                    <span class="fa fa-download"></span>&nbsp;&nbsp;<a href="/Descargas.html#/q/{{registro.adjunto.adjuntoId | encriptar}}" class="linkTabla" target="_blank">Descargar Archivo </a>
+                </div>
+                <div class="form-group" ng-show="registro.adjunto==null">
+                    <div class="alert advertencia  col-xs-12">
+                        <span class="glyphicon glyphicon-info-sign"></span> No hay evidencia
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12 col-sm-12 col-xs-12" ng-if="descargaEvidencia">
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+                    <div class="x_title">
+                        <h2>Descripción de contexto</h2>
+                        <div class="clearfix"></div>
+                        <label class="tit col-xs-12">
+                            ¿Cu&aacute;l es el problema o necesidad que se pretende satisfacer?
+                        </label>
+                        <label class="cont col-xs-12">
+                            {{registro.problema}}
+                        </label>
+                        <label class="tit col-xs-12">
+                            ¿Si ya existen soluciones en el mercado, qu&eacute; limitaciones tienen?
+                        </label>
+                        <label class="cont col-xs-12">
+                            {{registro.limitaciones}}
+                        </label>
+                        <label class="tit col-xs-12">
+                            ¿Si no existen soluciones, cu&aacute;les son las principales razones de su inexistencia?
+                        </label>
+                        <label class="cont col-xs-12">
+                            {{registro.razonesInexistncia}}
+                        </label>
+                        <label class="tit col-xs-12">
+                            ¿Cu&aacute;l ser&iacute;a la relevancia de la nueva soluci&oacute;n a desarrollar?
+                        </label>
+                        <label class="cont col-xs-12">
+                            {{registro.relevanciaNuevaSolucion}}
+                        </label>
+                        <label class="tit col-xs-12">
+                            ¿Qu&eacute; partes interesadas se beneficiar&iacute;an?
+                        </label>
+                        <label class="cont col-xs-12">
+                            {{registro.partesInteresadasBeneficiadas}}
+                        </label>
+                        <label class="tit col-xs-12">
+                            ¿Qu&eacute; capacidades (competencias y recursos) tiene el INEEL que lo habilitan para desarrollar una nueva y mejor soluci&oacute;n?
+                        </label>
+                        <label class="cont col-xs-12">
+                            {{registro.capacidades}}
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+                    <div class="x_title">
+                        <h2>Descripci&oacute;n del desarrollo tecnol&oacute;gico</h2>
+                        <div class="clearfix"></div>
+                        <label class="tit col-xs-12">
+                            ¿En qu&eacute; consiste?
+                        </label>
+                        <label class="cont col-xs-12">
+                            {{registro.descripcionDesarrollo}}
+                        </label>
+                        <label class="tit col-xs-12">
+                            ¿Qu&eacute; barreras tecnol&oacute;gicas hay que franquear?
+                        </label>
+                        <label class="cont col-xs-12">
+                            {{registro.barrerasTecnologicas}}
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+                    <div class="x_title">
+                        <h2>Descripci&oacute;n de la oferta de valor del INEEL</h2>
+                        <div class="clearfix"></div>
+                        <label class="tit col-xs-12">
+                            ¿Se desarrollar&aacute; una nueva o mejorada capacidad de servicio, o bien un producto o productos?
+                        </label>
+                        <label class="cont col-xs-12">
+                            {{registro.capacidadServicio}}
+                        </label>
+                        <label class="tit col-xs-12">
+                            ¿Por qu&eacute; los clientes preferir&aacute;n la oferta de valor del INEEL?
+                        </label>
+                        <label class="cont col-xs-12">
+                            {{registro.ofertaValor}}
+                        </label>
+                        <label class="tit col-xs-12">
+                            ¿Cómo se proteger&aacute;n el o los desarrolladores tecnol&oacute;gicos (secreto industrial, patente, derecho de autor)?
+                        </label>
+                        <label class="cont col-xs-12">
+                            {{registro.protegerDesarrolloTecnologico}}
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+                    <div class="x_title">
+                        <h2>Identificaci&oacute;n de los clientes potenciales</h2>
+                        <div class="clearfix"></div>
+                        <label class="tit col-xs-12">
+                            ¿Qui&eacute;nes ser&iacute;an los clientes potenciales?
+                        </label>
+                        <label class="cont col-xs-12">
+                            {{registro.clietesPotenciales}}
+                        </label>
+                        <label class="tit col-xs-12">
+                            ¿A qu&eacute; se dedican?
+                        </label>
+                        <label class="cont col-xs-12">
+                            {{registro.dedicacionClientesP}}
+                        </label>
+                        <label class="tit col-xs-12">
+                            ¿C&oacute;mo se beneficiar&iacute;a el cliente con la oferta de valor del INEEL?
+                        </label>
+                        <label class="cont col-xs-12">
+                            {{registro.beneficiosCliente}}
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-8 col-sm-8 col-xs-12" ng-if="!descargaEvidencia">
+            <div class="x_panel">
+                <b>Actualmente no tiene acceso a los detalles de este registro</b>
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <button type="button" ng-click="globalRegresar()" class="btn btn-primary">
+                <span class="fa fa-arrow-left"></span> Regresar
+            </button>
+        </div>
+    </div>
+</div>

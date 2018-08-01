@@ -1,0 +1,26 @@
+﻿<div class="col-md-6">
+
+<!-- Textarea -->
+    <div class="form-group">
+        <label class="col-xs-12" for="proyFuturo">*Posibles proyectos futuros derivados de este proyecto:</label>
+        <div class="col-xs-12">
+            <textarea class="form-control" id="proyFuturo" name="proyFuturo"
+                      ng-model="itf.proyFuturo.descripcion" ng-minlength="6" ng-maxlength="500" ng-required="true"></textarea>
+            <span class="error" ng-show="formITF.proyFuturo.$dirty &&  !formITF.proyFuturo.$valid">
+            Dato requerido con una longitud m&iacute;nima de 6 caracteres y m&aacute;xima de 500</span>
+        </div>
+    </div>
+</div>
+
+
+<div class="form-group row" ng-hide="ocultarGuardar" >
+    <div class="col-xs-5 col-sm=9 col-md-10">
+    </div>
+    <div class="col-xs-7 col-sm=3 col-md-2">
+        <button class="btn btn-block btn-info" ng-click="datoscompletos(5,'ITF.evaluaciones')"
+                ng-disabled="!formITF.proyFuturo.$valid || click">
+                <!--ng-show="!detalles">-->
+            {{txtGuardar}}
+        </button>
+    </div>
+</div>

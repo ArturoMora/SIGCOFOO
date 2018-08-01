@@ -1,0 +1,107 @@
+﻿<div class="vista">
+    <div class="page-title">
+        <div class="title_full">
+            <ol class="breadcrumb miga">
+                <li><i class="glyphicon glyphicon-file"></i> <a ui-sref="buscarProductoInnovador">Productos innovadores/ Buscar productos innovadores</a></li>
+                <li class="active">Detalles</li>
+            </ol>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <!--{{registro | json}}-->
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+                    <label class="detalle col-xs-12 " title="titulo">
+                        {{registro.nombreTecnico}}
+
+                    </label>
+                    <label class="cont emc col-xs-12 colorTit">
+                        {{registro.proyecto.nombre}} ({{registro.proyectoId}})
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+                    <div class="x_title">
+                        <h2>Informaci&oacute;n general</h2>
+                        <div class="clearfix"></div>
+                        <label class="tit col-xs-12">
+                            Gerencia que lider&oacute; el proyecto
+                        </label>
+                        <label class="cont col-xs-12">
+                            {{registro.unidad.nombreUnidad}}
+                        </label>
+                        <label class="tit col-xs-12">
+                            Nombre comercial del producto o servicio (en caso de que exista)
+                        </label>
+                        <label class="cont col-xs-12">
+                            {{registro.nombreComercial}}
+                        </label>
+                        <label class="tit col-xs-12">
+                            Necesidades que atiende
+                        </label>
+                        <label class="cont col-xs-12">
+                            {{registro.necesidades}}
+                        </label>
+                        <label class="tit col-xs-12">
+                            Segmento de mercado al que va dirigido
+                        </label>
+                        <label class="cont col-xs-12">
+                            {{registro.segmentoMercado.nomSegMerc}}
+                        </label>
+                        <label class="tit col-xs-12">
+                            Breve descripci&oacute;n del producto o servicio
+                        </label>
+                        <label class="cont col-xs-12">
+                            {{registro.descripcion}}
+                        </label>
+                        <label class="tit col-xs-12">
+                            Factor de innovaci&oacute;n
+                        </label>
+                        <label class="cont col-xs-12">
+                            {{registro.factorInnovacion.descripcion}}
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+                    <div class="x_title">
+                        <h2>Autores</h2>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="form-group">
+                        <table id="CHPonenciaAdd" class="table table-hover" cellspacing="0" dt-options="dtOptions">
+                            <thead>
+                                <tr>
+                                    <th data-priority="1">N&uacute;m empleado</th>
+                                    <th data-priority="1">Nombre de empleado</th>
+                                    <th data-priority="1">Contribuci&oacute;n</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="autor in registro.productoAutores">
+                                    <td ng-click="openProfile(autor.clavePersona)" title="Detalle de empleado" class="linkTabla">{{autor.clavePersona}}</td>
+                                    <td>{{autor.nombre}}</td>
+                                    <td>{{autor.contribucionAutor.contribucion}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <button type="button" ng-click="globalRegresar()" class="btn btn-primary">
+                <span class="fa fa-arrow-left"></span> Regresar
+            </button>
+        </div>
+    </div>
+</div>
+<!--{{registro.productoAutores | json}}-->

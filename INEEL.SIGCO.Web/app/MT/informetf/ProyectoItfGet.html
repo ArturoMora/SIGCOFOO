@@ -1,0 +1,82 @@
+﻿<div  id="page-wrapper">
+
+    <div class="row">
+        <div class="col-md-12">
+            <h1>Proyectos concluidos</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div>
+                <div ng-show="loading">
+                    <img src="images/cargando.gif" />
+                </div>
+                <div ng-show="proyecto.length === 0 && !loading" class="alert alert-danger">
+                    No hay proyectos disponibles donde el usuario participa como jefe de proyecto.
+                </div>
+                <div ng-show="!loading">
+                    <div ng-hide="proyecto.length === 0 && !loading">
+                        <table id="MTProyectoItfGet" class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" datatable="ng" width="100%" dt-options="dtOptions">
+                            <thead>
+                                <tr>
+                                    <th data-priority="1">ID</th>
+                                    <th>Nombre</th>
+                                    <th>Fecha</th>
+                                    <th data-priority="2"> Opciones</th>
+                                    <th ng-show="false"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="e in proyecto">
+                                    <td>{{e.proyectoId}}</td>
+                                    <td>{{e.nombre}}</td>
+                                    <td>{{e.fechaFin | date : "yyyy"}}</td>
+                                    <td style="width:200px">
+                                        <div ng-show="e.bandera==1">
+                                            <a ui-sref="ITF.infoGral({id:e.proyectoId,edit:'false',foo:1})"
+                                               class="btn btn-success btn-sm"
+                                               title="Nuevo ITF">
+                                                <i class="glyphicon glyphicon-plus"></i>
+                                            </a>
+                                        </div>
+
+                                        <div ng-show="e.bandera==2">
+                                            <a ui-sref="ITF.infoGral({id:e.proyectoId,edit:'true',foo:1})"
+                                               class="btn btn-primary btn-sm"
+                                               title="Editar">
+                                                <i class="glyphicon glyphicon-edit"></i>
+                                            </a>
+                                        </div>
+
+                                        <div ng-show="e.bandera==3">
+                                            <a ui-sref="ITFdetalles.infoGral({id:e.proyectoId,edit:'false',foo:99})"
+                                               class="btn btn-warning btn-sm"
+                                               title="Ver ITF">
+                                                <i class="glyphicon glyphicon-th-list"></i>
+                                            </a>
+                                        </div>
+                                       
+                                    </td>
+                                    <td ng-show="false">
+                                        {{e.bandera}}
+                                    </td>
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <button type="submit" ng-click="globalRegresar();" class="btn btn-primary" style="padding-right:15px">
+            <span class="fa fa-arrow-left"></span> Regresar
+        </button>
+        <a class="btn btn-success" ui-sref="AddITF">
+            <i class="glyphicon glyphicon-plus"></i> Agregar
+        </a>
+        
+    </div>
+  
+</div>

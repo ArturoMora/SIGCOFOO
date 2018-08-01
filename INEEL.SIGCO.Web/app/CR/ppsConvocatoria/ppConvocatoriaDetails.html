@@ -1,0 +1,211 @@
+<div class="vista">
+    <div class="page-title">
+        <div class="title_left">
+
+            <ol class="breadcrumb miga">
+                <li><i class="sg sg-fuentes-financiamiento"></i> <a ui-sref="ppsConvocatoriaGet">Fuentes de financiamiento/ Asociar propuesta/proyecto por fondo </a></li>
+                <li class="active">Detalles</li>
+            </ol>
+
+        </div>
+    </div>
+    <div data-ng-hide="authentication.isAuth">
+        No tiene permisos para ingresar a esta secci&oacute;n..<br /> Usuario no autentificado
+    </div>
+    <div data-ng-show="authentication.isAuth">
+        <div class="clearfix"></div>
+        <div class="row">
+            <div class="col-md-8 col-sm-8 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_content sin-desborde">
+                        <label class="detalle col-xs-12 " title="Nombre">
+                            {{fondos.nombreFP}}
+                        </label>
+                        <div class="form-group">
+                            <label class="tit col-xs-12">
+                                Fecha de registro:
+                                <span class="span-label">{{fondos.fechaRegistro | date:"dd/MM/yyyy"}}</span>
+                            </label>
+                            <label class="tit col-xs-12">
+                                Estado:
+                                <span style="color:green;font-weight:bold" class="span-label" ng-show="fondos.estado==true">Activo</span>
+                                <span style="color:red;font-weight:bold" class="span-label" ng-show="fondos.estado==false">Inactivo</span>
+
+                            </label>
+                        </div>
+                    </div>
+                </div>
+               
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Proyectos que solicitan financiamiento<small></small></h2>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content sin-desborde">
+                        <div ng-hide="fondos.proyectoPorFondo.length==0" class="col-xs-12">
+                            <table id="CRppConvocatoriaDetails" class="table table-hover table-striped table-condensed dt-responsive " cellspacing="0" datatable="ng" width="100%" dt-options="dtOptions">
+                                <thead>
+                                    <tr>
+                                       <th class="col-xs-2 ">Proyecto</th>
+                                        <th class="col-xs-2">Gerencia / Jefe de proyecto</th>
+                                        <th class="col-xs-1 text-center">Monto</th>
+
+                                    </tr>
+                                </thead>
+                                <tr ng-repeat="e in fondos.proyectoPorFondo track by $index">
+                                    <td><a href="" load-proyectos idproyecto="{{e.proyectoId}}" title="Detalle de proyecto">{{e.proyectoId}}</a>- {{e.proyecto.nombre}}</td>
+                                    <!--<td><b>{{e.proyectoId}}</b> - {{e.proyecto.nombre}}</td>-->
+                                    <td>{{e.proyecto.unidadOrganizacional.nombreUnidad}} <span ng-show="e.proyecto.nombreJefeProyecto.length >0">/</span> {{e.proyecto.nombreJefeProyecto}} </td>
+                                    <td class="text-right">
+                                        <div ng-show="e.costo.length > 0">
+                                            ${{pproyectosConv.costo}}
+                                        </div>
+                                        <div ng-show="!e.costo.length > 0">
+                                            Dato no disponible
+                                        </div>
+                                        <!-- ${{e.proyecto.costo}}-->
+                                    </td>
+
+                                </tr>
+                            </table>
+                        </div>
+                        <div ng-show="fondos.proyectoPorFondo.length==0" class="alert advertencia">
+                            No existen proyectos registrados
+                        </div>
+                    </div>
+                </div>
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Propuestas que solicitan financiamiento<small></small></h2>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content sin-desborde">
+                        <div ng-hide="fondos.propuestaPorFondo.length==0" class="col-xs-12">
+                            <table id="CRppConvocatoriaDetailspropuestaPorFondo" class="table table-hover table-striped table-condensed dt-responsive " cellspacing="0" datatable="ng" width="100%" dt-options="dtOptions">
+                                <thead>
+                                    <tr>
+                                        <th class="col-xs-2">Propuesta</th>
+                                        <th class="col-xs-2">Gerencia / Responsable</th>
+                                        <th class="thCeldaB text-center">Monto</th>
+
+                                    </tr>
+                                </thead>
+                                <tr ng-repeat="e in fondos.propuestaPorFondo track by $index">
+                                    <td><b>{{e.propuestaId}}</b> - {{e.propuestas.titulo}}</td>
+                                    <td>
+                                        {{e.propuestas.unidadOrganizacional.nombreUnidad}}<span ng-show="e.propuestas.claveEmpPropuesta.length >0">/</span>
+                                        {{e.propuestas.personas.nombreCompleto}}
+                                    </td>
+                                    
+                                    <td class="text-right">
+                                        <div ng-show="e.propuestas.costos.length > 0">
+                                            ${{e.costo}}
+                                        </div>
+                                        <div ng-show="!e.propuestas.costos.length > 0">
+                                            Dato no disponible
+                                        </div>
+                                        <!--${{e.propuestas.costos}}-->
+                                    </td>
+
+                                </tr>
+                            </table>
+                        </div>
+                        <div ng-show="fondos.propuestaPorFondo.length==0" class="alert advertencia">
+                            No existen propuestas registradas
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-4 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Instituci&oacute;n u organismo patrocinador <small></small></h2>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content sin-desborde">
+                        <label class="titFirst col-xs-12">
+                            {{fondos.empresa.nombreEmpresa}}
+                        </label>
+                    </div>
+                </div>
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Fuente financiamiento </h2>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content sin-desborde">
+                        <label class="titFirst col-xs-12 " title="Fuente">
+                        {{fondos.fuenteFinanciamiento.nombreFF}}
+                        </label>
+                        
+                        <label class="tit col-xs-12">
+                            T&eacute;maticas
+                        </label>
+                        <ul ng-repeat="e in fondos.tematicaPorFondoPrograma" class="cont col-xs-12">
+                            <li>{{e.tematica.nombre}}</li>
+                        </ul>
+
+                    </div>
+                </div>
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Contacto<small></small></h2>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content sin-desborde">
+                        <div ng-show="fondos.contacto!=null" class="col-xs-12 col-md-12">
+                            <i class="fa fa-briefcase user-profile-icon"></i>&nbsp;&nbsp;&nbsp;{{fondos.contacto.nombreCompleto}}<br />
+                            <i class="fa fa fa-phone"></i>&nbsp;&nbsp;&nbsp;{{fondos.contacto.telefono}}<br />
+                            <i class="fa fa fa-envelope"></i>&nbsp;&nbsp;&nbsp;{{fondos.contacto.correo}}<br />
+                        </div>
+                        <div class="col-xs-12 alert advertencia" ng-show="fondos.contacto==null">
+                            No hay contactos registrados
+                        </div>
+                    </div>
+                </div>
+                <div class="x_panel text-overflow" >
+                    <div class="x_title">
+                        <h2>Ligas de acceso<small></small></h2>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content sin-desborde">
+                            <div ng-if="fondos.sitioWebFondoPrograma.length>0" ng-repeat="sitio in fondos.sitioWebFondoPrograma track by $index" style="white-space: nowrap;">
+                                <i class="fa fa-link"></i>
+                                <a class="linkArchivo text" href="{{sitio.url}}" ta target="_blank" title="{{sitio.url}}">
+                                         {{sitio.url}}
+                                </a><br />
+                        </div>
+                        <div ng-show="fondosfondos.sitioWebFondoPrograma==null" class="col-xs-12 alert advertencia">
+                            No hay sitios web asociados al fondo
+                        </div>
+                    </div>
+                </div>
+                <!--<div class="x_panel">
+                    <div class="x_title">
+                        <h2>&Aacute;reas Tem&aacute;ticas <small></small></h2>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content sin-desborde" ng-repeat="areas in fondos.tematicaPorFondoPrograma track by $index">
+                        <ul>
+                            <li >
+                                {{areas.nombre}}
+                            </li>
+                        </ul>
+                    </div>
+                    <div ng-show="fondos.tematicaPorFondoPrograma.length==0" class="col-xs-12 alert advertencia">
+                        No hay tem&aacute;ticas asociadas al fondo
+                    </div>
+                </div>-->
+               
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <button type="button" ng-click="globalRegresar()" class="btn btn-primary">
+                    <span class="fa fa-arrow-left"></span> Regresar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,134 @@
+﻿<!DOCTYPE html>
+<html lang="es-mx" ng-app="ineel">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>SIGCO</title>
+    <link rel="stylesheet" href="Content/stylesSIGCO.min.css">
+
+    <!--
+      IE8 support, see AngularJS Internet Explorer Compatibility http://docs.angularjs.org/guide/ie
+      For Firefox 3.6, you will also need to include jQuery and ECMAScript 5 shim
+    -->
+    <!--[if lt IE 9]>
+      <script src="Scripts/jquery1.11.0.js"></script>
+      <script src="Scripts/es5-shim.min.js"></script>
+      <script>
+        document.createElement('ui-select');
+        document.createElement('ui-select-match');
+        document.createElement('ui-select-choices');
+      </script>
+    <![endif]-->
+
+
+
+    <script src="Scripts/scriptsSIGCO.min.js"></script>
+</head>
+<body class="nav-md" data-ng-controller="indexController">
+    <div class="container body">
+        <div class="main_container">
+            <div class="col-md-3 left_col">
+                <div class="left_col scroll-view bg-gradient-menuv">
+                    <div class="navbar nav_title bg-gradient-menuv" style="border: 0;">
+                        <a href="sigco.html" class="site_title">
+                            <img src="images/logo_sigco.png" />
+                            <span class="titLogo">&nbsp;SIGCO</span>
+                        </a>
+                    </div>
+                    <div class="clearfix"></div>
+
+                    <br />
+
+
+                    <!-- sidebar menu -->
+                    <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+                        <div class="menu_section">
+                            <h2>Bienvenido</h2>
+                            <ul class="nav side-menu">
+                                <li class="gen">
+                                    <a href="">
+                                        <font>Seleccione un módulo<span class="glyphicon glyphicon-menu-right"></span> </font>
+                                    </a>
+
+                                </li>
+                                <!--<li class="gen">
+                                    <a ui-sref="suscripcion">
+                                        Suscripci&oacute;n
+                                    </a>
+                                </li>-->
+
+                            </ul>
+                            <!--funciones : {{funciones | json}}-->
+                        </div>
+
+
+
+                    </div>
+                    <!-- /sidebar menu -->
+
+                </div>
+            </div>
+            <!-- top navigation -->
+            <div class="top_nav ">
+                <div class="nav_menu">
+                    <nav class="" role="navigation">
+                        <div class="nav toggle">
+                            <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+                        </div>
+                        <ul class="hidden-xs nav navbar-nav navbar-left" data-ng-hide="!authentication.isAuth">
+                            <li>
+                                <a href="">&nbsp;</a>
+                            </li>
+                        </ul>
+
+
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="">
+                                <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                    <span class="glyphicon glyphicon-user"></span> {{rolDescripcion}}
+                                    <span class=" fa fa-angle-down"></span>
+                                </a>
+                                <ul class="dropdown-menu dropdown-usermenu pull-right">
+                                    <li><h5>&nbsp;{{authentication.nombreCompleto}}</h5></li>
+                                    <li></li>
+                                    <li><a href="" data-ng-click="logOut()"><i class="fa fa-sign-out pull-right"></i>Cerrar sesi&oacute;n</a></li>
+                                </ul>
+                            </li>
+
+                        </ul>
+
+                    </nav>
+                </div>
+            </div>
+            <!-- /top navigation -->
+            <!-- page content -->
+            <div role="main" class="right_col">
+                <!-- top tiles -->
+                <div ui-view>
+
+                </div>
+            </div>
+            <!-- /page content -->
+            <!-- footer content -->
+            <footer>
+                <div class="pull-right">
+                    SIGCO3
+                </div>
+                <div class="clearfix"></div>
+            </footer>
+            <!-- /footer content -->
+        </div>
+    </div>
+
+    <!-- Custom Theme Scripts -->
+    <script src="Scripts/custom.js"></script>
+    <!-- endPlantilla-->
+    <script>
+        $('#sidebar-menu').find('li').removeClass('active active-sm');
+    </script>
+</body>
+</html>

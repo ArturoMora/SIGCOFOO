@@ -1,0 +1,77 @@
+﻿<div data-ng-show="authentication.isAuth">
+    <div ng-hide="registros.length >= 0">
+        <img src="images/cargando.gif" />
+    </div>
+    <div class="row">
+        <div class="col-md-12 col-lg-12 col-xs-12 sin-desborde">
+            <div ng-show="registros.length === 0" class="alert advertencia">
+                No hay registros de derechos de autor.
+            </div>
+            <div ng-show="registros.length > 0">
+                <table id="CHDAExternoGet" class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" datatable="ng"
+                    width="100%" dt-options="dtOptions">
+                    <thead>
+                        <tr>
+                            <th data-priority="1">T&iacute;tulo</th>
+                            <th data-priority="2" class="thAjuste text-center">Rama</th>
+
+                            <th>Estado
+                                <br />registro</th>
+                            <th>Fecha
+                                <br />validación</th>
+                            <th data-priority="1" class="thAjuste text-center">Opciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="registro in registros">
+                            <td style="max-width:300px" class="sin-desborde linkTabla" ng-if="registro.sintesis!='Patrimonio'" ng-click="$event.stopPropagation();"
+                                ui-sref="daexternoDetails({id:registro.derechosAutorId})" title="Detalle">{{registro.titulo}}
+                            </td>
+                            <td style="max-width:300px" class="sin-desborde" ng-if="registro.sintesis=='Patrimonio'">
+                                <u>
+                                    <a ng-click="$event.stopPropagation();" ui-sref="dainternoPatrimonialDetails({id:registro.derechosAutorId})" title="Detalle">{{registro.titulo}}</a>
+                                </u>
+                            </td>
+                            <td>{{registro.rama.descripcion}}</td>
+                            <td>{{registro.estadoFlujo === null ? 'Aceptado' : registro.estadoFlujo.descripcion}}</td>
+
+                            <td>{{registro.fechaValidacion === null ? 'Dato no disponible' : registro.fechaValidacion | date:"dd/MM/yyyy"}}</td>
+                            <td class="text-center">
+                                <div ng-if="!registro.esPropiedadInstituto">
+                                    <a ng-if="idRol==1" ng-click="setGlobalID(registro.derechosAutorId);$event.stopPropagation();" ui-sref="daexternoDetailsAdmin({id:registro.derechosAutorId, id2: 1})"
+                                        title="Aprobar registro" class="btn btn-warning">
+                                        <i class="glyphicon glyphicon-pencil"></i>
+                                    </a>
+                                    <div ng-if="(registro.estadoFlujo.estadoFlujoId==1 || editarGestion==1)">
+                                        <a ng-if="idRol!=1" ng-click="setGlobalID(registro.derechosAutorId);$event.stopPropagation();" ui-sref="daexternoEdit" title="Editar"
+                                            class="btn btn-warning">
+                                            <i class="glyphicon glyphicon-pencil"></i>
+                                        </a>
+                                        <a title="Eliminar" ng-if="registro.fechaValidacion === null && registro.estadoFlujo.estadoFlujoId!=3" ng-really-click="delete(registro)"
+                                            ng-really-message="Deseas eliminar {{registro.titulo}} ?" class="btn btn-danger">
+                                            <i class="glyphicon glyphicon-trash"></i>
+                                        </a>
+                                    </div>
+
+                                    <div ng-if="registro.estadoFlujo.estadoFlujoId==3&& EmpleadoQueConsulta==registro.clavePersona">
+                                        <a ng-if="idRol!=1" ng-really-message="Está a punto de acceder a un registro 'Aceptado', si modifica algún atributo deberá ser validado nuevamente. ¿Desea continuar?"
+                                            ng-really-click="setGlobalID(registro.derechosAutorId);$event.stopPropagation();navegador();"
+                                            title="Editar" class="btn btn-warning">
+                                            <i class="glyphicon glyphicon-pencil"></i>
+                                        </a>
+                                    </div>
+                                </div>
+
+
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <button ng-show="registros.length >= 0" type="button" ng-click="$event.stopPropagation();" ui-sref="daexternoAdd" class="btn btn-success">
+                <span class="glyphicon glyphicon-plus"></span> Agregar
+            </button>
+        </div>
+
+    </div>
+</div>

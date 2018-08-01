@@ -1,0 +1,145 @@
+﻿<div class="modal-content sin-desborde">
+    <div class="modal-header">
+        <button type="button" class="close" ng-click="cancel()" data-dissmiss="modal">x</button>
+    </div>
+    <div class="modal-body">
+
+
+        <div class="row">
+            <div class="col-xs-12 visible-print">
+                <img data-ng-src="images/cabeceraFichaPersonal.png" />
+            </div>
+            <div class="col-xs-12 visible-print">
+                <br />
+            </div>
+            <div class="col-xs-12">
+
+                <div class="col-xs-12">
+                    <div class="x_panel">
+                        <!--<div class="x_title not-print">
+                            <ul class="nav navbar-right panel_toolbox">
+                                <li>
+                                    <a class="foo" ng-click="full=!full" title="{{full?'Filtrar':'Mostrar todo'}}"><i class="fa fa-{{full?'compress':'expand'}}"></i></a>
+                                </li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>-->
+                        <div class="x_content sin-desborde">
+                            <div class="col-sm-2 col-xs-5">
+                                <div class="profile_img">
+                                    <div id="crop-avatar">
+                                        <img class="img-thumbnail" ng-src="data:image/png;base64,{{persona.adjunto64}}" width="180" height="180" title={{persona.nombreCompleto}}>                                {{persona.tipoPersonal.descripcion | capitalize1AndLower}} / {{persona.estado==1?'Activo':'Inactivo'}}
+                                    </div> 
+                                </div>
+                            </div>
+                            <div class="col-sm-10 col-xs-7">
+                                <div class="col-xs-12 col-sm-7">
+                                    <div class="form-group">
+                                        <label class="detalle">{{persona.nombreCompleto}} ({{persona.clavePersona}})</label>
+                                        <br />
+                                        <label class="detalle_subtitulo">{{persona.unidadOrganizacional.claveUnidadPadre.nombreUnidad}}</label><br />
+                                        <label class="detalle_subtitulo">{{persona.unidadOrganizacional.nombreUnidad}}</label>
+                                        <br />
+                                        <!--<label class="cont">{{persona.categoria.descripcion}}</label>-->
+                                        <ul class="list-unstyled">
+                                            <li class="hidden-print">
+                                                <i class="fa fa fa-envelope"></i>&nbsp;
+                                                <a href="mailto:{{persona.correo}}" target="_top"> {{persona.correo}} </a>
+                                            </li>
+                                            <li class="visible-print">
+                                                <i class="fa fa fa-envelope"></i>&nbsp; {{persona.correo}}
+                                            </li>
+
+                                            <li ng-if="duenio">
+                                                <i class="fa fa fa-mobile"></i>&nbsp; {{persona.detallePersona.celular}}
+                                            </li>
+                                            <li>
+                                                <i class="fa fa fa-phone"></i>&nbsp; {{persona.detallePersona.extension}}
+                                            </li>
+                                            <li><i class="fa fa fa-map-marker"></i>&nbsp;{{persona.detallePersona.ubicacion}}</li>
+                                            <li ng-if="duenio">
+                                                <strong>Direcci&oacute;n: </strong> {{persona.detallePersona.calle}}, Col. {{persona.detallePersona.colonia}},
+                                                {{persona.detallePersona.ciudad}}.
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-5">
+                                    <div class="contenedor_gris">
+                                        <label class="titFirst">Fecha ingreso:</label>
+                                        <label class="cont">{{persona.fechaIngreso | date:"dd/MM/yyyy"}}</label>
+                                        <br />
+                                        <label ng-if="persona.estado==0" class="titFirst">Fecha de salida:</label>
+                                        <label ng-if="persona.estado==0" class="cont">{{persona.fechaEfectiva | date:"dd/MM/yyyy"}}</label>
+                                        <br ng-if="persona.estado==0" />
+                                        <label class="titFirst">Antig&uuml;edad:</label>
+                                        <label class="cont" title="{{persona.antiguedad}}" ng-show="!detail">{{persona.antiguedad }}</label>
+                                        <label class="cont" ng-show="detail">{{persona.antiguedad}}</label>
+                                        <br />
+                                        <label class="titFirst">Experiencia externa:</label>
+                                        <label ng-show="id==null" class="cont">{{persona.experienciaPrevia}}</label>
+                                        <input class="cont" style="width:65px;" ng-show="id!=null" type="text" ng-disabled="experiencia" ng-model="persona.experienciaPrevia">
+                                    </div><br />
+                                    <!--<div class="text" ng-repeat="fa in registrosfa  | filter: {estaTitulado:true} | orderBy:'gradoAcademico':false | limitTo :1">
+                                        <strong>{{fa.gradoAcademico.descripcion }}</strong> / {{fa.carrera.descripcion}}<br/>
+                                        <strong>{{fa.institucion.descripcion}}</strong>
+                                    </div>-->
+                                    <div class="marca-agua">
+                                        Consulta realizada por {{authentication.userprofile.clavePersona}} {{authentication.userprofile.nombreCompleto | json}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12">
+                <div class="col-xs-12 {{extractoProfesional!=null?'':'hidden-print'}}" ng-show="extractoProfesional!=null || full">
+
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <h2>Semblanza profesional</h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content sin-desborde">
+                            <div ng-show="extractoProfesional==null" class="alert advertencia">
+                                No hay registros.
+                            </div>
+                            <font ng-bind-html="extractoProfesional.extracto"></font>
+                        </div>
+                    </div>
+                </div>
+                <!--<div class="col-xs-12 {{AptitudesEmpleado.length>0?'':'hidden-print'}}" ng-show="AptitudesEmpleado.length<-1 || full">
+
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <h2>Aptitudes y validaciones destacadas</h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content sin-desborde">
+                            <div ng-show="AptitudesEmpleado.length==0" class="alert advertencia">
+                                No hay registros.
+                            </div>
+                            <div ng-show="AptitudesEmpleado.length > 0">
+                                <div ng-repeat="a in AptitudesEmpleado" style="display:inline-block;margin-right:30px;">
+                                    <font>{{a.nombreAptitud}} </font>
+                                </div>
+                                <br />
+                            </div>
+                        </div>
+                    </div>
+                </div>-->
+
+            </div>
+
+            <div class="clearfix"></div>
+            
+        </div>
+    </div>
+    <div class="modal-footer">
+        <a class="btn btn-success" target="_blank"  href="/indexCH.html#/detallePersonal/{{personaIDSearch}}" title="Detalles">
+            Detalles
+        </a>
+        <button type="button" class="btn btn-primary" ng-click="cancel()">Cerrar</button>
+    </div>
+</div>

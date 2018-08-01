@@ -1,0 +1,50 @@
+﻿<div data-ng-show="authentication.isAuth">
+    <div ng-hide="registros.length >= 0">
+        <img src="images/cargando.gif" />
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div ng-show="registros.length === 0" class="alert advertencia">
+                No hay registros de Logros y Reconocimientos
+            </div>
+            <div ng-show="registros.length > 0">
+                <table id="CHlogrosreconocimientosGet" class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" datatable="ng" width="100%"
+                       dt-options="dtOptions">
+                    <thead>
+                        <tr>
+                            <th data-priority="1">T&iacute;tulo</th>
+                            <th>Emisor</th>
+                            <th>Fecha<br />obtenci&oacute;n</th>
+                            <th>Estado<br />registro </th>
+                            <th>Fecha<br />validación</th>
+                            <th data-priority="1" class="thAjuste text-center">Opciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="registro in registros">
+                            <td><u><a ng-click="$event.stopPropagation();" ui-sref="logrosreconocimientosDetails({id:registro.logrosReconocimientosId})" title="Detalle">{{registro.titulo}}</a></u></td>
+                            <td>{{registro.emisor}}</td>
+                            <td>{{registro.fechaObtencion | date:"dd/MM/yyyy"}}</td>
+                            <td>{{registro.estadoFlujo.descripcion}}</td>
+                            <td>{{registro.fechaValidacion === null ? 'Dato no disponible' : registro.fechaValidacion | date:"dd/MM/yyyy"}}</td>
+                            <td class="text-center">
+                                <div ng-if="registro.estadoFlujoId==1 || editarGestion==1 || registro.estadoFlujoId==3">
+                                    <a ng-click="setId(registro.logrosReconocimientosId);$event.stopPropagation();" ui-sref="logrosreconocimientosEdit" title="Editar" class="btn btn-warning">
+                                        <i class="glyphicon glyphicon-pencil"></i>
+                                    </a>
+                                    <a title="Eliminar" ng-click="open(registro)" class="btn btn-danger">
+                                        <i class="glyphicon glyphicon-trash"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <button ng-show="registros.length >= 0" type="button" ng-click="$event.stopPropagation();" ui-sref="logrosreconocimientosAdd" class="btn btn-success">
+                <span class="glyphicon glyphicon-plus"></span> Agregar
+            </button>
+        </div>
+
+    </div>
+</div>

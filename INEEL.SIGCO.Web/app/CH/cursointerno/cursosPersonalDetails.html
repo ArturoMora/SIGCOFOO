@@ -1,0 +1,245 @@
+<!-- page content -->
+<div class="vista">
+
+    <div class="page-title">
+        <div class="title_full">
+
+            <ol class="breadcrumb miga">
+                <li><i class="sg sg-cursos-cap"></i> <a ui-sref="fichapersonal.cursointerno({seccion:'cursointerno'})">Cursos impartidos</a></li>
+                <li class="active">Detalles</li>
+            </ol>
+
+        </div>
+    </div>
+    <div data-ng-hide="authentication.isAuth">
+        No tiene permisos para ingresar a esta secci&oacute;n..<br /> Usuario no autentificado
+    </div>
+    <div data-ng-show="authentication.isAuth">
+
+        <div class="clearfix"></div>
+
+
+        <div class="row">
+            <div class="col-md-8 col-sm-8 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_content sin-desborde">
+                        <label class="detalle col-xs-12 " title="Nombre">
+                            {{registro.titulo}}
+                        </label>
+                        <label class="cont emc col-xs-12 colorTit">
+                            {{registro.tipoCurso.descripcion}}
+                        </label>
+                        <label class="cont col-xs-12">
+                            Por: {{registro.nombrePersona}}
+                        </label>
+                        <label class="tit col-xs-12">
+                            Descripci&oacute;n
+                        </label>
+                        <label class="cont col-xs-12">
+                            {{registro.descripcion}}
+                        </label>
+                    </div>
+                </div>
+
+                <div class="x_panel">
+                    <div class="x_content sin-desborde">
+                        <div class="x_title">
+                            <h2>Origen y autores del curso</h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <label class="titFirst col-xs-12">
+                            Proyecto del que se origina el curso
+                        </label>
+                        <label ng-if="registro.proyecto.proyectoId==null" class="cont col-xs-12">
+                            Dato no disponible
+                        </label>
+                        <label class="cont col-xs-12" ng-if="registro.proyecto.proyectoId!=null">
+                            <a href="" load-proyectos idproyecto="{{registro.proyecto.proyectoId}}" title="Detalle de proyecto">{{registro.proyecto.proyectoId}}</a>- {{registro.proyecto.nombre}}
+                        </label>
+                        <label class="tit col-xs-12">
+                            Unidad organizacional a la que pertenece
+                        </label>
+                        <label class="cont col-xs-12">
+                            {{UO.nombreUnidad}}
+                        </label>
+                        <label class="tit col-xs-12">
+                            Autores internos
+                        </label>
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th class="thAjuste">N&uacute;m empleado</th>
+                                    <th>Nombre de empleado</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="registro in autoriie">
+                                    <td ng-click="openProfile(registro.clavePersona)" title="Detalle de empleado" class="linkTabla">{{registro.clavePersona}}</td>
+                                    <!--<td>{{registro.clavePersona}}</td>-->
+                                    <td>{{registro.nombreCompleto}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <label class="tit col-xs-12">
+                            Autores externos
+                        </label>
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Organizaci&oacute;n</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="registro in autorext">
+                                    <td>{{registro.nombreCompleto}}</td>
+                                    <td>{{registro.institucion}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <label class="alert informacion" ng-show="registro.perteneceCP === true">
+                            <span class="glyphicon glyphicon-info-sign"></span> Este curso <strong> pertenece </strong> al centro de postgrado
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-4 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Documentaci&oacute;n</h2>
+                        <div class="clearfix"></div>
+                    </div>
+
+
+
+                    <div class="form-group">
+                        <table class="table table-hover" ng-hide="archivosAdjuntos.length == 0">
+                            <thead>
+                                <tr>
+                                    <th>Archivo(s) adjunto(s):</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+
+
+
+                                <tr ng-repeat="adjunto in archivosAdjuntos">
+                                   
+                                    <td><span class="fa fa-download"></span>&nbsp;&nbsp; <a href="/Descargas.html#/cursos/{{adjunto.adjuntoCursosId| encriptar}}" class="text fa fa-unlock" ta target="_blank"> {{adjunto.nombre}}</a></td>
+                                </tr>
+
+
+                              
+                            </tbody>
+                        </table>
+                    </div>
+
+
+
+                
+
+                    <div class="alert advertencia col-xs-12" ng-show="registro.privadoPublico === 1 ">
+                        <span class="glyphicon glyphicon-info-sign"></span> El acceso a la documentaci&oacute;n es de tipo
+                        <strong> Privado </strong>
+                    </div>
+                    <br />
+                    <div>
+                        <a class="btn btn-warning" ng-click="SolicitarAcceso()" role="button" ng-if="Descarga=='False'&&Presentar=='True'">Solicitar acceso a documento(s)</a>
+                    </div>
+
+
+                </div>
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Ligas relacionadas</h2>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="form-group sin-desborde" ng-if="registro.sitioWebCurso.length>0">
+                        <div ng-repeat="sitio in registro.sitioWebCurso" style="white-space: nowrap;">
+                            <i class="fa fa-link"></i>
+                            <a class="linkArchivo text" href="{{sitio.url}}" target="_blank" title="{{sitio.url}}">
+                                {{sitio.url}}
+                            </a><br>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Fechas del curso</h2>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content sin-desborde">
+                        <form name="fromfa" id="form" class="form-horizontal">
+                            <div class="form-group">
+                                <label class="titFirst col-md-3 col-sm-3 col-xs-12">
+                                    Inicio
+                                </label>
+                                <label class="cont  col-md-6 col-sm-6 col-xs-12">
+                                    {{registro.fechaCurso | date: 'dd/MM/yyyy'}}
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <label class="titFirst col-md-3 col-sm-3 col-xs-12">
+                                    T&eacute;rmino &nbsp;
+                                </label>
+                                <label class="cont  col-md-6 col-sm-6 col-xs-12">
+                                    {{registro.fechaTermino | date:'dd/MM/yyyy'}}
+                                </label>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Lugar del curso</h2>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content sin-desborde">
+                        <form name="fromfa" id="form" class="form-horizontal">
+                            <div class="form-group">
+                                <label class="cont  col-md-6 col-sm-6 col-xs-12">
+                                    {{registro.lugar}}
+                                </label>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12">
+                <form>
+                    <button type="submit" ng-click="volver()" class="btn btn-primary">
+                        <span class="fa fa-arrow-left"></span> Regresar
+                    </button>
+                    <!--<button ng-show="centroposgrado===0 || centroposgrado==undefined" type="submit" ui-sref="fichapersonal.cursointerno({seccion:'cursointerno'})" class="btn btn-primary">
+                        <span class="fa fa-arrow-left"></span> Regresar
+                    </button>
+                    <button ng-show="centroposgrado===1" type="submit" ui-sref="solicitudescp" class="btn btn-primary">
+                        <span class="fa fa-arrow-left"></span> Regresar
+                    </button>
+                    <button ng-show="centroposgrado===2" type="submit" ui-sref="solicitudesrh" class="btn btn-primary">
+                        <span class="fa fa-arrow-left"></span> Regresar
+                    </button>-->
+                    <!--<button  type="submit" ui-sref="fichapersonal.cursointerno({seccion:'cursointerno'})" class="btn btn-primary">
+                        <span class="fa fa-arrow-left"></span> Regresar
+                    </button>-->
+                </form>
+            </div>
+        </div>
+
+
+
+    </div>
+    <!-- se oculta, si usuario est� logeado-->
+
+
+
+
+</div>

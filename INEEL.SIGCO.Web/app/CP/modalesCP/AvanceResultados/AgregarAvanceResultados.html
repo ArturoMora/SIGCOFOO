@@ -1,0 +1,134 @@
+﻿<div class="modal-content sin-desborde">
+    <div class="modal-header">
+        <button type="button" class="close" confirma-regresar="cancel()" state-form="avanceAddForm"  data-dissmiss="modal">
+            <i class="glyphicon glyphicon-remove"></i>
+        </button>
+        <div class="col-xs-1"></div>
+        <div>
+            <h3>
+                Agregar avance de resultados
+            </h3>
+        </div>
+
+
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <form ng-submit="agregarRegistro()" novalidate name="avanceAddForm" id="avanceAddForm" class="form-horizontal">
+                <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                        Compromisos <span class="required">*</span>
+                    </label>
+                    <div class="span-label  col-md-6 col-sm-6 col-xs-12">
+                        <select required class="form-control" ng-model="resultado" name="compromisos" ng-options="e.meta for e in compromisos">
+                            <option value="">--- Seleccione un compromiso ---</option>
+                        </select>
+                        <span class="error" ng-show="compromisos.length==0">No hay compromisos registrados</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                        Resultados <span class="required">*</span>
+                    </label>
+                    <div class="span-label  col-md-6 col-sm-6 col-xs-12">
+                        <select required class="form-control" name="resultados" ng-model="idMeta" ng-disabled="resultado.resultados.length==0" ng-options="e.resultadoId as e.resultadoEsperado for e in resultado.resultados ">
+                            <option value="">--- Seleccione un resultado ---</option>
+                        </select>
+                        <span class="error" ng-show="resultado.resultados.length==0">No hay resultados para reportar avance</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                        Comentarios
+                    </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <textarea type="text" maxlength="500" name="descripcion" ng-model="resultado.comentario" class="form-control"></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                        Porcentaje de avance <span class="required">*</span>
+                    </label>
+                    <div class="span-label  col-md-6 col-sm-6 col-xs-12">
+                        <input required  max="100" min="1" ng-model="resultado.descripcion" type="number"  class="form-control col-md-7 col-xs-12"/>
+                    </div>                
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                        Documento adjunto
+                    </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input class="input-file form-control" type="file" name="filesGral" id="filesGral" data-buttonName="btn-success" ng-click="saveIG();" ng-model="filesGral" onchange="angular.element(this).scope().getFileDetails(this);" />
+                    </div>
+                </div>
+                <div ng-show="resultado.descripcion==100">
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                            Autores *
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <a ng-click="openUser()" class="btn btn-success">
+                                <span class="fa fa-user-plus"></span> Buscar
+                            </a>
+                            <div class="col-md-12" ng-if="miembroSeleccionado!=null">
+                                <div class="col-xs-6 col-md-3">
+                                    <input disabled class="form-control" ng-model="miembroSeleccionado.miembroId"/>
+                                </div>
+                                <div class="col-xs-6 col-md-5">
+                                    <input disabled class="form-control" ng-model="miembroSeleccionado.nombrePersona"/>
+                                </div>
+                                <div class="col-xs-6 col-md-3">
+                                    <input type="number" placeholder="%" min="1" required max="100" ng-model="miembroSeleccionado.participacion" class="form-control col-md-7 col-xs-12"/>
+                                </div>
+                                <div class="col-xs-6 col-md-1">
+                                    <a title="Agregar" ng-click="agregaMiembro()" class="btn btn-success">
+                                        <i class="glyphicon glyphicon-ok"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <br/>
+                            <br/>
+                            <br />
+                            <div ng-show="autores.length > 0">
+                                <table id="RegistroAdd" class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" datatable="ng" width="100%"
+                                       dt-options="dtOptions">
+                                    <thead>
+                                    <tr>
+                                        <th data-priority="1">Nombre</th>
+                                        <th>Participaci&oacute;n</th>
+                                        <th data-priority="3" class="thAjuste text-center">Opciones</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="autor in autores">
+                                        <td>{{autor.nombrePersona}}</td>
+                                        <td>{{autor.participacion}}</td>
+                                        <td class="text-center">
+                                            <div>
+                                                <a title="Eliminar" ng-click="deleteMiembro(autor)" class="btn btn-danger">
+                                                    <i class="glyphicon glyphicon-trash"></i>
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <!--<button type="submit" class="btn btn-success" ng-disabled="resultado.resultados.length==0 || (resultado.descripcion==100 && autores.length <= 0)" ng-click="agregarRegistro()">-->
+                    <button type="submit" class="btn btn-success" ng-disabled="(resultado.descripcion==100 && autores.length <= 0)">
+                        <i class="glyphicon glyphicon-saved"></i> Guardar
+                    </button>
+                </div>
+            </form>
+            
+        </div>
+        
+
+    </div>
+    
+    
+</div>

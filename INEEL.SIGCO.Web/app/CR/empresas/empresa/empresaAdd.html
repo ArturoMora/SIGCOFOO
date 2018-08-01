@@ -1,0 +1,350 @@
+<SCRIPT language=Javascript>
+    function isNumberKey(evt) {
+        var charCode = (evt.which) ? evt.which : event.keyCode
+        if (charCode > 31 && (charCode < 48 || charCode > 57))
+            return false;
+
+        return true;
+    }
+
+</SCRIPT>
+<div id="vista">
+    <div class="page-title">
+        <div class="title_left">
+            <ol class="breadcrumb miga">
+                <li><i class="disabled fa fa-cogs"></i> <a ui-sref="empresasGet">Administraci&oacute;n/Cat&aacute;logos/Empresas</a></li>
+                <li class="active">Agregar</li>
+            </ol>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Informaci&oacute;n general </h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content sin-desborde">
+                    <form role="form" name="empresaAddForm" class="form-horizontal">
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Nombre <span class="required">*</span></label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input required type="text" name="nombreEmpresa" ng-model="empresa.nombreEmpresa" maxlength="150" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Tipo de organizaci&oacute;n <span class="required">*</span></label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <select required name="tipoOrganizacion" class="form-control" ng-model="empresa.tipoOrganizacionId" ng-options="tipoOrganizacion.tipoOrganizacionId as tipoOrganizacion.nombre for tipoOrganizacion in tiposOrganizaciones">
+                                    <option value="">- Selecciona tipo de organizaci&oacute;n -</option>
+                                </select>
+                                <span class="error" ng-show="empresaAddForm.tipoOrganizacion.$invalid && empresaAddForm.tipoOrganizacion.$dirty || empresaAddForm.$submitted && empresaAddForm.tipoOrganizacion.$invalid">
+                                    Debes de seleccionar una opci&oacute;n
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-3 col-sm-3 col-xs-12"></div>
+                            <div class="col-md-6 col-sm-6 col-xs-12 alert advertencia">
+                                Para agregar el titular primero tiene que crear la empresa
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Titular </label>
+                            <div class="col-md-8 col-sm-8 col-xs-12">
+                                <div class="row">
+                                    <div class="col-xs-8">
+                                        <input type="text" class="form-control" name="contacto" disabled>
+                                    </div>
+                                    <div class="row col-xs-4">
+                                        <button disabled class="btn btn-success" title="Buscar contacto">
+                                            <i class="glyphicon glyphicon-search"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12"> Puesto</label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" name="puesto" disabled maxlength="150" class="form-control" />
+                            </div>
+                        </div>
+                        <!-- <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Puesto del titular </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input disabled type="text" name="puesto" ng-model="empresa.puesto" maxlength="100" class="form-control" />
+                            </div>
+                        </div> -->
+                        
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Correo empresarial </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="email" maxlength="150" name="email" ng-model="empresa.correo" pattern="^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,3})+$"
+                                    class="form-control" />
+                                <div role="alert">
+                                    <span class="text-danger" ng-show="empresaAddForm.email.$invalid">
+                                        Correo no valido, ejemplo: correo@empresa.com
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Tel&eacute;fono </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" onkeypress='return isNumberKey(event)' name="tel" placeholder="(+52)" ng-model="empresa.telefono" maxlength="15" numbers-only
+                                    class="form-control" />
+                            </div>
+                            <div role="alert">
+                                <span class="error" ng-show="empresaAddForm.tel.$error.maxlength">
+                                    El n&uacute;mero de tel&eacute;fono solo puede contener 15 caracteres
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Extensi&oacute;n</label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" onkeypress='return isNumberKey(event)' name="ext" ng-model="empresa.ext" maxlength="10" numbers-only class="form-control"
+                                />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Celular </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" onkeypress='return isNumberKey(event)' placeholder="045777322450000" name="celular" ng-model="empresa.celular" numbers-only
+                                    maxlength="30" class="form-control" />
+                            </div>
+                            <div class="error" ng-show="empresaAddForm.celular.$error.maxlength">
+                                El n&uacute;mero de celular solo puede contener 15 caracteres
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Sitio Web </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" name="site" placeholder="http://www.empresa.com.mx" ng-pattern="/^(http|https)?(:\/\/)(www)?(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?$/"
+                                    ng-model="empresa.sitioWeb" class="form-control" maxlength="50" />
+                                <span class="error" ng-show="empresaAddForm.site.$dirty && !empresaAddForm.site.$valid">
+                                    Formato incorrecto,todas las URL deben de comenzar con http://
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Adjuntar logo</label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input class="input-file form-control col-md-7 col-xs-12" type="file" name="filesGral" id="filesGral" data-buttonName="btn-success"
+                                    ng-click="saveIG();" ng-model="filesGral" onchange="angular.element(this).scope().getFileDetails(this);"
+                                />
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Descripci&oacute;n</label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <textarea name="descripicion" class="form-control" ng-model="empresa.descripcion" rows="3" maxlength="250"></textarea>
+                            </div>
+                        </div>
+                        <div class="x_title">
+                            <h2>Direcci&oacute;n </h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Pa&iacute;s </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <select name="pais" class="form-control" ng-model="empresa.paisId" ng-change="cargaEstado()" ng-options="pais.paisId as pais.nombrePais for pais in paises">
+                                    <option value="">- Selecciona un pa&iacute;s -</option>
+                                </select>
+                                <span class="error" ng-show="empresaAddForm.pais.$invalid && empresaAddForm.pais.$dirty || empresaAddForm.$submitted && empresaAddForm.pais.$invalid">
+                                    Debes de seleccionar una opci&oacute;n
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-hide="estados.length > 1">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Estado </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" name="estado" ng-model="empresa.edo" maxlength="50" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="form-group" ng-show="estados.length > 1">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Estado </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <select name="estado" class="form-control" ng-model="empresa.estadoId" ng-change="cargaMunicipio()" ng-options="estado.estadoId as estado.nombreEstado for estado in estados">
+                                    <option value="">- Seleccione un estado-</option>
+                                </select>
+                                <span class="error" ng-show="empresa.estado.$invalid && empresa.estado.$dirty || empresa.$submitted && empresa.estado.$invalid">
+                                    Debes de seleccionar una opci&oacute;n
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-hide="estados.length > 1">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Municipio </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" name="municipio" ng-model="empresa.municipio" maxlength="50" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="form-group" ng-show="municipios.length > 1">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Municipio </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <select name="municipio" class="form-control" ng-model="empresa.municipioId" ng-options="municipio.municipioId as municipio.nombreMunicipio for municipio in municipios">
+                                    <option value="">- Seleccione un municipio-</option>
+                                </select>
+                                <span class="error" ng-show="empresa.municipio.$invalid && empresaAddForm.municipio.$dirty || empresaAddForm.$submitted && empresaAddForm.municipio.$invalid">
+                                    Debes de seleccionar una opci&oacute;n
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-hide="estados.length > 1">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Localidad </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" name="localidad" ng-model="empresa.localidad" maxlength="100" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="form-group" ng-show="municipios.length > 1">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Localidad </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" name="localidad" ng-model="empresa.localidad" maxlength="100" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Colonia </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" name="colonia" ng-model="empresa.colonia" maxlength="50" class="form-control" />
+                                <span class="error" ng-show="empresaAddForm.colonia.$dirty && !empresaAddForm.colonia.$valid">
+                                    El rango de caracteres debe ser m&iacute;nimo 2 y m&aacute;ximo 50
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Calle </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" name="colonia" ng-model="empresa.calle" maxlength="50" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">CP </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" onkeypress='return isNumberKey(event)' name="cp" ng-model="empresa.cp" maxlength="10" class="form-control" numbers-only />
+                            </div>
+                        </div>
+                        <div class="x_title">
+                            <h2>Datos fiscales </h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">RFC </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" name="rfc" ng-model="empresa.rfc" maxlength="12" class="form-control" />
+                                <span class="error" ng-show="empresaAddForm.rfc.$dirty && !empresaAddForm.rfc.$valid">
+                                    El RFC esta conformado por 12 caracteres
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Raz&oacute;n social </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" name="razonSocial" ng-model="empresa.razonSocial" maxlength="20" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Pa&iacute;s </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <select name="pais" class="form-control" ng-model="empresa.paisIdRS" ng-change="cargaEstadoRS()" ng-options="pais.paisId as pais.nombrePais for pais in paisesR">
+                                    <option value="">-   Selecciona un pa&iacute;s   -</option>
+                                </select>
+                                <span class="error" ng-show="empresaAddForm.pais.$invalid && empresaAddForm.pais.$dirty || empresaAddForm.$submitted && empresaAddForm.pais.$invalid">
+                                    Debes de seleccionar una opci&oacute;n
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-hide="estadosR.length > 1">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Estado </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" name="estado" ng-model="empresa.edoR" maxlength="50" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="form-group" ng-show="estadosR.length > 1">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Estado </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <select name="estado" class="form-control" ng-model="empresa.estadoIdRS" ng-change="cargaMunicipioRS()" ng-options="estado.estadoId as estado.nombreEstado for estado in estadosR">
+                                    <option value="">- Seleccione estado-</option>
+                                </select>
+                                <span class="error" ng-show="empresa.estado.$invalid && empresa.estado.$dirty || empresa.$submitted && empresa.estado.$invalid">
+                                    Debes de seleccionar una opci&oacute;n
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-hide="estadosR.length > 1">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Municipio </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" name="municipio" ng-model="empresa.municipioR" maxlength="50" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="form-group" ng-show="municipiosR.length > 1">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Municipio </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <select name="municipio" class="form-control" ng-model="empresa.municipioIdRS" ng-options="municipio.municipioId as municipio.nombreMunicipio for municipio in municipiosR">
+                                    <option value="">- Seleccione un municipio-</option>
+                                </select>
+                                <span class="error" ng-show="empresa.municipio.$invalid && empresaAddForm.municipio.$dirty || empresaAddForm.$submitted && empresaAddForm.municipio.$invalid">
+                                    Debes de seleccionar una opci&oacute;n
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-hide="estados.length > 1">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Localidad </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" name="localidadRS" ng-model="empresa.localidadRS" maxlength="100" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="form-group" ng-show="municipios.length > 1">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Localidad </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" name="localidad" ng-model="empresa.localidadRS" maxlength="100" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Colonia </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" name="colonia" ng-model="empresa.coloniaR" maxlength="50" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Calle </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" name="colonia" ng-model="empresa.calleR" maxlength="50" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">CP </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" onkeypress='return isNumberKey(event)' name="cp" ng-model="empresa.cpR" maxlength="10" class="form-control"  numbers-only />
+                            </div>
+                        </div>
+                        <div class="form-group" ng-show="rolid == 15">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Estado de la empresa<span class="required">*</span></label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <select required class="form-control" ng-model="empresa.estadoEmpresa" ng-options='option.value as option.nombre for option in estadoEmpresas'>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="ln_solid"></div>
+
+                        <div class="form-group">
+                            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                <div>
+                                    <button type="submit" ng-click="AddEmpresa()" class="btn btn-success" ng-disabled="empresaAddForm.$invalid">
+                                        <i class="glyphicon glyphicon-saved"></i> Guardar
+                                    </button>
+                                    <button type="button" ng-click="validaruta()" class="btn btn-primary">
+                                        <span class="fa fa-arrow-left"></span> Regresar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

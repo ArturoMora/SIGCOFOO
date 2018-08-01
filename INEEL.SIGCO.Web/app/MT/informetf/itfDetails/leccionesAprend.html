@@ -1,0 +1,118 @@
+﻿
+<!--<div ng-show="ITFPublico || itf.itFgeneral.accesoTipo==1">-->
+<div>
+    <div class="x_title">
+        <h2>Lecciones aprendidas en el desarrollo del proyecto</h2>
+        <div class="clearfix"></div>
+    </div>
+    <div ng-show="itf.lAproy==null">
+        <div class="alert advertencia">
+            No hay informaci&oacute;n disponible
+            <div class="clearfix"></div>
+        </div>
+    </div>
+    <div ng-show="itf.lAproy!=null">
+        <div class="form-group">
+            <label class="labelDetail col-md-3 col-sm-3 col-xs-12">
+                Insumos tecnol&oacute;gicos
+            </label>
+            <div class="col-md-6 col-sm-6 col-xs-12 sin-desborde">
+                <span class="text">{{itf.lAproy.insumos}}</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="labelDetail col-md-3 col-sm-3 col-xs-12">
+                Equipo de trabajo
+            </label>
+            <div class="col-md-6 col-sm-6 col-xs-12 sin-desborde">
+                <span class="text">{{itf.lAproy.equipo}}</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="labelDetail col-md-3 col-sm-3 col-xs-12">
+                Gesti&oacute;n del proyecto
+            </label>
+            <div class="col-md-6 col-sm-6 col-xs-12 sin-desborde">
+                <span class="text">{{itf.lAproy.gestion}}</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="labelDetail col-md-3 col-sm-3 col-xs-12">
+                Cumplimiento del tiempo, costo y alcance original
+            </label>
+            <div class="col-md-6 col-sm-6 col-xs-12 sin-desborde">
+                <span class="text">{{itf.lAproy.cumplimiento}}</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="labelDetail col-md-3 col-sm-3 col-xs-12">
+                Palabras clave
+            </label>
+            <div class="col-md-6 col-sm-6 col-xs-12 sin-desborde">
+                <span class="text">{{itf.lAproy.clave}}</span>
+            </div>
+        </div>
+
+        <div class="x_title">
+            <h2>Lecciones aprendidas en la relaci&oacute;n con el cliente</h2>
+            <div class="clearfix"></div>
+        </div>
+        <div class="form-group">
+            <label class="labelDetail col-md-3 col-sm-3 col-xs-12">
+                En la negociaci&oacute;n
+            </label>
+            <div class="col-md-6 col-sm-6 col-xs-12 sin-desborde">
+                <span class="text">{{itf.lActe.negociacion}}</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="labelDetail col-md-3 col-sm-3 col-xs-12">
+                En el desarrollo
+            </label>
+            <div class="col-md-6 col-sm-6 col-xs-12 sin-desborde">
+                <span class="text">{{itf.lActe.desarrollo}}</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="labelDetail col-md-3 col-sm-3 col-xs-12">
+                En el cierre
+            </label>
+            <div class="col-md-6 col-sm-6 col-xs-12 sin-desborde">
+                <span class="text">{{itf.lActe.cierre}}</span>
+            </div>
+        </div>
+
+        <div class="x_title">
+            <h2>Capacidad del Instituto</h2>
+            <div class="clearfix"></div>
+        </div>
+
+
+
+        <div class="form-group">
+            <label class="labelDetail col-md-3 col-sm-3 col-xs-12">
+                En sus instalaciones
+            </label>
+            <div class="col-md-6 col-sm-6 col-xs-12 sin-desborde">
+                <span class="text">{{itf.lAcap.instalaciones}}</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="labelDetail col-md-3 col-sm-3 col-xs-12">
+                Servicios y apoyos administrativos
+            </label>
+            <div class="col-md-6 col-sm-6 col-xs-12 sin-desborde">
+                <span class="text">{{itf.lAcap.servicios}}</span>
+            </div>
+        </div>
+    </div>
+
+  
+</div>
+
+
+
+
+
+
+

@@ -1,0 +1,169 @@
+<div class="vista">
+    <div class="page-title">
+        <div class="title_left">
+            <ol class="breadcrumb miga">
+                <li><i class="sg sg-aliados"></i> <a ui-sref="consultaConvenios">Convenios</a></li>
+            </ol>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Criterios de b&uacute;squeda</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li>
+                            <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <form role="form" class="form-label-left">
+                        <div class="col-xs-6 col-md-6">
+                            <div class="form-group">
+                                <label class="col-xs-12" style="height:30px; line-height:30px; text-align:left; ">Objeto del convenio</label>
+                                <div class="col-xs-10">
+                                    <input class="form-control frmSearch" type="text" id="s1" maxlength="50" placeholder="Objeto del convenio" ng-model="conv.objetoConvenio" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-xs-12" style="height:30px; line-height:30px; text-align:left; ">Empresa</label>
+                                <div class="col-xs-10">
+                                    <select id="s2" ng-model="conv.empresaId" ng-options="emp.idEmpresa as emp.nombreEmpresa for emp in empresas | orderBy:'nombreEmpresa'"
+                                            class="form-control">
+                                        <option value="">---Seleccione una empresa---</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-xs-12" style="height:30px; line-height:30px; text-align:left; ">N&uacute;mero del convenio</label>
+                                <div class="col-xs-10">
+                                    <input class="form-control frmSearch" type="text" id="s1" maxlength="50" placeholder="N&uacute;mero del convenio" ng-model="conv.noConvenio" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-xs-12" style="height:30px; line-height:30px; text-align:left; ">Tipo de convenio</label>
+                                <div class="col-xs-10">
+                                    <select id="s2" ng-model="conv.tipoConvenioId" ng-options="tipo.idTipo as tipo.nombre for tipo in tipos | orderBy:'nombre'"
+                                            class="form-control">
+                                        <option value="">---Seleccione un tipo de convenio---</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <br />
+                            <br />
+                        </div>
+
+                        <div class="col-xs-6 col-md-6">
+                            <div class="form-group">
+                                <label class="col-xs-12" style="height:30px; line-height:30px; text-align:left; ">
+                                    Unidad organizacional
+                                </label>
+                                <div class="col-xs-12">
+                                    <div uo-modal2 ng-model="unidadOselect" ng-change="{{conv.claveUnidad = unidadOselect.claveUnidad}}" requerido="false" fecha=""></div>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div><br />
+                            <label class="col-xs-12">Convenios con fecha de t&eacute;rmino entre el siguiente rango de fechas: </label>
+                            <div class="clearfix"></div>
+                            <div class="form-group">
+                                <label class="col-xs-12" >Inicio </label>
+                                <div class="col-xs-10">
+                                    <input placeholder="dd/mm/yyyy" show-button-bar="false" uib-datepicker-popup='dd/MM/yyyy' ng-minlength="8" maxlength="10" datepicker-options="datePicker.FechaOptions" popup-placement="bottom" type="text" class="form-control fechaOnly"
+                                           ng-model="conv.fechaInicioComparacion" is-open="open" close-text="Close" />
+                                </div>
+                                <div class="col-xs-2">
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-success" ng-click="open=true;conv.busquedaFecha='ok'"><i class="glyphicon glyphicon-calendar"></i></button>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-xs-12" style="height:30px; line-height:30px; text-align:left; ">T&eacute;rmino </label>
+                                <div class="col-xs-10">
+                                    <input placeholder="dd/mm/yyyy" show-button-bar="false" uib-datepicker-popup='dd/MM/yyyy' ng-minlength="8" maxlength="10" datepicker-options="datePicker.FechaOptions" popup-placement="bottom" type="text" class="form-control fechaOnly"
+                                           ng-model="conv.fechaFinalComparacion" is-open="open2" close-text="Close" />
+                                </div>
+                                <div class="col-xs-2">
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-success" ng-click="open2=true;conv.busquedaFecha='ok'"><i class="glyphicon glyphicon-calendar"></i></button>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <br />
+                            <br />
+                        </div>
+                        <div class="clearfix"></div><br />
+                        <div class="form-horizontal">
+                            <div>
+                                <a class="btn btn-success" ng-click="buscar()" title="buscar">
+                                    <span class="glyphicon glyphicon-search"></span> Buscar
+                                </a>
+                                <a class="btn btn-primary" ng-click="reset()" title="Limpiar formulario">
+                                    Limpiar
+                                </a>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+            <div ng-show="busqueda" class="x_panel">
+                <div class="x_content sin-desborde">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div>
+                                <table id="tablaConsultaConvenios" datatable="ng" dt-column-defs="dtColumnDefs" class="table table-hover table-striped table-condensed dt-responsive" width="100%"
+                                       dt-options="dtOptions">
+                                    <thead>
+                                        <tr>
+                                            <th data-priority="1">Nombre del aliado</th>
+                                            <th>Objeto del convenio</th>
+                                            <th class="thAjuste">N&uacute;mero de convenio</th>
+                                            <th>Tipo de convenio</th>
+                                            <th>Fecha de inicio - t&eacute;rmino</th>
+                                            <th>&Aacute;rea involucrada</th>
+                                            <th>Estado del convenio</th>
+                                            <th>Opciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="e in convenios ">
+                                            <td>
+                                                <!--<a class="hidden">{{e.fechaTermino | date: 'dd/MM/yyyy'}}</a>-->
+                                                {{::e.nombreEmpresa}}
+                                            </td>
+                                            <td class="linkTabla">
+                                                <a style="cursor:pointer" ui-sref="convenioDetails({ id: e.convenioId })" ng-click="setVariable('busquedaConvenios', conv)">{{::e.objetoConvenio}}</a>
+                                            </td>
+                                            <td>{{::e.noConvenio}}</td>
+                                            <td>{{::e.tipoConvenio}}</td>
+                                            <td>{{e.fechaInicio | date: 'dd/MM/yyyy'}} - {{e.fechaTermino==null? 'Indefinido' : e.fechaTermino | date: 'dd/MM/yyyy'}}</td>
+                                            <td>{{::e.claveUnidad}}</td>
+                                            <td>
+                                                <div ng-bind="getVigencia(e.fechaInicio , e.fechaTermino)"></div>
+                                            </td>
+                                            <td>
+                                                <a class="btn btn-warning" ui-sref="convenioEdit({ id: e.convenioId })" ng-click="setVariable('busquedaConvenios', conv)" title="Editar">
+                                                    <i class="glyphicon glyphicon-pencil"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

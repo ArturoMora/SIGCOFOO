@@ -1,0 +1,44 @@
+﻿<div class="modal-content sin-desborde">
+    <div class="modal-header">
+        <div class="col-xs-1"></div>
+        <div>
+            <h3 class="text-center">
+                Lineamientos
+            </h3>
+        </div>
+    </div>
+    <div class="modal-body">
+        <div class="container-fluid">
+            <div class="col-xs-12 col-lg-12 col-md-12">
+                <div ng-repeat="e in lineamientos">
+                    <div class="col-sm-3 col-md-3 col-lg-3">
+                        <div class="x_panel">
+                            <div class="x_content sin-desborde">
+                                <!--{{e | json}}-->
+                                <h5>{{e.nombre}}</h5>
+                                <span ng-if="e.adjuntoId!=null" class="fa fa-download"></span>&nbsp;&nbsp;<a ng-if="e.adjuntoId!=null" href="/Descargas.html#/q/{{e.adjunto.adjuntoId | encriptar}}" class="linkTabla" target="_blank">{{e.nombreAdjunto}}</a><br/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center">
+                <strong>&iquestAceptas los lineamientos de la comunidad?</strong>    
+            </div>
+            
+        </div>
+        </div>
+    <div class="modal-footer">
+        <div class="col-md-4">
+
+        </div>
+        <div class="col-md-4 text-center">
+            <button type="button" class="btn btn-success" ng-click="ok()">Si</button>
+            <button type="button" class="btn btn-danger" ng-click="cancel()">No</button>
+        </div>
+        <div class="col-md-4">
+            
+        </div>
+        
+    </div>
+</div>

@@ -1,0 +1,67 @@
+﻿<!-- page content -->
+<div class="vista">
+    <div class="page-title">
+        <div class="title_left">
+            <ol class="breadcrumb miga">
+                <li><i class="disabled fa fa-cogs"></i> <a ui-sref="TipoSoftwareGet">Administraci&oacute;n/Cat&aacute;logos/Tipo de software</a></li>
+            </ol>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+
+                    <div data-ng-hide="authentication.isAuth">
+                        No tiene permisos para ingresar a esta sección.<br />
+                        Usuario no autentificado
+                    </div>
+                    <div data-ng-show="authentication.isAuth">
+                        <div ng-show="registrossoftware.length == 0" class="alert advertencia">
+                            No hay registros
+                        </div>
+                        <div ng-show="loading">
+                            <img src="images/cargando.gif" />
+                        </div>
+                        <div ng-show="!loading && registrossoftware.length >0">
+                            <table id="MTTipoSoftwareGet" class="display dt-responsive" cellspacing="0" datatable="ng" width="100%" dt-options="dtOptions">
+                                <thead>
+                                    <tr>
+                                        <th data-priority="1">Nombre</th>
+                                        <th>Descripci&oacute;n</th>
+                                        <th class="thAjuste text-center">&iquest;Est&aacute; activo? </th>
+                                        <th class="thAjuste text-center">Opciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="software in registrossoftware">
+                                        <td class="linkTabla" ng-click="detalleSoftware(software.tipoSoftwareId)">
+                                            <!--<a class="linkTabla" ui-sref="TipoSoftwareDetails({ id: software.tipoSoftwareId })" title="Mostrar detalle">-->
+                                                {{software.nombre}}
+                                            <!--</a>-->
+                                        </td>
+                                        <td>{{software.descripcion}}</td>
+                                        <td class="text-center text-hide">
+                                            {{software.estado}}
+                                            <input type="checkbox" class="btn btn-lg btn-info btn-circle" ng-model="software.estado" value="{{software.estado}}" ng-click="saveEstado(software.tipoSoftwareId, software.estado, software.descripcion)" />
+                                        </td>
+                                        <td class="text-center">
+
+                                            <a class="btn btn-warning" ui-sref="TipoSoftwareEdit({ id: software.tipoSoftwareId })" title="Editar">
+                                                <i class="glyphicon glyphicon-pencil"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <button type="button" ui-sref="TipoSoftwareAdd" class="btn btn-success">
+                            <span class="glyphicon glyphicon-plus"></span> Agregar
+                        </button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

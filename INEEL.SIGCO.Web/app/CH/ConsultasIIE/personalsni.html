@@ -1,0 +1,124 @@
+<div class="vista">
+    <div class="page-title">
+        <div class="title_left">
+            <ol class="breadcrumb miga">
+                <li><i class="sg sg-inventario-rh"></i> <a ui-sref="personalsni">Inventario RH/Consulta estad&iacutestica de personal de investigaci&oacute;n en SNI</a></li>
+            </ol>
+
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <form name="ValidForm" id="form" class="form-horizontal">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Criterios de b&uacute;squeda</h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li>
+                                <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <div class="col-xs-12">
+                            <div class="col-lg-3 col-md-4 col-xs-6">
+                                <div class="form-group ">
+                                    <label class="col-md-12 col-sm-12 col-xs-12">Fecha:</label>
+                                    <div class="col-xs-10">
+                                        <input show-button-bar="false" ng-minlength="8" maxlength="10"
+                                               datepicker-options="datePicker.FechaOptions"
+                                               uib-datepicker-popup='dd/MM/yyyy' popup-placement="bottom"
+                                               type="text" class="form-control" ng-model="fecha" ng-change="cambiafecha()" is-open="open"
+                                               ng-required="true" close-text="Close" name="fecha" />
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-success" ng-click="open=true"><i class="glyphicon glyphicon-calendar"></i></button>
+                                        </span>
+                                        <span ng-show="ValidForm.fecha.$dirty &&  ValidForm.fecha.$invalid" class="error">Formato inválido 'dd/MM/yyyy'</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-4 col-xs-6">
+                                <div class="form-group ">
+                                    <div class="col-xs-12">
+                                        <label>Nivel organizacional:</label>
+                                        <select class="form-control" onchange="privateResetDatatable('estadistico')"
+                                                ng-model="divisionselected" ng-disabled="checkboxModel.value" ng-options="division.nombreUnidad for division in divisiones">
+                                            <option></option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-xs-12">
+                                <div class="form-group ">
+                                    <div class="col-xs-12">
+                                        <a class="btn btn-success" ng-click="consultarpersonalsni();">
+                                            <i class="glyphicon glyphicon-search"></i> Buscar
+                                        </a>
+                                        <a class="btn btn-primary" ng-click="reset()" title="Limpiar campos">
+                                            Limpiar
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="row" ng-show="unidadesorg.length > 0 ">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Resultados</h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <div class="row">
+                        <div class="col-xs-12 table-responsive">
+                            <table id="estadistico" class="table table-striped table-hover  table-bordered">
+                                <thead>
+                                    <tr class="bg-primary">
+                                        <th>Divisi&oacute;n</th>
+                                        <th>Candidatos</th>
+                                        <th>Nivel 1</th>
+                                        <th>Nivel 2</th>
+                                        <th>Nivel 3</th>
+                                        <th>Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="unidad in unidadesorg" class="{{unidad.unidadOrganizacional.nombreUnidad=='TOTAL'?'totales':''}}">
+                                        <td>{{unidad.unidadOrganizacional.nombreUnidad}}</td>
+                                        <td>{{unidad.candidatos}}</td>
+                                        <td>{{unidad.nivel1}}</td>
+                                        <td>{{unidad.nivel2}}</td>
+                                        <td>{{unidad.nivel3}}</td>
+                                        <td> <a ng-click="iradetalle(unidad.unidadOrganizacional)" href="" ng-if="!$last"> {{unidad.total}} </a>                                            <span ng-if="$last">{{unidad.total}}</span> </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="row" ng-show="unidadesorg.length > 0 ">
+                        <div class="col-lg-12">
+                            <a class="btn btn-success" title="Descargar" ng-click="exportpdf()">
+                                <i class="fa fa-download"></i> Descargar PDF
+                            </a>
+                            <a class="btn btn-success" title="Descargar" onclick="downloadExcelTableById('estadistico', 'ConsultaEstadísticaPersonalInvestigaciónSNI')">
+                                <i class="fa fa-download"></i> Descargar Excel
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>

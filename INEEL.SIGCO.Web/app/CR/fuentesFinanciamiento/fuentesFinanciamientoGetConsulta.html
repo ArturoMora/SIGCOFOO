@@ -1,0 +1,67 @@
+
+<div class="vista">
+    <div class="page-title">
+        <div class="title_left">
+            <ol class="breadcrumb miga">
+                <li><i class="sg sg-fuentes-financiamiento"></i> <a ui-sref="fuentesFinanciamientoGet">Fuentes de Financiamiento</a></li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+                    <!-- se oculta, si usuario está logeado-->
+                    <div data-ng-hide="authentication.isAuth">
+                        No tiene permisos para ingresar a esta secci&oacute;n.<br /> Usuario no autentificado
+                    </div>
+                    <div data-ng-show="authentication.isAuth">
+                        <div ng-hide="fuentesFinanciamiento.length >= 0">
+                            <img src="images/cargando.gif" />
+                        </div>
+                        <div ng-show="fuentesFinanciamiento.length === 0" class="alert advertencia">
+                            No hay registros
+                        </div>
+                        <div ng-show="fuentesFinanciamiento.length > 0" class="col-xs-12 col-md-12">
+                            <table id="CRfuentesFinanciamientoGetConsulta" dt-instance="dtInstance" class="display" cellspacing="0" datatable="ng" width="100%" dt-options="dtOptions">
+                                <thead>
+                                    <tr>
+                                        <th data-priority="1">ID</th>
+                                        <th >Nombre</th>
+                                        <th>Tipo de FF</th>
+                                        <th>Pa&iacute;s </th>
+                                        <th class="text-center">Fondo o Programa</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="e in fuentesFinanciamiento">
+                                        <td class="linkTabla" ng-click="detalleFuente(e.fuenteFinanciamientoId)">{{e.fuenteFinanciamientoId}}</td>
+                                        <td class="thCeldaB">
+                                            <!-- <a class="link" ui-sref="fuenteFinanciamientoDetails({ id: e.fuenteFinanciamientoId })" title="Detalles">  -->
+                                            {{e.nombreFF}}
+                                          <!--    </a>  -->
+                                        </td>
+                                        <td>{{e.tipoFuenteFinanciamiento.nombre}}</td>
+                                        <td>{{e.pais.descripcion}}</td>
+                                        <td class="text-center">
+                                            <div ng-show="e.fondoPrograma.length === 0">
+                                                {{e.fondoPrograma.length}}
+                                            </div>
+                                            <div ng-show="e.fondoPrograma.length > 0">
+                                                <a class="link" ui-sref="fondoProgramaDetailsByFF({ id: e.fuenteFinanciamientoId })" title="Detalles Fondo Programa">{{e.fondoPrograma.length}} </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <br /><br />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

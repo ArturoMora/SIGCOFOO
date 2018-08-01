@@ -1,0 +1,275 @@
+<div id="page-wrapper">
+    <div class="row">
+        <div class="col-lg-12">
+            <h3 class="row">Reporte Resultados por alianza</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="form-group">
+                <br /><label>Tipo de organizaci&oacute;n:</label>
+                <select ng-required="true" name="tipoOrganizacionId" class="form-control" ng-model="tipoOrganizacionId" scrolly style="overflow: scroll"
+                        ng-options="tipoOrganizacion.tipoOrganizacionId as tipoOrganizacion.nombre for tipoOrganizacion in tiposOrganizacion">
+                    <option value="" selected>Todos</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="form-group">
+                <br /><label>Estado del convenio:</label>
+                <select ng-required="true" name="estadoConvenio" class="form-control" ng-model="estadoConvenio" scrolly style="overflow: scroll">
+                    <option value="" selected>Todos</option>
+                    <option>Vigente</option>
+                    <option>Vencido</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-4">
+            <label>Fecha de inicio:</label>
+            <div class="form-group">
+                <p class="input-group">
+                    <input placeholder="dd/mm/yyyy" show-button-bar="false" uib-datepicker-popup='dd/MM/yyyy' popup-placement="bottom" type="text" class="form-control"
+                           ng-model="fechaInicio" is-open="open" ng-required="true" close-text="Close" ng-change="validarFechasInicio()" />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="open=true"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </p>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="form-group">
+                <label>Fecha de t&eacute;rmino:</label>
+                <p class="input-group">
+                    <input placeholder="dd/mm/yyyy" required ng-init="open2=false" type="text" show-button-bar="false" popup-placement="bottom"
+                           class="form-control" uib-datepicker-popup="dd/MM/yyyy" ng-model="fechaTermino" ng-change="validarFechas()"
+                           value="{{ date | date: 'dd/MM/yyyy' }}" is-open="open2" ng-required="true" close-text="Close" />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="open2=true"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </p>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="form-group">
+                <label>Ambito:</label>
+                <select ng-required="true" name="ambitoConvId" class="form-control" ng-model="ambitoConvId" scrolly style="overflow: scroll"
+                        ng-options="ambitoConv.ambitoConvId as ambitoConv.nombre for ambitoConv in ambitosConv">
+                    <option value="" selected>Todos</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+
+        <!--<div class="row">-->
+        <div class="col-lg-4">
+            <div class="form-group">
+                <br /><label>Tipo de convenio:</label>
+                <div class="check-box-panel">
+                    <div ng-repeat="e in tiposConvenio">
+                        <div class="action-checkbox">
+                            <input id="{{e.convenioId}}" type="checkbox" value="{{e.convenioId}}" ng-checked="selection.indexOf(e.convenioId) > -1" ng-click="toggleSelection(e.convenioId)" />
+                            <label for="{{e.convenioId}}"></label>
+                            {{e.nomTipConv}}
+                        </div>
+                    </div>
+                </div>
+                <div class="selected-items-panel">
+                    <div ng-repeat="convenioId in selection" class="selected-item">
+                        {{convenioId}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--</div>-->
+        <div class="col-lg-5"></div>
+        <div class="col-lg-3">
+            <br>
+            <button type="button" ng-click="obtenerInformacion()" class="btn btn-primary">Buscar</button>
+            <a ng-click="limpiar()" class="btn btn-primary"
+               title="Limpiar" ng-disabled="desabilitarLimpiar">
+                Limpiar
+            </a>
+        </div>
+    </div>
+    <div class="row" ng-show="aliados.length > 0">
+        <div class="col-lg-3">
+            <a class="navbar-brand" href="">
+                <img src="images/logo_sigco.png" />
+            </a>
+        </div>
+        <div class="col-lg-9">
+            <h3 class="row">Resultados por Alianza</h3>
+        </div>
+    </div>
+    <div class="row" ng-show="aliados.length > 0">
+        <div class="col-lg-12">
+            <div class="table-responsive">
+                <table id="tablaexport" datatable="ng" dt-options="dtOptions" class="table table-striped table-hover table-responsive table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Aliado</th>
+                            <th>Tipo Org Aliado</th>
+                            <th>N&uacute;m. Convenio Aliado</th>
+                            <th>Ambito Conv</th>
+                            <th>TipoConvenio</th>
+                            <th>FInicio Conv</th>
+                            <th>FTermino Conv</th>
+                            <th>N&uacute;m. proyecto</th>
+                            <th>Nombre Proy</th>
+                            <th>A&ntilde;o Proy</th>
+                            <th>N&uacute;m. propuesta</th>
+                            <th>Nombre Prop</th>
+                            <th>A&ntilde;o Prop</th>
+                            <th>Id ON</th>
+                            <th>Nombre ON</th>
+                            <th>A&ntilde;o ON</th>
+                            <th>Actividad Adicional</th>
+                            <th>A&ntilde;o Act Adc</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="aliado in aliados">
+                            <td>{{aliado.nombreAliado}}</td>
+                            <td>{{aliado.tipoOrganizacion}}</td>
+                            <td>{{aliado.convenioId}}</td>
+                            <td>{{aliado.ambito}}</td>
+                            <td>{{aliado.tipoConv}}</td>
+                            <td>
+                                <span class="text" ng-if="aliado.fInicioConc!='0001-01-01T00:00:00'" ng-bind="aliado.fInicioConc | date:'dd/MM/yyyy'"></span>
+                            </td>
+                            <td>
+                                <span class="text" ng-if="aliado.fTerminoConv!='0001-01-01T00:00:00'" ng-bind="aliado.fTerminoConv | date:'dd/MM/yyyy'"></span>
+                            </td>
+                            <td>{{aliado.proyectoId}}</td>
+                            <td>{{aliado.nombreProy}}</td>
+                            <td>
+                                <span class="text" ng-if="aliado.fInicioProy!='0001-01-01T00:00:00'" ng-bind="aliado.fInicioProy | date:'dd/MM/yyyy'"></span>
+                            </td>
+                            <td>{{aliado.propuestaId}}</td>
+                            <td>{{aliado.nombreProp}}</td>
+                            <td>
+                                <span class="text" ng-if="aliado.fInicioProp!='0001-01-01T00:00:00'" ng-bind="aliado.fInicioProp | date:'dd/MM/yyyy'"></span>
+                            </td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>{{aliado.nombreActAdc}}</td>
+                            <td>
+                                <span class="text" ng-if="aliado.fechaActividad!='0001-01-01T00:00:00'" ng-bind="aliado.fechaActividad | date:'dd/MM/yyyy'"></span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div id="aliados" style="visibility:hidden;">
+                <table id="tab_proyectos">
+                    <thead>
+                        <tr>
+                            <th>N&uacute;m. proyecto</th>
+                            <th>Nombre Proy</th>
+                            <th>A&ntilde;o Proy</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr >
+                            <td>proyecto</td>
+                            <td>Nombre</td>
+                            <td>
+                                A&ntilde;o
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <table id="tab_propuestas">
+                    <thead>
+                        <tr>
+                            <th>N&uacute;m. propuesta</th>
+                            <th>Nombre Prop</th>
+                            <th>A&ntilde;o Prop</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>propuesta</td>
+                            <td>Nombre</td>
+                            <td>
+                                A&ntilde;o
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table id="tab_aliados">
+                    <thead>
+                        <tr>
+                            <th>Aliado</th>
+                            <th>Tipo Org Aliado</th>
+                            <th>N&uacute;m. Convenio Aliado</th>
+                            <th>Ambito Conv</th>
+                            <th>TipoConvenio</th>
+                            <th>FInicio Conv</th>
+                            <th>FTermino Conv</th>
+                            <th>N&uacute;m. proyecto</th>
+                            <th>Nombre Proy</th>
+                            <th>A&ntilde;o Proy</th>
+                            <th>N&uacute;m. propuesta</th>
+                            <th>Nombre Prop</th>
+                            <th>A&ntilde;o Prop</th>
+                            <th>Id ON</th>
+                            <th>Nombre ON</th>
+                            <th>A&ntilde;o ON</th>
+                            <th>Actividad Adicional</th>
+                            <th>A&ntilde;o Act Adc</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="aliado in aliados">
+                            <td>{{aliado.nombreAliado}}</td>
+                            <td>{{aliado.tipoOrganizacion}}</td>
+                            <td>{{aliado.convenioId}}</td>
+                            <td>{{aliado.ambito}}</td>
+                            <td>{{aliado.tipoConv}}</td>
+                            <td>
+                                <span class="text" ng-if="aliado.fInicioConc!='0001-01-01T00:00:00'" ng-bind="aliado.fInicioConc | date:'dd/MM/yyyy'"></span>
+                            </td>
+                            <td>
+                                <span class="text" ng-if="aliado.fTerminoConv!='0001-01-01T00:00:00'" ng-bind="aliado.fTerminoConv | date:'dd/MM/yyyy'"></span>
+                            </td>
+                            <td>{{aliado.proyectoId}}</td>
+                            <td>{{aliado.nombreProy}}</td>
+                            <td>
+                                <span class="text" ng-if="aliado.fInicioProy!='0001-01-01T00:00:00'" ng-bind="aliado.fInicioProy | date:'dd/MM/yyyy'"></span>
+                            </td>
+                            <td>{{aliado.propuestaId}}</td>
+                            <td>{{aliado.nombreProp}}</td>
+                            <td>
+                                <span class="text" ng-if="aliado.fInicioProp!='0001-01-01T00:00:00'" ng-bind="aliado.fInicioProp | date:'dd/MM/yyyy'"></span>
+                            </td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>{{aliado.nombreActAdc}}</td>
+                            <td>
+                                <span class="text" ng-if="aliado.fechaActividad!='0001-01-01T00:00:00'" ng-bind="aliado.fechaActividad | date:'dd/MM/yyyy'"></span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+
+                <footer>
+                    <div style='text-align:center;'>P&aacute;gina <span class="pageCounter"></span>/<span class="totalPages"></span></div>
+                </footer>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,172 @@
+﻿<div data-ng-show="authentication.isAuth">
+    <!--<div ng-hide="registros.length >= 0">
+        <img src="images/cargando.gif" />
+    </div>-->
+
+
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <!--<div ng-show="registros.length > 0">-->
+                <!--<table class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" datatable="ng" width="100%" dt-options="dtOptions">-->
+                <table class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" width="100%">
+                    <thead>
+                        <tr>
+                            <th data-priority="1">M&oacute;dulo</th>
+                            <th>N&uacute;m emp</th>
+                            <th>Nombre del empleado</th>
+                            <th>Correo electr&oacute;nico</th>
+                            <th>Extensi&oacute;n</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+
+                            <td>Responsable del módulo de CH </td>
+                            <td class="linkTabla" title="Detalle de empleado"
+                                ng-click="openProfile('01753')">
+                                01753
+                            </td>
+                            <td> Andrés F. Rodríguez Martínez</td>
+                            <!--<td class="linkTabla">
+                                <a href="/indexCH.html#/detallePersonal/01753" target="_blank">
+                                    01753 - Andrés F. Rodríguez Martínez
+                                </a>
+                            </td>-->
+                            <td>afrm@iie.org.mx  </td>
+                            <td> 7611 </td>
+                        </tr>
+                        <tr>
+                            <td>Administrador del módulo de CH</td>
+                            <td class="linkTabla" title="Detalle de empleado"
+                                ng-click="openProfile(CveAdminCH)">
+                                {{CveAdminCH}}
+                            </td>
+                            <td>{{AdminCH}}</td>
+                            <td>{{MailAdminCH }} </td>
+                            <td>{{ExtAdminCH}} </td>
+                        </tr>
+                        <tr>
+                            <td>Responsable del módulo de MT</td>
+                            <td class="linkTabla" title="Detalle de empleado"
+                                ng-click="openProfile('03991')">
+                                03991
+                            </td>
+                            <td>Elsa Edith Orduña Mercado</td>
+                            <!--<td class="linkTabla">
+                                <a href="/indexCH.html#/detallePersonal/03991" target="_blank">
+                                    03991 - Elsa Edith Orduña Mercado
+                                </a>
+                            </td>-->
+                            <td>eeom@iie.org.mx   </td>
+                            <td> 7113 </td>
+                        </tr>
+                        <tr>
+                            <td>Administrador del módulo de MT</td>
+                            <td class="linkTabla" title="Detalle de empleado"
+                                ng-click="openProfile(CveAdminMT)">
+                                {{CveAdminMT}}
+                            </td>
+                            <td>{{AdminMT}}</td>
+                            <td>{{MailAdminMT }} </td>
+                            <td>{{ExtAdminMT}} </td>
+                        </tr>
+                        <tr>
+                            <td>Responsable del módulo de CR</td>
+                            <td class="linkTabla" title="Detalle de empleado"
+                                ng-click="openProfile('03575')">
+                                03575
+                            </td>
+                            <td>Ricardo López García</td>
+                            <!--<td class="linkTabla">
+                                <a href="/indexCH.html#/detallePersonal/03575" target="_blank">
+                                    03575 - Ricardo López García
+                                </a>
+                            </td>-->
+                            <td>rlopez@iie.org.mx   </td>
+                            <td> 7393 </td>
+                        </tr>
+                        <tr>
+                            <td>Administrador del módulo de CR</td>
+                            <td class="linkTabla" title="Detalle de empleado"
+                                ng-click="openProfile(CveAdminCR)">
+                                {{CveAdminCR}}
+                            </td>
+                            <td>{{AdminCR}}</td>
+                            <td>{{MailAdminCR}} </td>
+                            <td>{{ExtAdminCR}} </td>
+                        </tr>
+                        <tr>
+                            <td>Responsable del módulo de CP</td>
+                            <td class="linkTabla" title="Detalle de empleado"
+                                ng-click="openProfile('01483')">
+                                01483
+                            </td>
+                            <td>Sergio Javier Martínez Escobedo</td>
+                            <!--<td class="linkTabla">
+                                <a href="/indexCH.html#/detallePersonal/01483" target="_blank">
+                                    01483 - Sergio Javier Martínez Escobedo
+                                </a>
+                            </td>-->
+                            <td>sjme@iie.org.mx   </td>
+                            <td> 7008 </td>
+                        </tr>
+                        <tr>
+                            <td>Administrador del módulo de CP</td>
+                            <td class="linkTabla" title="Detalle de empleado"
+                                ng-click="openProfile(CveAdminCP)">
+                                {{CveAdminCP}}
+                            </td>
+                            <td>{{AdminCP}}</td>
+                            <td>{{MailAdminCP}} </td>
+                            <td>{{ExtAdminCP}} </td>
+                        </tr>
+                        <tr>
+                            <td>Responsable del módulo de PI</td>
+                            <td class="linkTabla" title="Detalle de empleado"
+                                ng-click="openProfile('03575')">
+                                03575
+                            </td>
+                            <td>Ricardo López García</td>
+                            <td>rlopez@iie.org.mx   </td>
+                            <td> 7393 </td>
+                        </tr>
+                        <tr>
+                            <td>Administrador del módulo de PI</td>
+                            <td class="linkTabla" title="Detalle de empleado"
+                                ng-click="openProfile(CveAdminPI)">
+                                {{CveAdminPI}}
+                            </td>
+                            <td>{{AdminPI}}</td>
+                            <td>{{MailAdminPI}} </td>
+                            <td>{{ExtAdminPI}} </td>
+                        </tr>
+                        <tr>
+                            <td>Responsable del módulo de GI</td>
+                            <td class="linkTabla" title="Detalle de empleado"
+                                ng-click="openProfile('00924')">
+                                00924
+                            </td>
+                            <td>Salvador González Castro</td>
+                            <!--<td class="linkTabla">
+                                <a href="/indexCH.html#/detallePersonal/00924" target="_blank">
+                                    00924 - Salvador González Castro
+                                </a>
+                            </td>-->
+                            <td>sgc@iie.org.mx  </td>
+                            <td> 7040 </td>
+                        </tr>
+                        <tr>
+                            <td>Administrador del módulo de GI</td>
+                            <td class="linkTabla" title="Detalle de empleado"
+                                ng-click="openProfile(CveAdminGI)">
+                                {{CveAdminGI}}
+                            </td>
+                            <td>{{AdminGI}}</td>
+                            <td>{{MailAdminGI}} </td>
+                            <td>{{ExtAdminGI}} </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>

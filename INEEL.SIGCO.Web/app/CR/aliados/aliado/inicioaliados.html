@@ -1,0 +1,159 @@
+<div class="vista">
+    <div class="row">
+        <div class="col-xs-12 col-md-4">
+            <div class="x_panel col-xs-12">
+                <div class="x_title">
+                    <h2>Convenios vigentes</h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content sin-desborde">
+                    <div ng-show="conveniosvigentes.length === 0" class="alert advertencia col-xs-12">
+                        No existen convenios vigentes
+                    </div>
+                    <div>
+                        <canvas id="graficaConvocatorias" width="150" height="150" class="chart chart-pie" chart-data="datos" chart-labels="labels"
+                            chart-options="options" chart-colors="colores"></canvas>
+                    </div>
+
+                    <!-- <div echart-graph ng-model="expProf" idgraph="GraphExperienciaProf" stilo="{'height':'350px', 'width':'100%'}" titulo="Aliados con convenios vigentes"
+                        labels="expProf.labels" showLabels="false" datos="expProf.datos"></div> -->
+                </div>
+
+            </div>
+            <div class="x_panel col-xs-12">
+                <div class="x_title">
+                    <h2>
+                        <a ui-sref="aliadosVigentesGet" style="cursor: hand;" class="link"> Aliados convenios vigentes</a>
+                    </h2>
+                    <div class="pull-right col-xs-1" ng-if="rolid === 15||rolId==1031||rolId==1032">
+                        <button type="button" ui-sref="aliadosVigentesGet" class="btn btn-sm btn-success pull-right">
+                            <span style="color:white" class="glyphicon glyphicon-pencil"></span> Editar aliado
+                        </button>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content sin-desborde">
+                    <div ng-show="aliadoshistoricos.length === 0" class="alert advertencia col-xs-12">
+                        No existen aliados hist&oacute;ricos
+                    </div>
+                    <div ng-show="aliadoshistoricos.length > 0">
+                        <table class="table table-hover table-sm table-striped">
+                            <thead>
+                                <tr>
+                                    <th style="cursor:default">Nombre</th>
+                                    <th style="cursor:default">Tipo</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="aliado in aliadosVigentes | orderBy: 'empresaNombre' |limitTo: 3 ">
+                                    <td>
+                                        <span class="message sin-desborde linkTabla" ui-sref="aliadoDetails({ id: aliado.aliadoId })">{{aliado.empresaNombre}}</span>
+                                    </td>
+                                    <td style="white-space: nowrap;">{{aliado.tipoOrganizacion }}</td>
+                                </tr>
+                            </tbody>
+                            <!-- <tfoot>
+                                <tr>
+                                    <td class="text-center">
+                                        <a ng-click="limitHistoricos ===3 ? limitHistoricos = aliadoshistoricos.length : limitHistoricos =3" href="">{{ limitHistoricos ===3 ? 'Mostrar todos...' : 'Mostrar menos...'}}</td>
+                                </tr>
+                            </tfoot> -->
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+            <div class="x_panel col-xs-12">
+                <div class="x_title">
+                    <h2 >
+                        <a ui-sref="aliadosGet" style="cursor: hand;" class="link"> Aliados convenios no vigentes</a>
+                    </h2>
+                    <div class="pull-right col-xs-1" ng-if="rolid === 15||rolId==1031||rolId==1032">
+                        <button type="button" ui-sref="aliadosGet" class="btn btn-sm btn-success pull-right">
+                            <span style="color:white" class="glyphicon glyphicon-pencil"></span> Editar aliado
+                        </button>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content sin-desborde">
+                    <div ng-show="aliadoshistoricos.length === 0" class="alert advertencia col-xs-12">
+                        No existen aliados hist&oacute;ricos
+                    </div>
+                    <div ng-show="aliadoshistoricos.length > 0">
+                        <table class="table table-hover table-sm table-striped">
+                            <thead>
+                                <tr>
+                                    <th style="cursor:default">Nombre</th>
+                                    <th style="cursor:default">Tipo</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="aliado in aliadoshistoricos | orderBy: 'empresaNombre'  |limitTo: 3 ">
+                                    <td>
+                                        <span class="message sin-desborde linkTabla" ui-sref="aliadoDetails({ id: aliado.aliadoId })">{{aliado.empresaNombre}}</span>
+                                    </td>
+                                    <td style="white-space: nowrap;">{{aliado.tipoOrganizacion }}</td>
+                                </tr>
+                            </tbody>
+                            <!-- <tfoot>
+                                <tr>
+                                    <td class="text-center">
+                                        <a ng-click="limitHistoricos ===3 ? limitHistoricos = aliadoshistoricos.length : limitHistoricos =3" href="">{{ limitHistoricos ===3 ? 'Mostrar todos...' : 'Mostrar menos...'}}</td>
+                                </tr>
+                            </tfoot> -->
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+            
+
+        </div>
+        <div class="col-xs-12 col-md-8">
+            <div class="col-xs-12 pull-right">
+                <div class="x_panel">
+                    <div class="x_title col-xs-12">
+                        <div class="col-xs-8">
+                            <h2>Convenios vigentes</h2>
+                        </div>
+                        <div class="col-xs-4" ng-if="rolid === 15||rolId==1031||rolId==1032">
+                            <button type="button" ui-sref="aliadoAdd" class="btn btn-sm btn-success pull-right">
+                                <span style="color:white" class="glyphicon glyphicon-plus"></span> Agregar aliado
+                            </button>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content sin-desborde">
+                        <div ng-show="conveniosvigentes.length === 0" class="alert advertencia col-xs-12">
+                            No existen aliados con convenios vigentes
+                        </div>
+                        <div class="col-xs-12" ng-show="conveniosvigentes.length > 0">
+                            <table class="table table-hover table-sm table-striped" ng-repeat="segmento in conveniosvigentes">
+                                <thead>
+                                    <tr>
+                                        <th style="cursor:default">{{segmento.tipoOrganizacion.nombre}} ({{segmento.convenios.length}})</th>
+                                        <th style="width: 15%">Fecha t&eacute;rmino</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="convenio in segmento.convenios |orderBy:'nombreEmpresa' | limitTo: limit ">
+                                        <td>
+                                            <span class="message sin-desborde linkTabla" ui-sref="aliadoDetails({ id: convenio.aliadoId })">{{convenio.nombreEmpresa}}</span>
+                                        </td>
+                                        <td>{{convenio.fechaTermino | date:'dd/MM/yyyy'}}</td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td class="text-center">
+                                            <a ng-click="limit ===3 ? limit = segmento.convenios.length : limit =3" href="">{{ limit ===3 ? 'Mostrar todos...' : 'Mostrar menos...'}}</td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

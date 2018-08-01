@@ -1,0 +1,324 @@
+<div class="vista">
+
+    <div class="page-title">
+        <div class="title_left">
+
+            <ol class="breadcrumb miga">
+                <li>
+                    <i class="sg sg-competidores"></i>
+                    <a ui-sref="competidorGet">Competidores</a>
+                </li>
+                <li class="active">Editar</li>
+            </ol>
+
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+                    <form name="competidorForm" id="competidorForm" class="form-horizontal">
+                        <div class="x_title">
+                            <h2>Informaci&oacute;n general</h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Competidor
+                                <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <input type="text" class="form-control" id="usr" name="empresa" ng-model="competidor.empresa.nombreEmpresa" readonly required>
+                                        <input type="hidden" ng-model="competidor.empresaId" class="form-control" value="empresa.empresaId" />
+                                        <span class="error" ng-show="competidorForm.empresa.$invalid && competidorForm.empresa.$dirty || competidorForm.$submitted && competidorForm.empresa.$invalid">
+                                            Debes de agregar una instituci&oacute;n
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Descripci&oacute;n
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <textarea type="text" rows="2" name="descripcion" ng-model="competidor.descripcion" class="form-control" maxlength="300"
+                                    ng-maxlength="300" />
+                                <span class="error" ng-show="competidorForm.descripcion.$dirty && !competidorForm.descripcion.$valid">
+                                    Longitud m&aacute;xima de 300 caracteres
+                                </span>
+                            </div>
+                        </div>
+                        <div class="x_title">
+                            <h2>Vigilancia Tecnol&oacute;gica Competitiva (VTC)</h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Tipo de Competidor
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <select name="tipoCompetidor" class="form-control" ng-model="competidor.tipoCompetidor" scrolly style="overflow: scroll">
+                                    <option>Directo</option>
+                                    <option>Indirecto</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                L&iacute;nea de Investigaci&oacute;n
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <select name="lineaInv" class="form-control" ng-model="competidor.lineaDesarrolloTecnologicoId" scrolly style="overflow: scroll"
+                                    ng-options="lineaDesarrolloTecnologico.lineaDesarrolloTecnologicoId as lineaDesarrolloTecnologico.nomLinDesTec for lineaDesarrolloTecnologico in lineasDesarrolloTecnologico "></select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Tama&ntilde;o empresa
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <select name="tamemp" class="form-control" ng-model="competidor.tamanoEmpresaId" scrolly style="overflow: scroll" ng-options="tamanoEmpresa.tamanoEmpresaId as tamanoEmpresa.nomTamEmp for tamanoEmpresa in tamanosEmpresa ">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Posicionamiento Tecnol&oacute;gico
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <select name="postec" class="form-control" ng-model="competidor.posicionamientoTec" scrolly style="overflow: scroll">
+                                    <option>Lider</option>
+                                    <option>Seguidor</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Segmento de mercado
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <select name="segmentoMercado" class="form-control" ng-model="competidor.segmentoMercadoId" scrolly style="overflow: scroll"
+                                    ng-options="segmentoMercado.segmentoMercadoId as segmentoMercado.nomSegMerc for segmentoMercado in segmentosMercado "></select>
+                            </div>
+                        </div>
+                        <div class="x_title">
+                            <h2>Seguridad</h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Comparaci&oacute;n tarifas o precios
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="row">
+                                    <input class="input-file" type="file" name="filesGral" id="filesGral" ng-click="saveIG();" ng-model="filesGral" data-buttonName="btn-success"
+                                        onchange="angular.element(this).scope().getFileDetails(this);" />
+                                    <span class="error" ng-show="competidor.filesGral.$dirty && !competidor.filesGral.$valid">Seleccione un documento</span>
+
+                                </div>
+                                <div class="form-group" ng-show="competidor.tasklist.length > 0">
+                                    <table class="table table-hover table-striped table-condensed dt-responsive " cellspacing="0" width="100%">
+                                        <thead>
+                                            <tr>
+                                                <th data-priority="1">Archivo</th>
+                                                <th class="thCeldaB text-center">Eliminar</th>
+                                            </tr>
+                                        </thead>
+                                        <tr ng-repeat="e in competidor.tasklist track by $index ">
+                                            <td     style="max-width:200px" class="sin-desborde">
+                                                    {{e.adjunto.nombre}}
+                                            </td>
+                                            <td>
+                                                <button type="button" ng-click="deleteArchivoComparacion(tasklist.indexOf(e))" class="btn btn-danger">
+                                                    <i class="glyphicon glyphicon-trash"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Tipo de acceso archivo tarifas
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <select name="postec" class="form-control" ng-model="competidor.tipoAccesoTarifas" scrolly style="overflow: scroll">
+                                    <option>P&uacute;blico</option>
+                                    <option>Restringido</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Archivo VTC
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="row">
+                                    <input class="input-file" type="file" name="vtc" id="vtc" ng-click="saveIG();" ng-model="vtc" data-buttonName="btn-success"
+                                        onchange="angular.element(this).scope().getFileDetailsVTC(this);" />
+                                    <span class="error" ng-show="competidor.vtc.$dirty && !competidor.vtc.$valid">Seleccione un documento</span>
+                                </div>
+
+                                <div class="form-group" ng-show="competidor.tasklistVTC.length > 0">
+                                    <table class="table table-hover table-striped table-condensed dt-responsive " cellspacing="0" width="100%">
+                                        <thead>
+                                            <tr>
+                                                <th data-priority="1">Archivo</th>
+                                                <th class="thCeldaB text-center">Eliminar</th>
+                                            </tr>
+                                        </thead>
+                                        <tr ng-repeat="e in competidor.tasklistVTC track by $index ">
+                                            <td style="max-width:200px" class="sin-desborde">
+                                                {{e.adjunto.nombre}}
+                                            </td>
+                                            <td>
+                                                <button type="button" ng-click="deleteArchivoVTC(tasklistVTC.indexOf(e))" class="btn btn-danger">
+                                                    <i class="glyphicon glyphicon-trash"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Tipo acceso archivo VTC
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <select name="postec" class="form-control" ng-model="competidor.tipoAccesoVTC" scrolly style="overflow: scroll">
+                                    <option>P&uacute;blico</option>
+                                    <option>Restringido</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Unidad Organizacional
+                                <span ng-required="tasklist.length>0" ng-show="tasklist.length>0">
+                                    *</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div uo-modal2 requerido="false" state-form="competidorForm" ng-model="competidor.uoselecionada" ng-required="tasklist.length>0"></div>
+                                <span class="error" ng-show="competidor.uoselecionada==null && tasklist.length>0"> Debe seleccionar una unidad organizacional</span>
+                            </div>
+                        </div>
+
+                        <div class="x_title">
+                            <h2>Productos</h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Producto
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="row">
+                                    <div class="col-xs-10">
+                                        <input type="text" class="form-control" id="usr" name="proyecto" ng-model="proyecto" readonly>
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <a ng-click="openProducto()" class="btn btn-success" title="Buscar proyecto">
+                                            <i class="glyphicon glyphicon-search"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div ng-show="competidor.productoPorCompetidor.length > 0">
+                                        <br />
+                                        <table id="CRcompetidorEdit" class="table table-hover table-striped table-condensed dt-responsive " cellspacing="0" datatable="ng"
+                                            width="100%" dt-options="dtOptions">
+                                            <thead>
+                                                <tr>
+                                                    <th>Productos</th>
+                                                    <th>Eliminar</th>
+                                                </tr>
+                                            </thead>
+                                            <tr ng-repeat="e in competidor.productoPorCompetidor track by $index">
+                                                <td>{{e.producto.nomProd}}</td>
+                                                <td class="thCeldaB text-center">
+                                                    <button type="button" ng-click="deleteProducto(e)" class="btn btn-danger">
+                                                        <i class="glyphicon glyphicon-trash"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="x_title">
+                            <h2>Servicios</h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Servicio
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="row">
+                                    <div class="col-xs-10">
+                                        <input type="text" class="form-control" id="usr" name="servicio" ng-model="servicio" readonly>
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <a ng-click="openServicio()" class="btn btn-success" title="Buscar servicio" ng-disabled="desabilitarBuscarServicio">
+                                            <i class="glyphicon glyphicon-search"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div ng-show="competidor.servicioPorCompetidor.length > 0">
+                                        <br />
+                                        <table id="CRCRcompetidorEditserviciosViejos" class="table table-hover table-striped table-condensed dt-responsive " cellspacing="0"
+                                            datatable="ng" width="100%" dt-options="dtOptions">
+                                            <thead>
+                                                <tr>
+                                                    <th>Servicios</th>
+                                                    <th>Eliminar</th>
+                                                </tr>
+                                            </thead>
+                                            <tr ng-repeat="e in competidor.servicioPorCompetidor track by $index">
+                                                <td>{{e.servicio.nomServ}}</td>
+                                                <td class="thCeldaB text-center">
+                                                    <button type="button" ng-click="deleteServicio(e)" class="btn btn-danger">
+                                                        <i class="glyphicon glyphicon-trash"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="ln_solid"></div>
+                        <div class="form-group">
+                            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                <div class="">
+                                    <button type="submit" class="btn btn-success" ng-click="actualizarcompetidor()">
+                                        <i class="glyphicon glyphicon-saved"></i> Actualizar
+                                    </button>
+                                    <button type="button" confirma-regresar="globalRegresar()" state-form="competidorForm" class="btn btn-primary">
+                                        <span class="fa fa-arrow-left"></span> Regresar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

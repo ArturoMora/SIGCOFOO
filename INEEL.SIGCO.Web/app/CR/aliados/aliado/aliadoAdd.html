@@ -1,0 +1,145 @@
+﻿<div class="vista">
+
+    <div class="page-title">
+        <div class="title_left">
+
+            <ol class="breadcrumb miga">
+                <li><i class="sg sg-aliados"></i> <a ng-click="globalRegresar();">Aliados</a></li>
+                <li class="active">Agregar</li>
+            </ol>
+
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+                    <!--<form name="ValidForm" id="form" class="form-horizontal">-->
+                    <form role="form" ng-submit="AddAliado()" novalidate name="aliadoAddForm" class="form-horizontal">
+                        <div class="x_title">
+                            <h2>Informaci&oacute;n general</h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Aliado <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="row">
+                                    <div class="col-xs-10">
+                                        <input type="text" placeholder="Seleccione un aliado" class="form-control" id="usr" name="empresa" ng-model="empresa" disabled required>
+                                        <input type="hidden" ng-model="aliado.empresaId" class="form-control" value="empresa.empresaId"/>
+                                        <span class="error" ng-show="aliadoAddForm.empresa.$invalid && aliadoAddForm.empresa.$dirty || aliadoAddForm.$submitted && aliadoAddForm.empresa.$invalid">
+                                            Debes de agregar una instituci&oacute;n
+                                        </span>
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <a ng-click="openEmpresasForAliados()" class="btn btn-success" title="Buscar aliado" ng-disabled="desabilitarBuscarEmpresa">
+                                            <i class="glyphicon glyphicon-search"></i>
+                                        </a>
+                                    </div>
+                                    <!--<div class="col-xs-2">
+                                        <a ng-click="openEmpresa()" class="btn btn-success" title="Buscar empresa" ng-disabled="desabilitarBuscarEmpresa">
+                                            <i class="glyphicon glyphicon-search"></i>
+                                        </a>
+                                    </div>-->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Tipo de organizaci&oacute;n 
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" placeholder="Tipo de organización" class="form-control" id="tipoOrg" name="tipoOrg" ng-model="tipoOrganizacion" disabled > 
+                            </div>
+                        </div>
+                        <div class="form-group" ng-hide="aliado.direccion==null || aliado.direccion==''">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Direcci&oacute;n
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <textarea type="text" rows="3" name="direccion" ng-model="aliado.direccion" class="form-control" readonly disabled />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Descripci&oacute;n
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <textarea  placeholder="Ingrese una descripci&oacute;n general sobre los motivos de la alianza" rows="4" type="text" name="descripcion" ng-model="aliado.descripcion" maxlength="300" class="form-control" />
+                            </div>
+                            <br/>
+                            <span class="error" ng-show="aliadoAddForm.descripcion.$dirty && !aliadoAddForm.descripcion.$valid">
+                                El n&uacute;mero m&aacute;ximo de caracteres debe ser 300.
+                            </span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Contacto <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="row">
+                                    <div class="col-xs-10">
+                                        <input type="text" placeholder="Seleccione un contacto" class="form-control" id="usr" name="contacto" ng-model="contacto" disabled >
+                                    </div>
+                                    <div class="col-xs-2">
+
+                                        <a ng-click="openContacto()" class="btn btn-success" title="Buscar contacto" >
+                                            <i class="glyphicon glyphicon-search"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div ng-show="listaContactos.length>0">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">
+
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <table class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" width="100%" dt-options="dtOptions">
+                                        <thead>
+                                            <tr>
+                                                <th data-priority="1">Nombre</th>
+                                                <th data-priority="1" class="thAjuste text-center">Eliminar</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="contacto in listaContactos">
+                                                <td>{{contacto.nombreCompleto}}</td>
+                                                <td class="text-center">
+                                                    <div>
+                                                        <a title="Eliminar" ng-click="eliminaContacto(listaContactos.indexOf(contacto))" class="btn btn-danger">
+                                                            <i class="glyphicon glyphicon-trash"></i>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                
+                            </div>
+                        </div>
+
+                        <div class="ln_solid"></div>
+                        <div class="form-group">
+                            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                <div class="">
+                                    <button type="submit" class="btn btn-success" ng-disabled="aliadoAddForm.$invalid || listaContactos.length==0">
+                                        <i class="glyphicon glyphicon-saved"></i> Guardar
+                                    </button>
+                                    <button type="button" confirma-regresar="globalRegresar()" state-form="aliadoAddForm" class="btn btn-primary">
+                                        <span class="fa fa-arrow-left"></span> Regresar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

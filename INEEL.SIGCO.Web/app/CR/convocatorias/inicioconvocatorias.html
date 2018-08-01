@@ -1,0 +1,157 @@
+<div class="vista">
+    <div class="row">
+        <div class="col-xs-4">
+            <div class="x_panel col-xs-12">
+                <div class="x_title">
+                    <h2>Convocatorias vigentes</h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content sin-desborde">
+                    <div ng-show="convocatoriasvigentes.length === 0" class="alert advertencia">
+                        No existen convocatorias vigentes
+                    </div>
+                    <canvas ng-if="convocatoriasvigentes.length>0" id="graficaConvocatorias" width="5" height="5" class="chart chart-pie" chart-data="data"
+                        chart-labels="labels" chart-options="options" chart-colors="colores"></canvas>
+
+                </div>
+            </div>
+
+            <div class="x_panel col-md-6 col-xs-12">
+                <div class="x_title">
+                    <h2>
+                        <a ng-click="visualizarFuentes()" style="cursor: hand;cursor: pointer;" class="link"> Fuentes de financiamiento</a>
+                    </h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content sin-desborde">
+                    <div ng-show="fuentesfinanciamiento.length === 0" class="alert advertencia">
+                        No existen fuentes de financiamiento
+                    </div>
+                    <div ng-show="fuentesfinanciamiento.length > 0" ng-init="limiteFuentes=3">
+                        <table class="table table-hover table-sm table-striped">
+                            <tbody>
+                                <tr ng-repeat="fuente in fuentesfinanciamiento | orderBy : '-fechaRegistro' |limitTo:limiteFuentes">
+                                    <td>
+                                        <a ui-sref="fuenteFinanciamientoDetails({ id: fuente.fuenteFinanciamientoId })">{{fuente.nombreFF}}</a>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tfoot ng-show="fuentesfinanciamiento.length > 0">
+                                <tr>
+                                    <td class="text-center">
+                                        <a ng-click="limiteFuentes ===3 ? limiteFuentes = fuentesfinanciamiento.length : limiteFuentes =3" href="">{{ limiteFuentes ===3 ? 'Mostrar todos...' : 'Mostrar menos...'}}
+                                    </td>
+
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-8">
+            <div class="col-xs-12 pull-right">
+                <div class="x_panel">
+                    <div class="x_content">
+                        <div class="col-xs-6">
+                            <h2>
+                                <a ng-click="visualizarConvocatorias('Nacional')" style="cursor: hand;cursor: pointer;" class="link">
+                                    Convocatorias</a> nacionales vigentes</h2>
+                        </div>
+                        <div class="col-xs-6">
+                            <button ng-if="rolid==15||rolid==1031||rolid==1032" type="button" ui-sref="convocatoriaAdd" class="btn btn-sm btn-success pull-right">
+                                <span class="glyphicon glyphicon-plus"></span> Agregar convocatoria
+                            </button>
+                        </div>
+                        <div ng-show="convocatoriasnacionales.length === 0" class="alert advertencia col-xs-12">
+                            No existen convocatorias nacionales vigentes
+                        </div>
+                        <div class="col-xs-12" ng-show="convocatoriasnacionales.length > 0" ng-init="limitCN=3">
+                            <table class="table table-hover table-sm table-striped">
+                                <thead>
+                                    <tr>
+                                        <th style="cursor:default">Nombre</th>
+                                        <th style="cursor:default">Fecha de apertura </th>
+                                        <th style="cursor:default">Fecha de cierre</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="o in convocatoriasnacionales | orderBy : '-fechaTermino' |limitTo:limitCN">
+                                        <td>
+                                            <a>
+                                                <span class="message sin-desborde linkTabla" ui-sref="convocatoriaDetails({ id: o.convocatoriaId })">{{o.nombreConvocatoria}}</span>
+                                                <br>{{o.fondoPrograma.nombreFP}} / {{ o.fondoPrograma.fuenteFinanciamiento.nombreFF}}
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <span class="time">{{o.fechaInicio | date:'dd-MM-yyyy'}}</span>
+                                        </td>
+                                        <td>
+                                            <span class="time">{{o.fechaTermino | date:'dd-MM-yyyy'}}</span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                <tfoot ng-show="convocatoriasnacionales.length > 0">
+                                    <tr>
+                                        <td class="text-center">
+                                            <a ng-click="limitCN ===3 ? limitCN = convocatoriasnacionales.length : limitCN =3" href="">{{ limitCN ===3 ? 'Mostrar todos...' : 'Mostrar menos...'}}
+                                        </td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+
+
+                        </div>
+
+
+                        <!--Convocatorias internacionales-->
+                        <div class="col-xs-6">
+                            <h2>
+                                <a ng-click="visualizarConvocatorias('Internacional')" style="cursor: hand;cursor: pointer;" class="link"> Convocatorias</a> internacionales vigentes</h2>
+                        </div>
+                        <div ng-show="convocatoriasinternacionales.length === 0" class="alert advertencia col-xs-12">
+                            No existen convocatorias internacionales vigentes
+                        </div>
+                        <div class="col-xs-12" ng-show="convocatoriasinternacionales.length > 0" ng-init="limitCI=3">
+                            <table class="table table-hover table-sm table-striped">
+                                <thead>
+                                    <tr>
+                                        <th style="cursor:default">Nombre</th>
+                                        <th style="cursor:default">Fecha de apertura </th>
+                                        <th style="cursor:default">Fecha de cierre</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="o in convocatoriasinternacionales | orderBy : '-fechaTermino' |limitTo:limitCI">
+                                        <td>
+                                            <a>
+                                                <span class="message sin-desborde linkTabla" ui-sref="convocatoriaDetails({ id: o.convocatoriaId })">{{o.nombreConvocatoria}}</span>
+                                                <br>{{o.fondoPrograma.nombreFP}} / {{ o.fondoPrograma.fuenteFinanciamiento.nombreFF}}
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <span class="time">{{o.fechaInicio | date:'dd-MM-yyyy'}}</span>
+                                        </td>
+                                        <td>
+                                            <span class="time">{{o.fechaTermino | date:'dd-MM-yyyy'}}</span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                <tfoot ng-show="convocatoriasinternacionales.length > 0">
+                                    <tr>
+                                        <td class="text-center">
+                                            <a ng-click="limitCI ===3 ? limitCI = convocatoriasinternacionales.length : limitCI =3" href="">{{ limitCI ===3 ? 'Mostrar todos...' : 'Mostrar menos...'}}
+                                        </td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

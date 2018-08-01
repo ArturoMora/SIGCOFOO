@@ -1,0 +1,132 @@
+﻿﻿<!-- page content -->
+<div class="vista">
+
+    <div class="page-title">
+        <div class="title_left">
+            <div class="col-xs-12">
+                <h3 class="titColor"><img src="/Resources/icono_home_cp_verde.png" /> Comunidades de pr&aacute;ctica (CP)</h3>
+            </div>
+            <div class="row">&nbsp;</div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-sm-7 col-xs-12">
+            <div class="col-sm-6 col-xs-12">
+
+                <div class="row top_tiles">
+                    <a ui-sref="otrascomunidadesGet">
+                        <div class="animated flipInY col-xs-12">
+
+                            <div class="tile-stats">
+                                <div class="icon2"><i class="fa fa-users"></i></div>
+                                <div class="count">{{model.comunidadesPractica}}</div>
+                                <h3>Comunidades de pr&aacute;ctica</h3>
+                            </div>
+
+                        </div>
+                    </a>
+                    <a ui-sref="ConsultaEstadoArte">
+                        <div class="animated flipInY col-xs-12">
+                            <div class="tile-stats">
+                                <div class="icon2"><i class="fa fa-paint-brush"></i></div>
+                                <div class="count">{{model.estadoArte}}</div>
+                                <h3>Estado del arte y de la pr&aacute;ctica</h3>
+                            </div>
+                        </div>
+                    </a><a ui-sref="ConsultaTemasInnovacion">
+                        <div class="animated flipInY col-xs-12">
+                            <div class="tile-stats">
+                                <div class="icon2"><i class="fa fa-lightbulb-o"></i></div>
+                                <div class="count">{{model.temasInnovacion}}</div>
+                                <h3>Temas de innovaci&oacute;n</h3>
+                            </div>
+                        </div>
+                    </a><a ui-sref="ConsultaInformeAnual">
+                        <div class="animated flipInY col-xs-12">
+                            <div class="tile-stats">
+                                <div class="icon2"><i class="fa fa-file-text"></i></div>
+                                <div class="count">{{model.informesAnuales}}</div>
+                                <h3>Informes anuales</h3>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-sm-6 col-xs-12">
+                <div class="row top_tiles">
+                    <a ui-sref="ConsultaMapasRuta">
+                        <div class="animated flipInY col-xs-12">
+                            <div class="tile-stats">
+                                <div class="icon2"><i class="fa fa-map-marker"></i></div>
+                                <div class="count">{{model.mapasRuta}}</div>
+                                <h3>Mapas de ruta y prospectiva tecnologica</h3>
+                            </div>
+                        </div>
+                    </a>
+                    <a ui-sref="ConsultaEstudiosEspecializados">
+                        <div class="animated flipInY col-xs-12">
+                            <div class="tile-stats">
+                                <div class="icon2"><i class="fa fa-book"></i></div>
+                                <div class="count">{{model.estudiosEspecializados}}</div>
+                                <h3>Estudios especializados</h3>
+                            </div>
+                        </div>
+                    </a><a ui-sref="ConsultaPlanAnual">
+                        <div class="animated flipInY col-xs-12">
+                            <div class="tile-stats">
+                                <div class="icon2"><i class="fa fa-th-list"></i></div>
+                                <div class="count">{{model.planAnual}}</div>
+                                <h3>Planes anuales de trabajo</h3>
+                            </div>
+                        </div>
+                    </a>
+                    <a ui-sref="ConsultaLineamientos">
+                        <div class="animated flipInY col-xs-12">
+                            <div class="tile-stats">
+                                <div class="icon2"><i class="fa fa-search"></i></div>
+                                <div class="count">{{model.lineamientosComunidades}}</div>
+                                <h3>Lineamientos de comunidades</h3>
+                            </div>
+                        </div>
+                    </a>
+
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-md-5 col-sm-5 col-xs-12">
+            <div class="row">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2 class="titColor">&Uacute;ltima informaci&oacute;n agregada </h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li>
+                                <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+
+                    <div class="x_content sin-desborde">
+                        <article class="media event" ng-repeat="n in nuevosOCs | filter: n.nuevo=true  | limitTo: 30 ">
+                            <a class="pull-left date">
+                                <p class="month">{{n.fechaRegistro | date:'MMM'}}</p>
+                                <p class="day">{{n.fechaRegistro | date:'dd'}}</p>
+                            </a>
+                            <div class="media-body">
+                                <a class="title" href="{{n.liga}}">{{n.ocs.nombre}} </a>
+                                <p>{{n.descripcion}} </p>
+                            </div>
+                        </article>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- end page content -->

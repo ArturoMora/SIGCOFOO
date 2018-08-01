@@ -1,0 +1,34 @@
+﻿.navbar-inverseON {
+    /* background-color: #222; */
+    margin-top:59px;
+    border-color: #337ab7;
+    background: #73879c;
+}
+
+.navbar-inverseON .navbar-nav>li>a {
+        color: #fff!important;
+}
+
+.navbar-inverseON .navbar-nav > .open > a, .navbar-inverseON .navbar-nav > .open > a:focus, .navbar-inverseON .navbar-nav > .open > a:hover {
+    color: #fff!important;
+    background-color: #1abb9c;
+}
+
+.navbar-inverseON .navbar-nav>.active>a, .navbar-inverseON .navbar-nav>.active>a:focus, .navbar-inverseON .navbar-nav>.active>a:hover {
+    color: #fff!important;
+    background-color: #1abb9c;
+}
+
+.container-fluidON {
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.contenido {
+    width: 85%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}

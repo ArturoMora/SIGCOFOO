@@ -1,0 +1,50 @@
+<div class="modal-content">
+    <div class="modal-header">
+        Agregar tipo de evento
+        <button type="button" class="close" ng-click="cancel()" data-dissmiss="modal">x</button>
+    </div>
+    <form role="form" ng-submit="ok()" novalidate name="tipoEventoAddForm">
+        <div class="modal-body">
+            <div class="panel">
+                <!-- /.panel-heading -->
+                <div class="panel-body">
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <label>Tipo de Evento *</label>
+                            <input type="text" name="nombreTipoEvento" ng-model="tipoEvento.nombreEvento" class="form-control" ng-required="true" />
+                        </div>
+                        <div class="form-group">
+                            <label>Fecha * </label>
+                            <p class="input-group">
+                                <input placeholder="dd/mm/yyyy" show-button-bar="false" uib-datepicker-popup='dd/MM/yyyy' popup-placement="bottom" type="text" class="form-control" ng-model="tipoEvento.fechaAlta" is-open="open" ng-required="true" close-text="Close" />
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-success" ng-click="open=true"><i class="glyphicon glyphicon-calendar"></i></button>
+                                </span>
+                            </p>
+                            <span class="error" ng-show="tipoEventoAddForm.fecha.$invalid && tipoEventoAddForm.$submitted">
+                                Debes ingresar la fecha
+                            </span>
+                            <span class="error" ng-show="tipoEvento.fechaAlta > fechaActual">
+                                La fecha no debe ser mayor a la actual
+                            </span>
+                        </div>
+                        <div lass="form-group">
+                            <label>Estado </label>
+                            <input type="checkbox" ng-model="tipoEvento.estado" class="btn btn-info btn-circle" checked />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-success" ng-disabled="desabilitar" ng-click="ok()">
+                <i class="glyphicon glyphicon-saved"></i> Guardar
+            </button>
+            <button type="button" ng-click="cancel()" class="btn btn-primary">
+                <span class="fa fa-arrow-left"></span> Regresar
+            </button>
+            <!--<button type="button" class="btn btn-success" ng-click="ok()">Agregar</button>
+            <button type="button" class="btn btn-primary" ng-click="cancel()">Regresar</button>-->
+        </div>
+    </form>
+</div>

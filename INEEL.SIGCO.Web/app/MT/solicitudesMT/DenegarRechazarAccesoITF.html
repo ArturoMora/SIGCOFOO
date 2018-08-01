@@ -1,0 +1,42 @@
+﻿<div class="modal-header">
+    <button type="button" class="close" ng-click="cancel()" data-dissmiss="modal">
+        <i class="glyphicon glyphicon-remove"></i>
+    </button>
+    <div class="col-xs-1"></div>
+    <div>
+        <h3>
+            Solicitud de acceso a ITF - Denegar
+        </h3>
+    </div>
+
+
+</div>
+<div class="modal-body">
+   
+    <form name="frm">
+        <h4>Justificaci&oacute;n:</h4>
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <textarea style="resize:vertical;" class="form-control" placeholder="Justificaci&oacute;n..."
+                           rows="6" name="justificacion" ng-model="datos.justificacion" 
+                          ng-required="true" ng-minlength="10" ng-maxlength="499">
+
+                </textarea>
+                <span class="error" ng-show="frm.justificacion.$dirty && !frm.justificacion.$valid">
+                Se requiere una Justificaci&oacute;n con longitud minima de 10 y m&aacute;xima de 500</span>
+            </div>
+        </div>
+    </form>
+    <!--<div class="alert alert-success" role="alert">
+        Tipicamente una solicitud de acceso es <strong>denegada</strong> por que no se relaciona con las actividades del solicitante<br />
+        y es <strong>rechazada</strong> por que no se facilita una justificación apropiada.
+    </div>-->
+
+</div> 
+<div class="modal-footer">
+
+    <button type="button" class="btn btn-danger" ng-click="Denegar()" ng-disabled="(frm.justificacion.$dirty && !frm.justificacion.$valid) || datos.justificacion.length<10 ">Denegar solicitud</button>
+    <!--<button type="button" class="btn btn-warning" ng-click="Rechazar()" ng-disabled="(frm.justificacion.$dirty && !frm.justificacion.$valid) || datos.justificacion.length<10 ">Rechazar</button>-->
+    <button type="button" class="btn btn-info" ng-click="cancel()">Cancelar</button>
+
+</div>

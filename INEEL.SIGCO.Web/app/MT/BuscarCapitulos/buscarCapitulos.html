@@ -1,0 +1,164 @@
+<div class="vista" ng-controller="CapitulosFilterGetCtrl as showCase">
+
+    <div class="page-title">
+        <div class="title_left">
+
+            <ol class="breadcrumb miga">
+                <li><i class="sg sg-articulos-ponencia-cap1"></i> <a ui-sref="BuscarCursos">Cap&iacute;tulos/Buscar cap&iacute;tulos</a></li>
+            </ol>
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Criterios de b&uacute;squeda</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li>
+                            <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content sin-desborde">
+                    <form role="form" name="formulario">
+
+                        <div class="col-xs-12 col-sm-6">
+
+                            <div class="form-group">
+                                <label class="col-xs-12">Autor interno</label>
+                                <div class="col-xs-10">
+                                    <input type="text" ng-model="Palabra.Autor" id="searchTextAutor" disabled
+                                           name="searchTextAutor" class="form-control" placeholder="Autor interno a buscar">
+                                </div>
+                                <div class="col-xs-2">
+                                    <button class="btn btn-success" ng-click="openAutor();" title="Nombre persona interna" ng-disabled="BuscarAutor">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-xs-12">Autor externo</label>
+                                <div class="col-xs-10">
+                                    <input type="text" ng-model="Palabra.Externo" id="searchTextExterno" maxlength="50"
+                                           name="searchTextExterno" class="form-control" placeholder="Nombre del autor externo a buscar"
+                                           ng-minlength="3" />
+                                    <span class="error" ng-show="formulario.searchTextExterno.$dirty && !formulario.searchTextExterno.$valid">
+                                        Longitud m&iacute;nima de 3
+                                    </span>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-xs-12">T&iacute;tulo del libro</label>
+                                <div class="col-xs-10">
+                                    <input type="text" ng-model="Palabra.Titulo" id="searchTextTitulo" maxlength="50"
+                                           name="searchTextTitulo" class="form-control" placeholder="T&iacute;tulo del libro a buscar"
+                                           ng-minlength="3" />
+                                    <span class="error" ng-show="formulario.searchTextTitulo.$dirty && !formulario.searchTextTitulo.$valid">
+                                        Longitud m&iacute;nima de 3
+                                    </span>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-xs-12">T&iacute;tulo del cap&iacute;tulo</label>
+                                <div class="col-xs-10">
+                                    <input type="text" ng-model="Palabra.Capitulo" id="searchTextCapitulo" maxlength="50"
+                                           name="searchTextCapitulo" class="form-control" placeholder="T&iacute;tulo del cap&iacute;tulo a buscar"
+                                           ng-minlength="3" />
+                                    <span class="error" ng-show="formulario.searchTextCapitulo.$dirty && !formulario.searchTextCapitulo.$valid">
+                                        Longitud m&iacute;nima de 3
+                                    </span>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+
+                        </div>
+                        <div class="col-xs-6">
+
+                            <div class="form-group">
+                                <div class="col-xs-12">
+                                    <label>Pa&iacute;s</label>
+                                    <select name="pais" class="form-control" ng-model="Palabra.paisID" ng-options="pais.paisID as pais.descripcion for pais in paises">
+                                        <option value="">--- Seleccione un pa&iacute;s ---</option>
+                                    </select>
+                                    <!--Palabra.Pais:{{Palabra.Pais | json}}-->
+
+                                </div>
+                                <div class="clearfix"></div>
+                                </div>
+
+
+                                
+                                <div class="form-group">
+                                    <label class="col-xs-12">Editorial</label>
+                                    <div class="col-xs-12">
+                                        <input type="text" ng-model="Palabra.Editorial" id="searchTextEditorial" maxlength="50"
+                                               name="searchTextEditorial" class="form-control" placeholder="Escriba el nombre de la editorial a buscar"
+                                               ng-minlength="3" />
+                                        <span class="error" ng-show="formulario.searchTextEditorial.$dirty && !formulario.searchTextEditorial.$valid">
+                                            Longitud m&iacute;nima de 3
+                                        </span>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="form-group">
+                                    <label class="col-xs-12">Editor</label>
+                                    <div class="col-xs-12">
+                                        <input type="text" ng-model="Palabra.Editor" id="searchTextEditor" maxlength="50"
+                                               name="searchTextEditor" class="form-control" placeholder="Escriba el nombre del editor a buscar"
+                                               ng-minlength="3" />
+                                        <span class="error" ng-show="formulario.searchTextEditor.$dirty && !formulario.searchTextEditor.$valid">
+                                            Longitud m&iacute;nima de 3
+                                        </span>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+
+                     
+                        <br />
+                        <div class="col-xs-12 col-sm-12">
+
+                       
+                            <div style="margin-left:10px">
+                                <div class="form-group">
+                                    <a class="btn btn-success" ng-click="buscar();">
+                                        <i class="glyphicon glyphicon-search"></i> Buscar
+                                    </a>
+                                    <a class="btn btn-primary" ng-click="LimpiarCampos();">
+                                        Limpiar
+                                    </a>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="row" ng-show="botonBusqueda">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          
+            <div class="x_panel">
+
+                <div class="x_content sin-desborde">
+                    <table datatable="" id="MTBusquedaCapitulos1A" dt-column-defs="dtColumnDefs" dt-options="showCase.dtOptions" dt-columns="showCase.dtColumns"
+                           dt-instance="showCase.dtInstance"
+                           class="display dt-responsive"
+                           cellspacing="0" width="100%"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

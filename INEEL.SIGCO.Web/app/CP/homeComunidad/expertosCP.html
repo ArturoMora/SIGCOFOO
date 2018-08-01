@@ -1,0 +1,225 @@
+﻿<div class="clearfix">
+    <br />
+</div>
+<div ng-controller="ExpertosComunidadCtrl" class="col-lg-12 col-md-12 col-xs-12">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+
+            <div class="x_title">
+                <h2>Expertos de la comunidad</h2>
+                <div class="clearfix"></div>
+            </div>
+
+            <!--Panel de la comunidad-->
+            <div class="x_panel" ng-hide="rol.invitado ==true || rol.miembro == true">
+
+                <!--Botones de agregar y cerrar panel experto-->
+                <button type="button" ng-click="muestraPanel()" ng-show="bmuestra" class="btn btn-success pull-right">
+                    <span class="glyphicon glyphicon-plus"></span> Agregar
+                </button>
+
+                <button type="button" ng-click="ocultaPanel()" ng-show="boculta" class="btn btn-success pull-right">
+                    <span class="fa fa-close"></span> Cerrar
+                </button>
+                <!--End Botones de agregar y cerrar panel experto-->
+
+                <!--Form para agregar experto-->
+                <form name="form" id="form" class="form-horizontal" ng-show="muestraPanelAgregar == true">
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">
+                            Tipo experto
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <select name="tipoExperto" class="form-control" ng-model="tipoExperto" ng-change="ocultaElementos();" scrolly style="overflow: scroll">
+                                <option value="-1" selected>--- Seleccione el tipo de experto ---</option>
+                                <option value="1">Interno</option>
+                                <option value="2">Externo</option>
+                            </select>
+
+                        </div>
+                    </div>
+                    <!--agregar experto externo-->
+                    <div class="form-group" ng-show="tipoExperto==2">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                            Contacto
+                            <span class="required"> *</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <div class="row form">
+                                <div class="col-xs-9">
+                                    <ui-select ng-model="contactos.selected" theme="bootstrap" ng-disabled="disabled" reset-search-input="true" title="Ingrese por lo menos dos caracteres">
+                                        <ui-select-match placeholder="--Escriba y seleccione un contacto--">{{contactos.selected.nombre}}</ui-select-match>
+                                        <ui-select-choices repeat="e in elementosSelectContactos" refresh="refreshelementosSelectContactos($select.search)" refresh-delay="0">
+                                            <div ng-bind-html="e.nombre | highlight: $select.search"></div>
+                                        </ui-select-choices>
+                                    </ui-select>
+                                </div>
+                                <div class="col-xs-2">
+                                    <button type="button" class="btn btn-success" ng-click="crearContacto()" ng-show="botonAgregarContacto">
+                                        <i class="glyphicon glyphicon-plus"></i> Crear</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!---experto interno-->
+                    <div class="form-group" ng-show="tipoExperto==1">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                            Nombre
+                            <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <div class="row">
+                                <div class="col-xs-10">
+                                    <input type="text" placeholder="Seleccione un investigador" class="form-control" id="usr" name="lider" ng-model="investigador"
+                                        required disabled>
+                                </div>
+                                <div class="col-xs-2">
+                                    <a class="btn btn-success" ng-click="openMiembro()" title="Buscar Persona">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group" ng-show="botonRegistrarExperto">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                            Tecnolog&iacute;a o &aacute;rea tem&aacute;tica
+                            <span class="required"> *</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <select required ng-required="true" class="form-control" name="medioComunicacion" ng-model="lineadeinvestigacion" ng-options="linea as linea.nomLinDesTec for linea in lineas">
+                                <option value="">--- Selecciona l&iacute;nea de investigaci&oacute;n ---</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group" ng-show="botonRegistrarExperto">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                            Reseña
+                            <span class="required"> *</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <textarea rows="3" required ng-required="true" class="form-control" name="especialidad" maxlength="500" placeholder="Breve reseña del experto"
+                                ng-model="especialidad" />
+                        </div>
+                    </div>
+
+                    <!--boton guardar experto-->
+                    <div class="form-group" ng-show="botonRegistrarExperto">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">
+
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <button type="button" class="btn btn-success" ng-click="registrarExperto()" ng-disabled="form.lineadeinvestigacion.$invalid || form.especialidad.$invalid ">
+                                <i class="glyphicon glyphicon-saved"></i> Guardar</button>
+                        </div>
+                    </div>
+
+                    <div class="ln_solid"></div>
+                </form>
+                <!--end Form para agregar experto-->
+
+            </div>
+
+            <br />
+            <!-- FICHAS DE LOS EXPERTOS-->
+            <div ng-show="expertos.length > 0">
+                <div ng-repeat="obj in expertos" class="col-md-4 col-sm-4 col-xs-12">
+                    <div class="x_panel">
+                        <!-- experto interno (investigador)-->
+                        <div ng-if="obj.tipoExperto ==1" style="height: 215px;">
+                            <!--- barra de opciones para experto interno/externo-->
+                            <div class="pull-right">
+                                <div ng-hide="rol.invitado ==true || rol.miembro == true" class="nav navbar-right panel_toolbox">
+                                    <a class="btn btn-warning" ng-click="actualizarExpertoExterno(obj)" title="Editar">
+                                        <i class="glyphicon glyphicon-pencil"></i>
+                                    </a>
+                                    <!--<i class="glyphicon glyphicon-pencil" ng-click="objetoAActualizar(obj)" style="font-size: 14px; color: orange"></i>-->
+                                    <a class="btn btn-danger" ng-really-message="¿Eliminar definitivamente al experto?" ng-really-click="eliminarTotalMente(obj)"
+                                        title="Eliminar">
+                                        <i class="glyphicon glyphicon-trash"></i>
+                                    </a>
+                                    <!--<a class="close-link" ng-click="deleteMiembro(obj)"><i class="glyphicon glyphicon-trash" style="font-size: 14px; color: crimson"></i></a>-->
+                                </div>
+                            </div>
+                            <img class="img-rounded" style="height: 100px; width: 100px;" ng-src="data:image/png;base64,{{obj.adjunto64}}">
+
+                            <!-- datos del experto interno-->
+                            <div class="row col-md-12">
+                                <div >
+                                    <label style="cursor:pointer; text-decoration:underline" ng-click="openProfile(obj.clavePersona)"> {{obj.nombreCompleto}} ( {{obj.clavePersona}} )  </label>
+                                </div>
+                                Especialista en {{obj.lineaDesarrolloTecnologico.nomLinDesTec}}
+                                <a style="color: #1ABB9C; cursor:pointer" ng-click="panelID=obj.expertoId" ng-show="panelID!=obj.expertoId">
+                                    <h5>
+                                        {{obj.especialidad | limitTo: 45}} ...
+                                    </h5>
+                                    <b style="color:#73879C">ver m&aacute;s</b>
+                                    <br/>
+                                </a>
+                                <div ng-show="panelID==obj.expertoId" ng-click="panelID=null" style="cursor:pointer">
+                                    <br/> {{obj.especialidad}}
+                                    <br/>
+                                    <b style="color:#73879C">ver menos</b>
+                                </div>
+                         
+                            </div>
+
+                        </div>
+                        <!-- EXPERTO EXTERNO (contacto)-->
+                        <div ng-if="obj.tipoExperto ==2" style="height: 215px;">
+                            <div class="pull-right">
+                                <div ng-hide="rol.invitado ==true || rol.miembro == true" class="nav navbar-right panel_toolbox">
+                                    <a class="btn btn-warning" ng-click="actualizarExpertoExterno(obj)" title="Editar">
+                                        <i class="glyphicon glyphicon-pencil"></i>
+                                    </a>
+                                    <a class="btn btn-danger" ng-really-message="¿Eliminar definitivamente al experto?" ng-really-click="eliminarTotalMente(obj)"
+                                        title="Eliminar">
+                                        <i class="glyphicon glyphicon-trash"></i>
+                                    </a>
+                                    <!--<a class="btn btn-danger" ng-click="deleteMiembro(obj)" title="Eliminar">
+                                        <i class="glyphicon glyphicon-trash"></i>
+                                    </a>-->
+                                </div>
+                            </div>
+                            <img class="img-rounded" style="height: 100px; width: 100px;" ng-src="data:image/png;base64,{{obj.contacto.adjunto64}}">
+                            <!--Imagen del contacto-->
+                            <div class="row col-md-12">
+                                <!--Datos del contacto-->
+                                <div>
+                                    <!--modal del contacto-->
+                                    <load-contacto registroid="{{obj.contacto.contactoId}}" descripcion="{{obj.contacto.nombreCompleto | limitTo: 35}}" title="{{obj.contacto.nombreCompleto}}"
+                                    />
+                                </div>
+                                <div style="text-overflow: clip; overflow-wrap: break-word">
+                                    <!--Resena del contacto-->
+                                    <!--START PROPUESTA-->
+                                        Especialista en {{obj.lineaDesarrolloTecnologico.nomLinDesTec}}
+                                        <a style="color: #1ABB9C; cursor:pointer" ng-click="panelID=obj.expertoId" ng-show="panelID!=obj.expertoId">
+                                            <h5>{{obj.especialidad | limitTo: 45}} ... </h5>
+                                            <b style="color:#73879C">ver m&aacute;s</b>
+                                        </a>
+                                        <div ng-show="panelID==obj.expertoId" ng-click="panelID=null" style="cursor:pointer">
+                                            <br/> {{obj.especialidad}}
+                                            <br/>
+                                            <b style="color:#73879C">ver menos</b>
+                                        </div>
+                                   
+                               
+
+                                </div>
+                             
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div ng-show="expertos.length==0" class="alert advertencia">
+                No hay expertos registrados en la comunidad
+            </div>
+        </div>
+    </div>
+</div>

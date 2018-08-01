@@ -1,0 +1,74 @@
+﻿<div class="vista">
+    <div class="page-title">
+        <div class="title_left">
+            <ol class="breadcrumb miga">
+                <li><i class="fa fa fa-user"></i> <a ui-sref="especialistasGet">Administraci&oacute;n/Cat&aacute;logos/Especialistas ON</a></li>
+            </ol>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel" style="margin-bottom: 0px;">
+            <div class="x_content sin-desborde">
+                <label for="usr">Usuario <span class="required">*</span></label>
+                <div class="row">
+                    <div class="col-xs-10">
+                        <input required type="text" class="form-control" id="usr" name="especialista" ng-model="especialista.nombreCompleto" disabled ng-required="true">
+                        <input type="hidden" ng-model="personaId" class="form-control" value="contactoId" />
+                    </div>
+                    <div class="col-xs-2">
+                        <a ng-click="buscarEspecialista()" class="btn btn-success" title="Buscar usuario">
+                            <i class="glyphicon glyphicon-search"></i>
+                        </a>
+                        <a ng-click="agregarEspecialista()" ng-hide="especialista.nombreCompleto == null" class="btn btn-success" title="Agregar especialista">
+                            <i class="glyphicon glyphicon-plus"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+        
+    <div class="clearfix"></div>
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_content sin-desborde">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div ng-show="especialistas.length === 0" class="alert advertencia">
+                            No existen especialistas registrados
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <div ng-hide="especialistas.length === 0">
+                        <table id="CRespecialistaGet" dt-instance="dtInstance" class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" datatable="ng" width="100%" dt-options="dtOptions">
+                            <thead>
+                                <tr>
+                                    <th style="width:70px" data-priority="1">Clave</th>
+                                    <th>Nombre</th>
+                                    <th class="center">¿Est&aacute; activo?</th>
+                                    <th class="center">Opciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="e in especialistas">
+                                    <td>{{e.clavePersona}}</td>
+                                    <td>{{e.persona.nombreCompleto}}</td>
+                                    <td align="center"><input type="checkbox" class="btn btn-info btn-circle" ng-model="status" ng-checked="e.estado == 1" ng-click="editarEspecialista(e, status)" /></td>
+                                    <td align="center">
+                                        <a class="btn btn-danger" ng-click="eliminarRegistro(e.rolPersonaId)" title="Eliminar de la lista al especialista seleccionado">
+                                            <i class="fa fa-trash-o"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

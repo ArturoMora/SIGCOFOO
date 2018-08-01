@@ -1,0 +1,211 @@
+<div class="vista">
+
+    <div class="page-title">
+        <div class="title_full">
+
+            <ol class="breadcrumb miga">
+                <li>
+                    <i class="fa fa-file-text-o"></i>
+                    <a ui-sref="BuscarInformesBecarios">Informes becarios internos</a>
+                </li>
+                <li class="active">Detalles</li>
+            </ol>
+
+        </div>
+    </div>
+    <div data-ng-hide="authentication.isAuth">
+        No tiene permisos para ingresar a esta secci&oacute;n..
+        <br /> Usuario no autentificado
+    </div>
+    <div data-ng-show="authentication.isAuth">
+
+        <div class="clearfix"></div>
+        <div class="row">
+            <div>
+                <div class="col-md-8 col-sm-8 col-xs-12">
+                    <div class="x_panel">
+                        <div class="x_content sin-desborde">
+                            <div class="col-xs-12">
+                                <label class="detalle" style="cursor: pointer;text-decoration: underline;" ng-click="openProfile(registro.clavePersona)" title="Detalle de empleado">
+                                    ({{registro.clavePersona}})
+                                </label>
+                                <label class="detalle">
+                                    {{registro.persona.nombreCompleto}}
+                                </label>
+                            </div>
+                            <!-- <label class="detalle col-xs-12 " title="Nombre">
+                                ({{registro.clavePersona}}) {{registro.persona.nombreCompleto}}
+                            </label> -->
+                            <label class="cont emc col-xs-12 colorTit">
+                                {{registro.becaInterna.descripcion}}
+                            </label>
+                            <label class="tit col-xs-12">
+                                Especialidad
+                            </label>
+                            <label class="cont col-xs-12">
+                                {{registro.carrera.descripcion}}
+                            </label>
+                            <label class="tit col-xs-12">
+                                Instituci&oacute;n de procedencia
+                            </label>
+                            <label class="cont col-xs-12">
+                                {{registro.institucion.descripcion}}
+                            </label>
+                            <label class="tit col-xs-12">
+                                Pa&iacute;s
+                            </label>
+                            <label class="cont col-xs-12">
+                                {{registro.pais.descripcion}}
+                            </label>
+                            <label class="tit col-xs-12">
+                                Estado de registro
+                            </label>
+                            <label class="cont col-xs-12">
+                                {{registro.estadoFlujo.descripcion}}
+                            </label>
+                            <label class="tit col-xs-12">
+                                Fecha de validaci&oacute;n
+                            </label>
+                            <label class="cont col-xs-12">
+                                {{registro.fechaValidacion === null || ((registro.fechaValidacion| date:"yyyy")
+                                <1901) ?
+                                    'Dato no disponible' :registro.fechaValidacion | date: "dd/MM/yyyy"}} </label>
+                        </div>
+
+
+                    </div>
+
+                    <!--Si existe Becario Dirigido-->
+                    <div class="x_panel" ng-show="registroDir!=null">
+                        <div class="x_content sin-desborde">
+                            <div class="x_title">
+                                <h2>Asesor</h2>
+                                <div class="clearfix"></div>
+                            </div>
+                            <label class="titFirst col-xs-12">
+                                Asesor
+                            </label>
+                            <label class="cont col-xs-12">
+                                {{registroDir.nombre}}
+                            </label>
+                            <label class="titFirst col-xs-12">
+                                Tipo de beca
+                            </label>
+                            <label class="cont col-xs-12">
+                                {{registroDir.tipoBeca.descripcion}}
+                            </label>
+                            <label class="titFirst col-xs-12">
+                                T&iacute;tulo de estancia
+                            </label>
+                            <label class="cont col-xs-12 sin-desborde">
+                                {{registroDir.nombreEstancia}}
+                            </label>
+                            <label class="titFirst col-xs-12" ng-if="UO!=null">
+                                Unidad Organizacional
+                            </label>
+                            <label class="cont col-xs-12" ng-if="UO!=null">
+                                {{UO}}
+                            </label>
+                            <label class="titFirst col-xs-12">
+                                Proyecto
+                            </label>
+                            <label class="cont col-xs-12" ng-show="registroDir.proyecto.proyectoId>0">
+                                <a href="" load-proyectos idproyecto="{{registroDir.proyecto.proyectoId}}" title="Detalle de proyecto">{{registroDir.proyecto.proyectoId}}</a>- {{registroDir.proyecto.nombre}}
+                            </label>
+                            <label class="cont col-xs-12" ng-show="registroDir.proyecto.proyectoId==0">
+                                Dato no disponible
+                            </label>
+
+                            <label class="titFirst col-xs-12">
+                                Instituci&oacute;n de procedencia
+                            </label>
+                            <label class="cont col-xs-12 sin-desborde">
+                                {{registroDir.otorganteBeca}}
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-4 col-xs-12">
+                    <div class="x_panel">
+                        <div class="x_content sin-desborde">
+                            <div class="x_title">
+                                <h2>Per&iacute;odo de beca</h2>
+                                <div class="clearfix"></div>
+                            </div>
+                            <label class="titFirst col-xs-12">
+                                Inicio
+                            </label>
+                            <label class="cont col-xs-12">
+                                {{registro.fechaInicioBeca | date: 'dd/MM/yyyy'}}
+                            </label>
+                            <label class="titFirst col-xs-12">
+                                T&eacute;rmino
+                            </label>
+                            <label class="cont col-xs-12">
+                                {{registro.fechaTerminoBeca === null || ((registro.fechaTerminoBeca | date:"yyyy")
+                                <1901)
+                                    ? 'Dato no disponible' :registro.fechaTerminoBeca | date: 'dd/MM/yyyy'}} </label>
+                                    <label class="titFirst col-xs-12" ng-if="registro.fechaBaja!=null">
+                                        Baja
+                                    </label>
+                                    <label class="cont col-xs-12" ng-if="registro.fechaBaja!=null">
+                                        {{registro.fechaBaja | date: 'dd/MM/yyyy'}}
+                                    </label>
+                                    <label class="titFirst col-xs-12" ng-if="registro.fechaTerminoExt!=null">
+                                        Extensi&oacute;n
+                                    </label>
+                                    <label class="cont col-xs-12" ng-if="registro.fechaTerminoExt!=null">
+                                        {{registro.fechaTerminoExt === null || ((registro.fechaTerminoExt | date:"yyyy")
+                                        <1901)
+                                            ? 'Dato no disponible' :registro.fechaTerminoExt | date: 'dd/MM/yyyy'}} </label>
+                        </div>
+                    </div>
+                    <div class="x_panel">
+                        <div class="x_content sin-desborde">
+                            <div class="x_title">
+                                <h2>Evidencia</h2>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="form-group" ng-if="registro.adjuntoId==null">
+                                <div class="alert advertencia col-xs-12">
+                                    <span class="glyphicon glyphicon-info-sign"></span> No se tiene informe de becario registrado
+                                </div>
+                            </div>
+                            <div class="form-group sin-desborde" ng-if="registro.adjunto!=null">
+
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Archivo(s) adjunto(s):</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <span class="fa fa-download"></span>&nbsp;&nbsp;
+                                                <a href="/Descargas.html#/q/{{registro.adjunto.adjuntoId| encriptar}}"
+                                                    class="text sin-desborde linkTabla" ta target="_blank"> {{registro.adjunto.nombre}}</a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <button type="submit" ng-click="globalRegresar()" class="btn btn-primary">
+                    <span class="fa fa-arrow-left"></span> Regresar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--registro{{ registro | json}}-->

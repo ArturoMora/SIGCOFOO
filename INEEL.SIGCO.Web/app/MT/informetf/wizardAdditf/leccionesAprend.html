@@ -1,0 +1,171 @@
+﻿<div class="x_title">
+    <h2>Lecciones aprendidas en el desarrollo del proyecto</h2>
+    <div class="clearfix"></div>
+</div>
+<div class="form-group">
+    <label class="control-label col-md-3 col-sm-3 col-xs-12">
+        Insumos tecnol&oacute;gicos <span class="required">*</span>
+    </label>
+    <div class="col-md-6 col-sm-6 col-xs-12">
+        <textarea class="form-control col-md-7 col-xs-12" id="lAproyInsumos" ng-model="itf.lAproy.insumos" name="lAproyInsumos"
+                  ng-minlength="6" ng-maxlength="500" ng-required="true" maxlength="500"
+                  placeholder="Insumos tecnol&oacute;gicos" rows="8"></textarea>
+        <span class="error" ng-show="formITF.lAproyInsumos.$dirty && !formITF.lAproyInsumos.$valid">
+            Dato requerido con una longitud m&iacute;nima de 6 caracteres y m&aacute;xima de 500
+        </span>
+    </div>
+</div>
+<div class="form-group">
+    <label class="control-label col-md-3 col-sm-3 col-xs-12">
+        Equipo de trabajo <span class="required">*</span>
+    </label>
+    <div class="col-md-6 col-sm-6 col-xs-12">
+        <textarea placeholder="¿Fue suficiente?¿C&oacute;mo fue el desempeño, actitud y conocimiento?"
+                  class="form-control col-md-7 col-xs-12" id="lAproyEquipo"
+                  ng-model="itf.lAproy.equipo" name="lAproyEquipo" maxlength="500"
+                  ng-minlength="6" ng-maxlength="500" ng-required="true" rows="8"></textarea>
+        <span class="error" ng-show="formITF.lAproyEquipo.$dirty && !formITF.lAproyEquipo.$valid">
+            Dato requerido con una longitud m&iacute;nima de 6 caracteres y m&aacute;xima de 500
+        </span>
+    </div>
+</div>
+<div class="form-group">
+    <label class="control-label col-md-3 col-sm-3 col-xs-12">
+        Gesti&oacute;n del proyecto <span class="required">*</span>
+    </label>
+    <div class="col-md-6 col-sm-6 col-xs-12">
+        <textarea class="form-control col-md-7 col-xs-12" id="lAproyGestion" name="lAproyGestion"
+                  placeholder="Indicar las pr&aacute;cticas de &eacute;xito, no exitosas y manejo de riesgos"
+                  ng-model="itf.lAproy.gestion" maxlength="500"
+                  ng-minlength="6" ng-maxlength="500" ng-required="true" rows="8"></textarea>
+        <span class="error" ng-show="formITF.lAproyGestion.$dirty && !formITF.lAproyGestion.$valid">
+            Dato requerido con una longitud m&iacute;nima de 6 caracteres y m&aacute;xima de 500
+        </span>
+    </div>
+</div>
+<div class="form-group">
+    <label class="control-label col-md-3 col-sm-3 col-xs-12">
+        Cumplimiento del tiempo, costo y alcance original <span class="required">*</span>
+    </label>
+    <div class="col-md-6 col-sm-6 col-xs-12">
+        <textarea class="form-control col-md-7 col-xs-12" placeholder="Si/No y ¿Por qu&eacute?"
+                  id="lAproyCumplimiento" ng-model="itf.lAproy.cumplimiento" name="lAproyCumplimiento" maxlength="500"
+                  ng-minlength="6" ng-maxlength="500" ng-required="true" rows="8"></textarea>
+        <span class="error" ng-show="formITF.lAproyCumplimiento.$dirty && !formITF.lAproyCumplimiento.$valid">
+            Dato requerido con una longitud m&iacute;nima de 6 caracteres y m&aacute;xima de 500
+        </span>
+    </div>
+</div>
+<div class="form-group">
+    <label class="control-label col-md-3 col-sm-3 col-xs-12">
+        Palabras clave <span class="required">*</span>
+    </label>
+    <div class="col-md-6 col-sm-6 col-xs-12">
+        <textarea class="form-control col-md-7 col-xs-12" id="lAproyClave" ng-model="itf.lAproy.clave" name="lAproyClave" maxlength="100"
+                  ng-minlength="3" ng-maxlength="100" ng-required="true" rows="8"></textarea>
+        <span class="error" ng-show="formITF.lAproyClave.$dirty && !formITF.lAproyClave.$valid">
+            Dato requerido con una longitud m&iacute;nima de 3 caracteres y m&aacute;xima de 100
+        </span>
+    </div>
+</div>
+
+<div class="x_title">
+    <h2>Lecciones aprendidas en la relaci&oacute;n con el cliente</h2>
+    <div class="clearfix"></div>
+</div>
+<div class="form-group">
+    <label class="control-label col-md-3 col-sm-3 col-xs-12">
+        En la negociaci&oacute;n <span class="required">*</span>
+    </label>
+    <div class="col-md-6 col-sm-6 col-xs-12">
+        <textarea class="form-control col-md-7 col-xs-12" id="lActeNegociacion" ng-model="itf.lActe.negociacion" name="lActeNegociacion" maxlength="500"
+                  ng-minlength="6" ng-maxlength="500" ng-required="true" rows="8"></textarea>
+        <span class="error" ng-show="formITF.lActeNegociacion.$dirty && !formITF.lActeNegociacion.$valid">
+            Dato requerido con una longitud m&iacute;nima de 6 caracteres y m&aacute;xima de 500
+        </span>
+    </div>
+</div>
+<div class="form-group">
+    <label class="control-label col-md-3 col-sm-3 col-xs-12">
+        En el desarrollo <span class="required">*</span>
+    </label>
+    <div class="col-md-6 col-sm-6 col-xs-12">
+        <textarea class="form-control col-md-7 col-xs-12" id="lActeDesarrollo" ng-model="itf.lActe.desarrollo" name="lActeDesarrollo" maxlength="500"
+                  ng-minlength="6" ng-maxlength="500" ng-required="true" rows="8"></textarea>
+        <span class="error" ng-show="formITF.lActeDesarrollo.$dirty && !formITF.lActeDesarrollo.$valid">
+            Dato requerido con una longitud m&iacute;nima de 6 caracteres y m&aacute;xima de 500
+        </span>
+    </div>
+</div>
+<div class="form-group">
+    <label class="control-label col-md-3 col-sm-3 col-xs-12">
+        En el cierre <span class="required">*</span>
+    </label>
+    <div class="col-md-6 col-sm-6 col-xs-12">
+        <textarea class="form-control col-md-7 col-xs-12" id="lActeCierre"
+                  ng-model="itf.lActe.cierre" name="lActeCierre" maxlength="500"
+                  ng-minlength="6" ng-maxlength="500" ng-required="true" rows="8"></textarea>
+        <span class="error" ng-show="formITF.lActeCierre.$dirty && !formITF.lActeCierre.$valid">
+            Dato requerido con una longitud m&iacute;nima de 6 caracteres y m&aacute;xima de 500
+        </span>
+    </div>
+</div>
+
+<div class="x_title">
+    <h2>Capacidad del Instituto</h2>
+    <div class="clearfix"></div>
+</div>
+ 
+
+
+<div class="form-group">
+    <label class="control-label col-md-3 col-sm-3 col-xs-12">
+        En sus instalaciones
+    </label>
+    <div class="col-md-6 col-sm-6 col-xs-12">
+        <textarea class="form-control col-md-7 col-xs-12" id="lAcapInstalaciones" name="lAcapInstalaciones" maxlength="500"
+                  ng-model="itf.lAcap.instalaciones" ng-maxlength="500" rows="8"></textarea>
+        <span class="error" ng-show="formITF.lAcapInstalaciones.$dirty && !formITF.lAcapInstalaciones.$valid">
+            Dato no obligatorio, con longitud m&aacute;xima de 500
+        </span>
+    </div>
+</div>
+<div class="form-group">
+    <label class="control-label col-md-3 col-sm-3 col-xs-12">
+        Servicios y apoyos administrativos
+    </label>
+    <div class="col-md-6 col-sm-6 col-xs-12">
+        <textarea class="form-control col-md-7 col-xs-12" id="lAcapServicios" name="lAcapServicios" maxlength="500"
+                  ng-model="itf.lAcap.servicios" ng-maxlength="500" rows="8"></textarea>
+        <span class="error" ng-show="formITF.lAcapServicios.$dirty && !formITF.lAcapServicios.$valid">
+            Dato no obligatorio, con longitud m&aacute;xima de 500
+        </span>
+    </div>
+</div>
+<div class="x_title">
+    <h2>&nbsp;</h2>
+    <div class="clearfix"></div>
+</div>
+<div class="form-group" ng-hide="ocultarGuardar" >
+    <label class="control-label col-md-3 col-sm-3 col-xs-12">
+        &nbsp;
+    </label>
+    <div class="col-md-6 col-sm-6 col-xs-12">
+        <div class="row col-xs-6">
+            <button class="btn btn-block btn-info" ng-click="datoscompletos(5,'ITF.insumos')"
+                    ng-disabled="!formITF.lAproyInsumos.$valid
+                || !formITF.lAproyEquipo.$valid
+                || !formITF.lAproyGestion.$valid
+                || !formITF.lAproyCumplimiento.$valid
+                || !formITF.lAproyClave.$valid
+                || !formITF.lActeNegociacion.$valid
+                || !formITF.lActeDesarrollo.$valid
+                || !formITF.lActeCierre.$valid
+                || !formITF.lAcapInstalaciones.$valid
+                || !formITF.lAcapServicios.$valid || click">
+                <!--ng-show="!detalles">-->
+                {{txtGuardar}}
+            </button>
+        </div>
+    </div>
+</div>

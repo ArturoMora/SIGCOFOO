@@ -1,0 +1,203 @@
+﻿<div class="vista">
+    <div class="page-title">
+        <div class="title_left">
+            <ol class="breadcrumb miga">
+                <li><i class="fa fa-cogs"></i> <a ui-sref="catalogosrh.EncargadoDespachoGet">Administraci&oacute;n/Cat&aacute;logos/Encargados de despacho</a></li>
+                <li class="active">Editar</li>
+            </ol>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                
+
+
+
+
+                    <form name="ValidForm" id="form" class="form-horizontal">
+                        <div class="x_title">
+                            <h2>Informaci&oacute;n general</h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                N&uacute;m. de empleado <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" class="form-control" id="usr" ng-model="registro.clavePersona" disabled>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Nombre de empleado <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" class="form-control" id="usr" disabled ng-model="registro.nombrePersona">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Unidad organizacional <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                              
+                                    <div uo-modal2 ng-model="unidadOselect" fecha=""></div>
+                                
+                            </div>
+                        </div>
+                        <div class="x_title">
+                            <h2>Periodo de encargado de despacho</h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Inicio <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="row">
+
+                                    <div class="col-xs-10">
+                                        <input  name="fechaEfectivaNombramiento" placeholder="dd/mm/yyyy" ng-init="open=false" 
+                                               type="text" show-button-bar="false" 
+                                               popup-placement="bottom"
+                                               class="form-control" 
+                                               uib-datepicker-popup="dd/MM/yyyy" 
+                                               ng-model="registro.fechaEfectivaNombramiento" 
+                                               value="{{ date | date: 'dd/MM/yyyy' }}" is-open="open" ng-required="true" close-text="Close" required />
+                                        <span ng-show="ValidForm.fechaEfectivaNombramiento.$dirty &&  ValidForm.fechaEfectivaNombramiento.$invalid" class="error">Formato inválido 'dd/MM/yyyy'</span>
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <button type="button" class="btn btn-success" ng-click="open=true"><i class="glyphicon glyphicon-calendar"></i></button>
+                                    </div>
+
+                                </div>
+
+
+                   
+
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                T&eacute;rmino
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="row">
+                                    
+                                        <div class="col-xs-10">
+                                            <input   name="fechaFinNombramiento" placeholder="dd/mm/yyyy"  ng-init="open1=false" type="text" show-button-bar="false" popup-placement="bottom" class="form-control" uib-datepicker-popup="dd/MM/yyyy" ng-model="registro.fechaFinNombramiento" value="{{ date | date: 'dd/MM/yyyy' }}" is-open="open1" close-text="Close" />
+                                            <span ng-show="ValidForm.fechaFinNombramiento.$dirty &&  ValidForm.fechaFinNombramiento.$invalid" class="error">Formato inválido 'dd/MM/yyyy'</span>
+                                        </div>
+                                        <div class="col-xs-2">
+                                            <button type="button" class="btn btn-success" ng-click="open1=true"><i class="glyphicon glyphicon-calendar"></i></button>
+                                        </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ln_solid"></div>
+                        <div class="form-group">
+                            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                <div class="">
+                                    <button type="submit" ng-click="save()" class="btn btn-success" style="padding-right:15px" ng-disabled="desactivar">
+                                        <i class="glyphicon glyphicon-saved"></i> Actualizar
+                                    </button>
+                                    <button type="button" ui-sref="catalogosrh.EncargadoDespachoGet" class="btn btn-primary" style="padding-right:15px">
+                                        <span class="fa fa-arrow-left"></span> Regresar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+               
+                
+                 
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--<div>
+    <div data-ng-hide="authentication.isAuth">
+        No tiene permisos para ingresar a esta sección.<br />
+        Usuario no autentificado
+    </div>
+    <div data-ng-show="authentication.isAuth">
+        <div id="page-wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h2 class="page-header">Editar Encargado de Despacho</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                        </div>
+                        <div class="panel-body">
+                            <form role="form" name="ValidForm">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="usr">Núm. de empleado:</label>
+                                        <input type="text" class="form-control" id="usr" ng-model="registro.clavePersona" disabled>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="usr">Nombre de empleado:</label>
+                                        <input type="text" class="form-control" id="usr" disabled ng-model="registro.nombrePersona">
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="form-group">
+                                            <label for="usr">Fecha inicio nombramiento:<a class="error">*</a></label>
+                                            <div class="row">
+                                                <div class="col-xs-10">
+                                                    <input placeholder="dd/mm/yyyy" readonly ng-init="fechaInicio=false" type="text" show-button-bar="false" popup-placement="bottom" class="form-control" uib-datepicker-popup="dd/MM/yyyy" ng-model="registro.fechaEfectivaNombramiento" value="{{ registro.fechaEfectivaNombramiento | date: 'dd/MM/yyyy' }}" is-open="fechaInicio" ng-required="true" close-text="Close" />
+                                                </div>
+                                                <div class="col-xs-2">
+                                                    <button type="button" class="btn btn-default" ng-click="fechaInicio=true"><i class="glyphicon glyphicon-calendar"></i></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <div class="form-group">
+                                            <label for="usr">Fecha t&eacute;rmino nombramiento:</label>
+                                            <div class="row">
+                                                <div class="col-xs-10">
+                                                    <input placeholder="dd/mm/yyyy" readonly ng-init="fechatermino=false" type="text" show-button-bar="false" popup-placement="bottom" class="form-control" uib-datepicker-popup="dd/MM/yyyy" ng-model="registro.fechaFinNombramiento" value="{{ registro.fechaFinNombramiento | date: 'dd/MM/yyyy' }}" is-open="fechatermino" close-text="Close" />
+                                                </div>
+                                                <div class="col-xs-2">
+                                                    <button type="button" class="btn btn-default" ng-click="fechatermino=true"><i class="glyphicon glyphicon-calendar"></i></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="usr">Gerencia:<a class="error">*</a></label>
+                                        <div class="row">
+                                            <div uo-modal ng-model="unidadOselect" fecha=""></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" ng-click="save()" class="btn btn-success" style="padding-right:15px" ng-disabled="desactivar">
+                            <i class="glyphicon glyphicon-saved"></i> Guardar
+                        </button>
+                        <button type="button" ui-sref="catalogosrh.EncargadoDespachoGet" class="btn btn-primary" style="padding-right:15px">
+                            <span class="fa fa-arrow-left"></span> Regresar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>-->

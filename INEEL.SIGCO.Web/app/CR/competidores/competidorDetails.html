@@ -1,0 +1,284 @@
+<div class="vista">
+    <div class="page-title">
+        <div class="title_left">
+
+            <ol class="breadcrumb miga">
+                <li>
+                    <i class="sg sg-competidores"></i>
+                    <a ui-sref="competidorGet">Competidores</a>
+                </li>
+                <li class="active">Detalles</li>
+            </ol>
+
+        </div>
+    </div>
+    <div data-ng-hide="authentication.isAuth">
+        No tiene permisos para ingresar a esta secci&oacute;n..
+        <br /> Usuario no autentificado
+    </div>
+    <div ng-if="authentication.isAuth && competidores!=null">
+        <div class="clearfix"></div>
+        <div class="row">
+            <div class="col-md-8 col-sm-8 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_content sin-desborde">
+                        <label class="detalle col-xs-12 " style="color:#1ABB9C !important" load-empresas empresa="{{competidores.empresa.nombreEmpresa}}"
+                            idempresa="{{competidores.empresa.empresaId}}" title="Nombre">
+                            <!-- {{competidores.empresa.nombreEmpresa}} -->
+                        </label>
+                        <label class="cont col-xs-12">
+                            {{competidores.descripcion}}
+
+                        </label>
+                        <label class="cont col-xs-12">
+                            <br/>
+                        </label>
+                        <label class="cont col-xs-12">
+                            {{competidores.empresa.sitioWeb}}
+                        </label>
+                        <label class="cont col-xs-12">
+                            {{competidores.direccion}}
+                        </label>
+                    </div>
+                </div>
+                <div class="x_panel">
+                    <div class="x_content sin-desborde">
+                        <div class="x_title">
+                            <h2>Vigilancia Tecnol&oacute;gica Competitiva (VTC)</h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <label class="titFirst col-xs-12">
+                            Tipo de Competidor
+                        </label>
+                        <label class="cont col-xs-12">
+                            {{competidores.tipoCompetidor}}
+                        </label>
+                        <label class="tit col-xs-12">
+                            L&iacute;nea de Investigaci&oacute;n
+                        </label>
+                        <label class="cont col-xs-12">
+                            {{competidores.lineaDesarrolloTecnologico.nomLinDesTec}}
+                        </label>
+                        <label class="tit col-xs-12">
+                            Tama&ntilde;o empresa
+                        </label>
+                        <label class="cont col-xs-12">
+                            {{competidores.tamanoEmpresa.nomTamEmp}}
+                        </label>
+                        <label class="tit col-xs-12">
+                            Posicionamiento Tecnol&oacute;gico
+                        </label>
+                        <label class="cont col-xs-12">
+                            {{competidores.posicionamientoTec}}
+                        </label>
+                        <label class="tit col-xs-12">
+                            Segmento de mercado
+                        </label>
+                        <label class="cont col-xs-12">
+                            {{competidores.segmentoMercado.nomSegMerc}}
+                        </label>
+                    </div>
+                </div>
+                <div class="x_panel">
+                    <div class="x_content sin-desborde">
+                        <div class="x_title">
+                            <h2>Productos</h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div ng-show="productos.length>0" class="span-label col-xs-12">
+                            <ul ng-repeat="prod in productos track by $index">
+                                <li>
+                                    <b>{{prod.producto.nomProd}}</b>
+                                    <br />&nbsp;&nbsp;&nbsp;{{prod.producto.descProd}}
+                                </li>
+                            </ul>
+                        </div>
+                        <div ng-show="productos.length<=0">
+                            <div class="alert advertencia col-xs-12">
+                                <span class="glyphicon glyphicon-info-sign"></span> No hay productos registrados
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="x_panel">
+                    <div class="x_content sin-desborde">
+                        <div class="x_title">
+                            <h2>Servicios</h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div ng-show="servicios.length>0" class="span-label col-xs-12">
+                            <ul ng-repeat="serv in servicios track by $index">
+                                <li>
+                                    <b>{{serv.servicio.nomServ}}</b>
+                                    <br />&nbsp;&nbsp;&nbsp;{{serv.servicio.descServ}}
+
+                                </li>
+                            </ul>
+                        </div>
+                        <div ng-show="servicios.length<=0">
+                            <div class="alert advertencia col-xs-12">
+                                <span class="glyphicon glyphicon-info-sign"></span> No hay servicios registrados
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-4 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_content sin-desborde">
+                        <div class="x_title">
+                            <h2>Informaci&oacute;n de contacto</h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div ng-if="competidores.empresa.telefono!=null || competidores.empresa.correo!=null">
+                            <div ng-if="competidores.empresa.telefono!=null">
+                                <label class="titFirst col-xs-12">
+                                    Tel&eacute;fono
+                                </label>
+                                <label class="cont col-xs-12">
+                                    {{competidores.empresa.telefono}}
+                                </label>
+                            </div>
+                            <div ng-if="competidores.empresa.correo!=null">
+                                <label class="tit col-xs-12">
+                                    Correo Electr&oacute;nico
+                                </label>
+                                <label class="cont col-xs-12">
+                                    {{competidores.empresa.correo}}
+                                </label>
+                            </div>
+                        </div>
+                        <div ng-show="competidores.empresa.telefono==null && competidores.empresa.correo==null">
+                            <div class="alert advertencia col-xs-12">
+                                <span class="glyphicon glyphicon-info-sign"></span> No hay datos de contacto
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--Original, no modificar aun.....-->
+                <div class="x_panel">
+                    <div class="x_content sin-desborde">
+                        <div class="x_title">
+                            <h2>Documento de an&aacute;lisis del competidor</h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div ng-hide="tarifa.length==0 && vtc.length==0">
+                            <div>
+                                <!--Se muestra cuando se le otorga permiso al usuario de descargar los documentos adjuntos-->
+                                <div class="form-group" ng-show="competidores.tipoAccesoVTC!='Restringido' ||(competidores.tipoAccesoVTC=='Restringido' && permiso==1) || esjefe==true || isGerenteComercializacion || isGerentePropietario  || idRol==5 || idRol==15">
+                                    <!-- <label ng-show="tarifa.length>0" class="cont col-xs-12">
+                                        <span class="fa fa-download"></span>
+                                        <span ng-repeat="t in tarifa track by $index">
+                                            <a href="/Descargas.html#/q/{{t.adjunto.adjuntoId | encriptar}}" target="_blank" class="alinea" title="{{t.adjunto.nombre}}">Comparaci&oacute;n tarifas o precios</a>
+                                        </span>
+                                    </label> -->
+                                    <label ng-show="vtc.length>0" class="cont col-xs-12">
+                                        <span class="fa fa-download"></span>
+                                        <span ng-repeat="v in vtc track by $index">
+                                            <a href="/Descargas.html#/q/{{v.adjunto.adjuntoId | encriptar}}" target="_blank" class="alinea" title="{{v.adjunto.nombre}}">Archivo VTC</a>
+                                        </span>
+                                    </label>
+                                </div>
+
+                                <!--Se muestra cuando el usuario no tiene permiso-->
+                                <div class="form-group" ng-show="competidores.tipoAccesoVTC=='Restringido' && permiso==0 && esjefe==false && idRol!=15 && idRol!=5 && !isGerenteComercializacion && !isGerentePropietario">
+                                    <!-- <label ng-show="tarifa.length>0" class="cont col-xs-12">
+                                        <span class="fa fa-lock"></span>
+                                        <span ng-repeat="t in tarifa track by $index">
+                                            <a class="alinea" title="{{t.adjunto.nombre}}">Comparaci&oacute;n tarifas o precios</a>
+                                        </span>
+                                    </label> -->
+                                    <label ng-show="vtc.length>0" class="cont col-xs-12">
+                                        <span class="fa fa-lock"></span>
+                                        <span ng-repeat="v in vtc track by $index">
+                                            <a class="alinea" title="{{v.adjunto.nombre}}">Archivo VTC</a>
+                                        </span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="alert advertencia col-xs-12" ng-show="permiso==2 && idRol!=15 && esjefe==false && !isGerentePropietario && idRol!=5 && !isGerenteComercializacion">
+                                <strong> Solicitud en proceso,</strong> espere respuesta de acceso
+                            </div>
+                            <div class="form-group" ng-show="competidores.tipoAccesoVTC=='Restringido' && permiso==0 && esjefe==false && idRol!=15 && idRol!=5 && !isGerenteComercializacion && !isGerentePropietario">
+                                <br/><br/><br/>
+
+                                <a ng-click="acceso('vtc')" class="btn btn-success btn-sm"> Solicitar Acceso </a>
+                            </div>
+                            <label class="tit col-xs-12">
+                                Unidad organizacional que gener&oacute; el VTC
+                            </label>
+                            <label class="cont col-xs-12">
+                                {{competidores.unidadOrganizacional.nombreUnidad}}
+                            </label>
+                        </div>
+
+
+
+                        <div ng-show="vtc.length==0">
+                            <div class="alert advertencia col-xs-12">
+                                <span class="glyphicon glyphicon-info-sign"></span> No se tiene informaci&oacute;n
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="x_panel">
+                    <div class="x_content sin-desborde">
+                        <div class="x_title">
+                            <h2>Documento de an&aacute;lisis de precios </h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div ng-hide="tarifa.length==0">
+                            <div>
+                                <!--Se muestra cuando se le otorga permiso al usuario de descargar los documentos adjuntos-->
+                                <div class="form-group" ng-show="competidores.tipoAccesoTarifas!='Restringido' ||(competidores.tipoAccesoTarifas=='Restringido' && permisoTarifa==1) || esjefe==true || isGerenteComercializacion || isGerentePropietario  || idRol==5 || idRol==15">
+                                    <label ng-show="tarifa.length>0" class="cont col-xs-12">
+                                        <span class="fa fa-download"></span>
+                                        <span ng-repeat="t in tarifa track by $index">
+                                            <a href="/Descargas.html#/q/{{t.adjunto.adjuntoId | encriptar}}" target="_blank" class="alinea" title="{{t.adjunto.nombre}}">Comparaci&oacute;n tarifas o precios</a>
+                                        </span>
+                                    </label>
+                                </div>
+
+                                <!--Se muestra cuando el usuario no tiene permiso-->
+                                <div class="form-group" ng-show="competidores.tipoAccesoTarifas=='Restringido' && permisoTarifa==0 && esjefe==false && idRol!=15 && idRol!=5 && !isGerenteComercializacion && !isGerentePropietario">
+                                    <label ng-show="tarifa.length>0" class="cont col-xs-12">
+                                        <span class="fa fa-lock"></span>
+                                        <span ng-repeat="t in tarifa track by $index">
+                                            <a class="alinea" title="{{t.adjunto.nombre}}">Comparaci&oacute;n tarifas o precios</a>
+                                        </span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="alert advertencia col-xs-12" ng-show="permisoTarifa==2 && idRol!=15 && esjefe==false && !isGerentePropietario && idRol!=5 && !isGerenteComercializacion">
+                                <strong> Solicitud en proceso,</strong> espere respuesta de acceso
+                            </div>
+                            <div class="form-group" ng-show="competidores.tipoAccesoTarifas=='Restringido' && permisoTarifa==0 && esjefe==false && idRol!=15 && idRol!=5 && !isGerenteComercializacion && !isGerentePropietario">
+                                <br/><br/>
+                                <a ng-click="acceso('tarifa')" class="btn btn-success btn-sm"> Solicitar Acceso </a>
+                            </div>
+                        </div>
+
+
+
+                        <div ng-show="tarifa.length==0">
+                            <div class="alert advertencia col-xs-12">
+                                <span class="glyphicon glyphicon-info-sign"></span> No se tiene informaci&oacute;n
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <button type="button" ng-click="globalRegresar()" class="btn btn-primary">
+                    <span class="fa fa-arrow-left"></span> Regresar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

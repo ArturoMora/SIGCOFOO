@@ -1,0 +1,247 @@
+﻿
+/*body {
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    background-color: lightgrey;
+}
+#wrapper {
+    width: 944px;
+    margin: 0 auto;
+ 
+}
+html,
+body { 
+  height: 100%; 
+  margin: 0; 
+  padding: 0; 
+  text-align: center;
+  background: green;
+}*/
+#wrapper {
+    width: 944px;
+    margin: 0 auto;
+}
+
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    min-width: 944px !important;
+}
+
+body {
+    width: 100%;
+    background-color: lightgrey;
+}
+
+.clase-general {
+    width: 944px;
+    margin: 0 auto;
+    background: #F7F7F7;
+}
+
+.vistaPrincipal {
+    min-height: 600px;
+}
+
+.fondoFooter {
+    padding-top: 4px;
+    background-color: #2A3F54 !important;
+}
+
+footer {
+    min-height: 100px;
+    width: 100%;
+    padding: 0px !important;
+    margin-bottom: 0px;
+    border-top: 3px solid #1ABB9C;
+}
+
+/*********************************/
+element.style {
+}
+
+.navbar-inverse {
+    background-color: #2A3F54;
+    color: white !important;
+}
+
+.navbar2 {
+    margin-bottom: 0;
+    background-color: #2A3F54;
+}
+
+header .clase-general navbar2 div a {
+    color: white;
+}
+
+span.titulos {
+    color: white;
+}
+
+.navbar2 {
+    position: relative;
+    min-height: 50px;
+    margin-bottom: 1px;
+    border: 0px solid transparent;
+    border-bottom: 3px solid #1ABB9C;
+    width: 994px;
+    height: 65px;
+}
+
+article, aside, details, figcaption, figure, header, hgroup, main, menu, nav, section, summary {
+    display: block;
+}
+
+*, *:before, *:after {
+    box-sizing: border-box;
+}
+
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+user agent stylesheet article, aside, footer, header, hgroup, main, nav, section {
+    display: block;
+}
+
+Inherited from body.ng-scope.block-ui.block-ui-anim-fade body {
+    color: #73879C;
+    background: #2A3F54;
+    font-family: "Helvetica Neue", Roboto, Arial, "Droid Sans", sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.471;
+}
+
+
+
+Inherited from html.ng-scope html {
+    font-size: 10px;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+
+
+@media (min-width: 768px) {
+    .lead {
+        font-size: 21px;
+    }
+}
+
+
+@media (min-width: 400px) {
+    .navbar-left ~ .navbar-left {
+        margin-right: 0px;
+    }
+
+    .navbar-right ~ .navbar-right {
+        margin-left: 0;
+    }
+}
+
+@media (min-width: 400px) {
+    .navbar-right {
+        float: right !important;
+        margin-right: 0px;
+    }
+
+    .navbar-left {
+        float: left !important;
+    }
+}
+
+nav {
+    min-width: 800px;
+}
+
+.navbar-inverse .navbar-nav > li > a {
+    color: white !important;
+}
+
+.headerFull {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    z-index: -1;
+    width: 100%;
+    min-height: 30px;
+    min-height: 50px;
+    margin-bottom: 1px;
+    border: 1px solid transparent;
+    border-bottom: 3px solid #D9DEE4;
+    margin-bottom: 3px;
+    width: 100%;
+    border-bottom-color: #1ABB9C;
+    height: 65px;
+    background-color: #2A3F54;
+}
+
+
+.contentFooter a {
+    color: #b6ddff !important;
+    text-decoration: underline;
+}
+
+.contentFooter p {
+    color: white;
+}
+
+.boxLogin {
+    max-width: 450px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+@media (min-width: 992px) {
+    footer {
+        margin-left: 0px !important;
+    }
+
+    footer {
+        background: #2A3F54;
+        padding: 15px 20px;
+        display: block;
+    }
+}
+
+.floatLeft {
+    float: left;
+}
+
+.floatRigth {
+    float: right;
+}
+
+.logo {
+    width: 70px;
+    background-color: #0A2A46;
+    padding-bottom:11px;
+}
+
+.sistema {
+    width: 540px;
+    /*background-color:red;*/
+    display: inline-block !important;
+    padding-top: 10px;
+}
+
+.derecha {
+    width: 314px !important;
+    display: inline-block !important;
+    margin-bottom: 0;
+    vertical-align: middle;
+    text-align: right !important;
+    /*background-color: green;*/
+    padding-top: 15px;
+}
+
+.izquierda {
+    display: inline-block;
+    margin-bottom: 0;
+    vertical-align: middle;
+    width: 600px !important;
+}

@@ -1,0 +1,80 @@
+﻿<div class="vista">
+    <div class="page-title">
+        <div class="title_left">
+            <ol class="breadcrumb miga">
+                <li><i class="glyphicon glyphicon-file"></i> <a ui-sref="planNegocioEvolutivo">Plan de negocio evolutivo/ Mis planes de negocio evolutivo </a></li>
+            </ol>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        
+        <div class="col-xs-12 sin-desborde">
+            <div  class="x_panel">
+                <div class="x_content">
+                    <form name="ValidForm" id="form" class="form-horizontal sin-desborde">
+                        <div class="col-xs-12">
+                            
+                            <div>
+                                <table id="GIplanNegocio" class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" datatable="ng" width="100%"
+                                       dt-options="dtOptions" dt-column-defs="dtColumnDefs" >
+                                    <thead>
+                                        <tr>
+                                            <th data-priority="1">T&iacute;tulo</th>
+                                            <th data-priority="1">Proyecto</th>
+                                            <th data-priority="1">Propuesta</th>
+                                            <th data-priority="2">Fecha<br />registro</th>
+                                            <th>Oferta valor</th>
+                                            <th>Autor o responsable</th>
+                                            <th>Gerencia</th>
+                                            <th>Tipo Acceso</th>
+                                            <th>Estado flujo</th>
+                                            <th data-priority="1">Opciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="registro in registros">
+                                            <td style="max-width:300px" class="sin-desborde linkTabla"><a ng-click="setVariable('busquedaMisPlanesNegocio', plan);setGlobalID(registro.planNegocioEvolutivoId)" ui-sref="planNegocioDetails" title="Detalle">{{registro.titulo}}</a></td>
+                                            <td>{{registro.proyecto}}</td>
+                                            <td>{{registro.propuesta}}</td>
+                                            <td>{{registro.fechaRegistro | date:"dd/MM/yyyy"}}</td>
+                                            <td>{{registro.ofertaDeValor}}</td>
+                                            <!--<td>{{registro.planNegocioEvolAutores.join(', ')}}</td>-->
+                                            <td>
+                                                <ul ng-repeat="aut in registro.planNegocioEvolAutores" style="margin-left:0; padding-left:0;">
+                                                    <li>
+                                                        <a ng-click="openProfile(aut.substring(0,5))" title="Detalle de empleado" class="linkTabla ">
+                                                            {{aut.substring(0,5)}}
+                                                        </a>{{aut.substring(5)}}
+                                                    </li>
+                                                </ul>
+                                            </td>
+                                            <td>{{registro.planNegocioEvolGerencias.join(', ')}}</td>
+                                            <td>{{registro.tipoAccesoGI}}</td>
+                                            <td>{{registro.estadoflujo}}</td>
+                                            <td class="text-center sin-desborde">
+                                                <div>
+                                                    <a ng-click="setVariable('busquedaMisPlanesNegocio', plan);setGlobalID(registro.planNegocioEvolutivoId)" ui-sref="planNegocioEdit" title="Editar" class="btn btn-warning">
+                                                        <i class="glyphicon glyphicon-pencil"></i>
+                                                    </a>
+                                                    <a ng-click="setVariable('busquedaMisPlanesNegocio', plan);setGlobalID(registro.planNegocioEvolutivoId);setGlobalID2('PNE')" ui-sref="bitacoraMovimientos" title="Bitácora" class="btn btn-success">
+                                                        <i class="fa fa-list-alt"></i>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!--<button ng-show="registros.length >= 0 || registros==null" type="button"  ui-sref="planNegocioAdd" class="btn btn-success">
+                                <span class="glyphicon glyphicon-plus"></span> Agregar
+                            </button>-->
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--{{nombres}}-->

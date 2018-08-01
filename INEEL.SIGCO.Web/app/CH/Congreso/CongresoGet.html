@@ -1,0 +1,75 @@
+﻿<div class="vista" ng-controller="CongresoCtrlGet as showCase">
+    <div class="page-title">
+        <div class="title_left">
+            <ol class="breadcrumb miga">
+                <li><i class="disabled fa fa-cogs"></i> <a ui-sref="catalogosrh.CongresoGet">Administración/Catálogos/Congresos</a></li>
+            </ol>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+                    <form name="ValidacionForm" id="form" class="form-horizontal">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div ng-show="registroscongresos.length === 0" class="alert advertencia">
+                                    No hay registrados
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" ng-show="true">
+                            <div class="col-lg-12 col-xs-12">
+
+                                <div>
+                                    <table id="CHCongresoGet" datatable="" dt-options="showCase.dtOptions" dt-columns="showCase.dtColumns"
+                                           dt-instance="showCase.dtInstance"
+                                           class="table table-hover table-striped table-condensed dt-responsive"
+                                           cellspacing="0" width="100%"></table>
+                                    <br />
+                                </div>
+
+                                <button type="button" ui-sref="CongresoAdd" class="btn btn-success">
+                                    <span class="glyphicon glyphicon-plus"></span> Agregar
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--<div id="page-wrapper" ng-controller="CongresoCtrlGet as showCase">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">Administraci&oacute;n/Cat&aacute;logos/Congresos</h1>
+            <div ng-show="registroscongresos.length === 0" class="alert alert-danger">
+                No hay registrados
+            </div>
+        </div>
+    </div>
+    <div ng-show="loading">
+        <img src="images/cargando.gif" />
+    </div>
+    <div class="row" ng-show="true">
+        <div class="col-lg-12">
+
+            <div>
+                <table datatable="" dt-options="showCase.dtOptions" dt-columns="showCase.dtColumns"
+                       dt-instance="showCase.dtInstance" 
+                       class="table table-hover table-striped table-condensed dt-responsive"
+                           cellspacing="0"  width="100%"
+                       ></table>
+                <br />
+            </div>
+
+            <button type="button" ui-sref="CongresoAdd" class="btn btn-success">
+                <span class="glyphicon glyphicon-plus"></span> Agregar
+            </button>
+        </div>
+    </div>
+</div>-->

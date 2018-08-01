@@ -1,0 +1,159 @@
+﻿<!-- page content -->
+<div class="vista">
+
+    <div class="page-title">
+        <div class="title_left">
+
+            <ol class="breadcrumb miga">
+                <li><i class="sg sg-libros"></i> <a ui-sref="libros">Libros</a></li>
+            </ol>
+
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Criterios de b&uacute;squeda</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li>
+                            <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content sin-desborde">
+
+
+
+
+
+                    <div ng-show="registros.length === 0" class="alert advertencia">Sin  registros</div>
+
+                    <form novalidate class="simple-form">
+                        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                            <div class="form-group">
+                                <label class="col-xs-12" for="palabras">T&iacute;tulo</label>
+                                <div class="col-xs-12">
+                                    <input class="form-control frmSearch" type="text" id="s0" maxlength="50"
+                                           placeholder="T&iacute;tulo" ng-model="busq.titulo" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                            <div class="form-group">
+                                <label class="col-xs-12" for="palabras">Autores INEEL</label>
+                                <div class="col-xs-12">
+                                    <input class="form-control frmSearch" type="text" id="s1" maxlength="50"
+                                           placeholder="Autores" ng-model="busq.autores" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                            <div class="form-group">
+                                <label class="col-xs-12" for="palabras">Clasificaci&oacute;n</label>
+                                <div class="col-xs-12">
+                                    <input class="form-control frmSearch" type="text" id="s2" maxlength="50"
+                                           placeholder="Clasificaci&oacute;n" ng-model="busq.clasificacion" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                            <div class="form-group">
+                                <label class="col-xs-12" for="palabras">Pie de imprenta</label>
+                                <div class="col-xs-12">
+                                    <input class="form-control frmSearch" type="text" id="s3" maxlength="50"
+                                           placeholder="Lugar, a&ntilde;o, pie de imprenta" ng-model="busq.pieImprenta" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                            <div class="form-group">
+                                <label class="col-xs-12" for="palabras">Palabras clave</label>
+                                <div class="col-xs-12">
+                                    <input class="form-control frmSearch" type="text" id="s4" maxlength="50"
+                                           placeholder="Ej. sistemas hidráulicos, mecánica fluidos" ng-model="busq.descriptores" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                            <div class="form-group">
+                                <label class="col-xs-12" for="palabras">No. inventario</label>
+                                <div class="col-xs-12">
+                                    <input class="form-control frmSearch" type="text" id="s5" maxlength="50"
+                                           placeholder="No. Inventario" ng-model="busq.noInventario" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                            <div class="form-group">
+                                <label class="col-xs-12" for="palabras">Tipo de material</label>
+                                <div class="col-xs-12">
+                                    <!-- <input class="form-control frmSearch" type="text" id="s6" maxlength="50" placeholder="Libro, tesis, etc." ng-model="busq.tipoMaterial" /> -->
+
+                                     <select ng-model="busq.tipoMaterial" ng-options="opcion.descripcion for opcion in OPCIONES" ng-change="seleccion();" class="form-control"></select>
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+                <div class="clearfix"></div>
+                <br/>
+                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                    <div style="margin-left:14px">
+                        <div class="form-group">
+
+                         
+                                <a class="btn btn-primary" ng-click="reset()" title="Limpiar campos">
+                                    <!--<span class="glyphicon glyphicon-search"></span>--> Limpiar
+                                </a>
+                            
+                        </div>
+                    </div>
+                    </div>
+            </div>
+
+
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <br />
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+                    <table class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0"
+                           width="100%" dt-options="dtOptions" id="datatableSis">
+                        <thead>
+                            <tr>
+
+                                <th data-priority="1" style="min-width:20%;">T&iacute;tulo</th>
+                                <th data-priority="3" style="min-width:16%;">Autores INEEL</th>
+                                <th>Clasificaci&oacute;n</th>
+                                <th style="min-width:10%;">Pie de imprenta</th>
+                                <th style="min-width:18%;">Descriptores</th>
+                                <th>No. inventario</th>
+                                <th data-priority="2" style="max-width:80px">Tipo de material</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="e in registros">
+                                <td>{{e.titulo}}</td>
+                                <td>{{e.autoresINEEL | getAutores}}</td>
+                                <td>{{e.clasificacion}}</td>
+                                <td>{{e.pieImprenta}}</td>
+                                <td>{{e.descriptores | getDescriptores}}</td>
+                                <td>{{e.nosInventario | getInventarios}}</td>
+                                <td>{{e.tipoMaterial}}</td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+             </div>
+          </div>
+        </div>       
+    </div>                 

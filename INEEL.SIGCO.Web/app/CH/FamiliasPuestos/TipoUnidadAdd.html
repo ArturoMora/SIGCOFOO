@@ -1,0 +1,50 @@
+﻿<div id="page-wrapper">
+    <br />
+    <div class="row">
+        <div class="col-lg-12">
+            <h2 class="page-header">Asignar tipo de área a unidad </h2>
+        </div>
+    </div>
+
+    <br/>
+
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="row">
+                <div class="col-lg-12">
+                    <label for="usr">Período : {{periodosel}}</label>
+                </div>
+                <div class="col-lg-12">
+                    <label for="usr">Unidad organizacional : {{nombreunidadorg}}</label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br />
+   
+    <div class="row">
+        <div class="col-lg-6">
+            <label for="area">Seleccione un tipo de área:</label>
+            <select id="areaId" name="periodoev" class="form-control"
+                    ng-options="e.tipoAreaId as e.area  for e in areastipo"
+                    ng-model="tipoAreaId"
+                    ng-required="true">
+                <option value="">Seleccione un tipo de área </option>
+            </select>
+        </div>
+    </div>
+
+    <br>
+
+    <div class="form-group">
+        <button type="submit" ng-click="save()" class="btn btn-success" style="padding-right:15px">
+            <i class="glyphicon glyphicon-saved"></i> Guardar
+        </button>
+        <button type="button" ui-sref="tipounidad" class="btn btn-default" style="padding-right:15px">
+            <span class="fa fa-arrow-left"></span> Regresar
+        </button>
+    </div>
+
+
+</div>

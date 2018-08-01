@@ -1,0 +1,218 @@
+<!-- page content -->
+<div class="vista">
+
+    <div class="page-title">
+        <div class="title_full">
+
+            <ol class="breadcrumb miga">
+                <li><i class="sg sg-software-des"></i> <a class="cursorPointer" ng-click="globalRegresar()">Software{{TituloMiga}}</a></li>
+                <li class="active">Detalles</li>
+            </ol>
+
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-8 col-sm-8 col-xs-12">
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+                    <label class="detalle col-xs-12 sin-desborde" title="Titulo del software">
+                        {{SoftwarePersonal.nombre}}
+                    </label>
+                    <label class="cont emc col-xs-12 colorTit">
+                        Versi&oacute;n {{SoftwarePersonal.numeroVersion}} / A&ntilde;o {{SoftwarePersonal.anioVersion}}
+                    </label>
+                    <label class="cont col-xs-12" title="Tipo de software">
+                        {{SoftwarePersonal.tipoSoftware.nombre}}
+                    </label>
+                    <label class="tit col-xs-12">
+                        Descripci&oacute;n
+                    </label>
+                    <label class="cont col-xs-12 sin-desborde">
+                        {{SoftwarePersonal.descripcionFuncional}}
+                    </label>
+                    <label class="tit col-xs-12">
+                        Comentarios
+                    </label>
+                    <label class="cont col-xs-12 sin-desborde">
+                        {{SoftwarePersonal.comentarios}}
+                    </label>
+                    <div ng-if="SoftwarePersonal.derechosAutor!=null">
+                        <label class="tit col-xs-12">
+                            Derechos de autor
+                        </label>
+                        <label class="cont col-xs-12 sin-desborde">
+                            <a target="_blank" class="linkTabla" href="indexPI.html#/detallesdaexterno/{{SoftwarePersonal.derechosAutor.derechosAutorId}}">{{SoftwarePersonal.derechosAutor.derechosAutorId}}</a> - {{SoftwarePersonal.derechosAutor.titulo}}
+                        </label>
+                    </div>
+                    <label class="tit col-xs-12">
+                        Observaciones
+                    </label>
+                    <label class="cont col-xs-12 sin-desborde">
+                        {{SoftwarePersonal.derechoAutor}}
+                    </label>
+
+
+                </div>
+            </div>
+
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+                    <div class="x_title">
+                        <h2>Origen y autores del software</h2>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div>
+                        <label class="titFirst col-xs-12" ng-show="SoftwarePersonal.proyecto.nombre.length > 0">
+                            Proyecto
+                        </label>
+                        <label class="cont col-xs-12" ng-show="SoftwarePersonal.proyecto.nombre.length > 0">
+                            <a href="" load-proyectos idproyecto="{{SoftwarePersonal.proyecto.proyectoId}}" title="Detalle de proyecto">{{SoftwarePersonal.proyecto.proyectoId}}</a>- {{SoftwarePersonal.proyecto.nombre}}
+                            <!--{{SoftwarePersonal.proyecto.proyectoId}} - {{SoftwarePersonal.proyecto.nombre}}-->
+                        </label>
+                    </div>
+                    <label class="tit  col-xs-12">
+                        Autores
+                    </label>
+                    <div class="col-xs-12" ng-show="SoftwarePersonal.autores.length > 0">
+                        <table id="MTSoftwarePersonalDetails" class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" datatable="ng" width="100%" dt-options="dtOptions">
+                            <thead>
+                                <tr>
+                                    <th>N&uacute;m emp</th>
+                                    <th data-priority="1">Nombre de empleado</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="autor in SoftwarePersonal.autores">
+                                    <td ng-click="openProfile(autor.claveAutor)" title="Detalle de empleado" class="linkTabla">{{autor.claveAutor}}</td>
+                                    <!--<td>{{autor.claveAutor}}</td>-->
+                                    <td>{{autor.nombreCompleto}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 col-sm-4 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Informaci&oacute;n t&eacute;cnica</h2>
+                    <div class="clearfix"></div>
+                </div>
+                <label class="titFirst col-xs-12">
+                    Plataforma de desarrollo (HW/SW) y su versi&oacute;n
+                </label>
+                <label class="cont col-xs-12 sin-desborde">
+                    {{SoftwarePersonal.plataformaDesarrollo}}
+                </label>
+            </div>
+
+
+
+            <div class="x_panel"  ng-hide="SoftwarePersonal.adjuntoManualUsuario==null && SoftwarePersonal.adjuntoManualTecnico==null && SoftwarePersonal.adjuntoCodigoFuente==null ">
+                <div class="x_title">
+                    <h2>Documentaci&oacute;n</h2>
+                    <div class="clearfix"></div>
+                </div>
+
+
+
+                <label class="cont col-xs-12" ng-hide="SoftwarePersonal.adjuntoManualUsuario==null || SoftwarePersonal.adjuntoManualUsuario==''">
+                    <span class="sg sg-software-des icono"></span>
+                    <span class="text" ng-hide="publico" title="{{SoftwarePersonal.adjuntoManualUsuario.nombre | underscoreless}}">Manual de usuario </span>
+                    <a href="/Descargas.html#/q/{{SoftwarePersonal.adjuntoManualUsuario.adjuntoId | encriptar}}"
+                       target="_blank" ng-show="publico" class="alinea" title="{{SoftwarePersonal.adjuntoManualUsuario.nombre | underscoreless}}">
+                        Manual de usuario
+                    </a>
+                </label>
+                <label class="cont col-xs-12" ng-hide="SoftwarePersonal.adjuntoManualTecnico==null || SoftwarePersonal.adjuntoManualTecnico==''">
+                    <span class="sg sg-software-des icono"></span>
+                    <span class="text" ng-hide="publico" title="{{SoftwarePersonal.adjuntoManualTecnico.nombre | underscoreless}}">Manual t&eacute;cnico</span>
+                    <a href="/Descargas.html#/q/{{SoftwarePersonal.adjuntoManualTecnico.adjuntoId | encriptar}}"
+                       target="_blank" ng-show="publico" class="alinea" title="{{SoftwarePersonal.adjuntoManualTecnico.nombre | underscoreless}}">
+                        Manual t&eacute;cnico
+                    </a>
+                </label>
+                <label class="cont col-xs-12" ng-hide="SoftwarePersonal.adjuntoCodigoFuente==null || SoftwarePersonal.adjuntoCodigoFuente==''">
+                    <span class="sg sg-software-des icono"></span>
+                    <span class="text" ng-hide="publico" title="{{SoftwarePersonal.adjuntoCodigoFuente.nombre | underscoreless}}">C&oacute;digo fuente </span>
+                    <a href="/Descargas.html#/q/{{SoftwarePersonal.adjuntoCodigoFuente.adjuntoId | encriptar}}"
+                       target="_blank" ng-show="publico" class="alinea" title="{{SoftwarePersonal.adjuntoCodigoFuente.nombre | underscoreless}}">
+                        C&oacute;digo fuente
+                    </a>
+                </label>
+
+
+
+
+                <label class="tit col-xs-12">
+                    El control de acceso a los archivos es de tipo
+                </label>
+                <label class="cont col-xs-12">
+                    {{SoftwarePersonal.tipoAccesoCat.nombre}}
+                </label>
+                <div class="col-xs-12" ng-hide="SoftwarePersonal.estadoFlujoId==8">
+                    <button ng-hide="publico || solicitudExistente" type="button"
+                            ng-click="solicitarAcceso()" class="btn btn-warning">
+                        <font class="fa fa-lock"></font> Solicitar Acceso
+                    </button>
+                </div>
+                <div class="col-xs-12" ng-hide="SoftwarePersonal.estadoFlujoId==8">
+                    <div class="alert informacion" ng-show="solicitudExistente">
+                        <span class="glyphicon glyphicon-info-sign"></span><strong> Existe </strong> una solicitud de acceso en proceso
+                    </div>
+                    <div class="alert alert-info" ng-show="autorizado">
+                        Usuario <strong>autorizado </strong> para ver el contenido
+                    </div>
+
+                </div>
+
+
+
+                <!--
+                <div class="col-xs-12" ng-hide="SoftwarePersonal.estadoFlujoId==8">
+                   <button ng-show="jefeHiperonimo || esAutor" type="button" ng-click="setGlobalID(SoftwarePersonal.softwarePersonalId)"
+                            ui-sref="SoftwarePersonalEdit" class="btn btn-warning">
+                        <span class="glyphicon glyphicon-pencil"></span> Editar
+                    </button>
+                </div>
+                -->
+                <!--<div  class="cont col-xs-12">
+                <div class="col-xs-12 alert informacion">
+                    Estado : {{SoftwarePersonal.estadoFlujo.descripcion}}
+                </div>
+
+                </div>-->
+
+            </div>
+
+        </div>
+
+
+
+    </div>
+
+
+    <div class="row">
+        <div class="col-xs-12">
+            <button type="button" ng-click="globalRegresar()" class="btn btn-primary">
+                <span class="fa fa-arrow-left"></span> Regresar
+            </button>
+
+           
+
+            <button ng-show="EsAdministrador" title="Editar"
+                    ng-click="setGlobalID(SoftwarePersonal.softwarePersonalId)"
+                    ui-sref="SoftwarePersonalAdminEdit"
+                    class="btn btn-warning">
+                <i class="glyphicon glyphicon-pencil"> </i> Actualizar
+            </button>
+
+        </div>
+    </div>
+   
+</div>
+<!-- end page content -->

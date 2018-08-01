@@ -1,0 +1,84 @@
+﻿<div ng-show="ITFPublico || itf.itFgeneral.accesoTipo==1">
+    <div class="col-xs-12">
+
+        <div class="x_title">
+            <h2>Evaluaciones</h2>
+            <div class="clearfix"></div>
+        </div>
+
+
+        <div ng-show="itf.evaluaciones==null || itf.evaluaciones.length === 0" class="alert advertencia">
+            No hay informaci&oacute;n disponible
+        </div>
+
+        <div ng-show="itf.evaluaciones!=null && itf.evaluaciones.length > 0">
+            <div ng-hide="itf.evaluaciones.length === 0">
+
+                <table id="MTevaluaciones" datatable="ng" dt-options="dtOptions"
+                       class="table table-condensed table-hover" width="100%">
+                    <thead>
+                        <tr>
+                            <th>N&uacute;mero de empleado</th>
+                            <th>Nombre de empleado</th>
+                            <th>Calificaci&oacute;n</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="e in itf.evaluaciones">
+                            <td ng-click="openProfile(e.personalProyecto.persona.clavePersona)" title="Detalle de empleado" class="linkTabla">{{e.personalProyecto.persona.clavePersona}}</td>
+                            <!--<td>{{e.personalProyecto.persona.clavePersona}}</td>-->
+                            <td>{{e.personalProyecto.persona.nombreCompleto}}</td>
+                            <td>
+                                <div ng-show="esJefeHiperonimo || fromAdminMT || e.personalProyecto.clavePersona==authentication.userprofile.clavePersona">
+                                    <select name="califPer{{e.personalProyecto.persona.clavePersona}}" ng-model="e.califPer"
+                                            class="form-control" ng-required="required"
+                                            ng-options="e.calificacionPersonalId as e.nombre  for e in CalificacionPersonal"
+                                            disabled="disabled">
+                                        <option value="">Seleccione...</option>
+                                    </select>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+
+
+            </div>
+        </div>
+
+
+
+
+        <div class="row">&nbsp;</div>
+    </div>
+
+
+
+    <!--<div class="form-group">
+        <label class="control-label col-md-3 col-sm-3 col-xs-12">
+            &nbsp;
+        </label>
+        <div class="col-md-6 col-sm-6 col-xs-12">
+            <div class="row col-xs-6">
+                <button class="btn btn-block btn-info" ng-click="datoscompletos(4,'ITFdetalles.leccionesAprend')">
+                    
+                    {{txtGuardar}}
+                </button>
+            </div>
+        </div>
+    </div>-->
+
+
+
+</div>
+
+<div class="alert informacion" ng-show="!permisoAccesoVigente && ITFPublico==false">
+
+
+    <div class="form-group">
+        Para acceder al contenido de est&aacute; secci&oacute;n <strong>deber&aacute; solicitar acceso a este ITF</strong>
+    </div>
+
+
+</div>

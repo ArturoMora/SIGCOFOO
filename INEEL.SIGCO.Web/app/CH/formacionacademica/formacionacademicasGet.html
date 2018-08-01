@@ -1,0 +1,64 @@
+﻿<div data-ng-show="authentication.isAuth">
+    <div ng-hide="registrosfa.length >= 0">
+        <img src="images/cargando.gif" />
+    </div>
+    <div class="row">
+        <div class="col-md-12 col-xs-12">
+            <div ng-show="registrosfa.length === 0" class="alert advertencia">
+                No hay registros de formaci&oacute;n acad&eacute;mica.
+            </div>
+            <div ng-show="registrosfa.length > 0">
+                <table id="CHformacionacademicasGet" class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" datatable="ng" width="100%"
+                       dt-options="dtOptions">
+                    <thead>
+                        <tr>
+                            <th class="ng-hide">Ordenamiento </th>
+                            <th data-priority="1">Grado académico</th>
+                            <th data-priority="2">Institución</th>
+                            <th data-priority="2">Carrera</th>
+                            <th>Estado registro </th>
+                            <th>Fecha validación</th>
+                            <th data-priority="1">Opciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="fa in registrosfa">
+                            <td class="ng-hide">{{fa.gradoAcademico.secuencia}}</td>
+                            <td ng-click="$event.stopPropagation();" ui-sref="formaciondetail({id:fa.formacionAcademicaId})" title="Detalle" class="linkTabla">{{fa.gradoAcademico.descripcion}}</td>
+                            <td>{{fa.institucion.descripcion}}</td>
+                            <td>{{fa.carrera.descripcion}}</td>
+                            <td>{{fa.estadoFlujo.descripcion}}</td>
+                            <td>{{ fa.fechaValidacion === null ? 'Dato no disponible' :fa.fechaValidacion | date:"dd/MM/yyyy"}}</td>
+                            <td class="text-center">
+                                <a ng-if="idRol==1" ng-click="setGlobalID(fa.formacionAcademicaId);$event.stopPropagation();"
+                                   ui-sref="FormacionAcademicaDetailsAdmin({id:fa.formacionAcademicaId, id2: 1})" title="Aprobar registro" class="btn btn-warning">
+                                    <i class="glyphicon glyphicon-pencil"></i>
+                                </a>
+                                <div ng-if="fa.estadoFlujoId==1 || editarGestion==1">
+                               
+                                    <a ng-if="idRol!=1" class="btn btn-warning" ng-click="setGlobalID(fa.formacionAcademicaId); $event.stopPropagation();"
+                                       ui-sref="formacionedit"
+                                       title="Editar">
+                                        <i class="glyphicon glyphicon-pencil"></i>
+                                    </a>
+                                    <a class="btn btn-danger" ng-if="fa.fechaValidacion === null" title="Eliminar" ng-click="open(fa)">
+                                        <i class="glyphicon glyphicon-trash"></i>
+                                    </a>
+                                </div>
+                                <div ng-if="fa.estadoFlujoId==3">
+                                    <a ng-if="idRol!=1" ng-really-message="Está a punto de acceder a un registro 'Aceptado', si modifica algún atributo deberá ser validado nuevamente. ¿Desea continuar?" ng-really-click="setGlobalID(fa.formacionAcademicaId);$event.stopPropagation();navegador();" title="Editar" class="btn btn-warning">
+                                        <i class="glyphicon glyphicon-pencil"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <!--registrosfa:{{registrosfa | json}}-->
+            </div>
+            <a ng-show="registrosfa.length >= 0" type="button" ng-click="$event.stopPropagation();" ui-sref="formacionadd" class="btn btn-success">
+                <span class="glyphicon glyphicon-plus"></span> Agregar
+            </a>
+        </div>
+    </div>
+</div>

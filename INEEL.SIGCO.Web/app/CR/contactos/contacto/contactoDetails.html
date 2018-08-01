@@ -1,0 +1,107 @@
+<div class="vista">
+    <div class="page-title">
+        <div class="title_left">
+            <ol class="breadcrumb miga">
+                <li><i class="disabled fa fa-cogs"></i> <a ui-sref="contactosGet">Administraci&oacute;n/Cat&aacute;logos/Contactos</a></li>
+                <li class="active">Detalles</li>
+            </ol>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title sin-desborde">
+                    <h1 class="detalle">{{(contacto.tituloPersona !== null ? contacto.tituloPersona.nombre+ ' ' : '')+ contacto.nombreCompleto}}</h1>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content sin-desborde">
+
+                    <div class="col-md-3 col-sm-3 col-xs-12 profile_left">
+                        <div ng-include="'app/CR/contactos/contacto/contactoComun.html'">
+                        </div>
+                    </div>
+                    <div class="col-md-9 col-sm-9 col-xs-12">
+                        <div class="" role="tabpanel" data-example-id="togglable-tabs">
+                            <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
+                                <li role="presentation" class={{active2}}>
+                                    <a ng-click="tab = 2;newTAB()" data-togle="tab" role="tab" aria-expanded="true" style="cursor: pointer">Educaci&oacute;n académica</a>
+                                </li>
+                                <li role="presentation" class="{{active3}}">
+                                    <a ng-click="tab = 3;newTAB()" data-togle="tab" role="tab" id="profile-tab" aria-expanded="false" style="cursor: pointer">Puestos ocupados</a>
+                                </li>
+                            </ul>
+                            <div ng-show="tab == 2" class="tab-content">
+                                <div ng-show="perfiles.length === 0" class="alert advertencia">
+                                    No hay perfiles registrados para el contacto
+                                </div>
+                                <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="home-tab">
+                                    <ul class="messages">
+                                        <li ng-repeat="p in perfiles">
+                                            <div style="position: absolute; left: 4%">
+                                                <a class="fa fa fa-graduation-cap"></a>
+                                            </div>
+                                            <div class="message_date">
+                                                <h3 class="date text-info">Del {{p.fechaInicio | date:'yyyy'}} a {{p.fechaFinal | date:'yyyy'}}</h3>
+                                            </div>
+                                            <div class="message_wrapper">
+                                                <h4 class="heading">{{p.gradoAcademico.descripcion}}</h4>
+                                                <blockquote class="message">Carrera: {{p.carrera.descripcion}}</blockquote>
+                                                <blockquote class="message">Especialidad: {{p.especialidad}}</blockquote>
+                                                <blockquote class="message">Instituci&oacute;n: {{p.institucion.descripcion}}</blockquote>
+                                                <blockquote class="message">Pa&iacute;s: {{p.pais.descripcion}}</blockquote>
+                                                <br />
+                                                <p class="url">
+                                                </p>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div ng-show="tab == 3" class="tab-content">
+                                <div ng-show="puestos.length === 0" class="alert advertencia">
+                                    No hay puestos registrados para el contacto
+                                </div>
+                                <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="home-tab">
+                                    <ul class="messages">
+                                        <li ng-repeat="p in puestos">
+                                            <div class="col-md-8 col-sm-8 col-lg-8">
+                                                <div style="position: absolute; left: 4%">
+                                                            <a class="fa fa-briefcase user-profile-icon"></a>
+                                                </div>
+                                                <div class="message_wrapper">
+                                                        <h4 class="heading">{{p.empresa.nombreEmpresa}} <small>{{p.unidad.nombreUnidad}}</small></h4>
+                                                        <blockquote class="message">Puesto: {{p.puesto}}</blockquote>
+                                                        <br />
+                                                        <p class="url">
+                                                        </p>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 col-sm-4 col-lg-4">
+                                                <h3 class="detalle_subtitulo">Del {{p.fechaInicio | date:'dd-MMM-yyyy'}} a {{p.fechaFinal==null? 'la actualidad' : p.fechaFinal | date:'MMM-yyyy'}}</h3>
+                                                <label class="label-control">
+                                                    {{p.antiguedad | formatoFecha : p.antiguedad }}
+                                                </label>
+                                            </div>
+                                            <!-- <div class="message_date">
+                                                <h3 class="date text-info">Del {{p.fechaInicio | date:'MM-yyyy'}} a {{p.fechaFinal==null? 'la actualidad' : p.fechaFinal | date:'MM-yyyy'}}</h3>
+                                            </div> -->
+                                            
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="row">
+                <button type="submit" class="btn btn-primary" ng-click="globalRegresar()">
+                    <span class="fa fa-arrow-left"></span> Regresar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

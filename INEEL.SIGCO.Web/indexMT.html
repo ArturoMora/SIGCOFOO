@@ -1,0 +1,546 @@
+﻿<!DOCTYPE html>
+<html lang="es-mx" ng-app="ineelMT">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta http-equiv="Expires" content="-1">
+    <meta http-equiv="Last-Modified" content="0">
+    <meta http-equiv="Cache-Control" content="no-cache, mustrevalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+
+    <title>Memoria tecnol&oacute;gica</title>
+    <!-- build:css Content/stylesMT.min.css -->
+    <!-- inject:css -->
+    <!-- Bootstrap -->
+    <link href="vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="vendors/nprogress/nprogress.css" rel="stylesheet">
+    <!-- iCheck -->
+    <link href="vendors/iCheck/skins/flat/green.css" rel="stylesheet">
+    <!-- bootstrap-progressbar -->
+    <link href="vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
+    <!-- JQVMap -->
+    <link href="vendors/jqvmap/dist/jqvmap.min.css" rel="stylesheet" />
+    <!-- bootstrap-daterangepicker -->
+    <link href="vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+    <!-- Custom Theme Style -->
+    <link href="Content/custom.css" rel="stylesheet">
+
+
+
+    <!--Mensajes Toastr-->
+    <link href="Content/toastr.css" rel="stylesheet" />
+    <!--Tablas responsivas-->
+    <link href="Content/EstilosPropios/jquery.dataTablesINEEL.css" rel="stylesheet" />
+    <link href="Content/DataTables/css/dataTables.responsive.css" rel="stylesheet" />
+    <!--Estilos propios-->
+    <link href="Content/EstilosPropios/StyleAuthorize.css" rel="stylesheet" />
+    <link href="Content/EstilosPropios/StyleModulos.css" rel="stylesheet" />
+
+    <script src="Scripts/jquery.highlight.js"></script>
+    <script src="Scripts/dataTables.searchHighlight.min.js"></script>
+    <!--Estilos propios del modulo-->
+    <link href="Content/angular-ui-tree/angular-ui-tree.css" rel="stylesheet" />
+    <link href="Content/EstilosPropios/ControlesEspeciales.css" rel="stylesheet" />
+    <link href="Content/EstilosPropios/fabForm.css" rel="stylesheet" />
+    <link href="Content/angular-block-ui.min.css" rel="stylesheet" />
+
+    <link href="Content/select2/select.min.css" rel="stylesheet" />
+    <link href="Content/select2/select2.css" rel="stylesheet" />
+    <link href="Content/select2/selectize.default.css" rel="stylesheet" />
+    <link href="Content/angucomplete-alt.css" rel="stylesheet" />
+    <link href="Content/multiple-select.min.css" rel="stylesheet" />
+
+    <!-- endinject -->
+    <!-- endbuild -->
+    <!--
+      IE8 support, see AngularJS Internet Explorer Compatibility http://docs.angularjs.org/guide/ie
+      For Firefox 3.6, you will also need to include jQuery and ECMAScript 5 shim
+    -->
+    <!--[if lt IE 9]>
+      <script src="Scripts/jquery1.11.0.js"></script>
+      <script src="Scripts/es5-shim.min.js"></script>
+      <script>
+        document.createElement('ui-select');
+        document.createElement('ui-select-match');
+        document.createElement('ui-select-choices');
+      </script>
+    <![endif]-->
+    <!--<link href="Content/dx.common.css" rel="stylesheet" />-->
+    <!-- build:js Scripts/scriptsCH.min.js -->
+    <!-- inject:js -->
+    <script src="Scripts/jquery-2.1.0.min.js"></script>
+    <script src="Scripts/jquery-ui-1.11.3.min.js"></script>
+
+    <!-- <script src="Scripts/jquery-1.9.1.js"></script>-->
+    <script src="Scripts/bootstrap.js"></script>
+
+    <!-- plantilla -->
+    <!-- FastClick -->
+    <script src="vendors/fastclick/lib/fastclick.js"></script>
+    <!-- NProgress -->
+    <script src="vendors/nprogress/nprogress.js"></script>
+    <!-- Chart.js -->
+    <script src="vendors/echarts/dist/echarts.min.js"></script>
+    <script src="vendors/Chart.js/dist/Chart.min.js"></script>
+    <!-- gauge.js -->
+    <script src="vendors/gauge.js/dist/gauge.min.js"></script>
+    <!-- bootstrap-progressbar -->
+    <script src="vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+    <!-- iCheck -->
+    <script src="vendors/iCheck/icheck.min.js"></script>
+    <!-- Skycons -->
+    <script src="vendors/skycons/skycons.js"></script>
+    <!-- Flot -->
+    <script src="vendors/Flot/jquery.flot.js"></script>
+    <script src="vendors/Flot/jquery.flot.pie.js"></script>
+    <script src="vendors/Flot/jquery.flot.time.js"></script>
+    <script src="vendors/Flot/jquery.flot.stack.js"></script>
+    <script src="vendors/Flot/jquery.flot.resize.js"></script>
+    <!-- Flot plugins -->
+    <script src="vendors/flot.orderbars/js/jquery.flot.orderBars.js"></script>
+    <script src="vendors/flot-spline/js/jquery.flot.spline.min.js"></script>
+    <script src="vendors/flot.curvedlines/curvedLines.js"></script>
+    <!-- DateJS -->
+    <script src="vendors/DateJS/build/date.js"></script>
+    <!-- JQVMap -->
+    <script src="vendors/jqvmap/dist/jquery.vmap.js"></script>
+    <script src="vendors/jqvmap/dist/maps/jquery.vmap.world.js"></script>
+    <script src="vendors/jqvmap/examples/js/jquery.vmap.sampledata.js"></script>
+
+
+    <script src="Scripts/toastr.js"></script>
+    <script src="Scripts/getorgchart-1.1/getorgchart.js"></script>
+
+
+
+
+
+    <script src="Scripts/angular.js"></script>
+    <script src="Scripts/angular-ui-router.js"></script>
+
+    <script src="Scripts/angular-animate.min.js"></script>
+    <script src="Scripts/i18n/angular-locale_es-mx.js"></script>
+    <script src="Scripts/angular-ui/ui-bootstrap-tpls.js"></script>
+    <script src="Scripts/angular-local-storage.min.js"></script>
+    <script src="Scripts/angular-block-ui.min.js"></script>
+    <script src="Scripts/angular-resource.js"></script>
+
+    <!--stilos reportes-->
+    <script src="Scripts/html2canvas.js"></script>
+    <script src="Scripts/jquery.canvasjs.min.js"></script>
+    <script src="Scripts/canvasjs.min.js"></script>
+    <!-- chart JS -->
+    <!--<script src="Scripts/node_modules/angular-chart.js/node_modules/chart.js/dist/Chart.min.js"></script>-->
+    <script src="Scripts/node_modules/angular-chart.js/dist/angular-chart.min.js"></script>
+    <!--Tablas-->
+    <script src="Scripts/DataTables/jquery.dataTables.js"></script>
+
+    <script src="Scripts/angular-datatables/angular-datatables.js"></script>
+    <script src="Scripts/DataTables/dataTables.bootstrap.js"></script>
+    <script src="Scripts/DataTables/dataTables.responsive.min.js"></script>
+    <script src="Scripts/angular-datatables/angular-datatables.js"></script>
+    <script src="Scripts/angular-datatables/angular-datatables.util.js"></script>
+    <script src="Scripts/angular-datatables/angular-datatables.options.js"></script>
+    <script src="Scripts/angular-datatables/angular-datatables.instances.js"></script>
+    <script src="Scripts/angular-datatables/angular-datatables.factory.js"></script>
+    <script src="Scripts/angular-datatables/angular-datatables.renderer.js"></script>
+    <script src="Scripts/angular-datatables/angular-datatables.directive.js"></script>
+    <script src="Scripts/DataTables/dataTables.columnFilter.js"></script>
+    <script src="Scripts/angular-datatables/plugins/columnfilter/angular-datatables.columnfilter.js"></script>
+
+    <script src="Scripts/jquery.highlight.js"></script>
+    <script src="Scripts/dataTables.searchHighlight.min.js"></script>
+
+    <script src="Scripts/aes.js"></script>
+    <script src="Scripts/mdo-angular-cryptography.js"></script>
+
+
+
+
+
+
+
+    <script src="Scripts/angular-ui-tree/angular-ui-tree.js"></script>
+    <script src="Scripts/angular-datatables/plugins/fixedcolumns/angular-datatables.fixedcolumns.js"></script>
+
+    <script src="Scripts/select2/select.min.js"></script>
+    <script src="Scripts/angular-sanitize.js"></script>
+    <script src="Scripts/bootstrap-filestyle.min.js"></script>
+    <script src="Scripts/jquery.highlight.js"></script>
+    <script src="Scripts/dataTables.searchHighlight.min.js"></script>
+    <script src="Scripts/multiple-select.min.js"></script>
+
+    <script src="Scripts/jsapiBook.js"></script>
+    <script src="Scripts/angular-messages.min.js"></script>
+    <script src="Scripts/ng-fab-form.js"></script>
+    <script src="app/_services/ineel.services.js"></script>
+    <script src="app/_services/factories/ComunDetails.js"></script>
+    <script src="Scripts/ng-tags-input.js"></script>
+    <script src="app/_services/ineel.controllers.js"></script>
+    <script src="app/vistasGenericas/directivas/directivasSIGCO.js"></script>
+    <script src="Scripts/angular-datatables/accent-neutralise.js"></script>
+
+    <script src="Scripts/globalINEEL.js"></script>
+    <script src="app/_services/factories/Comun.service.js"></script>
+    <script src="app/_services/factories/ComunCount.service.js"></script>
+    <script src="app/vistasGenericas/controllers/NotificationCtrl.js"></script>
+    <script src="app/vistasGenericas/_details/personal/controllers/PersonaProfileComun.ctrl.js"></script>
+    <script src="app/MT/appMT.js"></script>
+
+    <script src="app/MT/_services/ineel.MT.services.js"></script>
+    <script src="app/GEN/_services/ineel.GEN.services.js"></script>
+    <script src="app/vistasGenericas/buscarProyectosGEN/comunServiceProyectos.service.js"></script>
+    <script src="app/vistasGenericas/controllers/EstructuraOrganizacionalEmpresasFilterGet.ctrl.js"></script>
+
+    <script src="app/_services/factories/Descargas.js"></script>
+    <script src="app/CH/_services/factories/bitacorasolicitudes.CH.service.js"></script>
+    <script src="app/_services/factories/personas.service.js"></script>
+    <script src="app/MT/_services/factories/informetf.MT.service.js"></script>
+    <!--   <script src="app/MT/_services/factories/auth.MT.service.js"></script>-->
+    <script src="app/_services/factories/authService.js"></script>
+    <script src="app/_services/factories/menu.service.js"></script>
+    <script src="app/_services/factories/permisos.service.js"></script>
+    <script src="app/_services/factories/authInterceptorService.js"></script>
+    <script src="app/_services/factories/NuevoOC.js"></script>
+    <script src="app/MT/home/controllers/CargaControllerMT.ctrl.js"></script>
+    <script src="app/vistasGenericas/_details/proyecto/controllers/ProyectoComunDetailsGEN.ctrl.js"></script>
+    <script src="app/vistasGenericas/directivas/buscarDerechosAutorDirective/buscarDerechosAutorDirective.js"></script>
+    <!--PI-->
+    <script src="app/PI/propiedadindustrial/controllers/propiedadindustrialdetalleProyecto.ctrl.js"></script>
+    <script src="app/PI/derechosautor/controllers/derechosautordetalleProyecto.ctrl.js"></script>
+    <!--GI-->
+    <script src="app/GI/productosInnovadores/controllers/productoInnovadorDetailsProyecto.js"></script>
+
+
+    <script src="app/MT/_services/factories/informetf.MT.service.js"></script>
+    <script src="app/MT/_services/factories/CalifResultadosFinancieros.MT.service.js"></script>
+    <script src="app/MT/_services/factories/CalificacionCliente.MT.service.js"></script>
+    <script src="app/MT/_services/factories/CalificacionPersonal.MT.service.js"></script>
+    <script src="app/MT/_services/factories/PersonalProyecto.MT.service.js"></script>
+    <script src="app/MT/_services/factories/tiposoftware.MT.service.js"></script>
+    <script src="app/MT/_services/factories/Solicitudes.MT.service.js"></script>
+    <script src="app/MT/_services/factories/AdjuntoITFInsumo.MT.service.js"></script>
+
+    <script src="app/MT/home/controllers/homeMT.ctrl.js"></script>
+    <script src="app/auth/controllers/changepassword.ctrl.js"></script>
+    <script src="app/MT/informetf/controllers/informestfsGet.ctrl.js"></script>
+    <script src="app/MT/informetf/controllers/informetfAdd.ctrl.js"></script>
+    <script src="app/MT/informetf/controllers/informestfsGet.ctrl.js"></script>
+    <script src="app/vistasGenericas/buscarProyectosGEN/comunServiceProyectos.service.js"></script>
+    <script src="app/vistasGenericas/detallesProyectosGEN/controllers/proyectoDetails.GEN.ctrl.js"></script>
+    <script src="app/MT/informetf/controllers/proyectosItfGet.ctrl.js"></script>
+
+    <script src="app/CH/_services/factories/cursointerno.CH.service.js"></script>
+    <!--<script src="app/MT/_services/factories/CursosPersonal.MT.service.js"></script>-->
+    <script src="app/MT/_services/factories/SoftwarePersonal.MT.service.js"></script>
+    <script src="app/CH/cursointerno/controllers/cursointernoGet.ctrl.js"></script>
+    <script src="app/CH/cursointerno/controllers/cursointernoAdd.ctrl.js"></script>
+    <script src="app/CH/cursointerno/controllers/cursointernoEdit.ctrl.js"></script>
+    <script src="app/CH/cursointerno/controllers/cursosPersonalDetails.ctrl.js"></script>
+
+    <!--<script src="app/MT/CursosPersonal/controllers/cursosPersonalAdd.ctrl.js"></script>
+    <script src="app/MT/CursosPersonal/controllers/cursosPersonalDetails.ctrl.js"></script>
+    <script src="app/MT/CursosPersonal/controllers/cursosPersonalEdit.ctrl.js"></script>
+    <script src="app/MT/CursosPersonal/controllers/cursosPersonalGet.ctrl.js"></script>-->
+
+    <script src="app/MT/tipoCurso/controllers/tipoCursoAdd.ctrl.js"></script>
+    <script src="app/MT/tipoCurso/controllers/tipoCursoEdit.ctrl.js"></script>
+    <script src="app/MT/tipoCurso/controllers/tipoCursoGet.ctrl.js"></script>
+    <script src="app/MT/tipoCurso/controllers/tipocursoDetails.ctrl.js"></script>
+    <script src="app/MT/SoftwarePersonal/controllers/SoftwarePersonal.ctrl.js"></script>
+    <script src="app/MT/SoftwarePersonal/controllers/SoftwarePersonalAdd.ctrl.js"></script>
+    <script src="app/MT/SoftwarePersonal/controllers/SoftwarePersonalDetails.ctrl.js"></script>
+    <script src="app/MT/SoftwarePersonal/controllers/SoftwarePersonalEdit.ctrl.js"></script>
+    <script src="app/MT/SoftwarePersonal/controllers/SoftwarePersonalGet.ctrl.js"></script>
+    <script src="app/MT/tipoSoftware/controllers/tiposoftwareGet.ctrl.js"></script>
+    <script src="app/MT/tipoSoftware/controllers/tiposoftwareAdd.ctrl.js"></script>
+    <script src="app/MT/tipoSoftware/controllers/tiposoftwareEdit.ctrl.js"></script>
+    <script src="app/MT/tipoSoftware/controllers/tiposoftwareDetails.ctrl.js"></script>
+    <script src="app/MT/_services/factories/tipocurso.MT.service.js"></script>
+    <script src="app/MT/tipoCurso/controllers/tipocursoAdd.ctrl.js"></script>
+    <script src="app/MT/tipoCurso/controllers/tipocursoGet.ctrl.js"></script>
+    <script src="app/MT/tipoCurso/controllers/tipocursoEdit.ctrl.js"></script>
+    <script src="app/MT/_services/factories/califResultadosFinancieros.MT.service.js"></script>
+    <script src="app/MT/califResultadosFinancieros/controllers/califResultadosFinancierosAdd.ctrl.js"></script>
+    <script src="app/MT/califResultadosFinancieros/controllers/CalifResultadosFinancierosGet.ctrl.js"></script>
+    <script src="app/MT/califResultadosFinancieros/controllers/califResultadosFinancierosEdit.ctrl.js"></script>
+    <script src="app/MT/califResultadosFinancieros/controllers/CalifResultadosFinancierosDetails.ctrl.js"></script>
+    <script src="app/MT/_services/factories/CalificacionCliente.MT.service.js"></script>
+    <script src="app/MT/calificacionCliente/controllers/calificacionclienteAdd.ctrl.js"></script>
+    <script src="app/MT/calificacionCliente/controllers/calificacionclienteEdit.ctrl.js"></script>
+    <script src="app/MT/calificacionCliente/controllers/calificacionclienteGet.ctrl.js"></script>
+    <script src="app/MT/calificacionCliente/controllers/calificacionclienteDetails.ctrl.js"></script>
+    <script src="app/MT/_services/factories/CalificacionPersonal.MT.service.js"></script>
+    <script src="app/MT/calificacionPersonal/controllers/calificacionpersonalAdd.ctrl.js"></script>
+    <script src="app/MT/calificacionPersonal/controllers/calificacionpersonalEdit.ctrl.js"></script>
+    <script src="app/MT/calificacionPersonal/controllers/calificacionpersonalGet.ctrl.js"></script>
+    <script src="app/MT/calificacionPersonal/controllers/calificacionpersonalDetails.ctrl.js"></script>
+
+    <script src="app/MT/_services/factories/tipoInsumo.MT.service.js"></script>
+    <script src="app/MT/tipoInsumo/controllers/tipoinsumoGet.ctrl.js"></script>
+    <script src="app/MT/tipoInsumo/controllers/tipoinsumoAdd.ctrl.js"></script>
+    <script src="app/MT/tipoInsumo/controllers/tipoinsumoEdit.ctrl.js"></script>
+
+    <!--<script src="app/MT/_services/factories/InformeBecario.service.js"></script>
+    <script src="app/MT/informetf/controllers/InformeBecario.ctrl.js"></script>-->
+    <!-- Plugin para el autocompletado-->
+    <script src="Scripts/angucomplete-alt.js"></script>
+    <script src="app/GEN/_services/catalogos/notificacion.GEN.service.js"></script>
+
+    <!--Beccario externo=Informe del becario-->
+    <!-- <script src="app/MT/_services/factories/InformeBecario.MT.service.js"></script> -->
+    <!-- <script src="app/MT/InformeBecario/controllers/InformeBecarioAdd.ctrl.js"></script> -->
+    <!-- <script src="app/MT/InformeBecario/controllers/InformeBecarioDetails.ctrl.js"></script> -->
+    <!-- <script src="app/MT/InformeBecario/controllers/InformeBecarioEdit.ctrl.js"></script> -->
+    <!-- <script src="app/MT/InformeBecario/controllers/InformeBecarioGet.ctrl.js"></script> -->
+    <!-- Busquedas genericas-->
+    <script src="app/vistasGenericas/_services/buscarPersonas.MT.service.js"></script>
+    <script src="app/vistasGenericas/controllers/PersonasFilterGet.ctrlGEN.js"></script>
+    <script src="app/vistasGenericas/controllers/ProyectosFilterGet.ctrlGEN.js"></script>
+    <script src="app/vistasGenericas/buscarProyectosGEN/buscarProyectosPorSubprograma.service.js"></script>
+    <script src="app/vistasGenericas/buscarProyectosGEN/proyectosFilterSubprograma.ctrl.js"></script>
+    <!-- FIN de Busquedas genericas-->
+    <!-- Busquedas-->
+    <script src="app/MT/BuscarInsumos/controllers/InsumosFilterGet.ctrlMT.js"></script>
+    <script src="app/MT/BuscarInsumos/controllers/buscarInsumoDetails.ctrl.js"></script>
+    <script src="app/MT/_services/factories/buscarInsumos.MT.service.js"></script>
+    <script src="app/MT/_services/factories/buscarLA.MT.service.js"></script>
+    <script src="app/MT/BuscarLeccionesAprendidas/controllers/buscarLAcapDetails.ctrl.js"></script>
+    <script src="app/MT/BuscarLeccionesAprendidas/controllers/LAFilterGet.ctrlMT.js"></script>
+    <script src="app/MT/_services/factories/buscarArticulos.MT.service.js"></script>
+    <script src="app/MT/BuscarArticulos/controllers/ArticulosFilterGet.ctrlMT.js"></script>
+    <script src="app/MT/BuscarArticulos/controllers/buscarArticulosDetails.ctrl.js"></script>
+    <script src="app/MT/_services/factories/buscarCapitulos.MT.service.js"></script>
+    <script src="app/MT/BuscarCapitulos/controllers/CapitulosFilterGet.ctrlMT.js"></script>
+    <script src="app/MT/BuscarCapitulos/controllers/buscarCapitulosDetails.ctrl.js"></script>
+    <script src="app/CH/_services/factories/ponencia.CH.service.js"></script>
+    <!--<script src="app/MT/_services/factories/buscarPonencias.MT.service.js"></script>-->
+    <script src="app/MT/BuscarPonencias/controllers/PonenciasFilterGet.ctrlMT.js"></script>
+    <script src="app/MT/BuscarPonencias/controllers/buscarPonenciasDetails.ctrl.js"></script>
+    <script src="app/MT/_services/factories/buscarPonencias.MT.service.js"></script>
+    <script src="app/vistasGenericas/controllers/listacongresos.ctrl.js"></script>
+    <script src="app/MT/_services/factories/buscarCursos.MT.service.js"></script>
+    <script src="app/MT/BuscarCursos/controllers/CursosFilterGet.ctrlMT.js"></script>
+    <script src="app/MT/BuscarCursos/controllers/buscarCursosDetails.ctrl.js"></script>
+    <!--Becarios-->
+    <script src="app/MT/_services/factories/buscarInformesBecarios.MT.service.js"></script>
+    <script src="app/MT/BuscarInformesBecarios/controllers/old/InformesBecariosFilterGet.ctrlMT.js"></script>
+    <script src="app/MT/BuscarInformesBecarios/controllers/old/buscarInformesBecariosDetails.ctrl.js"></script>
+
+    <script src="app/MT/BuscarInformesBecarios/controllers/ConsultaInformesBecarios.ctrl.js"></script>
+
+    <script src="app/MT/BuscarInformesBecarios/controllers/ConsultaBecariosInternosGet.ctrl.js"></script>
+    <script src="app/MT/BuscarInformesBecarios/controllers/ConsultaBecariosInternosDetails.ctrl.js"></script>
+
+    <script src="app/MT/BuscarInformesBecarios/controllers/ConsultaBecariosExternosGet.ctrl.js"></script>
+    <script src="app/MT/BuscarInformesBecarios/controllers/ConsultaBecariosExternosDetails.ctrl.js"></script>
+
+    <!--End Becarios-->
+    <!--Articulos, Ponencias y Capítulos de libros-->
+    <!--<script src="app/MT/_services/factories/ponencia.MT.service.js"></script>-->
+    <!--<script src="app/MT/ponencia/controllers/ponenciaAdd.ctrl.js"></script>
+    <script src="app/MT/ponencia/controllers/ponenciaDetails.ctrl.js"></script>
+    <script src="app/MT/ponencia/controllers/ponenciaEdit.ctrl.js"></script>
+    <script src="app/MT/ponencia/controllers/ponenciaGet.ctrl.js"></script>-->
+
+    <script src="app/CH/ponencia/controllers/ponenciaGet.ctrl.js"></script>
+    <script src="app/CH/ponencia/controllers/ponenciaAdd.ctrl.js"></script>
+    <script src="app/CH/ponencia/controllers/ponenciaEdit.ctrl.js"></script>
+    <script src="app/CH/ponencia/controllers/ponenciaDetails.ctrl.js"></script>
+
+    <!--<script src="app/MT/_services/factories/publicacion.MT.service.js"></script>-->
+    <script src="app/CH/_services/factories/publicacion.CH.service.js"></script>
+
+    <script src="app/CH/publicacion/controllers/publicacionAdd.ctrl.js"></script>
+    <script src="app/CH/publicacion/controllers/publicacionEdit.ctrl.js"></script>
+    <script src="app/CH/publicacion/controllers/publicacionDetails.ctrl.js"></script>
+
+    <!--<script src="app/MT/publicacion/controllers/publicacionAdd.ctrl.js"></script>
+    <script src="app/MT/publicacion/controllers/publicacionEdit.ctrl.js"></script>-->
+    <!--<script src="app/MT/publicacion/controllers/publicacionDetails.ctrl.js"></script>-->
+    <!--<script src="app/MT/publicacion/controllers/publicacionGet.ctrl.js"></script>-->
+    <script src="app/CH/publicacion/controllers/publicacionGet.ctrl.js"></script>
+
+    <script src="app/vistasGenericas/controllers/listarevistas.ctrl.js"></script>
+    <script src="app/CH/_services/factories/capitulo.CH.service.js"></script>
+    <script src="app/CH/capitulos/controllers/capitulosAdd.ctrl.js"></script>
+    <script src="app/CH/capitulos/controllers/capitulosDetails.ctrl.js"></script>
+    <script src="app/CH/capitulos/controllers/capitulosEdit.ctrl.js"></script>
+    <script src="app/CH/capitulos/controllers/capitulosGet.ctrl.js"></script>
+    <!--<script src="app/MT/_services/factories/capitulos.MT.service.js"></script>
+    <script src="app/MT/capitulos/controllers/capitulosAdd.ctrl.js"></script>
+    <script src="app/MT/capitulos/controllers/capitulosDetails.ctrl.js"></script>
+    <script src="app/MT/capitulos/controllers/capitulosEdit.ctrl.js"></script>
+    <script src="app/MT/capitulos/controllers/capitulosGet.ctrl.js"></script>-->
+    <!--Solicitud pendiente-->
+    <script src="app/MT/_services/factories/EstadoSolicitud.MT.service.js"></script>
+    <script src="app/MT/_services/factories/SolicitudInsumo.MT.service.js"></script>
+    <script src="app/MT/SolicitudInsumo/controllers/SolicitudInsumoGet.ctrl.js"></script>
+    <!--Catalogo-->
+    <script src="app/MT/EstadoSolicitud/controllers/EstadoSolicitudAdd.ctrl.js"></script>
+    <script src="app/MT/EstadoSolicitud/controllers/EstadoSolicitudDetails.ctrl.js"></script>
+    <script src="app/MT/EstadoSolicitud/controllers/EstadoSolicitudGet.ctrl.js"></script>
+    <script src="app/MT/EstadoSolicitud/controllers/EstadoSolicitudEdit.ctrl.js"></script>
+
+    <script src="app/MT/_pruebas/controllers/PersonasFilter.ctrl.js"></script>
+    <script src="app/MT/_pruebas/controllers/ProyectosGet.ctrl.js"></script>
+    <!--<script src="app/MT/_pruebas/controllers/EstructuraOrganizacionalGet.ctrl.js"></script>-->
+    <!--<script src="app/vistasGenericas/controllers/EstructuraOrganizacionalFilterGet.ctrlMT.js"></script>-->
+    <script src="app/vistasGenericas/controllers/EstructuraOrganizacionalFilterGet.ctrl.js"></script>
+    <script src="app/MT/informetf/controllers/vocabularioListGet.ctrl.js"></script>
+    <script src="app/MT/informetf/itfDetails/controllers/informetfDetails.ctr.js"></script>
+
+    <script src="app/vistasGenericas/controllers/BitacoraMovimientoGet.ctrlMT.js"></script>
+    <script src="app/MT/solicitudesMT/controllers/SolicitudesMT.ctrl.js"></script>
+    <script src="app/MT/solicitudesMT/controllers/SolicitudesAdminMT.ctr.js"></script>
+    <script src="app/MT/informetf/itfDetails/controllers/solicitudAccesoITF.modal.ctrl.js"></script>
+    <script src="app/MT/informetf/controllers/solicitudAccesoITF.ctrl.js"></script>
+    <script src="app/MT/solicitudesMT/controllers/DenegarRechazarAccesoITF.modal.ctrl.js"></script>
+    <script src="app/MT/GenericoMT/controller/SolicitudConJustificacionMT.modal.ctrl.js"></script>
+    <script src="app/MT/Libros/controller/LibrosRawGet.ctrl.js"></script>
+    <script src="app/MT/informetf/controllers/nuevoItfGet.ctrl.js"></script>
+    <script src="app/vistasGenericas/SolicitudAcceso/controllers/SolicitudesAcceso.ctrl.js"></script>
+    <script src="app/MT/informetf/controllers/participacionMTCtrlAdd.js"></script>
+    <script src="app/MT/informetf/controllers/detalleInsumoITF.ctrl.js"></script>
+    <script src="app/MT/informetf/controllers/editarInsumoITF.ctrl.js"></script>
+    <script src="app/vistasGenericas/_details/proyecto/controllers/ProyectoDetailsComun.ctrl.js"></script>
+    <script src="app/vistasGenericas/SolicitudAcceso/controllers/BitacoraSolicitudesAcceso.ctrl.js"></script>
+    <script src="app/vistasGenericas/controllers/ConfirmacionContinue.js"></script>
+    <script src="app/CH/BitacoraSolicitudes/controllers/bitacorasolicitudesDetails.ctrl.js"></script>
+    <script src="app/MT/_services/factories/IndicadoresMTService.js"></script>
+
+
+    <script src="Scripts/dom-to-image.js"></script>
+    <script src="Scripts/Canvas2Image.js"></script>
+    <script src="Scripts/jspdf.min.js"></script>
+    <script src="Scripts/jspdf.plugin.autotable.src.js"></script>
+
+    <script src="Scripts/angular.easypiechart.min.js"></script>
+
+    <script src="app/vistasGenericas/directivas/echartGraph.js"></script>
+    <script src="app/_services/factories/ExportJsPDF.js"></script>
+
+    <!-- endinject -->
+    <!-- endbuild -->
+</head>
+
+<body class="nav-md" data-ng-controller="indexControllerMT">
+    <div class="info-servidor-desplegado">{{'' | getInfoServidorDesplegado}}</div>
+    <div class="container body">
+        <div class="main_container">
+            <div class="col-md-3 left_col">
+                <div class="left_col scroll-view bg-gradient-menuv">
+                    <div class="navbar nav_title bg-gradient-menuv" style="border: 0;">
+                        <a href="sigco.html" class="site_title">
+                            <img src="images/logo_sigco.png" />
+                            <span class="titLogo">&nbsp;SIGCO</span>
+                        </a>
+                    </div>
+                    <div class="clearfix"></div>
+
+                    <br />
+
+
+                    <!-- sidebar menu -->
+                    <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+                        <div class="menu_section">
+                            <h3>&nbsp;</h3>
+                            <ul class="nav side-menu">
+                                <li ng-repeat="opcion in funciones" ng-if="opcion.funcion.nivel==0" ng-show="opcion.funcion.idModulo==modulo">
+                                    <a ng-if="opcion.funcion.children.length ==0" ui-sref="{{opcion.funcion.state}}">
+                                        <i class="{{opcion.funcion.claseIcono}}"> </i>&nbsp;{{opcion.funcion.nombre}}
+                                    </a>
+
+                                    <a ng-if="opcion.funcion.children.length > 0">
+                                        <i class="{{opcion.funcion.claseIcono}}"></i>
+                                        &nbsp;{{opcion.funcion.nombre}}<span class="fa fa-chevron-down"></span>
+                                    </a>
+                                    <ul ng-if="opcion.funcion.children.length > 0 " class="nav child_menu">
+                                        <li ng-repeat="opc in funciones" ng-if="opc.funcion.nivel==1 && opc.funcion.idPadre == opcion.funcion.funcionesId">
+                                            <a ng-if="opc.funcion.children.length ==0" ui-sref="{{opc.funcion.state}}" class="child"> &nbsp;{{opc.funcion.nombre}}</a>
+
+                                            <a ng-if="opc.funcion.children.length > 0" class="child">
+                                                &nbsp;{{opc.funcion.nombre}}<span class="fa fa-chevron-down"></span>
+                                            </a>
+                                            <ul class="nav child_menu" ng-if="opc.funcion.children.length > 0 ">
+                                                <li ng-repeat="opc3 in funciones" ng-if="opc3.funcion.nivel==2 && opc3.funcion.idPadre == opc.funcion.funcionesId">
+
+                                                    <a ui-sref="{{opc3.funcion.state}}" ng-show="opc3.funcion.idModulo ==modulo"> &nbsp;{{opc3.funcion.nombre}}</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+
+                            </ul>
+                            <!--funciones : {{funciones | json}}-->
+                        </div>
+
+
+
+                    </div>
+                    <!-- /sidebar menu -->
+
+                </div>
+            </div>
+            <!-- top navigation -->
+            <div class="top_nav ">
+                <div class="nav_menu">
+                    <nav class="" role="navigation">
+                        <div class="nav toggle">
+                            <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+                        </div>
+                        <div ng-include="'app/vistasGenericas/header/profileNotification.html'">
+                        </div>
+                    </nav>
+                </div>
+                <div class="toolbar-top visible-xs">
+                    <div ng-include="'app/vistasGenericas/header/navegacionpormodulo.html'">
+                    </div>
+                </div>
+            </div>
+            <!-- /top navigation -->
+            <!-- page content -->
+            <div role="main" class="right_col">
+                <!-- top tiles -->
+                <div ui-view>
+
+                </div>
+            </div>
+            <!-- /page content -->
+            <!-- footer content -->
+            <footer>
+                <div class="pull-right">
+                    SIGCO3
+                </div>
+                <div class="clearfix"></div>
+            </footer>
+            <!-- /footer content -->
+        </div>
+    </div>
+
+    <!-- Custom Theme Scripts -->
+    <script src="Scripts/custom.js"></script>
+    <!-- endPlantilla-->
+    <!--scripts para reportes-->
+    <script src="Scripts/DataTables/dataTables.buttons.js"></script>
+    <script src="Scripts/DataTables/buttons.bootstrap.js"></script>
+    <script src="Scripts/angular-datatables/plugins/buttons/angular-datatables.buttons.js"></script>
+    <script src="Scripts/DataTables/buttons.html5.js"></script>
+    <script src="Scripts/jszip.min.js"></script>
+    <script src="vendors/pdfmake/build/pdfmake.min.js"></script>
+    <script src="vendors/pdfmake/build/vfs_fonts.js"></script>
+    <script src="Scripts/DataTables/buttons.print.js"></script>
+    <script src="Scripts/DataTables/buttons.flash.js"></script>
+    <script src="Scripts/DataTables/buttons.colVis.js"></script>
+
+</body>
+
+</html>

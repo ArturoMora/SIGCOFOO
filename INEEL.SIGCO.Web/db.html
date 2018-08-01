@@ -1,0 +1,187 @@
+﻿
+<!DOCTYPE html>
+<html ng-app>
+<head>
+    <meta charset="utf-8">
+    <title>Angular JS Database Document</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta http-equiv="Content-Type" content="text/html; charset=big5">
+    <meta charset="big5">
+    <link href="Scripts/angular-1.1.4/css/bootstrap-combined.min.css" rel="stylesheet" />
+    
+    <style type="text/css">
+        body {
+            padding-top: 60px;
+            padding-bottom: 40px;
+        }
+
+        .sidebar-nav {
+            padding: 9px 0;
+        }
+
+        @media (max-width: 980px) {
+            /* Enable use of floated navbar text */
+            .navbar-text.pull-right {
+                float: none;
+                padding-left: 5px;
+                padding-right: 5px;
+            }
+        }
+    </style>
+    <script src="Scripts/jquery-2.1.0.min.js"></script>
+    <script src="Scripts/bootstrap.js"></script>
+    <script src="Scripts/angular-1.1.4/angular.min.js"></script>
+    
+    <script src="data.js"></script>
+    <script type="text/ng-template" id="/detail">
+        <h1>TableName : {{detailData.TableName}}</h1>
+        <hr />
+        <h2>Description</h2>
+        <p>{{detailData.Description}}</p>
+        <hr />
+        <h2>Table Columns</h2>
+        <table class="table table-bordered">
+            <thead>
+            <th>Name</th>
+            <th>Datatype</th>
+            <th>Nullable</th>
+            <th>Description</th>
+            </thead>
+            <tbody>
+                <tr ng-repeat="col in detailData.Coumns">
+                    <td>
+                        {{col.Name}}
+                    </td>
+                    <td>
+                        {{col.Datatype}}
+                    </td>
+                    <td>
+                        {{col.Nullable}}
+                    </td>
+                    <td>
+                        {{col.Description}}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <h2>Refrence Keys</h2>
+        <table class="table table-bordered">
+            <thead>
+            <th>Name</th>
+            <th>Column</th>
+            <th>Reference To</th>
+            </thead>
+            <tbody>
+                <tr ng-repeat="fk in detailData.FKs">
+                    <td>
+                        {{fk.Name}}
+                    </td>
+                    <td>
+                        {{fk.Column}}
+                    </td>
+                    <td>
+                        {{fk.ReferenceTo}}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <h2>Default Constraints</h2>
+        <table class="table table-bordered">
+            <thead>
+            <th>Name</th>
+            <th>Column</th>
+            <th>Value</th>
+            </thead>
+            <tbody>
+                <tr ng-repeat="dc in detailData.DefaultConstraints">
+                    <td>
+                        {{dc.Name}}
+                    </td>
+                    <td>
+                        {{dc.Column}}
+                    </td>
+                    <td>
+                        {{dc.Value}}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <h2>Indexes</h2>
+        <table class="table table-bordered">
+            <thead>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Columns</th>
+            </thead>
+            <tbody>
+                <tr ng-repeat="index in detailData.Indexes">
+                    <td>
+                        {{index.Name}}
+                    </td>
+                    <td>
+                        {{index.Type}}
+                    </td>
+                    <td>
+                        <span ng-repeat="col in index.Columns">
+                            {{col.Columns}}
+                            </sapn>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </script>
+    <script>
+      function AppController ($scope)
+      {
+        $scope.data = dbData;
+        $scope.detailData = dbData[0];
+        $scope.Detail = function(detail){
+          $scope.detailData = detail;
+        }
+      }
+    </script>
+</head>
+<body ng-controller="AppController">
+    <!-- 導覽列 -->
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container-fluid">
+                <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="brand" href="#">DB</a>
+            </div>
+        </div>
+    </div>
+    <!-- 導覽列 End-->
+
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span3">
+                <div class="well sidebar-nav">
+                    <ul class="nav nav-list">
+                        <li class="nav-header">All Tables - Click TableName If You Want To View</li>
+                        <li ng-repeat="item in data">
+                            <a href="#Table:{{item.TableName}}" ng-click="Detail(item)">{{item.TableName}}</a>
+                        </li>
+                    </ul>
+                </div><!--/.well -->
+            </div><!--/span-->
+            <div class="span9">
+                <div ng-include src="'/detail'">
+                </div>
+            </div><!--/span-->
+        </div><!--/row-->
+        <hr>
+        <footer>
+            <p>&copy; Lion@Lai 2013</p>
+        </footer>
+
+    </div><!--/.fluid-container-->
+
+</body>
+</html>

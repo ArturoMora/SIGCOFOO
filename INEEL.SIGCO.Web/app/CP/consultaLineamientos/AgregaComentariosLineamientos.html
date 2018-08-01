@@ -1,0 +1,49 @@
+﻿﻿<div class="vista">
+    <div class="page-title">
+        <div class="title_left">
+            <ol class="breadcrumb miga">
+                <li><i class="disabled fa fa-file-text-o"></i> <a ng-click="regresar()" href="">Lineamientos de comunidades de pr&aacute;ctica/Comentarios</a></li>
+                <li class="active">Agregar</li>
+            </ol>
+
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+                    <form name="form" id="form" class="form-horizontal">
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">
+                                Descripci&oacute;n del comentario
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <textarea rows="3" type="text" ng-model="comentariosLCP.comentario" class="form-control col-md-7 col-xs-12"
+                                          name="descrip" maxlength="500"/>
+                                <!--<span class="error" ng-show="form.descrip.$dirty && form.descrip.$invalid">
+                                    Dato incorrecto, se espera una longitud m&aacute;ximo 300
+                                </span>-->
+                            </div>
+                        </div>
+                        <div class="ln_solid"></div>
+                        <div class="form-group">
+                            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                <div class="">
+
+                                    <button type="submit" class="btn btn-success" ng-click="agregaRegistro()"
+                                            ng-disabled="!form.descrip.$valid">
+                                        <i class="glyphicon glyphicon-saved"></i> Guardar
+                                    </button>
+                                    <button type="button" confirma-regresar="regresar()" state-form="form" class="btn btn-primary">
+                                        <span class="fa fa-arrow-left"></span> Regresar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

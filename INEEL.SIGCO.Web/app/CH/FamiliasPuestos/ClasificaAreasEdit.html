@@ -1,0 +1,93 @@
+﻿<div class="vista">
+
+    <div class="page-title">
+        <div class="title_left">
+
+            <ol class="breadcrumb miga">
+                <li><i class="disabled fa fa-cogs"></i> <a>Clasificación de áreas por tipo de servicio</a></li>
+            </ol>
+        </div>
+    </div>
+
+
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Criterios de búsqueda</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li>
+                            <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content sin-desborde">
+                    <div class="form-horizontal form-label-rigth ">
+                        <div class="col-xs-12 col-md-8">
+                            <div class="form-group ">
+                                <label class="control-label col-md-4 col-sm-4 col-xs-12">
+                                    Período
+                                </label>
+                                <div class="col-md-8 col-sm-8 col-xs-12">
+                                    <select id="periodoId" name="periodoev" class="form-control"
+                                            ng-options="e.periodoEvaluaionId as e.periodo  for e in periodos"
+                                            ng-model="periodoId"
+                                            ng-init="periodoId"
+                                            ng-required="true">
+                                        <option value="">Seleccione un período de evaluación </option>
+                                    </select>
+                                </div>
+                            </div>      
+                            
+                            <div class="form-group ">
+                                <label class="control-label col-md-4 col-sm-4 col-xs-12">
+                                   Tipo de área
+                                </label>
+                                <div class="col-md-8 col-sm-8 col-xs-12">
+                                    <select id="areaId" name="tipoareaId" class="form-control"
+                                            ng-options="e.tipoAreaId as e.area  for e in areastipo"
+                                            ng-model="tipoAreaId"
+                                            ng-required="true">
+                                        <option value="">Seleccione un tipo de área </option>
+                                    </select>
+                                </div>
+                            </div>     
+                                             
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+
+                    <table dt-instance="dtInstance" class="table table-hover table-striped table-condensed dt-responsive" cellspacing="0" datatable="ng" width="100%" dt-options="dtOptions">
+                        <thead>
+                            <tr>
+                                <th data-priority="1">Unidad organizacional</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                          
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <button type="button" ui-sref="clasificaareasAdd" class="btn btn-success">
+                <span class="glyphicon glyphicon-plus"></span> Agregar
+            </button>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,170 @@
+﻿<!-- page content -->
+<div class="vista">
+
+    <div class="page-title">
+        <div class="title_left">
+
+
+            <ol class="breadcrumb miga">
+                <li><i class="sg sg-metodo-evaluacion-compet"></i> <a>Competencias técnicas</a></li>
+                <li><a ui-sref="evaluacionpersonaltecnicas">Evaluación</a></li>
+                <li class="active">Detalle de la evaluación</li>
+            </ol>
+
+
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Informaci&oacute;n general</h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content sin-desborde">
+
+
+
+                    <div class="form-group">
+                        <div class="col-xs-12 col-md-6">
+
+                            <label class="detalle col-xs-12 " title="Empleado">
+                                {{clave}} {{nombre}}
+                            </label>
+
+                            <label class="cont emc col-xs-12 colorTit">
+                                Período {{periodo}}
+                            </label>
+
+
+                            <label class="cont col-xs-12" title="Unidad organizacional">
+                                {{nombreUnidad}}
+                            </label>
+
+                            <label class="tit col-xs-12">
+                                Resultado de la evaluación general
+                            </label>
+                            <label class="cont col-xs-12">
+                                {{calificacionObtenidaEnEvaluacion}}
+                            </label>
+
+                        </div>
+
+                        <div class="col-sm-6 col-xs-12 contenedor_gris">
+                            <label class="titFirst">Categoría (Nómina):</label>
+                            <label class="cont">{{nomina}}</label>
+
+
+                            <br />
+                            <label class="titFirst">  Categoría (Competencias técnicas):</label>
+                            <label class="cont">{{nivel}}</label>
+                        </div>
+                    </div>
+
+
+
+
+
+
+
+
+
+                </div>
+            </div>
+
+
+            <div class="clearfix"></div>
+
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Brecha</h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content sin-desborde">
+
+
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                            Registrar brecha <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <textarea rows="4" cols="50" class="form-control" ng-model="nuevabrecharegistrada"></textarea>
+                        </div>
+                    </div>          
+
+                </div>
+            </div>
+
+
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Competencias a evaluar</h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content sin-desborde">
+                    
+                   
+
+                    <table dt-options="dtOptions" dt-instance="dtInstance" class="table table-condensed table-hover">
+                        <thead>
+                            <tr>
+                                <th data-priority="1">Competencia</th>
+                                <th>Evaluación</th>
+                                <th>Justificación</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="obj in registro">
+                                <td><textarea rows="8" cols="50" readonly>{{obj.competencia}}</textarea></td>
+                                <td>
+                                    <div>
+                                        <input type="radio" ng-model="obj.calificacionEvaluacionId" value="4" />
+                                        <label>Excede expectativas</label>
+                                        <br />
+                                        <input type="radio" ng-model="obj.calificacionEvaluacionId" value="3" />
+                                        <label>Cumple</label>
+                                        <br />
+                                        <input type="radio" ng-model="obj.calificacionEvaluacionId" value="2" />
+                                        <label>Cumple parcialmente</label>
+                                        <br />
+                                        <input type="radio" ng-model="obj.calificacionEvaluacionId" value="1" />
+                                        <label>No Cumple expectativas</label>
+                                        <br />
+                                    </div>
+                                </td>
+                                <td><textarea rows="8" cols="50" ng-model="obj.observaciones"></textarea></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+
+
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-12 col-sm-12 col-xs-12 col-md-offset-3">
+                        <div class="">
+                            <button type="submit" ng-click="save()" class="btn btn-success" style="padding-right:15px">
+                                <i class="glyphicon glyphicon-saved"></i> Guardar
+                            </button>
+                            <button type="submit" class="btn btn-success" style="padding-right:15px">
+                                <span class="fa fa-arrow-left"></span> Imprimir reporte
+                            </button>
+                            <button type="submit" ng-click="finalizarEvaluacion()" class="btn btn-success" style="padding-right:15px">
+                                <span class="fa fa-arrow-left"></span>Finalizar evaluación
+                            </button>
+                            <button type="button" ui-sref="evaluacionpersonaltecnicas" class="btn btn-primary" style="padding-right:15px">
+                                <span class="fa fa-arrow-left"></span> Regresar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+   
+
+</div>                         

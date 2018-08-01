@@ -1,0 +1,52 @@
+﻿<div data-ng-show="authentication.isAuth">
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_content sin-desborde">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <br />
+                            <div ng-show="propuestasAsignadosEmpresa.length === 0" class="alert advertencia">No existen propuestas asociados a la empresa {{empresa.nombreEmpresa}}</div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div ng-hide="propuestasAsignadosEmpresa.length === 0">
+                                <table id="CRpropuestasAsignadasGet" dt-instance="dtInstance" class="table table-hover table-striped table-condensed" cellspacing="0" datatable="ng" width="100%" dt-options="dtOptions">
+                                    <thead>
+                                        <tr>
+                                            <th data-priority="1">N&uacute;mero propuesta</th>
+                                            <th>Nombre</th>
+                                            <th>Contacto</th>
+                                            <th>Monto</th>
+                                            <th>Fecha</th>
+                                            <th>Opciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="p in propuestasAsignadosEmpresa">
+                                            <td>{{p.propuestaId}}</td>
+                                            <td><a class="link" style="cursor:pointer" ng-click="detallePropuestaAsignado(p.propuestaId)">{{p.titulo}}</a></td>
+                                            <td>{{p.contacto.nombreContacto}} {{p.contacto.apellidoPaterno}} {{p.contacto.apellidoMaterno}}</td>
+                                            <td>{{p.costo}}</td>
+                                            <td>{{p.fecha | date:'dd-MM-yyyy'}}</td>
+                                            <td>
+                                                <a class="btn btn-warning" ng-click="editarPropuestaAsignada(p.propuestaId)" title="Editar">
+                                                    <i class="glyphicon glyphicon-pencil"></i>
+                                                </a>
+                                                <a class="btn btn-danger" ng-click="eliminarPropuesta(p)" title="Eliminar">
+                                                    <i class="glyphicon glyphicon-trash"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

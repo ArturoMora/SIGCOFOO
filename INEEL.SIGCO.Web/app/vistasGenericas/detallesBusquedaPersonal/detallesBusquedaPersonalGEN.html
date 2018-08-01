@@ -1,0 +1,37 @@
+﻿<div class="modal-content sin-desborde">
+    <div class="modal-header">
+        <button type="button" class="close" ng-click="cancel()" data-dissmiss="modal">x</button>
+        <h2>{{tituloModal==null? 'Sin descripci&oacute;n' : tituloModal}}</h2>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-xs-12">
+                <div ng-show="registros.length==0">
+                    <div class="alert advertencia">
+                        No hay informaci&oacute;n registrada
+                    </div>
+                </div>
+                <div ng-show="registros.length>0" class="x_content sin-desborde">
+                    <ul ng-repeat="e in registros">
+                        <li>
+                            <a ng-bind-html="e.nombre | highlight: parametro.busquedaInicial">
+                                {{e.nombre}}
+                            </a>
+                        </li>
+                        <!-- <li class="linkTabla" href="{{url + e.id }}" target="_blank">
+                            <a href="{{url + e.id }}" target="_blank" ng-bind-html="e.nombre | highlight: parametro.busquedaInicial">
+                                {{e.nombre}}
+                            </a>
+                        </li>  -->
+                    </ul>
+                </div>
+
+            </div>
+            <div class="clearfix"></div>
+
+        </div>
+    </div>
+    <div class="modal-footer">
+
+    </div>
+</div>
